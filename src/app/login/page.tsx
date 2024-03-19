@@ -1,13 +1,13 @@
 "use client"
-import { useState } from "react";
-import SendOTP from "../components/customer/SendOTP";
+import SendOTP from "./__components/SendOTP";
+import { useAppSelector } from "../store/reduxHooks";
 
 export default function Auth() {
-  const [step, setStep] = useState(0);
+  const step = useAppSelector((state) => state.auth.authStep)
 
   return (
     <div>
-      {step === 0 && <SendOTP setStep={setStep} />}
+      {step === 0 && <SendOTP/>}
       {step === 1 && <div>Hello</div>}
     </div>
   );

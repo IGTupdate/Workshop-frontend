@@ -1,5 +1,5 @@
 import { sendOTP } from '@/app/services/operations/auth/customerAuth';
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 type Inputs = {

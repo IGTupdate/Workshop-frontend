@@ -7,12 +7,13 @@ const {
 } = authEndpoints;
 
 export async function sendOTP(contactNumber: string){
+    let result
     try {
-        const result = await apiConnector({method : "POST", url : SENDOTP_API, bodyData : {contactNumber}});
-        toast.success("OTP SENT SUCCESSFULLY")
-        return result
+        result = await apiConnector({method : "POST", url : SENDOTP_API, bodyData : {contactNumber}});
+        if(result?.data?.success) toast.success("OTP SENT SUCCESSFULLY")
     } catch (err) {
         console.error(err);
         toast.error("Failed to send OTP. Please try again later.");
     }
+    return result
 }
