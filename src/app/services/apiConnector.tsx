@@ -8,8 +8,8 @@ interface ApiConnectorParams {
     method: Method;
     url: string;
     bodyData?: any;
-    headers?: AxiosRequestConfig["headers"] | undefined; 
-    params?: AxiosRequestConfig["params"] | undefined; 
+    headers?: AxiosRequestConfig["headers"] | undefined;
+    params?: AxiosRequestConfig["params"] | undefined;
 }
 
 export const apiConnector = async ({
@@ -22,10 +22,10 @@ export const apiConnector = async ({
     try {
         // console.log(method, url, bodyData)
         const response = await axiosInstance({
-            method : `${method}`,
+            method: `${method}`,
             url: `${url}`,
             data: bodyData ? bodyData : null,
-            headers, 
+            headers,
             params,
         });
         return response;
