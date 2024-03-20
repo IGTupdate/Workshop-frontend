@@ -1,6 +1,35 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { cookies } from "next/headers";
+import { generateAccessToken } from "./operations/auth/customerAuth";
 
-const axiosInstance = axios.create({});
+const axiosInstance = axios.create({
+    withCredentials: true,
+});
+
+// // Request interceptor
+// axiosInstance.interceptors.request.use(
+//     async (config) => {
+//       const cookieStore = cookies();
+//       const accessToken = cookieStore.get('accessToken')?.value;
+  
+//       // If token is present, add it to request's Authorization Header
+//       if (accessToken) {
+//         config.headers.token = accessToken;
+//       }else{
+//         const refreshToken = cookieStore.get('refreshToken')?.value;
+//         if(refreshToken) {
+//             await generateAccessToken(refreshToken)
+//             const newAccessToken = cookieStore.get('accessToken')?.value;
+//             config.headers.token = newAccessToken
+//         }
+//       }
+//       return config;
+//     },
+//     (error) => {
+//       return Promise.reject(error);
+//     }
+//   );
+
 
 type Method = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -20,7 +49,6 @@ export const apiConnector = async ({
     params,
 }: ApiConnectorParams): Promise<AxiosResponse<any>> => {
     try {
-        // console.log(method, url, bodyData)
         const response = await axiosInstance({
             method: `${method}`,
             url: `${url}`,
@@ -33,3 +61,4 @@ export const apiConnector = async ({
         throw error;
     }
 };
+

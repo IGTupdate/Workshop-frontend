@@ -54,11 +54,8 @@ const Register = (props: Props) => {
                     htmlType='submit'
                     className='bg-blue1 text-white1 font-semibold w-full'>
                     Save
-                </Button>
-
-
-            </form>
-
+                </Button >
+            </form >
         </div >
     )
 }

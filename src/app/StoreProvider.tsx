@@ -10,7 +10,7 @@ interface Props {
 
 export default function StoreProvider({ children }: Props) {
   return <Provider store={store}>
-      <Toaster/>
+    <Toaster/>
       {children}
     </Provider>;
 }

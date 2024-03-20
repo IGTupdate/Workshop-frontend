@@ -3,29 +3,28 @@ import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 
 export interface IAuthData {
-    contactNumber : number,
-    otp : number,
+    contactNumber? : string,
+    otp? : string,
     fullName? : string,
     email? : string
 }
-const accessToken : string | null = typeof window !== "undefined" ? window.localStorage.getItem("accessToken") : null;
-const refreshToken : string | null = typeof window !== "undefined" ? window.localStorage.getItem("refreshToken") : null;
 
 export interface IAuthState {
     authStep: number,
     userExists: boolean,
-    authData: IAuthData | {},
-    accessToken: string | null,
-    refreshToken: string | null,
+    authData: IAuthData,
     authLoading: boolean
+}
+
+const initialAuthData = {
+    contactNumber: '',
+    otp: ''
 }
 
 const initialState: IAuthState = {
     authStep: 0,
     userExists: false,
-    authData: {},
-    accessToken : accessToken ? JSON.parse(accessToken) : null,
-    refreshToken : refreshToken ? JSON.parse(refreshToken) : null,
+    authData: initialAuthData,
     authLoading : false
 }
 
@@ -39,20 +38,20 @@ export const authSlice = createSlice({
         setUserExists: (state, action: PayloadAction<boolean>) => {
             state.userExists = action.payload
         },
-        setAuthData: (state, action: PayloadAction<IAuthState>) => {
+        setAuthData: (state, action: PayloadAction<IAuthData>) => {
             state.authData = action.payload
-        },
-        setAccessToken: (state, action: PayloadAction<string | null>) => {
-            state.accessToken = action.payload
-        },
-        setRefreshToken: (state, action: PayloadAction<string | null>) => {
-            state.refreshToken = action.payload 
         },
         setAuthLoading : (state, action: PayloadAction<boolean>) => {
             state.authLoading = action.payload
+        },
+        resetAuthSlice: (state) => {
+            state.authStep = initialState.authStep;
+            state.userExists = initialState.userExists;
+            state.authData = initialState.authData;
+            state.authLoading = initialState.authLoading;
         }
     }
 })
 
-export const { setAuthStep, setAuthData, setAccessToken, setRefreshToken, setAuthLoading, setUserExists } = authSlice.actions
+export const { setAuthStep, setAuthData, setAuthLoading, setUserExists, resetAuthSlice } = authSlice.actions
 export const authReducer = authSlice.reducer
