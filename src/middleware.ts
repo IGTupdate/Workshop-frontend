@@ -1,29 +1,17 @@
-import { cookies } from 'next/headers';
 import { NextResponse, NextRequest } from 'next/server';
-import { generateAccessToken } from './app/services/operations/auth/customerAuth';
-
-export const config = {
-  matcher: ['/dashboard/:path*', '/employee/dashboard/:path*'],
-}
+import { cookies } from 'next/headers';
 
 export async function middleware(request: NextRequest) {
   const cookieStore = cookies();
-  const accessToken = cookieStore.get('accessToken');
-  const refreshToken = cookieStore.get('refreshToken');
-  const isAccessAuthenticated = accessToken?.value;
-  const isRefreshAuthenticated = refreshToken?.value;
+  const refreshToken = cookieStore.get('refreshToken')?.value;
 
-  if (isAccessAuthenticated) {
-    return NextResponse.next();
+  if (request.nextUrl.pathname.includes('/dashboard' || '/employee/dashboard')) {
+    if (refreshToken) return NextResponse.next();
+    return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  if (isRefreshAuthenticated) {
-    await generateAccessToken(refreshToken?.value);
-    const newAccessToken = cookieStore.get('accessToken')?.value;
-    if (newAccessToken) {
-      return NextResponse.next();
-    }
+  if (request.nextUrl.pathname.includes('/login' || '/employee/login')){
+    if (!refreshToken) return NextResponse.next();
+    return NextResponse.redirect(new URL('/dashboard', request.url));
   }
-
-  return NextResponse.redirect(new URL('/login', request.url));
 }

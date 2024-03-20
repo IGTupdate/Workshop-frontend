@@ -28,7 +28,6 @@ const VerifyOTP: React.FC = () => {
             if (userExists) {
                 if (!customerData?.contactNumber) return
                 await login(customerData?.contactNumber, data.otp);
-                dispatch(resetAuthSlice());
                 router.push('/dashboard')
             } else {
                 dispatch(setAuthStep(2));

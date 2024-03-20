@@ -1,4 +1,3 @@
-"use client"
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 
@@ -13,8 +12,11 @@ export interface IAuthState {
     authStep: number,
     userExists: boolean,
     authData: IAuthData,
-    authLoading: boolean
+    authLoading: boolean,
+    accessToken: string | null
 }
+
+const accessToken : string | null = typeof window !== "undefined" ? window.localStorage.getItem("accessToken") : null;
 
 const initialAuthData = {
     contactNumber: '',
@@ -25,7 +27,8 @@ const initialState: IAuthState = {
     authStep: 0,
     userExists: false,
     authData: initialAuthData,
-    authLoading : false
+    authLoading : false,
+    accessToken : accessToken
 }
 
 export const authSlice = createSlice({
@@ -44,10 +47,14 @@ export const authSlice = createSlice({
         setAuthLoading : (state, action: PayloadAction<boolean>) => {
             state.authLoading = action.payload
         },
+        setAccessToken : (state, action: PayloadAction<string>) => {
+            state.accessToken = action.payload
+        },
         resetAuthSlice: (state) => {
             state.authStep = initialState.authStep;
             state.userExists = initialState.userExists;
             state.authData = initialState.authData;
+            state.accessToken = initialState.accessToken;
             state.authLoading = initialState.authLoading;
         }
     }

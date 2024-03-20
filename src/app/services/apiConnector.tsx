@@ -1,34 +1,28 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { cookies } from "next/headers";
 import { generateAccessToken } from "./operations/auth/customerAuth";
+import { useAppSelector } from "../store/reduxHooks";
 
 const axiosInstance = axios.create({
     withCredentials: true,
 });
 
-// // Request interceptor
-// axiosInstance.interceptors.request.use(
-//     async (config) => {
-//       const cookieStore = cookies();
-//       const accessToken = cookieStore.get('accessToken')?.value;
-  
-//       // If token is present, add it to request's Authorization Header
-//       if (accessToken) {
-//         config.headers.token = accessToken;
-//       }else{
-//         const refreshToken = cookieStore.get('refreshToken')?.value;
-//         if(refreshToken) {
-//             await generateAccessToken(refreshToken)
-//             const newAccessToken = cookieStore.get('accessToken')?.value;
-//             config.headers.token = newAccessToken
-//         }
-//       }
-//       return config;
-//     },
-//     (error) => {
-//       return Promise.reject(error);
-//     }
-//   );
+// Request interceptor
+axiosInstance.interceptors.request.use(
+    async (config) => {
+      const accessToken = useAppSelector((state) => state.auth.accessToken)
+      if (accessToken) {
+        config.headers.token = accessToken;
+      }else{
+        await generateAccessToken()
+        const newAccessToken = useAppSelector((state) => state.auth.accessToken)
+        config.headers.token = newAccessToken
+      }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
 
 
 type Method = "GET" | "POST" | "PUT" | "DELETE";

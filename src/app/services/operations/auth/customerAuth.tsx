@@ -1,6 +1,5 @@
 import toast from "react-hot-toast";
 import { authEndpoints } from "../../apis";
-import { apiConnector } from "../../apiConnector";
 import { apiOpenConnector } from "../../apiOpenConnector";
 
 const {
@@ -13,8 +12,8 @@ const {
 export async function sendOTP(contactNumber: string) {
     let result
     try {
-        result = await apiConnector({ method: "POST", url: SENDOTP_API, bodyData: { contactNumber } });
-        if (result?.data?.success) toast.success("OTP SENT SUCCESSFULLY")
+        result = await apiOpenConnector({method : "POST", url : SENDOTP_API, bodyData : {contactNumber}});
+        if(result?.data?.success) toast.success("OTP SENT SUCCESSFULLY")
     } catch (err) {
         console.error(err);
         toast.error("Failed to send OTP. Pleasge try again later.");
@@ -25,8 +24,9 @@ export async function sendOTP(contactNumber: string) {
 export async function login(contactNumber: string, otp: string){
     let result
     try {
-        result = await apiConnector({method : "POST", url : LOGIN_API, bodyData : {contactNumber, otp}});
+        result = await apiOpenConnector({method : "POST", url : LOGIN_API, bodyData : {contactNumber, otp}});
         if(result?.data?.success){
+            window.localStorage.setItem('accessToken', result?.data?.accessToken)
             toast.success("USER LOGGED IN SUCCESSFULLY")
         }
     } catch (err) {
@@ -36,12 +36,9 @@ export async function login(contactNumber: string, otp: string){
     return result
 }
 
-export async function generateAccessToken(refreshToken : string){
+export async function generateAccessToken(){
     try {
-        await apiOpenConnector({method : "GET", url : GENERATE_ACCESS_TOKEN_API, bodyData : null, headers: {
-            "Content-Type" : "multipart/form-data",
-            Authorization: `Bearer ${refreshToken}`
-        } });
+        await apiOpenConnector({method : "GET", url : GENERATE_ACCESS_TOKEN_API});
     } catch (err) {
         console.error(err);
     }
