@@ -1,14 +1,18 @@
-"use client"
-import { useState } from "react";
-import SendOTP from "../components/customer/SendOTP";
+import LeftSection from "../components/Auth/LeftSection";
+import RightSection from "./__components/RightSection";
 
 export default function Auth() {
-  const [step, setStep] = useState(0);
 
   return (
-    <div>
-      {step === 0 && <SendOTP setStep={setStep} />}
-      {step === 1 && <div>Hello</div>}
+    <div className="w-full h-screen overflow-hidden">
+      <div className="w-full h-full flex md:flex-row flex-col">
+        <div className="xl:w-[60%] lg:w-[55%] md:w-1/2 w-full md:h-full h-[220px]">
+          <LeftSection primaryText="Welcome To Workshop" secondaryText="We are here to assist you" />
+        </div>
+        <div className="md:flex-auto md:h-full">
+          <RightSection />
+        </div>
+      </div>
     </div>
   );
 }

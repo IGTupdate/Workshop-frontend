@@ -1,3 +1,4 @@
+"use client"
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 
@@ -7,8 +8,8 @@ export interface IAuthData {
     fullName? : string,
     email? : string
 }
-const accessToken : string | null = localStorage.getItem("accessToken")
-const refreshToken : string | null = localStorage.getItem("refreshToken")
+const accessToken : string | null = typeof window !== "undefined" ? window.localStorage.getItem("accessToken") : null;
+const refreshToken : string | null = typeof window !== "undefined" ? window.localStorage.getItem("refreshToken") : null;
 
 export interface IAuthState {
     authStep: number,
@@ -16,7 +17,7 @@ export interface IAuthState {
     authData: IAuthData | {},
     accessToken: string | null,
     refreshToken: string | null,
-    loading: boolean
+    authLoading: boolean
 }
 
 const initialState: IAuthState = {
@@ -25,7 +26,7 @@ const initialState: IAuthState = {
     authData: {},
     accessToken : accessToken ? JSON.parse(accessToken) : null,
     refreshToken : refreshToken ? JSON.parse(refreshToken) : null,
-    loading : false
+    authLoading : false
 }
 
 export const authSlice = createSlice({
@@ -47,11 +48,11 @@ export const authSlice = createSlice({
         setRefreshToken: (state, action: PayloadAction<string | null>) => {
             state.refreshToken = action.payload 
         },
-        setLoading : (state, action: PayloadAction<boolean>) => {
-            state.loading = action.payload
+        setAuthLoading : (state, action: PayloadAction<boolean>) => {
+            state.authLoading = action.payload
         }
     }
 })
 
-export const { setAuthStep, setAuthData, setAccessToken, setRefreshToken, setLoading, setUserExists } = authSlice.actions
+export const { setAuthStep, setAuthData, setAccessToken, setRefreshToken, setAuthLoading, setUserExists } = authSlice.actions
 export const authReducer = authSlice.reducer
