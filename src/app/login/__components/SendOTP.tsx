@@ -1,7 +1,7 @@
 "use client"
 import { sendOTP } from '@/app/services/operations/auth/customerAuth';
 import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
-import { setAuthLoading, setAuthStep } from '@/app/store/slices/authSlice';
+import { setAuthData, setAuthLoading, setAuthStep, setUserExists } from '@/app/store/slices/authSlice';
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
@@ -19,7 +19,12 @@ const SendOTP: React.FC = () => {
         dispatch(setAuthLoading(true))
         try {
             const result = await sendOTP(data.contactNumber);
-            if(result?.data.success) dispatch(setAuthStep(1));
+            if(result?.data.success){
+                dispatch(setAuthStep(1));
+                dispatch(setAuthData({...data}))
+                dispatch(setUserExists(result.data.data.customerExists))
+            } 
+
         } catch (error) {
             console.error("Error sending OTP:", error);
         }

@@ -1,64 +1,76 @@
-// "use client"
-// import { sendOTP } from '@/app/services/operations/auth/customerAuth';
-// import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
-// import { setAuthLoading, setAuthStep } from '@/app/store/slices/authSlice';
-// import React from 'react';
-// import { useForm, SubmitHandler } from 'react-hook-form';
+"use client"
+import { login } from '@/app/services/operations/auth/customerAuth';
+import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
+import { resetAuthSlice, setAuthData, setAuthLoading, setAuthStep } from '@/app/store/slices/authSlice';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
-// type Inputs = {
-//     otp: number;
-// }
+type Inputs = {
+    otp: string;
+}
 
-// const VerifyOTP: React.FC = () => {
-//     const loading = useAppSelector((state) => state.auth.authLoading)
-//     const dispatch = useAppDispatch()
-//     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+const VerifyOTP: React.FC = () => {
+    const loading = useAppSelector((state) => state.auth.authLoading);
+    const userExists = useAppSelector((state) => state.auth.userExists);
+    const customerData = useAppSelector((state) => state.auth.authData);
+    const router = useRouter()
 
-//     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-//         if (!data) return;
-//         dispatch(setAuthLoading(true))
-//         try {
-//             const result = await sendOTP(data.otp);
-//             if(result?.data.success) dispatch(setAuthStep(1));
-//         } catch (error) {
-//             console.error("Error sending OTP:", error);
-//         }
-//         dispatch(setAuthLoading(false))
-//     };
+    const dispatch = useAppDispatch();
+    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
 
-//     return (
-//         <div className="flex justify-center items-center h-screen">
-//             {
-//                 loading ? (
-//                     <div>Loading</div>
-//                 ) : (
-//                     <form onSubmit={handleSubmit(onSubmit)} className="flex gap-4 flex-col">
-//                         <input
-//                             type="number"
-//                             {...register("contactNumber", {
-//                                 pattern: {
-//                                     value: /^[0-9]{10}$/,
-//                                     message: "Please enter a valid phone number in the format xxx-xxx-xxxx"
-//                                 },
-//                                 minLength: {
-//                                     value: 10,
-//                                     message: "Please enter exactly 10 digits"
-//                                 },
-//                                 maxLength: {
-//                                     value: 10,
-//                                     message: "Please enter exactly 10 digits"
-//                                 }
-//                             })}
-//                             placeholder="Enter Your Contact Number"
-//                             className="border-2 px-4 py-2 border-black"
-//                         />
-//                         {errors.contactNumber && <span>{errors.contactNumber.message}</span>}
-//                         <button type="submit">Send OTP</button>
-//                     </form>
-//                 )
-//             }
-//         </div>
-//     );
-// }
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        if (!data) return;
+        dispatch(setAuthLoading(true));
+        try {
+            if (userExists) {
+                if(!customerData?.contactNumber) return
+                await login(customerData?.contactNumber, data.otp);
+                dispatch(resetAuthSlice());
+                router.push('/dashboard')
+            } else {
+                dispatch(setAuthStep(2));
+                dispatch(setAuthData({ ...customerData, otp: data.otp }));
+            }
+        } catch (error) {
+            console.error("Error Verifying OTP:", error);
+        }
+        dispatch(setAuthLoading(false));
+    };
 
-// export default SendOTP;
+    return (
+        <div className="flex justify-center items-center h-screen">
+            {
+                loading ? (
+                    <div>Loading</div>
+                ) : (
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex gap-4 flex-col">
+                        <input
+                            type="number"
+                            {...register("otp", {
+                                pattern: {
+                                    value: /^[0-9]{6}$/,
+                                    message: "ENTER VALID OTP"
+                                },
+                                minLength: {
+                                    value: 6,
+                                    message: "Please enter exactly 6 digits"
+                                },
+                                maxLength: {
+                                    value: 6,
+                                    message: "Please enter exactly 6 digits"
+                                }
+                            })}
+                            placeholder='Enter OTP'
+                            className="border-2 px-4 py-2 border-black"
+                        />
+                        {errors.otp && <span>{errors.otp.message}</span>}
+                        <button type="submit">Verify</button>
+                    </form>
+                )
+            }
+        </div>
+    );
+}
+
+export default VerifyOTP
