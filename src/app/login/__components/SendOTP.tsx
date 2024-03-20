@@ -10,18 +10,18 @@ import contactNumberValidationSchema from '@/app/validators/contact-number';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 
-type Inputs = {
-    contactNumber: string;
-}
 
 const SendOTP: React.FC = () => {
     const loading = useAppSelector((state) => state.auth.authLoading)
     const dispatch = useAppDispatch()
-    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            contactNumber: ""
+        },
         resolver: yupResolver(contactNumberValidationSchema)
     });
 
-    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const onSubmit = async (data) => {
 
         if (!data) return;
         dispatch(setAuthLoading(true))
@@ -57,7 +57,7 @@ const SendOTP: React.FC = () => {
                 {/* input field */}
                 <div className='md:mb-4 mb-3'>
                     <label className='text-sm font-medium mb-1 block text-black1'>Phone</label>
-                    <Input type="number" {...register("contactNumber")}
+                    <Input type="text" {...register("contactNumber")}
                         size='large'
                         placeholder="ex - 0123456789"
                         className='w-full text'
