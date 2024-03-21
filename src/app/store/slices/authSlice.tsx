@@ -1,34 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 
-export interface IAuthData {
-    contactNumber? : string,
-    otp? : string,
-    fullName? : string,
-    email? : string
-}
-
 export interface IAuthState {
     authStep: number,
-    userExists: boolean,
-    authData: IAuthData,
+    contact: string
     authLoading: boolean,
-    accessToken: string | null
+    accessToken: string | null,
+    retryCount: number
 }
 
 const accessToken : string | null = typeof window !== "undefined" ? window.localStorage.getItem("accessToken") : null;
 
-const initialAuthData = {
-    contactNumber: '',
-    otp: ''
-}
 
 const initialState: IAuthState = {
-    authStep: 0,
-    userExists: false,
-    authData: initialAuthData,
+    authStep: 2,
+    contact: '',
     authLoading : false,
-    accessToken : accessToken
+    accessToken : accessToken,
+    retryCount : 3
 }
 
 export const authSlice = createSlice({
@@ -38,11 +27,8 @@ export const authSlice = createSlice({
         setAuthStep: (state, action: PayloadAction<number>) =>{
             state.authStep = action.payload
         },
-        setUserExists: (state, action: PayloadAction<boolean>) => {
-            state.userExists = action.payload
-        },
-        setAuthData: (state, action: PayloadAction<IAuthData>) => {
-            state.authData = action.payload
+        setContact: (state, action: PayloadAction<string>) => {
+            state.contact = action.payload
         },
         setAuthLoading : (state, action: PayloadAction<boolean>) => {
             state.authLoading = action.payload
@@ -50,15 +36,18 @@ export const authSlice = createSlice({
         setAccessToken : (state, action: PayloadAction<string>) => {
             state.accessToken = action.payload
         },
+        setRetryCount : (state, action: PayloadAction<number>) => {
+            state.retryCount = action.payload
+        },
         resetAuthSlice: (state) => {
             state.authStep = initialState.authStep;
-            state.userExists = initialState.userExists;
-            state.authData = initialState.authData;
+            state.contact = initialState.contact;
             state.accessToken = initialState.accessToken;
             state.authLoading = initialState.authLoading;
+            state.retryCount = initialState.retryCount
         }
     }
 })
 
-export const { setAuthStep, setAuthData, setAuthLoading, setUserExists, resetAuthSlice } = authSlice.actions
+export const { setAuthStep, setContact, setAuthLoading, setRetryCount, resetAuthSlice } = authSlice.actions
 export const authReducer = authSlice.reducer
