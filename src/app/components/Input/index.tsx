@@ -5,7 +5,7 @@ type Props = {}
 
 const Input = (props: Props) => {
     const inputs = {
-        input1 : <InputStyle1 />
+        input1: <InputStyle1 />
     }
     return (
         <InputStyle1 />
