@@ -2,6 +2,10 @@ import { NextResponse, NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
 
 export async function middleware(request: NextRequest) {
+
+  return NextResponse.next();
+
+  /*
   const cookieStore = cookies();
   const refreshToken = cookieStore.get('refreshToken')?.value;
 
@@ -14,4 +18,6 @@ export async function middleware(request: NextRequest) {
     if (!refreshToken) return NextResponse.next();
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
+
+  */
 }
