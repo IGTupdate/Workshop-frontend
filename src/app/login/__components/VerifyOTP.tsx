@@ -37,17 +37,16 @@ const VerifyOTP: React.FC = () => {
 
         try {
             const result = await verifyOTP(contact, otp);
-            console.log(result);
             if(result.data.success){
                 if (result?.data?.data?.userExists) router.push('/dashboard');
                 else dispatch(setAuthStep(2));
             }
         } catch (error) {
-            console.log("Retry Count:", retryCount);
+            // console.log("Retry Count:", retryCount);
             if (retryCount < MAX_RETRY) { // Check retryCount against MAX_RETRY
                 setRetryCount(prevRetryCount => prevRetryCount + 1); // Increment retryCount
                 const remainingRetries = MAX_RETRY - retryCount - 1;
-                console.log("Remaining Retries:", remainingRetries);
+                // console.log("Remaining Retries:", remainingRetries);
                 toast.error(`INVALID OTP - RETRIES LEFT ${remainingRetries}`);
             } else {
                 toast.error("Max retry limit reached");

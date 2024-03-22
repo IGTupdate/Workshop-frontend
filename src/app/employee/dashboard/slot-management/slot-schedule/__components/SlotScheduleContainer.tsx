@@ -75,7 +75,7 @@ const SlotScheduleContainer = (props: Props) => {
 
 
 
-    console.log(data);
+    // console.log(data);
     return (
         <Table dataSource={data} columns={columns} />
     )

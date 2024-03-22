@@ -1,7 +1,11 @@
 import Heading from '@/app/components/Heading';
+import { registerCustomer } from '@/app/services/operations/auth/customerAuth';
+import { useAppDispatch } from '@/app/store/reduxHooks';
+import { resetAuthSlice, setAuthLoading } from '@/app/store/slices/authSlice';
 import { Button, Input } from 'antd';
+import { redirect, useRouter } from 'next/navigation';
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 
 type FormData = {
     fullName: string;
@@ -9,10 +13,20 @@ type FormData = {
 };
 
 const Register: React.FC = () => {
-    const { register, handleSubmit } = useForm<FormData>();
+    const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
+    const dispatch = useAppDispatch()
+    const router = useRouter();
 
-    const onSubmit = (data: FormData) => {
-        console.log(data)
+    const onSubmit = async (data: FormData) => {
+        dispatch(setAuthLoading(true))
+        try{
+            await registerCustomer(data.fullName, data.email)
+            dispatch(resetAuthSlice())
+            redirect('/dashboard')
+        }catch(err){
+            // console.log(error)
+        }
+        dispatch(setAuthLoading(false))
     };
 
     return (
@@ -29,23 +43,41 @@ const Register: React.FC = () => {
                 {/* input field */}
                 <div className='md:mb-4 mb-3'>
                     <label className='text-sm font-medium mb-1 block text-black1'>Name</label>
-                    <Input type='text'
-                        size='large'
-                        placeholder="Enter Name"
-                        className='w-full text'
-                        {...register("fullName")}
+                    <Controller
+                        name="fullName"
+                        control={control}
+                        rules={{ required: 'Name is required' }}
+                        render={({ field }) => (
+                            <Input
+                                type='text'
+                                size='large'
+                                placeholder="Enter Name"
+                                className='w-full text'
+                                {...field}
+                            />
+                        )}
                     />
+                    {errors.fullName && <span className="text-red-500">{errors.fullName.message}</span>}
                 </div>
 
                 {/* input field */}
                 <div className='md:mb-4 mb-3'>
                     <label className='text-sm font-medium mb-1 block text-black1'>Email</label>
-                    <Input type='text'
-                        size='large'
-                        placeholder="Enter Email"
-                        className='w-full text'
-                        {...register("email")}
+                    <Controller
+                        name="email"
+                        control={control}
+                        rules={{ required: 'Email is required', pattern: { value: /^\S+@\S+$/i, message: 'Invalid email address' } }}
+                        render={({ field }) => (
+                            <Input
+                                type='text'
+                                size='large'
+                                placeholder="Enter Email"
+                                className='w-full text'
+                                {...field}
+                            />
+                        )}
                     />
+                    {errors.email && <span className="text-red-500">{errors.email.message}</span>}
                 </div>
 
                 <Button

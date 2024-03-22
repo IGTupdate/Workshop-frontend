@@ -1,52 +1,104 @@
-import Heading from '@/app/components/Heading'
-import { Button, Input } from 'antd'
-import React from 'react'
+"use client";
+import Heading from "@/app/components/Heading";
+import { employeeLogin } from "@/app/services/operations/auth/employeeAuth";
+import { useAppDispatch } from "@/app/store/reduxHooks";
+import { setAuthLoading } from "@/app/store/slices/authSlice";
+import { Button, Input } from "antd";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
-type Props = {}
+type FormData = {
+  email: string;
+  password: string;
+};
 
-const LogIn = (props: Props) => {
-    return (
+const LogIn: React.FC = () => {
+  const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const dispatch = useAppDispatch();
+  const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter()
 
-        <div className="w-full">
-            <Heading
-                type='heading1'
-                primary={"Log in"}
-                secondary={"Join Us: Log in for Seamless Integration"}
-                primaryColor='text-black1'
-            />
-            <form className='w-full md:mt-10 mt-8'>
-                {/* input field */}
-                <div className='md:mb-4 mb-3'>
-                    <label className='text-sm font-medium mb-1 block text-black1'>Email</label>
-                    <Input type='text'
-                        size='large'
-                        placeholder="Enter email"
-                        className='w-full text'
-                    />
-                    {/* {errors.contactNumber && <span className='text-red-500 text-[11px] font-medium'>{errors.contactNumber.message}</span>} */}
-                </div>
+  const onSubmit = async (data: FormData) => {
+    dispatch(setAuthLoading(true));
+    try {
+      await employeeLogin(data.email, data.password);
+      router.push("/employee/dashboard");
+    } catch (err) {
+      // console.log(error)
+    }
+    dispatch(setAuthLoading(false));
+  };
 
-                {/* input field */}
-                <div className='md:mb-4 mb-3'>
-                    <label className='text-sm font-medium mb-1 block text-black1'>Password</label>
-                    <Input type='text'
-                        size='large'
-                        placeholder="Enter password"
-                        className='w-full text'
-                    />
-                    {/* {errors.contactNumber && <span className='text-red-500 text-[11px] font-medium'>{errors.contactNumber.message}</span>} */}
-                </div>
+  return (
+    <div className="w-full">
+      <Heading
+        type="heading1"
+        primary={"Employee Login"}
+        secondary={""}
+        primaryColor="text-black1"
+      />
 
-                <Button
-                    size='large'
-                    htmlType='submit'
-                    className='bg-blue1 text-white1 font-semibold w-full'>
-                    Log in
-                </Button>
+      <form className="w-full md:mt-10 mt-8" onSubmit={handleSubmit(onSubmit)}>
 
-            </form>
+        {/* Email input field */}
+        <div className="md:mb-4 mb-3">
+          <label className="text-sm font-medium mb-1 block text-black1">Email</label>
+          <Controller
+            name="email"
+            control={control}
+            rules={{ required: "Email is required", pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" } }}
+            render={({ field }) => (
+              <Input
+                type="text"
+                size="large"
+                placeholder="Enter Email"
+                className="w-full text"
+                {...field}
+              />
+            )}
+          />
+          {errors.email && <span className="text-red-500">{errors.email.message}</span>}
         </div>
-    )
-}
 
-export default LogIn
+        {/* Password input field */}
+        <div className="md:mb-4 mb-3">
+          <label className="text-sm font-medium mb-1 block text-black1">Password</label>
+          <Controller
+            name="password"
+            control={control}
+            rules={{ required: "Password is required", pattern: { value: /^\S{8,16}$/, message: "Password must be 8 to 16 characters" } }}
+            render={({ field }) => (
+              <div className="relative">
+                <Input
+                  type={showPassword ? ("text"):("password")}
+                  size="large"
+                  placeholder="Enter Password"
+                  className="w-full text"
+                  {...field}
+                />
+                <span className="absolute right-2 bottom-3 cursor-pointer"
+                  onClick={() => setShowPassword((prev) => !prev)}>
+                      { showPassword ? <FaEyeSlash fontSize={18} fill="#AFB2BF"/> : <FaEye fontSize={18} fill="#AFB2BF"/>}
+                </span>
+              </div>
+            )}
+          />
+          {errors.password && <span className="text-red-500">{errors.password.message}</span>}
+        </div>
+
+        <Button
+          type="primary"
+          size="large"
+          htmlType="submit"
+          className="bg-blue1 text-white1 font-semibold w-full"
+        >
+          Login
+        </Button>
+      </form>
+    </div>
+  );
+};
+
+export default LogIn;

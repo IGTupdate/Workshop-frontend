@@ -7,5 +7,5 @@ export const authEndpoints = {
     VERIFYOTP_API : BASE_URL + "/customer/verifyOtp",
     AUTH_API : BASE_URL + "/customer/auth",
     GENERATE_ACCESS_TOKEN_API : BASE_URL + "/auth/generateAccessToken",
-    RESETPASSWORD_API : BASE_URL + "/auth/reset-password"
+    EMPLOYEE_LOGIN_API : BASE_URL + "/employee/login"
 }

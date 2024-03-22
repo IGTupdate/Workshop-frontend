@@ -1,11 +1,9 @@
 "use client"
-
 import { Layout, ConfigProvider } from "antd";
 import SideBar from "./__components/SideBar";
 import HeaderContainer from "./__components/HeaderContainer";
 import { useState } from "react";
 import { SIDEBAR_COLLAPSED_WIDTH, SIDEBAR_WIDTH } from "./utils/variables";
-
 
 const { Header, Sider, Content } = Layout;
 

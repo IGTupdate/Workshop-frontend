@@ -31,7 +31,7 @@ const SendOTP: React.FC= () => {
                 dispatch(setContact(contactNumber));
             }
         } catch (error) {
-            console.error("Error sending OTP:", error);
+            // console.error("Error sending OTP:", error);
         } finally {
             dispatch(setAuthLoading(false));
         }

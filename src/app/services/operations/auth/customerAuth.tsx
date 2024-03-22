@@ -82,10 +82,10 @@ export async function registerCustomer(fullName : string, email : string){
         if (authResult?.data?.success) {
             // If authentication is successful, set access token
             window.localStorage.setItem('accessToken', authResult?.data?.accessToken);
-            toast.success("USER REGISTRATION SUCCESSFULL");
+            toast.success("REGISTRATION SUCCESSFULL");
         }
     }catch(err){
-        toast.error('USER REGISTRATION FAILED')
+        toast.error('REGISTRATION FAILED')
         throw err
     }
 }

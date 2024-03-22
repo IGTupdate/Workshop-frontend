@@ -1,10 +1,11 @@
-import LeftSection from '@/app/components/Auth/LeftSection'
-import React from 'react'
-import RightSection from './__components/RightSection'
+"use client";
+import LeftSection from '@/app/components/Auth/LeftSection';
+import React from 'react';
+import RightSection from './__components/RightSection';
 
-type Props = {}
+type Props = {};
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
     return (
         <div className="w-full h-screen overflow-hidden">
             <div className="w-full h-full flex md:flex-row flex-col">
@@ -16,7 +17,7 @@ const page = (props: Props) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default page
+export default Page;
