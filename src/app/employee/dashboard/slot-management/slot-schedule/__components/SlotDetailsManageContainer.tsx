@@ -1,18 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Button,
-  Col,
-  DatePicker,
-  Drawer,
-  Form,
-  Input,
-  Row,
-  Select,
-  Space,
-  Typography,
-} from "antd";
+import { Button, Col, Form, Input, Row, Select, Typography } from "antd";
 import { TSlotDetail } from "@/app/types/slot-schedule";
 const { Option } = Select;
 
@@ -78,8 +67,37 @@ const SlotDetailsManageContainer = (props: Props) => {
       {/* slots */}
       {slotDetails.map((slot, index) => {
         return (
-          <div>
+          <div key={index}>
             <Typography>Slot : {index + 1}</Typography>
+            <Typography>Start Time -</Typography>
+            <Row gutter={16}>
+              <Col span={12}>
+                <Form.Item
+                  name="hour"
+                  label="Hour"
+                  className="m-0"
+                  rules={[
+                    { required: true, message: "Please enter user name" },
+                  ]}
+                >
+                  <Input type="number" placeholder="Please enter user name" />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name="minute"
+                  label="Minute"
+                  className="m-0"
+                  rules={[
+                    { required: true, message: "Please enter user name" },
+                  ]}
+                >
+                  <Input type="number" placeholder="Please enter user name" />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Typography className="mt-2">End Time - </Typography>
+
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item
@@ -110,8 +128,8 @@ const SlotDetailsManageContainer = (props: Props) => {
             <Row className="w-full">
               <Form.Item
                 className="w-full"
-                name="name"
-                label="Name"
+                name="limit"
+                label="Limit"
                 rules={[
                   { required: true, message: "Please enter Schedule name" },
                 ]}

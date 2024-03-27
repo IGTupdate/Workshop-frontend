@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Table, Button } from "antd";
-import SlotScheduleUpdateDrawer from "./SlotScheduleUpdateDrawer";
+import SlotScheduleManageDrawer from "./SlotScheduleManageDrawer";
 import {
   get_slot_schedule_columns,
   ISlotSchedule,
@@ -17,6 +17,90 @@ const SlotScheduleContainer = (props: Props) => {
 
   // sample data
   const data: ISlotSchedule[] = [
+    {
+      _id: "abcd",
+      key: "1",
+      name: "John Brown",
+      limit: 32,
+      details: [
+        "3:30 - 5:30",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+      ],
+    },
+    {
+      _id: "abcd",
+      key: "1",
+      name: "John Brown",
+      limit: 32,
+      details: [
+        "3:30 - 5:30",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+      ],
+    },
+    {
+      _id: "abcd",
+      key: "1",
+      name: "John Brown",
+      limit: 32,
+      details: [
+        "3:30 - 5:30",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+      ],
+    },
+    {
+      _id: "abcd",
+      key: "1",
+      name: "John Brown",
+      limit: 32,
+      details: [
+        "3:30 - 5:30",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+      ],
+    },
+    {
+      _id: "abcd",
+      key: "1",
+      name: "John Brown",
+      limit: 32,
+      details: [
+        "3:30 - 5:30",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+      ],
+    },
+    {
+      _id: "abcd",
+      key: "1",
+      name: "John Brown",
+      limit: 32,
+      details: [
+        "3:30 - 5:30",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+        "6:60 - 7:56",
+      ],
+    },
     {
       _id: "abcd",
       key: "1",
@@ -54,7 +138,7 @@ const SlotScheduleContainer = (props: Props) => {
         dataSource={data}
         columns={get_slot_schedule_columns(setOpenDrawer)}
       />
-      <SlotScheduleUpdateDrawer
+      <SlotScheduleManageDrawer
         openDrawer={openDrawer}
         setOpenDrawer={setOpenDrawer}
       />

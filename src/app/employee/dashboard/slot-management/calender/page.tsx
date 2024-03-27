@@ -1,9 +1,14 @@
 import React from "react";
 import CalenderContainer from "./__components/CalenderContainer";
+import { calenderData } from "./__demo";
 
 type Props = {};
 
-const page = (props: Props) => {
+const page = async (props: Props) => {
+  setTimeout(() => {
+    console.log("loading");
+  }, 3000);
+
   return (
     <div className="p-4 bg-white rounded-md">
       {/* heading */}
@@ -12,7 +17,7 @@ const page = (props: Props) => {
       </div>
 
       <div className="">
-        <CalenderContainer />
+        <CalenderContainer calenderData={calenderData} />
       </div>
     </div>
   );

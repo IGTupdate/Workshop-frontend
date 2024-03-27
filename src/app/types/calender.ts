@@ -1,13 +1,15 @@
 export type TSlot = {
-  start_time: Date;
-  end_time: Date;
-  slot_limit: Date;
+  start_time: string; // iso string
+  end_time: string;
+  slot_limit: number;
   _id: string;
 };
 
 export type TCalender = {
   _id: string;
   date: string;
-  status: string;
+  status: "Open" | "Close" | "Default";
   slots: TSlot[];
+  createdAt: string;
+  updateAt: string;
 };

@@ -9,7 +9,7 @@ type Props = {
   setOpenDrawer: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const SlotScheduleUpdateDrawer = (props: Props) => {
+const SlotScheduleManageDrawer = (props: Props) => {
   // open drawer has of _id of the slot schedule which need to be edit and if it has new key word then the create new slot
 
   const closeDrwer = () => {
@@ -61,4 +61,4 @@ const SlotScheduleUpdateDrawer = (props: Props) => {
   );
 };
 
-export default SlotScheduleUpdateDrawer;
+export default SlotScheduleManageDrawer;

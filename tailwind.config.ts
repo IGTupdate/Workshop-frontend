@@ -8,11 +8,11 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1250px',
-      '2xl': '1536px',
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1250px",
+      "2xl": "1536px",
     },
     extend: {
       backgroundImage: {
@@ -21,11 +21,13 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        "white1": "#fff",
-        "black1": "#141414",
-        "gray1": "#8c8c8c",
-        "blue1": "#1890ff"
-      }
+        white1: "#fff",
+        black1: "#141414",
+        gray1: "#8c8c8c",
+        blue1: "#1890ff",
+        green1: "#24ae55",
+        green2: "abcd",
+      },
     },
   },
   plugins: [],
