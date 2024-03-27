@@ -35,14 +35,20 @@ const VerifyOTP: React.FC = () => {
 
         dispatch(setAuthLoading(true));
 
+        let result
         try {
-            const result = await verifyOTP(contact, otp);
+            result = await verifyOTP(contact, otp);
             if(result.data.success){
                 if (result?.data?.data?.userExists) router.push('/dashboard');
                 else dispatch(setAuthStep(2));
             }
         } catch (error) {
             // console.log("Retry Count:", retryCount);
+            if(result?.status !== 403){
+                toast.error("Internal Error... Please Try After some time")
+                router.push('/')
+                return
+            }
             if (retryCount < MAX_RETRY) { // Check retryCount against MAX_RETRY
                 setRetryCount(prevRetryCount => prevRetryCount + 1); // Increment retryCount
                 const remainingRetries = MAX_RETRY - retryCount - 1;

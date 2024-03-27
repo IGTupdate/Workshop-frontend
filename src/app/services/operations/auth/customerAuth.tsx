@@ -1,6 +1,9 @@
 import toast from "react-hot-toast";
 import { authEndpoints } from "../../apis";
 import { apiOpenConnector } from "../../apiOpenConnector";
+import { AppDispatch } from "@/app/store/store";
+import { resetAuthSlice, setAccessToken } from "@/app/store/slices/authSlice";
+import { cookies } from "next/headers";
 
 const { SENDOTP_API, VERIFYOTP_API, AUTH_API, GENERATE_ACCESS_TOKEN_API } =
   authEndpoints;
@@ -67,32 +70,19 @@ export async function verifyOTP(contactNumber: string, otp: string) {
   }
 }
 
-export async function registerCustomer(fullName: string, email: string) {
-  try {
-    const authResult = await apiOpenConnector({
-      method: "POST",
-      url: AUTH_API,
-      bodyData: {
-        fullName,
-        email,
-      },
-    });
-
-    if (authResult?.data?.success) {
-      // If authentication is successful, set access token
-      window.localStorage.setItem("accessToken", authResult?.data?.accessToken);
-      toast.success("REGISTRATION SUCCESSFULL");
+export async function generateAccessToken(dispatch : AppDispatch){
+    let generateAccessTokenResult
+    try {
+        // console.log("INSIDE GENERATE ACCESS TOKEN")
+        generateAccessTokenResult = await apiOpenConnector({method : "GET", url : GENERATE_ACCESS_TOKEN_API});
+        if(generateAccessTokenResult?.data?.accessToken) {
+            dispatch(setAccessToken(generateAccessTokenResult?.data?.accessToken))
+            window.localStorage.setItem('accessToken', generateAccessTokenResult?.data?.accessToken);
+        }
+        return generateAccessTokenResult
+    } catch (err) {
+        if(!generateAccessTokenResult?.data.success) window.localStorage.clear()
+        console.error(err);
     }
-  } catch (err) {
-    toast.error("REGISTRATION FAILED");
-    throw err;
-  }
-}
-
-export async function generateAccessToken() {
-  try {
-    await apiOpenConnector({ method: "GET", url: GENERATE_ACCESS_TOKEN_API });
-  } catch (err) {
-    console.error(err);
-  }
+    return generateAccessTokenResult
 }
