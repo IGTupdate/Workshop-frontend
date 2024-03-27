@@ -15,7 +15,7 @@ axiosInstance.interceptors.request.use(
     const accessToken = store.getState().auth.accessToken;
     // console.log(accessToken);
 
-    let generateAccessTokenResponse
+    let generateAccessTokenResponse;
     if (!accessToken) {
       // If no access token is available, generate a new one
       generateAccessTokenResponse = await generateAccessToken(store.dispatch);
@@ -31,8 +31,11 @@ axiosInstance.interceptors.request.use(
       }
     }
 
-    if (!generateAccessTokenResponse || !generateAccessTokenResponse.data.success) {
-      window.location.href = '/';
+    if (
+      !generateAccessTokenResponse ||
+      !generateAccessTokenResponse.data.success
+    ) {
+      window.location.href = "/";
       return Promise.reject();
     }
 
@@ -66,17 +69,17 @@ export const apiConnector = async ({
   headers,
   params,
 }: ApiConnectorParams): Promise<AxiosResponse<any>> => {
-    try {
-      // console.log("INSIDE AXIOS INSTANCE")
-        const response = await axiosInstance({
-            method: `${method}`,
-            url: `${url}`,
-            data: bodyData ? bodyData : null,
-            headers,
-            params,
-        });
-        return response;
-    } catch (error) {
-        throw error;
-    }
+  try {
+    // console.log("INSIDE AXIOS INSTANCE")
+    const response = await axiosInstance({
+      method: `${method}`,
+      url: `${url}`,
+      data: bodyData ? bodyData : null,
+      headers,
+      params,
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
 };
