@@ -15,11 +15,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [collapsed, setCollapsed] = useState(false);
-  const isEmployee = true || useAppSelector((state) => state.auth.isEmployee);
-
-  useEffect(() => {
-    if (!isEmployee) redirect("/login");
-  }, [isEmployee]);
 
   return (
     <Layout>

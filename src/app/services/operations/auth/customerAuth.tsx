@@ -1,6 +1,8 @@
 import toast from "react-hot-toast";
 import { authEndpoints } from "../../apis";
 import { apiOpenConnector } from "../../apiOpenConnector";
+import { AppDispatch } from "@/app/store/store";
+import { setAccessToken } from "@/app/store/slices/authSlice";
 
 const {
     SENDOTP_API,
@@ -90,9 +92,11 @@ export async function registerCustomer(fullName : string, email : string){
     }
 }
 
-export async function generateAccessToken(){
+export async function generateAccessToken(dispatch : AppDispatch){
     try {
-        await apiOpenConnector({method : "GET", url : GENERATE_ACCESS_TOKEN_API});
+        const generateAccessTokenResult = await apiOpenConnector({method : "GET", url : GENERATE_ACCESS_TOKEN_API});
+        if(generateAccessTokenResult?.data?.accessToken) dispatch(setAccessToken(generateAccessTokenResult?.data?.accessToken))
+        return generateAccessTokenResult
     } catch (err) {
         console.error(err);
     }

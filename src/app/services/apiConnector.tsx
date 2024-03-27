@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { generateAccessToken } from "./operations/auth/customerAuth";
-import { useAppSelector } from "../store/reduxHooks";
+import { jwtDecode } from "jwt-decode";
+import { store } from "../store/store";
 
 const axiosInstance = axios.create({
     withCredentials: true,
@@ -8,21 +9,39 @@ const axiosInstance = axios.create({
 
 // Request interceptor
 axiosInstance.interceptors.request.use(
-    async (config) => {
-      const accessToken = useAppSelector((state) => state.auth.accessToken)
-      if (accessToken) {
-        config.headers.token = accessToken;
-      }else{
-        await generateAccessToken()
-        const newAccessToken = useAppSelector((state) => state.auth.accessToken)
-        config.headers.token = newAccessToken
+  async (config) => {
+    console.log("INSIDE INTERCEPTOR");
+
+    const accessToken = store.getState().auth.accessToken;
+    console.log(accessToken);
+
+    if (!accessToken) {
+      // If no access token is available, generate a new one
+      await generateAccessToken(store.dispatch);
+    } else {
+      const currentTime = new Date().getTime();
+      const decode = jwtDecode(accessToken);
+
+      // Check if decode.exp is defined and not expired
+      if (decode.exp && decode.exp * 1000 < currentTime) {
+        // If expired, generate a new access token
+        console.log("ACCESS TOKEN EXPIRED");
+        await generateAccessToken(store.dispatch);
       }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
     }
-  );
+
+    // Get the new access token after generation
+    const newAccessToken = store.getState().auth.accessToken;
+
+    // Set the authorization header with the new access token
+    config.headers.Authorization = `Bearer ${newAccessToken}`;
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 
 type Method = "GET" | "POST" | "PUT" | "DELETE";
@@ -43,6 +62,7 @@ export const apiConnector = async ({
     params,
 }: ApiConnectorParams): Promise<AxiosResponse<any>> => {
     try {
+      console.log("INSIDE AXIOS INSTANCE")
         const response = await axiosInstance({
             method: `${method}`,
             url: `${url}`,

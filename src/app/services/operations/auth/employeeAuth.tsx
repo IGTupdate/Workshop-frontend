@@ -19,7 +19,6 @@ export async function employeeLogin(email : string, password : string){
 
         if (authResult?.data?.success) {
             window.localStorage.setItem('accessToken', authResult?.data?.accessToken);
-            window.localStorage.setItem('isEmployee', 'true');
             toast.success("LOGIN SUCCESSFULL");
         }
     }catch(err){

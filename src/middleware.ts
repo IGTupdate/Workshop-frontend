@@ -2,59 +2,58 @@ import { NextResponse, NextRequest } from "next/server";
 import { cookies } from "next/headers";
 
 export async function middleware(request: NextRequest) {
-  return NextResponse.next();
-  const cookieStore = cookies();
-  const refreshToken = cookieStore.get("refreshToken")?.value;
-  const pathname = request.nextUrl.pathname;
+    // Get cookies from the request
+    const cookieStore = cookies();
 
-  const redirectUrl = (location: string) => {
-    return NextResponse.redirect(new URL(location, request.url));
-  };
+    // Extract refresh token and isEmployee from cookies
+    const refreshToken = cookieStore.get("refreshToken")?.value;
+    const isEmployee = cookieStore.get('isEmployee')?.value;
 
-  // Check if the user is trying to access /employee/dashboard
-  if (pathname === "/employee/dashboard") {
-    if (refreshToken) {
-      // User has a refresh token, allow access
-      return NextResponse.next();
-    } else {
-      // User doesn't have a refresh token, redirect to login
-      return redirectUrl("/employee/login");
+    // Extract pathname from the request's URL
+    const pathname = request.nextUrl.pathname;
+
+    // Function to generate redirect URL
+    const redirectUrl = (location: string) => {
+        return NextResponse.redirect(new URL(location, request.url));
+    };
+
+    // Middleware logic
+    if (pathname === "/employee/dashboard") {
+        // Check access to /employee/dashboard route
+        if (refreshToken && isEmployee) {
+            return NextResponse.next(); // Allow access
+        } else if (refreshToken && !isEmployee) {
+            return redirectUrl('/dashboard'); // Redirect non-employee to /dashboard
+        } else {
+            return redirectUrl('/employee/login'); // Redirect unauthorized user to /employee/login
+        }
+    } else if (pathname === "/dashboard") {
+        // Check access to /dashboard route
+        if (refreshToken && !isEmployee) {
+            return NextResponse.next(); // Allow access
+        } else if (refreshToken && isEmployee){
+          return redirectUrl('/employee/dashboard')
+        } else {
+            return redirectUrl("/login"); // Redirect unauthorized user to /login
+        }
+    } else if (pathname === "/employee/login") {
+        // Check access to /employee/login route
+        if (!refreshToken) {
+            return NextResponse.next(); // Allow access
+        } else {
+            if(isEmployee) redirectUrl("/employee/dashboard"); // Redirect authorized user to /employee/dashboard
+            return redirectUrl('/dashboard')
+        }
+    } else if (pathname === "/login") {
+        // Check access to /login route
+        if (!refreshToken) {
+            return NextResponse.next(); // Allow access
+        } else {
+            if(isEmployee) return redirectUrl("/employee/dashboard"); // Redirect authorized user to /dashboard
+            return redirectUrl('/dashboard')
+        }
     }
-  }
 
-  // Check if the user is trying to access /dashboard
-  if (pathname === "/dashboard") {
-    if (refreshToken) {
-      // User has a refresh token, allow access
-      return NextResponse.next();
-    } else {
-      // User doesn't have a refresh token, redirect to login
-      return redirectUrl("/login");
-    }
-  }
-
-  // Check if the user is trying to access /employee/login
-  if (pathname === "/employee/login") {
-    if (!refreshToken) {
-      // User doesn't have a refresh token, allow access
-      return NextResponse.next();
-    } else {
-      // User has a refresh token, redirect to employee dashboard
-      return redirectUrl("/employee/dashboard");
-    }
-  }
-
-  // Check if the user is trying to access /login
-  if (pathname === "/login") {
-    if (!refreshToken) {
-      // User doesn't have a refresh token, allow access
-      return NextResponse.next();
-    } else {
-      // User has a refresh token, redirect to dashboard
-      return redirectUrl("/dashboard");
-    }
-  }
-
-  // For any other routes, allow access
-  return NextResponse.next();
+    // Allow access to other routes
+    return NextResponse.next();
 }

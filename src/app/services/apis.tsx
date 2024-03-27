@@ -1,11 +1,34 @@
 // const BASE_URL = process.env.REACT_APP_BASE_URL
-const BASE_URL = "http://localhost:4000"
+const AUTH_BASE_URL = "http://localhost:4000"
+const APPOINTMENT_BASE_URL = "http://localhost:5000/api"
+
+const CUSTOMER = '/customer'
+const AUTH = '/auth'
+const EMPLOYEE = '/employee'
+const SLOT_SCHEDULE = '/slot-schedule'
+
+const CUSTOMER_AUTH_BASE_URL = AUTH_BASE_URL + CUSTOMER
+const EMPLOYEE_AUTH_BASE_URL = AUTH_BASE_URL + EMPLOYEE 
+const AUTHENTICATION_BASE_URL = AUTH_BASE_URL + AUTH
+
+const APPOINTMENT_SLOT_SCHEDULE_BASE_URL = APPOINTMENT_BASE_URL + SLOT_SCHEDULE
 
 // AUTH ENDPOINTS
 export const authEndpoints = {
-    SENDOTP_API : BASE_URL + "/customer/sendOtp",
-    VERIFYOTP_API : BASE_URL + "/customer/verifyOtp",
-    AUTH_API : BASE_URL + "/customer/auth",
-    GENERATE_ACCESS_TOKEN_API : BASE_URL + "/auth/generateAccessToken",
-    EMPLOYEE_LOGIN_API : BASE_URL + "/employee/login"
+    SENDOTP_API : CUSTOMER_AUTH_BASE_URL + "/sendOtp",
+    VERIFYOTP_API : CUSTOMER_AUTH_BASE_URL + "/verifyOtp",
+    AUTH_API : CUSTOMER_AUTH_BASE_URL +"/auth",
+    GENERATE_ACCESS_TOKEN_API : AUTHENTICATION_BASE_URL + "/generateAccessToken",
+    EMPLOYEE_LOGIN_API : EMPLOYEE_AUTH_BASE_URL + "/login"
+}
+
+export const appointmentEndpoints = {
+    // SLOT_SCHEDULE
+    CREATE_SLOT_SCHEDULE_API : APPOINTMENT_SLOT_SCHEDULE_BASE_URL + '/create',
+    GET_SLOT_SCHEDULE_API : APPOINTMENT_SLOT_SCHEDULE_BASE_URL + '/get-by-id',
+    GET_ALL_SLOT_SCHEDULE_API : APPOINTMENT_SLOT_SCHEDULE_BASE_URL + '/get-all',
+    UPDATE_SLOT_SCHEDULE_API : APPOINTMENT_SLOT_SCHEDULE_BASE_URL + '/update',
+    DELETE_SLOT_SCHEDULE_API : APPOINTMENT_SLOT_SCHEDULE_BASE_URL + '/delete',
+
+    // 
 }

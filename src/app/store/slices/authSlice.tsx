@@ -6,20 +6,17 @@ export interface IAuthState {
     contact: string
     authLoading: boolean,
     accessToken: string | null,
-    retryCount: number,
-    isEmployee: boolean
+    retryCount: number
 }
 
 const accessToken : string | null = typeof window !== "undefined" ? window.localStorage.getItem("accessToken") : null;
-const isEmployee : string | null = typeof window !== "undefined" ? window.localStorage.getItem("isEmployee") : 'false';
 
 const initialState: IAuthState = {
     authStep: 0,
     contact: '',
     authLoading : false,
     accessToken : accessToken,
-    retryCount : 3,
-    isEmployee : isEmployee === 'true' ? true : false
+    retryCount : 3
 }
 
 export const authSlice = createSlice({
@@ -41,9 +38,6 @@ export const authSlice = createSlice({
         setRetryCount : (state, action: PayloadAction<number>) => {
             state.retryCount = action.payload
         },
-        setIsEmployee : (state, action: PayloadAction<boolean>) => {
-            state.isEmployee = action.payload
-        },
         resetAuthSlice: (state) => {
             state.authStep = initialState.authStep;
             state.contact = initialState.contact;
@@ -53,5 +47,5 @@ export const authSlice = createSlice({
     }
 })
 
-export const { setAuthStep, setContact, setAuthLoading, setRetryCount, resetAuthSlice, setIsEmployee } = authSlice.actions
+export const { setAuthStep, setContact, setAuthLoading, setRetryCount, resetAuthSlice, setAccessToken } = authSlice.actions
 export const authReducer = authSlice.reducer
