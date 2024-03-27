@@ -1,9 +1,8 @@
-import toast from "react-hot-toast";
-import { authEndpoints } from "../../apis";
-import { apiOpenConnector } from "../../apiOpenConnector";
+import { setAccessToken } from "@/app/store/slices/authSlice";
 import { AppDispatch } from "@/app/store/store";
-import { resetAuthSlice, setAccessToken } from "@/app/store/slices/authSlice";
-import { cookies } from "next/headers";
+import toast from "react-hot-toast";
+import { apiOpenConnector } from "../../apiOpenConnector";
+import { authEndpoints } from "../../apis";
 
 const { SENDOTP_API, VERIFYOTP_API, AUTH_API, GENERATE_ACCESS_TOKEN_API } =
   authEndpoints;
@@ -67,6 +66,28 @@ export async function verifyOTP(contactNumber: string, otp: string) {
     // Handle errors
     // console.error("Error verifying OTP:", err);
     throw err; // Rethrow the error for the caller to handle
+  }
+}
+
+export async function registerCustomer(fullName: string, email: string) {
+  try {
+    const authResult = await apiOpenConnector({
+      method: "POST",
+      url: AUTH_API,
+      bodyData: {
+        fullName,
+        email,
+      },
+    });
+
+    if (authResult?.data?.success) {
+      // If authentication is successful, set access token
+      window.localStorage.setItem("accessToken", authResult?.data?.accessToken);
+      toast.success("REGISTRATION SUCCESSFULL");
+    }
+  } catch (err) {
+    toast.error("REGISTRATION FAILED");
+    throw err;
   }
 }
 
