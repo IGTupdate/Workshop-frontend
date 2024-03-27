@@ -42,7 +42,7 @@ export const authSlice = createSlice({
             state.authStep = initialState.authStep;
             state.contact = initialState.contact;
             state.authLoading = initialState.authLoading;
-            state.retryCount = initialState.retryCount
+            state.retryCount = initialState.retryCount;
         }
     }
 })

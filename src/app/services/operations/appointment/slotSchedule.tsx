@@ -14,7 +14,7 @@ const {
 
 export async function createSlotSchedule(slotScheduleData : TSlotSchedule){
     try{
-        console.log("INSIDE API CONNECTOR")
+        // console.log("INSIDE API CONNECTOR")
         const createSlotScheduleResult = await apiConnector({
             method: "POST",
             url: CREATE_SLOT_SCHEDULE_API,
