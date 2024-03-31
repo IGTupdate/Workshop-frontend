@@ -10,6 +10,7 @@ export type TCalender = {
   date: string;
   status: "Open" | "Close" | "Default";
   slots: TSlot[];
+  createdBy?: string;
   createdAt: string;
-  updateAt: string;
+  updatedAt: string;
 };

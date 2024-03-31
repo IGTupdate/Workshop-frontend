@@ -5,7 +5,9 @@ import { Button, Col, Form, Input, Row, Select, Typography } from "antd";
 import { TSlotDetail } from "@/app/types/slot-schedule";
 const { Option } = Select;
 
-type Props = {};
+type Props = {
+  // slot_details: TSlotDetail
+};
 
 const SlotDetailsManageContainer = (props: Props) => {
   const [slotDetails, setSlotDetails] = useState([
@@ -59,6 +61,9 @@ const SlotDetailsManageContainer = (props: Props) => {
       });
     });
   };
+
+
+  
 
   return (
     <div className="w-full">
@@ -156,7 +161,7 @@ const SlotDetailsManageContainer = (props: Props) => {
       <div className="flex justify-end">
         <Button
           onClick={addSlotDetail}
-          className="bg-black1 border hover:border-black1 text-white1 font-medium text-md"
+          className="bg-black1 border hover:outline-black1 hover:border-black1 text-white1 font-medium text-md"
         >
           Add More
         </Button>

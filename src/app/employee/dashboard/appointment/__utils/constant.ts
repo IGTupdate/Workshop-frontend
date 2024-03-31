@@ -1,0 +1,1 @@
+export const APPOINTMENT_DATA_PAGE_SIZE = 20;

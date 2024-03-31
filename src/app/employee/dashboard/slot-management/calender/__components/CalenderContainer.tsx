@@ -25,7 +25,9 @@ const CalenderContainer = (props: Props) => {
   state - 
   calenderData, calenderLoading, active calender
   */
-  const { calenderData, calenderLoading, activeCalender } = useAppSelector(state => state.calender);
+  const { calenderData, calenderLoading, activeCalender } = useAppSelector(
+    (state) => state.calender
+  );
 
   // dispatch state action
   const dispatch = useAppDispatch();

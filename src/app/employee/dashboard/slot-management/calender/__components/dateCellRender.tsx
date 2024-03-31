@@ -2,8 +2,9 @@ import { TCalender } from "@/app/types/calender";
 import { get_date_only, isPastDate } from "@/app/utils/helper";
 import type { Dayjs } from "dayjs";
 import { MdBlockFlipped } from "react-icons/md";
-import { calender_status, NEW_CALENDER } from "../__utils.ts/constant";
+import { calender_status } from "../__utils.ts/constant";
 import { calenderCellBgColorByStatus } from "../__utils.ts/constant";
+import { getAllSlotOfCalender } from "../__utils.ts/helper";
 
 const getRequiredCalenderByDate = (
   calenderData: TCalender[],
@@ -85,7 +86,9 @@ const dateCellRender = (params: TdateCellRender) => {
           <>
             {required_calender.status === calender_status.open && (
               <div>
-                <h2 className="text-xl font-semibold">25</h2>
+                <h2 className="text-xl font-semibold">
+                  {getAllSlotOfCalender(required_calender)}
+                </h2>
                 <p className="text-md font-normal">Slots Open</p>
               </div>
             )}

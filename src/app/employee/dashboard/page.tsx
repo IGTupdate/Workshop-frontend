@@ -1,17 +1,10 @@
-'use client'
-import React, { useEffect } from 'react'
+"use client";
+import React, { useEffect } from "react";
 
+type Props = {};
 
-type Props = {}
+const Page = (props: Props) => {
+  return <div>this is the dashboard home page</div>;
+};
 
-const Page = (props: Props) => { 
-  
-
-  return (
-    <div>
-      this is the me
-    </div>
-  )
-}
-
-export default Page
+export default Page;

@@ -1,124 +1,41 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Table, Button } from "antd";
 import SlotScheduleManageDrawer from "./SlotScheduleManageDrawer";
-import {
-  get_slot_schedule_columns,
-  ISlotSchedule,
-} from "../__utils/slot-schedule-table-column";
+import { get_slot_schedule_columns } from "../__utils/slot-schedule-table-column";
 import { NEW_SLOT_SCHEDULE } from "../__utils/constant";
+import { useRouter } from "next/navigation";
+import {
+  setActiveSlotSchedule,
+  setSlotScheduleData,
+  setSlotScheduleDataLoading,
+} from "@/app/store/slices/slot-scheduleSlice";
+import { demoSlotScheduleData } from "../__demo";
+import { TActiveSlotSchedule } from "@/app/types/slot-schedule";
+import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 
 type Props = {};
 
 const SlotScheduleContainer = (props: Props) => {
-  // update drawer it take id of the data(ISlotSchedule) to which it needs to show on drawer if it is close than has values null
-  const [openDrawer, setOpenDrawer] = useState<string | null>(null);
+  const router = useRouter();
+  const dispatch = useAppDispatch();
 
-  // sample data
-  const data: ISlotSchedule[] = [
-    {
-      _id: "abcd",
-      key: "1",
-      name: "John Brown",
-      limit: 32,
-      details: [
-        "3:30 - 5:30",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-      ],
-    },
-    {
-      _id: "abcd",
-      key: "1",
-      name: "John Brown",
-      limit: 32,
-      details: [
-        "3:30 - 5:30",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-      ],
-    },
-    {
-      _id: "abcd",
-      key: "1",
-      name: "John Brown",
-      limit: 32,
-      details: [
-        "3:30 - 5:30",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-      ],
-    },
-    {
-      _id: "abcd",
-      key: "1",
-      name: "John Brown",
-      limit: 32,
-      details: [
-        "3:30 - 5:30",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-      ],
-    },
-    {
-      _id: "abcd",
-      key: "1",
-      name: "John Brown",
-      limit: 32,
-      details: [
-        "3:30 - 5:30",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-      ],
-    },
-    {
-      _id: "abcd",
-      key: "1",
-      name: "John Brown",
-      limit: 32,
-      details: [
-        "3:30 - 5:30",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-      ],
-    },
-    {
-      _id: "abcd",
-      key: "1",
-      name: "John Brown",
-      limit: 32,
-      details: [
-        "3:30 - 5:30",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-        "6:60 - 7:56",
-      ],
-    },
-  ];
+  const { slotScheduleData } = useAppSelector((state) => state.slotSchedule);
 
-  const handleOpenDrawer = (toOpen: string) => {
-    setOpenDrawer(toOpen);
+  // handing loading the slot schedule data
+  useEffect(() => {
+    console.log("router cahgned");
+    // call api for data
+    dispatch(setSlotScheduleDataLoading(true));
+    setTimeout(() => {
+      dispatch(setSlotScheduleData(demoSlotScheduleData));
+      dispatch(setSlotScheduleDataLoading(false));
+    });
+  }, [router]);
+
+  const handleSlotScheduleDrawer = (newDrawerData: TActiveSlotSchedule) => {
+    dispatch(setActiveSlotSchedule(newDrawerData));
   };
 
   return (
@@ -127,7 +44,7 @@ const SlotScheduleContainer = (props: Props) => {
         <h2 className="text-xl font-semibold">Slot Schedule</h2>
         <Button
           onClick={() => {
-            handleOpenDrawer(NEW_SLOT_SCHEDULE);
+            handleSlotScheduleDrawer(NEW_SLOT_SCHEDULE);
           }}
           className="bg-blue1 text-white1 font-medium text-md"
         >
@@ -135,13 +52,10 @@ const SlotScheduleContainer = (props: Props) => {
         </Button>
       </div>
       <Table
-        dataSource={data}
-        columns={get_slot_schedule_columns(setOpenDrawer)}
+        dataSource={slotScheduleData}
+        columns={get_slot_schedule_columns(handleSlotScheduleDrawer)}
       />
-      <SlotScheduleManageDrawer
-        openDrawer={openDrawer}
-        setOpenDrawer={setOpenDrawer}
-      />
+      <SlotScheduleManageDrawer />
     </div>
   );
 };
