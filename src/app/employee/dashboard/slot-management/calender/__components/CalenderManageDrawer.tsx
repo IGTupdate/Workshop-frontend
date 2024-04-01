@@ -53,7 +53,7 @@ const CalenderManageDrawer = (props: Props) => {
       >
         {activeCalender ? (
           <div>
-            {!activeCalender?._id ? (
+            {!activeCalender._id ? (
               <Text>show new calender</Text>
             ) : (
               <CalenderShowDetail
@@ -62,7 +62,7 @@ const CalenderManageDrawer = (props: Props) => {
             )}
           </div>
         ) : (
-          <Text>Ant Design (default)</Text>
+          <Text>No Date Selected</Text>
         )}
       </Drawer>
     </div>

@@ -4,6 +4,29 @@ export const get_date_only = (date: Date) => {
   );
 };
 
-export const isPastDate = (date:Date)=>{
-    return get_date_only(date) < get_date_only(new Date())
-}
+export const isPastDate = (date: Date) => {
+  return get_date_only(date) < get_date_only(new Date());
+};
+
+export const setQueryParams = (
+  url: string,
+  name: string,
+  value: string
+): string => {
+  const params = new URLSearchParams(url);
+  params.set(name, value);
+  return params.toString();
+};
+
+export const removeQueryParams = (url: string, name: string): string => {
+  const params = new URLSearchParams(url);
+  params.delete(name);
+  return params.toString();
+};
+
+export const removeAllQueryParams = (url: string) => {
+  const params = new URLSearchParams(url);
+  Object.keys(params).forEach((key) => {
+    params.delete(key);
+  });
+};

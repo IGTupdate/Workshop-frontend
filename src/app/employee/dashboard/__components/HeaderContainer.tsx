@@ -1,7 +1,9 @@
-import { Button } from "antd";
-import { Header } from "antd/es/layout/layout";
+import { Button, Layout } from "antd";
 import React from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+
+const {Header} = Layout
+
 
 type Props = {
   collapsed: boolean;
@@ -10,7 +12,9 @@ type Props = {
 
 const HeaderContainer = (props: Props) => {
   return (
-    <Header style={{ padding: 0, background: "white" }}>
+    <Header
+      style={{ padding: 0, background: "white", position: "sticky", top: 0, zIndex:1000 }}
+    >
       <Button
         type="text"
         icon={props.collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}

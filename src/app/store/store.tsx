@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./slices/authSlice";
 import { calenderReducer } from "./slices/calenderSlice";
 import { slotReducer } from "./slices/slotSlice";
+import { slotScheduleReducer } from "./slices/slot-scheduleSlice";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     calender: calenderReducer,
-    slot: slotReducer
+    slot: slotReducer,
+    slotSchedule: slotScheduleReducer
   },
 });
 

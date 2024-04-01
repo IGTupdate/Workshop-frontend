@@ -73,14 +73,14 @@ export function getSideBarMenuItems(router: AppRouterInstance, sideBarMenuItems:
     })
 }
 
-const findRecursive = (sideBarMenuItems: TsideBarMenuItems[], pathname: string): TsideBarMenuItems | null => {
+export const findRecursiveByPathName = (sideBarMenuItems: TsideBarMenuItems[], pathname: string): TsideBarMenuItems | null => {
 
     for (const item of sideBarMenuItems) {
-        if (item.pathname && item.pathname === pathname) {
+        if (item.pathname && pathname.includes(item.pathname)) {
             return item;
         }
         else if (item.children) {
-            const required_item = findRecursive(item.children, pathname);
+            const required_item = findRecursiveByPathName(item.children, pathname);
             if (required_item) return required_item;
         }
     }
@@ -90,7 +90,7 @@ const findRecursive = (sideBarMenuItems: TsideBarMenuItems[], pathname: string):
 
 
 export function getActiveSideBarMenu(pathname: string): string {
-    const active_menu = findRecursive(sideBarMenuItems, pathname);
+    const active_menu = findRecursiveByPathName(sideBarMenuItems, pathname);
     if (!active_menu) return "1";
     return active_menu.key
 }

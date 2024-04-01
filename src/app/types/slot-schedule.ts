@@ -1,3 +1,5 @@
+import { NEW_SLOT_SCHEDULE } from "../employee/dashboard/slot-management/slot-schedule/__utils/constant";
+
 export type TSlotTime = {
   hour: number;
   minute: number;
@@ -14,3 +16,6 @@ export type TSlotSchedule = {
   name: string;
   slot_details: TSlotDetail[];
 };
+
+
+export type TActiveSlotSchedule = TSlotSchedule | null | typeof NEW_SLOT_SCHEDULE
