@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { generateAccessToken } from "./operations/auth/customerAuth";
 import { jwtDecode } from "jwt-decode";
 import { store } from "../store/store";
+import { redirect } from "next/navigation";
 
 const axiosInstance = axios.create({
   withCredentials: true,
@@ -13,7 +14,7 @@ axiosInstance.interceptors.request.use(
     // console.log("INSIDE INTERCEPTOR");
 
     const accessToken = store.getState().auth.accessToken;
-    // console.log(accessToken);
+    console.log("accessToken", accessToken);
 
     let generateAccessTokenResponse;
     if (!accessToken) {
@@ -22,6 +23,8 @@ axiosInstance.interceptors.request.use(
     } else {
       const currentTime = new Date().getTime();
       const decode = jwtDecode(accessToken);
+
+      console.log("decode token", decode)
 
       // Check if decode.exp is defined and not expired
       if (decode.exp && decode.exp * 1000 < currentTime) {
@@ -35,7 +38,8 @@ axiosInstance.interceptors.request.use(
       !generateAccessTokenResponse ||
       !generateAccessTokenResponse.data.success
     ) {
-      window.location.href = "/";
+      // window.location.href = "/";
+      // redirect("/")
       return Promise.reject();
     }
 
@@ -48,6 +52,7 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
+    console.log(error);
     return Promise.reject(error);
   }
 );

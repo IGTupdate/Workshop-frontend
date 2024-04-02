@@ -102,7 +102,8 @@ export async function generateAccessToken(dispatch : AppDispatch){
         }
         return generateAccessTokenResult
     } catch (err) {
-        if(!generateAccessTokenResult?.data.success) window.localStorage.clear()
+      console.log(err);
+        // if(!generateAccessTokenResult?.data.success) window.localStorage.clear()
         console.error(err);
     }
     return generateAccessTokenResult

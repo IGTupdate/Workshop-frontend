@@ -16,7 +16,7 @@ const EmployeeDashBoardLayOut = ({
   const [collapsed, setCollapsed] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {});
+  useEffect(() => { });
   return (
     <Layout className="w-full h-screen overflow-hidden">
       <SideBar collapsed={collapsed} setCollapsed={setCollapsed} />
@@ -26,7 +26,7 @@ const EmployeeDashBoardLayOut = ({
         }}
       >
         <HeaderContainer collapsed={collapsed} setCollapsed={setCollapsed} />
-        <Content className="overflow-auto">
+        <Content className="h-full overflow-auto">
           <div className="p-4">{children}</div>
         </Content>
       </Layout>

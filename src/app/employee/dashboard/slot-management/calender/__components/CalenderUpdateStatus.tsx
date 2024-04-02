@@ -74,7 +74,7 @@ const CalenderUpdateStatus = (props: Props) => {
         <Spin spinning={spinLoading} delay={500}>
           {props.calender ? (
             <div>
-              <Text className="text-lg mb-1">
+              <Text className="text-md mb-1">
                 Are You Sure Want to
                 <span className="font-semibold">
                   {props.calender.status === calender_status.open

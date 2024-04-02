@@ -6,6 +6,7 @@ import CalenderShowDetail from "./CalenderShowDetail";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { setActiveCalender } from "@/app/store/slices/calenderSlice";
 import { TCalender } from "@/app/types/calender";
+import CalenderCreate from "./CalenderCreate";
 
 const { Text } = Typography;
 
@@ -54,7 +55,7 @@ const CalenderManageDrawer = (props: Props) => {
         {activeCalender ? (
           <div>
             {!activeCalender._id ? (
-              <Text>show new calender</Text>
+              <CalenderCreate />
             ) : (
               <CalenderShowDetail
                 activeCalender={activeCalender as TCalender}

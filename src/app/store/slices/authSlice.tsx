@@ -9,33 +9,33 @@ export interface IAuthState {
     retryCount: number
 }
 
-const accessToken : string | null = typeof window !== "undefined" ? window.localStorage.getItem("accessToken") : null;
+const accessToken: string | null = typeof window !== "undefined" ? window.localStorage.getItem("accessToken") : null;
 
 const initialState: IAuthState = {
     authStep: 0,
     contact: '',
-    authLoading : false,
-    accessToken : accessToken,
-    retryCount : 3
+    authLoading: false,
+    accessToken: accessToken,
+    retryCount: 3
 }
 
 export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        setAuthStep: (state, action: PayloadAction<number>) =>{
+        setAuthStep: (state, action: PayloadAction<number>) => {
             state.authStep = action.payload
         },
         setContact: (state, action: PayloadAction<string>) => {
             state.contact = action.payload
         },
-        setAuthLoading : (state, action: PayloadAction<boolean>) => {
+        setAuthLoading: (state, action: PayloadAction<boolean>) => {
             state.authLoading = action.payload
         },
-        setAccessToken : (state, action: PayloadAction<string>) => {
+        setAccessToken: (state, action: PayloadAction<string>) => {
             state.accessToken = action.payload
         },
-        setRetryCount : (state, action: PayloadAction<number>) => {
+        setRetryCount: (state, action: PayloadAction<number>) => {
             state.retryCount = action.payload
         },
         resetAuthSlice: (state) => {

@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  box-sizing: border-box;
+}
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -15,221 +18,44 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-@layer components{
+@layer components {
   .bold-text-lg {
-      @apply font-bold text-lg;
+    @apply font-bold text-lg;
   }
 }
 
 @layer utilities {
   @layer responsive {
+
     /* Hide scrollbar for Chrome, Safari and Opera */
     .no-scrollbar::-webkit-scrollbar {
-        display: none;
+      display: none;
     }
 
     /* Hide scrollbar for IE, Edge and Firefox */
     .no-scrollbar {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
     }
   }
 }
 
 /* CUSTOM CSS */
-.ant-tabs-content-left, .ant-tabs-tabpane {
+.ant-tabs-content-left,
+.ant-tabs-tabpane {
   height: 100%;
 }
 
-/*!
-=========================================================
-* Muse Ant Design Dashboard - v1.0.0
-=========================================================
-* Product Page: https://www.creative-tim.com/product/muse-ant-design-dashboard
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/muse-ant-design-dashboard/blob/main/LICENSE.md)
-* Coded by Creative Tim
-=========================================================
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-body {
-  padding: 0 0 30px 0;
-  background-color: #fafafa;
-  letter-spacing: -0.3px;
-  color: rgba(0, 0, 0, 0.65);
-  font-size: 14px;
-  line-height: 1.6;
-  font-weight: 400;
-  font-family: open sans, Helvetica, Arial, sans-serif;
-  user-select: none;
-}
 
-.ant-layout.ant-layout-has-sider {
-  flex-direction: row;
-}
 
-.layout-dashboard {
-  background: transparent;
-  text-align: left;
-  position: relative;
-  overflow-x: hidden;
-}
+.menu-item-header:hover {}
 
-@media (min-width: 992px) {
-  .layout-dashboard {
-    overflow: auto;
-  }
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary {
-  width: 250px;
-  position: fixed;
-  left: 0;
-  z-index: 99;
-  height: 100vh;
-  overflow: auto;
-  margin: 0;
-  padding: 33px 20px;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .brand img {
-  height: 30px;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary hr {
-  margin: 18px 0;
-  border: none;
-  height: 1px;
-  background-color: #f5f5f5;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .brand {
-  font-weight: 600;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .brand span {
-  vertical-align: middle;
-  margin-left: 3px;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .ant-layout-sider-children {
-  width: auto;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-inline {
-  border: none;
-}
-
-.layout-dashboard .ant-menu {
-  background: transparent;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-inline .ant-menu-item,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-inline .ant-menu-submenu {
-  margin: 0;
-  overflow: visible;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu {
-  padding: 0 !important;
-  height: auto;
-  line-height: normal;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-inline .ant-menu-item:after,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-inline .ant-menu-submenu:after {
-  display: none;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item.ant-menu-item-selected,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item.ant-menu-item:active,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item .ant-menu-submenu-selected,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item.ant-menu-submenu-title:active,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item .ant-menu-submenu:active,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu.ant-menu-item-selected,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu.ant-menu-item:active,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu .ant-menu-submenu-selected,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu.ant-menu-submenu-title:active,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu .ant-menu-submenu:active {
-  background-color: transparent;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item.ant-menu-item-selected .active,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item .active,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu.ant-menu-item-selected .active,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu .active {
-  background-color: #fff;
-  box-shadow: 0 20px 27px rgb(0 0 0 / 5%);
-  font-weight: 600;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item a,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu a {
-  padding: 10px 16px;
-  color: #141414;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary.ant-layout-sider-primary .ant-menu-item.ant-menu-item-selected .active .icon,
-.layout-dashboard .ant-layout-sider.sider-primary.ant-layout-sider-primary .ant-menu-item .active .icon {
-  background-color: #1890ff;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item.ant-menu-item-selected .active .icon,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item .active .icon,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu.ant-menu-item-selected .active .icon,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu .active .icon {
-  background-color: #1890ff;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item .icon,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu .icon {
-  display: inline-flex;
-  width: 32px;
-  height: 32px;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgb(0 0 0 / 12%);
-  border-radius: 6px;
-  justify-content: center;
-  align-items: center;
-  margin-right: 11px;
-  vertical-align: middle;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item.ant-menu-item-selected .active svg path,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item .active svg path,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu.ant-menu-item-selected .active svg path,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu .active svg path {
-  fill: #fff;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item svg path,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu svg path {
-  fill: #bfbfbf;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item a:hover,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu a:hover {
-  color: #141414;
-}
-
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-inline .ant-menu-item.menu-item-header {
-  padding: 10px 16px !important;
-  color: #8c8c8c;
-  font-weight: 700;
-  font-size: 13px;
-  text-transform: uppercase;
-  display: block;
-}
-
-.menu-item-header:hover {
 a {
   color: inherit;
 }
+
 a:hover {
   color: inherit;
 }

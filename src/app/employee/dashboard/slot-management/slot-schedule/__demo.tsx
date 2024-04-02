@@ -2,6 +2,7 @@ import { TSlotSchedule } from "@/app/types/slot-schedule";
 
 export const demoSlotScheduleData: TSlotSchedule[] = [
   {
+    _id: "65d3564570fb6acd621ad4c9",
     name: "Morning",
     slot_details: [
       {
@@ -17,6 +18,7 @@ export const demoSlotScheduleData: TSlotSchedule[] = [
     ],
   },
   {
+    _id: "65d3564570fb6acd621ad4c0",
     name: "Afternoon",
     slot_details: [
       {
@@ -32,6 +34,7 @@ export const demoSlotScheduleData: TSlotSchedule[] = [
     ],
   },
   {
+    _id: "65d3564570fb6acd621ad4c2",
     name: "Evening",
     slot_details: [
       {
@@ -47,6 +50,7 @@ export const demoSlotScheduleData: TSlotSchedule[] = [
     ],
   },
   {
+    _id: "65d3564570fb6acd621ad4c3",
     name: "Night",
     slot_details: [
       {
