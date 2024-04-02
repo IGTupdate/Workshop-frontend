@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -53,7 +55,7 @@ input[type="number"] {
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 body {
-  padding: 0 0 30px 0;
+  /* padding: 0 0 30px 0; */
   background-color: #fafafa;
   letter-spacing: -0.3px;
   color: rgba(0, 0, 0, 0.65);
@@ -226,10 +228,11 @@ body {
   display: block;
 }
 
-.menu-item-header:hover {
-a {
-  color: inherit;
-}
-a:hover {
-  color: inherit;
-}
+/* .menu-item-header:hover {
+  a {
+    color: inherit;
+  }
+  a:hover {
+    color: inherit;
+  }
+} */

@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Kanit } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const kanit = Kanit({
+  weight: ["100", '200', '300', '400', '500', '600', '700', '800', '900'],
+  style: ["normal" , "italic"],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-kanit',
+});
+
 
 export const metadata: Metadata = {
   title: "Workshop Module",
@@ -17,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={kanit.className}>
         <StoreProvider>
           {children}
         </StoreProvider>

@@ -36,9 +36,9 @@ const SlotDetails: React.FC = () => {
     }) || [];
 
     return (
-        <div className='flex justify-center items-center flex-col gap-8'>
+        <div className='flex  flex-col gap-8'>
             <h1 className='text-2xl font-extrabold'>Displaying Slot Details For Date: {formattedDate}</h1>
-            <div className=' w-[70%] h-[100%]'>
+            <div className=' h-[100%]'>
                 <Tabs
                     defaultActiveKey="1"
                     tabPosition="left"

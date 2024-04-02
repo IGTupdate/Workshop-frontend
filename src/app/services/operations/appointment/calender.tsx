@@ -6,7 +6,7 @@ const { GET_ALL_CALENDER } = appointmentEndpoints;
 
 export const getAllCalender = async () => {
   try {
-    const response = await apiOpenConnector({
+    const response = await apiConnector({
       method: "GET",
       url: GET_ALL_CALENDER,
     });

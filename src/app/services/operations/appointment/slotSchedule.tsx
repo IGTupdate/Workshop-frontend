@@ -63,6 +63,7 @@ export async function getSlotSchedule(slotScheduleId : string) {
 
 export async function getAllSlotSchedule() {
     try{
+        console.log("INDISE CONNECTOR")
         const getAllSlotScheduleResult = await apiConnector({
             method : "GET",
             url : GET_ALL_SLOT_SCHEDULE_API
