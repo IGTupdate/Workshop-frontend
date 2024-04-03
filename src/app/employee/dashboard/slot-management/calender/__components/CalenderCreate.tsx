@@ -1,93 +1,113 @@
 "use client"
 
-import React from 'react'
-import { Button, Typography, Select, Form } from 'antd';
+import React, { useEffect, useState } from 'react'
+import { Button, Typography, Select, Form, Radio } from 'antd';
 import { demoSlotScheduleData } from '../../slot-schedule/__demo';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
+import { calenderCreateSchema, TCalenderCreate } from '@/app/validators/calender';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { TCalender } from '@/app/types/calender';
+import { calender_status } from '../__utils/constant';
+import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
+import { setCalenderDrawerLoading } from '@/app/store/slices/calenderSlice';
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 type TSlotScheduleOption = {
     value: string,
     label: string
+}[] | undefined
+
+type Props = {
+    activeCalender: Partial<TCalender>
 }
 
-type Props = {}
-
 const CalenderCreate = (props: Props) => {
+    const [slotScheduleOptions, setSlotScheduleOptions] = useState<TSlotScheduleOption>([])
 
-    const createCalender = () => {
-        console.log("create claender");
-    }
+    const { calenderDrawerLoading } = useAppSelector((state) => state.calender);
+    const dispatch = useAppDispatch();
 
-    const getSlotScheduleOptions = (): TSlotScheduleOption[] => {
-        return demoSlotScheduleData.map((el) => {
-            return {
-                value: el._id,
-                label: el.name
-            } as TSlotScheduleOption
+    useEffect(() => {
+        setSlotScheduleOptions(() => {
+            return demoSlotScheduleData.map((schedule) => {
+                return {
+                    value: schedule._id,
+                    label: schedule.name
+                }
+            })
         })
-    }
+    }, []);
+
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            slot_schedule_id: "",
+            status: calender_status.open,
+            date: props.activeCalender.date
+        },
+        resolver: yupResolver(calenderCreateSchema)
+    });
+
 
     const filterOption = (input: string, option?: { label: string; value: string }) => {
         return (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
     }
 
-    const onChange = (value: string) => {
-        console.log(`selected ${value}`);
-    };
-
-    const onSearch = (value: string) => {
-        console.log('search:', value);
-    };
-
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: TCalenderCreate) => {
+        dispatch(setCalenderDrawerLoading(true));
         console.log(data);
     }
-
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        defaultValues:{
-            slot_schedule:""
-        }
-    });
 
 
     return (
         <div>
             <div className="flex justify-between items-center mb-4">
-
-                <Form onSubmitCapture={handleSubmit(onSubmit)} className="w-full" layout="vertical" hideRequiredMark>
-                    {/* <Title level={5}>Slot Details</Title> */}
-                    <Form.Item
-                        className="w-full"
-                        {...register("slot_schedule")}
-                        label="Select Schedule for the day"
-                        rules={[{ required: true, message: "Please enter Schedule name" }]}
-                    >
-                        <Select
-                            showSearch
-                            placeholder="Select Schedule"
-                            optionFilterProp="children"
-                            // onChange={onChange}
-                            onSearch={onSearch}
-                            filterOption={filterOption}
-                            options={
-                                [
-                                    {
-                                        value: "ABCd",
-                                        label: "Regular"
-                                    },
-                                    {
-                                        value: "ABCd1",
-                                        label: "Morning"
-                                    }
-                                ]
-                            }
+                <Form onSubmitCapture={handleSubmit(onSubmit)} className="w-full" layout="vertical">
+                    <div className='md:mb-4 mb-3'>
+                        <label className='text-sm font-medium mb-2 block text-black1'>Select Slot Schedule for the day</label>
+                        <Controller
+                            name="slot_schedule_id"
+                            control={control}
+                            render={({ field }) => {
+                                return <Select
+                                    className='w-full'
+                                    {...field}
+                                    showSearch
+                                    placeholder="Select Schedule"
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}
+                                    options={slotScheduleOptions}
+                                />
+                            }}
                         />
-                    </Form.Item>
+                        {errors.slot_schedule_id && <Text type='danger'> {errors.slot_schedule_id.message}</Text>}
+                    </div>
 
+                    <div>
+                        <label className='text-sm font-medium mb-2 block text-black1'>Calender Status</label>
+                        <Controller
+                            name='status'
+                            control={control}
+                            render={({ field }) => {
+                                return <Radio.Group {...field}>
+                                    <Radio
+                                        defaultChecked
+                                        value={calender_status.open}
+                                    >
+                                        {calender_status.open}
+                                    </Radio>
+                                    <Radio
+                                        value={calender_status.close}
+                                    >
+                                        {calender_status.close}
+                                    </Radio>
+                                </Radio.Group>
+                            }}
+                        />
+                    </div>
                     <div className='flex justify-end'>
                         <Button
+                            disabled={calenderDrawerLoading}
                             htmlType='submit'
                             className="bg-blue1 text-white1 font-medium text-md"
                         >
@@ -96,7 +116,7 @@ const CalenderCreate = (props: Props) => {
                     </div>
                 </Form>
             </div>
-        </div>
+        </div >
     )
 }
 

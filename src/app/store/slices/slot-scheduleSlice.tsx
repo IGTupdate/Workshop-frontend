@@ -7,6 +7,7 @@ type TinitialState = {
   slotScheduleLoading: boolean;
   activeSlotSchedule: TActiveSlotSchedule;
   slotScheduleDrawerLoading: boolean;
+  deleteSlotSchedule: TSlotSchedule | null
 };
 
 const initialState: TinitialState = {
@@ -14,6 +15,7 @@ const initialState: TinitialState = {
   slotScheduleLoading: true, // initial loading true if calender does not have
   activeSlotSchedule: null,
   slotScheduleDrawerLoading: false,
+  deleteSlotSchedule: null
 };
 
 export const slotScheduleSlice = createSlice({
@@ -39,6 +41,10 @@ export const slotScheduleSlice = createSlice({
       state.slotScheduleDrawerLoading = action.payload;
       return state;
     },
+    setDeleteSlotSchedule: (state, action: PayloadAction<TSlotSchedule | null>) => {
+      state.deleteSlotSchedule = action.payload
+      return state
+    },
     resetSlotSchedule: (state) => {
       return initialState;
     },
@@ -50,6 +56,7 @@ export const {
   setSlotScheduleDataLoading,
   setSlotScheduleDrawerLoading,
   resetSlotSchedule,
-  setActiveSlotSchedule
+  setActiveSlotSchedule,
+  setDeleteSlotSchedule
 } = slotScheduleSlice.actions;
 export const slotScheduleReducer = slotScheduleSlice.reducer;

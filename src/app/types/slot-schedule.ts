@@ -13,7 +13,7 @@ export type TSlotDetail = {
 };
 
 export type TSlotSchedule = {
-  _id:string,
+  _id: string,
   name: string;
   slot_details: TSlotDetail[];
 };

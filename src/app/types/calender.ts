@@ -5,12 +5,14 @@ export type TSlot = {
   _id: string;
 };
 
+export type TCalenderStatus = "Open" | "Close" | "Default"
 export type TCalender = {
   _id: string;
   date: string;
-  status: "Open" | "Close" | "Default";
+  status: TCalenderStatus;
   slots: TSlot[];
   createdBy?: string;
   createdAt: string;
   updatedAt: string;
 };
+

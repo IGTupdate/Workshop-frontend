@@ -25,9 +25,7 @@ const CalenderContainer = (props: Props) => {
   state - 
   calenderData, calenderLoading, active calender
   */
-  const { calenderData, calenderLoading, activeCalender } = useAppSelector(
-    (state) => state.calender
-  );
+  const { calenderData, calenderLoading, activeCalender } = useAppSelector((state) => state.calender);
 
   // dispatch state action
   const dispatch = useAppDispatch();
@@ -38,7 +36,7 @@ const CalenderContainer = (props: Props) => {
       dispatch(setCalenderData(props.calenderData));
       dispatch(setCalenderLoading(false));
     }
-  }, [calenderLoading]);
+  }, [calenderLoading, props.calenderData]);
 
   // calender button cell click schedule, view
   const handleCalenderCellButtonClick = (data: Partial<TCalender> | null) => {

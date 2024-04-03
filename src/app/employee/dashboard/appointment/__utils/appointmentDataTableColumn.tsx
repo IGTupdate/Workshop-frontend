@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback } from "react";
-import getColumnTextSearchProps from "@/app/components/TableSearch/getColumnTextSearchProps";
+import GetColumnTextSearchProps from "../../../../components/TableSearch/GetColumnTextSearchProps";
 import {
   Button,
   Flex,
@@ -27,7 +27,7 @@ import { MdAddChart } from "react-icons/md";
 
 const { Title, Text } = Typography;
 
-export function getAppointmentDataTableColumn() {
+export function GetAppointmentDataTableColumn() {
   const router = useRouter();
 
   const searchParams = useSearchParams();
@@ -67,7 +67,7 @@ export function getAppointmentDataTableColumn() {
         title: "Customer",
         dataIndex: "customer",
         key: "customer",
-        ...getColumnTextSearchProps<TAppointmentDataTable>("phone"),
+        ...GetColumnTextSearchProps<TAppointmentDataTable>("phone"),
         render: (customer) => {
           return (
             <div>
@@ -81,7 +81,7 @@ export function getAppointmentDataTableColumn() {
         title: "Vehicle Reg No.",
         dataIndex: "registeration_number",
         key: "registeration_number",
-        ...getColumnTextSearchProps<TAppointmentDataTable>(
+        ...GetColumnTextSearchProps<TAppointmentDataTable>(
           "registeration_number"
         ),
       },
@@ -156,13 +156,13 @@ export function getAppointmentDataTableColumn() {
         title: "Actions",
         dataIndex: "action",
         key: "action",
-        render: (_,{_id}) => {
+        render: (_, { _id }) => {
           return (
             <Flex wrap="wrap" gap="small">
 
               <Button
-                onClick={()=>{
-                  router.push("/employee/dashboard/appointment/"+_id)
+                onClick={() => {
+                  router.push("/employee/dashboard/appointment/" + _id)
                 }}
                 style={{ border: "1px #1890ff solid", color: "#1890ff" }}
                 size="middle"
@@ -173,7 +173,7 @@ export function getAppointmentDataTableColumn() {
               <Button
                 style={{ border: "1px #24ae55 solid", color: "#24ae55" }}
                 size="middle"
-                icon={<MdAddChart size={"22px"} title="Create WorkOrder"/>}
+                icon={<MdAddChart size={"22px"} title="Create WorkOrder" />}
               ></Button>
             </Flex>
           );

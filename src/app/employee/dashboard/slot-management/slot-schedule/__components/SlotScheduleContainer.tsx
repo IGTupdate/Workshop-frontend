@@ -8,12 +8,14 @@ import { NEW_SLOT_SCHEDULE } from "../__utils/constant";
 import { useRouter } from "next/navigation";
 import {
     setActiveSlotSchedule,
+    setDeleteSlotSchedule,
     setSlotScheduleData,
     setSlotScheduleDataLoading,
 } from "@/app/store/slices/slot-scheduleSlice";
 import { demoSlotScheduleData } from "../__demo";
-import { TActiveSlotSchedule } from "@/app/types/slot-schedule";
+import { TActiveSlotSchedule, TSlotSchedule } from "@/app/types/slot-schedule";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
+import SlotScheduleDeleteModal from "./SlotScheduleDeleteModal";
 
 type Props = {};
 
@@ -38,6 +40,11 @@ const SlotScheduleContainer = (props: Props) => {
         dispatch(setActiveSlotSchedule(newDrawerData));
     };
 
+    const handleSlotScheduleDeleteModal = (newDeleteModal: TSlotSchedule | null) => {
+        dispatch(setDeleteSlotSchedule(newDeleteModal))
+    }
+
+
     return (
         <div>
             <div className="flex justify-between items-center mb-8">
@@ -53,9 +60,10 @@ const SlotScheduleContainer = (props: Props) => {
             </div>
             <Table
                 dataSource={slotScheduleData}
-                columns={get_slot_schedule_columns(handleSlotScheduleDrawer)}
+                columns={get_slot_schedule_columns(handleSlotScheduleDrawer, handleSlotScheduleDeleteModal)}
             />
             <SlotScheduleManageDrawer />
+            <SlotScheduleDeleteModal />
         </div>
     );
 };

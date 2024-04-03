@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
-import { getAppointmentDataTableColumn } from "../__utils/appointmentDataTableColumn";
+import { GetAppointmentDataTableColumn } from "../__utils/appointmentDataTableColumn";
 import { TAppointment, TAppointmentDataTable } from "@/app/types/appointment";
 
 type Props = {
@@ -19,7 +19,7 @@ const AppointmentTableContainer = (props: Props) => {
     setAppointMentDataTable(() => {
       return props.appointmentData.map((appointment) => {
         return {
-          _id:appointment._id,
+          _id: appointment._id,
           customer: {
             phone: appointment.customer_id,
             name: appointment.customer_id,
@@ -36,7 +36,7 @@ const AppointmentTableContainer = (props: Props) => {
     <Table
       sticky={true}
       pagination={false}
-      columns={getAppointmentDataTableColumn()}
+      columns={GetAppointmentDataTableColumn()}
       dataSource={appointmentDataTable}
     />
   );

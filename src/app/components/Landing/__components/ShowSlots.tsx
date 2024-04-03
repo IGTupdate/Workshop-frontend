@@ -1,7 +1,7 @@
 "use client"
 import { useAppDispatch } from '@/app/store/reduxHooks';
 import { setSlotData } from '@/app/store/slices/slotSlice';
-import React, { useEffect } from 'react';
+import React, { useRef } from 'react';
 
 const data = {
     "date": "2024-03-29T00:00:00.000Z",
@@ -50,38 +50,31 @@ const data = {
   interface Props {
     selectedDate: string;
     scrollToSlotDetails: () => void;
-}
-
-const ShowSlots: React.FC<Props> = ({ selectedDate, scrollToSlotDetails }) => {
+  }
+  
+  const ShowSlots: React.FC<Props> = ({ selectedDate, scrollToSlotDetails }) => {
     const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        if (selectedDate) {
-            scrollToSlotDetails();
-        }
-    }, [selectedDate, scrollToSlotDetails]);
-
+    const scrollToSlotDetailsRef = useRef(scrollToSlotDetails);
+  
     const handleClick = async () => {
-        try {
-            dispatch(setSlotData(data));
-            scrollToSlotDetails();
-        } catch (err) {
-            console.error(err);
+      try {
+        if (selectedDate !== '') {
+          dispatch(setSlotData(data));
+          scrollToSlotDetailsRef.current?.();
         }
+      } catch (err) {
+        console.error(err);
+      }
     };
-
-    useEffect(() => {
-        scrollToSlotDetails();
-    }); 
-
+  
     return (
-        <button
-            onClick={handleClick}
-            className='bg-blue2 hover:bg-opacity-90 transition-all duration-200 h-full w-[40%] text-lg font-semibold text-red-400 hover:text-red-300 rounded-r-full'
-        >
-            Find Available Slots
-        </button>
+      <button
+        onClick={handleClick}
+        className='bg-customGray hover:bg-opacity-90 transition-all duration-200 h-full w-[40%] text-lg font-semibold text-red-400 hover:text-red-300 rounded-r-full'
+      >
+        Find Available Slots
+      </button>
     );
-};
-
-export default ShowSlots;
+  };
+  
+  export default ShowSlots;

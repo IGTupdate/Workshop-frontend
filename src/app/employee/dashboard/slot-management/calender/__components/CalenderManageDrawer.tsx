@@ -21,15 +21,11 @@ const CalenderManageDrawer = (props: Props) => {
     return state.calender;
   });
 
-  const closeDrwer = () => {
+  const closeDrawer = () => {
     if (!calenderDrawerLoading) {
       dispatch(setActiveCalender(null));
       console.log("closing drawer");
     }
-  };
-
-  const saveCalender = () => {
-    console.log("saved");
   };
 
   return (
@@ -44,7 +40,7 @@ const CalenderManageDrawer = (props: Props) => {
           </Text>
         }
         width={480}
-        onClose={closeDrwer}
+        onClose={closeDrawer}
         open={activeCalender !== null}
         styles={{
           body: {
@@ -55,7 +51,7 @@ const CalenderManageDrawer = (props: Props) => {
         {activeCalender ? (
           <div>
             {!activeCalender._id ? (
-              <CalenderCreate />
+              <CalenderCreate activeCalender={activeCalender} />
             ) : (
               <CalenderShowDetail
                 activeCalender={activeCalender as TCalender}

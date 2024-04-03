@@ -19,7 +19,7 @@ const SlotTabs: React.FC<AppointmentBookingProps> = ({ slotData }) => {
         <p className=" bold-text-lg">You picked a great slot for booking</p>
         <p className=" bold-text-lg">Slot Timings: {extractTimeFromDate(start_time)} - {extractTimeFromDate(end_time)}</p>
         <p className=" bold-text-lg">Slot Availability: {available}</p>
-        <button onClick={handleBookAppointment} className='bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-200 text-lg font-semibold focus:outline-none focus:ring focus:ring-blue-400'>
+        <button onClick={handleBookAppointment} className='bg-customGray text-customLightGray px-4 py-2 rounded-md hover:bg-opacity-80 transition-colors duration-200 text-lg font-semibold focus:outline-none focus:ring focus:ring-blue-400'>
             Book Appointment
         </button>
     </div>

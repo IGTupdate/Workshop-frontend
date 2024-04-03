@@ -1,146 +1,94 @@
 "use client";
 
-import React, { useState } from "react";
-import { Button, Col, Form, Input, Row, Select, Typography } from "antd";
-import { TSlotDetail } from "@/app/types/slot-schedule";
-const { Option } = Select;
+import React from "react";
+import { Button, Col, Input, Row, Typography } from "antd";
+import { Control, Controller, useFieldArray, } from "react-hook-form";
 
+import { TSlotScheduleManage } from "@/app/validators/slot-schedule";
+import { NEW_SLOT_SCHEDULE_INITIAL_DATA } from "../__utils/constant";
 type Props = {
-  // slot_details: TSlotDetail
+  control: Control<TSlotScheduleManage, any>,
 };
 
+
+
 const SlotDetailsManageContainer = (props: Props) => {
-  const [slotDetails, setSlotDetails] = useState([
-    {
-      startTime: {
-        hour: 10,
-        minute: 50,
-      },
-      endTime: {
-        hour: 12,
-        minute: 25,
-      },
-      slot_limit: 5,
-    },
-    {
-      startTime: {
-        hour: 10,
-        minute: 50,
-      },
-      endTime: {
-        hour: 12,
-        minute: 25,
-      },
-      slot_limit: 5,
-    },
-  ]);
 
+  const { fields, append, remove, } = useFieldArray({
+    control: props.control,
+    name: "slot_details"
+  });
   const addSlotDetail = () => {
-    setSlotDetails((prv) => {
-      return [
-        ...prv,
-        {
-          startTime: {
-            hour: 10,
-            minute: 50,
-          },
-          endTime: {
-            hour: 12,
-            minute: 25,
-          },
-          slot_limit: 5,
-        },
-      ];
-    });
+    append(NEW_SLOT_SCHEDULE_INITIAL_DATA.slot_details)
   };
-
   const removeSlotDetail = (toDeleteIndex: number) => {
-    setSlotDetails((prv) => {
-      return prv.filter((slot, index) => {
-        return toDeleteIndex !== index;
-      });
-    });
+    remove(toDeleteIndex)
   };
-
-
-  
 
   return (
     <div className="w-full">
-      <Typography className="mb-2">Slot Details</Typography>
+      <Typography className="mb-4 font-semibold">Slot Details</Typography>
 
-      {/* slots */}
-      {slotDetails.map((slot, index) => {
-        return (
-          <div key={index}>
+      {
+        fields.map((slot_details, index) => {
+          return <div key={slot_details.id} className="mb-4">
             <Typography>Slot : {index + 1}</Typography>
-            <Typography>Start Time -</Typography>
-            <Row gutter={16}>
-              <Col span={12}>
-                <Form.Item
-                  name="hour"
-                  label="Hour"
-                  className="m-0"
-                  rules={[
-                    { required: true, message: "Please enter user name" },
-                  ]}
-                >
-                  <Input type="number" placeholder="Please enter user name" />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  name="minute"
-                  label="Minute"
-                  className="m-0"
-                  rules={[
-                    { required: true, message: "Please enter user name" },
-                  ]}
-                >
-                  <Input type="number" placeholder="Please enter user name" />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Typography className="mt-2">End Time - </Typography>
-
-            <Row gutter={16}>
-              <Col span={12}>
-                <Form.Item
-                  name="hour"
-                  label="Hour"
-                  className="m-0"
-                  rules={[
-                    { required: true, message: "Please enter user name" },
-                  ]}
-                >
-                  <Input type="number" placeholder="Please enter user name" />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  name="minute"
-                  label="Minute"
-                  className="m-0"
-                  rules={[
-                    { required: true, message: "Please enter user name" },
-                  ]}
-                >
-                  <Input type="number" placeholder="Please enter user name" />
-                </Form.Item>
-              </Col>
-            </Row>
+            <div className="mb-2">
+              <Typography>Start Time - </Typography>
+              <Row gutter={16}>
+                <Col span={12}>
+                  <label className='mb-2 block text-black1' htmlFor="name">Hour</label>
+                  <Controller
+                    name={`slot_details.${index}.start_time.hour`}
+                    control={props.control}
+                    render={({ field }) => {
+                      return <Input {...field} type="number" placeholder="Enter Hour" />
+                    }} />
+                </Col>
+                <Col span={12}>
+                  <label className='mb-2 block text-black1' htmlFor="name">Minute</label>
+                  <Controller
+                    name={`slot_details.${index}.start_time.minute`}
+                    control={props.control}
+                    render={({ field }) => {
+                      // {field.}
+                      return <Input {...field} placeholder="Enter Minute" />
+                    }} />
+                </Col>
+              </Row>
+            </div>
+            <div className="mb-2">
+              <Typography>End Time - </Typography>
+              <Row gutter={16}>
+                <Col span={12}>
+                  <label className='mb-2 block text-black1' htmlFor="name">Hour</label>
+                  <Controller
+                    name={`slot_details.${index}.end_time.hour` as const}
+                    control={props.control}
+                    render={({ field }) => {
+                      return <Input {...field} type="number" placeholder="Enter Hour" />
+                    }} />
+                </Col>
+                <Col span={12}>
+                  <label className='mb-2 block text-black1' htmlFor="name">Minute</label>
+                  <Controller
+                    name={`slot_details.${index}.end_time.minute`}
+                    control={props.control}
+                    render={({ field }) => {
+                      return <Input {...field} type="number" placeholder="Enter Hour" />
+                    }} />
+                </Col>
+              </Row>
+            </div>
 
             <Row className="w-full">
-              <Form.Item
-                className="w-full"
-                name="limit"
-                label="Limit"
-                rules={[
-                  { required: true, message: "Please enter Schedule name" },
-                ]}
-              >
-                <Input placeholder="Please enter Schedule name" />
-              </Form.Item>
+              <label className='mb-2 block text-black1' htmlFor="Limit">Limit</label>
+              <Controller
+                name={`slot_details.${index}.slot_limit`}
+                control={props.control}
+                render={({ field }) => {
+                  return <Input {...field} type="number" placeholder="Enter Limit" />
+                }} />
             </Row>
 
             <div className="mb-2 flex justify-end">
@@ -155,8 +103,8 @@ const SlotDetailsManageContainer = (props: Props) => {
               </button>
             </div>
           </div>
-        );
-      })}
+        })
+      }
 
       <div className="flex justify-end">
         <Button

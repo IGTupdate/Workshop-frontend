@@ -5,6 +5,8 @@ import LandingNavbar from './__components/Navbar';
 import SlotSchedule from './__components/SlotSchedule';
 import SlotDetails from './__components/SlotDetails';
 import { useAppSelector } from '@/app/store/reduxHooks';
+import EmployeeLogin from './__components/EmployeeLogin';
+import AboutUsFooter from './__components/AboutUs';
 
 const { Header, Footer, Content } = Layout;
 
@@ -22,19 +24,24 @@ const App: React.FC = () => {
 
   return (
     <Layout>
-      <Header className='flex items-center justify-center w-full h-20'>
+      <Header className='flex items-center justify-center w-full h-20 bg-customGray mb-0'>
         <LandingNavbar/>
       </Header>
       <Content>
-        <Flex vertical gap={100}>
+        <Flex vertical>
           <SlotSchedule scrollToSlotDetails={scrollToSlotDetails} />
-          { slotData && (<div ref={slotDetailsRef}>
-              <SlotDetails/>
-            </div>)
-          }
+          <div ref={slotDetailsRef} className={`${slotData? "h-screen flex justify-center items-center flex-col" : " invisible"}`}>
+            { (<div>
+                <SlotDetails/>
+              </div>)
+            }
+          </div>
+          <EmployeeLogin/>
         </Flex>
       </Content>
-      <Footer>Footer</Footer>
+      <Footer className=' p-0 mt-[100px]'>
+        <AboutUsFooter/>
+      </Footer>
     </Layout>
   );
 };

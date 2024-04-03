@@ -1,12 +1,9 @@
 "use client";
-
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Button, Space, TableColumnType } from "antd";
-
 import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import type { FilterDropdownProps } from "antd/es/table/interface";
-import Highlighter from "react-highlight-words";
 import type { GetRef } from "antd";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { removeQueryParams, setQueryParams } from "@/app/utils/helper";
@@ -16,7 +13,7 @@ type InputRef = GetRef<typeof Input>;
 type DataIndex = string;
 
 // T is the type of data in the table
-function getColumnSearchProps<T>(dataIndex: DataIndex): TableColumnType<T> {
+function GetColumnTextSearchProps<T>(dataIndex: DataIndex): TableColumnType<T> {
   // states
   /*
   searchText : will update on the click of serach and filter
@@ -68,15 +65,6 @@ function getColumnSearchProps<T>(dataIndex: DataIndex): TableColumnType<T> {
     clearFilters && clearFilters();
   };
 
-  // const handleFilter = (
-  //   selectedKeys: string[],
-  //   confirm: FilterDropdownProps["confirm"],
-  //   dataIndex: DataIndex
-  // ) => {
-  //   confirm({ closeDropdown: false });
-  //   setSearchText((selectedKeys as string[])[0]);
-  //   setSearchedColumn(dataIndex);
-  // };
 
   return {
     filterDropdown: ({
@@ -157,4 +145,4 @@ function getColumnSearchProps<T>(dataIndex: DataIndex): TableColumnType<T> {
   };
 }
 
-export default getColumnSearchProps;
+export default GetColumnTextSearchProps;

@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { generateAccessToken } from "./operations/auth/customerAuth";
 import { jwtDecode } from "jwt-decode";
 import { store } from "../store/store";
-import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
 const axiosInstance = axios.create({
   withCredentials: true,
@@ -11,14 +11,17 @@ const axiosInstance = axios.create({
 // Request interceptor
 axiosInstance.interceptors.request.use(
   async (config) => {
-    // console.log("INSIDE INTERCEPTOR");
+    console.log("INSIDE INTERCEPTOR");
 
-    const accessToken = store.getState().auth.accessToken;
-    console.log("accessToken", accessToken);
+    // const cookieStore = cookies()
+    // console.log("YES",cookieStore.getAll())
+    const accessToken = store.getState().auth.accessToken
+    console.log(accessToken);
 
     let generateAccessTokenResponse;
     if (!accessToken) {
       // If no access token is available, generate a new one
+      console.log("ACCESS TOKEN NOT FOUND")
       generateAccessTokenResponse = await generateAccessToken(store.dispatch);
     } else {
       const currentTime = new Date().getTime();
@@ -29,19 +32,18 @@ axiosInstance.interceptors.request.use(
       // Check if decode.exp is defined and not expired
       if (decode.exp && decode.exp * 1000 < currentTime) {
         // If expired, generate a new access token
-        // console.log("ACCESS TOKEN EXPIRED");
+        console.log("ACCESS TOKEN EXPIRED");
         generateAccessTokenResponse = await generateAccessToken(store.dispatch);
       }
     }
 
-    if (
-      !generateAccessTokenResponse ||
-      !generateAccessTokenResponse.data.success
-    ) {
-      // window.location.href = "/";
-      // redirect("/")
-      return Promise.reject();
-    }
+    // if (
+    //   !generateAccessTokenResponse ||
+    //   !generateAccessTokenResponse.data.success
+    // ) {
+    //   window.location.href = "/";
+    //   return Promise.reject();
+    // }
 
     // Get the new access token after generation
     const newAccessToken = store.getState().auth.accessToken;

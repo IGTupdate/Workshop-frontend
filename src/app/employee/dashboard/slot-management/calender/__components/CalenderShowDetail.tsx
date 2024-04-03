@@ -6,7 +6,7 @@ import { CheckOutlined, CloseOutlined, EditOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import { TCalender } from "@/app/types/calender";
 import DescriptionItem from "@/app/components/DescriptionItem.tsx";
-import { calender_status } from "../__utils.ts/constant";
+import { calender_status } from "../__utils/constant";
 import CalenderUpdateStatus from "./CalenderUpdateStatus";
 const { Title, Text } = Typography;
 

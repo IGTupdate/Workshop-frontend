@@ -1,51 +1,54 @@
 "use client";
 
-import React, { useState } from "react";
-import { Button, Drawer, Form, Input, Row, Select, Space } from "antd";
+import React, { useEffect, useState } from "react";
+import { Button, Drawer, Form, Input, Row, Select, Space, Typography } from "antd";
 import SlotDetailsManageContainer from "./SlotDetailsManageContainer";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { setActiveSlotSchedule } from "@/app/store/slices/slot-scheduleSlice";
-import { NEW_CALENDER } from "../../calender/__utils.ts/constant";
-import { NEW_SLOT_SCHEDULE } from "../__utils/constant";
-import { useForm } from "react-hook-form";
+import { NEW_SLOT_SCHEDULE, NEW_SLOT_SCHEDULE_INITIAL_DATA } from "../__utils/constant";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { slotScheduleManageSchema } from "@/app/validators/slot-schedule";
+import { TSlotSchedule } from "@/app/types/slot-schedule";
 
+
+const { Text } = Typography
 type Props = {};
 
 const SlotScheduleManageDrawer = (props: Props) => {
   // open drawer has of _id of the slot schedule which need to be edit and if it has new key word then the create new slot
 
-  const { activeSlotSchedule } = useAppSelector((state) => state.slotSchedule);
+  const { activeSlotSchedule, slotScheduleDrawerLoading } = useAppSelector((state) => state.slotSchedule);
+
   const dispatch = useAppDispatch();
 
   const closeDrwer = () => {
-    dispatch(setActiveSlotSchedule(null));
+    if (!slotScheduleDrawerLoading) {
+      dispatch(setActiveSlotSchedule(null));
+    }
   };
 
-  const saveSlotSchedule = () => {
-    console.log("saved");
-  };
-
-  const { register, control, handleSubmit } = useForm({
-    defaultValues: {
-      slotSchedules: [
-        {
-          name: "Morning",
-          slot_details: [
-            {
-              start_time: { hour: 8, minute: 0 },
-              end_time: { hour: 10, minute: 0 },
-              slot_limit: 5,
-            },
-            {
-              start_time: { hour: 10, minute: 0 },
-              end_time: { hour: 12, minute: 0 },
-              slot_limit: 5,
-            },
-          ],
-        },
-      ],
-    },
+  const { control, handleSubmit, formState: { errors }, setValue } = useForm({
+    defaultValues: NEW_SLOT_SCHEDULE_INITIAL_DATA,
+    resolver: yupResolver(slotScheduleManageSchema)
   });
+
+
+  // setting initail fields
+  useEffect(() => {
+    if (activeSlotSchedule && activeSlotSchedule !== NEW_SLOT_SCHEDULE) {
+      setValue("name", activeSlotSchedule.name)
+      setValue("slot_details", activeSlotSchedule.slot_details)
+    }
+    else if (!activeSlotSchedule) {
+      setValue("name", NEW_SLOT_SCHEDULE_INITIAL_DATA.name)
+      setValue("slot_details", NEW_SLOT_SCHEDULE_INITIAL_DATA.slot_details)
+    }
+  }, [activeSlotSchedule])
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  }
 
   return (
     <Drawer
@@ -66,7 +69,8 @@ const SlotScheduleManageDrawer = (props: Props) => {
         <Space>
           <Button onClick={closeDrwer}>Cancel</Button>
           <Button
-            onClick={saveSlotSchedule}
+            htmlType="submit"
+            onClick={handleSubmit(onSubmit)}
             className="bg-blue1 text-white1 font-medium text-md"
           >
             Save
@@ -74,19 +78,18 @@ const SlotScheduleManageDrawer = (props: Props) => {
         </Space>
       }
     >
-      <Form className="w-full" layout="vertical" hideRequiredMark>
-        <Row className="w-full">
-          <Form.Item
-            className="w-full"
-            name="name"
-            label="Name"
-            rules={[{ required: true, message: "Please enter Schedule name" }]}
-          >
-            <Input placeholder="Please enter Schedule name" />
-          </Form.Item>
+      <Form className="w-full" layout="vertical">
+        <Row className="w-full mb-4">
+          <label className='font-medium mb-2 block text-black1' htmlFor="name">Schedule Name</label>
+          <Controller name="name"
+            control={control}
+            render={({ field }) => {
+              return <Input {...field} placeholder="Please enter Schedule name" />
+            }} />
+          {errors.name && <Text type='danger'> {errors.name.message}</Text>}
         </Row>
-        
-        <SlotDetailsManageContainer />
+
+        <SlotDetailsManageContainer control={control} />
       </Form>
     </Drawer>
   );

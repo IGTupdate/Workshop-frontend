@@ -4,7 +4,6 @@ import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
 
 const dateFormat = 'DD-MM-YYYY';
-
 const maxDate = dayjs().add(7, 'day');
 
 interface LandingDatePickerProps {
@@ -12,29 +11,38 @@ interface LandingDatePickerProps {
 }
 
 const LandingDatePicker: React.FC<LandingDatePickerProps> = ({ setSelectedDate }) => {
-  const [selectedDate, setSelectedDateState] = useState(dayjs());
+  const [selectedDate, setSelectedDateState] = useState<dayjs.Dayjs | null>(dayjs()); // Initial value set to current date
 
   useEffect(() => {
-    handleDateChange(selectedDate); 
-  }, );
+    handleDateChange(selectedDate);
+  },);
 
   const handleDateChange = (date: dayjs.Dayjs | null) => {
-    const formattedDate = date ? date.format(dateFormat) : '';
-    setSelectedDate(formattedDate);
-    setSelectedDateState(date || dayjs()); 
+    if (!date) {
+      // If date is cleared, set selectedDate to null
+      setSelectedDateState(null);
+      setSelectedDate(''); // Notify parent component of cleared date
+    } else {
+      const formattedDate = date.format(dateFormat);
+      setSelectedDate(formattedDate);
+      setSelectedDateState(date);
+    }
   };
 
   return (
     <DatePicker
-      value={selectedDate}
+      value={selectedDate} // Bind value to selectedDate
       format={dateFormat}
       minDate={dayjs()}
       maxDate={maxDate}
       allowClear={true}
       inputReadOnly={true}
+      // placement='topLeft'
+      // size='small'
       mode='date'
       superNextIcon={''}
       superPrevIcon={''}
+      placeholder="Select date" // Placeholder text when value is cleared
       className='h-full w-[60%] rounded-l-full text-3xl text-black py-6 px-12'
       picker='date'
       onChange={handleDateChange}
@@ -43,4 +51,3 @@ const LandingDatePicker: React.FC<LandingDatePickerProps> = ({ setSelectedDate }
 };
 
 export default LandingDatePicker;
-

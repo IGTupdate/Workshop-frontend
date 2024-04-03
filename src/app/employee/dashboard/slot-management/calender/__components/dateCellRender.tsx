@@ -2,9 +2,9 @@ import { TCalender } from "@/app/types/calender";
 import { get_date_only, isPastDate } from "@/app/utils/helper";
 import type { Dayjs } from "dayjs";
 import { MdBlockFlipped } from "react-icons/md";
-import { calender_status } from "../__utils.ts/constant";
-import { calenderCellBgColorByStatus } from "../__utils.ts/constant";
-import { getAllSlotOfCalender } from "../__utils.ts/helper";
+import { calender_status } from "../__utils/constant";
+import { calenderCellBgColorByStatus } from "../__utils/constant";
+import { getAllSlotOfCalender } from "../__utils/helper";
 
 const getRequiredCalenderByDate = (
   calenderData: TCalender[],

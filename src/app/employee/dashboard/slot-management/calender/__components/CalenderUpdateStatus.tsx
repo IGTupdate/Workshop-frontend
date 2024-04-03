@@ -3,12 +3,11 @@
 import { TCalender } from "@/app/types/calender";
 import { Button, Modal, Spin, Typography } from "antd";
 import React, { useEffect, useState } from "react";
-import { calender_status } from "../__utils.ts/constant";
+import { calender_status } from "../__utils/constant";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import {
   setActiveCalender,
-  setCalenderLoading,
 } from "@/app/store/slices/calenderSlice";
 import { useAppDispatch } from "@/app/store/reduxHooks";
 

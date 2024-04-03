@@ -10,7 +10,8 @@ export interface ISlotSchedule {
 }
 
 export const get_slot_schedule_columns = (
-  setOpenDrawer: (newDrawerData: TActiveSlotSchedule) => void
+  setOpenDrawer: (newDrawerData: TActiveSlotSchedule) => void,
+  handleSlotScheduleDeleteModal: (newDeleteModal: TSlotSchedule | null) => void
 ) => {
   const slot_schedule_table_columns: TableProps<TSlotSchedule>["columns"] = [
     {
@@ -53,13 +54,14 @@ export const get_slot_schedule_columns = (
         <Space size="middle">
           <button
             onClick={() => {
-              console.log("it works");
               setOpenDrawer(record);
             }}
           >
             Update{" "}
           </button>
-          <button className="text-red-500">Delete</button>
+          <button onClick={() => {
+            handleSlotScheduleDeleteModal(record)
+          }} className="text-red-500">Delete</button>
         </Space>
       ),
     },
