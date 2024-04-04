@@ -12,7 +12,7 @@ import toast from 'react-hot-toast';
 const MAX_RETRY = 3;
 
 const VerifyOTP: React.FC = () => {
-    const contact = useAppSelector((state) => state.auth.contact);
+    const contact = useAppSelector((state) => state.auth.authData.contactNumber);
     const router = useRouter();
     const dispatch = useAppDispatch();
     const [otpValues, setOtpValues] = useState<string[]>([]);
@@ -37,7 +37,7 @@ const VerifyOTP: React.FC = () => {
 
         let result
         try {
-            result = await verifyOTP(contact, otp);
+            result = await verifyOTP(contact, otp, dispatch);
             if(result.data.success){
                 if (result?.data?.data?.userExists) router.push('/dashboard');
                 else dispatch(setAuthStep(2));

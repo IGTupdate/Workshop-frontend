@@ -14,8 +14,8 @@ axiosInstance.interceptors.request.use(
     console.log("INSIDE INTERCEPTOR");
 
     // const cookieStore = cookies()
-    // console.log("YES",cookieStore.getAll())
-    const accessToken = store.getState().auth.accessToken
+    // const accessToken = cookieStore.get('accessToken')?.value
+    const accessToken = null
     console.log(accessToken);
 
     let generateAccessTokenResponse;

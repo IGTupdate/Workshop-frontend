@@ -19,7 +19,7 @@ const Register: React.FC = () => {
     const onSubmit = async (data: FormData) => {
         dispatch(setAuthLoading(true))
         try{
-            await registerCustomer(data.fullName, data.email)
+            await registerCustomer(data.fullName, data.email, dispatch)
             dispatch(resetAuthSlice())
             redirect('/dashboard')
         }catch(err){

@@ -24,6 +24,8 @@ export const authEndpoints = {
   AUTH_API: CUSTOMER_AUTH_BASE_URL + "/auth",
   GENERATE_ACCESS_TOKEN_API: AUTHENTICATION_BASE_URL + "/generateAccessToken",
   EMPLOYEE_LOGIN_API: EMPLOYEE_AUTH_BASE_URL + "/login",
+  GET_CUSTOMER_DATA_API: CUSTOMER_AUTH_BASE_URL,
+  GET_EMPLOYEE_DATA_API: EMPLOYEE_AUTH_BASE_URL
 };
 
 export const appointmentEndpoints = {
