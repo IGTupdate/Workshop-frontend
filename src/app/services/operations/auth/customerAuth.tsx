@@ -1,11 +1,28 @@
-import { setAccessToken } from "@/app/store/slices/authSlice";
+import { setAccessToken, setAuthData } from "@/app/store/slices/authSlice";
 import { AppDispatch } from "@/app/store/store";
 import toast from "react-hot-toast";
 import { apiOpenConnector } from "../../apiOpenConnector";
 import { authEndpoints } from "../../apis";
+import { apiConnector } from "../../apiConnector";
 
-const { SENDOTP_API, VERIFYOTP_API, AUTH_API, GENERATE_ACCESS_TOKEN_API } =
+const { SENDOTP_API, VERIFYOTP_API, AUTH_API, GENERATE_ACCESS_TOKEN_API, GET_CUSTOMER_DATA_API } =
   authEndpoints;
+
+export async function getCustomerData(_id : string, dispatch : AppDispatch) {
+  try{
+    const result = await apiConnector({
+      method: "GET",
+      url: GET_CUSTOMER_DATA_API,
+      params: {_id}
+    })
+
+    if(result.data.success){
+      dispatch(setAuthData(result.data.data))
+    }
+  }catch(err){
+    throw err
+  }
+}
 
 export async function sendOTP(contactNumber: string) {
   try {
@@ -30,7 +47,7 @@ export async function sendOTP(contactNumber: string) {
   }
 }
 
-export async function verifyOTP(contactNumber: string, otp: string) {
+export async function verifyOTP(contactNumber: string, otp: string, dispatch: AppDispatch) {
   try {
     // Sending OTP verification request
     const otpVerificationResult = await apiOpenConnector({
@@ -54,6 +71,7 @@ export async function verifyOTP(contactNumber: string, otp: string) {
             "accessToken",
             authResult?.data?.accessToken
           );
+          await getCustomerData(authResult.data.data._id, dispatch)
           toast.success("USER LOGGED IN SUCCESSFULLY");
         }
       } else {
@@ -69,7 +87,7 @@ export async function verifyOTP(contactNumber: string, otp: string) {
   }
 }
 
-export async function registerCustomer(fullName: string, email: string) {
+export async function registerCustomer(fullName: string, email: string, dispatch: AppDispatch) {
   try {
     const authResult = await apiOpenConnector({
       method: "POST",
@@ -83,6 +101,7 @@ export async function registerCustomer(fullName: string, email: string) {
     if (authResult?.data?.success) {
       // If authentication is successful, set access token
       window.localStorage.setItem("accessToken", authResult?.data?.accessToken);
+      await getCustomerData(authResult.data.data._id, dispatch)
       toast.success("REGISTRATION SUCCESSFULL");
     }
   } catch (err) {

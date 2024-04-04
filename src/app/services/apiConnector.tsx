@@ -17,36 +17,24 @@ axiosInstance.interceptors.request.use(
     console.log("INSIDE INTERCEPTOR");
     let accessToken = get_client_cookie("accessToken");
 
-
-    let generateAccessTokenResponse;
     if (!accessToken) {
       // If no access token is available, generate a new one
-      console.log("ACCESS TOKEN NOT FOUND")
-      generateAccessTokenResponse = await generateAccessToken(store.dispatch);
+      console.log("ACCESS a NOT FOUND")
+      accessToken = await generateAccessToken(store.dispatch);
     } else {
       const currentTime = new Date().getTime();
       const decode = jwtDecode(accessToken);
       if (decode.exp && decode.exp * 1000 < currentTime) {
         // If expired, generate a new access token
         console.log("ACCESS TOKEN EXPIRED");
-        generateAccessTokenResponse = await generateAccessToken(store.dispatch);
+        accessToken = await generateAccessToken(store.dispatch);
       }
     }
 
-    // if (
-    //   !generateAccessTokenResponse ||
-    //   !generateAccessTokenResponse.data.success
-    // ) {
-    //   window.location.href = "/";
-    //   return Promise.reject();
-    // }
-
-    // Get the new access token after generation
-    const newAccessToken = store.getState().auth.accessToken;
+    if (!accessToken) throw "";
 
     // Set the authorization header with the new access token
-    config.headers.Authorization = `Bearer ${newAccessToken}`;
-
+    config.headers.Authorization = `Bearer ${accessToken}`;
     return config;
   },
   (error) => {

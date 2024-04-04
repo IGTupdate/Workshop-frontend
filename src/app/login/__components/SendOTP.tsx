@@ -2,7 +2,7 @@ import Heading from '@/app/components/Heading';
 import ErrorText from '@/app/components/Text/ErrorText';
 import { sendOTP } from '@/app/services/operations/auth/customerAuth';
 import { useAppDispatch } from '@/app/store/reduxHooks';
-import { setAuthLoading, setAuthStep, setContact } from '@/app/store/slices/authSlice';
+import { setAuthData, setAuthLoading, setAuthStep } from '@/app/store/slices/authSlice';
 import { Button, Input } from 'antd';
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -28,7 +28,7 @@ const SendOTP: React.FC= () => {
             const result = await sendOTP(contactNumber);
             if (result?.data.success) {
                 dispatch(setAuthStep(1));
-                dispatch(setContact(contactNumber));
+                dispatch(setAuthData({contactNumber}));
             }
         } catch (error) {
             // console.error("Error sending OTP:", error);
