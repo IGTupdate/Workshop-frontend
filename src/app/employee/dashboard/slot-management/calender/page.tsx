@@ -8,8 +8,6 @@ import { TCalender } from "@/app/types/calender";
 type Props = {};
 
 const page = async (props: Props) => {
-  const response = await getAllCalender();
-  const calenderData = response.data.data as TCalender[];
 
   return (
     <div className="p-4 bg-white rounded-md">
@@ -19,7 +17,7 @@ const page = async (props: Props) => {
       </div>
 
       <div className="">
-        <CalenderContainer calenderData={calenderData} />
+        <CalenderContainer />
       </div>
     </div>
   );

@@ -15,9 +15,10 @@ import {
   setCalenderLoading,
 } from "@/app/store/slices/calenderSlice";
 import Loader from "@/app/components/Loader";
+import { getAllCalender } from "@/app/services/operations/appointment/calender";
 
 type Props = {
-  calenderData: TCalender[];
+
 };
 
 const CalenderContainer = (props: Props) => {
@@ -33,10 +34,10 @@ const CalenderContainer = (props: Props) => {
   // for the first time
   useEffect(() => {
     if (calenderLoading) {
-      dispatch(setCalenderData(props.calenderData));
-      dispatch(setCalenderLoading(false));
+      console.log("slot schedule fetched");
+      dispatch(getAllCalender());
     }
-  }, [calenderLoading, props.calenderData]);
+  }, [calenderLoading]);
 
   // calender button cell click schedule, view
   const handleCalenderCellButtonClick = (data: Partial<TCalender> | null) => {

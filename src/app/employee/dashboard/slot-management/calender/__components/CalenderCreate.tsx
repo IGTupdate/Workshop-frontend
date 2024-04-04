@@ -10,6 +10,7 @@ import { TCalender } from '@/app/types/calender';
 import { calender_status } from '../__utils/constant';
 import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import { setCalenderDrawerLoading } from '@/app/store/slices/calenderSlice';
+import { createCalender } from '@/app/services/operations/appointment/calender';
 
 const { Text } = Typography;
 
@@ -53,9 +54,9 @@ const CalenderCreate = (props: Props) => {
         return (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
     }
 
+    
     const onSubmit = (data: TCalenderCreate) => {
-        dispatch(setCalenderDrawerLoading(true));
-        console.log(data);
+        dispatch(createCalender([data]))
     }
 
 

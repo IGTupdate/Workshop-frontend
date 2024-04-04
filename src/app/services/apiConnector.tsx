@@ -2,7 +2,10 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { generateAccessToken } from "./operations/auth/customerAuth";
 import { jwtDecode } from "jwt-decode";
 import { store } from "../store/store";
-import { cookies } from "next/headers";
+// import { get_server_cookie } from "../utils/get_server_cookie";
+import { get_client_cookie } from "../utils/get_client_cookie";
+
+
 
 const axiosInstance = axios.create({
   withCredentials: true,
@@ -12,11 +15,8 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async (config) => {
     console.log("INSIDE INTERCEPTOR");
+    let accessToken = get_client_cookie("accessToken");
 
-    // const cookieStore = cookies()
-    // console.log("YES",cookieStore.getAll())
-    const accessToken = store.getState().auth.accessToken
-    console.log(accessToken);
 
     let generateAccessTokenResponse;
     if (!accessToken) {
@@ -26,10 +26,6 @@ axiosInstance.interceptors.request.use(
     } else {
       const currentTime = new Date().getTime();
       const decode = jwtDecode(accessToken);
-
-      console.log("decode token", decode)
-
-      // Check if decode.exp is defined and not expired
       if (decode.exp && decode.exp * 1000 < currentTime) {
         // If expired, generate a new access token
         console.log("ACCESS TOKEN EXPIRED");
@@ -54,7 +50,7 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log(error);
+    // handle logout
     return Promise.reject(error);
   }
 );

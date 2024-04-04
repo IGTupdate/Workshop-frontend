@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Drawer, Form, Input, Row, Select, Space, Typography } from "antd";
 import SlotDetailsManageContainer from "./SlotDetailsManageContainer";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
-import { setActiveSlotSchedule } from "@/app/store/slices/slot-scheduleSlice";
+import { setActiveSlotSchedule, setSlotScheduleDrawerLoading } from "@/app/store/slices/slot-scheduleSlice";
 import { NEW_SLOT_SCHEDULE, NEW_SLOT_SCHEDULE_INITIAL_DATA } from "../__utils/constant";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -48,6 +48,7 @@ const SlotScheduleManageDrawer = (props: Props) => {
 
   const onSubmit = (data: any) => {
     console.log(data);
+    dispatch(setSlotScheduleDrawerLoading(true));
   }
 
   return (
@@ -69,6 +70,7 @@ const SlotScheduleManageDrawer = (props: Props) => {
         <Space>
           <Button onClick={closeDrwer}>Cancel</Button>
           <Button
+            disabled={slotScheduleDrawerLoading}
             htmlType="submit"
             onClick={handleSubmit(onSubmit)}
             className="bg-blue1 text-white1 font-medium text-md"

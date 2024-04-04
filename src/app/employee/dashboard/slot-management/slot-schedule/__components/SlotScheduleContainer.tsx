@@ -16,25 +16,28 @@ import { demoSlotScheduleData } from "../__demo";
 import { TActiveSlotSchedule, TSlotSchedule } from "@/app/types/slot-schedule";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import SlotScheduleDeleteModal from "./SlotScheduleDeleteModal";
+import { getAllSlotSchedule } from "@/app/services/operations/appointment/slotSchedule";
 
 type Props = {};
 
 const SlotScheduleContainer = (props: Props) => {
-    const router = useRouter();
     const dispatch = useAppDispatch();
 
-    const { slotScheduleData } = useAppSelector((state) => state.slotSchedule);
+    const { slotScheduleData, slotScheduleLoading } = useAppSelector((state) => state.slotSchedule);
 
     // handing loading the slot schedule data
     useEffect(() => {
-        console.log("router cahgned");
-        // call api for data
-        dispatch(setSlotScheduleDataLoading(true));
-        setTimeout(() => {
-            dispatch(setSlotScheduleData(demoSlotScheduleData));
-            dispatch(setSlotScheduleDataLoading(false));
-        });
-    }, [router]);
+        console.log("slot schedule fetched");
+        if (slotScheduleLoading) {
+            dispatch(getAllSlotSchedule());
+
+            // // call api for data
+            // setTimeout(() => {
+            //     dispatch(setSlotScheduleData(demoSlotScheduleData));
+            //     dispatch(setSlotScheduleDataLoading(false));
+            // });
+        }
+    }, [slotScheduleLoading]);
 
     const handleSlotScheduleDrawer = (newDrawerData: TActiveSlotSchedule) => {
         dispatch(setActiveSlotSchedule(newDrawerData));

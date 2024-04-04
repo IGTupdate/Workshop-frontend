@@ -91,20 +91,19 @@ export async function registerCustomer(fullName: string, email: string) {
   }
 }
 
-export async function generateAccessToken(dispatch : AppDispatch){
-    let generateAccessTokenResult
-    try {
-        // console.log("INSIDE GENERATE ACCESS TOKEN")
-        generateAccessTokenResult = await apiOpenConnector({method : "GET", url : GENERATE_ACCESS_TOKEN_API});
-        if(generateAccessTokenResult?.data?.accessToken) {
-            dispatch(setAccessToken(generateAccessTokenResult?.data?.accessToken))
-            window.localStorage.setItem('accessToken', generateAccessTokenResult?.data?.accessToken);
-        }
-        return generateAccessTokenResult
-    } catch (err) {
-      console.log(err);
-        // if(!generateAccessTokenResult?.data.success) window.localStorage.clear()
-        console.error(err);
+export async function generateAccessToken(dispatch: AppDispatch): Promise<string> {
+
+  try {
+    console.log("INSIDE GENERATE ACCESS TOKEN")
+    const response = await apiOpenConnector({ method: "GET", url: GENERATE_ACCESS_TOKEN_API });
+    console.log("newAccessToken", response.data.accessToken)
+    if (response.data.accessToken) {
+      return response.data.accessToken as string
     }
-    return generateAccessTokenResult
+    throw "";
+  } catch (err) {
+    console.log(err);
+    // handle logout
+    throw err;
+  }
 }

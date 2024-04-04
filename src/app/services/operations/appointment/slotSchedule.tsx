@@ -2,6 +2,9 @@ import { TSlotSchedule } from "@/app/types/slot-schedule";
 import { apiConnector } from "../../apiConnector";
 import { appointmentEndpoints } from "../../apis";
 import toast from "react-hot-toast";
+import { Action, ThunkAction } from "@reduxjs/toolkit";
+import { RootState } from "@/app/store/store";
+import { setSlotScheduleDataLoading } from "@/app/store/slices/slot-scheduleSlice";
 
 
 const {
@@ -12,77 +15,80 @@ const {
     UPDATE_SLOT_SCHEDULE_API
 } = appointmentEndpoints
 
-export async function createSlotSchedule(slotScheduleData : TSlotSchedule){
-    try{
+export async function createSlotSchedule(slotScheduleData: TSlotSchedule) {
+    try {
         // console.log("INSIDE API CONNECTOR")
         const createSlotScheduleResult = await apiConnector({
             method: "POST",
             url: CREATE_SLOT_SCHEDULE_API,
             bodyData: slotScheduleData
         })
-        if(createSlotScheduleResult?.data?.success){
+        if (createSlotScheduleResult?.data?.success) {
             toast.success("SLOT SCHEDULE CREATED SUCCESSFULLY")
         }
         return createSlotScheduleResult
-    }catch(err){
+    } catch (err) {
         toast.error("SLOT SCHEDULE CREATION FAILED")
         throw err;
     }
 }
 
-export async function updateSlotSchedule(slotScheduleData : TSlotSchedule, slotScheduleId : string){
-    try{
+export async function updateSlotSchedule(slotScheduleData: TSlotSchedule, slotScheduleId: string) {
+    try {
         const updateSlotScheduleResult = await apiConnector({
             method: "POST",
             url: UPDATE_SLOT_SCHEDULE_API,
             bodyData: slotScheduleData,
-            params: {slotScheduleId}
+            params: { slotScheduleId }
         })
-        if(updateSlotScheduleResult?.data?.success){
+        if (updateSlotScheduleResult?.data?.success) {
             toast.success("SLOT SCHEDULE UPDATED SUCCESSFULLY")
         }
         return updateSlotScheduleResult
-    }catch(err){
+    } catch (err) {
         toast.error("SLOT SCHEDULE UPDATION FAILED")
         throw err;
     }
 }
 
-export async function getSlotSchedule(slotScheduleId : string) {
-    try{
+export async function getSlotSchedule(slotScheduleId: string) {
+    try {
         const getSlotScheduleResult = await apiConnector({
-            method : "GET",
-            url : GET_SLOT_SCHEDULE_API,
-            params : {slotScheduleId}
+            method: "GET",
+            url: GET_SLOT_SCHEDULE_API,
+            params: { slotScheduleId }
         })
         return getSlotScheduleResult
-    }catch(err){
+    } catch (err) {
         throw err
     }
 }
 
-export async function getAllSlotSchedule() {
-    try{
-        console.log("INDISE CONNECTOR")
-        const getAllSlotScheduleResult = await apiConnector({
-            method : "GET",
-            url : GET_ALL_SLOT_SCHEDULE_API
+
+export const getAllSlotSchedule = (): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
+    try {
+        const response = await apiConnector({
+            method: "GET",
+            url: GET_ALL_SLOT_SCHEDULE_API
         })
-        return getAllSlotScheduleResult
-    }catch(err){
-        throw err
+
+        console.log(response)
+        dispatch(setSlotScheduleDataLoading(false));
+
+    } catch (err) {
+        console.log(err);
     }
 }
 
-export async function deleteSlotSchedule(slotScheduleId : string) {
-    try{
+export async function deleteSlotSchedule(slotScheduleId: string) {
+    try {
         const deleteSlotScheduleResult = await apiConnector({
-            method : "DELETE",
-            url : DELETE_SLOT_SCHEDULE_API,
-            params : {slotScheduleId}
+            method: "DELETE",
+            url: DELETE_SLOT_SCHEDULE_API,
+            params: { slotScheduleId }
         })
         return deleteSlotScheduleResult
-    }catch(err){
+    } catch (err) {
         throw err
     }
 }

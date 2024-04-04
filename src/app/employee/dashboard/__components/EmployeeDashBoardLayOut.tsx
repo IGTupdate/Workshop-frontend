@@ -4,7 +4,6 @@ import { Layout } from "antd";
 import SideBar from "./SideBar";
 import HeaderContainer from "./HeaderContainer";
 import { SIDEBAR_COLLAPSED_WIDTH, SIDEBAR_WIDTH } from "../utils/variables";
-import { useRouter } from "next/navigation";
 
 const { Header, Sider, Content } = Layout;
 
@@ -14,7 +13,6 @@ const EmployeeDashBoardLayOut = ({
   children: React.ReactNode;
 }>) => {
   const [collapsed, setCollapsed] = useState(false);
-  const router = useRouter();
 
   useEffect(() => { });
   return (

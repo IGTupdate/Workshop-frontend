@@ -10,8 +10,8 @@ interface ApiOpenConnectorParams {
     method: Method;
     url: string;
     bodyData?: any;
-    headers?: AxiosRequestConfig["headers"] | undefined; 
-    params?: AxiosRequestConfig["params"] | undefined; 
+    headers?: AxiosRequestConfig["headers"] | undefined;
+    params?: AxiosRequestConfig["params"] | undefined;
 }
 
 export const apiOpenConnector = async ({
@@ -23,10 +23,10 @@ export const apiOpenConnector = async ({
 }: ApiOpenConnectorParams): Promise<AxiosResponse<any>> => {
     try {
         const response = await axiosInstance({
-            method : `${method}`,
+            method: `${method}`,
             url: `${url}`,
             data: bodyData ? bodyData : null,
-            headers, 
+            headers,
             params,
         });
         return response;

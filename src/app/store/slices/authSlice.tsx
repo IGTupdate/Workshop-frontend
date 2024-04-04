@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { getCookie } from "cookies-next";
 
 export interface IAuthState {
     authStep: number,
