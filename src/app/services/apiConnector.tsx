@@ -14,19 +14,19 @@ const axiosInstance = axios.create({
 // Request interceptor
 axiosInstance.interceptors.request.use(
   async (config) => {
-    console.log("INSIDE INTERCEPTOR");
+    // console.log("INSIDE INTERCEPTOR");
     let accessToken = get_client_cookie("accessToken");
 
     if (!accessToken) {
       // If no access token is available, generate a new one
-      console.log("ACCESS a NOT FOUND")
+      // console.log("ACCESS a NOT FOUND")
       accessToken = await generateAccessToken(store.dispatch);
     } else {
       const currentTime = new Date().getTime();
       const decode = jwtDecode(accessToken);
       if (decode.exp && decode.exp * 1000 < currentTime) {
         // If expired, generate a new access token
-        console.log("ACCESS TOKEN EXPIRED");
+        // console.log("ACCESS TOKEN EXPIRED");
         accessToken = await generateAccessToken(store.dispatch);
       }
     }

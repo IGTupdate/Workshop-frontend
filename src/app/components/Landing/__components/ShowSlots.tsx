@@ -49,10 +49,11 @@ const data = {
 
   interface Props {
     selectedDate: string;
-    scrollToSlotDetails: () => void;
+    scrollToSlotDetails?: () => void;
+    customClasses: string
   }
   
-  const ShowSlots: React.FC<Props> = ({ selectedDate, scrollToSlotDetails }) => {
+  const ShowSlots: React.FC<Props> = ({ selectedDate, scrollToSlotDetails, customClasses }) => {
     const dispatch = useAppDispatch();
     const scrollToSlotDetailsRef = useRef(scrollToSlotDetails);
   
@@ -70,7 +71,7 @@ const data = {
     return (
       <button
         onClick={handleClick}
-        className='bg-customGray hover:bg-opacity-90 transition-all duration-200 h-full w-[40%] text-lg font-semibold text-red-400 hover:text-red-300 rounded-r-full'
+        className={`${customClasses}`}
       >
         Find Available Slots
       </button>

@@ -22,13 +22,24 @@ export function convertToLocaleDateAndWeekday(dateString: string | undefined) {
     return formattedDate + ", " + weekdayName;
 }
 
-export function extractTimeFromDate(datetimeString: string): string {
-    // Split the datetime string at 'T' to separate date and time
-    const [datePart, timePart] = datetimeString.split('T');
+export function extractTimeFromDate(dateString: string): string {
+    const date = new Date(dateString);
+    const hours = date.getHours().toString().padStart(2, '0'); // Ensure two digits for hours
+    const minutes = date.getMinutes().toString().padStart(2, '0'); // Ensure two digits for minutes
+    return `${hours}:${minutes}`;
+}
+
+export function formatDateAndTime(dateString : string) {
+    const date = new Date(dateString);
     
-    // Split the time part at '.' to remove milliseconds
-    const [timeOnly] = timePart.split('.');
+    // Get day, month, year
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Month is zero-based
+    const year = date.getFullYear();
     
-    // Return the time part
-    return timeOnly
+    // Get hours and minutes
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    
+    return `${day}-${month}-${year} ${hours}:${minutes}`;
 }

@@ -23,8 +23,8 @@ const SlotSchedule: React.FC<Props> = ({scrollToSlotDetails}) => {
         
         {/* Date Picker and Slots Display */}
         <div className="flex w-[550px]">
-          <DatePicker setSelectedDate={setSelectedDate} />
-          <ShowSlots selectedDate={selectedDate} scrollToSlotDetails={scrollToSlotDetails} />
+          <DatePicker setSelectedDate={setSelectedDate} customClasses='h-full w-[60%] rounded-l-full text-3xl text-black py-6 px-12' />
+          <ShowSlots selectedDate={selectedDate} scrollToSlotDetails={scrollToSlotDetails} customClasses='bg-customGray hover:bg-opacity-90 transition-all duration-200 h-full w-[40%] text-lg font-semibold text-red-400 hover:text-red-300 rounded-r-full'/>
         </div>
       </div>
     </div>

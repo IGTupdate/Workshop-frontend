@@ -1,9 +1,9 @@
-import { setAccessToken, setAuthData } from "@/app/store/slices/authSlice";
+import { setAuthData } from "@/app/store/slices/authSlice";
 import { AppDispatch } from "@/app/store/store";
 import toast from "react-hot-toast";
+import { apiConnector } from "../../apiConnector";
 import { apiOpenConnector } from "../../apiOpenConnector";
 import { authEndpoints } from "../../apis";
-import { apiConnector } from "../../apiConnector";
 
 const { SENDOTP_API, VERIFYOTP_API, AUTH_API, GENERATE_ACCESS_TOKEN_API, GET_CUSTOMER_DATA_API } =
   authEndpoints;
@@ -12,11 +12,11 @@ export async function getCustomerData(_id : string, dispatch : AppDispatch) {
   try{
     const result = await apiConnector({
       method: "GET",
-      url: GET_CUSTOMER_DATA_API,
-      params: {_id}
+      url: GET_CUSTOMER_DATA_API + `/${_id}`
     })
 
     if(result.data.success){
+      window.localStorage.setItem('authData', result.data.data)
       dispatch(setAuthData(result.data.data))
     }
   }catch(err){
@@ -66,11 +66,6 @@ export async function verifyOTP(contactNumber: string, otp: string, dispatch: Ap
         });
 
         if (authResult?.data?.success) {
-          // If authentication is successful, set access token
-          window.localStorage.setItem(
-            "accessToken",
-            authResult?.data?.accessToken
-          );
           await getCustomerData(authResult.data.data._id, dispatch)
           toast.success("USER LOGGED IN SUCCESSFULLY");
         }
@@ -99,8 +94,6 @@ export async function registerCustomer(fullName: string, email: string, dispatch
     });
 
     if (authResult?.data?.success) {
-      // If authentication is successful, set access token
-      window.localStorage.setItem("accessToken", authResult?.data?.accessToken);
       await getCustomerData(authResult.data.data._id, dispatch)
       toast.success("REGISTRATION SUCCESSFULL");
     }
@@ -113,7 +106,7 @@ export async function registerCustomer(fullName: string, email: string, dispatch
 export async function generateAccessToken(dispatch: AppDispatch): Promise<string> {
 
   try {
-    console.log("INSIDE GENERATE ACCESS TOKEN")
+    // console.log("INSIDE GENERATE ACCESS TOKEN")
     const response = await apiOpenConnector({ method: "GET", url: GENERATE_ACCESS_TOKEN_API });
     console.log("newAccessToken", response.data.accessToken)
     if (response.data.accessToken) {
