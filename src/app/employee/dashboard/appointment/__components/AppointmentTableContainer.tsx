@@ -24,8 +24,8 @@ const AppointmentTableContainer = (props: Props) => {
             phone: appointment.customer_id,
             name: appointment.customer_id,
           },
-          registeration_number: appointment.vehicle_id,
-          date_time: new Date("2024-03-11T13:10:15.330Z"),
+          registeration_number: (typeof appointment.vehicle_id !== "string" ? appointment.vehicle_id.registeration_number : ""),
+          date_time: new Date(),
           status: appointment.status,
         };
       });

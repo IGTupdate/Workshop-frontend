@@ -110,6 +110,7 @@ export function GetAppointmentDataTableColumn() {
           return (
             <div className="p-4">
               <Radio.Group
+                defaultValue={searchParams.get("status")}
                 onChange={(e) => {
                   handleStatusSelect(e, props);
                 }}

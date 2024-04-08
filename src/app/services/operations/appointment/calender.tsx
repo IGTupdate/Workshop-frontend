@@ -1,17 +1,19 @@
 import { appointmentEndpoints } from "../../apis";
 import { apiConnector } from "../../apiConnector";
-import { apiOpenConnector } from "../../apiOpenConnector";
-import { setActiveCalender, setCalenderData, setCalenderDrawerLoading, setCalenderLoading } from "@/app/store/slices/calenderSlice";
+import { setActiveCalender, setCalenderData, setCalenderDrawerLoading, setCalenderLoading, setUpdateCalenderLoading, setUpdateStatusCalender } from "@/app/store/slices/calenderSlice";
 import { RootState } from "@/app/store/store";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import { TCalenderCreate } from "@/app/validators/calender";
 import toast from "react-hot-toast";
+import { COMMON_ERROR } from "@/app/utils/constant";
+import { toogleCalenderStatus } from "@/app/employee/dashboard/slot-management/calender/__utils/helper";
+import { TCalender, TCalenderStatus } from "@/app/types/calender";
 
-const { GET_ALL_CALENDER, CREATE_CALENDER } = appointmentEndpoints;
+const { GET_ALL_CALENDER, CREATE_CALENDER, UPDATE_CALENDER_STATUS } = appointmentEndpoints;
 
 export const getAllCalender = (): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
   try {
-    const response = await apiOpenConnector({
+    const response = await apiConnector({
       method: "GET",
       url: GET_ALL_CALENDER,
     });
@@ -30,7 +32,7 @@ export const getAllCalender = (): ThunkAction<void, RootState, unknown, Action> 
 export const createCalender = (data: TCalenderCreate[]): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
   try {
     dispatch(setCalenderDrawerLoading(true));
-    const response = await apiOpenConnector({
+    const response = await apiConnector({
       method: "POST",
       url: CREATE_CALENDER,
       bodyData: { calender: data }
@@ -42,30 +44,54 @@ export const createCalender = (data: TCalenderCreate[]): ThunkAction<void, RootS
     toast.success(response.data.message);
   } catch (err: any) {
     console.log(err);
-    toast.error(err?.response?.data?.message || "Something went wrong 1");
+    toast.error(err?.response?.data?.message || COMMON_ERROR);
   }
   finally {
     dispatch(setCalenderDrawerLoading(false));
   }
 }
 
+export const udpateCalenderStatus = (calenderId: string, status: string): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
+  try {
 
-// export const getAllCalender = async () => {
-//   return async (dispatch: AppDispatch) => {
-//     try {
-//       const response = await apiOpenConnector({
-//         method: "GET",
-//         url: GET_ALL_CALENDER,
-//       });
+    const response = await apiConnector({
+      method: "POST",
+      url: UPDATE_CALENDER_STATUS + "/" + calenderId + "/" + status,
+    })
 
-//       console.log(response)
+    // dispatch()
+    const currentActiveCalender = getState().calender.activeCalender as TCalender;
+    if (currentActiveCalender) {
+      // update active calender
+      dispatch(setActiveCalender({
+        ...currentActiveCalender,
+        status: toogleCalenderStatus(currentActiveCalender.status as TCalenderStatus)
+      }))
 
-//       const calenderData = response.data.data
-//       dispatch(setCalenderData(calenderData));
-//       dispatch(setCalenderLoading(false));
+      // update all calender
+      const currentCalenderData = getState().calender.calenderData.map((calender) => {
+        if (calender._id === currentActiveCalender._id) {
+          return {
+            ...currentActiveCalender,
+            status: toogleCalenderStatus(currentActiveCalender.status as TCalenderStatus)
+          }
+        }
+        return calender;
+      })
 
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
-// };
+      dispatch(setCalenderData(currentCalenderData))
+    }
+
+    dispatch(setUpdateStatusCalender(null));
+
+    toast.success(response.data.message);
+
+  } catch (err: any) {
+    console.log(err);
+    toast.error(err?.response?.data?.message || COMMON_ERROR);
+  }
+  finally {
+    dispatch(setUpdateCalenderLoading(false))
+  }
+
+}

@@ -61,7 +61,7 @@ export const apiConnector = async ({
   params,
 }: ApiConnectorParams): Promise<AxiosResponse<any>> => {
   try {
-    // console.log("INSIDE AXIOS INSTANCE")
+
     const response = await axiosInstance({
       method: `${method}`,
       url: `${url}`,

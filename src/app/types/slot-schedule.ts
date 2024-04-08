@@ -16,6 +16,8 @@ export type TSlotSchedule = {
   _id: string,
   name: string;
   slot_details: TSlotDetail[];
+  createdAt: string,
+  updatedAt: string
 };
 
 

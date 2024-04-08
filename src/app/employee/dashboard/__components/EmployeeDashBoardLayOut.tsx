@@ -1,9 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { Layout } from "antd";
 import SideBar from "./SideBar";
 import HeaderContainer from "./HeaderContainer";
 import { SIDEBAR_COLLAPSED_WIDTH, SIDEBAR_WIDTH } from "../utils/variables";
+import Loader from "@/app/components/Loader";
 
 const { Header, Sider, Content } = Layout;
 
@@ -16,19 +17,21 @@ const EmployeeDashBoardLayOut = ({
 
   useEffect(() => { });
   return (
-    <Layout className="w-full h-screen overflow-hidden">
-      <SideBar collapsed={collapsed} setCollapsed={setCollapsed} />
-      <Layout
-        style={{
-          marginLeft: collapsed ? SIDEBAR_COLLAPSED_WIDTH : SIDEBAR_WIDTH,
-        }}
-      >
-        <HeaderContainer collapsed={collapsed} setCollapsed={setCollapsed} />
-        <Content className="h-full overflow-auto">
-          <div className="p-4">{children}</div>
-        </Content>
+    <Suspense fallback={<Loader />}>
+      <Layout className="w-full h-screen overflow-hidden">
+        <SideBar collapsed={collapsed} setCollapsed={setCollapsed} />
+        <Layout
+          style={{
+            marginLeft: collapsed ? SIDEBAR_COLLAPSED_WIDTH : SIDEBAR_WIDTH,
+          }}
+        >
+          <HeaderContainer collapsed={collapsed} setCollapsed={setCollapsed} />
+          <Content className="h-full overflow-auto">
+            <div className="p-4">{children}</div>
+          </Content>
+        </Layout>
       </Layout>
-    </Layout>
+    </Suspense>
   );
 };
 
