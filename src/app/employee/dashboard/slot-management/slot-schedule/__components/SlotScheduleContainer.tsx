@@ -1,41 +1,32 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { Table, Button } from "antd";
+import { Table, Button, Typography } from "antd";
 import SlotScheduleManageDrawer from "./SlotScheduleManageDrawer";
 import { get_slot_schedule_columns } from "../__utils/slot-schedule-table-column";
 import { NEW_SLOT_SCHEDULE } from "../__utils/constant";
-import { useRouter } from "next/navigation";
 import {
     setActiveSlotSchedule,
     setDeleteSlotSchedule,
-    setSlotScheduleData,
-    setSlotScheduleDataLoading,
 } from "@/app/store/slices/slot-scheduleSlice";
-import { demoSlotScheduleData } from "../__demo";
 import { TActiveSlotSchedule, TSlotSchedule } from "@/app/types/slot-schedule";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import SlotScheduleDeleteModal from "./SlotScheduleDeleteModal";
 import { getAllSlotSchedule } from "@/app/services/operations/appointment/slotSchedule";
+import Loader from "@/app/components/Loader";
+
+const { Text } = Typography
 
 type Props = {};
 
 const SlotScheduleContainer = (props: Props) => {
     const dispatch = useAppDispatch();
-
     const { slotScheduleData, slotScheduleLoading } = useAppSelector((state) => state.slotSchedule);
 
-    // handing loading the slot schedule data
     useEffect(() => {
         console.log("slot schedule fetched");
         if (slotScheduleLoading) {
             dispatch(getAllSlotSchedule());
-
-            // // call api for data
-            // setTimeout(() => {
-            //     dispatch(setSlotScheduleData(demoSlotScheduleData));
-            //     dispatch(setSlotScheduleDataLoading(false));
-            // });
         }
     }, [slotScheduleLoading]);
 
@@ -45,8 +36,7 @@ const SlotScheduleContainer = (props: Props) => {
 
     const handleSlotScheduleDeleteModal = (newDeleteModal: TSlotSchedule | null) => {
         dispatch(setDeleteSlotSchedule(newDeleteModal))
-    }
-
+    };
 
     return (
         <div>
@@ -61,10 +51,14 @@ const SlotScheduleContainer = (props: Props) => {
                     Add Schedule
                 </Button>
             </div>
-            <Table
-                dataSource={slotScheduleData}
-                columns={get_slot_schedule_columns(handleSlotScheduleDrawer, handleSlotScheduleDeleteModal)}
-            />
+
+            {
+                slotScheduleLoading ? <Loader /> : <Table
+                    dataSource={slotScheduleData}
+                    columns={get_slot_schedule_columns(handleSlotScheduleDrawer, handleSlotScheduleDeleteModal)}
+                />
+            }
+
             <SlotScheduleManageDrawer />
             <SlotScheduleDeleteModal />
         </div>

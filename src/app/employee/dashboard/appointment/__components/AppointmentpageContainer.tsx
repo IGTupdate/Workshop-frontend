@@ -9,25 +9,45 @@ import { Pagination } from "antd";
 import { APPOINTMENT_DATA_PAGE_SIZE } from "../__utils/constant";
 import { removeQueryParams, setQueryParams } from "@/app/utils/helper";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/app/store/reduxHooks";
+import { getAllAppointment } from "@/app/services/operations/appointment/appointment";
+import { TAppointment } from "@/app/types/appointment";
 
 type Props = {};
+type TAppointmentData = {
+  appointments: TAppointment[],
+  totalAppointments: number
+}
 
 const AppointmentpageContainer = (props: Props) => {
   const [appointmentDataLoading, setAppointmentDataLoading] =
     useState<boolean>(false);
 
+  const [appointmentData, setAppointmentData] = useState<TAppointmentData>({
+    appointments: [],
+    totalAppointments: 0
+  })
+
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
+
   // when search params changes then call api
   useEffect(() => {
-    console.log("calling api here for now", searchParams.toString());
-    setAppointmentDataLoading(true);
-    setTimeout(() => {
-      setAppointmentDataLoading(false);
-    }, 2000);
+
+    loadAppointement();
   }, [searchParams]);
+
+  const loadAppointement = async () => {
+    setAppointmentDataLoading(true);
+    const appointmentData = await getAllAppointment(searchParams.toString())
+    if (appointmentData) {
+      console.log(appointmentData)
+      setAppointmentData(appointmentData)
+    }
+    setAppointmentDataLoading(false);
+  }
 
   // create query string
   const createQueryString = useCallback(
@@ -57,12 +77,12 @@ const AppointmentpageContainer = (props: Props) => {
       ) : (
         <div>
           <div></div>
-          <AppointmentTableContainer appointmentData={demoAppointmentData} />
+          <AppointmentTableContainer appointmentData={appointmentData.appointments} />
           <div className="mt-10 mx-auto w-max">
             <Pagination
               defaultCurrent={getCurrentPage()}
               pageSize={APPOINTMENT_DATA_PAGE_SIZE}
-              total={50}
+              total={appointmentData.totalAppointments}
               onChange={(value) => handlePageChange(value)}
             />
           </div>

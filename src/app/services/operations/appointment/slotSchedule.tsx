@@ -4,7 +4,8 @@ import { appointmentEndpoints } from "../../apis";
 import toast from "react-hot-toast";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "@/app/store/store";
-import { setSlotScheduleDataLoading } from "@/app/store/slices/slot-scheduleSlice";
+import { setActiveSlotSchedule, setDeleteSlotSchedule, setDeleteSlotScheduleLoading, setSlotScheduleData, setSlotScheduleDataLoading, setSlotScheduleDrawerLoading } from "@/app/store/slices/slot-scheduleSlice";
+import { TSlotScheduleManage } from "@/app/validators/slot-schedule";
 
 
 const {
@@ -15,39 +16,47 @@ const {
     UPDATE_SLOT_SCHEDULE_API
 } = appointmentEndpoints
 
-export async function createSlotSchedule(slotScheduleData: TSlotSchedule) {
+export const createSlotSchedule = (data: TSlotScheduleManage): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
     try {
         // console.log("INSIDE API CONNECTOR")
-        const createSlotScheduleResult = await apiConnector({
+        const response = await apiConnector({
             method: "POST",
             url: CREATE_SLOT_SCHEDULE_API,
-            bodyData: slotScheduleData
+            bodyData: data
         })
-        if (createSlotScheduleResult?.data?.success) {
-            toast.success("SLOT SCHEDULE CREATED SUCCESSFULLY")
+        if (response?.data?.success) {
+            toast.success(response.data.message)
         }
-        return createSlotScheduleResult
-    } catch (err) {
-        toast.error("SLOT SCHEDULE CREATION FAILED")
-        throw err;
+        toast.success(response.data.message)
+        dispatch(setActiveSlotSchedule(null));
+        dispatch(setSlotScheduleDataLoading(true));
+
+    } catch (err: any) {
+        console.log(err);
+        toast.error(err?.response?.data?.message || "Something went wrong1");
+    }
+    finally {
+        dispatch(setSlotScheduleDrawerLoading(false));
     }
 }
 
-export async function updateSlotSchedule(slotScheduleData: TSlotSchedule, slotScheduleId: string) {
+export const updateSlotSchedule = (slotScheduleId: string, data: TSlotScheduleManage): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
     try {
-        const updateSlotScheduleResult = await apiConnector({
+        const response = await apiConnector({
             method: "POST",
-            url: UPDATE_SLOT_SCHEDULE_API,
-            bodyData: slotScheduleData,
+            url: UPDATE_SLOT_SCHEDULE_API + "/" + slotScheduleId,
+            bodyData: data,
             params: { slotScheduleId }
         })
-        if (updateSlotScheduleResult?.data?.success) {
-            toast.success("SLOT SCHEDULE UPDATED SUCCESSFULLY")
-        }
-        return updateSlotScheduleResult
-    } catch (err) {
-        toast.error("SLOT SCHEDULE UPDATION FAILED")
-        throw err;
+        toast.success(response.data.message)
+        dispatch(setActiveSlotSchedule(null));
+        dispatch(setSlotScheduleDataLoading(true));
+    } catch (err: any) {
+        console.log(err);
+        toast.error(err?.response?.data?.message || "Something went wrong1");
+    }
+    finally {
+        dispatch(setSlotScheduleDrawerLoading(false));
     }
 }
 
@@ -74,21 +83,28 @@ export const getAllSlotSchedule = (): ThunkAction<void, RootState, unknown, Acti
 
         console.log(response)
         dispatch(setSlotScheduleDataLoading(false));
+        dispatch(setSlotScheduleData(response.data.data));
 
     } catch (err) {
         console.log(err);
     }
 }
 
-export async function deleteSlotSchedule(slotScheduleId: string) {
+export const deleteSlotScheduleById = (slotScheduleId: string): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
     try {
-        const deleteSlotScheduleResult = await apiConnector({
+        const response = await apiConnector({
             method: "DELETE",
-            url: DELETE_SLOT_SCHEDULE_API,
+            url: DELETE_SLOT_SCHEDULE_API + "/" + slotScheduleId,
             params: { slotScheduleId }
         })
-        return deleteSlotScheduleResult
+        toast.success(response.data.message)
+        dispatch(setDeleteSlotSchedule(null));
+        dispatch(setSlotScheduleDataLoading(true));
+
     } catch (err) {
         throw err
+    }
+    finally {
+        dispatch(setDeleteSlotScheduleLoading(false))
     }
 }

@@ -8,8 +8,9 @@ import { setActiveSlotSchedule, setSlotScheduleDrawerLoading } from "@/app/store
 import { NEW_SLOT_SCHEDULE, NEW_SLOT_SCHEDULE_INITIAL_DATA } from "../__utils/constant";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { slotScheduleManageSchema } from "@/app/validators/slot-schedule";
+import { slotScheduleManageSchema, TSlotScheduleManage } from "@/app/validators/slot-schedule";
 import { TSlotSchedule } from "@/app/types/slot-schedule";
+import { createSlotSchedule, updateSlotSchedule } from "@/app/services/operations/appointment/slotSchedule";
 
 
 const { Text } = Typography
@@ -46,9 +47,15 @@ const SlotScheduleManageDrawer = (props: Props) => {
     }
   }, [activeSlotSchedule])
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: TSlotScheduleManage) => {
+    if (!activeSlotSchedule) return;
     console.log(data);
     dispatch(setSlotScheduleDrawerLoading(true));
+    if (activeSlotSchedule === NEW_SLOT_SCHEDULE) {
+      dispatch(createSlotSchedule(data))
+    } else {
+      dispatch(updateSlotSchedule(activeSlotSchedule._id, data));
+    }
   }
 
   return (

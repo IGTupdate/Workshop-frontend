@@ -2,15 +2,14 @@
 
 import React, { useEffect, useState } from 'react'
 import { Button, Typography, Select, Form, Radio } from 'antd';
-import { demoSlotScheduleData } from '../../slot-schedule/__demo';
 import { Controller, useForm } from 'react-hook-form';
 import { calenderCreateSchema, TCalenderCreate } from '@/app/validators/calender';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { TCalender } from '@/app/types/calender';
 import { calender_status } from '../__utils/constant';
 import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
-import { setCalenderDrawerLoading } from '@/app/store/slices/calenderSlice';
 import { createCalender } from '@/app/services/operations/appointment/calender';
+import { getAllSlotSchedule } from '@/app/services/operations/appointment/slotSchedule';
 
 const { Text } = Typography;
 
@@ -27,18 +26,25 @@ const CalenderCreate = (props: Props) => {
     const [slotScheduleOptions, setSlotScheduleOptions] = useState<TSlotScheduleOption>([])
 
     const { calenderDrawerLoading } = useAppSelector((state) => state.calender);
+    const { slotScheduleData, slotScheduleLoading } = useAppSelector((state) => state.slotSchedule)
     const dispatch = useAppDispatch();
 
     useEffect(() => {
+        if (slotScheduleLoading) {
+            dispatch(getAllSlotSchedule());
+        }
+    }, [slotScheduleLoading, dispatch]);
+
+    useEffect(() => {
         setSlotScheduleOptions(() => {
-            return demoSlotScheduleData.map((schedule) => {
+            return slotScheduleData.map((schedule) => {
                 return {
                     value: schedule._id,
                     label: schedule.name
                 }
             })
         })
-    }, []);
+    }, [slotScheduleData])
 
     const { control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -53,8 +59,6 @@ const CalenderCreate = (props: Props) => {
     const filterOption = (input: string, option?: { label: string; value: string }) => {
         return (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
     }
-
-    
     const onSubmit = (data: TCalenderCreate) => {
         dispatch(createCalender([data]))
     }

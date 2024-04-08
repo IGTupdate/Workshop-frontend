@@ -5,16 +5,15 @@ const {
     GET_AVAILABLE_SLOTS_API
 } = appointmentEndpoints
 
-export async function getAvailableSlots(slotData: string | null) {
+export async function getAvailableSlots(query: string = "") {
     try {
-        const params = slotData ? { date: slotData } : undefined;
-        const availableSlotResult = await apiOpenConnector({
-            method: "POST",
-            url: GET_AVAILABLE_SLOTS_API,
-            params: params
+        const response = await apiOpenConnector({
+            method: "GET",
+            url: GET_AVAILABLE_SLOTS_API + "?" + query,
         });
-        return availableSlotResult;
+        return response.data.data;
     } catch (err) {
+        console.log(err);
         throw err;
     }
 }

@@ -1,8 +1,9 @@
 "use client"
+import React from 'react'
+import { deleteSlotScheduleById } from '@/app/services/operations/appointment/slotSchedule';
 import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import { setDeleteSlotSchedule } from '@/app/store/slices/slot-scheduleSlice';
 import { Button, Modal, Typography } from 'antd';
-import React, { useState } from 'react'
 
 const { Title, Text } = Typography;
 
@@ -10,21 +11,18 @@ const { Title, Text } = Typography;
 type Props = {}
 
 const SlotScheduleDeleteModal = (props: Props) => {
-    const [confirmLoading, setConfirmLoading] = useState(false);
 
-    const { deleteSlotSchedule } = useAppSelector((state) => state.slotSchedule);
+    const { deleteSlotSchedule, deleteSlotScheduleLoading } = useAppSelector((state) => state.slotSchedule);
     const dispatch = useAppDispatch();
 
     const handleOk = () => {
-        setConfirmLoading(true);
-        setTimeout(() => {
-            dispatch(setDeleteSlotSchedule(null))
-            setConfirmLoading(false);
-        }, 2000);
+        if (deleteSlotSchedule !== null) {
+            dispatch(deleteSlotScheduleById(deleteSlotSchedule._id))
+        }
     };
 
     const handleCancel = () => {
-        if (!confirmLoading) {
+        if (!deleteSlotScheduleLoading) {
             console.log('Clicked cancel button');
             dispatch(setDeleteSlotSchedule(null))
         }
@@ -34,17 +32,17 @@ const SlotScheduleDeleteModal = (props: Props) => {
         <Modal
             title={<Title level={4}>Confirm</Title>}
             open={deleteSlotSchedule !== null}
-            confirmLoading={confirmLoading}
+            confirmLoading={deleteSlotScheduleLoading}
             onCancel={handleCancel}
             footer={(_, { OkBtn, CancelBtn }) => (
                 <>
                     <CancelBtn />
                     <Button
-                        disabled={confirmLoading}
+                        disabled={deleteSlotScheduleLoading}
                         onClick={handleOk}
                         className="bg-red-500 text-white1 font-medium text-md"
                     >
-                        {confirmLoading ? "Deleting..." : "Delete"}
+                        {deleteSlotScheduleLoading ? "Deleting..." : "Delete"}
                     </Button>
                 </>
             )}

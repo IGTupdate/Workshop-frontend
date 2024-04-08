@@ -34,7 +34,7 @@ const CalenderContainer = (props: Props) => {
   // for the first time
   useEffect(() => {
     if (calenderLoading) {
-      console.log("slot schedule fetched");
+      console.log("calender fetched");
       dispatch(getAllCalender());
     }
   }, [calenderLoading]);

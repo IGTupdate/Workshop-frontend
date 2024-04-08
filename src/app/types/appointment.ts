@@ -1,5 +1,6 @@
 import { appointmentStatus } from "../employee/dashboard/appointment/__utils/appointmentStatus";
 import { TCalender, TSlot } from "./calender";
+import { TVehicle } from "./vehicle";
 
 export type TAppointmentStatus =
   | "Missed"
@@ -11,7 +12,7 @@ export type TAppointmentStatus =
 
 export type TAppointment = {
   _id: string;
-  vehicle_id: string;
+  vehicle_id: TVehicle | string;
   customer_id: string;
   calender_id: string | TCalender;
   slot_id: string | TSlot;
@@ -27,7 +28,7 @@ export type TAppointment = {
 };
 
 export type TAppointmentDataTable = {
-  _id:string
+  _id: string
   customer: {
     name: string;
     phone: string;
@@ -36,3 +37,11 @@ export type TAppointmentDataTable = {
   date_time: Date;
   status: TAppointmentStatus;
 };
+
+
+export type TAppointmentBook = {
+  slot_id: string,
+  calender_id: string,
+  vehicle_id: string,
+  customer_id: string
+}

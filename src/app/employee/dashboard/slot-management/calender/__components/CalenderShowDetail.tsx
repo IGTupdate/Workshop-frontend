@@ -8,6 +8,8 @@ import { TCalender } from "@/app/types/calender";
 import DescriptionItem from "@/app/components/DescriptionItem.tsx";
 import { calender_status } from "../__utils/constant";
 import CalenderUpdateStatus from "./CalenderUpdateStatus";
+import { useAppDispatch } from "@/app/store/reduxHooks";
+import { setUpdateStatusCalender } from "@/app/store/slices/calenderSlice";
 const { Title, Text } = Typography;
 
 type Props = {
@@ -15,8 +17,11 @@ type Props = {
 };
 
 const CalenderShowDetail = (props: Props) => {
-  const [openUpdateStatusModal, setOpenUpdateStatusModal] =
-    useState<TCalender | null>(null);
+  const dispatch = useAppDispatch();
+
+  const openUpDateCalenderStatusModal = () => {
+    dispatch(setUpdateStatusCalender(props.activeCalender));
+  }
 
   return (
     <div>
@@ -42,7 +47,7 @@ const CalenderShowDetail = (props: Props) => {
             }
             checked={props.activeCalender.status === calender_status.open}
             onChange={() => {
-              setOpenUpdateStatusModal(props.activeCalender);
+              openUpDateCalenderStatusModal();
             }}
           />
         </div>
@@ -88,10 +93,7 @@ const CalenderShowDetail = (props: Props) => {
       )}
 
       {/* modal delete  */}
-      <CalenderUpdateStatus
-        calender={openUpdateStatusModal}
-        setOpenUpdateStatusModal={setOpenUpdateStatusModal}
-      />
+      <CalenderUpdateStatus />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 export type TSlot = {
   start_time: string; // iso string
   end_time: string;
-  slot_limit: number;
+  available: number;
   _id: string;
 };
 
