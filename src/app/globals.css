@@ -24,6 +24,21 @@ input[type="number"] {
   .bold-text-lg {
     @apply font-bold text-lg;
   }
+  .form-field {
+    @apply px-4 py-1.5 text-base font-semibold
+  }
+  .form-component {
+    @apply flex flex-col gap-1 relative
+  }
+  .form-error {
+    @apply absolute right-0 -bottom-5 text-red-600
+  }
+  .custom-button {
+    @apply bg-customGray text-customLightGray px-4 py-4 text-base rounded-md hover:bg-customGray hover:bg-opacity-75 transition-colors duration-200 flex items-center justify-center focus:outline-none focus:bg-customGray
+  }
+  .customer-page-title {
+    @apply text-center text-2xl font-extrabold
+  }
 }
 
 @layer utilities {

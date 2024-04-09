@@ -7,10 +7,11 @@ const dateFormat = 'DD-MM-YYYY';
 const maxDate = dayjs().add(7, 'day');
 
 interface LandingDatePickerProps {
+  customClasses: string,
   setSelectedDate: (date: string) => void;
 }
 
-const LandingDatePicker: React.FC<LandingDatePickerProps> = ({ setSelectedDate }) => {
+const LandingDatePicker: React.FC<LandingDatePickerProps> = ({ setSelectedDate, customClasses }) => {
   const [selectedDate, setSelectedDateState] = useState<dayjs.Dayjs | null>(dayjs()); // Initial value set to current date
 
   useEffect(() => {
@@ -38,12 +39,12 @@ const LandingDatePicker: React.FC<LandingDatePickerProps> = ({ setSelectedDate }
       allowClear={true}
       inputReadOnly={true}
       // placement='topLeft'
-      // size='small'
+      size='large'
       mode='date'
       superNextIcon={''}
       superPrevIcon={''}
-      placeholder="Select date" // Placeholder text when value is cleared
-      className='h-full w-[60%] rounded-l-full text-3xl text-black py-6 px-12'
+      placeholder="Select date"
+      className={`${customClasses}`}
       picker='date'
       onChange={handleDateChange}
     />

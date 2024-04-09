@@ -12,11 +12,13 @@ export interface IAuthState {
     authStep: number,
     authData: IAuthData,
     authLoading: boolean,
-    accessToken: string | null,
     retryCount: number
 }
 
-const accessToken: string | null = typeof window !== "undefined" ? window.localStorage.getItem("accessToken") : null;
+const authDataString: string | null = typeof window !== "undefined" ? window.localStorage.getItem("authData") : null;
+
+// Parse the JSON string to convert it into an object
+const authData: IAuthData | null = authDataString ? JSON.parse(authDataString) : null;
 
 const initialAuthDataState: IAuthData = {
     contactNumber: ''
@@ -24,9 +26,8 @@ const initialAuthDataState: IAuthData = {
 
 const initialState: IAuthState = {
     authStep: 0,
-    authData: initialAuthDataState,
+    authData: authData ? authData : initialAuthDataState,
     authLoading: false,
-    accessToken: accessToken,
     retryCount: 3
 }
 
@@ -43,9 +44,6 @@ export const authSlice = createSlice({
         setAuthLoading: (state, action: PayloadAction<boolean>) => {
             state.authLoading = action.payload
         },
-        setAccessToken: (state, action: PayloadAction<string>) => {
-            state.accessToken = action.payload
-        },
         setRetryCount: (state, action: PayloadAction<number>) => {
             state.retryCount = action.payload
         },
@@ -56,12 +54,10 @@ export const authSlice = createSlice({
         },
         logOut: (state) => {
             window.localStorage.clear()
-            resetAuthSlice()
             state.authData = initialState.authData;
-            state.accessToken = initialState.accessToken
         }
     }
 })
 
-export const { setAuthStep, setAuthData, setAuthLoading, setRetryCount, resetAuthSlice, setAccessToken, logOut } = authSlice.actions
+export const { setAuthStep, setAuthData, setAuthLoading, setRetryCount, resetAuthSlice, logOut } = authSlice.actions
 export const authReducer = authSlice.reducer

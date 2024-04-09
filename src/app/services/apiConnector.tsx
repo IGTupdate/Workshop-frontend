@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { generateAccessToken } from "./operations/auth/customerAuth";
 import { jwtDecode } from "jwt-decode";
-import { store } from "../store/store";
+import { generateAccessToken } from "./operations/auth/customerAuth";
 // import { get_server_cookie } from "../utils/get_server_cookie";
 import { get_client_cookie } from "../utils/get_client_cookie";
 
@@ -14,24 +13,22 @@ const axiosInstance = axios.create({
 // Request interceptor
 axiosInstance.interceptors.request.use(
   async (config) => {
-    console.log("INSIDE INTERCEPTOR");
+    // console.log("INSIDE INTERCEPTOR");
     let accessToken = get_client_cookie("accessToken");
 
     if (!accessToken) {
       // If no access token is available, generate a new one
-      console.log("ACCESS a NOT FOUND")
-      accessToken = await generateAccessToken(store.dispatch);
+      await generateAccessToken();
     } else {
       const currentTime = new Date().getTime();
       const decode = jwtDecode(accessToken);
       if (decode.exp && ((decode.exp * 1000) + (60 * 1000) < currentTime)) {
         // If expired, generate a new access token
-        console.log("ACCESS TOKEN EXPIRED");
-        accessToken = await generateAccessToken(store.dispatch);
+        await generateAccessToken();
       }
     }
 
-    if (!accessToken) throw "";
+    if (!accessToken) throw Error
 
     // Set the authorization header with the new access token
     config.headers.Authorization = `Bearer ${accessToken}`;

@@ -3,13 +3,17 @@ import { authReducer } from "./slices/authSlice";
 import { calenderReducer } from "./slices/calenderSlice";
 import { slotReducer } from "./slices/slotSlice";
 import { slotScheduleReducer } from "./slices/slot-scheduleSlice";
+import { deviceReducer } from "./slices/deviceSlice";
+import { customerAppointmentReducer } from "./slices/customerAppointmentSlice";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     calender: calenderReducer,
     slot: slotReducer,
-    slotSchedule: slotScheduleReducer
+    slotSchedule: slotScheduleReducer,
+    device: deviceReducer,
+    customerAppointment: customerAppointmentReducer
   },
 });
 

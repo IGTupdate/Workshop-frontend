@@ -1,14 +1,10 @@
-'use client'
-import { useAppDispatch } from '@/app/store/reduxHooks';
-import { Button, Modal } from 'antd';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Button } from 'antd';
 import { FiLogOut } from "react-icons/fi";
+import CustomModal from '../Model/CustomModel'; 
 
-type Props = {}
-
-const Logout = (props: Props) => {
+const Logout: React.FC = () => {
     const [visible, setVisible] = useState(false);
-    const dispatch = useAppDispatch();
 
     const handleLogout = async () => {
         try {
@@ -42,19 +38,16 @@ const Logout = (props: Props) => {
             >
                 LogOut
             </Button>
-            <Modal
+            {/* Use the custom modal component */}
+            <CustomModal
                 title="Confirm Logout"
-                centered
-                width={300}
                 open={visible}
                 onOk={handleOk}
                 onCancel={handleCancel}
-                okText="Confirm"
-                cancelText="Cancel"
                 okButtonProps={{ className: "bg-customGray hover:bg-opacity-80 text-white font-semibold" }}
             >
                 <p>Are you sure you want to log out?</p>
-            </Modal>
+            </CustomModal>
         </>
     );
 }

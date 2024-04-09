@@ -44,27 +44,22 @@ export const sideBarMenuItems: TsideBarMenuItems[] = [
     },
     {
         key: '7',
-        label: 'Slot Availability',
-        pathname: "/"
-    },
-    {
-        key: '8',
         label: 'Previous Bookings',
         pathname: '/dashboard/previous-appointments'
     },
     {
-        key: '9',
+        key: '8',
         label: "Settings",
         pathname: '/dashboard/settings'
     }
 
 ]
 
-export function getSideBarMenuItems(router: AppRouterInstance, sideBarMenuItems: TsideBarMenuItems[], dashBoardIcons: any, setCollapsed: React.Dispatch<React.SetStateAction<boolean>>, isSmallDevice: boolean)
+export function getSideBarMenuItems(router: AppRouterInstance, sideBarMenuItems: TsideBarMenuItems[], dashBoardIcons: any)
     : MenuProps["items"] {
 
     return sideBarMenuItems.map((item) => {
-        let children = item.children ? getSideBarMenuItems(router, item.children, dashBoardIcons, setCollapsed, isSmallDevice) : undefined
+        let children = item.children ? getSideBarMenuItems(router, item.children, dashBoardIcons) : undefined
         return {
             ...item,
             children,
@@ -72,7 +67,7 @@ export function getSideBarMenuItems(router: AppRouterInstance, sideBarMenuItems:
             onClick: () => {
                 if (item.pathname) {
                     router.push(item.pathname)
-                    if(isSmallDevice) setCollapsed(true)
+                    // if(isSmallDevice) setCollapsed(true)
                 }
             }
         }

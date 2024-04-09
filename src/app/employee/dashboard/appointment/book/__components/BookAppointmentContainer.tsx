@@ -11,7 +11,6 @@ import VehicleDetailContainer from './VehicleDetailContainer'
 import AppointmentBookingConfirmation from './AppointmentBookingConfirmation'
 import { useAppSelector } from '@/app/store/reduxHooks'
 
-
 type Props = {}
 
 const BookAppointmentContainer = (props: Props) => {
