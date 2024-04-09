@@ -16,6 +16,7 @@ const { Text } = Typography
 
 type Props = {
     setVehicleId: React.Dispatch<React.SetStateAction<string>>
+    customer_id?: string
 }
 
 const VehicleCreateContainer = (props: Props) => {
@@ -29,12 +30,16 @@ const VehicleCreateContainer = (props: Props) => {
 
     const onSubmit = async (data: TvehicleCreateSchema) => {
         console.log(data);
+        if (props.customer_id) {
+            data.customer_id = props.customer_id;
+        }
         setLoading(true);
         try {
             const response = await createVehicle(data) as TVehicle;
             console.log(response);
             props.setVehicleId(response._id);
         } catch (err: any) {
+            console.log(err);
             toast.error(err?.response?.data?.message || COMMON_ERROR)
         }
         finally {

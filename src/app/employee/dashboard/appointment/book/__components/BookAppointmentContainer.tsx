@@ -93,6 +93,7 @@ const BookAppointmentContainer = (props: Props) => {
             }
             {
                 currentStep === 2 && <VehicleDetailContainer
+                appointmentBookingData={appointmentBookingData}
                     setAppointmentBookingData={setAppointmentBookingData}
                     setCurrentStep={setCurrentStep}
                 />

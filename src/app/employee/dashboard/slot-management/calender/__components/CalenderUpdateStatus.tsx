@@ -29,7 +29,7 @@ const CalenderUpdateStatus = (props: Props) => {
 
   const getAppointmentScheduledData = async () => {
     if (updateStatusCalender && updateStatusCalender.status === calender_status.open) {
-      const appointment = await getAppointmentByCalenderId(updateStatusCalender._id);
+      const appointment = await getAppointmentByCalenderId(updateStatusCalender._id, "status=Scheduled");
       setAppointmentData(appointment)
     }
     else {
@@ -97,7 +97,7 @@ const CalenderUpdateStatus = (props: Props) => {
                         <Text type="danger" style={{ fontSize: "12px" }}>{appponitementData} Scheduled appointments will be cancelled</Text>
                         <br />
                         <Link
-                          href={`/employee/dashboard/appointment?calenderId=${updateStatusCalender._id}`}
+                          href={`/employee/dashboard/appointment?calender_id=${updateStatusCalender._id}`}
                           className="text-blue1 text-[12px] flex items-start"
                         >
                           View Appointments

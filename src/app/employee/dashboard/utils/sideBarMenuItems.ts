@@ -76,7 +76,8 @@ export function getSideBarMenuItems(router: AppRouterInstance, sideBarMenuItems:
 export const findRecursiveByPathName = (sideBarMenuItems: TsideBarMenuItems[], pathname: string): TsideBarMenuItems | null => {
 
     for (const item of sideBarMenuItems) {
-        if (item.pathname && pathname.includes(item.pathname)) {
+        // console.log(pathname, item?.pathname?.substring(19), pathname.substring(19).includes(item?.pathname?.substring(19)|| "-" ))
+        if (item.pathname && (pathname === item.pathname || pathname.substring(19).includes(item.pathname.substring(19) || "-"))) {
             return item;
         }
         else if (item.children) {
