@@ -12,10 +12,11 @@ export interface AppointmentData {
     appointmentCreated: string;
     vehicleVIN: string;
     vehicleReg: string;
+    status: string
 }
 
 export const fetchAppointments = (data: ICustomerAppointmentData[], status?: string): AppointmentData[] => {
-    console.log(data,status)
+    // console.log(data,status)
     let filteredAppointments = data;
     
     if (status) {
@@ -23,7 +24,7 @@ export const fetchAppointments = (data: ICustomerAppointmentData[], status?: str
     }
 
     return filteredAppointments.map(appointment => {
-        const { _id: appointmentId, createdAt: appointmentCreated, vehicle_id: { vin: vehicleVIN, registeration_number: vehicleReg }, calender_id: { date: appointmentDate, slots } } = appointment;
+        const { _id: appointmentId, createdAt: appointmentCreated, vehicle_id: { vin: vehicleVIN, registeration_number: vehicleReg }, calender_id: { date: appointmentDate, slots }, status: status } = appointment;
         const slot = slots.find(slot => slot._id === appointment.slot_id);
         const slotTimings = slot ? { startTime: extractTimeFromDate(slot.start_time), endTime: extractTimeFromDate(slot.end_time) } : null;
         return {
@@ -32,7 +33,8 @@ export const fetchAppointments = (data: ICustomerAppointmentData[], status?: str
             slotTimings,
             appointmentCreated: formatDateAndTime(appointmentCreated),
             vehicleVIN,
-            vehicleReg
+            vehicleReg,
+            status
         } as AppointmentData;
     });
 };

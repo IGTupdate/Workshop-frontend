@@ -5,11 +5,13 @@ import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import React, { useEffect, useState } from 'react';
 import AllAppointments from '../appointment/__common/AllAppointment';
 import { AppointmentData, fetchAppointments } from '../appointment/__utils/FetchAppointments';
+import { useRouter } from 'next/navigation';
 
 const Page: React.FC = () => {
     const [scheduledAppointmentData, setScheduledAppointmentData] = useState<AppointmentData[]>([]);
     const { appointmentLoading, appointmentData } = useAppSelector((state) => state.customerAppointment)
     const dispatch = useAppDispatch()
+    const router = useRouter()
 
     useEffect(() => {
         if(appointmentLoading){
@@ -24,7 +26,7 @@ const Page: React.FC = () => {
     }, [appointmentData]);
 
     const handleShowAppointmentDetails = (appointmentId: string) => {
-        console.log(`Showing Details for appointment with ID: ${appointmentId}`);
+        router.push('/dashboard/appointment/'+appointmentId)
     };
     return (
         <>
@@ -38,7 +40,7 @@ const Page: React.FC = () => {
                                 <AllAppointments
                                     key={appointment.appointmentId}
                                     appointment={appointment}
-                                    onShowDetails={handleShowAppointmentDetails}
+                                    onShowAppointmentDetails={handleShowAppointmentDetails}
                                 />
                             ))
                         ) : (

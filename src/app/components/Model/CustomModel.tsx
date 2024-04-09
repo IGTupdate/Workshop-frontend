@@ -1,27 +1,19 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Modal, Button, ButtonProps } from 'antd';
 
 type ModalProps = {
     title: string;
     open: boolean;
-    onOk: () => void;
     onCancel: () => void;
-    okText?: string;
-    cancelText?: string;
-    okButtonProps?: ButtonProps;
-    cancelButtonProps?: ButtonProps;
+    footer: ReactNode[];
     children: React.ReactNode;
 }
 
 const CustomModal: React.FC<ModalProps> = ({
     title,
     open,
-    onOk,
     onCancel,
-    okText = 'Confirm',
-    cancelText = 'Cancel',
-    okButtonProps,
-    cancelButtonProps,
+    footer,
     children
 }) => {
     return (
@@ -29,12 +21,8 @@ const CustomModal: React.FC<ModalProps> = ({
             title={title}
             centered
             open={open}
-            onOk={onOk}
             onCancel={onCancel}
-            okText={okText}
-            cancelText={cancelText}
-            okButtonProps={okButtonProps}
-            cancelButtonProps={cancelButtonProps}
+            footer={footer}
         >
             {children}
         </Modal>
