@@ -10,11 +10,11 @@ import { AppointmentData } from "@/app/dashboard/appointment/__utils/FetchAppoin
 
 const { GET_APPOINTMENT_BY_CALENDER, APPOINTMENT_BOOK, GET_ALL_APPOINTMENT, GET_APPOINTMENT_BOOK_INIT_DATA, GET_ALL_CUSTOMER_APPOINTMENT, GET_APPOINTMENT_BY_APPOINTMENT_ID, APPOINTMENT_CANCEL_API } = appointmentEndpoints
 
-export const getAppointmentByCalenderId = async (calenderId: string): Promise<number> => {
+export const getAppointmentByCalenderId = async (calenderId: string, query:string = ""): Promise<number> => {
     try {
         const response = await apiConnector({
             method: "GET",
-            url: GET_APPOINTMENT_BY_CALENDER + "/" + calenderId
+            url: GET_APPOINTMENT_BY_CALENDER + "/" + calenderId+"?"+query
         })
 
         console.log(response);

@@ -7,6 +7,7 @@ export const vehicleCreateSchema = Yup.object({
     owner: Yup.string().optional(),
     vehicle_make: Yup.string().optional(),
     vehicle_model: Yup.string().optional(),
+    customer_id: Yup.string().optional()
 })
 
 export type TvehicleCreateSchema = Yup.InferType<typeof vehicleCreateSchema>

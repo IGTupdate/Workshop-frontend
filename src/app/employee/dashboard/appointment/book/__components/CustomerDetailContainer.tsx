@@ -1,13 +1,14 @@
 "use client";
 
-import Loader from '@/app/components/Loader';
-import Register from '@/app/login/__components/Register';
-import SendOTP from '@/app/login/__components/SendOTP';
-import VerifyOTP from '@/app/login/__components/VerifyOTP';
-import { useAppSelector } from '@/app/store/reduxHooks';
+
 import { TAppointmentBook } from '@/app/types/appointment'
 import { Button, Typography } from 'antd'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import CustomerSendOtp from './CustomerSendOtp';
+import CustomerVerifyOtp from './CustomerVerifyOtp';
+import { TCustomer } from '@/app/types/customer';
+import { setAppointmentData } from '@/app/store/slices/customerAppointmentSlice';
+import CustomerInfo from './CustomerInfo';
 
 const { Title } = Typography;
 
@@ -17,7 +18,24 @@ type Props = {
 }
 
 const CustomerDetailContainer = (props: Props) => {
-    const { authLoading, authStep } = useAppSelector((state) => state.auth)
+    const [authStep, setAuthStep] = useState(0);
+    const [customer, setCustomer] = useState<TCustomer>({
+        contactNumber: "",
+        email: "",
+        name: "",
+        _id: ""
+    })
+
+    useEffect(() => {
+        if (authStep === 3) {
+            props.setAppointmentBookingData((prv) => {
+                return {
+                    ...prv,
+                    customer_id: customer._id
+                }
+            })
+        }
+    }, [authStep])
 
 
 
@@ -30,24 +48,35 @@ const CustomerDetailContainer = (props: Props) => {
 
             <div className='grid grid-cols-2'>
                 {
-                    authLoading ? <Loader /> : <div className='w-full sm:max-w-[320px]'>
+                    <div className='w-full sm:max-w-[320px]'>
                         {
-                            authStep === 0 && <SendOTP />
+                            authStep === 0 && <CustomerSendOtp
+                                setAuthStep={setAuthStep}
+                                setCustomer={setCustomer}
+                            />
                         }
                         {
-                            authStep === 1 && <VerifyOTP />
+                            authStep === 1 && <CustomerVerifyOtp
+                                setAuthStep={setAuthStep}
+                                customer={customer}
+                                setCustomer={setCustomer}
+                            />
                         }
-                        {/* {
-                            authStep === 2 && <Register />
-                        } */}
+                        {
+                            authStep === 2 && <CustomerInfo
+                                setAuthStep={setAuthStep}
+                                setCustomer={setCustomer}
+                                customer = {customer}
+                            />
+                        }
                     </div>
                 }
             </div>
 
 
-            <Button onClick={() => {
+            {/* <Button onClick={() => {
                 props.setCurrentStep(2);
-            }}>Proceed for now as demo customer</Button>
+            }}>Proceed for now as demo customer</Button> */}
         </div>
     )
 }

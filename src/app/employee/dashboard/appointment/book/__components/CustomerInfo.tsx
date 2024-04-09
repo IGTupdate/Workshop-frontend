@@ -1,31 +1,53 @@
+"use client"
+
 import Heading from '@/app/components/Heading';
-import { registerCustomer } from '@/app/services/operations/auth/customerAuth';
-import { useAppDispatch } from '@/app/store/reduxHooks';
-import { resetAuthSlice, setAuthLoading } from '@/app/store/slices/authSlice';
+import { apiOpenConnector } from '@/app/services/apiOpenConnector';
+import { authEndpoints } from '@/app/services/apis';
+import { TCustomer } from '@/app/types/customer';
+import { COMMON_ERROR } from '@/app/utils/constant';
 import { Button, Input } from 'antd';
-import { redirect } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 type FormData = {
     fullName: string;
     email: string;
 };
 
-const Register: React.FC = () => {
+const { AUTH_API } = authEndpoints;
+
+
+type Props = {
+    setCustomer: React.Dispatch<React.SetStateAction<TCustomer>>,
+    setAuthStep: React.Dispatch<React.SetStateAction<number>>,
+    customer: TCustomer
+}
+
+const Register = (props: Props) => {
     const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
-    const dispatch = useAppDispatch()
+
+    const [loading, setLoading] = useState(false);
 
     const onSubmit = async (data: FormData) => {
-        dispatch(setAuthLoading(true))
+        setLoading(true);
         try {
-            await registerCustomer(data.fullName, data.email, dispatch)
-            dispatch(resetAuthSlice())
-            redirect('/dashboard')
-        } catch (err) {
-            // console.log(error)
+            // await registerCustomer(data.fullName, data.email, dispatch)'
+            const response = await apiOpenConnector({
+                method: "POST",
+                url: AUTH_API,
+                bodyData: {
+                    fullName: data.fullName,
+                    email: data.email
+                }
+            })
+            props.setAuthStep(3);
+
+        } catch (err: any) {
+            toast.error(err?.response?.data?.message || COMMON_ERROR)
+        } finally {
+            setLoading(false);
         }
-        dispatch(setAuthLoading(false))
     };
 
     return (
@@ -80,6 +102,7 @@ const Register: React.FC = () => {
                 </div>
 
                 <Button
+                    disabled={loading}
                     type='primary'
                     size='large'
                     htmlType='submit'

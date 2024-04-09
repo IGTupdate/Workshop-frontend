@@ -7,7 +7,7 @@ import { setAuthData } from "@/app/store/slices/authSlice";
 
 const { EMPLOYEE_LOGIN_API, GET_EMPLOYEE_DATA_API } = authEndpoints;
 
-export async function getCustomerData(_id : string, dispatch : AppDispatch) {
+export async function getEmployeeData(_id : string, dispatch : AppDispatch) {
   try{
     const result = await apiConnector({
       method: "GET",
@@ -17,6 +17,7 @@ export async function getCustomerData(_id : string, dispatch : AppDispatch) {
 
     if(result.data.success){
       const {_id, fullName, contactNumber, email } = result.data.data  
+      window.localStorage.setItem("authData", result?.data?.data);
       dispatch(setAuthData({_id,fullName,contactNumber,email}))
     }
   }catch(err){
@@ -24,7 +25,7 @@ export async function getCustomerData(_id : string, dispatch : AppDispatch) {
   }
 }
 
-export async function employeeLogin(email: string, password: string) {
+export async function employeeLogin(email: string, password: string, dispatch : AppDispatch) {
   try {
     const authResult = await apiOpenConnector({
       method: "POST",
@@ -36,8 +37,8 @@ export async function employeeLogin(email: string, password: string) {
     });
 
     if (authResult?.data?.success) {
-      window.localStorage.setItem("accessToken", authResult?.data?.accessToken);
-
+      // window.localStorage.setItem("accessToken", authResult?.data?.accessToken);
+      await getEmployeeData(authResult.data.data._id, dispatch)
       toast.success("LOGIN SUCCESSFULL");
     }
   } catch (err) {

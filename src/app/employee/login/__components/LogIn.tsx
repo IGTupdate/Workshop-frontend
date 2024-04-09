@@ -23,7 +23,7 @@ const LogIn: React.FC = () => {
   const onSubmit = async (data: FormData) => {
     dispatch(setAuthLoading(true));
     try {
-      await employeeLogin(data.email, data.password);
+      await employeeLogin(data.email, data.password, dispatch);
       router.push("/employee/dashboard");
     } catch (err) {
       // console.log(error)

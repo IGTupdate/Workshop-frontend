@@ -13,6 +13,7 @@ const { Title } = Typography
 type Props = {
     setAppointmentBookingData: React.Dispatch<React.SetStateAction<TAppointmentBook>>
     setCurrentStep: React.Dispatch<React.SetStateAction<number>>
+    appointmentBookingData: TAppointmentBook
 }
 
 const VehicleDetailContainer = (props: Props) => {
@@ -39,7 +40,10 @@ const VehicleDetailContainer = (props: Props) => {
 
             {
                 vehicleId === NEW_VEHICLE.value ?
-                    <VehicleCreateContainer setVehicleId={setVehicleId} /> :
+                    <VehicleCreateContainer
+                        setVehicleId={setVehicleId}
+                        customer_id={props.appointmentBookingData.customer_id}
+                    /> :
                     <VehicleSearchCompoent setVehicleId={setVehicleId} />
             }
 
