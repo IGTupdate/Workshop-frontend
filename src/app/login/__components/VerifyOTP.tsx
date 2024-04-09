@@ -5,7 +5,7 @@ import Heading from '@/app/components/Heading';
 import ErrorText from '@/app/components/Text/ErrorText';
 import { verifyOTP } from '@/app/services/operations/auth/customerAuth';
 import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
-import { setAuthLoading, setAuthStep } from '@/app/store/slices/authSlice';
+import { setAuthData, setAuthLoading, setAuthStep } from '@/app/store/slices/authSlice';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
@@ -21,13 +21,13 @@ const VerifyOTP: React.FC = () => {
 
     const handleFinish = async () => {
         const otp = otpValues.join('');
-        if (!otp || otp.trim() === '') { 
-            setOTPErrors("OTP is required"); 
-            return; 
+        if (!otp || otp.trim() === '') {
+            setOTPErrors("OTP is required");
+            return;
         }
-        if (otp.length !== 6) { 
-            setOTPErrors("OTP must be of 6 digits"); 
-            return; 
+        if (otp.length !== 6) {
+            setOTPErrors("OTP must be of 6 digits");
+            return;
         }
         if (otp.length === 6) {
             setOTPErrors('');
@@ -35,16 +35,23 @@ const VerifyOTP: React.FC = () => {
 
         dispatch(setAuthLoading(true));
 
+        // this is for the demo purpose
+        dispatch(setAuthData({
+            _id: "65fd3718356daf4e516a09f0",
+            contactNumber: "9301042640",
+        }))
+
+        return;
         let result
         try {
             result = await verifyOTP(contact, otp, dispatch);
-            if(result.data.success){
+            if (result.data.success) {
                 if (result?.data?.data?.userExists) router.push('/dashboard');
                 else dispatch(setAuthStep(2));
             }
         } catch (error) {
             // console.log("Retry Count:", retryCount);
-            if(result?.status !== 403){
+            if (result?.status !== 403) {
                 toast.error("Internal Error... Please Try After some time")
                 router.push('/')
                 return

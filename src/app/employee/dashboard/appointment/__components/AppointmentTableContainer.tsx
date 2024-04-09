@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { GetAppointmentDataTableColumn } from "../__utils/appointmentDataTableColumn";
 import { TAppointment, TAppointmentDataTable } from "@/app/types/appointment";
+import { getSlotTiming } from "@/app/utils/get-slot-timing";
 
 type Props = {
   appointmentData: TAppointment[];
@@ -18,6 +19,9 @@ const AppointmentTableContainer = (props: Props) => {
   useEffect(() => {
     setAppointMentDataTable(() => {
       return props.appointmentData.map((appointment) => {
+        const slotTime = (typeof appointment.calender_id !== "string") ?
+          getSlotTiming(appointment.calender_id, appointment.slot_id as string)?.start_time || ""
+          : "";
         return {
           _id: appointment._id,
           customer: {
@@ -25,7 +29,7 @@ const AppointmentTableContainer = (props: Props) => {
             name: appointment.customer_id,
           },
           registeration_number: (typeof appointment.vehicle_id !== "string" ? appointment.vehicle_id.registeration_number : ""),
-          date_time: new Date(),
+          date_time: new Date(slotTime),
           status: appointment.status,
         };
       });

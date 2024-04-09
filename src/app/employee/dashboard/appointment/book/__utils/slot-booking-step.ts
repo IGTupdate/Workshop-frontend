@@ -12,4 +12,8 @@ export const slot_booking_item  = [
         title: 'Vehicle',
         description: "Fill vehicle Info",
     },
+    {
+        title:"Review",
+        description:"Finalise your"
+    }
 ]

@@ -1,7 +1,7 @@
 "use client"
 
 import { TSlot } from '@/app/types/calender'
-import { TAvailbleSlots } from '@/app/types/slot'
+import { TASlot, TAvailbleSlots } from '@/app/types/slot'
 import { TSlotDetail } from '@/app/types/slot-schedule'
 import { Button, Space, Table, TableProps, Tag, Typography } from 'antd'
 import { useRouter } from 'next/navigation'
@@ -15,7 +15,7 @@ type Props = {
 const ShowSlotAvailableData = (props: Props) => {
     const router = useRouter();
 
-    const columns: TableProps<TSlot>['columns'] = [
+    const columns: TableProps<TASlot>['columns'] = [
         {
             title: 'Start Time',
             dataIndex: 'start_time',

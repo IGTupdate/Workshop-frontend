@@ -1,9 +1,10 @@
-import { AvailableSlot } from '@/app/types/slot';
+import { TSlot } from '@/app/types/calender';
+import { TASlot, TAvailbleSlots } from '@/app/types/slot';
 import { extractTimeFromDate } from '@/app/utils/dateFormatter';
 import React from 'react';
 
 interface AppointmentBookingProps {
-    slotData : AvailableSlot
+    slotData : TASlot
 }
 
 const SlotTabs: React.FC<AppointmentBookingProps> = ({ slotData }) => {

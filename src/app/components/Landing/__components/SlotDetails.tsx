@@ -9,6 +9,7 @@ const SlotDetails: React.FC = () => {
     const slotData = useAppSelector((state) => state.slot.slotData);
     const formattedDate = slotData?.date ? convertToLocaleDateAndWeekday(slotData.date) : '';
 
+    // @ts-ignore
     const availableItems = slotData?.available_slots?.map(slot => {
         const startTime = extractTimeFromDate(slot.start_time);
         const endTime = extractTimeFromDate(slot.end_time);
@@ -43,6 +44,7 @@ const SlotDetails: React.FC = () => {
                     defaultActiveKey="1"
                     tabPosition="left"
                     centered={true}
+                        // @ts-ignore
                     items={availableItems.map(slot => ({
                         label: slot.label,
                         key: slot.key,

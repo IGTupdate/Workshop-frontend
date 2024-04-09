@@ -35,9 +35,9 @@ const AppointmentpageContainer = (props: Props) => {
 
   // when search params changes then call api
   useEffect(() => {
-
     loadAppointement();
-  }, [searchParams]);
+    console.log("fetching");
+  }, [searchParams, router]);
 
   const loadAppointement = async () => {
     setAppointmentDataLoading(true);

@@ -24,7 +24,7 @@ axiosInstance.interceptors.request.use(
     } else {
       const currentTime = new Date().getTime();
       const decode = jwtDecode(accessToken);
-      if (decode.exp && decode.exp * 1000 < currentTime) {
+      if (decode.exp && ((decode.exp * 1000) + (60 * 1000) < currentTime)) {
         // If expired, generate a new access token
         console.log("ACCESS TOKEN EXPIRED");
         accessToken = await generateAccessToken(store.dispatch);

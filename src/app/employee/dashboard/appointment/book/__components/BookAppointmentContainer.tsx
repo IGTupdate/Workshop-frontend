@@ -8,6 +8,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { TAppointmentBook } from '@/app/types/appointment'
 import CustomerDetailContainer from './CustomerDetailContainer'
 import VehicleDetailContainer from './VehicleDetailContainer'
+import AppointmentBookingConfirmation from './AppointmentBookingConfirmation'
+import { useAppSelector } from '@/app/store/reduxHooks'
 
 
 type Props = {}
@@ -17,12 +19,27 @@ const BookAppointmentContainer = (props: Props) => {
     const searchParams = useSearchParams();
     const [currentStep, setCurrentStep] = useState<number>(0);
 
+    const authData = useAppSelector(state => state.auth.authData);
+
     const [appointmentBookingData, setAppointmentBookingData] = useState<TAppointmentBook>({
         slot_id: "",
         calender_id: "",
-        customer_id: "",
+        customer_id: "", // 65fd3718356daf4e516a09f0
         vehicle_id: ""
-    })
+    });
+
+
+    useEffect(() => {
+        console.log(authData);
+        if (authData._id) {
+            setAppointmentBookingData((prv) => {
+                return {
+                    ...prv,
+                    customer_id: authData._id || ""
+                }
+            })
+        }
+    }, [authData])
 
     useEffect(() => {
         console.log(searchParams.toString());
@@ -40,8 +57,22 @@ const BookAppointmentContainer = (props: Props) => {
     }, [searchParams])
 
     useEffect(() => {
-        if (appointmentBookingData.slot_id && appointmentBookingData.calender_id) {
+        if (appointmentBookingData.calender_id &&
+            appointmentBookingData.slot_id &&
+            appointmentBookingData.customer_id &&
+            appointmentBookingData.vehicle_id) {
+            setCurrentStep(3);
+        }
+        else if (appointmentBookingData.calender_id &&
+            appointmentBookingData.slot_id &&
+            appointmentBookingData.customer_id) {
+            setCurrentStep(2);
+        }
+        else if (appointmentBookingData.slot_id && appointmentBookingData.calender_id) {
             setCurrentStep(1);
+        }
+        else {
+            setCurrentStep(0);
         }
     }, [appointmentBookingData])
 
@@ -56,10 +87,23 @@ const BookAppointmentContainer = (props: Props) => {
                 currentStep === 0 && <SlotAvailablityContainer />
             }
             {
-                currentStep === 1 && <CustomerDetailContainer setCurrentStep={setCurrentStep} />
+                currentStep === 1 &&
+                <CustomerDetailContainer
+                    setAppointmentBookingData={setAppointmentBookingData}
+                    setCurrentStep={setCurrentStep} />
             }
             {
-                currentStep === 2 && <VehicleDetailContainer />
+                currentStep === 2 && <VehicleDetailContainer
+                    setAppointmentBookingData={setAppointmentBookingData}
+                    setCurrentStep={setCurrentStep}
+                />
+            }
+            {
+                currentStep === 3 &&
+                <AppointmentBookingConfirmation
+                    appointmentBookingData={appointmentBookingData}
+                    setAppointmentBookingData={setAppointmentBookingData}
+                />
             }
         </div>
     )
