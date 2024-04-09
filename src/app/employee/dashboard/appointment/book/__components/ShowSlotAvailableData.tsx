@@ -51,7 +51,7 @@ const ShowSlotAvailableData = (props: Props) => {
             render: (_, record) => (
                 <Space size="middle">
                     <Button onClick={() => {
-                        router.push(`/employee/dashboard/appointment/book?calender_id=${props.availableSlot?.calender_id}&slot_id=${record._id}`)
+                        router.push(`?calender_id=${props.availableSlot?.calender_id}&slot_id=${record._id}`)
                     }} className='px-4 bg-blue1 text-white'> Procced</Button>
                 </Space>
             ),

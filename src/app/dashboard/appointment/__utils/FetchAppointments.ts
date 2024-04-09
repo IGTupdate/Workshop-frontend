@@ -1,5 +1,6 @@
 'use client'
 import { ICustomerAppointmentData } from '@/app/store/slices/customerAppointmentSlice';
+import { TVehicle } from '@/app/types/vehicle';
 import { convertToLocaleDateAndWeekday, extractTimeFromDate, formatDateAndTime } from '@/app/utils/dateFormatter';
 
 export interface AppointmentData {
@@ -39,3 +40,30 @@ export const fetchAppointments = (data: ICustomerAppointmentData[], status?: str
     });
 };
 
+const findAllVehicles = (appointments: ICustomerAppointmentData[]): TVehicle[] => {
+    const vehiclesMap = new Map<string, TVehicle>();
+
+    // Iterate over each appointment
+    appointments.forEach(appointment => {
+        const { vehicle_id } = appointment;
+        const { _id, vehicle_make, vehicle_model, vin, registeration_number, owner, createdAt, updatedAt } = vehicle_id;
+
+        // Check if the vehicle is not already included
+        if (!vehiclesMap.has(registeration_number)) {
+            // Add the vehicle to the map
+            vehiclesMap.set(registeration_number, {
+                _id,
+                vehicle_make,
+                vehicle_model,
+                vin,
+                registeration_number,
+                owner,
+                createdAt : formatDateAndTime(createdAt),
+                updatedAt
+            });
+        }
+    });
+
+    // Convert the map values to an array and return
+    return Array.from(vehiclesMap.values());
+};

@@ -17,3 +17,18 @@ export const slot_booking_step  = [
         description:"Finalise your"
     }
 ]
+
+export const slot_booking_customer_step  = [
+    {
+        title: 'Slot',
+        description: "Select your Available time",
+    },
+    {
+        title: 'Vehicle',
+        description: "Fill vehicle Info",
+    },
+    {
+        title:"Review",
+        description:"Finalise your"
+    }
+]

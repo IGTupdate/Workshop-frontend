@@ -1,6 +1,6 @@
 'use client'
 import Watermark from '@/app/components/Text/WatermarkText';
-import { getAllCustomerAppointment } from '@/app/services/operations/appointment/appointment';
+import { cancelAppointment, getAllCustomerAppointment } from '@/app/services/operations/appointment/appointment';
 import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import React, { useEffect, useState } from 'react';
 import AllAppointments from '../__common/AllAppointment';
@@ -13,11 +13,8 @@ const Page: React.FC = () => {
     const dispatch = useAppDispatch()
     const router = useRouter()
 
-    // console.log(appointmentData)
-
     useEffect(() => {
         if(appointmentLoading){
-            // console.log("APPOINTMENT DATA FETCHED")
             dispatch(getAllCustomerAppointment())
         }
     }, []);
@@ -31,8 +28,8 @@ const Page: React.FC = () => {
         router.push('reschedule/'+appointmentId)
     };
 
-    const handleCancelAppointment = (appointmentId: string) => {
-        console.log(`Canceling appointment with ID: ${appointmentId}`);
+    const handleCancelAppointment = async (appointmentId: string) => {
+        await cancelAppointment(appointmentId, dispatch)
     };
 
     return (

@@ -1,3 +1,4 @@
+import { TVehicle } from "@/app/types/vehicle";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface ICustomerAppointmentData {
@@ -7,14 +8,7 @@ export interface ICustomerAppointmentData {
         role: string;
     };
     _id: string;
-    vehicle_id: {
-        _id: string;
-        registeration_number: string;
-        vin: string;
-        createdAt: string;
-        updatedAt: string;
-        __v: number;
-    };
+    vehicle_id: TVehicle;
     customer_id: string;
     calender_id: {
         _id: string;

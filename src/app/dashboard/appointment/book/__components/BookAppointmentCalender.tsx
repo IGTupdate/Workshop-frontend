@@ -1,11 +1,13 @@
 "use client"
-import SlotAvailablityContainer from "@/app/employee/dashboard/appointment/book/__components/SlotAvailablityContainer";
-import VehicleDetailContainer from "@/app/employee/dashboard/appointment/book/__components/VehicleDetailContainer";
-import { slot_booking_item_customer } from "@/app/employee/dashboard/appointment/book/__utils/slot-booking-step";
-import { TAppointmentBook } from "@/app/types/appointment";
-import { Steps } from "antd";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
+import { Steps } from 'antd'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { TAppointmentBook } from '@/app/types/appointment'
+import { useAppSelector } from '@/app/store/reduxHooks'
+import { slot_booking_customer_step } from '@/app/employee/dashboard/appointment/book/__utils/slot-booking-step'
+import SlotAvailablityContainer from '@/app/employee/dashboard/appointment/book/__components/SlotAvailablityContainer'
+import AppointmentBookingConfirmation from '@/app/employee/dashboard/appointment/book/__components/AppointmentBookingConfirmation'
+import VehicleDetailContainer from './VehicleDetailContainer'
 
 type Props = {}
 
@@ -14,12 +16,26 @@ const BookAppointmentContainer = (props: Props) => {
     const searchParams = useSearchParams();
     const [currentStep, setCurrentStep] = useState<number>(0);
 
+    const authData = useAppSelector(state => state.auth.authData);
+
     const [appointmentBookingData, setAppointmentBookingData] = useState<TAppointmentBook>({
         slot_id: "",
         calender_id: "",
         customer_id: "",
         vehicle_id: ""
-    })
+    });
+
+
+    useEffect(() => {
+        if (authData._id) {
+            setAppointmentBookingData((prv) => {
+                return {
+                    ...prv,
+                    customer_id: authData._id || ""
+                }
+            })
+        }
+    }, [authData])
 
     useEffect(() => {
         // console.log(searchParams.toString());
@@ -33,12 +49,31 @@ const BookAppointmentContainer = (props: Props) => {
                     calender_id,
                 }
             })
+        }else{
+            setAppointmentBookingData((prv) => {
+                return {
+                    ...prv,
+                    slot_id : '',
+                    calender_id : '',
+                }
+            })
         }
     }, [searchParams])
 
     useEffect(() => {
-        if (appointmentBookingData.slot_id && appointmentBookingData.calender_id) {
+        if (appointmentBookingData.calender_id &&
+            appointmentBookingData.slot_id &&
+            appointmentBookingData.customer_id &&
+            appointmentBookingData.vehicle_id) {
+            setCurrentStep(2);
+        }
+        else if (appointmentBookingData.calender_id &&
+            appointmentBookingData.slot_id &&
+            appointmentBookingData.customer_id) {
             setCurrentStep(1);
+        }
+        else {
+            setCurrentStep(0);
         }
     }, [appointmentBookingData])
 
@@ -47,16 +82,22 @@ const BookAppointmentContainer = (props: Props) => {
             <Steps
                 className='mb-4'
                 current={currentStep}
-                items={slot_booking_item_customer}
+                items={slot_booking_customer_step}
             />
             {
                 currentStep === 0 && <SlotAvailablityContainer />
             }
             {
-                currentStep === 1 && <VehicleDetailContainer />
+                currentStep === 1 && <VehicleDetailContainer
+                    setAppointmentBookingData={setAppointmentBookingData}
+                />
             }
             {
-                currentStep === 2 && <h1>REVIEW</h1>
+                currentStep === 2 &&
+                <AppointmentBookingConfirmation
+                    appointmentBookingData={appointmentBookingData}
+                    setAppointmentBookingData={setAppointmentBookingData}
+                />
             }
         </div>
     )

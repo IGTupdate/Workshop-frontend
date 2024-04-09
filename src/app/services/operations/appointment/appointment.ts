@@ -1,12 +1,14 @@
 import { setAppointmentData, setAppointmentLoading } from "@/app/store/slices/customerAppointmentSlice";
-import { RootState } from "@/app/store/store";
+import { AppDispatch, RootState } from "@/app/store/store";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import { apiConnector } from "../../apiConnector";
 import { appointmentEndpoints } from "../../apis";
+import toast from "react-hot-toast";
+import { AppointmentData } from "@/app/dashboard/appointment/__utils/FetchAppointments";
 
 
 
-const { GET_APPOINTMENT_BY_CALENDER, APPOINTMENT_BOOK, GET_ALL_APPOINTMENT, GET_APPOINTMENT_BOOK_INIT_DATA, GET_ALL_CUSTOMER_APPOINTMENT } = appointmentEndpoints
+const { GET_APPOINTMENT_BY_CALENDER, APPOINTMENT_BOOK, GET_ALL_APPOINTMENT, GET_APPOINTMENT_BOOK_INIT_DATA, GET_ALL_CUSTOMER_APPOINTMENT, GET_APPOINTMENT_BY_APPOINTMENT_ID, APPOINTMENT_CANCEL_API } = appointmentEndpoints
 
 export const getAppointmentByCalenderId = async (calenderId: string): Promise<number> => {
     try {
@@ -19,6 +21,21 @@ export const getAppointmentByCalenderId = async (calenderId: string): Promise<nu
         return response.data.data.length
     } catch (err) {
         console.log(err);
+        throw err;
+    }
+}
+
+export const getAppointmentByAppointmentId = async (appointmentId: string): Promise<AppointmentData> => {
+    try {
+        const response = await apiConnector({
+            method: "GET",
+            url: GET_APPOINTMENT_BY_APPOINTMENT_ID + "/" + appointmentId
+        })
+
+        // console.log(response);
+        return response.data.data
+    } catch (err) {
+        // console.log(err);
         throw err;
     }
 }
@@ -68,6 +85,7 @@ export const bookAppointment = async (data: any) => {
         throw err;
     }
 }
+
 export const getAllCustomerAppointment = (): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
     try {
         const _id = getState().auth.authData._id;
@@ -84,3 +102,21 @@ export const getAllCustomerAppointment = (): ThunkAction<void, RootState, unknow
         dispatch(setAppointmentLoading(false));
     }
 };
+
+
+export const cancelAppointment = async (appointmentId: string, dispatch: AppDispatch) => {
+    try{
+        const response = await apiConnector({
+            method: 'POST',
+            url: APPOINTMENT_CANCEL_API + '/' + appointmentId
+        })
+
+        if(response.data.success){
+            dispatch(getAllCustomerAppointment())
+            toast.success("Appointment Cancelled Successfulyy")
+        }
+
+    }catch(err){
+        throw err
+    }
+}

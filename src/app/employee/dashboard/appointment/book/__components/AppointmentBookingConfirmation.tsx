@@ -1,5 +1,4 @@
 "use client"
-
 import DescriptionItem from '@/app/components/DescriptionItem.tsx'
 import Loader from '@/app/components/Loader';
 import { bookAppointment, getAppointMentBookInitData } from '@/app/services/operations/appointment/appointment';
@@ -43,18 +42,23 @@ const AppointmentBookingConfirmation = (props: Props) => {
 
     useEffect(() => {
         setLoading(true);
-        console.log(props.appointmentBookingData);
+        // console.log(props.appointmentBookingData);
 
-        (async function () {
-            try {
-                const responseData = await getAppointMentBookInitData(props.appointmentBookingData) as TappointmentBookingConfirmationData;
-                console.log(responseData);
-                setAppointmentBookingConfirmationData(responseData);
-                setLoading(false);
-            } catch (err) {
-                console.log(err);
-            }
-        }());
+        if( props.appointmentBookingData.calender_id &&
+            props.appointmentBookingData.slot_id &&
+            props.appointmentBookingData.customer_id &&
+            props.appointmentBookingData.vehicle_id){
+            (async function () {
+                try {
+                    const responseData = await getAppointMentBookInitData(props.appointmentBookingData) as TappointmentBookingConfirmationData;
+                    // console.log(responseData);
+                    setAppointmentBookingConfirmationData(responseData)
+                    setLoading(false);
+                } catch (err) {
+                    // console.log(err);
+                }
+            }());
+        }
 
     }, [props.appointmentBookingData]);
 
@@ -72,7 +76,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
         try {
 
             const response = await bookAppointment(props.appointmentBookingData);
-            console.log(response);
+            // console.log(response);
             toast.success(response?.message);
             router.push(`/employee/dashboard/appointment/${response.data._id}`)
 

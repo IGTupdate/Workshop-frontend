@@ -1,11 +1,32 @@
-import React from 'react'
+'use client'
+import { getAppointmentByAppointmentId } from '@/app/services/operations/appointment/appointment';
+import { useEffect, useState } from 'react';
+import { AppointmentData } from '../__utils/FetchAppointments';
+import AppointmentDetails  from '../../../components/Appointment/AppointmentDetails'
 
-type Props = {}
 
-const page = (props: Props) => {
-  return (
-    <div>page</div>
-  )
+const AppointmentPage = ({params}) => {
+    const [appointmentData, setAppointmentData] = useState<AppointmentData | null>(null)
+
+    const fetchAppointmentData = async() => {
+      try{
+        const result = await getAppointmentByAppointmentId(params.appointmentId)
+        setAppointmentData(result)
+      }catch(err){
+      }
+    }
+
+    useEffect(() => {
+      fetchAppointmentData();
+  }, [params.appointmentId]);
+
+    return (
+      <>
+        {
+          appointmentData ? <AppointmentDetails appointmentData={appointmentData}/> : <div>Loading</div>
+        }
+      </>
+    );
 }
 
-export default page
+export default AppointmentPage;

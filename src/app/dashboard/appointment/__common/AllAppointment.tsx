@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { Button, Descriptions } from 'antd';
+import { Button, Descriptions, Tag } from 'antd';
 import { AppointmentData } from '../__utils/FetchAppointments';
 import CustomModal from '@/app/components/Model/CustomModel';
 
@@ -32,8 +32,12 @@ const AllAppointments: React.FC<Props> = ({ appointment, onRescheduleAppointment
                 <Descriptions.Item label="Appointment Created">{appointment.appointmentCreated}</Descriptions.Item>
                 <Descriptions.Item label="Vehicle VIN">{appointment.vehicleVIN}</Descriptions.Item>
                 <Descriptions.Item label="Vehicle Registration">{appointment.vehicleReg}</Descriptions.Item>
-                <Descriptions.Item label="Status">{appointment.status}</Descriptions.Item>
-                <Descriptions.Item label="" contentStyle={{ display: 'flex', justifyContent: 'end', paddingRight: '25%', gap: '10px'}}>
+                <Descriptions.Item label="Status">
+                    <Tag color={appointment.status === 'Cancelled' ? 'red' : 'green'}>
+                        {appointment.status}
+                    </Tag>
+                </Descriptions.Item>
+                <Descriptions.Item label="" contentStyle={{ display: 'flex', justifyContent: 'end', gap: '10px'}}>
                     {onRescheduleAppointment && <Button onClick={() => onRescheduleAppointment(appointment.appointmentId)}>Reschedule</Button>}
                     {onCancelAppointment && <Button onClick={() => showModal()}>Cancel</Button>}
                     {onShowAppointmentDetails && <Button onClick={() => onShowAppointmentDetails?.(appointment.appointmentId)}>Show Details</Button>}
