@@ -3,14 +3,10 @@ import { RootState } from "@/app/store/store";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import { apiConnector } from "../../apiConnector";
 import { appointmentEndpoints } from "../../apis";
-<<<<<<< HEAD
 
 
 
-const { GET_APPOINTMENT_BY_CALENDER, APPOINTMENT_BOOK, GET_ALL_APPOINTMENT, GET_APPOINTMENT_BOOK_INIT_DATA } = appointmentEndpoints
-=======
-const { GET_APPOINTMENT_BY_CALENDER, GET_ALL_APPOINTMENT, GET_ALL_CUSTOMER_APPOINTMENT } = appointmentEndpoints
->>>>>>> b5e16f745911c201db86cf75b5ca87bee4f5e15b
+const { GET_APPOINTMENT_BY_CALENDER, APPOINTMENT_BOOK, GET_ALL_APPOINTMENT, GET_APPOINTMENT_BOOK_INIT_DATA, GET_ALL_CUSTOMER_APPOINTMENT } = appointmentEndpoints
 
 export const getAppointmentByCalenderId = async (calenderId: string): Promise<number> => {
     try {
@@ -43,7 +39,6 @@ export const getAllAppointment = async (query: string = "") => {
     }
 }
 
-<<<<<<< HEAD
 export const getAppointMentBookInitData = async (data: any) => {
     try {
 
@@ -73,7 +68,6 @@ export const bookAppointment = async (data: any) => {
         throw err;
     }
 }
-=======
 export const getAllCustomerAppointment = (): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
     try {
         const _id = getState().auth.authData._id;
@@ -90,4 +84,3 @@ export const getAllCustomerAppointment = (): ThunkAction<void, RootState, unknow
         dispatch(setAppointmentLoading(false));
     }
 };
->>>>>>> b5e16f745911c201db86cf75b5ca87bee4f5e15b

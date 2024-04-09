@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import SlotAvailablityContainer from './SlotAvailablityContainer'
 import { Steps } from 'antd'
-import { slot_booking_item } from '../__utils/slot-booking-step'
+import { slot_booking_step } from '../__utils/slot-booking-step'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { TAppointmentBook } from '@/app/types/appointment'
 import CustomerDetailContainer from './CustomerDetailContainer'
@@ -80,7 +80,7 @@ const BookAppointmentContainer = (props: Props) => {
             <Steps
                 className='mb-4'
                 current={currentStep}
-                items={slot_booking_item}
+                items={slot_booking_step}
             />
             {
                 currentStep === 0 && <SlotAvailablityContainer />

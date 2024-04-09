@@ -1,4 +1,4 @@
-export const slot_booking_item  = [
+export const slot_booking_step  = [
     {
         title: 'Slot',
         description: "Select your Available time",
