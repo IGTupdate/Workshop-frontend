@@ -15,11 +15,10 @@ export interface IAuthState {
     retryCount: number
 }
 
-// const authDataString: string | null = typeof window !== "undefined" ? window.localStorage.getItem("authData") : null;
+const authDataString: string | null = typeof window !== "undefined" ? window.localStorage.getItem("authData") : null;
 
 // Parse the JSON string to convert it into an object
-// const authData: IAuthData | null = authDataString ? JSON.parse(authDataString) : null;
-const authData = null
+const authData: IAuthData | null = authDataString ? JSON.parse(authDataString) : null;
 
 const initialAuthDataState: IAuthData = {
     contactNumber: ''

@@ -13,3 +13,18 @@ export const slot_booking_item  = [
         description: "Fill vehicle Info",
     },
 ]
+
+export const slot_booking_item_customer = [
+    {
+        title: 'Slot',
+        description: "Select your Available time",
+    },
+    {
+        title: 'Vehicle',
+        description: "Fill vehicle Info",
+    },
+    {
+        title: 'Review',
+        description: "Review Appointment Details"
+    }
+]

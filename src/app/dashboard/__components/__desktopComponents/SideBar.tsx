@@ -4,6 +4,7 @@ import { useAppSelector } from "@/app/store/reduxHooks";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Layout, Space } from "antd";
 import SideBarMenus from "./SideBarMenus";
+import { useEffect, useState } from "react";
 
 const { Sider } = Layout;
 
@@ -12,7 +13,7 @@ interface SideBarProps {
 }
 
 const SideBar = ({ sidebarWidth }: SideBarProps) => {
-  const authData = useAppSelector((state) => state.auth.authData);
+  const fullName = useAppSelector((state) => state.auth.authData.fullName);
 
   return (
     <Sider
@@ -26,7 +27,7 @@ const SideBar = ({ sidebarWidth }: SideBarProps) => {
       <Space className={`w-full p-4`}>
         <Avatar size={"large"} icon={<UserOutlined />} />
         <div>
-          <h2 className="text-white1 font-semibold text-xl">Hello, {authData?.fullName?.split(' ')[0]}</h2>
+          <h2 className="text-white1 font-semibold text-xl">Hello, Guest</h2>
           <p className="text-gray1 text-sm font-medium">Customer</p>
         </div>
       </Space>

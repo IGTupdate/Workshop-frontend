@@ -1,11 +1,12 @@
 import { setAuthData } from "@/app/store/slices/authSlice";
-import { AppDispatch } from "@/app/store/store";
+import { AppDispatch, RootState } from "@/app/store/store";
+import { Action, ThunkAction } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import { apiConnector } from "../../apiConnector";
 import { apiOpenConnector } from "../../apiOpenConnector";
 import { authEndpoints } from "../../apis";
 
-const { SENDOTP_API, VERIFYOTP_API, AUTH_API, GENERATE_ACCESS_TOKEN_API, GET_CUSTOMER_DATA_API } =
+const { SENDOTP_API, VERIFYOTP_API, AUTH_API, GENERATE_ACCESS_TOKEN_API, GET_CUSTOMER_DATA_API, CUSTOMER_UPDATE_API, LOGOUT_API } =
   authEndpoints;
 
 export async function getCustomerData(_id : string, dispatch : AppDispatch) {
@@ -16,7 +17,8 @@ export async function getCustomerData(_id : string, dispatch : AppDispatch) {
     })
 
     if(result.data.success){
-      window.localStorage.setItem('authData', result.data.data)
+      console.log(result)
+      window.localStorage.setItem('authData', JSON.stringify(result.data.data))
       dispatch(setAuthData(result.data.data))
     }
   }catch(err){
@@ -103,19 +105,43 @@ export async function registerCustomer(fullName: string, email: string, dispatch
   }
 }
 
-export async function generateAccessToken(dispatch: AppDispatch): Promise<string> {
-
+export async function generateAccessToken(){
   try {
-    // console.log("INSIDE GENERATE ACCESS TOKEN")
-    const response = await apiOpenConnector({ method: "GET", url: GENERATE_ACCESS_TOKEN_API });
-    console.log("newAccessToken", response.data.accessToken)
-    if (response.data.accessToken) {
-      return response.data.accessToken as string
-    }
-    throw "";
+    await apiOpenConnector({ method: "GET", url: GENERATE_ACCESS_TOKEN_API });
   } catch (err) {
-    console.log(err);
-    // handle logout
     throw err;
   }
 }
+
+export const updateCustomer = (data: any): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
+  try {
+    const authData = getState().auth.authData;
+    const response = await apiConnector({ method: "POST", url: CUSTOMER_UPDATE_API + "/" + authData._id, bodyData: data });
+    if (response.data.success) {
+      const {fullName, email} = response.data.data
+      let newAuthData = {...authData}
+      newAuthData.fullName = fullName
+      newAuthData.email = email
+      dispatch(setAuthData(newAuthData))
+      toast.success("User Updated Successfully")
+    }
+  } catch (err) {
+    // console.log(err);
+    toast.error("Updation Failed... Please Try Later")
+    throw err;
+  }
+}
+
+export const logout = (): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
+  try {
+    const response = await apiConnector({ method: "GET", url: LOGOUT_API });
+    if (response.data.success) {
+      dispatch(logout())
+    }
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
+

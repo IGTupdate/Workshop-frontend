@@ -1,7 +1,5 @@
 'use client'
 import { Button, Layout } from "antd";
-import React from "react";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import Image from "next/image";
 
 const {Header} = Layout

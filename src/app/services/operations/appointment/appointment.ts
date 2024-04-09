@@ -1,10 +1,9 @@
+import { setAppointmentData, setAppointmentLoading } from "@/app/store/slices/customerAppointmentSlice";
 import { RootState } from "@/app/store/store";
+import { Action, ThunkAction } from "@reduxjs/toolkit";
 import { apiConnector } from "../../apiConnector";
 import { appointmentEndpoints } from "../../apis";
-import { Action, ThunkAction } from "@reduxjs/toolkit";
-import { setCalenderData, setCalenderLoading } from "@/app/store/slices/calenderSlice";
-import { TAppointment } from "@/app/types/appointment";
-const { GET_APPOINTMENT_BY_CALENDER, GET_ALL_APPOINTMENT } = appointmentEndpoints
+const { GET_APPOINTMENT_BY_CALENDER, GET_ALL_APPOINTMENT, GET_ALL_CUSTOMER_APPOINTMENT } = appointmentEndpoints
 
 export const getAppointmentByCalenderId = async (calenderId: string): Promise<number> => {
     try {
@@ -36,3 +35,20 @@ export const getAllAppointment = async (query: string = "") => {
         return null
     }
 }
+
+export const getAllCustomerAppointment = (): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
+    try {
+        const _id = getState().auth.authData._id;
+        const response = await apiConnector({
+            method: "GET",
+            url: GET_ALL_CUSTOMER_APPOINTMENT + "/" + _id
+        });
+
+        dispatch(setAppointmentData(response.data.data));
+        return response.data.data;
+    } catch (err) {
+        return null;
+    } finally{
+        dispatch(setAppointmentLoading(false));
+    }
+};

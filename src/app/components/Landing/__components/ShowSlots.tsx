@@ -1,51 +1,8 @@
 "use client"
+import { getAvailableSlots } from '@/app/services/operations/appointment/slots';
 import { useAppDispatch } from '@/app/store/reduxHooks';
 import { setSlotData } from '@/app/store/slices/slotSlice';
 import React, { useRef } from 'react';
-
-const data = {
-    "date": "2024-03-29T00:00:00.000Z",
-    "calendar_id": "65d3564570fb6acd621ad4c9",
-    "status": "Open",
-    "available_slots": [
-      {
-        "_id": "65d3564570fb6acd621ad4ca",
-        "start_time": "2024-02-16T09:00:00.000Z",
-        "end_time": "2024-02-16T10:00:00.000Z",
-        "available": 5
-      },
-      {
-        "_id": "65d3564570fb6acd621ad4cb",
-        "start_time": "2024-02-16T10:00:00.000Z",
-        "end_time": "2024-02-16T11:00:00.000Z",
-        "available": 5
-      },
-      {
-        "_id": "65d3564570fb6acd621ad4cc",
-        "start_time": "2024-02-16T11:00:00.000Z",
-        "end_time": "2024-02-16T12:00:00.000Z",
-        "available": 3
-      },
-      {
-        "_id": "65d3564570fb6acd621ad4cd",
-        "start_time": "2024-02-16T12:00:00.000Z",
-        "end_time": "2024-02-16T13:00:00.000Z",
-        "available": 8
-      },
-      {
-        "_id": "65d3564570fb6acd621ad4ce",
-        "start_time": "2024-02-16T13:00:00.000Z",
-        "end_time": "2024-02-16T14:00:00.000Z",
-        "available": 0
-      },
-      {
-        "_id": "65d3564570fb6acd621ad4cf",
-        "start_time": "2024-02-16T14:00:00.000Z",
-        "end_time": "2024-02-16T15:00:00.000Z",
-        "available": 10
-      },
-    ]
-  }
 
   interface Props {
     selectedDate: string;
@@ -60,7 +17,10 @@ const data = {
     const handleClick = async () => {
       try {
         if (selectedDate !== '') {
-          dispatch(setSlotData(data));
+          const parts = selectedDate.split('-');
+          const formattedDate = `${parts[1]}-${parts[0]}-${parts[2]}`;
+          const res = await getAvailableSlots(formattedDate)
+          dispatch(setSlotData(res));
           scrollToSlotDetailsRef.current?.();
         }
       } catch (err) {

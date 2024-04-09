@@ -9,7 +9,7 @@ export async function getAvailableSlots(query: string = "") {
     try {
         const response = await apiOpenConnector({
             method: "GET",
-            url: GET_AVAILABLE_SLOTS_API + "?" + query,
+            url: GET_AVAILABLE_SLOTS_API + "?date=" + query,
         });
         return response.data.data;
     } catch (err) {

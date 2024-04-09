@@ -1,13 +1,11 @@
 "use client"
-
-import React, { useEffect, useState } from 'react'
-import SlotAvailablityContainer from './SlotAvailablityContainer'
-import { Steps } from 'antd'
-import { slot_booking_item } from '../__utils/slot-booking-step'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { TAppointmentBook } from '@/app/types/appointment'
-import CustomerDetailContainer from './CustomerDetailContainer'
-import VehicleDetailContainer from './VehicleDetailContainer'
+import SlotAvailablityContainer from "@/app/employee/dashboard/appointment/book/__components/SlotAvailablityContainer";
+import VehicleDetailContainer from "@/app/employee/dashboard/appointment/book/__components/VehicleDetailContainer";
+import { slot_booking_item_customer } from "@/app/employee/dashboard/appointment/book/__utils/slot-booking-step";
+import { TAppointmentBook } from "@/app/types/appointment";
+import { Steps } from "antd";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 type Props = {}
 
@@ -24,7 +22,7 @@ const BookAppointmentContainer = (props: Props) => {
     })
 
     useEffect(() => {
-        console.log(searchParams.toString());
+        // console.log(searchParams.toString());
         const slot_id = searchParams.get("slot_id");
         const calender_id = searchParams.get("calender_id");
         if (slot_id && calender_id) {
@@ -49,16 +47,16 @@ const BookAppointmentContainer = (props: Props) => {
             <Steps
                 className='mb-4'
                 current={currentStep}
-                items={slot_booking_item}
+                items={slot_booking_item_customer}
             />
             {
                 currentStep === 0 && <SlotAvailablityContainer />
             }
             {
-                currentStep === 1 && <CustomerDetailContainer setCurrentStep={setCurrentStep} />
+                currentStep === 1 && <VehicleDetailContainer />
             }
             {
-                currentStep === 2 && <VehicleDetailContainer />
+                currentStep === 2 && <h1>REVIEW</h1>
             }
         </div>
     )

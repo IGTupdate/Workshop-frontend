@@ -1,15 +1,22 @@
+'use client'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import FormComponent from '../../__components/__common/FormComponent';
 import { Button } from 'antd';
+import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
+import { updateCustomer } from '@/app/services/operations/auth/customerAuth';
 
 const ProfileForm = () => {
+
+  const authData = useAppSelector((state) => state.auth.authData)
+  const dispatch = useAppDispatch()
+
   // Define default values for the form fields
   const defaultValues = {
-    fullName: 'Rohit Gupta',
-    contactNumber: '7049761589', // Including the default contact number here
-    email: 'rg640321@gmail.com',
+    fullName: authData.fullName,
+    contactNumber: authData.contactNumber, // Including the default contact number here
+    email: authData.email,
   };
 
   // Define Yup schema for form validation
@@ -26,9 +33,21 @@ const ProfileForm = () => {
   });
 
   // Handle form submission
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: any) => {
+    if (Object.keys(data).length === 0) return;
+    let newData: {
+      fullName?: string,
+      email?: string
+    } = {};
+  
+    if (authData.fullName !== data.fullName) newData.fullName = data.fullName;
+    if (authData.email !== data.email) newData.email = data.email;
+
+    if(Object.keys(newData).length === 0) return
+
+    dispatch(updateCustomer(newData));
   };
+  
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className=' sm:w-[330px] lg:w-[380px] mx-auto flex flex-col gap-4'>
