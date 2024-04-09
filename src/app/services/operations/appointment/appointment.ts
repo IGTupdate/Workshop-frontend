@@ -3,7 +3,10 @@ import { RootState } from "@/app/store/store";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import { apiConnector } from "../../apiConnector";
 import { appointmentEndpoints } from "../../apis";
-const { GET_APPOINTMENT_BY_CALENDER, GET_ALL_APPOINTMENT, GET_ALL_CUSTOMER_APPOINTMENT } = appointmentEndpoints
+
+
+
+const { GET_APPOINTMENT_BY_CALENDER, APPOINTMENT_BOOK, GET_ALL_APPOINTMENT, GET_APPOINTMENT_BOOK_INIT_DATA, GET_ALL_CUSTOMER_APPOINTMENT } = appointmentEndpoints
 
 export const getAppointmentByCalenderId = async (calenderId: string): Promise<number> => {
     try {
@@ -23,19 +26,48 @@ export const getAppointmentByCalenderId = async (calenderId: string): Promise<nu
 
 export const getAllAppointment = async (query: string = "") => {
     try {
-        console.log("loading calender api ", query);
+        console.log("loading appointment api ", query);
         const response = await apiConnector({
             method: "GET",
             url: GET_ALL_APPOINTMENT + "?" + query
         });
 
-        return response.data.data 
+        return response.data.data
     } catch (err) {
         console.log(err);
         return null
     }
 }
 
+export const getAppointMentBookInitData = async (data: any) => {
+    try {
+
+        const response = await apiConnector({
+            method: "POST",
+            url: GET_APPOINTMENT_BOOK_INIT_DATA,
+            bodyData: data
+        });
+
+        return response.data.data
+
+    } catch (err) {
+        throw err;
+    }
+}
+
+export const bookAppointment = async (data: any) => {
+    try {
+        const response = await apiConnector({
+            method: "POST",
+            url: APPOINTMENT_BOOK,
+            bodyData: data
+        });
+
+        return response?.data
+    } catch (err) {
+        throw err;
+    }
+}
 export const getAllCustomerAppointment = (): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
     try {
         const _id = getState().auth.authData._id;

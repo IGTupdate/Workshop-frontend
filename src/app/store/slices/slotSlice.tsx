@@ -1,9 +1,9 @@
-import { SlotData } from "@/app/types/slot";
+import { TAvailbleSlots } from "@/app/types/slot";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface ISlotState {
-    slotData : SlotData | null
+    slotData : TAvailbleSlots | null
 }
 
 const initialState: ISlotState = {
@@ -14,7 +14,7 @@ export const slotSlice = createSlice({
     name: "slot",
     initialState,
     reducers: {
-        setSlotData: (state, action: PayloadAction<SlotData>) =>{
+        setSlotData: (state, action: PayloadAction<TAvailbleSlots>) =>{
             state.slotData = action.payload
         },
     }

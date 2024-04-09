@@ -2,6 +2,7 @@
 import { getAvailableSlots } from '@/app/services/operations/appointment/slots';
 import { useAppDispatch } from '@/app/store/reduxHooks';
 import { setSlotData } from '@/app/store/slices/slotSlice';
+import { TAvailbleSlots } from '@/app/types/slot';
 import React, { useRef } from 'react';
 
   interface Props {
@@ -37,5 +38,6 @@ import React, { useRef } from 'react';
       </button>
     );
   };
-  
-  export default ShowSlots;
+
+
+export default ShowSlots;
