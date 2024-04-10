@@ -9,19 +9,19 @@ import { authEndpoints } from "../../apis";
 const { SENDOTP_API, VERIFYOTP_API, AUTH_API, GENERATE_ACCESS_TOKEN_API, GET_CUSTOMER_DATA_API, CUSTOMER_UPDATE_API, LOGOUT_API } =
   authEndpoints;
 
-export async function getCustomerData(_id : string, dispatch : AppDispatch) {
-  try{
+export async function getCustomerData(_id: string, dispatch: AppDispatch) {
+  try {
     const result = await apiConnector({
       method: "GET",
       url: GET_CUSTOMER_DATA_API + `/${_id}`
     })
 
-    if(result.data.success){
+    if (result.data.success) {
       console.log(result)
       window.localStorage.setItem('authData', JSON.stringify(result.data.data))
       dispatch(setAuthData(result.data.data))
     }
-  }catch(err){
+  } catch (err) {
     throw err
   }
 }
@@ -105,7 +105,7 @@ export async function registerCustomer(fullName: string, email: string, dispatch
   }
 }
 
-export async function generateAccessToken(){
+export async function generateAccessToken() {
   try {
     await apiOpenConnector({ method: "GET", url: GENERATE_ACCESS_TOKEN_API });
   } catch (err) {
@@ -118,8 +118,8 @@ export const updateCustomer = (data: any): ThunkAction<void, RootState, unknown,
     const authData = getState().auth.authData;
     const response = await apiConnector({ method: "POST", url: CUSTOMER_UPDATE_API + "/" + authData._id, bodyData: data });
     if (response.data.success) {
-      const {fullName, email} = response.data.data
-      let newAuthData = {...authData}
+      const { fullName, email } = response.data.data
+      let newAuthData = { ...authData }
       newAuthData.fullName = fullName
       newAuthData.email = email
       dispatch(setAuthData(newAuthData))

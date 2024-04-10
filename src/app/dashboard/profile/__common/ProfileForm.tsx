@@ -8,9 +8,9 @@ import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import { updateCustomer } from '@/app/services/operations/auth/customerAuth';
 
 interface FormValues {
-  fullName?: string;
+  fullName: string;
   contactNumber: string;
-  email?: string;
+  email: string;
 }
 
 const ProfileForm = () => {
@@ -19,9 +19,9 @@ const ProfileForm = () => {
 
   // Define default values for the form fields
   const defaultValues: FormValues = {
-    fullName: authData.fullName,
+    fullName: authData.fullName || "",
     contactNumber: authData.contactNumber,
-    email: authData.email,
+    email: authData.email || "",
   };
 
   // Define Yup schema for form validation
@@ -31,11 +31,11 @@ const ProfileForm = () => {
     email: Yup.string().email('Invalid email format').required('Email is required'),
   });
 
-  const resolver: Resolver<FormValues> = yupResolver(profileSchema);
+  // const resolver: Resolver<FormValues> = yupResolver(profileSchema);
 
   // Initialize react-hook-form useForm hook with Yup resolver and default values
   const { control, handleSubmit, formState: { errors } } = useForm<FormValues>({
-    resolver,
+    resolver:yupResolver(profileSchema),
     defaultValues,
   });
 

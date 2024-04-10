@@ -11,8 +11,7 @@ export async function getEmployeeData(_id : string, dispatch : AppDispatch) {
   try{
     const result = await apiConnector({
       method: "GET",
-      url: GET_EMPLOYEE_DATA_API,
-      params: {_id}
+      url: GET_EMPLOYEE_DATA_API+"/"+_id,
     })
 
     if(result.data.success){

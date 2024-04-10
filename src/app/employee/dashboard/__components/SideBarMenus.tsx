@@ -31,8 +31,8 @@ const SideBarMenus = (props: Props) => {
 
     const activeDashboardKey = getActiveSideBarMenu(pathname);
 
-    console.log(sideBarMenuItems)
-    console.log(activeDashboardKey)
+    // console.log(sideBarMenuItems)
+    // console.log(activeDashboardKey)
     return (
         <Menu
             mode="inline"

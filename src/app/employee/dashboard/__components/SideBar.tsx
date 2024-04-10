@@ -9,6 +9,8 @@ import { SIDEBAR_COLLAPSED_WIDTH, SIDEBAR_WIDTH } from "../utils/variables";
 import { useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import SideBarMenus from "./SideBarMenus";
+import { useAppDispatch } from "@/app/store/reduxHooks";
+import { logout } from "@/app/services/operations/auth/customerAuth";
 
 const { Header, Sider, Content } = Layout;
 
@@ -17,6 +19,11 @@ type Props = {
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const SideBar = (props: Props) => {
+
+  const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  }
   return (
     <Sider
       width={SIDEBAR_WIDTH}
@@ -41,6 +48,7 @@ const SideBar = (props: Props) => {
 
       <div className="w-full absolute bottom-0 ">
         <Button
+          onClick={handleLogout}
           type="primary"
           style={{ borderBottomRightRadius: 0, borderBottomLeftRadius: 0 }}
           className="bg-blue1 text-white1 font-semibold w-full h-10"
