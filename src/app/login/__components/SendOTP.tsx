@@ -12,7 +12,6 @@ interface FormInputs {
 }
 
 type Tprops = {
-    employee?: boolean
 }
 const SendOTP = (props: Tprops) => {
     const {
@@ -43,7 +42,7 @@ const SendOTP = (props: Tprops) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
         const reg = /^[0-9]*$/;
-        
+
         if (!reg.test(inputValue)) {
             setContactNumberError('Contact Number must be digits');
         } else if (inputValue.length !== 10) {
@@ -51,20 +50,20 @@ const SendOTP = (props: Tprops) => {
         } else {
             setContactNumberError('');
         }
-    
+
         setContactNumber(inputValue);
     };
 
     return (
         <div className="w-full">
-            {
-                props.employee && <Heading
-                    type='heading1'
-                    primary={"Authenticate"}
-                    secondary={"Give Your Identity"}
-                    primaryColor='text-black1'
-                />
-            }
+
+            <Heading
+                type='heading1'
+                primary={"Authenticate"}
+                secondary={"Give Your Identity"}
+                primaryColor='text-black1'
+            />
+
             <form onSubmit={handleSubmit(onSubmit)} className="w-full md:mt-10 mt-8 flex flex-col gap-3">
                 <div className='md:mb-4 mb-3 relative'>
                     <label className='text-sm font-medium mb-1 block text-black1'>Phone</label>
