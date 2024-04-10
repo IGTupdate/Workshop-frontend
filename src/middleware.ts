@@ -2,7 +2,6 @@ import { NextResponse, NextRequest } from "next/server";
 import { cookies } from "next/headers";
 
 export async function middleware(request: NextRequest) {
-    // return NextResponse.next();
     // Get cookies from the request
     const cookieStore = cookies();
 
@@ -19,7 +18,7 @@ export async function middleware(request: NextRequest) {
     };
 
     // Middleware logic
-    if (pathname === "/employee/dashboard") {
+    if (pathname.includes("/employee/dashboard")) {
         // Check access to /employee/dashboard route
         if (refreshToken && isEmployee) {
             return NextResponse.next(); // Allow access
@@ -28,7 +27,7 @@ export async function middleware(request: NextRequest) {
         } else {
             return redirectUrl('/employee/login'); // Redirect unauthorized user to /employee/login
         }
-    } else if (pathname === "/dashboard") {
+    } else if (pathname.includes("/dashboard")) {
         // Check access to /dashboard route
         if (refreshToken && !isEmployee) {
             return NextResponse.next(); // Allow access
@@ -37,7 +36,7 @@ export async function middleware(request: NextRequest) {
         } else {
             return redirectUrl("/login"); // Redirect unauthorized user to /login
         }
-    } else if (pathname === "/employee/login") {
+    } else if (pathname.includes("/employee/login")) {
         // Check access to /employee/login route
         if (!refreshToken) {
             return NextResponse.next(); // Allow access
@@ -45,7 +44,7 @@ export async function middleware(request: NextRequest) {
             if (isEmployee) redirectUrl("/employee/dashboard"); // Redirect authorized user to /employee/dashboard
             return redirectUrl('/dashboard')
         }
-    } else if (pathname === "/login") {
+    } else if (pathname.includes("/login")) {
         // Check access to /login route
         if (!refreshToken) {
             return NextResponse.next(); // Allow access

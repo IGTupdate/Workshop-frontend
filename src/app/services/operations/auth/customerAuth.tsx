@@ -17,7 +17,6 @@ export async function getCustomerData(_id: string, dispatch: AppDispatch) {
     })
 
     if (result.data.success) {
-      console.log(result)
       window.localStorage.setItem('authData', JSON.stringify(result.data.data))
       dispatch(setAuthData(result.data.data))
     }

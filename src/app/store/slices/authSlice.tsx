@@ -11,8 +11,7 @@ export interface IAuthData {
 export interface IAuthState {
     authStep: number,
     authData: IAuthData,
-    authLoading: boolean,
-    retryCount: number
+    authLoading: boolean
 }
 
 const authDataString: string | null = typeof window !== "undefined" ? window.localStorage.getItem("authData") : null;
@@ -27,8 +26,7 @@ const initialAuthDataState: IAuthData = {
 const initialState: IAuthState = {
     authStep: 0,
     authData: authData ? authData : initialAuthDataState,
-    authLoading: false,
-    retryCount: 3
+    authLoading: false
 }
 
 export const authSlice = createSlice({
@@ -44,13 +42,9 @@ export const authSlice = createSlice({
         setAuthLoading: (state, action: PayloadAction<boolean>) => {
             state.authLoading = action.payload
         },
-        setRetryCount: (state, action: PayloadAction<number>) => {
-            state.retryCount = action.payload
-        },
         resetAuthSlice: (state) => {
             state.authStep = initialState.authStep;
             state.authLoading = initialState.authLoading;
-            state.retryCount = initialState.retryCount;
         },
         logOut: (state) => {
             window.localStorage.clear()
@@ -59,5 +53,5 @@ export const authSlice = createSlice({
     }
 })
 
-export const { setAuthStep, setAuthData, setAuthLoading, setRetryCount, resetAuthSlice, logOut } = authSlice.actions
+export const { setAuthStep, setAuthData, setAuthLoading, resetAuthSlice, logOut } = authSlice.actions
 export const authReducer = authSlice.reducer

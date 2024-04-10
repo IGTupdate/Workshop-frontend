@@ -17,7 +17,7 @@ const VerifyOTP: React.FC = () => {
     const dispatch = useAppDispatch();
     const [otpValues, setOtpValues] = useState<string[]>([]);
     const [otpErrors, setOTPErrors] = useState('');
-    const [retryCount, setRetryCount] = useState(0); // Define retryCount state
+    const [retryCount, setRetryCount] = useState(0);
 
     const handleFinish = async () => {
         const otp = otpValues.join('');
@@ -35,13 +35,6 @@ const VerifyOTP: React.FC = () => {
 
         dispatch(setAuthLoading(true));
 
-        // this is for the demo purpose
-        dispatch(setAuthData({
-            _id: "65fd3718356daf4e516a09f0",
-            contactNumber: "9301042640",
-        }))
-
-        return;
         let result
         try {
             result = await verifyOTP(contact, otp, dispatch);
@@ -50,7 +43,6 @@ const VerifyOTP: React.FC = () => {
                 else dispatch(setAuthStep(2));
             }
         } catch (error) {
-            // console.log("Retry Count:", retryCount);
             if (result?.status !== 403) {
                 toast.error("Internal Error... Please Try After some time")
                 router.push('/')
