@@ -49,6 +49,7 @@ export const authSlice = createSlice({
         logOut: (state) => {
             window.localStorage.clear()
             state.authData = initialState.authData;
+            resetAuthSlice()
         }
     }
 })

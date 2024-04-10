@@ -3,14 +3,27 @@ import React from 'react';
 import CustomerDashboardLayout from './__components/__common/CustomerDashboardLayout';
 import useDeviceType from './__hooks/useDeviceType';
 import { ChildrenProps } from './__components/__utils/types';
+import { useAppSelector } from '../store/reduxHooks';
+import Loader from '../components/Loader';
 
 const RootLayout: React.FC<ChildrenProps> = ({ children }) => {
   useDeviceType();
+  const authLoading = useAppSelector(state => state.auth.authLoading)
 
   return (
-    <div>
-      <CustomerDashboardLayout>{children}</CustomerDashboardLayout>
-    </div>
+    <>
+    {
+      authLoading ? (
+        <div className=' h-screen flex justify-center items-center'>
+          <Loader/>
+        </div>
+      ) : (
+        <div>
+          <CustomerDashboardLayout>{children}</CustomerDashboardLayout>
+        </div>
+      )
+    }
+    </>
   );
 };
 

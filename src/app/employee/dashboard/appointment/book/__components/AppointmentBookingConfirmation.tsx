@@ -88,7 +88,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
 
 
     return (
-        loading ? <Loader /> : <div>
+        loading ? <Loader /> : <div className='bg-white p-4'>
             <div >
                 <Title level={5}>Customer Details</Title>
                 <div className='grid grid-cols-2 gap-2'>

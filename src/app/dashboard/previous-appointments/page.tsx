@@ -21,9 +21,14 @@ const Page: React.FC = () => {
     }, [appointmentLoading]);
 
     useEffect(() => {
+        // console.log(appointmentData)
         const allAppointmentsData : AppointmentData[] = fetchAppointments(appointmentData)
         setScheduledAppointmentData(allAppointmentsData)
     }, [appointmentData]);
+
+    // useEffect(() => {
+    //     console.log(scheduledAppointmentData)
+    // }, [scheduledAppointmentData])
 
     const handleShowAppointmentDetails = (appointmentId: string) => {
         router.push('/dashboard/appointment/'+appointmentId)

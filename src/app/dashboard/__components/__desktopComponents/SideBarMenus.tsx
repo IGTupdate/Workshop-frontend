@@ -1,5 +1,5 @@
 'use client'
-import { getActiveSideBarMenu, getSideBarMenuItems, sideBarMenuItems } from '@/app/employee/dashboard/utils/CustomerSideBarMenuItems';
+import { sideBarMenuItems } from '@/app/dashboard/__components/__desktopComponents/CustomerSideBarMenuItems';
 import { DesktopOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { usePathname, useRouter } from 'next/navigation';
@@ -7,6 +7,7 @@ import { CgProfile } from "react-icons/cg";
 import { RxDashboard } from "react-icons/rx";
 import { GrBook } from "react-icons/gr";
 import { IoSettingsOutline } from "react-icons/io5";
+import { getActiveSideBarMenu, getSideBarMenuItems } from '@/app/employee/dashboard/utils/sideBarMenuItems';
 
 const dashBoardIcons = {
     Dashboard: <RxDashboard />,
@@ -14,12 +15,6 @@ const dashBoardIcons = {
     Profile: <CgProfile/>,
     PreviousBookings: <GrBook/>,
     Settings: <IoSettingsOutline/>
-}
-
-type Props = {
-    // collapsed: boolean;
-    // setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
-    // isSmallDevice: boolean
 }
 
 const SideBarMenus = () => {

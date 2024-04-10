@@ -4,7 +4,7 @@ import { Action, ThunkAction } from "@reduxjs/toolkit";
 import { apiConnector } from "../../apiConnector";
 import { appointmentEndpoints } from "../../apis";
 import toast from "react-hot-toast";
-import { AppointmentData } from "@/app/dashboard/appointment/__utils/FetchAppointments";
+import { AppointmentData, sortDataByCreatedAt } from "@/app/dashboard/appointment/__utils/FetchAppointments";
 
 
 
@@ -93,8 +93,7 @@ export const getAllCustomerAppointment = (): ThunkAction<void, RootState, unknow
             method: "GET",
             url: GET_ALL_CUSTOMER_APPOINTMENT + "/" + _id
         });
-
-        dispatch(setAppointmentData(response.data.data));
+        dispatch(setAppointmentData(sortDataByCreatedAt(response.data.data)));
         return response.data.data;
     } catch (err) {
         return null;

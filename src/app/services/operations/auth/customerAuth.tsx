@@ -1,4 +1,4 @@
-import { logOut, setAuthData } from "@/app/store/slices/authSlice";
+import { logOut, setAuthData, setAuthLoading } from "@/app/store/slices/authSlice";
 import { AppDispatch, RootState } from "@/app/store/store";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
@@ -108,11 +108,12 @@ export async function generateAccessToken() {
   try {
     await apiOpenConnector({ method: "GET", url: GENERATE_ACCESS_TOKEN_API });
   } catch (err) {
+    
     throw err;
   }
 }
 
-export const updateCustomer = (data: any): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
+export const updateCustomer = (data: any, setLoading: React.Dispatch<React.SetStateAction<boolean>>): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
   try {
     const authData = getState().auth.authData;
     const response = await apiConnector({ method: "POST", url: CUSTOMER_UPDATE_API + "/" + authData._id, bodyData: data });
@@ -122,7 +123,9 @@ export const updateCustomer = (data: any): ThunkAction<void, RootState, unknown,
       newAuthData.fullName = fullName
       newAuthData.email = email
       dispatch(setAuthData(newAuthData))
+      window.localStorage.setItem('authData', JSON.stringify(newAuthData))
       toast.success("User Updated Successfully")
+      setLoading(false)
     }
   } catch (err) {
     // console.log(err);
@@ -133,7 +136,7 @@ export const updateCustomer = (data: any): ThunkAction<void, RootState, unknown,
 
 export const logout = (): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
   try {
-    console.log("LOGOUT")
+    dispatch(setAuthLoading(true))
     const response = await apiOpenConnector({ method: "GET", url: LOGOUT_API });
     if (response.data.success) {
       dispatch(logOut())

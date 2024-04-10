@@ -4,7 +4,6 @@ import { useAppSelector } from "@/app/store/reduxHooks";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Layout, Space } from "antd";
 import SideBarMenus from "./SideBarMenus";
-import { useEffect, useState } from "react";
 
 const { Sider } = Layout;
 
