@@ -1,6 +1,6 @@
 'use client'
 import CustomModel from '@/app/components/Model/CustomModel';
-import { Select } from 'antd';
+import { Button, Select } from 'antd';
 import { useState } from 'react';
 
 const { Option } = Select;
@@ -10,7 +10,7 @@ const Page = () => {
   const [visible, setVisible] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('');
 
-  const handleLanguageChange = (value) => {
+  const handleLanguageChange = (value : string) => {
     setSelectedLanguage(value);
     setVisible(true);
   };
@@ -37,10 +37,10 @@ const Page = () => {
       <CustomModel
         title="Change Language"
         open={visible}
-        onOk={handleOk}
         onCancel={handleCancel}
-        okText="Change"
-        cancelText="Cancel"
+        footer={[
+          <Button key="changeLanguage" onClick={() => handleOk()}>Change Language</Button>,
+        ]}
       >
         <p>Are you sure you want to change the language to {selectedLanguage.toUpperCase()}?</p>
       </CustomModel>
