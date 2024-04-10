@@ -28,17 +28,17 @@ const BookAppointmentContainer = (props: Props) => {
     });
 
 
-    useEffect(() => {
-        console.log(authData);
-        if (authData._id) {
-            setAppointmentBookingData((prv) => {
-                return {
-                    ...prv,
-                    customer_id: authData._id || ""
-                }
-            })
-        }
-    }, [authData])
+    // useEffect(() => {
+    //     console.log(authData);
+    //     if (authData._id) {
+    //         setAppointmentBookingData((prv) => {
+    //             return {
+    //                 ...prv,
+    //                 customer_id: authData._id || ""
+    //             }
+    //         })
+    //     }
+    // }, [authData])
 
     useEffect(() => {
         console.log(searchParams.toString());
@@ -53,9 +53,19 @@ const BookAppointmentContainer = (props: Props) => {
                 }
             })
         }
+        else {
+            setAppointmentBookingData((prv) => {
+                return {
+                    ...prv,
+                    slot_id: "",
+                    calender_id: "",
+                }
+            })
+        }
     }, [searchParams])
 
     useEffect(() => {
+
         if (appointmentBookingData.calender_id &&
             appointmentBookingData.slot_id &&
             appointmentBookingData.customer_id &&
@@ -93,7 +103,7 @@ const BookAppointmentContainer = (props: Props) => {
             }
             {
                 currentStep === 2 && <VehicleDetailContainer
-                appointmentBookingData={appointmentBookingData}
+                    appointmentBookingData={appointmentBookingData}
                     setAppointmentBookingData={setAppointmentBookingData}
                     setCurrentStep={setCurrentStep}
                 />

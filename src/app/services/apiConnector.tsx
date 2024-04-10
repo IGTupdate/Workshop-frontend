@@ -19,12 +19,14 @@ axiosInstance.interceptors.request.use(
     if (!accessToken) {
       // If no access token is available, generate a new one
       await generateAccessToken();
+      accessToken = get_client_cookie("accessToken");
     } else {
       const currentTime = new Date().getTime();
       const decode = jwtDecode(accessToken);
       if (decode.exp && ((decode.exp * 1000) + (60 * 1000) < currentTime)) {
         // If expired, generate a new access token
         await generateAccessToken();
+        accessToken = get_client_cookie("accessToken");
       }
     }
 

@@ -7,8 +7,8 @@ import React, { useEffect, useState } from 'react';
 import CustomerSendOtp from './CustomerSendOtp';
 import CustomerVerifyOtp from './CustomerVerifyOtp';
 import { TCustomer } from '@/app/types/customer';
-import { setAppointmentData } from '@/app/store/slices/customerAppointmentSlice';
 import CustomerInfo from './CustomerInfo';
+import { usePathname, useRouter } from 'next/navigation';
 
 const { Title } = Typography;
 
@@ -22,9 +22,12 @@ const CustomerDetailContainer = (props: Props) => {
     const [customer, setCustomer] = useState<TCustomer>({
         contactNumber: "",
         email: "",
-        name: "",
+        fullName: "",
         _id: ""
     })
+
+    const router = useRouter();
+    const pathname = usePathname();
 
     useEffect(() => {
         if (authStep === 3) {
@@ -35,9 +38,13 @@ const CustomerDetailContainer = (props: Props) => {
                 }
             })
         }
+        console.log("customer", setCustomer)
     }, [authStep])
 
 
+    const handleBack = ()=>{
+        router.push("/employee/dashboard/appointment/book")
+    }
 
     return (
         <div>
@@ -66,7 +73,7 @@ const CustomerDetailContainer = (props: Props) => {
                             authStep === 2 && <CustomerInfo
                                 setAuthStep={setAuthStep}
                                 setCustomer={setCustomer}
-                                customer = {customer}
+                                customer={customer}
                             />
                         }
                     </div>
@@ -74,9 +81,9 @@ const CustomerDetailContainer = (props: Props) => {
             </div>
 
 
-            {/* <Button onClick={() => {
-                props.setCurrentStep(2);
-            }}>Proceed for now as demo customer</Button> */}
+            <Button onClick={handleBack} className='mt-5'>
+                Back
+            </Button>
         </div>
     )
 }

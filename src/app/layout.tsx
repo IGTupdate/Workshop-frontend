@@ -3,6 +3,7 @@ import { Kanit } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
 import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { ConfigProvider } from "antd";
 
 
 const kanit = Kanit({
@@ -27,11 +28,33 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={kanit.className}>
-        <AntdRegistry>
-          <StoreProvider>
-            {children}
-          </StoreProvider>
-        </AntdRegistry>
+        <ConfigProvider theme={{
+          // "token": {
+          //   "colorPrimary": "#ffe200",
+          //   "colorInfo": "#ffe200",
+          //   "colorTextBase": "#2e3033",
+          //   "colorBgBase": "#ffffff",
+          //   "borderRadius": 7
+          // },
+          // "components": {
+          //   "Button": {
+          //     "defaultActiveBg": "rgb(255, 226, 0)",
+          //     "defaultActiveBorderColor": "rgb(255, 226, 0)",
+          //     "defaultBorderColor": "rgb(255, 226, 0)",
+          //     "defaultColor": "rgb(255, 226, 0)",
+          //     "defaultHoverBg": "rgb(255, 255, 255)"
+          //   },
+          //   "Typography": {
+          //     "colorText": "rgb(46, 48, 51)"
+          //   },
+          // }
+        }}>
+          <AntdRegistry>
+            <StoreProvider>
+              {children}
+            </StoreProvider>
+          </AntdRegistry>
+        </ConfigProvider>
       </body>
     </html>
   );

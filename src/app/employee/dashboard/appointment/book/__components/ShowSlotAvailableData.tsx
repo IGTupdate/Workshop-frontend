@@ -5,7 +5,7 @@ import { TASlot, TAvailbleSlots } from '@/app/types/slot'
 import { TSlotDetail } from '@/app/types/slot-schedule'
 import { Button, Space, Table, TableProps, Tag, Typography } from 'antd'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 const { Title, Text } = Typography
 
 type Props = {
@@ -15,6 +15,17 @@ type Props = {
 const ShowSlotAvailableData = (props: Props) => {
     const router = useRouter();
 
+    const [talbeRows, setTableRows] = useState<any>([])
+    useEffect(() => {
+        setTableRows(() => {
+            return props.availableSlot?.available_slots.map((el, index) => {
+                return {
+                    ...el,
+                    key: index
+                }
+            })
+        })
+    }, [])
     const columns: TableProps<TASlot>['columns'] = [
         {
             title: 'Start Time',
@@ -62,7 +73,7 @@ const ShowSlotAvailableData = (props: Props) => {
         props.availableSlot ?
             <div>
                 <Text strong>Date : {new Date(props.availableSlot.date).toDateString()}</Text>
-                <Table pagination={false} className='mt-4' columns={columns} dataSource={props.availableSlot.available_slots} />
+                <Table pagination={false} className='mt-4' columns={columns} dataSource={talbeRows} />
             </div> : ""
     )
 }

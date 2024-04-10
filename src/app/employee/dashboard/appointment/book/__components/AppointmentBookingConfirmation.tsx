@@ -44,14 +44,15 @@ const AppointmentBookingConfirmation = (props: Props) => {
         setLoading(true);
         // console.log(props.appointmentBookingData);
 
-        if( props.appointmentBookingData.calender_id &&
+        if (props.appointmentBookingData.calender_id &&
             props.appointmentBookingData.slot_id &&
             props.appointmentBookingData.customer_id &&
-            props.appointmentBookingData.vehicle_id){
+            props.appointmentBookingData.vehicle_id) {
             (async function () {
                 try {
                     const responseData = await getAppointMentBookInitData(props.appointmentBookingData) as TappointmentBookingConfirmationData;
                     // console.log(responseData);
+                    console.log(responseData);
                     setAppointmentBookingConfirmationData(responseData)
                     setLoading(false);
                 } catch (err) {

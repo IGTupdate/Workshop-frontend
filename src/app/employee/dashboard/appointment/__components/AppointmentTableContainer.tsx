@@ -23,10 +23,11 @@ const AppointmentTableContainer = (props: Props) => {
           getSlotTiming(appointment.calender_id, appointment.slot_id as string)?.start_time || ""
           : "";
         return {
+          key: appointment._id,
           _id: appointment._id,
           customer: {
-            phone: appointment.customer_id,
-            name: appointment.customer_id,
+            name: (typeof appointment.customer_id !== "string" ? appointment.customer_id && appointment.customer_id.fullName : "-"),
+            phone: (typeof appointment.customer_id !== "string" ? appointment.customer_id && appointment.customer_id.contactNumber : "-"),
           },
           registeration_number: (typeof appointment.vehicle_id !== "string" ? appointment.vehicle_id.registeration_number : ""),
           date_time: new Date(slotTime),

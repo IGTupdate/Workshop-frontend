@@ -35,7 +35,7 @@ const Register = (props: Props) => {
             // await registerCustomer(data.fullName, data.email, dispatch)'
             const response = await apiOpenConnector({
                 method: "POST",
-                url: AUTH_API,
+                url: AUTH_API + "?employee=true",
                 bodyData: {
                     fullName: data.fullName,
                     email: data.email
