@@ -1,4 +1,3 @@
-"use client"
 import LeftSection from "../components/Auth/LeftSection";
 import RightSection from "./__components/RightSection";
 

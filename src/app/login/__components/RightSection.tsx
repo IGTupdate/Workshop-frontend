@@ -17,7 +17,7 @@ const RightSection = (props: Props) => {
     return (
         <div className='relative md:z-[0] z-[10] w-full h-full md:p-10 xl:pl-20 py-16 px-6 flex items-center justify-center xl:justify-start bg-white1 rounded-t-[50px]'>
             {
-                loading ? <Loader /> : <div className='w-full sm:max-w-[320px]'>
+                loading ? <div className=' h-screen flex justify-center items-center'><Loader /></div> : <div className='w-full sm:max-w-[320px]'>
                     {
                         step === 0 && <SendOTP />
                     }

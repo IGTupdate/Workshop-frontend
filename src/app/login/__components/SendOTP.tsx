@@ -41,10 +41,11 @@ const SendOTP = (props: Tprops) => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
-        const reg = /^[0-9]*$/;
+        const reg = /^[0-9]*$/; // Regex to match only digits
 
         if (!reg.test(inputValue)) {
             setContactNumberError('Contact Number must be digits');
+            return
         } else if (inputValue.length !== 10) {
             setContactNumberError('Contact Number must have 10 digits');
         } else {

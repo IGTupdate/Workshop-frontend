@@ -6,6 +6,8 @@ import FormComponent from '../../__components/__common/FormComponent';
 import { Button } from 'antd';
 import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import { updateCustomer } from '@/app/services/operations/auth/customerAuth';
+import toast from 'react-hot-toast';
+import { useState } from 'react';
 
 interface FormValues {
   fullName: string;
@@ -16,6 +18,7 @@ interface FormValues {
 const ProfileForm = () => {
   const authData = useAppSelector((state) => state.auth.authData);
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(false)
 
   // Define default values for the form fields
   const defaultValues: FormValues = {
@@ -31,8 +34,6 @@ const ProfileForm = () => {
     email: Yup.string().email('Invalid email format').required('Email is required'),
   });
 
-  // const resolver: Resolver<FormValues> = yupResolver(profileSchema);
-
   // Initialize react-hook-form useForm hook with Yup resolver and default values
   const { control, handleSubmit, formState: { errors } } = useForm<FormValues>({
     resolver:yupResolver(profileSchema),
@@ -42,14 +43,19 @@ const ProfileForm = () => {
   // Handle form submission
   const onSubmit = async (data: FormValues) => {
     if (Object.keys(data).length === 0) return;
+    setLoading(true)
     let newData: Partial<FormValues> = {};
 
     if (authData.fullName !== data.fullName) newData.fullName = data.fullName;
     if (authData.email !== data.email) newData.email = data.email;
 
-    if (Object.keys(newData).length === 0) return;
+    if (Object.keys(newData).length === 0) {
+      toast.error('No Changes Found')
+      setLoading(false)
+      return
+    };
 
-    dispatch(updateCustomer(newData));
+    dispatch(updateCustomer(newData, setLoading));
   };
 
   return (
@@ -68,7 +74,7 @@ const ProfileForm = () => {
           errors={errors}
         />
       ))}
-      <Button htmlType='submit' className='custom-button mt-2'>Submit</Button>
+      <Button htmlType='submit' disabled={loading} loading={loading} className='custom-button mt-2'>Submit</Button>
     </form>
   );
 };

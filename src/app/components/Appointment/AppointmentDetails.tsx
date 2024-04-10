@@ -7,7 +7,7 @@ interface Props {
 
 const AppointmentDetails: React.FC<Props> = ({ appointmentData }) => {
     return (
-        <div>
+        <div className=' bg-white p-4'>
             <Typography.Title level={2}>Appointment Details</Typography.Title>
             <Descriptions bordered column={2}>
                 <Descriptions.Item label="Appointment ID">{appointmentData._id}</Descriptions.Item>

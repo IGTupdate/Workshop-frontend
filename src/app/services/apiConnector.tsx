@@ -1,10 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { jwtDecode } from "jwt-decode";
 import { generateAccessToken } from "./operations/auth/customerAuth";
-// import { get_server_cookie } from "../utils/get_server_cookie";
 import { get_client_cookie } from "../utils/get_client_cookie";
-
-
+import { redirect } from "next/navigation";
 
 const axiosInstance = axios.create({
   withCredentials: true,
@@ -28,7 +26,12 @@ axiosInstance.interceptors.request.use(
       }
     }
 
-    if (!accessToken) throw Error
+    accessToken = get_client_cookie("accessToken");
+    
+    if (!accessToken) {
+      redirect('/')
+      throw Error
+    }
 
     // Set the authorization header with the new access token
     config.headers.Authorization = `Bearer ${accessToken}`;
