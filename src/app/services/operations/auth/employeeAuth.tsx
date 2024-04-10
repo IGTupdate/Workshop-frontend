@@ -7,24 +7,24 @@ import { setAuthData } from "@/app/store/slices/authSlice";
 
 const { EMPLOYEE_LOGIN_API, GET_EMPLOYEE_DATA_API } = authEndpoints;
 
-export async function getEmployeeData(_id : string, dispatch : AppDispatch) {
-  try{
+export async function getEmployeeData(_id: string, dispatch: AppDispatch) {
+  try {
     const result = await apiConnector({
       method: "GET",
-      url: GET_EMPLOYEE_DATA_API+"/"+_id,
+      url: GET_EMPLOYEE_DATA_API + "/" + _id,
     })
 
-    if(result.data.success){
-      const {_id, fullName, contactNumber, email } = result.data.data  
+    if (result.data.success) {
+      const { _id, fullName, contactNumber, email } = result.data.data
       window.localStorage.setItem("authData", result?.data?.data);
-      dispatch(setAuthData({_id,fullName,contactNumber,email}))
+      dispatch(setAuthData({ _id, fullName, contactNumber, email }))
     }
-  }catch(err){
+  } catch (err) {
     throw err
   }
 }
 
-export async function employeeLogin(email: string, password: string, dispatch : AppDispatch) {
+export async function employeeLogin(email: string, password: string, dispatch: AppDispatch) {
   try {
     const authResult = await apiOpenConnector({
       method: "POST",
