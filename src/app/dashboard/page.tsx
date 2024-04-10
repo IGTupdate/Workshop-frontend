@@ -1,16 +1,15 @@
-'use client'
-import React from 'react'
-import { useAppSelector } from '../store/reduxHooks'
+import React from 'react';
+import { useAppSelector } from '../store/reduxHooks';
 
-type Props = {}
+type Props = {};
 
-const page = (props: Props) => {
-  const isSmallDevice = useAppSelector((state) => state.device.isSmallDevice)
+const Page = (props: Props) => {
+  const isSmallDevice = useAppSelector((state) => state.device.isSmallDevice);
   return (
     <div>
       {isSmallDevice ? <p>Hello</p> : <p>Bye</p>}
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Page;

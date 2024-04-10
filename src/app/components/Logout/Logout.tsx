@@ -2,13 +2,20 @@ import React, { useState } from 'react';
 import { Button } from 'antd';
 import { FiLogOut } from "react-icons/fi";
 import CustomModal from '../Model/CustomModel'; 
+import { useAppDispatch } from '@/app/store/reduxHooks';
+import { logout } from '@/app/services/operations/auth/customerAuth';
+import { useRouter } from 'next/navigation';
 
 const Logout: React.FC = () => {
     const [visible, setVisible] = useState(false);
+    const dispatch = useAppDispatch()
+    const router = useRouter()
 
     const handleLogout = async () => {
         try {
-            console.log("LOGOUT");
+            dispatch(logout())
+            setVisible(false)
+            router.push('/')
         } catch(err) {
             console.error(err);
         }
@@ -16,11 +23,6 @@ const Logout: React.FC = () => {
 
     const showModal = () => {
         setVisible(true);
-    };
-
-    const handleOk = () => {
-        handleLogout();
-        setVisible(false);
     };
 
     const handleCancel = () => {
@@ -42,9 +44,11 @@ const Logout: React.FC = () => {
             <CustomModal
                 title="Confirm Logout"
                 open={visible}
-                onOk={handleOk}
                 onCancel={handleCancel}
-                okButtonProps={{ className: "bg-customGray hover:bg-opacity-80 text-white font-semibold" }}
+                footer={[
+                    <Button key="cancel" onClick={() => handleCancel()}>Cancel</Button>,
+                    <Button key="logout" onClick={() => handleLogout()}>Logout</Button>,
+                ]}
             >
                 <p>Are you sure you want to log out?</p>
             </CustomModal>

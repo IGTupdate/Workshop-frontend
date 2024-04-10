@@ -135,7 +135,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
 
             <div className='mt-6 flex gap-4'>
                 <Button onClick={handleBack} >Back </Button>
-                <Button onClick={handleBookAppointment} className="bg-blue1 text-white">Book </Button>
+                <Button onClick={handleBookAppointment} className="bg-blue1 text-white">Book</Button>
             </div>
 
         </div>

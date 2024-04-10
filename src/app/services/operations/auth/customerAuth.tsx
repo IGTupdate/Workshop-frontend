@@ -1,4 +1,4 @@
-import { setAuthData } from "@/app/store/slices/authSlice";
+import { logOut, setAuthData } from "@/app/store/slices/authSlice";
 import { AppDispatch, RootState } from "@/app/store/store";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
@@ -134,9 +134,10 @@ export const updateCustomer = (data: any): ThunkAction<void, RootState, unknown,
 
 export const logout = (): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
   try {
-    const response = await apiConnector({ method: "GET", url: LOGOUT_API });
+    console.log("LOGOUT")
+    const response = await apiOpenConnector({ method: "GET", url: LOGOUT_API });
     if (response.data.success) {
-      dispatch(logout())
+      dispatch(logOut())
     }
   } catch (err) {
     console.log(err);

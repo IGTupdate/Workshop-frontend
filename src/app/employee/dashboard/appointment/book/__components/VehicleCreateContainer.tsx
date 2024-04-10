@@ -11,17 +11,21 @@ import InputField from '@/app/components/Input/InputField';
 import toast from 'react-hot-toast';
 import { COMMON_ERROR } from '@/app/utils/constant';
 import { createVehicle } from '@/app/services/operations/appointment/vehicle';
+import { useAppDispatch } from '@/app/store/reduxHooks';
+import { setVehicleLoading } from '@/app/store/slices/customerVehicleSlice';
 
 const { Text } = Typography
 
 type Props = {
     setVehicleId: React.Dispatch<React.SetStateAction<string>>
     customer_id?: string
+    customer? : boolean
 }
 
 const VehicleCreateContainer = (props: Props) => {
 
     const [loading, setLoading] = useState(false);
+    const dispatch = useAppDispatch()
 
     const { control, handleSubmit, formState: { errors }, setValue } = useForm({
         defaultValues: {},
@@ -29,21 +33,22 @@ const VehicleCreateContainer = (props: Props) => {
     });
 
     const onSubmit = async (data: TvehicleCreateSchema) => {
-        console.log(data);
+        // console.log(data);
         if (props.customer_id) {
             data.customer_id = props.customer_id;
         }
         setLoading(true);
         try {
             const response = await createVehicle(data) as TVehicle;
-            console.log(response);
+            // console.log(response);
             props.setVehicleId(response._id);
         } catch (err: any) {
-            console.log(err);
+            // console.log(err);
             toast.error(err?.response?.data?.message || COMMON_ERROR)
         }
         finally {
             setLoading(false);
+            if(props?.customer) dispatch(setVehicleLoading(true))
         }
     }
 

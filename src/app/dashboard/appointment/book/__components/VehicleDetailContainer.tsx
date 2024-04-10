@@ -21,6 +21,8 @@ const VehicleDetailContainer = (props: Props) => {
     const router = useRouter();
     const pathname = usePathname()
     const { vehicleLoading, vehicleData } = useAppSelector((state) => state.customerVehicle)
+    const customerId = useAppSelector((state) => state.auth.authData._id)
+
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -59,7 +61,7 @@ const VehicleDetailContainer = (props: Props) => {
     
                 {
                     vehicleId === NEW_VEHICLE.value ?
-                        <VehicleCreateContainer setVehicleId={setVehicleId} /> : (
+                        <VehicleCreateContainer setVehicleId={setVehicleId} customer_id={customerId} customer={true}/> : (
                             <div className=' flex flex-col gap-8'>
                                 {
                                     vehicleData.map(ele => (
