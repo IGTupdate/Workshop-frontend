@@ -29,13 +29,13 @@ const VehicleDetailContainer = (props: Props) => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        if(vehicleLoading){
+        if (vehicleLoading) {
             dispatch(getVehicleByCustomerId())
         }
     }, [vehicleLoading]);
 
     useEffect(() => {
-        if(vehicleId !== NEW_VEHICLE.value){
+        if (vehicleId !== NEW_VEHICLE.value) {
             props.setAppointmentBookingData((prv) => {
                 return {
                     ...prv,
@@ -45,11 +45,11 @@ const VehicleDetailContainer = (props: Props) => {
         }
     }, [vehicleId])
 
-    const handleAddNewVehicle= () => {
+    const handleAddNewVehicle = () => {
         setVehicleId(NEW_VEHICLE.value)
     }
 
-    const handleBack= () => {
+    const handleBack = () => {
         router.push(pathname)
     }
 
@@ -74,38 +74,44 @@ const VehicleDetailContainer = (props: Props) => {
 
     return (
         <>
-        {
-            vehicleLoading ? <div>Loading</div> : (
-            <div>
-                <div className='mb-5'>
-                    <Title level={5}>Fill Vehicle Details</Title>
-                </div>
-    
-                {
-                    vehicleId === NEW_VEHICLE.value ?
-                        <VehicleCreateContainer setVehicleId={setVehicleId} customer_id={customerId} customer={true}/> : (
-                            <>
-                            {
-                                updateVehicleId ? (<VehicleUpdateContainer updateVehicleId={updateVehicleId} setUpdateVehicleId={setUpdateVehicleId} updateVehicleValues={vehicleData.find(vehicle => vehicle._id === updateVehicleId)}/>) : (
-                                    <div className=' flex flex-col gap-8'>
+            {
+                vehicleLoading ? <div>Loading</div> : (
+                    <div>
+                        <div className='mb-5'>
+                            <Title level={5}>Fill Vehicle Details</Title>
+                        </div>
+
+                        {
+                            vehicleId === NEW_VEHICLE.value ?
+                                <VehicleCreateContainer setVehicleId={setVehicleId} customer_id={customerId} customer={true} /> : (
+                                    <>
                                         {
-                                            vehicleData.map(ele => (
-                                                <VehicleDetails vehicleDetails={ele} key={ele._id} setVehicleId={setVehicleId} setUpdateVehicleId={setUpdateVehicleId} onDeleteVehicle={onDeleteVehicle}/>
-                                            ))
+                                            updateVehicleId ? (<VehicleUpdateContainer
+                                                updateVehicleId={updateVehicleId}
+                                                setUpdateVehicleId={setUpdateVehicleId}
+                                                updateVehicleValues={(vehicleData.find(vehicle => vehicle._id === updateVehicleId)) || {
+                                                    registeration_number: "",
+                                                    vin: "",
+                                                }} />) : (
+                                                <div className=' flex flex-col gap-8'>
+                                                    {
+                                                        vehicleData.map(ele => (
+                                                            <VehicleDetails vehicleDetails={ele} key={ele._id} setVehicleId={setVehicleId} setUpdateVehicleId={setUpdateVehicleId} onDeleteVehicle={onDeleteVehicle} />
+                                                        ))
+                                                    }
+                                                    <div className=' flex gap-4'>
+                                                        <Button onClick={() => handleAddNewVehicle()} className=' bg-customGray w-fit text-white'>Add New Vehicle</Button>
+                                                        <Button onClick={() => handleBack()} >Back</Button>
+                                                    </div>
+                                                </div>
+                                            )
                                         }
-                                            <div className=' flex gap-4'>
-                                                <Button onClick={() => handleAddNewVehicle()} className=' bg-customGray w-fit text-white'>Add New Vehicle</Button>
-                                                <Button onClick={() => handleBack()} >Back</Button>
-                                            </div>
-                                    </div>
+                                    </>
                                 )
-                            }
-                            </>
-                        )
-                }
-            </div>
-            )
-        }
+                        }
+                    </div>
+                )
+            }
         </>
     )
 }
