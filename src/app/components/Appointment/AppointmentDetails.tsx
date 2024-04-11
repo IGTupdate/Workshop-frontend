@@ -1,3 +1,4 @@
+import { TAppointment } from '@/app/types/appointment';
 import { Descriptions, Tag, Typography } from 'antd';
 import React from 'react';
 

@@ -28,7 +28,7 @@ const SlotScheduleContainer = (props: Props) => {
         if (slotScheduleLoading) {
             dispatch(getAllSlotSchedule());
         }
-    }, [slotScheduleLoading]);
+    }, [slotScheduleLoading, dispatch]);
 
     const handleSlotScheduleDrawer = (newDrawerData: TActiveSlotSchedule) => {
         dispatch(setActiveSlotSchedule(newDrawerData));

@@ -5,6 +5,7 @@ import { apiConnector } from "../../apiConnector";
 import { appointmentEndpoints } from "../../apis";
 import toast from "react-hot-toast";
 import { AppointmentData } from "@/app/dashboard/appointment/__utils/FetchAppointments";
+import { TAppointment } from "@/app/types/appointment";
 
 
 
@@ -25,7 +26,7 @@ export const getAppointmentByCalenderId = async (calenderId: string, query:strin
     }
 }
 
-export const getAppointmentByAppointmentId = async (appointmentId: string): Promise<AppointmentData> => {
+export const getAppointmentByAppointmentId = async (appointmentId: string): Promise<TAppointment> => {
     try {
         const response = await apiConnector({
             method: "GET",

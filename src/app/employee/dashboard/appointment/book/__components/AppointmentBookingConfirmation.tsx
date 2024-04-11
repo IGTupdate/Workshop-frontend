@@ -83,7 +83,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
 
     const handleBookAppointment = async () => {
         try {
-
+            setLoading(true);
             const response = await bookAppointment(props.appointmentBookingData);
             // console.log(response);
             toast.success(response?.message);
@@ -92,18 +92,10 @@ const AppointmentBookingConfirmation = (props: Props) => {
 
         } catch (err: any) {
             toast.error(err?.response?.data?.message || COMMON_ERROR)
+        } finally {
+            setLoading(false);
         }
     }
-
-
-    const createQueryString = useCallback(
-        (name: string, value?: string) => {
-            if (!value || value === "")
-                return removeQueryParams(searchParams.toString(), name);
-            else return setQueryParams(searchParams.toString(), name, value);
-        },
-        [searchParams]
-    );
 
     const changeSlotDetails = () => {
         let queryParams = removeQueryParams(searchParams.toString(), "slot_id");
@@ -112,11 +104,27 @@ const AppointmentBookingConfirmation = (props: Props) => {
         router.push(`${pathname}?${queryParams}`);
     }
 
+    const changeAppointmentBookingData = (name: string, value: string) => {
+        props.setAppointmentBookingData((prv) => {
+            return {
+                ...prv,
+                [name]: value
+            }
+        })
+    }
+
 
     return (
         loading ? <Loader /> : <div className='bg-white p-4'>
             <div >
-                <Title level={5}>Customer Details</Title>
+                <div className='grid grid-cols-2'>
+                    <Title level={5}>Customer Details</Title>
+                    <div className='flex justify-end'>
+                        <Button type='link' onClick={() => {
+                            changeAppointmentBookingData("customer_id", "");
+                        }}>Change</Button>
+                    </div>
+                </div>
                 <div className='grid grid-cols-2 gap-2'>
                     <DescriptionItem title='Name'
                         content={appointmentBookingConfirmationData.customer?.name || "-"} />
@@ -129,7 +137,15 @@ const AppointmentBookingConfirmation = (props: Props) => {
             </div>
             <Divider />
             <div>
-                <Title level={5}>Vehicle Details</Title>
+
+                <div className='grid grid-cols-2'>
+                    <Title level={5}>Vehicle Details</Title>
+                    <div className='flex justify-end'>
+                        <Button type='link' onClick={() => {
+                            changeAppointmentBookingData("vehicle_id", "");
+                        }}>Change</Button>
+                    </div>
+                </div>
                 <div className='grid grid-cols-2 gap-2'>
                     <DescriptionItem title='Registeration Number'
                         content={appointmentBookingConfirmationData.vehicle?.registeration_number || "-"} />

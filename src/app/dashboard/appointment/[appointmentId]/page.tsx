@@ -3,6 +3,7 @@ import { getAppointmentByAppointmentId } from '@/app/services/operations/appoint
 import { useEffect, useState } from 'react';
 import { AppointmentData } from '../__utils/FetchAppointments';
 import AppointmentDetails from '../../../components/Appointment/AppointmentDetails';
+import { TAppointment } from '@/app/types/appointment';
 
 interface Props {
   params: {
@@ -11,7 +12,7 @@ interface Props {
 }
 
 const AppointmentPage: React.FC<Props> = ({ params }) => {
-  const [appointmentData, setAppointmentData] = useState<AppointmentData | null>(null);
+  const [appointmentData, setAppointmentData] = useState<TAppointment | null>(null);
 
   const fetchAppointmentData = async () => {
     try {
