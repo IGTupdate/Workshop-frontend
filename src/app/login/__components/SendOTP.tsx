@@ -1,7 +1,7 @@
 import Heading from '@/app/components/Heading';
 import ErrorText from '@/app/components/Text/ErrorText';
 import { sendOTP } from '@/app/services/operations/auth/customerAuth';
-import { useAppDispatch } from '@/app/store/reduxHooks';
+import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import { setAuthData, setAuthLoading, setAuthStep } from '@/app/store/slices/authSlice';
 import { Button, Input } from 'antd';
 import React, { useState } from 'react';
@@ -19,7 +19,8 @@ const SendOTP = (props: Tprops) => {
     } = useForm<FormInputs>()
 
     const dispatch = useAppDispatch()
-    const [contactNumber, setContactNumber] = useState('')
+    const contact = useAppSelector(state => state.auth.authData.contactNumber)
+    const [contactNumber, setContactNumber] = useState(contact)
     const [contactNumberError, setContactNumberError] = useState('')
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
@@ -81,7 +82,7 @@ const SendOTP = (props: Tprops) => {
                     size='large'
                     htmlType='submit'
                     className='bg-blue1 text-white1 font-semibold w-full'>
-                    Send
+                    Send Verification Code
                 </Button>
             </form>
         </div>

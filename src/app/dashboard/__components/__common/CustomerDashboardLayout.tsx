@@ -1,3 +1,5 @@
+"use client"
+
 import { useAppSelector } from '@/app/store/reduxHooks';
 import React from 'react';
 import { ChildrenProps } from '../__utils/types';

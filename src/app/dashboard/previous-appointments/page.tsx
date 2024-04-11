@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import AllAppointments from '../appointment/__common/AllAppointment';
 import { AppointmentData, fetchAppointments } from '../appointment/__utils/FetchAppointments';
 import { useRouter } from 'next/navigation';
+import Loader from '@/app/components/Loader';
 
 const Page: React.FC = () => {
     const [scheduledAppointmentData, setScheduledAppointmentData] = useState<AppointmentData[]>([]);
@@ -15,28 +16,25 @@ const Page: React.FC = () => {
 
     useEffect(() => {
         if(appointmentLoading){
-            // console.log("APPOINTMENT DATA FETCHED")
             dispatch(getAllCustomerAppointment())
         }
     }, [appointmentLoading]);
 
     useEffect(() => {
-        // console.log(appointmentData)
-        const allAppointmentsData : AppointmentData[] = fetchAppointments(appointmentData)
-        setScheduledAppointmentData(allAppointmentsData)
+        if (appointmentData.length > 0) {
+            const allAppointmentsData: AppointmentData[] = fetchAppointments(appointmentData);
+            setScheduledAppointmentData(allAppointmentsData);
+        }
     }, [appointmentData]);
-
-    // useEffect(() => {
-    //     console.log(scheduledAppointmentData)
-    // }, [scheduledAppointmentData])
 
     const handleShowAppointmentDetails = (appointmentId: string) => {
         router.push('/dashboard/appointment/'+appointmentId)
     };
+
     return (
         <>
         {
-            appointmentLoading ? (<h1>Loading</h1>) : (
+            appointmentLoading ? (<Loader/>) : (
                 <div>
                     <h1 className='text-lg font-bold bg-white p-4'>Previous Appointments</h1>
                     <div className=' flex flex-col gap-4 my-4'>

@@ -2,6 +2,7 @@
 import DescriptionItem from '@/app/components/DescriptionItem.tsx'
 import Loader from '@/app/components/Loader';
 import { bookAppointment, getAppointMentBookInitData } from '@/app/services/operations/appointment/appointment';
+import { useAppSelector } from '@/app/store/reduxHooks';
 import { TAppointmentBook } from '@/app/types/appointment'
 import { TSlot } from '@/app/types/calender';
 import { TVehicle } from '@/app/types/vehicle';
@@ -32,6 +33,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
 
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const userRole = useAppSelector(state => state.auth.authData.role)
 
     const [appointmentBookingConfirmationData, setAppointmentBookingConfirmationData] = useState<TappointmentBookingConfirmationData>({
         vehicle: null,
@@ -78,6 +80,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
             const response = await bookAppointment(props.appointmentBookingData);
             // console.log(response);
             toast.success(response?.message);
+            userRole === 'customer' ? router.push(`/dashboard/appointment/${response.data._id}`) :
             router.push(`/employee/dashboard/appointment/${response.data._id}`)
 
         } catch (err: any) {

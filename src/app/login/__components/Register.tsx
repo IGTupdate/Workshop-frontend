@@ -3,7 +3,7 @@ import { registerCustomer } from '@/app/services/operations/auth/customerAuth';
 import { useAppDispatch } from '@/app/store/reduxHooks';
 import { resetAuthSlice, setAuthLoading } from '@/app/store/slices/authSlice';
 import { Button, Input } from 'antd';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -15,13 +15,14 @@ type FormData = {
 const Register: React.FC = () => {
     const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
     const dispatch = useAppDispatch()
+    const router = useRouter()
 
     const onSubmit = async (data: FormData) => {
         dispatch(setAuthLoading(true))
         try {
             await registerCustomer(data.fullName, data.email, dispatch)
-            dispatch(resetAuthSlice())
-            redirect('/dashboard')
+            // dispatch(resetAuthSlice())
+            router.push('/dashboard')
         } catch (err) {
             // console.log(error)
         }

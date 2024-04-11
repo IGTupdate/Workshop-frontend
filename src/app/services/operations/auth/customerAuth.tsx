@@ -25,7 +25,7 @@ export async function getCustomerData(_id: string, dispatch: AppDispatch) {
   }
 }
 
-export async function sendOTP(contactNumber: string) {
+export async function sendOTP(contactNumber: string, resend?: boolean) {
   try {
     // Sending OTP request
     const otpResult = await apiOpenConnector({
@@ -36,7 +36,8 @@ export async function sendOTP(contactNumber: string) {
 
     if (otpResult?.data?.success) {
       // If OTP request is successful, display success message
-      toast.success("OTP SENT SUCCESSFULLY");
+      if(resend) toast.success("OTP RE-SENT SUCCESSFULLY");
+      else toast.success("OTP SENT SUCCESSFULLY");
     }
 
     return otpResult; // Return the OTP request result

@@ -26,7 +26,7 @@ const SideBar = ({ sidebarWidth }: SideBarProps) => {
       <Space className={`w-full p-4`}>
         <Avatar size={"large"} icon={<UserOutlined />} />
         <div>
-          <h2 className="text-white1 font-semibold text-xl">Hello, Guest</h2>
+          <h2 className="text-white1 font-semibold text-xl">Hello, </h2>
           <p className="text-gray1 text-sm font-medium">Customer</p>
         </div>
       </Space>
