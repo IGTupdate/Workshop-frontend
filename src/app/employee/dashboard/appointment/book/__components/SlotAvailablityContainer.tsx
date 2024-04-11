@@ -8,6 +8,7 @@ import { SegmentedOptions } from 'antd/es/segmented';
 import { getFormattedDateForSlotAvailabilityFilter } from '../__utils/helper';
 import Loader from '@/app/components/Loader';
 import ShowSlotAvailableData from './ShowSlotAvailableData';
+import Watermark from '@/app/components/Text/WatermarkText';
 const { Text } = Typography
 
 type Props = {}
@@ -24,6 +25,8 @@ const SlotAvailablityContainer = (props: Props) => {
                 setAvailableSlots(availableSlotsData)
             } catch (err) {
                 console.log(err);
+            } finally {
+                setLoading(false);
             }
         })();
     }, [])
@@ -68,11 +71,13 @@ const SlotAvailablityContainer = (props: Props) => {
 
     return (
         loading ? <Loader /> : <div className='w-full '>
-            <Tabs
-                defaultActiveKey="0"
-                tabPosition={"top"}
-                items={availableSlotsOptions}
-            />
+            {
+                availableSlotsOptions.length > 0 ? <Tabs
+                    defaultActiveKey="0"
+                    tabPosition={"top"}
+                    items={availableSlotsOptions}
+                /> : <Watermark text='No Slots Available' />
+            }
         </div>
     )
 }

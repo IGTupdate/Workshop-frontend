@@ -1,11 +1,14 @@
 "use client"
 
 import React from 'react'
-import { MdOutlineWorkOutline } from "react-icons/md";
+import { SiReacthookform } from "react-icons/si";
 import { RxDashboard } from "react-icons/rx";
 import { IoIosApps } from "react-icons/io";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { MdSchedule } from "react-icons/md";
+import { GoNote } from "react-icons/go";
+import { FaHouseUser } from "react-icons/fa";
+
 import { DesktopOutlined, } from '@ant-design/icons';
 import { usePathname, useRouter } from 'next/navigation';
 import { Menu, MenuProps } from 'antd';
@@ -17,7 +20,8 @@ const dashBoardIcons = {
     Appointment: <DesktopOutlined />,
     SlotManagement: <IoIosApps />,
     Calender: <FaRegCalendarAlt />,
-    SlotSchedule: <MdSchedule />
+    SlotSchedule: <MdSchedule />,
+    WorkOrder: <FaHouseUser />,
 }
 
 type Props = {}

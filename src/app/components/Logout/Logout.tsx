@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
 import { FiLogOut } from "react-icons/fi";
-import CustomModal from '../Model/CustomModel'; 
+import CustomModal from '../Model/CustomModel';
 import { useAppDispatch } from '@/app/store/reduxHooks';
 import { logout } from '@/app/services/operations/auth/customerAuth';
 import { useRouter } from 'next/navigation';
@@ -16,7 +16,7 @@ const Logout: React.FC = () => {
             dispatch(logout())
             setVisible(false)
             router.push('/')
-        } catch(err) {
+        } catch (err) {
             console.error(err);
         }
     };

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, Button, Divider, Layout, Menu, Space } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { FiLogOut } from "react-icons/fi";
@@ -11,6 +11,8 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import SideBarMenus from "./SideBarMenus";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { logout } from "@/app/services/operations/auth/customerAuth";
+import { IAuthData } from "@/app/store/slices/authSlice";
+import Logout from "@/app/components/Logout/Logout";
 
 const { Header, Sider, Content } = Layout;
 
@@ -20,11 +22,24 @@ type Props = {
 };
 const SideBar = (props: Props) => {
 
+  const [user, setUser] = useState<IAuthData>();
+
+
   const { authData } = useAppSelector((state) => state.auth)
 
   const dispatch = useAppDispatch();
+  const router = useRouter();
+
+
+  useEffect(() => {
+    setUser(() => {
+      return authData;
+    })
+  }, [user]);
+
   const handleLogout = () => {
     dispatch(logout());
+    router.push("/employee/login")
   }
   return (
     <Sider
@@ -40,8 +55,8 @@ const SideBar = (props: Props) => {
         <Avatar size={"large"} icon={<UserOutlined />} />
         {!props.collapsed && (
           <div>
-            <h2 className="text-white1 font-semibold text-xl">Hello User</h2>
-            <p className="text-gray1 text-sm font-medium">Advisor</p>
+            <h2 className="text-white1 font-semibold text-xl capitalize">Hello {user?.fullName?.split(" ")[0]}</h2>
+            <p className="text-gray1 text-sm font-medium">{"user?.role" || "-"}</p>
           </div>
         )}
       </Space>
@@ -49,15 +64,7 @@ const SideBar = (props: Props) => {
       <SideBarMenus />
 
       <div className="w-full absolute bottom-0 ">
-        <Button
-          onClick={handleLogout}
-          type="primary"
-          style={{ borderBottomRightRadius: 0, borderBottomLeftRadius: 0 }}
-          className="bg-blue1 text-white1 font-semibold w-full h-10"
-          icon={<FiLogOut />}
-        >
-          LogOut
-        </Button>
+        <Logout />
       </div>
     </Sider>
   );

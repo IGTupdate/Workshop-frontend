@@ -8,10 +8,10 @@ const CustomerDashboardLayout = ({ children }: ChildrenProps) => {
     const isSmallDevice = useAppSelector((state) => state.device.isSmallDevice)
     return (
         <>
-        {
-            isSmallDevice ? (<CustomerMobileDashboardLayout>{children}</CustomerMobileDashboardLayout>)
-            : (<CustomerDesktopDashboardLayout>{children}</CustomerDesktopDashboardLayout>)
-        }
+            {
+                isSmallDevice ? (<CustomerMobileDashboardLayout>{children}</CustomerMobileDashboardLayout>)
+                    : (<CustomerDesktopDashboardLayout>{children}</CustomerDesktopDashboardLayout>)
+            }
         </>
     )
 }
