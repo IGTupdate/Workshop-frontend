@@ -17,7 +17,7 @@ const Logout: React.FC = () => {
             setVisible(false)
             router.push('/')
         } catch (err) {
-            console.error(err);
+            // console.error(err);
         }
     };
 

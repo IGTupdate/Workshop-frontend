@@ -18,10 +18,8 @@ const SideBar = ({ sidebarWidth }: SideBarProps) => {
   const authData = useAppSelector((state) => state.auth.authData);
 
   useEffect(() => {
-    setUser(() => {
-      return authData;
-    })
-  }, [user]);
+    setUser(authData)
+  }, [authData]);
 
   return (
     <Sider

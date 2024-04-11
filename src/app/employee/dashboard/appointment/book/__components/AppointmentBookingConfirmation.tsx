@@ -54,7 +54,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
                 try {
                     const responseData = await getAppointMentBookInitData(props.appointmentBookingData) as TappointmentBookingConfirmationData;
                     // console.log(responseData);
-                    console.log(responseData);
+                    // console.log(responseData);
                     setAppointmentBookingConfirmationData(responseData)
                     setLoading(false);
                 } catch (err) {

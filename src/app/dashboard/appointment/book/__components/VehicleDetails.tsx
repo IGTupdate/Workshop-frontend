@@ -1,15 +1,17 @@
-import { TVehicle } from '@/app/types/vehicle'
-import React from 'react'
-import { Button, Descriptions } from 'antd';
+import { TVehicle } from '@/app/types/vehicle';
 import { formatDateAndTime } from '@/app/utils/dateFormatter';
+import { Button, Descriptions } from 'antd';
+import React from 'react';
 
 type Props = {
     vehicleDetails: TVehicle,
     setVehicleId: React.Dispatch<React.SetStateAction<string>>
+    setUpdateVehicleId: React.Dispatch<React.SetStateAction<string>>
+    onDeleteVehicle: (_id: string) => void
 }
 
 const VehicleDetails = (props: Props) => {
-  const { vehicleDetails, setVehicleId } = props;
+  const { vehicleDetails, setVehicleId, setUpdateVehicleId } = props;
 
   return (
     <Descriptions className=' p-4 pb-0 bg-white'>
@@ -21,6 +23,8 @@ const VehicleDetails = (props: Props) => {
       <Descriptions.Item label="Created At">{formatDateAndTime(vehicleDetails.createdAt)}</Descriptions.Item>
       <Descriptions.Item label="" contentStyle={{ display: 'flex', justifyContent: 'end', gap: '10px'}}>
         <Button onClick={() => setVehicleId(vehicleDetails._id)}>Select Vehicle</Button>
+        <Button onClick={() => setUpdateVehicleId(vehicleDetails._id)}>Update Vehicle</Button>
+        <Button onClick={() => props.onDeleteVehicle(vehicleDetails._id)}>Delete Vehicle</Button>
       </Descriptions.Item>
     </Descriptions>
   )

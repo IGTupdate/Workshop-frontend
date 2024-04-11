@@ -1,13 +1,15 @@
 "use client"
 import VehicleCreateContainer from '@/app/employee/dashboard/appointment/book/__components/VehicleCreateContainer'
 import { NEW_VEHICLE } from '@/app/employee/dashboard/appointment/book/__utils/constant'
+import { deleteVehicle, getVehicleByCustomerId } from '@/app/services/operations/appointment/vehicle'
+import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks'
 import { TAppointmentBook } from '@/app/types/appointment'
 import { Button, Typography } from 'antd'
 import { usePathname, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import VehicleDetails from './VehicleDetails'
-import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks'
-import { getVehicleByCustomerId } from '@/app/services/operations/appointment/vehicle'
+import VehicleUpdateContainer from './VehicleUpdateContainer'
+import { setVehicleLoading } from '@/app/store/slices/customerVehicleSlice'
 
 const { Title } = Typography
 
@@ -18,6 +20,7 @@ type Props = {
 const VehicleDetailContainer = (props: Props) => {
 
     const [vehicleId, setVehicleId] = useState("");
+    const [updateVehicleId, setUpdateVehicleId] = useState("");
     const router = useRouter();
     const pathname = usePathname()
     const { vehicleLoading, vehicleData } = useAppSelector((state) => state.customerVehicle)
@@ -50,6 +53,25 @@ const VehicleDetailContainer = (props: Props) => {
         router.push(pathname)
     }
 
+    useEffect(() => {
+        setUpdateVehicleId('')
+    }, [vehicleId])
+
+    useEffect(() => {
+        setVehicleId('')
+    }, [updateVehicleId])
+
+    const onDeleteVehicle = async (_id: string) => {
+        try {
+            await deleteVehicle(_id, customerId)
+        } catch (err: any) {
+            // console.log(err);
+        }
+        finally {
+            dispatch(setVehicleLoading(true))
+        }
+    }
+
     return (
         <>
         {
@@ -62,17 +84,23 @@ const VehicleDetailContainer = (props: Props) => {
                 {
                     vehicleId === NEW_VEHICLE.value ?
                         <VehicleCreateContainer setVehicleId={setVehicleId} customer_id={customerId} customer={true}/> : (
-                            <div className=' flex flex-col gap-8'>
-                                {
-                                    vehicleData.map(ele => (
-                                        <VehicleDetails vehicleDetails={ele} key={ele._id} setVehicleId={setVehicleId}/>
-                                    ))
-                                }
-                                <div className=' flex gap-4'>
-                                    <Button onClick={() => handleAddNewVehicle()} className=' bg-customGray w-fit text-white'>Add New Vehicle</Button>
-                                    <Button onClick={() => handleBack()} >Back</Button>
-                                </div>
-                            </div>
+                            <>
+                            {
+                                updateVehicleId ? (<VehicleUpdateContainer updateVehicleId={updateVehicleId} setUpdateVehicleId={setUpdateVehicleId} updateVehicleValues={vehicleData.find(vehicle => vehicle._id === updateVehicleId)}/>) : (
+                                    <div className=' flex flex-col gap-8'>
+                                        {
+                                            vehicleData.map(ele => (
+                                                <VehicleDetails vehicleDetails={ele} key={ele._id} setVehicleId={setVehicleId} setUpdateVehicleId={setUpdateVehicleId} onDeleteVehicle={onDeleteVehicle}/>
+                                            ))
+                                        }
+                                            <div className=' flex gap-4'>
+                                                <Button onClick={() => handleAddNewVehicle()} className=' bg-customGray w-fit text-white'>Add New Vehicle</Button>
+                                                <Button onClick={() => handleBack()} >Back</Button>
+                                            </div>
+                                    </div>
+                                )
+                            }
+                            </>
                         )
                 }
             </div>
