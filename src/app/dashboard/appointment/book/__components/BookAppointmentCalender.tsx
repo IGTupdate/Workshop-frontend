@@ -1,18 +1,17 @@
 "use client"
-import React, { useEffect, useState } from 'react'
-import { Steps } from 'antd'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { TAppointmentBook } from '@/app/types/appointment'
-import { useAppSelector } from '@/app/store/reduxHooks'
-import { slot_booking_customer_step } from '@/app/employee/dashboard/appointment/book/__utils/slot-booking-step'
-import SlotAvailablityContainer from '@/app/employee/dashboard/appointment/book/__components/SlotAvailablityContainer'
 import AppointmentBookingConfirmation from '@/app/employee/dashboard/appointment/book/__components/AppointmentBookingConfirmation'
+import SlotAvailablityContainer from '@/app/employee/dashboard/appointment/book/__components/SlotAvailablityContainer'
+import { slot_booking_customer_step } from '@/app/employee/dashboard/appointment/book/__utils/slot-booking-step'
+import { useAppSelector } from '@/app/store/reduxHooks'
+import { TAppointmentBook } from '@/app/types/appointment'
+import { Steps } from 'antd'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import VehicleDetailContainer from './VehicleDetailContainer'
 
 type Props = {}
 
 const BookAppointmentContainer = (props: Props) => {
-    const router = useRouter();
     const searchParams = useSearchParams();
     const [currentStep, setCurrentStep] = useState<number>(0);
 

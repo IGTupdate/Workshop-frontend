@@ -3,7 +3,7 @@ import { registerCustomer } from '@/app/services/operations/auth/customerAuth';
 import { useAppDispatch } from '@/app/store/reduxHooks';
 import { resetAuthSlice, setAuthLoading } from '@/app/store/slices/authSlice';
 import { Button, Input } from 'antd';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -21,6 +21,7 @@ const Register: React.FC = () => {
         dispatch(setAuthLoading(true))
         try {
             await registerCustomer(data.fullName, data.email, dispatch)
+            // dispatch(resetAuthSlice())
             router.push('/dashboard')
         } catch (err) {
             // console.log(error)

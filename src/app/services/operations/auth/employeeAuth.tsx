@@ -15,9 +15,9 @@ export async function getEmployeeData(_id: string, dispatch: AppDispatch) {
     })
 
     if (result.data.success) {
-      const { _id, fullName, contactNumber, email } = result.data.data
+      const { _id, fullName, contactNumber, email, role } = result.data.data
       window.localStorage.setItem("authData", JSON.stringify(result.data.data));
-      dispatch(setAuthData({ _id, fullName, contactNumber, email }))
+      dispatch(setAuthData({ _id, fullName, contactNumber, email, role }))
     }
   } catch (err) {
     throw err

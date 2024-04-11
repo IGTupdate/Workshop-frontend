@@ -5,7 +5,8 @@ export interface IAuthData {
     _id?: string,
     contactNumber: string,
     fullName?: string,
-    email?: string
+    email?: string,
+    role?: string
 }
 
 export interface IAuthState {

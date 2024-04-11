@@ -15,22 +15,19 @@ export interface AppointmentData {
     status: string
 }
 
-export const sortDataByCreatedAt = (data: ICustomerAppointmentData[]): ICustomerAppointmentData[] => {
-    // console.log(data)
-    data.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-    const newData = data
-    return newData
-};
-
 export const fetchAppointments = (data: ICustomerAppointmentData[], status?: string): AppointmentData[] => {
-    // console.log(data,status)
-    let filteredAppointments = data
-    // let filteredAppointments = sortDataByCreatedAt(data);
+    // Make a copy of the data array
+    let filteredAppointments = [...data];
+
+    // Sort the appointments based on their creation date
+    filteredAppointments.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     
+    // Filter appointments by status if provided
     if (status) {
-        filteredAppointments = data.filter(appointment => appointment.status === status);
+        filteredAppointments = filteredAppointments.filter(appointment => appointment.status === status);
     }
 
+    // Map each appointment to an AppointmentData object
     return filteredAppointments.map(appointment => {
         const { _id: appointmentId, createdAt: appointmentCreated, vehicle_id: { vin: vehicleVIN, registeration_number: vehicleReg }, calender_id: { date: appointmentDate, slots }, status: status } = appointment;
         const slot = slots.find(slot => slot._id === appointment.slot_id);
@@ -46,4 +43,3 @@ export const fetchAppointments = (data: ICustomerAppointmentData[], status?: str
         } as AppointmentData;
     });
 };
-

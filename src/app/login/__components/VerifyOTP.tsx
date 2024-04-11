@@ -1,23 +1,22 @@
-import { useState } from 'react';
-import { Button } from 'antd';
-import { InputOTP } from 'antd-input-otp';
+"use client"
 import Heading from '@/app/components/Heading';
 import ErrorText from '@/app/components/Text/ErrorText';
-import { verifyOTP } from '@/app/services/operations/auth/customerAuth';
+import { sendOTP, verifyOTP } from '@/app/services/operations/auth/customerAuth';
 import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
-import { setAuthData, setAuthLoading, setAuthStep } from '@/app/store/slices/authSlice';
+import { setAuthLoading, setAuthStep } from '@/app/store/slices/authSlice';
+import { Button } from 'antd';
+import { InputOTP } from 'antd-input-otp';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { FaRegEdit } from "react-icons/fa";
 
-const MAX_RETRY = 3;
-
-const VerifyOTP: React.FC = () => {
+const VerifyOTP = () => {
     const contact = useAppSelector((state) => state.auth.authData.contactNumber);
     const router = useRouter();
     const dispatch = useAppDispatch();
     const [otpValues, setOtpValues] = useState<string[]>([]);
     const [otpErrors, setOTPErrors] = useState('');
-    const [retryCount, setRetryCount] = useState(0);
 
     const handleFinish = async () => {
         const otp = otpValues.join('');
@@ -32,7 +31,7 @@ const VerifyOTP: React.FC = () => {
         if (otp.length === 6) {
             setOTPErrors('');
         }
-
+        
         dispatch(setAuthLoading(true));
 
         let result
@@ -43,24 +42,28 @@ const VerifyOTP: React.FC = () => {
                 else dispatch(setAuthStep(2));
             }
         } catch (error) {
-            if (result?.status !== 403) {
-                toast.error("Internal Error... Please Try After some time")
-                router.push('/')
-                return
-            }
-            if (retryCount < MAX_RETRY) { // Check retryCount against MAX_RETRY
-                setRetryCount(prevRetryCount => prevRetryCount + 1); // Increment retryCount
-                const remainingRetries = MAX_RETRY - retryCount - 1;
-                // console.log("Remaining Retries:", remainingRetries);
-                toast.error(`INVALID OTP - RETRIES LEFT ${remainingRetries}`);
-            } else {
-                toast.error("Max retry limit reached");
-                router.push('/login');
-            }
+            toast.error("Invalid OTP")
+            router.push('/login')
+        }finally {
+            dispatch(setAuthLoading(false));
         }
 
-        dispatch(setAuthLoading(false));
     };
+
+    const resendOTP = async () => {
+        dispatch(setAuthLoading(true));
+        try {
+            await sendOTP(contact, true);
+        } catch (error) {
+            // console.error("Error sending OTP:", error);
+        } finally {
+            dispatch(setAuthLoading(false));
+        }
+    }
+
+    const editContactNumber = async () => {
+        dispatch(setAuthStep(0))
+    }
 
     return (
         <div className="w-full">
@@ -71,7 +74,8 @@ const VerifyOTP: React.FC = () => {
                 primaryColor='text-black1'
             />
 
-            <div className=' flex flex-col gap-8'>
+            <div className=' flex flex-col gap-5'>
+                <div className=' flex gap-4 text-xs'>Your Verification code has been sent to ******{contact.substring(6)} <FaRegEdit onClick={() => editContactNumber()} className=' cursor-pointer' /></div>
                 <div className='relative'>
                     <InputOTP
                         inputType="custom"
@@ -88,6 +92,7 @@ const VerifyOTP: React.FC = () => {
                 >
                     Send
                 </Button>
+                <p className=' text-xs'>Didn&apos;t get the code? <span onClick={() => resendOTP()} className=' cursor-pointer text-sm'>Resend</span></p>
             </div>
         </div>
     );
