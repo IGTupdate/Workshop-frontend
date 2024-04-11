@@ -29,6 +29,6 @@ export const slot_booking_customer_step  = [
     },
     {
         title:"Review",
-        description:"Finalise your"
+        description:"Finalise your Appointment"
     }
 ]
