@@ -8,6 +8,7 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import { MdSchedule } from "react-icons/md";
 import { GoNote } from "react-icons/go";
 import { FaHouseUser } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa";
 
 import { DesktopOutlined, } from '@ant-design/icons';
 import { usePathname, useRouter } from 'next/navigation';
@@ -22,6 +23,7 @@ const dashBoardIcons = {
     Calender: <FaRegCalendarAlt />,
     SlotSchedule: <MdSchedule />,
     WorkOrder: <FaHouseUser />,
+    Employee: <FaRegUser />
 }
 
 type Props = {}

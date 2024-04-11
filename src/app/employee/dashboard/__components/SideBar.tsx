@@ -35,12 +35,8 @@ const SideBar = (props: Props) => {
     setUser(() => {
       return authData;
     })
-  }, [user]);
+  }, [authData]);
 
-  const handleLogout = () => {
-    dispatch(logout());
-    router.push("/employee/login")
-  }
   return (
     <Sider
       width={SIDEBAR_WIDTH}
@@ -56,7 +52,7 @@ const SideBar = (props: Props) => {
         {!props.collapsed && (
           <div>
             <h2 className="text-white1 font-semibold text-xl capitalize">Hello {user?.fullName?.split(" ")[0]}</h2>
-            <p className="text-gray1 text-sm font-medium">{"user?.role" || "-"}</p>
+            <p className="text-gray1 text-sm font-medium">{user?.role || "-"}</p>
           </div>
         )}
       </Space>

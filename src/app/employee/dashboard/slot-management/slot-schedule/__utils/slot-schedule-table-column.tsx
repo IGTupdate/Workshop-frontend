@@ -39,9 +39,10 @@ export const get_slot_schedule_columns = (
           {slot_details.map((slot, index) => {
             let color = slot.start_time.hour >= 12 ? "orange" : "geekblue";
             return (
-              <Tag color={color} key={index}>
-                {`${slot.start_time.hour}:${slot.start_time.minute} - ${slot.end_time.hour}:${slot.end_time.minute} = ${slot.slot_limit}`}
-              </Tag>
+              <></>
+              // <Tag color={color} key={index}>
+              //   {`${slot.start_time.hour}:${slot.start_time.minute} - ${slot.end_time.hour}:${slot.end_time.minute} = ${slot.slot_limit}`}
+              // </Tag>
             );
           })}
         </div>

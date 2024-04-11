@@ -3,8 +3,9 @@
 import { TSlot } from '@/app/types/calender'
 import { TASlot, TAvailbleSlots } from '@/app/types/slot'
 import { TSlotDetail } from '@/app/types/slot-schedule'
+import { setQueryParams } from '@/app/utils/helper'
 import { Button, Space, Table, TableProps, Tag, Typography } from 'antd'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 const { Title, Text } = Typography
 
@@ -14,6 +15,8 @@ type Props = {
 
 const ShowSlotAvailableData = (props: Props) => {
     const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
 
     const [talbeRows, setTableRows] = useState<any>([])
     useEffect(() => {
@@ -25,7 +28,14 @@ const ShowSlotAvailableData = (props: Props) => {
                 }
             })
         })
-    }, [])
+    }, [props.availableSlot]);
+
+    const handleProceedClick = (slot_id: string, calender_id: string) => {
+        let queryParams = setQueryParams(searchParams.toString(), "slot_id", slot_id);
+        queryParams = setQueryParams(queryParams, "calender_id", calender_id);
+        router.push(`${pathname}?${queryParams}`);
+    }
+
     const columns: TableProps<TASlot>['columns'] = [
         {
             title: 'Start Time',
@@ -62,7 +72,8 @@ const ShowSlotAvailableData = (props: Props) => {
             render: (_, record) => (
                 <Space size="middle">
                     <Button onClick={() => {
-                        router.push(`?calender_id=${props.availableSlot?.calender_id}&slot_id=${record._id}`)
+                        handleProceedClick(record._id, props.availableSlot?.calender_id || "")
+                        // router.push(`?calender_id=${props.availableSlot?.calender_id}&slot_id=${record._id}`)
                     }} className='px-4 bg-blue1 text-white'> Procced</Button>
                 </Space>
             ),

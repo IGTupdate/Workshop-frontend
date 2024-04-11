@@ -82,11 +82,14 @@ export const getAllSlotSchedule = (): ThunkAction<void, RootState, unknown, Acti
         })
 
         console.log(response)
-        dispatch(setSlotScheduleDataLoading(false));
+        
         dispatch(setSlotScheduleData(response.data.data));
 
     } catch (err) {
         console.log(err);
+    }
+    finally{
+        dispatch(setSlotScheduleDataLoading(false));
     }
 }
 

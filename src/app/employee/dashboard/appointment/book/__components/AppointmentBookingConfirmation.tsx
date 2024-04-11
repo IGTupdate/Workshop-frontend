@@ -7,9 +7,10 @@ import { TAppointmentBook } from '@/app/types/appointment'
 import { TSlot } from '@/app/types/calender';
 import { TVehicle } from '@/app/types/vehicle';
 import { COMMON_ERROR } from '@/app/utils/constant';
+import { removeQueryParams, setQueryParams } from '@/app/utils/helper';
 import { Button, Divider, Typography } from 'antd';
-import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React, { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const { Title } = Typography
@@ -33,7 +34,10 @@ const AppointmentBookingConfirmation = (props: Props) => {
 
     const [loading, setLoading] = useState(false);
     const router = useRouter();
-    const userRole = useAppSelector(state => state.auth.authData.role)
+    const userRole = useAppSelector(state => state.auth.authData.role);
+
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
 
     const [appointmentBookingConfirmationData, setAppointmentBookingConfirmationData] = useState<TappointmentBookingConfirmationData>({
         vehicle: null,
@@ -66,6 +70,8 @@ const AppointmentBookingConfirmation = (props: Props) => {
     }, [props.appointmentBookingData]);
 
 
+
+
     const handleBack = () => {
         props.setAppointmentBookingData((prv) => {
             return {
@@ -82,11 +88,28 @@ const AppointmentBookingConfirmation = (props: Props) => {
             // console.log(response);
             toast.success(response?.message);
             userRole === 'customer' ? router.push(`/dashboard/appointment/${response.data._id}`) :
-            router.push(`/employee/dashboard/appointment/${response.data._id}`)
+                router.push(`/employee/dashboard/appointment/${response.data._id}`)
 
         } catch (err: any) {
             toast.error(err?.response?.data?.message || COMMON_ERROR)
         }
+    }
+
+
+    const createQueryString = useCallback(
+        (name: string, value?: string) => {
+            if (!value || value === "")
+                return removeQueryParams(searchParams.toString(), name);
+            else return setQueryParams(searchParams.toString(), name, value);
+        },
+        [searchParams]
+    );
+
+    const changeSlotDetails = () => {
+        let queryParams = removeQueryParams(searchParams.toString(), "slot_id");
+        queryParams = removeQueryParams(queryParams, "calender_id");
+
+        router.push(`${pathname}?${queryParams}`);
     }
 
 
@@ -124,7 +147,12 @@ const AppointmentBookingConfirmation = (props: Props) => {
             </div>
             <Divider />
             <div>
-                <Title level={5}>Slot Details</Title>
+                <div className='grid grid-cols-2'>
+                    <Title level={5}>Slot Details</Title>
+                    <div className='flex justify-end'>
+                        <Button type='link' onClick={changeSlotDetails}>Change</Button>
+                    </div>
+                </div>
                 <div className='grid grid-cols-2'>
                     <DescriptionItem title='Start'
                         content={appointmentBookingConfirmationData.slot_details?.start_time ?
