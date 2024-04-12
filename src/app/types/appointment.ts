@@ -1,4 +1,3 @@
-import { appointmentStatus } from "../employee/dashboard/appointment/__utils/appointmentStatus";
 import { TCalender, TSlot } from "./calender";
 import { TCustomer } from "./customer";
 import { TVehicle } from "./vehicle";
@@ -45,4 +44,9 @@ export type TAppointmentBook = {
   calender_id: string,
   vehicle_id: string,
   customer_id: string
+}
+
+export type TAppointmentReschedule = {
+  slot_id: string,
+  calender_id: string
 }

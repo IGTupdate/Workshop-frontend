@@ -23,23 +23,9 @@ export function convertToLocaleDateAndWeekday(dateString: string | undefined) {
 }
 
 export function extractTimeFromDate(dateString: string): string {
-    const date = new Date(dateString);
-    const hours = date.getHours().toString().padStart(2, '0'); // Ensure two digits for hours
-    const minutes = date.getMinutes().toString().padStart(2, '0'); // Ensure two digits for minutes
-    return `${hours}:${minutes}`;
+    return new Date(dateString).toLocaleTimeString();
 }
 
 export function formatDateAndTime(dateString : string) {
-    const date = new Date(dateString);
-    
-    // Get day, month, year
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Month is zero-based
-    const year = date.getFullYear();
-    
-    // Get hours and minutes
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    
-    return `${day}-${month}-${year} ${hours}:${minutes}`;
+    return new Date(dateString).toLocaleString()
 }

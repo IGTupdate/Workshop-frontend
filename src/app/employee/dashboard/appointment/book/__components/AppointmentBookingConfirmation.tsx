@@ -69,9 +69,6 @@ const AppointmentBookingConfirmation = (props: Props) => {
 
     }, [props.appointmentBookingData]);
 
-
-
-
     const handleBack = () => {
         props.setAppointmentBookingData((prv) => {
             return {

@@ -19,7 +19,7 @@ const useDeviceType = () => {
     return () => {
       window.removeEventListener('resize', updateDeviceType);
     };
-  }, [dispatch]);
+  }, []);
 };
 
 export default useDeviceType;

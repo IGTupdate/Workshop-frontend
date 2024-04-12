@@ -2,13 +2,12 @@
 import React, { useEffect, useState } from 'react'
 import { Flex, Segmented, TabPaneProps, Tabs, TabsProps, Tooltip, Typography } from 'antd';
 import { getAllAppointment } from '@/app/services/operations/appointment/appointment';
+import Loader from '@/app/components/Loader';
+import Watermark from '@/app/components/Text/WatermarkText';
 import { getAvailableSlots } from '@/app/services/operations/appointment/slots';
 import { TAvailbleSlots } from '@/app/types/slot';
-import { SegmentedOptions } from 'antd/es/segmented';
 import { getFormattedDateForSlotAvailabilityFilter } from '../__utils/helper';
-import Loader from '@/app/components/Loader';
 import ShowSlotAvailableData from './ShowSlotAvailableData';
-import Watermark from '@/app/components/Text/WatermarkText';
 const { Text } = Typography
 
 type Props = {}
