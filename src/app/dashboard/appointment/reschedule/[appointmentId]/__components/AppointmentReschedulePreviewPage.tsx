@@ -18,7 +18,7 @@ const { Title } = Typography
 type Props = {
     appointmentRescheduleData: TAppointmentBook
     setAppointmentRescheduleData: React.Dispatch<React.SetStateAction<TAppointmentBook>>,
-    appointmentDataPrefetched : TAppointment
+    appointmentId: string
 }
 
 type TappointmentRescheduleConfirmationData = {
@@ -81,10 +81,9 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
     const handleRescheduleAppointment = async () => {
         try {
             setLoading(true);
-            // console.log(props.appointmentDataPrefetched)
-            await rescheduleAppointment(props.appointmentDataPrefetched._id, {calender_id: props.appointmentRescheduleData.calender_id, slot_id: props.appointmentRescheduleData.slot_id});
-            userRole === 'customer' ? router.push(`/dashboard/appointment/${props.appointmentDataPrefetched._id}`) :
-                router.push(`/employee/dashboard/appointment/${props.appointmentDataPrefetched._id}`)
+            await rescheduleAppointment(props.appointmentId, {calender_id: props.appointmentRescheduleData.calender_id, slot_id: props.appointmentRescheduleData.slot_id});
+            userRole === 'customer' ? router.push(`/dashboard/appointment/${props.appointmentId}`) :
+                router.push(`/employee/dashboard/appointment/${props.appointmentId}`)
 
             dispatch(getAllCustomerAppointment());
 

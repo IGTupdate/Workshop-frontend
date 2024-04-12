@@ -10,11 +10,11 @@ interface Props {
   params: {
     appointmentId: string;
   };
-  appointmentDataPrefetched?: TAppointment | null
+  // appointmentDataPrefetched?: TAppointment | null
 }
 
-const AppointmentPage: React.FC<Props> = ({ params, appointmentDataPrefetched }) => {
-  const [appointmentData, setAppointmentData] = useState<TAppointment | null>(appointmentDataPrefetched ? appointmentDataPrefetched : null);
+const AppointmentPage: React.FC<Props> = ({ params }) => {
+  const [appointmentData, setAppointmentData] = useState<TAppointment | null>(null);
   const router = useRouter()
 
   const fetchAppointmentData = async () => {

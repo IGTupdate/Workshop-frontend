@@ -86,7 +86,7 @@ const RescheduleAppointmentContainer = (props: Props) => {
                     <AppointmentRescheduleConfirmation
                         appointmentRescheduleData={appointmentRescheduleData}
                         setAppointmentRescheduleData={setAppointmentRescheduleData}
-                        appointmentDataPrefetched={props.appointmentData}
+                        appointmentId={appointmentId}
                     />
                 </>
             }
