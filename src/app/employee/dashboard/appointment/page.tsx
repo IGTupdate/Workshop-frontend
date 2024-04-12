@@ -10,7 +10,7 @@ const page = async (props: Props) => {
         <h2 className="text-xl font-semibold">Manage Appointments</h2>
         <Link
           href={`/employee/dashboard/appointment/book`}
-          className="bg-blue1 text-white1 font-medium text-md px-4 py-2 rounded-md"
+          className="bg-customYellow text-white1 font-medium text-md px-4 py-2 rounded-md"
         >
           Book Appointment
         </Link>

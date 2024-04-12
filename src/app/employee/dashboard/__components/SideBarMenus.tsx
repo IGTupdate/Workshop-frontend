@@ -43,7 +43,7 @@ const SideBarMenus = (props: Props) => {
         <Menu
             mode="inline"
             defaultSelectedKeys={[activeDashboardKey]}
-            theme='dark'
+            // theme='dark'
             defaultOpenKeys={['sub1']}
             items={sideBarMenus}
         />

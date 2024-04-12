@@ -94,7 +94,6 @@ function GetColumnTextSearchProps<T>(dataIndex: DataIndex): TableColumnType<T> {
             icon={<SearchOutlined />}
             size="small"
             style={{ width: 90 }}
-            className="bg-blue1"
           >
             Search
           </Button>

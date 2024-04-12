@@ -1,6 +1,6 @@
 export type TCustomer = {
-    contactNumber:string,
-    fullName:string,
-    email:string,
-    _id:string
+    contactNumber: string,
+    fullName: string,
+    email: string,
+    _id: string
 }

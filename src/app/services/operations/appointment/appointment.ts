@@ -6,16 +6,17 @@ import { appointmentEndpoints } from "../../apis";
 import toast from "react-hot-toast";
 import { AppointmentData } from "@/app/dashboard/appointment/__utils/FetchAppointments";
 import { TAppointment } from "@/app/types/appointment";
+import { COMMON_ERROR } from "@/app/utils/constant";
 
 
 
 const { GET_APPOINTMENT_BY_CALENDER, APPOINTMENT_BOOK, GET_ALL_APPOINTMENT, GET_APPOINTMENT_BOOK_INIT_DATA, GET_ALL_CUSTOMER_APPOINTMENT, GET_APPOINTMENT_BY_APPOINTMENT_ID, APPOINTMENT_CANCEL_API } = appointmentEndpoints
 
-export const getAppointmentByCalenderId = async (calenderId: string, query:string = ""): Promise<number> => {
+export const getAppointmentByCalenderId = async (calenderId: string, query: string = ""): Promise<number> => {
     try {
         const response = await apiConnector({
             method: "GET",
-            url: GET_APPOINTMENT_BY_CALENDER + "/" + calenderId+"?"+query
+            url: GET_APPOINTMENT_BY_CALENDER + "/" + calenderId + "?" + query
         })
 
         console.log(response);
@@ -98,25 +99,27 @@ export const getAllCustomerAppointment = (): ThunkAction<void, RootState, unknow
         return response.data.data;
     } catch (err) {
         return null;
-    } finally{
+    } finally {
         dispatch(setAppointmentLoading(false));
     }
 };
 
 
-export const cancelAppointment = async (appointmentId: string, dispatch: AppDispatch) => {
-    try{
+export const cancelAppointment = async (appointmentId: string) => {
+    try {
         const response = await apiConnector({
             method: 'POST',
             url: APPOINTMENT_CANCEL_API + '/' + appointmentId
         })
 
-        if(response.data.success){
-            dispatch(getAllCustomerAppointment())
-            toast.success("Appointment Cancelled Successfulyy")
+        if (response.data.success) {
+            // dispatch(getAllCustomerAppointment())
+            toast.success(response.data.message);
+            return response.data.data
         }
 
-    }catch(err){
+    } catch (err: any) {
+        toast.error(err?.response?.data?.message || COMMON_ERROR);
         throw err
     }
 }

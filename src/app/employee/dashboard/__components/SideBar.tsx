@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Avatar, Button, Divider, Layout, Menu, Space } from "antd";
+import { Avatar, Button, Divider, Layout, Menu, Space, Typography } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { FiLogOut } from "react-icons/fi";
 
@@ -13,6 +13,8 @@ import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { logout } from "@/app/services/operations/auth/customerAuth";
 import { IAuthData } from "@/app/store/slices/authSlice";
 import Logout from "@/app/components/Logout/Logout";
+
+const { Text, Title } = Typography
 
 const { Header, Sider, Content } = Layout;
 
@@ -41,7 +43,7 @@ const SideBar = (props: Props) => {
     <Sider
       width={SIDEBAR_WIDTH}
       collapsedWidth={SIDEBAR_COLLAPSED_WIDTH}
-      theme="dark"
+      theme="light"
       trigger={null}
       collapsible
       collapsed={props.collapsed}
@@ -51,13 +53,15 @@ const SideBar = (props: Props) => {
         <Avatar size={"large"} icon={<UserOutlined />} />
         {!props.collapsed && (
           <div>
-            <h2 className="text-white1 font-semibold text-xl capitalize">Hello {user?.fullName?.split(" ")[0]}</h2>
-            <p className="text-gray1 text-sm font-medium">{user?.role || "-"}</p>
+            <Title level={5} style={{ color: "white", textTransform: "capitalize", marginBottom: 0 }}>Hello {user?.fullName?.split(" ")[0]}</Title>
+            <Text style={{ color: "#CDCDCE" }}>{user?.role || "-"}</Text>
           </div>
         )}
       </Space>
 
-      <SideBarMenus />
+      <div className="h-[500px] overflow-auto">
+        <SideBarMenus />
+      </div>
 
       <div className="w-full absolute bottom-0 ">
         <Logout />

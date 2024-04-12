@@ -5,6 +5,7 @@ import SideBar from "./SideBar";
 import HeaderContainer from "./HeaderContainer";
 import { SIDEBAR_COLLAPSED_WIDTH, SIDEBAR_WIDTH } from "../utils/variables";
 import Loader from "@/app/components/Loader";
+import BreadCrumbContainer from "./BreadCrumbContainer";
 
 const { Header, Sider, Content } = Layout;
 
@@ -26,6 +27,8 @@ const EmployeeDashBoardLayOut = ({
           }}
         >
           <HeaderContainer collapsed={collapsed} setCollapsed={setCollapsed} />
+          <BreadCrumbContainer />
+
           <Content className="h-full overflow-auto">
             <div className="p-4">{children}</div>
           </Content>

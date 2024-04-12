@@ -80,7 +80,7 @@ const SlotScheduleManageDrawer = (props: Props) => {
             disabled={slotScheduleDrawerLoading}
             htmlType="submit"
             onClick={handleSubmit(onSubmit)}
-            className="bg-blue1 text-white1 font-medium text-md"
+            type="primary"
           >
             Save
           </Button>

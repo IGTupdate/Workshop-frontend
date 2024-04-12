@@ -34,7 +34,7 @@ const Logout: React.FC = () => {
             <Button
                 type="primary"
                 style={{ borderBottomRightRadius: 0, borderBottomLeftRadius: 0 }}
-                className="bg-blue1 text-white1 font-semibold w-full h-10"
+                className='bg-customBrown w-full'
                 icon={<FiLogOut />}
                 onClick={showModal}
             >
@@ -47,7 +47,7 @@ const Logout: React.FC = () => {
                 onCancel={handleCancel}
                 footer={[
                     <Button key="cancel" onClick={() => handleCancel()}>Cancel</Button>,
-                    <Button key="logout" onClick={() => handleLogout()}>Logout</Button>,
+                    <Button type='primary' key="logout" onClick={() => handleLogout()}>Logout</Button>,
                 ]}
             >
                 <p>Are you sure you want to log out?</p>

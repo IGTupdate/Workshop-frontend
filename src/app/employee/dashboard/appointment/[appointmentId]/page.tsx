@@ -8,9 +8,9 @@ type Props = {
 };
 
 const page = (props: Props) => {
-  return <div>
-      <AppointmentPageContiner appointmentId={props.params.appointmentId}/>
-    </div>;
+  return <div className="p-4 bg-white rounded-md">
+    <AppointmentPageContiner appointmentId={props.params.appointmentId} />
+  </div>;
 };
 
 export default page;

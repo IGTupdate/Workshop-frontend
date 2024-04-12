@@ -3,8 +3,10 @@ import AppointmentDetails from '@/app/components/Appointment/AppointmentDetails'
 import Loader from '@/app/components/Loader';
 import { getAppointmentByAppointmentId } from '@/app/services/operations/appointment/appointment';
 import { TAppointment } from '@/app/types/appointment';
-import { Typography } from 'antd';
+import { Button, Typography } from 'antd';
 import React, { useEffect, useState } from 'react'
+import AppointmentCancel from './AppointmentCancel';
+import { useRouter } from 'next/navigation';
 
 type Props = {
     appointmentId: string
@@ -13,37 +15,54 @@ type Props = {
 const { Text } = Typography
 
 const AppointmentPageContiner = (props: Props) => {
-    const [loading, setLoading] = useState(true);
-
+    const [appointmentLoading, setAppointmentLoading] = useState(true);
     const [appointment, setAppointment] = useState<TAppointment | null>(null);
 
+    const router = useRouter();
+
     useEffect(() => {
+        if (appointmentLoading) {
+            console.log("changed", props.appointmentId)
+            fetchAppointmentData();
+        }
+    }, [props.appointmentId, appointmentLoading]);
 
-        console.log("changed", props.appointmentId)
-
-        fetchAppointmentData();
-
-    }, [props.appointmentId]);
 
     const fetchAppointmentData = async () => {
-        setLoading(true);
+        setAppointmentLoading(true);
         try {
             const result = await getAppointmentByAppointmentId(props.appointmentId);
             setAppointment(result);
         } catch (err) {
             // Handle error
         } finally {
-            setLoading(false);
+            setAppointmentLoading(false);
         }
     };
-
 
 
     return (
         <div>
             {
-                loading ? <Loader /> : (
-                    appointment ? <AppointmentDetails appointmentData={appointment} /> : <Text>Appointment not found</Text>
+                appointmentLoading ? <Loader /> : (
+                    appointment ? <div>
+                        <AppointmentDetails appointmentData={appointment} />
+
+                        <div className='flex justify-end items-center  gap-3 '>
+                            <Button onClick={() => {
+                                router.push(`/employee/dashboard/appointment/${props.appointmentId}/reschedule`)
+                            }} type='primary' className='bg-blue1'>
+                                ReSchedule
+                            </Button>
+                            {
+                                appointment.status !== "Cancelled" && <AppointmentCancel
+                                    appointmentId={props.appointmentId}
+                                    setAppointmentLoading={setAppointmentLoading}
+                                />
+                            }
+
+                        </div>
+                    </div> : <Text>Appointment not found</Text>
                 )
             }
 

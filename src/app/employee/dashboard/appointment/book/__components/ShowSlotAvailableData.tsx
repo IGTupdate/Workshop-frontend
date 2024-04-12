@@ -24,7 +24,7 @@ const ShowSlotAvailableData = (props: Props) => {
             return props.availableSlot?.available_slots.map((el, index) => {
                 return {
                     ...el,
-                    key: index
+                    key: index,
                 }
             })
         })
@@ -59,7 +59,7 @@ const ShowSlotAvailableData = (props: Props) => {
             dataIndex: 'slot_limit',
             render: (_, { available }) => (
                 <>
-                    <Tag color={available > 4 ? 'geekblue' : 'green'} key={available}>
+                    <Tag color={available > 4 ? 'green' : available === 0 ? 'red' : 'orange'} key={available}>
                         {available}
                     </Tag>
 
@@ -71,10 +71,10 @@ const ShowSlotAvailableData = (props: Props) => {
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
-                    <Button onClick={() => {
+                    <Button disabled={record.available === 0} onClick={() => {
                         handleProceedClick(record._id, props.availableSlot?.calender_id || "")
                         // router.push(`?calender_id=${props.availableSlot?.calender_id}&slot_id=${record._id}`)
-                    }} className='px-4 bg-blue1 text-white'> Procced</Button>
+                    }} type='primary'> Procced</Button>
                 </Space>
             ),
         },
