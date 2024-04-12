@@ -32,3 +32,14 @@ export const slot_booking_customer_step  = [
         description:"Finalise your Appointment"
     }
 ]
+
+export const slot_booking_customer_reschedule_step  = [
+    {
+        title: 'Slot',
+        description: "Select your Available time",
+    },
+    {
+        title:"Review",
+        description:"Finalise your Appointment"
+    }
+]

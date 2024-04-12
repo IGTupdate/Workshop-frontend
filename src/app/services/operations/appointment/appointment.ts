@@ -1,15 +1,14 @@
 import { setAppointmentData, setAppointmentLoading } from "@/app/store/slices/customerAppointmentSlice";
-import { AppDispatch, RootState } from "@/app/store/store";
+import { RootState } from "@/app/store/store";
+import { TAppointment, TAppointmentReschedule } from "@/app/types/appointment";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 import { apiConnector } from "../../apiConnector";
 import { appointmentEndpoints } from "../../apis";
-import toast from "react-hot-toast";
-import { AppointmentData } from "@/app/dashboard/appointment/__utils/FetchAppointments";
-import { TAppointment } from "@/app/types/appointment";
 
 
 
-const { GET_APPOINTMENT_BY_CALENDER, APPOINTMENT_BOOK, GET_ALL_APPOINTMENT, GET_APPOINTMENT_BOOK_INIT_DATA, GET_ALL_CUSTOMER_APPOINTMENT, GET_APPOINTMENT_BY_APPOINTMENT_ID, APPOINTMENT_CANCEL_API } = appointmentEndpoints
+const { GET_APPOINTMENT_BY_CALENDER, APPOINTMENT_BOOK, GET_ALL_APPOINTMENT, GET_APPOINTMENT_BOOK_INIT_DATA, GET_ALL_CUSTOMER_APPOINTMENT, GET_APPOINTMENT_BY_APPOINTMENT_ID, APPOINTMENT_CANCEL_API, APPOINTMENT_RESCHEDULE_API } = appointmentEndpoints
 
 export const getAppointmentByCalenderId = async (calenderId: string, query:string = ""): Promise<number> => {
     try {
@@ -104,7 +103,7 @@ export const getAllCustomerAppointment = (): ThunkAction<void, RootState, unknow
 };
 
 
-export const cancelAppointment = async (appointmentId: string, dispatch: AppDispatch) => {
+export const cancelAppointment = async (appointmentId: string) => {
     try{
         const response = await apiConnector({
             method: 'POST',
@@ -112,8 +111,26 @@ export const cancelAppointment = async (appointmentId: string, dispatch: AppDisp
         })
 
         if(response.data.success){
-            dispatch(getAllCustomerAppointment())
             toast.success("Appointment Cancelled Successfulyy")
+        }
+
+    }catch(err){
+        throw err
+    }
+}
+
+export const rescheduleAppointment = async (appointmentId: string, data: TAppointmentReschedule) => {
+    try{
+        // console.log(appointmentId, data)
+        const response = await apiConnector({
+            method: 'POST',
+            url: APPOINTMENT_RESCHEDULE_API + '/' + appointmentId,
+            bodyData: data
+        })
+
+        // console.log(response)
+        if(response.data.success){
+            toast.success("Appointment Re-Scheduled Successfully")
         }
 
     }catch(err){
