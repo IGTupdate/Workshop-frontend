@@ -4,7 +4,7 @@ import Heading from '@/app/components/Heading';
 import { apiOpenConnector } from '@/app/services/apiOpenConnector';
 import { authEndpoints } from '@/app/services/apis';
 import { TCustomer } from '@/app/types/customer';
-import { COMMON_ERROR } from '@/app/utils/constant';
+import { COMMON_ERROR } from '@/app/utils/constants/constant';
 import { Button, Input } from 'antd';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';

@@ -172,6 +172,9 @@ export function GetAppointmentDataTableColumn() {
 
               {/* view appointments */}
               <Button
+              onClick={() => {
+                router.push("/employee/dashboard/workorder/create?appointmentId=" + _id)
+              }}
                 style={{ border: "1px #24ae55 solid", color: "#24ae55" }}
                 size="middle"
                 icon={<MdAddChart size={"22px"} title="Create WorkOrder" />}

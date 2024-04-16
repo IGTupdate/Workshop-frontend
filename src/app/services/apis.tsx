@@ -1,6 +1,7 @@
 // const BASE_URL = process.env.REACT_APP_BASE_URL
 const AUTH_BASE_URL = "http://localhost:4000";
 const APPOINTMENT_SERVICE_BASE_URL = "http://localhost:5000/api";
+const WORK_ORDER_SERVICE_BASE_URL = "http://localhost:4100/api"
 
 const CUSTOMER = '/customer'
 const AUTH = '/auth'
@@ -69,3 +70,8 @@ export const appointmentEndpoints = {
   UPDATE_VEHICLE_BY_CUSTOMER_ID: APPOINTMENT_VEHICLE_BASE_URL + '/update',
   DELETE_VEHICLE_BY_CUSTOMER_ID: APPOINTMENT_VEHICLE_BASE_URL + '/delete'
 };
+
+
+export const workOrderEndPoints = {
+  GET_EMPLOYEE_WORK_STATUS: WORK_ORDER_SERVICE_BASE_URL + "/employee/status"
+}

@@ -4,7 +4,7 @@ import { vehicleCreateInputFields } from '@/app/employee/dashboard/appointment/b
 import { updateVehicle } from '@/app/services/operations/appointment/vehicle';
 import { useAppDispatch } from '@/app/store/reduxHooks';
 import { setVehicleLoading } from '@/app/store/slices/customerVehicleSlice';
-import { COMMON_ERROR } from '@/app/utils/constant';
+import { COMMON_ERROR } from '@/app/utils/constants/constant';
 import { TvehicleCreateSchema, vehicleCreateSchema } from '@/app/validators/vehicle';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from 'antd';

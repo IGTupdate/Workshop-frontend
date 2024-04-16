@@ -49,18 +49,19 @@ const AppointmentPageContiner = (props: Props) => {
                         <AppointmentDetails appointmentData={appointment} />
 
                         <div className='flex justify-end items-center  gap-3 '>
-                            <Button onClick={() => {
-                                router.push(`/employee/dashboard/appointment/${props.appointmentId}/reschedule`)
-                            }} type='primary' className='bg-blue1'>
-                                ReSchedule
-                            </Button>
+                            {
+                                appointment.status === "Scheduled" && <Button onClick={() => {
+                                    router.push(`/employee/dashboard/appointment/${props.appointmentId}/reschedule`)
+                                }} type='primary'>
+                                    ReSchedule
+                                </Button>
+                            }
                             {
                                 appointment.status !== "Cancelled" && <AppointmentCancel
                                     appointmentId={props.appointmentId}
                                     setAppointmentLoading={setAppointmentLoading}
                                 />
                             }
-
                         </div>
                     </div> : <Text>Appointment not found</Text>
                 )

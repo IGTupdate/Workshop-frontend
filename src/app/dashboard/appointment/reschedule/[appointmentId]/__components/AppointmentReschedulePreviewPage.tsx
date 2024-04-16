@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import { TAppointment, TAppointmentBook } from '@/app/types/appointment';
 import { TSlot } from '@/app/types/calender';
 import { TVehicle } from '@/app/types/vehicle';
-import { COMMON_ERROR } from '@/app/utils/constant';
+import { COMMON_ERROR } from '@/app/utils/constants/constant';
 import { removeQueryParams } from '@/app/utils/helper';
 import { Button, Divider, Typography } from 'antd';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -72,8 +72,8 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
         props.setAppointmentRescheduleData((prv) => {
             return {
                 ...prv,
-                slot_id : '',
-                calender_id : '',
+                slot_id: '',
+                calender_id: '',
             }
         })
     }
@@ -81,14 +81,14 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
     const handleRescheduleAppointment = async () => {
         try {
             setLoading(true);
-            await rescheduleAppointment(props.appointmentId, {calender_id: props.appointmentRescheduleData.calender_id, slot_id: props.appointmentRescheduleData.slot_id});
+            await rescheduleAppointment(props.appointmentId, { calender_id: props.appointmentRescheduleData.calender_id, slot_id: props.appointmentRescheduleData.slot_id });
             userRole === 'customer' ? router.push(`/dashboard/appointment/${props.appointmentId}`) :
                 router.push(`/employee/dashboard/appointment/${props.appointmentId}`)
 
             dispatch(getAllCustomerAppointment());
 
         } catch (err: any) {
-            toast.error(COMMON_ERROR)
+            toast.error(err.response.data.message || COMMON_ERROR)
         } finally {
             setLoading(false);
         }
@@ -159,7 +159,7 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
             </div>
 
             <div className='mt-6 flex gap-4'>
-                <Button onClick={() => {handleBack(); router.push(pathname)}} >Back </Button>
+                <Button onClick={() => { handleBack(); router.push(pathname) }} >Back </Button>
                 <Button onClick={handleRescheduleAppointment} className="bg-blue1 text-white">Reschedule</Button>
             </div>
 

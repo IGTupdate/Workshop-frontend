@@ -11,8 +11,6 @@ import CalenderManageDrawer from "./CalenderManageDrawer";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import {
   setActiveCalender,
-  setCalenderData,
-  setCalenderLoading,
 } from "@/app/store/slices/calenderSlice";
 import Loader from "@/app/components/Loader";
 import { getAllCalender } from "@/app/services/operations/appointment/calender";

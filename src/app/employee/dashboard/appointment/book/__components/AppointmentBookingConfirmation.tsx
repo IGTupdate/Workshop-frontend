@@ -6,7 +6,7 @@ import { useAppSelector } from '@/app/store/reduxHooks';
 import { TAppointmentBook } from '@/app/types/appointment'
 import { TSlot } from '@/app/types/calender';
 import { TVehicle } from '@/app/types/vehicle';
-import { COMMON_ERROR } from '@/app/utils/constant';
+import { COMMON_ERROR } from '@/app/utils/constants/constant';
 import { removeQueryParams, setQueryParams } from '@/app/utils/helper';
 import { Button, Divider, Typography } from 'antd';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
