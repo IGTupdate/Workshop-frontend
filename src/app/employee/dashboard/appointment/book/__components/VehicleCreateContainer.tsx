@@ -81,8 +81,7 @@ const VehicleCreateContainer = (props: Props) => {
                 </Button>
                 <Button
                     disabled={loading}
-                    onClick={handleSubmit(onSubmit)}
-                    className='bg-blue1 text-white'>
+                    onClick={handleSubmit(onSubmit)}>
                     Save
                 </Button>
 

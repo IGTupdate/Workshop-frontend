@@ -1,4 +1,5 @@
 import { TAppointmentStatus } from "@/app/types/appointment";
+import { Tag } from "antd";
 import { ReactNode } from "react";
 
 export const appointmentStatus: TAppointmentStatus[] = [
@@ -21,9 +22,9 @@ export const getAppointMentStatus = () => {
 
 export const appointmentStatusText: Record<TAppointmentStatus, ReactNode> = {
   Missed: <h2 className="text-orange-500">Missed</h2>,
-  Scheduled: <h2 className="text-gray-500">Scheduled</h2>,
-  Assigned: <h2 className="text-blue-500">Assigned</h2>,
-  Completed: <h2 className="text-green-500">Completed</h2>,
-  Cancelled: <h2 className="text-red-500">Cancelled</h2>,
+  Scheduled: <Tag color="green">Scheduled</Tag>,
+  Assigned: <Tag color="blue">Assigned</Tag>,
+  Completed: <Tag color="gray">Completed</Tag>,
+  Cancelled: <Tag color="red">Cancelled</Tag>,
   Pending: <h2 className="text-red-500">Pending</h2>,
 };

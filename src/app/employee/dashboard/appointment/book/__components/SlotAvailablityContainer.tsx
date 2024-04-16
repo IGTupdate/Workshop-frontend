@@ -1,10 +1,11 @@
 "use client"
+import React, { useEffect, useState } from 'react'
+import { Flex, Segmented, TabPaneProps, Tabs, TabsProps, Tooltip, Typography } from 'antd';
+import { getAllAppointment } from '@/app/services/operations/appointment/appointment';
 import Loader from '@/app/components/Loader';
 import Watermark from '@/app/components/Text/WatermarkText';
 import { getAvailableSlots } from '@/app/services/operations/appointment/slots';
 import { TAvailbleSlots } from '@/app/types/slot';
-import { Tabs, Typography } from 'antd';
-import { useEffect, useState } from 'react';
 import { getFormattedDateForSlotAvailabilityFilter } from '../__utils/helper';
 import ShowSlotAvailableData from './ShowSlotAvailableData';
 const { Text } = Typography
@@ -59,7 +60,7 @@ const SlotAvailablityContainer = (props: Props) => {
             else {
                 optionArray.push({
                     key: key,
-                    label: getFormattedDateForSlotAvailabilityFilter(new Date(currentDate)),
+                    label: <Tooltip title="Closed">{getFormattedDateForSlotAvailabilityFilter(new Date(currentDate))}</Tooltip>,
                     disabled: true,
                 });
             }

@@ -46,7 +46,7 @@ const SlotScheduleContainer = (props: Props) => {
                     onClick={() => {
                         handleSlotScheduleDrawer(NEW_SLOT_SCHEDULE);
                     }}
-                    className="bg-blue1 text-white1 font-medium text-md"
+                    type="primary"
                 >
                     Add Schedule
                 </Button>

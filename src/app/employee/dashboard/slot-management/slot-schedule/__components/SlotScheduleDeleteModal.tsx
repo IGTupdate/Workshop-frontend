@@ -40,7 +40,7 @@ const SlotScheduleDeleteModal = (props: Props) => {
                     <Button
                         disabled={deleteSlotScheduleLoading}
                         onClick={handleOk}
-                        className="bg-red-500 text-white1 font-medium text-md"
+                        danger
                     >
                         {deleteSlotScheduleLoading ? "Deleting..." : "Delete"}
                     </Button>

@@ -1,5 +1,5 @@
 import { TActiveSlotSchedule, TSlotSchedule } from "@/app/types/slot-schedule";
-import { Space, TableProps, Tag } from "antd";
+import { Space, TableProps, Tag, Typography } from "antd";
 
 export interface ISlotSchedule {
   _id: string;
@@ -8,6 +8,7 @@ export interface ISlotSchedule {
   limit: number;
   details: string[];
 }
+const { Text, Title } = Typography
 
 export const get_slot_schedule_columns = (
   setOpenDrawer: (newDrawerData: TActiveSlotSchedule) => void,
@@ -35,11 +36,16 @@ export const get_slot_schedule_columns = (
       key: "slot_details",
       dataIndex: "slot_details",
       render: (_, { slot_details }) => (
-        <div style={{ maxWidth: 300 }} className="flex flex-wrap gap-2">
+        <div style={{ maxWidth: 300 }} className="">
           {slot_details.map((slot, index) => {
             let color = slot.start_time.hour >= 12 ? "orange" : "geekblue";
-            return (
-              <></>
+            return (<div key={index} className="mb-2 pb-2 border-b">
+              <div className="grid grid-cols-2 gap-2">
+                <p>Start Time : {slot.start_time.hour}:{slot.start_time.minute}</p>
+                <p>End Time :{slot.end_time.hour}:{slot.end_time.minute}</p>
+              </div>
+              <p>Slot Limit : {slot.slot_limit}</p>
+            </div>
               // <Tag color={color} key={index}>
               //   {`${slot.start_time.hour}:${slot.start_time.minute} - ${slot.end_time.hour}:${slot.end_time.minute} = ${slot.slot_limit}`}
               // </Tag>

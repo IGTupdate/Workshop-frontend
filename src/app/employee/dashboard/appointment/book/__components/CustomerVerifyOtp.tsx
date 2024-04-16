@@ -96,7 +96,7 @@ const CustomerVerifyOtp = (props: Props) => {
                 <Button
                     disabled={loading}
                     size='large'
-                    className='bg-blue1 text-white1 font-semibold w-full'
+                    className='bg-customYellow text-white1 font-semibold w-full'
                     onClick={handleFinish}
                 >
                     Send

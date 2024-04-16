@@ -67,7 +67,7 @@ const CustomerSendOtp = (props: Tprops) => {
 
             <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">
                 <div className='md:mb-4 mb-3 relative'>
-                    <label className='text-sm font-medium mb-1 block text-black1'>Phone</label>
+                    <label className='text-sm font-medium mb-1 block text-customGray'>Phone</label>
                     <Input
                         size='large'
                         value={contactNumber}
@@ -81,7 +81,7 @@ const CustomerSendOtp = (props: Tprops) => {
                     disabled={loading}
                     size='large'
                     htmlType='submit'
-                    className='bg-blue1 text-white1 font-semibold w-full'>
+                    className='bg-customYellow text-white1 font-semibold w-full'>
                     Send
                 </Button>
             </form>

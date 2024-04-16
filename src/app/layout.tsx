@@ -28,12 +28,33 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={kanit.className}>
-        {/* <AntdRegistry> */}
-          <StoreProvider>
-            {children}
-          </StoreProvider>
-        {/* </AntdRegistry> */}
+        <AntdRegistry>
+          <ConfigProvider theme={{
+            "token": {
+              "colorPrimary": "#ffe200",
+              "colorInfo": "#ffe200",
+              "colorTextBase": "#2e3033",
+            },
+            "components": {
+              "Menu": {
+                "colorBgContainer": "#171717",
+                "colorFillAlter": "#2E3033",
+                "colorText": "#CDCDCE",
+                "itemHoverColor": "#A49339",
+                itemSelectedBg: "#A49339",
+                itemSelectedColor: "#ffffff",
+              },
+              "Layout": {
+                "colorBgContainer": "#171717",
+              }
+            }
+          }}>
+            <StoreProvider>
+              {children}
+            </StoreProvider>
+          </ConfigProvider>
+        </AntdRegistry>
       </body>
-    </html>
+    </html >
   );
 }

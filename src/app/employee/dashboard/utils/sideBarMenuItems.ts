@@ -94,6 +94,22 @@ export const findRecursiveByPathName = (sideBarMenuItems: TsideBarMenuItems[], p
     return null;
 }
 
+export const findRecursiveByPathNameExact = (sideBarMenuItems: TsideBarMenuItems[], pathname: string): TsideBarMenuItems | null => {
+
+    for (const item of sideBarMenuItems) {
+        // console.log(pathname, item?.pathname?.substring(19), pathname.substring(19).includes(item?.pathname?.substring(19)|| "-" ))
+        if (item.pathname && (pathname === item.pathname)) {
+            return item;
+        }
+        else if (item.children) {
+            const required_item = findRecursiveByPathName(item.children, pathname);
+            if (required_item) return required_item;
+        }
+    }
+
+    return null;
+}
+
 
 export function getActiveSideBarMenu(pathname: string): string {
     const active_menu = findRecursiveByPathName(sideBarMenuItems, pathname);
