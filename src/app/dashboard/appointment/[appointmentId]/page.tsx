@@ -10,7 +10,6 @@ interface Props {
   params: {
     appointmentId: string;
   };
-  // appointmentDataPrefetched?: TAppointment | null
 }
 
 const AppointmentPage: React.FC<Props> = ({ params }) => {
