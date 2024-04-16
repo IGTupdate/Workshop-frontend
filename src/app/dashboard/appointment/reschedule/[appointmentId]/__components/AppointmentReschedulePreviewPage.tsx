@@ -88,7 +88,6 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
             dispatch(getAllCustomerAppointment());
 
         } catch (err: any) {
-            toast.error(COMMON_ERROR)
         } finally {
             setLoading(false);
         }

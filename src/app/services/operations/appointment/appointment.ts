@@ -120,9 +120,10 @@ export const cancelAppointment = async (appointmentId: string) => {
 }
 
 export const rescheduleAppointment = async (appointmentId: string, data: TAppointmentReschedule) => {
+    let response
     try{
         // console.log(appointmentId, data)
-        const response = await apiConnector({
+        response = await apiConnector({
             method: 'POST',
             url: APPOINTMENT_RESCHEDULE_API + '/' + appointmentId,
             bodyData: data
@@ -134,6 +135,7 @@ export const rescheduleAppointment = async (appointmentId: string, data: TAppoin
         }
 
     }catch(err){
+        toast.error(response?.data.message)
         throw err
     }
 }
