@@ -2,10 +2,13 @@
 import Image from 'next/image';
 import React from 'react';
 import Services from "../../../../../public/images/services.png";
-import History from "../../../../../public/images/history.png";
-import Calender from "../../../../../public/images/calander.png";
-import Payments from "../../../../../public/images/payments.png";
-import Chat from "../../../../../public/images/chat.png";
+
+import Calender from "../../../../../public/images/calander.webp";
+
+
+import { FaHistory } from "react-icons/fa";
+import { FaCreditCard } from "react-icons/fa";
+import { MdHeadsetMic } from "react-icons/md";
 
 const CustomerMobileFooter = () => {
     return (
@@ -15,19 +18,19 @@ const CustomerMobileFooter = () => {
                 <p className='mt-1'>Services</p>
             </div>
             <div className="flex flex-col items-center justify-center cursor-pointer">
-                <Image src={History} alt='History' className='h-[25px] w-[25px]' />
+                <FaHistory className='text-2xl text-black' />
                 <p className='mt-1'>History</p>
             </div>
             <div className="flex flex-col items-center justify-center h-[70px] w-[70px] rounded-full bg-gradient-to-r from-[#FFE301] to-[#D7C000] relative top-[-35px] cursor-pointer">
-                <Image src={Calender} alt='Calender' />
+                <Image src={Calender} alt='Calender' className='h-[50px] w-[50px]' />
             </div>
             <div className="flex flex-col items-center justify-center cursor-pointer">
-                <Image src={Payments} alt='Payments' className='h-[17px] w-[25px]' />
-                <p className='mt-3'>Payments</p>
+                <FaCreditCard className='text-2xl text-black' />
+                <p className='mt-1'>Payments</p>
             </div>
             <div className="flex flex-col items-center justify-center cursor-pointer">
-                <Image src={Chat} alt='Chat' className='h-[25px] w-[25px]' />
-                <p className='mt-1'>Chat</p>
+                <MdHeadsetMic className='text-3xl text-black' />
+                <p className='mt-0'>Chat</p>
             </div>
         </div>
     );

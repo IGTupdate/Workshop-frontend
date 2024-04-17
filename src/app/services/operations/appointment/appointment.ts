@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { apiConnector } from "../../apiConnector";
 import { appointmentEndpoints } from "../../apis";
 import { AppointmentData } from "@/app/dashboard/appointment/__utils/FetchAppointments";
-import { COMMON_ERROR } from "@/app/utils/constant";
+import { COMMON_ERROR } from "@/app/utils/constants/constant";
 
 
 
@@ -114,8 +114,9 @@ export const cancelAppointment = async (appointmentId: string) => {
 
         if (response.data.success) {
             toast.success("Appointment Cancelled Successfulyy")
-        }
 
+        }
+        return true;
     } catch (err: any) {
         toast.error(err?.response?.data?.message || COMMON_ERROR);
         throw err

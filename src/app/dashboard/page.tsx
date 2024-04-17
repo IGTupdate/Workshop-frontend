@@ -2,7 +2,7 @@ import React from 'react';
 import AppointmentCard from './__components/__common/AppointmentCard';
 import NotificationCard from './__components/__common/NotificationCard';
 import Image from 'next/image';
-import AddImage from '../../../public/images/image 2.png';
+import AddImage from '../../../public/images/image-2.webp';
 import PaymentMethods from './__components/__common/PaymentMethods';
 
 type Props = {};

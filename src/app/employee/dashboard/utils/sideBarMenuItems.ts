@@ -13,7 +13,7 @@ export const sideBarMenuItems: TsideBarMenuItems[] = [
     {
         key: '1',
         label: 'Dashboard',
-        pathname: "/employee/dashboard"
+        pathname: "/employee/dashboard",
     },
     {
         key: '2',
@@ -73,7 +73,7 @@ export function getSideBarMenuItems(router: AppRouterInstance, sideBarMenuItems:
                 if (item.pathname) {
                     router.push(item.pathname)
                 }
-            }
+            },
         }
     })
 }

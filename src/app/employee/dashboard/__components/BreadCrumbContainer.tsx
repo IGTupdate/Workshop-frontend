@@ -28,7 +28,7 @@ const BreadCrumbContainer = (props: Props) => {
         for (let index = 0; index < path.length; index++) {
             if (path.charAt(index) === '/') {
                 const currentPath = path.substring(0, index);
-                console.log(currentPath);
+                // console.log(currentPath);
                 const requiredSubMenuItem = findRecursiveByPathNameExact(sideBarMenuItems, currentPath);
                 if (requiredSubMenuItem) {
                     newBreadCrumItem.push({

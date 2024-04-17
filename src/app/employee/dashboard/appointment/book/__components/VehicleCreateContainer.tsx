@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form'
 import { vehicleCreateInputFields } from '../__utils/vehicle-create-input';
 import InputField from '@/app/components/Input/InputField';
 import toast from 'react-hot-toast';
-import { COMMON_ERROR } from '@/app/utils/constant';
+import { COMMON_ERROR } from '@/app/utils/constants/constant';
 import { createVehicle } from '@/app/services/operations/appointment/vehicle';
 import { useAppDispatch } from '@/app/store/reduxHooks';
 import { setVehicleLoading } from '@/app/store/slices/customerVehicleSlice';

@@ -5,7 +5,7 @@ import { RootState } from "@/app/store/store";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import { TCalenderCreate } from "@/app/validators/calender";
 import toast from "react-hot-toast";
-import { COMMON_ERROR } from "@/app/utils/constant";
+import { COMMON_ERROR } from "@/app/utils/constants/constant";
 import { toogleCalenderStatus } from "@/app/employee/dashboard/slot-management/calender/__utils/helper";
 import { TCalender, TCalenderStatus } from "@/app/types/calender";
 

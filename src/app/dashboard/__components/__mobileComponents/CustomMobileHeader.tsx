@@ -4,11 +4,12 @@ import { useAppSelector } from '@/app/store/reduxHooks';
 import { IAuthData } from "@/app/store/slices/authSlice";
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import Fly from "../../../../../public/images/fly.png";
-import Bell from "../../../../../public/images/bell.png";
-import Profile from "../../../../../public/images/profile.png";
-import Dots from "../../../../../public/images/dots.png";
+import Fly from "../../../../../public/images/fly.webp";
 import Link from 'next/link';
+
+import { IoNotifications } from "react-icons/io5";
+import { PiUserCircleFill } from "react-icons/pi";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { usePathname } from 'next/navigation';
 
 const CustomMobileHeader = () => {
@@ -40,9 +41,9 @@ const CustomMobileHeader = () => {
             {/* side icons */}
 
             <div className="flex justify-center items-center gap-2">
-                <Link href={"/dashboard/notifications"}><Image src={Bell} alt='Bell' /></Link>
-                <Image src={Profile} alt='Profile' />
-                <Image src={Dots} alt='Dots' />
+                <Link href={"/dashboard/notifications"}><IoNotifications className='text-3xl text-[#2b2c30]' /></Link>
+                <PiUserCircleFill className='text-5xl text-[#2b2c30]' />
+                <BsThreeDotsVertical className='text-4xl text-[#2b2c30]' />
             </div>
         </div>
     );

@@ -7,7 +7,7 @@ import { Button, Input } from 'antd';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Logo from "../../../../public/images/logo-3.png";
+import Logo from "../../../../public/images/logo-3.webp";
 
 interface FormInputs {
     contactNumber: string,

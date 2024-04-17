@@ -1,7 +1,7 @@
 "use client";
 import Image from 'next/image';
 import React, { useState } from 'react';
-import Fly from "../../../../../public/images/fly.png";
+import Fly from "../../../../../public/images/fly.webp";
 
 const StepBar = () => {
     const [step, setStep] = useState<number>(5);

@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaRegEdit } from "react-icons/fa";
-import Logo from "../../../../public/images/logo-3.png";
+import Logo from "../../../../public/images/logo-3.webp";
 
 
 const VerifyOTP = () => {
