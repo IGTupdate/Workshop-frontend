@@ -1,6 +1,7 @@
-const BASE_URL = "http://localhost:4000";
-const APPOINTMENT_SERVICE_BASE_URL = "http://localhost:5000/api";
-const WORK_ORDER_SERVICE_BASE_URL = "http://localhost:4100/api";
+const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_BASE_URL || ''
+const APPOINTMENT_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_APPOINTMENT_SERVICE_BASE_URL+ "/api";
+const WORK_ORDER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_WORK_ORDER_SERVICE_BASE_URL + "/api";
+const CONSUMER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_CONSUMER_BASE_URL
 
 const createUrl = (baseUrl: string, ...paths: string[]) => `${baseUrl}${paths.join('')}`;
 
@@ -17,7 +18,7 @@ const CANCEL = "/cancel";
 const RAMP = '/ramp'
 
 // Define endpoint generators
-const authUrl = (...paths: string[]) => createUrl(BASE_URL, ...paths);
+const authUrl = (...paths: string[]) => createUrl(AUTH_BASE_URL, ...paths);
 const appointmentUrl = (...paths: string[]) => createUrl(APPOINTMENT_SERVICE_BASE_URL, ...paths);
 const workOrderUrl = (...paths: string[]) => createUrl(WORK_ORDER_SERVICE_BASE_URL, ...paths);
 
