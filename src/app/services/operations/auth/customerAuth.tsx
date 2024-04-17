@@ -6,7 +6,7 @@ import { apiConnector } from "../../apiConnector";
 import { apiOpenConnector } from "../../apiOpenConnector";
 import { authEndpoints } from "../../apis";
 
-const { SENDOTP_API, VERIFYOTP_API, AUTH_API, GENERATE_ACCESS_TOKEN_API, GET_CUSTOMER_DATA_API, CUSTOMER_UPDATE_API, LOGOUT_API } =
+const { SEND_OTP_API, VERIFY_OTP_API, AUTH_API, GENERATE_ACCESS_TOKEN_API, GET_CUSTOMER_DATA_API, CUSTOMER_UPDATE_API, LOGOUT_API } =
   authEndpoints;
 
 export async function getCustomerData(_id: string, dispatch: AppDispatch) {
@@ -30,7 +30,7 @@ export async function sendOTP(contactNumber: string, resend?: boolean) {
     // Sending OTP request
     const otpResult = await apiOpenConnector({
       method: "POST",
-      url: SENDOTP_API,
+      url: SEND_OTP_API,
       bodyData: { contactNumber },
     });
 
@@ -54,7 +54,7 @@ export async function verifyOTP(contactNumber: string, otp: string, dispatch: Ap
     // Sending OTP verification request
     const otpVerificationResult = await apiOpenConnector({
       method: "POST",
-      url: VERIFYOTP_API,
+      url: VERIFY_OTP_API,
       bodyData: { contactNumber, otp },
     });
 
