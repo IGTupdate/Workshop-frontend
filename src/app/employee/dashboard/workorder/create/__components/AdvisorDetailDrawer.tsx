@@ -41,7 +41,16 @@ const AdvisorDetailDrawer = (props: Props) => {
                                         props.activeAdvisor.assigned_workOrder.length > 0 ?
                                             props.activeAdvisor.assigned_workOrder.map((el, index) => {
                                                 return <li key={index}>
-                                                    <DescriptionItem title={"Estimated Time"} content={el.estimatedTimeOfCompletion ? new Date(el.estimatedTimeOfCompletion).toLocaleTimeString() : "-"} />
+                                                    <div className='grid grid-cols-2 mb-4 '>
+                                                        <DescriptionItem
+                                                            title={"Estimated Time"}
+                                                            content={el.estimatedTimeOfCompletion ? new Date(el.estimatedTimeOfCompletion).toLocaleTimeString() : "-"} />
+
+                                                        <DescriptionItem
+                                                            title={"Ramp"}
+                                                            content={(el.ramdId && typeof el.ramdId !== "string" && el.ramdId.name)} />
+                                                    </div>
+                                                    <Divider />
                                                 </li>
                                             }) : <>No Assigned Work order found</>
                                     }

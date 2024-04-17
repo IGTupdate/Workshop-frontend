@@ -1,1 +1,2 @@
 export const APPOINTMENT_DATA_PAGE_SIZE = 20;
+export const WORK_ORDER_DATA_PAGE_SIZE = 20;

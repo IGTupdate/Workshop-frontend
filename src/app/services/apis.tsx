@@ -61,6 +61,8 @@ export const appointmentEndpoints = {
 
 export const workOrderEndpoints = {
   GET_EMPLOYEE_WORK_STATUS: workOrderUrl("/employee/status"),
+  CREATE_WORK_ORDER : workOrderUrl("/workorder/create"),
+  GET_ALL_WORK_ORDER : workOrderUrl("/workorder/get-all"),
   RAMP_CREATE_API: workOrderUrl("/create"),
   GET_ALL_RAMP_API: workOrderUrl(RAMP, "/get"),
   GET_ALL_RAMP_STATUS_API: workOrderUrl(RAMP, "/get/status")

@@ -1,5 +1,5 @@
 export function convertToLocaleDateAndWeekday(dateString: string | undefined) {
-    if(!dateString) return ''
+    if (!dateString) return ''
     // Convert string to Date object
     const date = new Date(dateString);
 
@@ -26,6 +26,6 @@ export function extractTimeFromDate(dateString: string): string {
     return new Date(dateString).toLocaleTimeString();
 }
 
-export function formatDateAndTime(dateString : string) {
+export function formatDateAndTime(dateString: string) {
     return new Date(dateString).toLocaleString()
 }
