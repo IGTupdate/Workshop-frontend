@@ -40,6 +40,7 @@ export type TPartRequested = {
 
 
 export type TWorkOrder = {
+    _id:string,
     orderNumber: string;
     appointmentId: string | TAppointment;
     advisorId: string | TEmployee;

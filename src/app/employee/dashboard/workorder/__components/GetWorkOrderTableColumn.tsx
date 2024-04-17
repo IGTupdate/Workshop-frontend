@@ -62,11 +62,11 @@ export function GetWorkOrderTableColumn() {
                 dataIndex: "orderNumber",
                 key: "orderNumber",
                 ...GetColumnTextSearchProps<TWorkOrderDataTable>("orderNumber"),
-                render: (customer) => {
+                render: (orderNumber) => {
                     return (
                         <div>
-                            <Title level={5}>{customer.name}</Title>
-                            <Text>{customer.phone}</Text>
+                            <Title level={5}>{orderNumber}</Title>
+                            <Text>{orderNumber}</Text>
                         </div>
                     );
                 },
