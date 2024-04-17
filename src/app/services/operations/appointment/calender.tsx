@@ -9,13 +9,13 @@ import { COMMON_ERROR } from "@/app/utils/constants/constant";
 import { toogleCalenderStatus } from "@/app/employee/dashboard/slot-management/calender/__utils/helper";
 import { TCalender, TCalenderStatus } from "@/app/types/calender";
 
-const { GET_ALL_CALENDER, CREATE_CALENDER, UPDATE_CALENDER_STATUS } = appointmentEndpoints;
+const { GET_ALL_CALENDAR, CREATE_CALENDAR, UPDATE_CALENDAR_STATUS } = appointmentEndpoints;
 
 export const getAllCalender = (): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
   try {
     const response = await apiConnector({
       method: "GET",
-      url: GET_ALL_CALENDER,
+      url: GET_ALL_CALENDAR,
     });
 
     console.log(response)
@@ -34,7 +34,7 @@ export const createCalender = (data: TCalenderCreate[]): ThunkAction<void, RootS
     dispatch(setCalenderDrawerLoading(true));
     const response = await apiConnector({
       method: "POST",
-      url: CREATE_CALENDER,
+      url: CREATE_CALENDAR,
       bodyData: { calender: data }
     })
 
@@ -56,7 +56,7 @@ export const udpateCalenderStatus = (calenderId: string, status: string): ThunkA
 
     const response = await apiConnector({
       method: "POST",
-      url: UPDATE_CALENDER_STATUS + "/" + calenderId + "/" + status,
+      url: UPDATE_CALENDAR_STATUS + "/" + calenderId + "/" + status,
     })
 
     // dispatch()
