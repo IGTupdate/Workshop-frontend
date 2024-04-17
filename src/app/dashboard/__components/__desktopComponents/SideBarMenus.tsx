@@ -30,7 +30,7 @@ const SideBarMenus = () => {
         <Menu
             mode="inline"
             defaultSelectedKeys={[activeDashboardKey]}
-            theme='dark'
+            theme='light'
             defaultOpenKeys={['sub1']}
             items={sideBarMenus}
         />

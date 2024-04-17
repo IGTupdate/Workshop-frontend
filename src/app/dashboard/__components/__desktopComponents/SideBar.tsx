@@ -24,7 +24,7 @@ const SideBar = ({ sidebarWidth }: SideBarProps) => {
   return (
     <Sider
       width={sidebarWidth}
-      theme="dark"
+      theme="light"
       trigger={null}
       collapsible
       breakpoint="md"
