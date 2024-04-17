@@ -8,14 +8,14 @@ import { useRouter } from 'next/navigation';
 
 const Logout: React.FC = () => {
     const [visible, setVisible] = useState(false);
-    const dispatch = useAppDispatch()
-    const router = useRouter()
+    const dispatch = useAppDispatch();
+    const router = useRouter();
 
     const handleLogout = async () => {
         try {
-            dispatch(logout())
-            setVisible(false)
-            router.push('/')
+            dispatch(logout());
+            setVisible(false);
+            router.push('/');
         } catch (err) {
             // console.error(err);
         }
@@ -32,10 +32,12 @@ const Logout: React.FC = () => {
     return (
         <>
             <Button
-                type="primary"
-                style={{ borderBottomRightRadius: 0, borderBottomLeftRadius: 0 }}
-                className='bg-customBrown w-full'
-                icon={<FiLogOut />}
+                // type="primary"
+                style={{
+                    padding: "1.5em 0", display: "flex", justifyContent: "center", alignItems: "center", border: "none", color: "white"
+                }}
+                className='bg-[#063146] w-full hover:bg-[#063142] shadow-xl'
+                icon={< FiLogOut />}
                 onClick={showModal}
             >
                 LogOut
@@ -54,6 +56,6 @@ const Logout: React.FC = () => {
             </CustomModal>
         </>
     );
-}
+};
 
 export default Logout;

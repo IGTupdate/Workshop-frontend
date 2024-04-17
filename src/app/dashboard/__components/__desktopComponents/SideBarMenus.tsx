@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { sideBarMenuItems } from '@/app/dashboard/__components/__desktopComponents/CustomerSideBarMenuItems';
 import { DesktopOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
@@ -12,10 +12,10 @@ import { getActiveSideBarMenu, getSideBarMenuItems } from '@/app/employee/dashbo
 const dashBoardIcons = {
     Dashboard: <RxDashboard />,
     Appointment: <DesktopOutlined />,
-    Profile: <CgProfile/>,
-    PreviousBookings: <GrBook/>,
-    Settings: <IoSettingsOutline/>
-}
+    Profile: <CgProfile />,
+    PreviousBookings: <GrBook />,
+    Settings: <IoSettingsOutline />
+};
 
 const SideBarMenus = () => {
     const router = useRouter();
@@ -30,11 +30,11 @@ const SideBarMenus = () => {
         <Menu
             mode="inline"
             defaultSelectedKeys={[activeDashboardKey]}
-            theme='dark'
+            theme='light'
             defaultOpenKeys={['sub1']}
             items={sideBarMenus}
         />
-    )
-}
+    );
+};
 
 export default SideBarMenus;

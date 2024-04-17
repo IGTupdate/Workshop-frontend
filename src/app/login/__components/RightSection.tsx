@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import SendOTP from './SendOTP';
 import Register from './Register';
 import VerifyOTP from './VerifyOTP';
 import { useAppSelector } from '@/app/store/reduxHooks';
-import Loader from '@/app/components/Loader/index';
+import Loading from '../Loading';
 
-type Props = {}
+type Props = {};
 
 const RightSection = (props: Props) => {
 
-    const loading = useAppSelector((state) => state.auth.authLoading)
+    const loading = useAppSelector((state) => state.auth.authLoading);
 
-    const step = useAppSelector((state) => state.auth.authStep)
+    const step = useAppSelector((state) => state.auth.authStep);
     return (
-        <div className='relative md:z-[0] z-[10] w-full h-full md:p-10 xl:pl-20 py-16 px-6 flex items-center justify-center xl:justify-start bg-white1 rounded-t-[50px]'>
+        <div className='relative md:z-[0] z-[10] w-full h-full md:p-10 xl:pl-20 py-16 px-6 flex items-center justify-center bg-white1 rounded-t-[50px]'>
             {
-                loading ? <div className=' h-screen flex justify-center items-center'><Loader /></div> : <div className='w-full sm:max-w-[320px]'>
+                loading ? <Loading /> : <div className='w-full sm:max-w-[320px]'>
                     {
                         step === 0 && <SendOTP />
                     }
@@ -32,7 +32,7 @@ const RightSection = (props: Props) => {
 
 
         </div>
-    )
-}
+    );
+};
 
 export default RightSection;

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Heading from '@/app/components/Heading';
 import ErrorText from '@/app/components/Text/ErrorText';
 import { sendOTP, verifyOTP } from '@/app/services/operations/auth/customerAuth';
@@ -6,10 +6,13 @@ import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import { setAuthLoading, setAuthStep } from '@/app/store/slices/authSlice';
 import { Button } from 'antd';
 import { InputOTP } from 'antd-input-otp';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaRegEdit } from "react-icons/fa";
+import Logo from "../../../../public/images/logo-3.png";
+
 
 const VerifyOTP = () => {
     const contact = useAppSelector((state) => state.auth.authData.contactNumber);
@@ -31,10 +34,10 @@ const VerifyOTP = () => {
         if (otp.length === 6) {
             setOTPErrors('');
         }
-        
+
         dispatch(setAuthLoading(true));
 
-        let result
+        let result;
         try {
             result = await verifyOTP(contact, otp, dispatch);
             if (result.data.success) {
@@ -42,9 +45,9 @@ const VerifyOTP = () => {
                 else dispatch(setAuthStep(2));
             }
         } catch (error) {
-            toast.error("Invalid OTP")
-            router.push('/login')
-        }finally {
+            toast.error("Invalid OTP");
+            router.push('/login');
+        } finally {
             dispatch(setAuthLoading(false));
         }
 
@@ -59,17 +62,21 @@ const VerifyOTP = () => {
         } finally {
             dispatch(setAuthLoading(false));
         }
-    }
+    };
 
     const editContactNumber = async () => {
-        dispatch(setAuthStep(0))
-    }
+        dispatch(setAuthStep(0));
+    };
 
     return (
         <div className="w-full">
+
+
+            <Image src={Logo} alt='Logo' className='mb-8' />
+
             <Heading
                 type='heading1'
-                primary={"OTP"}
+                primary={"OTP Verification"}
                 secondary={"Give Your Identity"}
                 primaryColor='text-black1'
             />
@@ -87,12 +94,12 @@ const VerifyOTP = () => {
                 </div>
                 <Button
                     size='large'
-                    className='bg-blue1 text-white1 font-semibold w-full'
+                    className='bg-black text-white1 font-semibold w-full border-none hover:shadow-xl'
                     onClick={handleFinish}
                 >
                     Send
                 </Button>
-                <p className=' text-xs'>Didn&apos;t get the code? <span onClick={() => resendOTP()} className=' cursor-pointer text-sm'>Resend</span></p>
+                <p className=' text-xs'>Didn&apos;t get the code? <span onClick={() => resendOTP()} className=' cursor-pointer font-semibold text-base text-blue-600'>Resend</span></p>
             </div>
         </div>
     );

@@ -31,21 +31,21 @@ export default function RootLayout({
         <AntdRegistry>
           <ConfigProvider theme={{
             "token": {
-              "colorPrimary": "#ffe200",
-              "colorInfo": "#ffe200",
-              "colorTextBase": "#2e3033",
+              "colorPrimary": "#fadb14",
+              "colorInfo": "#fadb14"
             },
             "components": {
               "Menu": {
-                "colorBgContainer": "#171717",
-                "colorFillAlter": "#2E3033",
-                "colorText": "#CDCDCE",
-                "itemHoverColor": "#A49339",
-                itemSelectedBg: "#A49339",
-                itemSelectedColor: "#ffffff",
+                "colorBgContainer": "#031c30",
+                "colorFillAlter": "#031c30",
+                "itemHoverBg": "#063146",
+                "itemHoverColor": "rgba(255, 255, 255, 0.88)",
+                "itemSelectedBg": "#063146",
+                "itemSelectedColor": "rgb(255, 255, 255)",
+                "itemColor": "#FFFFFF"
               },
               "Layout": {
-                "colorBgContainer": "#171717",
+                "colorBgContainer": "#031c30",
               }
             }
           }}>

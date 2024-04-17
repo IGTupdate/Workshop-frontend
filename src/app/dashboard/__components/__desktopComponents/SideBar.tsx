@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Logout from "@/app/components/Logout/Logout";
 import { useAppSelector } from "@/app/store/reduxHooks";
 import { UserOutlined } from "@ant-design/icons";
@@ -18,29 +18,29 @@ const SideBar = ({ sidebarWidth }: SideBarProps) => {
   const authData = useAppSelector((state) => state.auth.authData);
 
   useEffect(() => {
-    setUser(authData)
+    setUser(authData);
   }, [authData]);
 
   return (
     <Sider
       width={sidebarWidth}
-      theme="dark"
+      theme="light"
       trigger={null}
       collapsible
       breakpoint="md"
-      style={{ height: "100vh", position: "fixed", top: 0, overflow: "hidden", zIndex: 999 }}
+      style={{ height: "100vh", position: "fixed", top: 0, overflow: "hidden", zIndex: 999, padding: "1em" }}
     >
-      <Space className={`w-full p-4`}>
+      <Space className={`w-full mb-6`}>
         <Avatar size={"large"} icon={<UserOutlined />} />
         <div>
-          <h2 className="text-white1 font-semibold text-xl">Hello, {user?.fullName?.split(" ")[0]}</h2>
+          <h2 className="text-white1 font-semibold text-xl capitalize">Hello, {user?.fullName?.split(" ")[0]}</h2>
           <p className="text-gray1 text-sm font-medium">Customer</p>
         </div>
       </Space>
 
       <SideBarMenus />
 
-      <div className="w-full absolute bottom-0 ">
+      <div className="w-[200px] absolute bottom-6 left-1/2 translate-x-[-50%] border-t pt-10">
         <Logout />
       </div>
     </Sider>

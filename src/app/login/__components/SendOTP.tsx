@@ -4,28 +4,30 @@ import { sendOTP } from '@/app/services/operations/auth/customerAuth';
 import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import { setAuthData, setAuthLoading, setAuthStep } from '@/app/store/slices/authSlice';
 import { Button, Input } from 'antd';
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import Logo from "../../../../public/images/logo-3.png";
 
 interface FormInputs {
     contactNumber: string,
 }
 
 type Tprops = {
-}
+};
 const SendOTP = (props: Tprops) => {
     const {
         handleSubmit
-    } = useForm<FormInputs>()
+    } = useForm<FormInputs>();
 
-    const dispatch = useAppDispatch()
-    const contact = useAppSelector(state => state.auth.authData.contactNumber)
-    const [contactNumber, setContactNumber] = useState(contact)
-    const [contactNumberError, setContactNumberError] = useState('')
+    const dispatch = useAppDispatch();
+    const contact = useAppSelector(state => state.auth.authData.contactNumber);
+    const [contactNumber, setContactNumber] = useState(contact);
+    const [contactNumberError, setContactNumberError] = useState('');
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-        if (contactNumber.length === 0) setContactNumberError("Contact Number is Required")
-        if (contactNumber.length !== 10) return
+        if (contactNumber.length === 0) setContactNumberError("Contact Number is Required");
+        if (contactNumber.length !== 10) return;
         dispatch(setAuthLoading(true));
         try {
             const result = await sendOTP(contactNumber);
@@ -46,7 +48,7 @@ const SendOTP = (props: Tprops) => {
 
         if (!reg.test(inputValue)) {
             setContactNumberError('Contact Number must be digits');
-            return
+            return;
         } else if (inputValue.length !== 10) {
             setContactNumberError('Contact Number must have 10 digits');
         } else {
@@ -59,15 +61,17 @@ const SendOTP = (props: Tprops) => {
     return (
         <div className="w-full">
 
-            <Heading
+            {/* <Heading
                 type='heading1'
                 primary={"Authenticate"}
                 secondary={"Give Your Identity"}
                 primaryColor='text-black1'
-            />
+            /> */}
+
+            <Image src={Logo} alt='Logo' />
 
             <form onSubmit={handleSubmit(onSubmit)} className="w-full md:mt-10 mt-8 flex flex-col gap-3">
-                <div className='md:mb-4 mb-3 relative'>
+                <div className='mb-6 relative shadow-xl p-4 rounded-xl'>
                     <label className='text-sm font-medium mb-1 block text-black1'>Phone</label>
                     <Input
                         size='large'
@@ -75,18 +79,19 @@ const SendOTP = (props: Tprops) => {
                         onChange={handleChange}
                         placeholder="Enter Your Contact Number"
                         maxLength={10}
+                        className='border-0 p-0 outline-none shadow-none'
                     />
                     {contactNumberError && <ErrorText text={contactNumberError} />}
                 </div>
                 <Button
                     size='large'
                     htmlType='submit'
-                    className='bg-blue1 text-white1 font-semibold w-full'>
+                    className='bg-black text-white1 font-semibold w-full border-none hover:shadow-xl'>
                     Send Verification Code
                 </Button>
             </form>
         </div>
     );
-}
+};
 
 export default SendOTP;
