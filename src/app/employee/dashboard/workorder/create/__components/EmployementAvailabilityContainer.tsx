@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
-import { Avatar, Card, Skeleton, Switch, Typography } from 'antd';
+import { Avatar, Button, Card, Skeleton, Switch, Typography } from 'antd';
 import { TEmployeeWorkStatus } from '@/app/types/employee';
 import { getEmployeeWorkingStatus } from '@/app/services/operations/workorder/workorder';
 import AdvisorDetailDrawer from './AdvisorDetailDrawer';
@@ -13,6 +13,8 @@ const { Meta } = Card;
 
 type Props = {
     role: string
+    handleSetlect: (advisorId: string) => void
+    selectedAdvisor: string
 }
 
 
@@ -24,11 +26,11 @@ const EmployementAvailabilityContainer = (props: Props) => {
 
     useEffect(() => {
         if (loading) {
-            loadAdvisorStatus();
+            loaddEmployeeWorkStatus();
         }
     }, [loading]);
 
-    const loadAdvisorStatus = async () => {
+    const loaddEmployeeWorkStatus = async () => {
         setLoading(true);
         try {
             const response = await getEmployeeWorkingStatus(props.role);
@@ -42,6 +44,16 @@ const EmployementAvailabilityContainer = (props: Props) => {
 
     const openDrawer = (data: TEmployeeWorkStatus) => {
         setActiveAdvisor(data);
+    }
+
+    const handleAdvisorSelect = (value: string) => {
+
+        if (value === props.selectedAdvisor) {
+            props.handleSetlect("");
+        }
+        else {
+            props.handleSetlect(value)
+        }
     }
 
     return (
@@ -61,8 +73,14 @@ const EmployementAvailabilityContainer = (props: Props) => {
                                     <SettingOutlined key="setting" onClick={() => {
                                         openDrawer(advisor);
                                     }} />,
-                                    // <EditOutlined key="edit" />,
-                                    <EllipsisOutlined key="ellipsis" />,
+                                    <Button
+                                        key="button"
+                                        type={props.selectedAdvisor !== advisor._id ? "default" : "primary"}
+                                        onClick={() => {
+                                            handleAdvisorSelect(advisor._id)
+                                        }}>
+                                        {props.selectedAdvisor !== advisor._id ? "Select" : "Selected"}
+                                    </Button>
                                 ]}
                             >
 

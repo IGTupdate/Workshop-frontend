@@ -76,7 +76,6 @@ const AppointmentpageContainer = (props: Props) => {
         <Loader />
       ) : (
         <div>
-          <div></div>
           <AppointmentTableContainer appointmentData={appointmentData.appointments} />
           <div className="mt-10 mx-auto w-max">
             <Pagination

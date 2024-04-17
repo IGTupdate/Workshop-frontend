@@ -73,5 +73,7 @@ export const appointmentEndpoints = {
 
 
 export const workOrderEndPoints = {
-  GET_EMPLOYEE_WORK_STATUS: WORK_ORDER_SERVICE_BASE_URL + "/employee/status"
+  GET_EMPLOYEE_WORK_STATUS: WORK_ORDER_SERVICE_BASE_URL + "/employee/status",
+  CREATE_WORK_ORDER : WORK_ORDER_SERVICE_BASE_URL +"/workorder/create",
+  GET_ALL_WORK_ORDER : WORK_ORDER_SERVICE_BASE_URL + "/workorder/get-all"
 }

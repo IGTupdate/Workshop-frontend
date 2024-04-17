@@ -1,6 +1,11 @@
 import { TAppointment } from "./appointment";
 import { TEmployee } from "./employee";
 
+export type TWorkOrderStatus =
+    | "Pending"
+    | "Processing"
+    | "Completed";
+
 export type TTask = {
     title: string;
     description: string;
@@ -50,3 +55,16 @@ export type TWorkOrder = {
     partsRequiredInvoice: string[];
     current_location: string;
 };
+
+
+export type TWorkOrderData = {
+    workOrders: TWorkOrder[],
+    totalWorkOrders: number
+}
+
+export type TWorkOrderDataTable = {
+    orderNumber: string,
+    status: string,
+    vehicle_registeration_number: string,
+    _id: string
+}
