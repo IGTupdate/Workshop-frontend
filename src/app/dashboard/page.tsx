@@ -20,7 +20,7 @@ const Page = (props: Props) => {
       <div className="image my-4 w-full">
         <Image src={AddImage} alt='AddImage' className='w-full' />
       </div>
-
+      {/* PAYMENT COMPONENT */}
       <PaymentMethods />
 
     </div>

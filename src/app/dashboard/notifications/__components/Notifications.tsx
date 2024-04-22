@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import { useEffect, useState } from 'react';
 import { appointmentNotification } from '@/app/services/operations/notification/appointment';
 import Loader from '@/app/components/Loader';
+import Watermark from '@/app/components/Text/WatermarkText';
 
 
 interface NotificationItem {
@@ -74,7 +75,7 @@ const Notifications: React.FC<NotificationsProps> = ({ show, appointmentId }) =>
                                 {
                                     notifications?.length > 0 ? notifications.slice(0, 2)?.map((item, index) => (
                                         <li key={index} className='relative ps-6 before:content=[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:h-[10px] before:w-[10px] before:rounded-full before:bg-yellow-300'>{item.title}</li>
-                                    )) : <p className='font-semibold'>No notification available</p>
+                                    )) : <p className='py-4 relative'><Watermark text={'No History Available'} /></p>
                                 }
                             </ul>
                                 : <ul className={`relative ${notifications.length > 3 && 'before:content-[""] before:h-16'} before:absolute before:right-0 before:bottom-0 before:w-full before:bg-gradient-to-t before:from-[#f5f5f5] before:to-transparent`}>
@@ -86,7 +87,7 @@ const Notifications: React.FC<NotificationsProps> = ({ show, appointmentId }) =>
                                                 </h3>
                                                 <p>{item.desc}</p>
                                             </li>
-                                        )) : <p className='font-semibold'>No notification available</p>
+                                        )) : <p className='py-4 relative'><Watermark text={'No History Available'} /></p>
                                     }
                                 </ul>
                         }

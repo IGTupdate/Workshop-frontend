@@ -19,8 +19,6 @@ const AppointmentCard = () => {
 
     const combinedAppointments = assignedAppointments.concat(scheduledAppointments);
 
-    console.log(appointmentData, "appointmentData");
-
     return (
         <Swiper
             loop={true}

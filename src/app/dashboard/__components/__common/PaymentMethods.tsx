@@ -55,8 +55,8 @@ const PaymentMethods = () => {
                 }}
             >
                 {
-                    [1, 2, 3, 4, 5, 6].map((item) => (
-                        <SwiperSlide>
+                    [1, 2, 3, 4, 5, 6].map((item, index) => (
+                        <SwiperSlide key={index}>
                             <SliderContent />
                         </SwiperSlide>
                     ))

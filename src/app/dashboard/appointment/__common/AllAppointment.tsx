@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Button, Descriptions, Tag } from 'antd';
 import { AppointmentData } from '../__utils/FetchAppointments';
 import CustomModal from '@/app/components/Model/CustomModel';
-import dayjs from 'dayjs';
 
 interface Props {
     appointment: AppointmentData;
@@ -29,7 +28,7 @@ const AllAppointments: React.FC<Props> = ({ appointment, onRescheduleAppointment
     return (
         <>
             <div className='shadow-xl rounded-xl overflow-hidden'>
-                <Descriptions title={`Appointment Id: ${appointment.appointmentId}`} column={2} className=' bg-white p-4 pb-0 '>
+                <Descriptions title={`Appointment Id: ${appointment.appointmentId}`} className=' bg-white p-4 pb-0 font-bold'>
                     <Descriptions.Item label="Appointment Date" className='font-bold text-nowrap'>{appointment.appointmentDate}</Descriptions.Item>
                     <Descriptions.Item label="Slot Timings" className='font-bold text-nowrap'>{`${appointment.slotTimings?.startTime} - ${appointment.slotTimings?.endTime}`}</Descriptions.Item>
                     <Descriptions.Item label="Appointment Created" className='font-bold text-nowrap'>{appointment.appointmentCreated}</Descriptions.Item>

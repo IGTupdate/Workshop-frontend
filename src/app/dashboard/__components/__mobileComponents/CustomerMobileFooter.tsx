@@ -1,11 +1,8 @@
 "use client";
 import Image from 'next/image';
 import React from 'react';
-import Services from "../../../../../public/images/services.png";
-
+import Services from "../../../../../public/images/services.webp";
 import Calender from "../../../../../public/images/calander.webp";
-
-
 import { FaHistory } from "react-icons/fa";
 import { FaCreditCard } from "react-icons/fa";
 import { MdHeadsetMic } from "react-icons/md";
