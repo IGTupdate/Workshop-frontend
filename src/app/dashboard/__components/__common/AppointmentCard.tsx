@@ -81,7 +81,7 @@ const AppointmentCard = () => {
 
             <SwiperSlide>
                 <div className='bg-gradient-to-r from-[#FFE301] to-[#D7C000] rounded-2xl p-4  min-h-[121px]'>
-                    <h3 className='font-bold text-2xl text-white text-center'>Don,t have any appointment</h3>
+                    <h3 className='font-bold text-2xl text-white text-center'>Don't have any appointment</h3>
                     <div className="flex justify-center items-center mt-4">
                         <Link href={"/dashboard/appointment/book"}><button className='bg-black rounded-xl p-2 px-4 text-white hover:shadow-xl'>Book Appointment</button></Link>
                     </div>
