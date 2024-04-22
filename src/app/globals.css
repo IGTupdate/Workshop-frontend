@@ -72,3 +72,11 @@ a:hover {
 .input-otp {
   justify-content: start !important;
 }
+
+
+
+:where(.css-dev-only-do-not-override-dg1m93).ant-descriptions .ant-descriptions-item-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}

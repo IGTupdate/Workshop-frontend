@@ -25,15 +25,16 @@ const AllAppointments: React.FC<Props> = ({ appointment, onRescheduleAppointment
         setVisible(false);
     };
 
+
     return (
         <>
-            <div className='shadow-xl'>
+            <div className='shadow-xl rounded-xl overflow-hidden'>
                 <Descriptions title={`Appointment Id: ${appointment.appointmentId}`} column={2} className=' bg-white p-4 pb-0 '>
                     <Descriptions.Item label="Appointment Date" className='font-bold text-nowrap'>{appointment.appointmentDate}</Descriptions.Item>
-                    <Descriptions.Item label="Slot Timings" className='font-bold'>{`${dayjs(appointment.slotTimings?.startTime).format("hh:mm")} - ${dayjs(appointment.slotTimings?.endTime).format("hh:mm")}`}</Descriptions.Item>
-                    <Descriptions.Item label="Appointment Created" className='font-bold'>{appointment.appointmentCreated}</Descriptions.Item>
-                    <Descriptions.Item label="Vehicle VIN" className='font-bold'>{appointment.vehicleVIN}</Descriptions.Item>
-                    <Descriptions.Item label="Vehicle Registration" className='font-bold'>{appointment.vehicleReg}</Descriptions.Item>
+                    <Descriptions.Item label="Slot Timings" className='font-bold text-nowrap'>{`${appointment.slotTimings?.startTime} - ${appointment.slotTimings?.endTime}`}</Descriptions.Item>
+                    <Descriptions.Item label="Appointment Created" className='font-bold text-nowrap'>{appointment.appointmentCreated}</Descriptions.Item>
+                    <Descriptions.Item label="Vehicle VIN" className='font-bold text-nowrap'>{appointment.vehicleVIN}</Descriptions.Item>
+                    <Descriptions.Item label="Vehicle Registration" className='font-bold text-nowrap'>{appointment.vehicleReg}</Descriptions.Item>
                     <Descriptions.Item label="Status">
                         <Tag color={appointment.status === 'Cancelled' ? 'red' : 'green'}>
                             {appointment.status}

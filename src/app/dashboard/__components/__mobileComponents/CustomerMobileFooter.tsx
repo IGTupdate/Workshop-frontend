@@ -43,7 +43,7 @@ const CustomerMobileFooter = () => {
                     <Typography.Link>
                         <Space className='flex-col gap-0 m-0'>
                             <Image src={Services} alt='Services' className='h-[25px] w-[25px]' />
-                            <p className='mt-[1px] text-black mb-0'>Services</p>
+                            <p className='mt-[1px] text-black mb-0 text-nowrap'>Services</p>
                         </Space>
                     </Typography.Link>
                 </Dropdown>
