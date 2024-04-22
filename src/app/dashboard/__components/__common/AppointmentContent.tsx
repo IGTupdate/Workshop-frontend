@@ -5,7 +5,7 @@ const AppointmentContent = ({ item }) => {
 
     const data = item.calender_id.slots.filter(slot => slot._id == item.slot_id);
 
-    console.log(data);
+    // console.log(data);
 
     return (
         <div className='bg-gradient-to-r from-[#FFE301] to-[#D7C000] rounded-2xl p-4 min-h-[121px]'>

@@ -1,7 +1,12 @@
-const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_BASE_URL || '';
-const APPOINTMENT_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_APPOINTMENT_SERVICE_BASE_URL + "/api";
-const WORK_ORDER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_WORK_ORDER_SERVICE_BASE_URL + "/api";
-const CONSUMER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_CONSUMER_BASE_URL || '';
+// const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_BASE_URL || '';
+// const APPOINTMENT_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_APPOINTMENT_SERVICE_BASE_URL + "/api";
+// const WORK_ORDER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_WORK_ORDER_SERVICE_BASE_URL + "/api";
+// const CONSUMER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_CONSUMER_BASE_URL || '';
+
+const AUTH_BASE_URL = 'http://localhost:4000';
+const APPOINTMENT_SERVICE_BASE_URL = 'http://localhost:5000' + "/api";
+const WORK_ORDER_SERVICE_BASE_URL = 'http://localhost:4100' + "/api";
+const CONSUMER_SERVICE_BASE_URL = 'http://localhost:4200'
 
 const createUrl = (baseUrl: string, ...paths: string[]) => `${baseUrl}${paths.join('')}`;
 
@@ -50,6 +55,7 @@ export const appointmentEndpoints = {
   GET_APPOINTMENT_BY_APPOINTMENT_ID: appointmentUrl(APPOINTMENT, "/get"),
   GET_ALL_APPOINTMENT: appointmentUrl(APPOINTMENT, "/get-all"),
   GET_APPOINTMENT_BOOK_INIT_DATA: appointmentUrl(APPOINTMENT, "/book/init"),
+  GET_CUSTOMER_INIT_DATA: appointmentUrl(APPOINTMENT, "/get-customer/init"),
   APPOINTMENT_BOOK: appointmentUrl(APPOINTMENT, "/book"),
   APPOINTMENT_CANCEL_API: appointmentUrl(APPOINTMENT, CANCEL),
   APPOINTMENT_RESCHEDULE_API: appointmentUrl(APPOINTMENT, "/reschedule"),
