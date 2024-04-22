@@ -15,7 +15,9 @@ const config: Config = {
       "2xl": "1536px",
     },
     extend: {
-
+      boxShadow: {
+        'top': '0px -8px 30px #0000001f',
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

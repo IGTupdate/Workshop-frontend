@@ -60,19 +60,20 @@ const SendOTP = (props: Tprops) => {
 
     return (
         <div className="w-full">
+            <Image src={Logo} alt='Logo' className='mb-4 w-[90%]' />
 
-            {/* <Heading
+
+            <Heading
                 type='heading1'
                 primary={"Authenticate"}
                 secondary={"Give Your Identity"}
                 primaryColor='text-black1'
-            /> */}
+            />
 
-            <Image src={Logo} alt='Logo' />
 
-            <form onSubmit={handleSubmit(onSubmit)} className="w-full md:mt-10 mt-8 flex flex-col gap-3">
+            <form onSubmit={handleSubmit(onSubmit)} className="w-full md:mt-10 mt-4 flex flex-col gap-3">
                 <div className='mb-6 relative shadow-xl p-4 rounded-xl'>
-                    <label className='text-sm font-medium mb-1 block text-black1'>Phone</label>
+                    <label className='text-base font-medium mb-1 block text-black1'>Phone</label>
                     <Input
                         size='large'
                         value={contactNumber}

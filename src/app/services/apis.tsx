@@ -1,7 +1,7 @@
-const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_BASE_URL || ''
-const APPOINTMENT_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_APPOINTMENT_SERVICE_BASE_URL+ "/api";
+const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_BASE_URL || '';
+const APPOINTMENT_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_APPOINTMENT_SERVICE_BASE_URL + "/api";
 const WORK_ORDER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_WORK_ORDER_SERVICE_BASE_URL + "/api";
-const CONSUMER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_CONSUMER_BASE_URL
+const CONSUMER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_CONSUMER_BASE_URL || '';
 
 const createUrl = (baseUrl: string, ...paths: string[]) => `${baseUrl}${paths.join('')}`;
 
@@ -21,6 +21,7 @@ const RAMP = '/ramp';
 const authUrl = (...paths: string[]) => createUrl(AUTH_BASE_URL, ...paths);
 const appointmentUrl = (...paths: string[]) => createUrl(APPOINTMENT_SERVICE_BASE_URL, ...paths);
 const workOrderUrl = (...paths: string[]) => createUrl(WORK_ORDER_SERVICE_BASE_URL, ...paths);
+const notificationUrl = (...paths: string[]) => createUrl(CONSUMER_SERVICE_BASE_URL, ...paths);
 
 // Define endpoint objects
 export const authEndpoints = {
@@ -67,4 +68,9 @@ export const workOrderEndpoints = {
   RAMP_CREATE_API: workOrderUrl("/create"),
   GET_ALL_RAMP_API: workOrderUrl(RAMP, "/get"),
   GET_ALL_RAMP_STATUS_API: workOrderUrl(RAMP, "/get/status")
+};
+
+
+export const notificationEndpoints = {
+  GET_ALL_NOTIFICATIONS: notificationUrl("/notification/get-all")
 };

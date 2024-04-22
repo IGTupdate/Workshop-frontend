@@ -10,9 +10,9 @@ interface FormComponentProps {
   handleChange?: (value: any) => void;
 }
 
-const FormComponent = ({ name, label, disabled, control, errors, handleChange }: FormComponentProps) => (
+const FormComponent = ({ name, label, control, errors, handleChange }: FormComponentProps) => (
   <div className='form-component'>
-    <label htmlFor={name}>{label}</label>
+    <label className='font-semibold' htmlFor={name}>{label}</label>
     <Controller
       name={name}
       control={control}
@@ -20,7 +20,6 @@ const FormComponent = ({ name, label, disabled, control, errors, handleChange }:
         <Input
           className='form-field'
           {...field}
-          disabled={disabled}
           onChange={(e) => {
             field.onChange(e);
             if (handleChange) handleChange(e.target.value);

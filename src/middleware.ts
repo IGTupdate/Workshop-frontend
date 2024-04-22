@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import { cookies } from "next/headers";
 
 export async function middleware(request: NextRequest) {
-    // return NextResponse.next();
+    return NextResponse.next();
 
     // Get cookies from the request
     const cookieStore = cookies();
@@ -34,7 +34,7 @@ export async function middleware(request: NextRequest) {
         if (refreshToken && !isEmployee) {
             return NextResponse.next(); // Allow access
         } else if (refreshToken && isEmployee) {
-            return redirectUrl('/employee/dashboard')
+            return redirectUrl('/employee/dashboard');
         } else {
             return redirectUrl("/login"); // Redirect unauthorized user to /login
         }
@@ -44,7 +44,7 @@ export async function middleware(request: NextRequest) {
             return NextResponse.next(); // Allow access
         } else {
             if (isEmployee) redirectUrl("/employee/dashboard"); // Redirect authorized user to /employee/dashboard
-            return redirectUrl('/dashboard')
+            return redirectUrl('/dashboard');
         }
     } else if (pathname.includes("/login")) {
         // Check access to /login route
@@ -52,7 +52,7 @@ export async function middleware(request: NextRequest) {
             return NextResponse.next(); // Allow access
         } else {
             if (isEmployee) return redirectUrl("/employee/dashboard"); // Redirect authorized user to /dashboard
-            return redirectUrl('/dashboard')
+            return redirectUrl('/dashboard');
         }
     }
 

@@ -72,7 +72,7 @@ const VerifyOTP = () => {
         <div className="w-full">
 
 
-            <Image src={Logo} alt='Logo' className='mb-8' />
+            <Image src={Logo} alt='Logo' className='mb-8 w-[90%]' />
 
             <Heading
                 type='heading1'

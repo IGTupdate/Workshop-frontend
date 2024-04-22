@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Resolver, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -8,6 +8,9 @@ import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import { updateCustomer } from '@/app/services/operations/auth/customerAuth';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
+import { AiOutlineUser } from "react-icons/ai";
+import { MdOutlineMailOutline } from "react-icons/md";
+import { BsTelephone } from "react-icons/bs";
 
 interface FormValues {
   fullName: string;
@@ -15,10 +18,10 @@ interface FormValues {
   email: string;
 }
 
-const ProfileForm = () => {
+const ProfileForm = ({ edit, setEdit }) => {
   const authData = useAppSelector((state) => state.auth.authData);
   const dispatch = useAppDispatch();
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   // Define default values for the form fields
   const defaultValues: FormValues = {
@@ -36,46 +39,93 @@ const ProfileForm = () => {
 
   // Initialize react-hook-form useForm hook with Yup resolver and default values
   const { control, handleSubmit, formState: { errors } } = useForm<FormValues>({
-    resolver:yupResolver(profileSchema),
+    resolver: yupResolver(profileSchema),
     defaultValues,
   });
 
   // Handle form submission
   const onSubmit = async (data: FormValues) => {
     if (Object.keys(data).length === 0) return;
-    setLoading(true)
+    setLoading(true);
     let newData: Partial<FormValues> = {};
 
     if (authData.fullName !== data.fullName) newData.fullName = data.fullName;
     if (authData.email !== data.email) newData.email = data.email;
 
     if (Object.keys(newData).length === 0) {
-      toast.error('No Changes Found')
-      setLoading(false)
-      return
+      toast.error('No Changes Found');
+      setLoading(false);
+      return;
     };
 
     dispatch(updateCustomer(newData, setLoading));
+
+    setEdit(false);
   };
 
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='sm:w-[330px] lg:w-[380px] mx-auto flex flex-col gap-4'>
-      {[
-        { name: 'fullName', label: 'Full Name' },
-        { name: 'contactNumber', label: 'Contact Number', disabled: true },
-        { name: 'email', label: 'Email' },
-      ].map(({ name, label, disabled }) => (
-        <FormComponent
-          key={name}
-          name={name}
-          label={label}
-          disabled={disabled}
-          control={control}
-          errors={errors}
-        />
-      ))}
-      <Button htmlType='submit' disabled={loading} loading={loading} className='custom-button mt-2'>Submit</Button>
-    </form>
+
+
+    <>
+      {edit ?
+
+        <form onSubmit={handleSubmit(onSubmit)} className='mx-auto flex flex-col gap-4 pt-8'>
+          {[
+            { name: 'fullName', label: 'Full Name' },
+            { name: 'contactNumber', label: 'Contact Number' },
+            { name: 'email', label: 'Email' },
+          ].map(({ name, label }) => (
+            <FormComponent
+              key={name}
+              name={name}
+              label={label}
+              control={control}
+              errors={errors}
+            />
+          ))}
+          <Button type="primary" htmlType='submit' disabled={loading} loading={loading} className='custom-button mt-2'>Submit</Button>
+        </form>
+        :
+        <div className='pt-8 flex flex-col justify-center h-full'>
+          <div className="flex items-center gap-4 mb-4">
+            <div className="icon h-[37px] w-[37px] rounded-full border flex justify-center items-center">
+              <AiOutlineUser className='text-xl' />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="name" className='font-semibold'>Full Name</label>
+              <p className='font-medium capitalize text-lg'>{authData.fullName}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 mb-4">
+            <div className="icon h-[37px] w-[37px] rounded-full border flex justify-center items-center">
+              <BsTelephone className='text-lg' />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="name" className='font-semibold'>Contact Number</label>
+              <p className='font-medium text-lg'>{authData.contactNumber}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 mb-4">
+            <div className="icon h-[37px] w-[37px] rounded-full border flex justify-center items-center">
+              <MdOutlineMailOutline className='text-xl' />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="name" className='font-semibold'>Email</label>
+              <p className='font-medium capitalize text-lg'>{authData.email}</p>
+            </div>
+          </div>
+
+          <Button type="primary" onClick={() => setEdit(true)} className='custom-button mt-2'>Edit</Button>
+        </div>
+
+
+
+      }
+    </>
+
   );
 };
 

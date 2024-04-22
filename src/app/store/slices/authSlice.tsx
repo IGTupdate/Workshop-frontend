@@ -6,13 +6,13 @@ export interface IAuthData {
     contactNumber: string,
     fullName?: string,
     email?: string,
-    role?: string
+    role?: string;
 }
 
 export interface IAuthState {
     authStep: number,
     authData: IAuthData,
-    authLoading: boolean
+    authLoading: boolean;
 }
 
 const authDataString: string | null = typeof window !== "undefined" ? window.localStorage.getItem("authData") : null;
@@ -22,38 +22,38 @@ const authData: IAuthData | null = authDataString ? JSON.parse(authDataString) :
 
 const initialAuthDataState: IAuthData = {
     contactNumber: ''
-}
+};
 
 const initialState: IAuthState = {
     authStep: 0,
     authData: authData ? authData : initialAuthDataState,
     authLoading: false
-}
+};
 
 export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
         setAuthStep: (state, action: PayloadAction<number>) => {
-            state.authStep = action.payload
+            state.authStep = action.payload;
         },
         setAuthData: (state, action: PayloadAction<IAuthData>) => {
-            state.authData = action.payload
+            state.authData = action.payload;
         },
         setAuthLoading: (state, action: PayloadAction<boolean>) => {
-            state.authLoading = action.payload
+            state.authLoading = action.payload;
         },
         resetAuthSlice: (state) => {
             state.authStep = initialState.authStep;
             state.authLoading = initialState.authLoading;
         },
         logOut: (state) => {
-            window.localStorage.clear()
+            window.localStorage.clear();
             state.authData = initialState.authData;
-            resetAuthSlice()
+            resetAuthSlice();
         }
     }
-})
+});
 
-export const { setAuthStep, setAuthData, setAuthLoading, resetAuthSlice, logOut } = authSlice.actions
-export const authReducer = authSlice.reducer
+export const { setAuthStep, setAuthData, setAuthLoading, resetAuthSlice, logOut } = authSlice.actions;
+export const authReducer = authSlice.reducer;

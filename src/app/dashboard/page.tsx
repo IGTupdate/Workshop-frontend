@@ -4,6 +4,7 @@ import NotificationCard from './__components/__common/NotificationCard';
 import Image from 'next/image';
 import AddImage from '../../../public/images/image-2.webp';
 import PaymentMethods from './__components/__common/PaymentMethods';
+import Notifications from './notifications/__components/Notifications';
 
 type Props = {};
 
@@ -14,7 +15,7 @@ const Page = (props: Props) => {
       <AppointmentCard />
       {/* NOTIFICATION COMPONENT */}
 
-      <NotificationCard />
+      <Notifications show={2} />
 
       <div className="image my-4 w-full">
         <Image src={AddImage} alt='AddImage' className='w-full' />

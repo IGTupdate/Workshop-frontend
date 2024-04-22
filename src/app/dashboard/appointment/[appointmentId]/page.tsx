@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { getAppointmentByAppointmentId } from '@/app/services/operations/appointment/appointment';
 import { TAppointment } from '@/app/types/appointment';
 import { useEffect, useState } from 'react';
@@ -14,7 +14,7 @@ interface Props {
 
 const AppointmentPage: React.FC<Props> = ({ params }) => {
   const [appointmentData, setAppointmentData] = useState<TAppointment | null>(null);
-  const router = useRouter()
+  const router = useRouter();
 
   const fetchAppointmentData = async () => {
     try {
@@ -26,18 +26,18 @@ const AppointmentPage: React.FC<Props> = ({ params }) => {
   };
 
   useEffect(() => {
-    if(!appointmentData) fetchAppointmentData();
+    if (!appointmentData) fetchAppointmentData();
   }, [params.appointmentId]);
 
   return (
-    <div>
+    <div className='p-4 pt-28 pb-32 md:p-0'>
       <Button onClick={() => router.back()} className='mb-4 w-fit'>Back</Button>
       {appointmentData ? (
         <>
           <Typography.Title level={2}>Appointment Details</Typography.Title>
-          <AppointmentDetails appointmentData={appointmentData} bordered/>
+          <AppointmentDetails appointmentData={appointmentData} bordered />
         </>
-        
+
       ) : (
         <div>Loading</div>
       )}

@@ -6,6 +6,8 @@ import { Button, Input } from 'antd';
 import { redirect, useRouter } from 'next/navigation';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import Image from 'next/image';
+import Logo from "../../../../public/images/logo-3.webp";
 
 type FormData = {
     fullName: string;
@@ -14,23 +16,26 @@ type FormData = {
 
 const Register: React.FC = () => {
     const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
-    const dispatch = useAppDispatch()
-    const router = useRouter()
+    const dispatch = useAppDispatch();
+    const router = useRouter();
 
     const onSubmit = async (data: FormData) => {
-        dispatch(setAuthLoading(true))
+        dispatch(setAuthLoading(true));
         try {
-            await registerCustomer(data.fullName, data.email, dispatch)
+            await registerCustomer(data.fullName, data.email, dispatch);
             // dispatch(resetAuthSlice())
-            router.push('/dashboard')
+            router.push('/dashboard');
         } catch (err) {
             // console.log(error)
         }
-        dispatch(setAuthLoading(false))
+        dispatch(setAuthLoading(false));
     };
 
     return (
         <div className="w-full">
+
+            <Image src={Logo} alt='Logo' className='mb-4 w-[90%]' />
+
             <Heading
                 type='heading1'
                 primary={"Share with us"}
@@ -81,10 +86,10 @@ const Register: React.FC = () => {
                 </div>
 
                 <Button
-                    type='primary'
+                    // type='primary'
                     size='large'
                     htmlType='submit'
-                    className='bg-blue1 text-white1 font-semibold w-full'>
+                    className='bg-black text-white1 font-semibold w-full border-none hover:shadow-xl'>
                     Save
                 </Button>
             </form>
