@@ -1,15 +1,18 @@
 import Notifications from '@/app/dashboard/notifications/__components/Notifications';
-import { convertToLocaleDateAndWeekday, extractTimeFromDate, formatDateAndTime } from '@/app/utils/dateFormatter';
+import { convertToLocaleDateAndWeekday, formatDateAndTime } from '@/app/utils/dateFormatter';
 import { Descriptions, Tag, Typography } from 'antd';
 import dayjs from 'dayjs';
 import React from 'react';
 
 interface Props {
     appointmentData: any;
-    bordered?: boolean;
+    bordered?: boolean,
+    notificationData: any,
 }
 
-const AppointmentDetails: React.FC<Props> = ({ appointmentData, bordered }) => {
+const AppointmentDetails: React.FC<Props> = ({ appointmentData, notificationData, bordered }) => {
+
+
 
 
     return (
@@ -34,7 +37,7 @@ const AppointmentDetails: React.FC<Props> = ({ appointmentData, bordered }) => {
             </div>
 
 
-            <Notifications show={"all"} appointmentId={appointmentData._id} />
+            <Notifications show={"all"} notificationData={notificationData} />
         </>
     );
 };

@@ -1,12 +1,12 @@
-// const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_BASE_URL || '';
-// const APPOINTMENT_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_APPOINTMENT_SERVICE_BASE_URL + "/api";
-// const WORK_ORDER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_WORK_ORDER_SERVICE_BASE_URL + "/api";
-// const CONSUMER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_CONSUMER_BASE_URL || '';
+const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_BASE_URL || '';
+const APPOINTMENT_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_APPOINTMENT_SERVICE_BASE_URL + "/api";
+const WORK_ORDER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_WORK_ORDER_SERVICE_BASE_URL + "/api";
+const CONSUMER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_CONSUMER_BASE_URL || '';
 
-const AUTH_BASE_URL = 'http://localhost:4000';
-const APPOINTMENT_SERVICE_BASE_URL = 'http://localhost:5000' + "/api";
-const WORK_ORDER_SERVICE_BASE_URL = 'http://localhost:4100' + "/api";
-const CONSUMER_SERVICE_BASE_URL = 'http://localhost:4200'
+// const AUTH_BASE_URL = 'http://localhost:4000';
+// const APPOINTMENT_SERVICE_BASE_URL = 'http://localhost:5000' + "/api";
+// const WORK_ORDER_SERVICE_BASE_URL = 'http://localhost:4100' + "/api";
+// const CONSUMER_SERVICE_BASE_URL = 'http://localhost:4200'
 
 const createUrl = (baseUrl: string, ...paths: string[]) => `${baseUrl}${paths.join('')}`;
 
