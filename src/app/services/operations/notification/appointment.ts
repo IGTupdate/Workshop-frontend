@@ -9,7 +9,6 @@ export async function appointmentNotification(appointmentId: string) {
         const notifications = await apiConnector({
             method: "GET",
             url: GET_ALL_NOTIFICATIONS + "/" + appointmentId,
-
         });
 
 

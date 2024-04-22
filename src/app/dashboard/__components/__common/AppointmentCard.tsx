@@ -14,7 +14,7 @@ const AppointmentCard = () => {
 
     const { appointmentLoading, appointmentData } = useAppSelector((state) => state.customerAppointment);
 
-    console.log(appointmentData);
+    // console.log(appointmentData);
     const scheduledAppointments = appointmentData.filter(item => item.status === "Scheduled");
     const assignedAppointments = appointmentData.filter(item => item.status === "Assigned");
 

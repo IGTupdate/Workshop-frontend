@@ -7,10 +7,11 @@ import { apiConnector } from "../../apiConnector";
 import { appointmentEndpoints } from "../../apis";
 import { AppointmentData } from "@/app/dashboard/appointment/__utils/FetchAppointments";
 import { COMMON_ERROR } from "@/app/utils/constants/constant";
+import { appointmentNotification } from "../notification/appointment";
 
 
 
-const { GET_APPOINTMENT_BY_CALENDAR, APPOINTMENT_BOOK, GET_ALL_APPOINTMENT, GET_APPOINTMENT_BOOK_INIT_DATA, GET_ALL_CUSTOMER_APPOINTMENT, GET_APPOINTMENT_BY_APPOINTMENT_ID, APPOINTMENT_CANCEL_API, APPOINTMENT_RESCHEDULE_API } = appointmentEndpoints
+const { GET_APPOINTMENT_BY_CALENDAR, APPOINTMENT_BOOK, GET_CUSTOMER_INIT_DATA, GET_ALL_APPOINTMENT, GET_APPOINTMENT_BOOK_INIT_DATA, GET_ALL_CUSTOMER_APPOINTMENT, GET_APPOINTMENT_BY_APPOINTMENT_ID, APPOINTMENT_CANCEL_API, APPOINTMENT_RESCHEDULE_API } = appointmentEndpoints
 
 export const getAppointmentByCalenderId = async (calenderId: string, query: string = ""): Promise<number> => {
     try {
@@ -73,6 +74,25 @@ export const getAppointMentBookInitData = async (data: any) => {
         throw err;
     }
 }
+
+export const getCustomerInitData = async (customerId: string) => {
+    try {
+
+        const response = await apiConnector({
+            method: "GET",
+            url: GET_CUSTOMER_INIT_DATA + `/${customerId}`
+        });
+
+        if(response.data.success){
+            return response.data.data.appointmentData[0]
+        }
+        return {}
+
+    } catch (err) {
+        throw err;
+    }
+}
+
 
 export const bookAppointment = async (data: any) => {
     try {
