@@ -14,16 +14,17 @@ const AppointmentCard = () => {
 
     const { appointmentLoading, appointmentData } = useAppSelector((state) => state.customerAppointment);
 
-    // console.log(appointmentData);
     const scheduledAppointments = appointmentData.filter(item => item.status === "Scheduled");
     const assignedAppointments = appointmentData.filter(item => item.status === "Assigned");
 
     const combinedAppointments = assignedAppointments.concat(scheduledAppointments);
 
+    console.log(appointmentData, "appointmentData");
+
     return (
         <Swiper
             loop={true}
-            slidesPerView={3}
+            slidesPerView={combinedAppointments.length > 0 ? 2 : 1}
             spaceBetween={20}
             pagination={{
                 clickable: true,
@@ -51,25 +52,29 @@ const AppointmentCard = () => {
                     spaceBetween: 20
                 },
                 980: {
-                    slidesPerView: 2,
+                    slidesPerView: combinedAppointments.length > 0 ? 2 : 1,
                     spaceBetween: 20
                 },
                 1024: {
-                    slidesPerView: 2,
+                    slidesPerView: combinedAppointments.length > 0 ? 2 : 1,
                     spaceBetween: 20
                 },
                 1280: {
-                    slidesPerView: 2,
+                    slidesPerView: combinedAppointments.length > 0 ? 2 : 1,
                     spaceBetween: 20
                 },
                 1400: {
-                    slidesPerView: 3,
+                    slidesPerView: combinedAppointments.length > 0 ? 2 : 1,
+                    spaceBetween: 20
+                },
+                1600: {
+                    slidesPerView: combinedAppointments.length > 0 ? 3 : 1,
                     spaceBetween: 20
                 },
             }}
         >
             {
-                combinedAppointments?.map((item) => (
+                combinedAppointments?.length > 0 && combinedAppointments?.map((item) => (
                     <SwiperSlide key={item._id}>
                         <AppointmentContent item={item} />
                     </SwiperSlide>

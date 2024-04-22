@@ -50,6 +50,7 @@ const Notifications: React.FC<NotificationsProps> = ({ show, appointmentId }) =>
 
     const getAllNotifications = async (id: string) => {
         const result = await appointmentNotification(id);
+
         if (result) {
             setNotifications([...result].reverse());
             setLoading(false);
@@ -71,21 +72,21 @@ const Notifications: React.FC<NotificationsProps> = ({ show, appointmentId }) =>
                         {
                             show === 2 ? <ul className='mt-4 flex flex-col gap-3'>
                                 {
-                                    notifications.slice(0, 2)?.map((item, index) => (
+                                    notifications?.length > 0 ? notifications.slice(0, 2)?.map((item, index) => (
                                         <li key={index} className='relative ps-6 before:content=[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:h-[10px] before:w-[10px] before:rounded-full before:bg-yellow-300'>{item.title}</li>
-                                    ))
+                                    )) : <p className='font-semibold'>No notification available</p>
                                 }
                             </ul>
                                 : <ul className={`relative ${notifications.length > 3 && 'before:content-[""] before:h-16'} before:absolute before:right-0 before:bottom-0 before:w-full before:bg-gradient-to-t before:from-[#f5f5f5] before:to-transparent`}>
                                     {
-                                        notifications.map((item: NotificationItem, index: number) => (
+                                        notifications?.length > 0 ? notifications.map((item: NotificationItem, index: number) => (
                                             <li key={index} className='ps-10 mt-4'>
                                                 <h3 className='font-semibold text-base relative before:content-[""] before:absolute before:left-[-35px] before:top-1/2 before:translate-y-[-50%] before:w-[15px] before:h-[15px] before:rounded-full before:bg-[#FFE301]'>
                                                     {item.title}
                                                 </h3>
                                                 <p>{item.desc}</p>
                                             </li>
-                                        ))
+                                        )) : <p className='font-semibold'>No notification available</p>
                                     }
                                 </ul>
                         }

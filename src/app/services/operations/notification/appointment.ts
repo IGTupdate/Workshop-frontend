@@ -11,12 +11,15 @@ export async function appointmentNotification(appointmentId: string) {
             url: GET_ALL_NOTIFICATIONS + "/" + appointmentId,
         });
 
+        if (notifications?.data?.success) {
+            return notifications.data.data; // Return notifications
+        }
 
-        return notifications.data.data; // Return the OTP request result
+
     } catch (err) {
+
         // Handle errors
-        // console.error("Error sending OTP:", err);
-        //   toast.error("Failed to send OTP. Please try again later.");
-        throw err; // Rethrow the error for the caller to handle
+        console.error("NO Appointment Found", err);
+        // throw err; // Rethrow the error for the caller to handle
     }
 }
