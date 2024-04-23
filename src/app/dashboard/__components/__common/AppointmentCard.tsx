@@ -7,22 +7,20 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import AppointmentContent from './AppointmentContent';
-import { useAppSelector } from '@/app/store/reduxHooks';
 import Link from 'next/link';
 
-const AppointmentCard = () => {
+interface AppointmentProps {
+    appointmentData: any,
+}
 
-    const { appointmentLoading, appointmentData } = useAppSelector((state) => state.customerAppointment);
+const AppointmentCard: React.FC<AppointmentProps> = ({ appointmentData }) => {
 
-    const scheduledAppointments = appointmentData.filter(item => item.status === "Scheduled");
-    const assignedAppointments = appointmentData.filter(item => item.status === "Assigned");
 
-    const combinedAppointments = assignedAppointments.concat(scheduledAppointments);
 
     return (
         <Swiper
             loop={true}
-            slidesPerView={combinedAppointments.length > 0 ? 2 : 1}
+            slidesPerView={2}
             spaceBetween={20}
             pagination={{
                 clickable: true,
@@ -50,33 +48,29 @@ const AppointmentCard = () => {
                     spaceBetween: 20
                 },
                 980: {
-                    slidesPerView: combinedAppointments.length > 0 ? 2 : 1,
+                    slidesPerView: 2,
                     spaceBetween: 20
                 },
                 1024: {
-                    slidesPerView: combinedAppointments.length > 0 ? 2 : 1,
+                    slidesPerView: 2,
                     spaceBetween: 20
                 },
                 1280: {
-                    slidesPerView: combinedAppointments.length > 0 ? 2 : 1,
+                    slidesPerView: 2,
                     spaceBetween: 20
                 },
                 1400: {
-                    slidesPerView: combinedAppointments.length > 0 ? 2 : 1,
+                    slidesPerView: 2,
                     spaceBetween: 20
-                },
-                1600: {
-                    slidesPerView: combinedAppointments.length > 0 ? 3 : 1,
-                    spaceBetween: 20
-                },
+                }
             }}
         >
             {
-                combinedAppointments?.length > 0 && combinedAppointments?.map((item) => (
-                    <SwiperSlide key={item._id}>
-                        <AppointmentContent item={item} />
-                    </SwiperSlide>
-                ))
+
+                <SwiperSlide>
+                    <AppointmentContent item={appointmentData} />
+                </SwiperSlide>
+
             }
 
             <SwiperSlide>

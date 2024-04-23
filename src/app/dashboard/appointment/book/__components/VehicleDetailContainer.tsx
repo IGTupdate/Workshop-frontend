@@ -1,36 +1,36 @@
-"use client"
-import VehicleCreateContainer from '@/app/employee/dashboard/appointment/book/__components/VehicleCreateContainer'
-import { NEW_VEHICLE } from '@/app/employee/dashboard/appointment/book/__utils/constant'
-import { deleteVehicle, getVehicleByCustomerId } from '@/app/services/operations/appointment/vehicle'
-import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks'
-import { setVehicleLoading } from '@/app/store/slices/customerVehicleSlice'
-import { TAppointmentBook } from '@/app/types/appointment'
-import { Button, Typography } from 'antd'
-import { usePathname, useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-import VehicleDetails from './VehicleDetails'
-import VehicleUpdateContainer from './VehicleUpdateContainer'
+"use client";
+import VehicleCreateContainer from '@/app/employee/dashboard/appointment/book/__components/VehicleCreateContainer';
+import { NEW_VEHICLE } from '@/app/employee/dashboard/appointment/book/__utils/constant';
+import { deleteVehicle, getVehicleByCustomerId } from '@/app/services/operations/appointment/vehicle';
+import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
+import { TAppointmentBook } from '@/app/types/appointment';
+import { Button, Typography } from 'antd';
+import { usePathname, useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import VehicleDetails from './VehicleDetails';
+import VehicleUpdateContainer from './VehicleUpdateContainer';
+import { setVehicleLoading } from '@/app/store/slices/customerVehicleSlice';
 
-const { Title } = Typography
+const { Title } = Typography;
 
 type Props = {
-    setAppointmentBookingData: React.Dispatch<React.SetStateAction<TAppointmentBook>>
-}
+    setAppointmentBookingData: React.Dispatch<React.SetStateAction<TAppointmentBook>>;
+};
 
 const VehicleDetailContainer = (props: Props) => {
 
     const [vehicleId, setVehicleId] = useState("");
     const [updateVehicleId, setUpdateVehicleId] = useState("");
     const router = useRouter();
-    const pathname = usePathname()
-    const { vehicleLoading, vehicleData } = useAppSelector((state) => state.customerVehicle)
-    const customerId = useAppSelector((state) => state.auth.authData._id)
+    const pathname = usePathname();
+    const { vehicleLoading, vehicleData } = useAppSelector((state) => state.customerVehicle);
+    const customerId = useAppSelector((state) => state.auth.authData._id);
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (vehicleLoading) {
-            dispatch(getVehicleByCustomerId())
+            dispatch(getVehicleByCustomerId());
         }
     }, [vehicleLoading]);
 
@@ -40,37 +40,37 @@ const VehicleDetailContainer = (props: Props) => {
                 return {
                     ...prv,
                     vehicle_id: vehicleId
-                }
+                };
             });
         }
-    }, [vehicleId])
+    }, [vehicleId]);
 
     const handleAddNewVehicle = () => {
-        setVehicleId(NEW_VEHICLE.value)
-    }
+        setVehicleId(NEW_VEHICLE.value);
+    };
 
     const handleBack = () => {
-        router.push(pathname)
-    }
+        router.push(pathname);
+    };
 
     useEffect(() => {
-        setUpdateVehicleId('')
-    }, [vehicleId])
+        setUpdateVehicleId('');
+    }, [vehicleId]);
 
     useEffect(() => {
-        setVehicleId('')
-    }, [updateVehicleId])
+        setVehicleId('');
+    }, [updateVehicleId]);
 
     const onDeleteVehicle = async (_id: string) => {
         try {
-            await deleteVehicle(_id, customerId)
+            await deleteVehicle(_id, customerId);
         } catch (err: any) {
             // console.log(err);
         }
         finally {
-            dispatch(setVehicleLoading(true))
+            dispatch(setVehicleLoading(true));
         }
-    }
+    };
 
     return (
         <>
@@ -100,7 +100,7 @@ const VehicleDetailContainer = (props: Props) => {
                                                         ))
                                                     }
                                                     <div className=' flex gap-4'>
-                                                        <Button onClick={() => handleAddNewVehicle()} className=' bg-customGray w-fit text-white'>Add New Vehicle</Button>
+                                                        <Button onClick={() => handleAddNewVehicle()} className=' bg-black border-none hover:shadow-xl w-fit text-white'>Add New Vehicle</Button>
                                                         <Button onClick={() => handleBack()} >Back</Button>
                                                     </div>
                                                 </div>
@@ -113,7 +113,7 @@ const VehicleDetailContainer = (props: Props) => {
                 )
             }
         </>
-    )
-}
+    );
+};
 
-export default VehicleDetailContainer
+export default VehicleDetailContainer;

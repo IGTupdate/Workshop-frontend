@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import AddImage from '../../../public/images/image-2.webp';
@@ -13,34 +13,34 @@ type Props = {};
 
 const Page = (props: Props) => {
 
-  const [appointmentData, setAppointmentData] = useState({})
-  const [notificationData, setNotificationData] = useState({})
+  const [appointmentData, setAppointmentData] = useState({});
+  const [notificationData, setNotificationData] = useState({});
 
-  const customerId = useAppSelector((state) => state.auth.authData._id)
+  const customerId = useAppSelector((state) => state.auth.authData._id);
 
   const initData = async () => {
-    try{
-      if(!customerId) return
-      const initAppointmentData = await getCustomerInitData(customerId)
+    try {
+      if (!customerId) return;
+      const initAppointmentData = await getCustomerInitData(customerId);
       const initNotificationData = await appointmentNotification(initAppointmentData._id);
-      setAppointmentData(initAppointmentData)
-      setNotificationData(initNotificationData)
-    }catch(err){
+      setAppointmentData(initAppointmentData);
+      setNotificationData(initNotificationData);
+    } catch (err) {
     }
-  }
+  };
 
   useEffect(() => {
-    initData()
-  },[])
+    initData();
+  }, [customerId]);
 
-  console.log(appointmentData,notificationData)
+
   return (
     <div className='h-screen overflow-auto py-32 px-4 md:py-0'>
       {/* CARD COMPONENT */}
-      <AppointmentCard />
+      <AppointmentCard appointmentData={appointmentData} />
       {/* NOTIFICATION COMPONENT */}
 
-      <Notifications show={2} />
+      <Notifications show={2} notificationData={notificationData} />
 
       <div className="image my-4 w-full">
         <Image src={AddImage} alt='AddImage' className='w-full' />

@@ -1,21 +1,24 @@
 import Notifications from '@/app/dashboard/notifications/__components/Notifications';
-import { convertToLocaleDateAndWeekday, extractTimeFromDate, formatDateAndTime } from '@/app/utils/dateFormatter';
+import { convertToLocaleDateAndWeekday, formatDateAndTime } from '@/app/utils/dateFormatter';
 import { Descriptions, Tag, Typography } from 'antd';
 import dayjs from 'dayjs';
 import React from 'react';
 
 interface Props {
     appointmentData: any;
-    bordered?: boolean;
+    bordered?: boolean,
+    notificationData: any,
 }
 
-const AppointmentDetails: React.FC<Props> = ({ appointmentData, bordered }) => {
+const AppointmentDetails: React.FC<Props> = ({ appointmentData, notificationData, bordered }) => {
+
+
 
 
     return (
         <>
-            <div className=' bg-white p-4'>
-                <Descriptions title={`Appointment Id: ${appointmentData._id}`} column={2} bordered={bordered} className=' bg-white pb-0 '>
+            <div className=' bg-white p-4 shadow-xl rounded-xl overflow-hidden mb-8'>
+                <Descriptions title={`Appointment Id: ${appointmentData._id}`} column={2} bordered={bordered} className=' bg-white pb-0 ' scroll={{ x: 500 }}>
                     <Descriptions.Item label="Appointment Date">{convertToLocaleDateAndWeekday(appointmentData.calender_id.date)}</Descriptions.Item>
                     <Descriptions.Item label="Created At">{formatDateAndTime(appointmentData.createdAt)}</Descriptions.Item>
                     <Descriptions.Item label="Start Time">{dayjs(appointmentData.calender_id.slots[0].start_time).format("hh:mm")}</Descriptions.Item>
@@ -34,7 +37,7 @@ const AppointmentDetails: React.FC<Props> = ({ appointmentData, bordered }) => {
             </div>
 
 
-            <Notifications show={"all"} appointmentId={appointmentData._id} />
+            <Notifications show={"all"} notificationData={notificationData} />
         </>
     );
 };

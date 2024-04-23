@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import AppointmentDetails from '../../../components/Appointment/AppointmentDetails';
 import { useRouter } from 'next/navigation';
 import { Button, Typography } from 'antd';
+import { appointmentNotification } from '@/app/services/operations/notification/appointment';
 
 interface Props {
   params: {
@@ -14,6 +15,7 @@ interface Props {
 
 const AppointmentPage: React.FC<Props> = ({ params }) => {
   const [appointmentData, setAppointmentData] = useState<TAppointment | null>(null);
+  const [notificationData, setNotificationData] = useState({});
   const router = useRouter();
 
   const fetchAppointmentData = async () => {
@@ -25,9 +27,24 @@ const AppointmentPage: React.FC<Props> = ({ params }) => {
     }
   };
 
+  const initData = async () => {
+    try {
+      if (!params.appointmentId) return;
+
+      const initNotificationData = await appointmentNotification(params.appointmentId);
+      setNotificationData(initNotificationData);
+    } catch (err) {
+    }
+  };
+
   useEffect(() => {
     if (!appointmentData) fetchAppointmentData();
+
+    initData();
+
   }, [params.appointmentId]);
+
+  console.log(params.appointmentId, 'params.appointmentId');
 
   return (
     <div className='p-4 pt-28 pb-32 md:p-0'>
@@ -35,7 +52,7 @@ const AppointmentPage: React.FC<Props> = ({ params }) => {
       {appointmentData ? (
         <>
           <Typography.Title level={2}>Appointment Details</Typography.Title>
-          <AppointmentDetails appointmentData={appointmentData} bordered />
+          <AppointmentDetails appointmentData={appointmentData} notificationData={notificationData} bordered />
         </>
 
       ) : (
