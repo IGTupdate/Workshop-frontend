@@ -7,6 +7,7 @@ import { deviceReducer } from "./slices/deviceSlice";
 import { customerAppointmentReducer } from "./slices/customerAppointmentSlice";
 import { customerVehicleReducer } from "./slices/customerVehicleSlice";
 import { customerNotificationReducer } from "./slices/notificationSlice";
+import { servicePlanReducer } from "./slices/servicePlanSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     customerAppointment: customerAppointmentReducer,
     customerVehicle: customerVehicleReducer,
     notifications: customerNotificationReducer,
+    servicePlan: servicePlanReducer
   },
 });
 

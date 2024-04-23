@@ -7,9 +7,14 @@ const {
 
 export async function getAvailableSlots(query: string = "") {
     try {
+        let url = GET_AVAILABLE_SLOTS_API;
+        if (query) {
+            url += "?date=" + query;
+        }
+
         const response = await apiOpenConnector({
             method: "GET",
-            url: GET_AVAILABLE_SLOTS_API + "?date=" + query,
+            url: url,
         });
         return response.data.data;
     } catch (err) {

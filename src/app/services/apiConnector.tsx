@@ -47,7 +47,7 @@ axiosInstance.interceptors.request.use(
 
 type Method = "GET" | "POST" | "PUT" | "DELETE";
 
-interface ApiConnectorParams {
+export interface ApiConnectorParams {
   method: Method;
   url: string;
   bodyData?: any;

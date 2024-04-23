@@ -28,8 +28,12 @@ export const slot_booking_customer_step = [
         description: "Fill Vehicle Info",
     },
     {
-        title: "Review",
-        description: "Your Appointment"
+        title: 'Service Plans',
+        description: "Select Service Plans"
+    },
+    {
+        title:"Review",
+        description:"Finalise your Appointment"
     }
 ];
 
