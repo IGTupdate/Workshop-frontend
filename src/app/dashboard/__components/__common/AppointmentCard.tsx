@@ -67,7 +67,7 @@ const AppointmentCard: React.FC<AppointmentProps> = ({ appointmentData }) => {
         >
             {
 
-                <SwiperSlide>
+                appointmentData && <SwiperSlide>
                     <AppointmentContent item={appointmentData} />
                 </SwiperSlide>
 
