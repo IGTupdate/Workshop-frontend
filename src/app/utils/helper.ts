@@ -30,3 +30,20 @@ export const removeAllQueryParams = (url: string) => {
     params.delete(key);
   });
 };
+
+
+export const minutesToHoursConverter = (minutes: number) => {
+
+  if (minutes > 59) {
+    return minutes / 60;
+  }
+
+  return "0." + minutes;
+};
+
+
+export const PriceCalculator = (originalPrice: number) => {
+  return Math.round(originalPrice * 1.3);
+
+}
+

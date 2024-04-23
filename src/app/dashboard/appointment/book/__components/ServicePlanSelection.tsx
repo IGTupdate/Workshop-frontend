@@ -1,13 +1,16 @@
-'use client'
+'use client';
 import { getAllServicePlans } from '@/app/services/operations/appointment/service-plans';
 import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
+import { minutesToHoursConverter, PriceCalculator } from '@/app/utils/helper';
 import { Tabs } from 'antd';
 import TabPane from 'antd/es/tabs/TabPane';
 import { useEffect } from 'react';
 
-type Props = {};
+import ServicePlans from './ServicePlans';
 
-const ServicePlanSelection = (props: Props) => {
+
+
+const ServicePlanSelection: React.FC<Props> = (props) => {
     const { servicePlansLoading, servicePlansData } = useAppSelector((state) => state.servicePlan);
     const dispatch = useAppDispatch();
 
@@ -23,26 +26,19 @@ const ServicePlanSelection = (props: Props) => {
         console.log(servicePlansData);
     }, [servicePlansData]);
 
-    return <div>
-        <Tabs defaultActiveKey="0" tabPosition="top">
-        {Object.keys(servicePlansData).map(categoryId => (
-            <TabPane tab={servicePlansData[categoryId].category.name} key={categoryId}>
-            {servicePlansData[categoryId].plans.map(plan => (
-                <div key={plan._id}>
-                <h3>{plan.name}</h3>
-                <p>Description: {plan.description}</p>
-                <p>Price: {plan.price}</p>
-                {/* Render other plan details */}
-                <p>Duration: {plan.duration}</p>
-                <p>Category: {plan.category.name}</p>
-                <p>Tasks: {plan.tasks && plan?.tasks.map(task => task.name).join(', ')}</p>
-                {/* Render other plan details */}
-                </div>
-            ))}
-            </TabPane>
-        ))}
-        </Tabs>
-    </div>
+    return (
+        <div>
+            <Tabs defaultActiveKey="0" tabPosition="top">
+                {Object.keys(servicePlansData).map(categoryId => (
+                    <TabPane tab={servicePlansData[categoryId].category.name} key={categoryId}>
+                        {servicePlansData[categoryId].plans.map(plan => (
+                            <ServicePlans key={plan._id} plan={plan} />
+                        ))}
+                    </TabPane>
+                ))}
+            </Tabs>
+        </div>
+    );
 };
 
 export default ServicePlanSelection;

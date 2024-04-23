@@ -24,9 +24,9 @@ const VehicleDetails = (props: Props) => {
           <Descriptions.Item label="Owner" className='font-semibold'>{vehicleDetails.owner}</Descriptions.Item>
           <Descriptions.Item label="Created At" className='font-semibold text-nowrap'>{formatDateAndTime(vehicleDetails.createdAt)}</Descriptions.Item>
           <Descriptions.Item label="" contentStyle={{ display: 'flex', justifyContent: 'end', gap: '10px', flexWrap: 'wrap' }}>
-            <Button type='primary' onClick={() => setVehicleId(vehicleDetails._id)}>Select</Button>
-            <Button type='primary' onClick={() => setUpdateVehicleId(vehicleDetails._id)}>Update</Button>
-            <Button type='primary' onClick={() => props.onDeleteVehicle(vehicleDetails._id)}>Delete</Button>
+            <Button type='primary' onClick={() => setVehicleId(vehicleDetails._id)}>Select Vehicle</Button>
+            <Button type='primary' onClick={() => setUpdateVehicleId(vehicleDetails._id)}>Update Vehicle</Button>
+            <Button type='primary' onClick={() => props.onDeleteVehicle(vehicleDetails._id)}>Delete Vehicle</Button>
           </Descriptions.Item>
         </Descriptions>
       </div>
