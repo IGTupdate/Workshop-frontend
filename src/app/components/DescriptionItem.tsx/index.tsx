@@ -1,4 +1,4 @@
-type TDescriptionItemProps =  {
+type TDescriptionItemProps = {
   title: string;
   content: React.ReactNode;
 }

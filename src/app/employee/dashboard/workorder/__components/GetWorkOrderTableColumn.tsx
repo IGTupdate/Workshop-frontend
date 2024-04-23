@@ -155,16 +155,14 @@ export function GetWorkOrderTableColumn() {
                 render: (_, { _id }) => {
                     return (
                         <Flex wrap="wrap" gap="small">
-
                             <Button
                                 onClick={() => {
-                                    router.push("/employee/dashboard/appointment/" + _id)
+                                    router.push("/employee/dashboard/workorder/" + _id)
                                 }}
                                 style={{ border: "1px #1890ff solid", color: "#1890ff" }}
                                 size="middle"
                                 icon={<FaEye size={"22px"} title="View Appointments" />}
                             ></Button>
-
                             {/* view appointments */}
                             <Button
                                 onClick={() => {

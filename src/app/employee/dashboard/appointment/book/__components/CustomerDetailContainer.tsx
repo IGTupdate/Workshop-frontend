@@ -23,7 +23,8 @@ const CustomerDetailContainer = (props: Props) => {
         contactNumber: "",
         email: "",
         fullName: "",
-        _id: ""
+        _id: "",
+        userType: "customer"
     })
 
     const router = useRouter();
@@ -38,11 +39,11 @@ const CustomerDetailContainer = (props: Props) => {
                 }
             })
         }
-        console.log("customer", setCustomer)
+        // console.log("customer", setCustomer)
     }, [authStep])
 
 
-    const handleBack = ()=>{
+    const handleBack = () => {
         router.push("/employee/dashboard/appointment/book")
     }
 

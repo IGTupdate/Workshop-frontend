@@ -9,6 +9,7 @@ import { authEndpoints } from "../../apis";
 const { SEND_OTP_API, VERIFY_OTP_API, AUTH_API, GENERATE_ACCESS_TOKEN_API, GET_CUSTOMER_DATA_API, CUSTOMER_UPDATE_API, LOGOUT_API } =
   authEndpoints;
 
+
 export async function getCustomerData(_id: string, dispatch: AppDispatch) {
   try {
     const result = await apiConnector({
@@ -36,7 +37,7 @@ export async function sendOTP(contactNumber: string, resend?: boolean) {
 
     if (otpResult?.data?.success) {
       // If OTP request is successful, display success message
-      if(resend) toast.success("OTP RE-SENT SUCCESSFULLY");
+      if (resend) toast.success("OTP RE-SENT SUCCESSFULLY");
       else toast.success("OTP SENT SUCCESSFULLY");
     }
 
@@ -51,6 +52,7 @@ export async function sendOTP(contactNumber: string, resend?: boolean) {
 
 export async function verifyOTP(contactNumber: string, otp: string, dispatch: AppDispatch) {
   try {
+    console.log(VERIFY_OTP_API);
     // Sending OTP verification request
     const otpVerificationResult = await apiOpenConnector({
       method: "POST",
@@ -109,7 +111,7 @@ export async function generateAccessToken() {
   try {
     await apiOpenConnector({ method: "GET", url: GENERATE_ACCESS_TOKEN_API });
   } catch (err) {
-    
+
     throw err;
   }
 }
