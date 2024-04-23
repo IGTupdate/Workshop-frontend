@@ -1,5 +1,4 @@
 "use client"
-import AppointmentBookingConfirmation from '@/app/employee/dashboard/appointment/book/__components/AppointmentBookingConfirmation'
 import SlotAvailablityContainer from '@/app/employee/dashboard/appointment/book/__components/SlotAvailablityContainer'
 import { slot_booking_customer_step } from '@/app/employee/dashboard/appointment/book/__utils/slot-booking-step'
 import { useAppSelector } from '@/app/store/reduxHooks'
@@ -9,6 +8,7 @@ import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import ServicePlanSelection from './ServicePlanSelection'
 import VehicleDetailContainer from './VehicleDetailContainer'
+import AppointmentBookingConfirmation from './CustomerAppointmentBookingConfirmation'
 
 const BookAppointmentContainer: React.FC = () => {
     const searchParams = useSearchParams();
@@ -19,7 +19,8 @@ const BookAppointmentContainer: React.FC = () => {
         calender_id: "",
         customer_id: "",
         vehicle_id: "",
-        service_plans: []
+        service_description: [],
+        service_plans: JSON.parse(localStorage.getItem('selectedPlans') || '')
     });
 
     useEffect(() => {
@@ -36,18 +37,11 @@ const BookAppointmentContainer: React.FC = () => {
         } else {
             setAppointmentBookingData(prevData => ({ ...prevData, slot_id: '', calender_id: '' }));
         }
-    }, [searchParams]);
+    }, [searchParams]); 
 
     useEffect(() => {
-        const service_plans = searchParams.get("plan_id");
-        setAppointmentBookingData(prevData => ({ ...prevData, service_plans: service_plans ? (typeof service_plans === 'string' ? [service_plans] : service_plans) : [] }));
-    }, [searchParams]);
-
-    useEffect(() => {
-        const { calender_id, slot_id, customer_id, vehicle_id, service_plans } = appointmentBookingData;
-        if (calender_id && slot_id && customer_id && vehicle_id && service_plans.length) {
-            setCurrentStep(3);
-        } else if (calender_id && slot_id && customer_id && vehicle_id) {
+        const { calender_id, slot_id, customer_id, vehicle_id } = appointmentBookingData;
+        if (calender_id && slot_id && customer_id && vehicle_id) {
             setCurrentStep(2);
         } else if (calender_id && slot_id && customer_id) {
             setCurrentStep(1);
@@ -66,8 +60,8 @@ const BookAppointmentContainer: React.FC = () => {
             />
             {currentStep === 0 && <SlotAvailablityContainer />}
             {currentStep === 1 && <VehicleDetailContainer setAppointmentBookingData={setAppointmentBookingData} />}
-            {currentStep === 2 && <ServicePlanSelection />}
-            {currentStep === 3 && <AppointmentBookingConfirmation appointmentBookingData={appointmentBookingData} setAppointmentBookingData={setAppointmentBookingData} />}
+            {currentStep === 2 && <ServicePlanSelection setAppointmentBookingData={setAppointmentBookingData} setCurrentStep={setCurrentStep}/>}
+            {currentStep === 3 && <AppointmentBookingConfirmation appointmentBookingData={appointmentBookingData} setAppointmentBookingData={setAppointmentBookingData} setCurrentStep={setCurrentStep}/>}
         </div>
     );
 };

@@ -1,6 +1,6 @@
 import { setAppointmentData, setAppointmentLoading } from "@/app/store/slices/customerAppointmentSlice";
 import { RootState } from "@/app/store/store";
-import { TAppointment, TAppointmentReschedule } from "@/app/types/appointment";
+import { TAppointment, TAppointmentBook, TAppointmentReschedule } from "@/app/types/appointment";
 import { COMMON_ERROR } from "@/app/utils/constants/constant";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
@@ -57,7 +57,7 @@ export const getAllAppointment = async (query: string = "") => {
     }
 }
 
-export const getAppointMentBookInitData = async (data: any) => {
+export const getAppointMentBookInitData = async (data: TAppointmentBook) => {
     try {
 
         const response = await apiConnector({

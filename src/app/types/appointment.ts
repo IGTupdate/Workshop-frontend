@@ -17,6 +17,8 @@ export type TAppointment = {
   calender_id: string | TCalender;
   slot_id: string | TSlot;
   extensions: any[];
+  service_plans_id: string[] | [];
+  service_description: string[] | []
   status: TAppointmentStatus;
   bookedBy: {
     role_id: string;
@@ -44,7 +46,8 @@ export type TAppointmentBook = {
   calender_id: string,
   vehicle_id: string,
   customer_id: string,
-  service_plans: string[] 
+  service_description?: string[],
+  service_plans?: string[] 
 }
 
 export type TAppointmentReschedule = {
