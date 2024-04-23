@@ -57,7 +57,7 @@ const ServicePlans: React.FC<Props> = ({ plan }) => {
                 {/* tasks */}
                 {plan?.tasks?.length > 0 && <div className="flex flex-wrap justify-between items-center mt-4">
                     {plan?.tasks.map(task => (
-                        <p className='w-1/2 flex items-center gap-2' key={task.name}><span className='flex flex-wrap justify-center items-center h-[15px] w-[15px] rounded-full bg-green-200'><IoIosCheckmark className='text-green-400 text-lg' /></span> <span>{task.name}</span></p>
+                        <p className='w-1/2 flex items-center gap-2' key={task.name}><span className='flex justify-center items-center h-[15px] w-[15px] rounded-full bg-green-200'><IoIosCheckmark className='text-green-400 text-lg' /></span> <span>{task.name}</span></p>
                     ))}
                 </div>}
 

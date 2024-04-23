@@ -1,12 +1,12 @@
 'use client';
 import { getAllServicePlans } from '@/app/services/operations/appointment/service-plans';
 import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
-import { minutesToHoursConverter, PriceCalculator } from '@/app/utils/helper';
 import { Tabs } from 'antd';
 import TabPane from 'antd/es/tabs/TabPane';
 import { useEffect } from 'react';
 
 import ServicePlans from './ServicePlans';
+import Watermark from '@/app/components/Text/WatermarkText';
 
 
 
@@ -31,9 +31,11 @@ const ServicePlanSelection: React.FC<Props> = (props) => {
             <Tabs defaultActiveKey="0" tabPosition="top">
                 {Object.keys(servicePlansData).map(categoryId => (
                     <TabPane tab={servicePlansData[categoryId].category.name} key={categoryId}>
-                        {servicePlansData[categoryId].plans.map(plan => (
+                        {servicePlansData[categoryId].plans.length > 0 ? servicePlansData[categoryId].plans.map(plan => (
                             <ServicePlans key={plan._id} plan={plan} />
-                        ))}
+                        )) : <div className='text-center text-2xl font-bold mt-4'>
+                            <Watermark text='No Plans available' />
+                        </div>}
                     </TabPane>
                 ))}
             </Tabs>
