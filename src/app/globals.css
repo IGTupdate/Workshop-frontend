@@ -80,3 +80,9 @@ a:hover {
   flex-wrap: wrap;
   align-items: center;
 }
+
+
+:where(.css-dev-only-do-not-override-1awui22).ant-descriptions .ant-descriptions-item-container {
+  display: flex;
+  flex-wrap: wrap;
+}

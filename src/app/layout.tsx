@@ -46,6 +46,11 @@ export default function RootLayout({
               },
               "Layout": {
                 "colorBgContainer": "#031c30",
+              },
+              "Table": {
+                "headerBg": "#fadb14",
+                "headerColor": "rgba(255, 255, 255, 0.88)",
+                "rowHoverBg": "rgb(245, 245, 245)"
               }
             }
           }}>

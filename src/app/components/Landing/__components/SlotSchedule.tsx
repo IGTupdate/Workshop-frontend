@@ -14,7 +14,7 @@ const SlotSchedule: React.FC<Props> = ({ scrollToSlotDetails }) => {
   return (
     <div className="relative h-[550px]">
       {/* Background image */}
-      <div className="absolute inset-0 bg-cover bg-center filter blur-[5px]" style={{ backgroundImage: "url('/images/auth-side-img.webp')" }}></div>
+      <div className="absolute inset-0 bg-cover bg-center filter blur-[3px]" style={{ backgroundImage: "url('/images/auth-side-img.webp')" }}></div>
 
       {/* Content */}
       <div className="relative z-10 flex justify-center items-center h-full flex-col gap-14">

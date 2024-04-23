@@ -1,15 +1,15 @@
-"use client"
-import AppointmentBookingConfirmation from '@/app/employee/dashboard/appointment/book/__components/AppointmentBookingConfirmation'
-import SlotAvailablityContainer from '@/app/employee/dashboard/appointment/book/__components/SlotAvailablityContainer'
-import { slot_booking_customer_step } from '@/app/employee/dashboard/appointment/book/__utils/slot-booking-step'
-import { useAppSelector } from '@/app/store/reduxHooks'
-import { TAppointmentBook } from '@/app/types/appointment'
-import { Steps } from 'antd'
-import { useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import VehicleDetailContainer from './VehicleDetailContainer'
+"use client";
+import AppointmentBookingConfirmation from '@/app/employee/dashboard/appointment/book/__components/AppointmentBookingConfirmation';
+import SlotAvailablityContainer from '@/app/employee/dashboard/appointment/book/__components/SlotAvailablityContainer';
+import { slot_booking_customer_step } from '@/app/employee/dashboard/appointment/book/__utils/slot-booking-step';
+import { useAppSelector } from '@/app/store/reduxHooks';
+import { TAppointmentBook } from '@/app/types/appointment';
+import { Steps } from 'antd';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import VehicleDetailContainer from './VehicleDetailContainer';
 
-type Props = {}
+type Props = {};
 
 const BookAppointmentContainer = (props: Props) => {
     const searchParams = useSearchParams();
@@ -31,10 +31,10 @@ const BookAppointmentContainer = (props: Props) => {
                 return {
                     ...prv,
                     customer_id: authData._id || ""
-                }
-            })
+                };
+            });
         }
-    }, [authData])
+    }, [authData]);
 
     useEffect(() => {
         // console.log(searchParams.toString());
@@ -46,18 +46,18 @@ const BookAppointmentContainer = (props: Props) => {
                     ...prv,
                     slot_id,
                     calender_id,
-                }
-            })
-        }else{
+                };
+            });
+        } else {
             setAppointmentBookingData((prv) => {
                 return {
                     ...prv,
-                    slot_id : '',
-                    calender_id : '',
-                }
-            })
+                    slot_id: '',
+                    calender_id: '',
+                };
+            });
         }
-    }, [searchParams])
+    }, [searchParams]);
 
     useEffect(() => {
         if (appointmentBookingData.calender_id &&
@@ -74,13 +74,14 @@ const BookAppointmentContainer = (props: Props) => {
         else {
             setCurrentStep(0);
         }
-    }, [appointmentBookingData])
+    }, [appointmentBookingData]);
 
     return (
         <div>
             <Steps
                 className='mb-4'
                 current={currentStep}
+                labelPlacement="vertical"
                 items={slot_booking_customer_step}
             />
             {
@@ -99,7 +100,7 @@ const BookAppointmentContainer = (props: Props) => {
                 />
             }
         </div>
-    )
-}
+    );
+};
 
-export default BookAppointmentContainer
+export default BookAppointmentContainer;

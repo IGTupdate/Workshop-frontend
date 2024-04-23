@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import DescriptionItem from '@/app/components/DescriptionItem.tsx';
 import Loader from '@/app/components/Loader';
 import { getAllCustomerAppointment, getAppointMentBookInitData, rescheduleAppointment } from '@/app/services/operations/appointment/appointment';
@@ -13,30 +13,30 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-const { Title } = Typography
+const { Title } = Typography;
 
 type Props = {
-    appointmentRescheduleData: TAppointmentBook
+    appointmentRescheduleData: TAppointmentBook;
     setAppointmentRescheduleData: React.Dispatch<React.SetStateAction<TAppointmentBook>>,
-    appointmentId: string
-}
+    appointmentId: string;
+};
 
 type TappointmentRescheduleConfirmationData = {
     vehicle: null | TVehicle,
     customer: null | {
         phone: string,
         name: string,
-        email: string
+        email: string;
     },
-    slot_details: TSlot | null
-}
+    slot_details: TSlot | null;
+};
 
 const AppointmentRescheduleConfirmation = (props: Props) => {
 
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const userRole = useAppSelector(state => state.auth.authData.role);
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
 
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -58,7 +58,7 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
             (async function () {
                 try {
                     const responseData = await getAppointMentBookInitData(props.appointmentRescheduleData) as TappointmentRescheduleConfirmationData;
-                    setAppointmentRescheduleConfirmationData(responseData)
+                    setAppointmentRescheduleConfirmationData(responseData);
                     setLoading(false);
                 } catch (err) {
                     // console.log(err);
@@ -74,16 +74,16 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
                 ...prv,
                 slot_id: '',
                 calender_id: '',
-            }
-        })
-    }
+            };
+        });
+    };
 
     const handleRescheduleAppointment = async () => {
         try {
             setLoading(true);
             await rescheduleAppointment(props.appointmentId, { calender_id: props.appointmentRescheduleData.calender_id, slot_id: props.appointmentRescheduleData.slot_id });
             userRole === 'customer' ? router.push(`/dashboard/appointment/${props.appointmentId}`) :
-                router.push(`/employee/dashboard/appointment/${props.appointmentId}`)
+                router.push(`/employee/dashboard/appointment/${props.appointmentId}`);
 
             dispatch(getAllCustomerAppointment());
 
@@ -91,18 +91,18 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
         } finally {
             setLoading(false);
         }
-    }
+    };
 
     const changeSlotDetails = () => {
         let queryParams = removeQueryParams(searchParams.toString(), "slot_id");
         queryParams = removeQueryParams(queryParams, "calender_id");
 
         router.push(`${pathname}?${queryParams}`);
-    }
+    };
 
 
     return (
-        loading ? <Loader /> : <div className='bg-white p-4'>
+        loading ? <Loader /> : <div className='bg-white p-4 rounded-xl shadow-lg'>
             <div >
                 <div className='grid grid-cols-2'>
                     <Title level={5}>Customer Details</Title>
@@ -158,12 +158,12 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
             </div>
 
             <div className='mt-6 flex gap-4'>
-                <Button onClick={() => { handleBack(); router.push(pathname) }} >Back </Button>
-                <Button onClick={handleRescheduleAppointment} className="bg-blue1 text-white">Reschedule</Button>
+                <Button onClick={() => { handleBack(); router.push(pathname); }} >Back </Button>
+                <Button onClick={handleRescheduleAppointment} className="bg-black border-none hover:shadow-lg text-white">Reschedule</Button>
             </div>
 
         </div>
-    )
-}
+    );
+};
 
-export default AppointmentRescheduleConfirmation
+export default AppointmentRescheduleConfirmation;

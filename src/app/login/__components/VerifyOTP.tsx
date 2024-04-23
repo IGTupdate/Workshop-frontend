@@ -72,14 +72,14 @@ const VerifyOTP = () => {
         <div className="w-full">
 
 
-            <Image src={Logo} alt='Logo' className='mb-8 w-[90%]' />
+            <Image src={Logo} alt='Logo' className='mb-8 w-[200px]' />
 
-            <Heading
+            {/* <Heading
                 type='heading1'
                 primary={"OTP Verification"}
                 secondary={"Give Your Identity"}
                 primaryColor='text-black1'
-            />
+            /> */}
 
             <div className=' flex flex-col gap-5'>
                 <div className=' flex gap-4 text-xs'>Your Verification code has been sent to ******{contact.substring(6)} <FaRegEdit onClick={() => editContactNumber()} className=' cursor-pointer' /></div>
