@@ -1,4 +1,4 @@
-const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_BASE_URL || '';
+const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_BASE_URL || ''
 const APPOINTMENT_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_APPOINTMENT_SERVICE_BASE_URL + "/api";
 const WORK_ORDER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_WORK_ORDER_SERVICE_BASE_URL + "/api";
 const CONSUMER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_CONSUMER_BASE_URL || '';
@@ -16,7 +16,7 @@ const AUTH = '/auth';
 const EMPLOYEE = '/employee';
 const SLOT_SCHEDULE = '/slot_schedule';
 const SLOTS = '/slots';
-const CALENDAR = "/calendar";
+const CALENDAR = "/calender";
 const APPOINTMENT = "/appointment";
 const VEHICLE = "/vehicle";
 const CANCEL = "/cancel";
@@ -24,6 +24,7 @@ const RAMP = '/ramp';
 const SERVICE_CATEGORY = '/service_category';
 const SERVICE_TASKS = '/service_tasks';
 const SERVICE_PLANS = '/service_plans';
+const WORKORDER = "/workorder"
 
 // Define endpoint generators
 const authUrl = (...paths: string[]) => createUrl(AUTH_BASE_URL, ...paths);
@@ -87,7 +88,9 @@ export const workOrderEndpoints = {
   GET_ALL_WORK_ORDER: workOrderUrl("/workorder/get-all"),
   RAMP_CREATE_API: workOrderUrl("/create"),
   GET_ALL_RAMP_API: workOrderUrl(RAMP, "/get"),
-  GET_ALL_RAMP_STATUS_API: workOrderUrl(RAMP, "/get/status")
+  GET_ALL_RAMP_STATUS_API: workOrderUrl(RAMP, "/get/status"),
+  GET_WORK_ORDER_BY_ID: workOrderUrl(WORKORDER, "/get"),
+  PREPARE_WORK_ORDER: workOrderUrl(WORKORDER, "/prepare"),
 };
 
 

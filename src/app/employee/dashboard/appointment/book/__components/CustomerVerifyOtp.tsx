@@ -10,10 +10,8 @@ import { TCustomer } from '@/app/types/customer';
 import { authEndpoints } from '@/app/services/apis';
 import { apiOpenConnector } from '@/app/services/apiOpenConnector';
 
-const { VERIFYOTP_API } =
+const { VERIFY_OTP_API } =
     authEndpoints;
-
-const MAX_RETRY = 3;
 
 type Props = {
     customer: TCustomer,
@@ -49,7 +47,7 @@ const CustomerVerifyOtp = (props: Props) => {
         try {
             const response = await apiOpenConnector({
                 method: "POST",
-                url: VERIFYOTP_API,
+                url: VERIFY_OTP_API,
                 bodyData: { contactNumber: props.customer.contactNumber, otp },
             })
             console.log(response);

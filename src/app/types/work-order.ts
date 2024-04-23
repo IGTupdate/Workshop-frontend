@@ -1,5 +1,6 @@
 import { TAppointment } from "./appointment";
 import { TEmployee } from "./employee";
+import { TServicePlans } from "./service";
 
 export type TWorkOrderStatus =
     | "Pending"
@@ -40,14 +41,14 @@ export type TPartRequested = {
 
 
 export type TWorkOrder = {
-    _id:string,
+    _id: string,
     orderNumber: string;
     appointmentId: string | TAppointment;
     advisorId: string | TEmployee;
     mechanicId: string[] | TEmployee[];
     status: string;
     estimatedCost?: number;
-    estimatedTimeOfCompletion?: Date;
+    estimatedTimeOfCompletion?: string;
     serviceType?: string;
     notes?: string;
     rampId: string;
@@ -55,6 +56,10 @@ export type TWorkOrder = {
     partsRequested: TPartRequested[];
     partsRequiredInvoice: string[];
     current_location: string;
+    servicePlanId?: string[] | TServicePlans[];
+    odometerReading?: number;
+    fuelQuantity?: number;
+    observations: string[];
 };
 
 

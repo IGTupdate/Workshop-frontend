@@ -7,6 +7,9 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect, useState } from 'react'
 import WorkOrderTableContainer from './WorkOrderTableContainer';
 import { getAllWorkOrder } from '@/app/services/operations/workorder/workorder';
+import { Button, DatePicker } from 'antd';
+const { RangePicker } = DatePicker;
+
 
 type Props = {}
 
@@ -58,11 +61,21 @@ const WorkOrderPageContainer = (props: Props) => {
         router.push(`${pathname}?${queryParmas}`);
     };
 
+    const handleClearFilter = () => {
+        router.push(pathname);
+    }
+
     return (
         <div>
             {
                 workOrderLoading ? <Loader /> : <div>
-                    <WorkOrderTableContainer workOrderData={workOrderData.workOrders}/>
+                    <div className='mb-4 flex justify-between'>
+                        <RangePicker />
+                        <div>
+                            <Button type='link' onClick={handleClearFilter}>Clear Filter</Button>
+                        </div>
+                    </div>
+                    <WorkOrderTableContainer workOrderData={workOrderData.workOrders} />
                 </div>
             }
         </div>

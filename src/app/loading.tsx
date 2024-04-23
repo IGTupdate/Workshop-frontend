@@ -6,7 +6,7 @@ type Props = {}
 const loading = (props: Props) => {
   return (
     <div className=' h-screen flex justify-center items-center'>
-        <Loader />
+      <Loader />
     </div>
   )
 }

@@ -1,17 +1,16 @@
-
 export interface IServiceCategory {
     _id: string;
     name: string;
     isActive?: boolean;
 }
-
 export interface IServiceTask {
+    _id: string;
     name: string;
 }
-
 export type TParts = {
-    name: string;
-    description?: string;
+    _id: string,
+    partId?: string | null,
+    partName: string
 }
 
 export type TServicePlans = {

@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useCallback } from "react";
 import GetColumnTextSearchProps from "../../../../components/TableSearch/GetColumnTextSearchProps";
 import {
@@ -157,10 +158,10 @@ export function GetAppointmentDataTableColumn() {
         title: "Actions",
         dataIndex: "action",
         key: "action",
-        render: (_, { _id }) => {
+        render: (_, { _id, status }) => {
           return (
             <Flex wrap="wrap" gap="small">
-
+              {/* view appointments */}
               <Button
                 onClick={() => {
                   router.push("/employee/dashboard/appointment/" + _id)
@@ -170,15 +171,18 @@ export function GetAppointmentDataTableColumn() {
                 icon={<FaEye size={"22px"} title="View Appointments" />}
               ></Button>
 
-              {/* view appointments */}
-              <Button
-              onClick={() => {
-                router.push("/employee/dashboard/workorder/create?appointmentId=" + _id)
-              }}
-                style={{ border: "1px #24ae55 solid", color: "#24ae55" }}
-                size="middle"
-                icon={<MdAddChart size={"22px"} title="Create WorkOrder" />}
-              ></Button>
+              {/* create workorder */}
+              {
+                status === appointmentStatus[0] && <Button
+                  onClick={() => {
+                    router.push("/employee/dashboard/workorder/create?appointmentId=" + _id)
+                  }}
+                  style={{ border: "1px #24ae55 solid", color: "#24ae55" }}
+                  size="middle"
+                  icon={<MdAddChart size={"22px"} title="Create WorkOrder" />}
+                ></Button>
+              }
+
             </Flex>
           );
         },

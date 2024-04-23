@@ -11,6 +11,10 @@ export async function middleware(request: NextRequest) {
     const refreshToken = cookieStore.get("refreshToken")?.value;
     const isEmployee = cookieStore.get('isEmployee')?.value;
 
+    // console.log(cookieStore.get("accessToken")?.value);
+    // console.log(cookieStore.get("refreshToken")?.value);
+
+
     // Extract pathname from the request's URL
     const pathname = request.nextUrl.pathname;
 
