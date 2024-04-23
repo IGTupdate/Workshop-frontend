@@ -56,6 +56,7 @@ const BookAppointmentContainer: React.FC = () => {
                 className='mb-4'
                 current={currentStep}
                 labelPlacement="vertical"
+                direction="horizontal"
                 items={slot_booking_customer_step}
             />
             {currentStep === 0 && <SlotAvailablityContainer />}

@@ -36,6 +36,8 @@ const AppointmentBookingConfirmation = (props: Props) => {
     const router = useRouter();
     const userRole = useAppSelector(state => state.auth.authData.role);
 
+    console.log(userRole, "user role");
+
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
@@ -180,7 +182,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
 
             <div className='mt-6 flex gap-4'>
                 <Button onClick={handleBack} >Back </Button>
-                <Button onClick={handleBookAppointment} className="bg-black border-none hover:shadow-lg text-white">Book</Button>
+                <Button type='primary' onClick={handleBookAppointment} className="border-none hover:shadow-lg text-white">Book</Button>
             </div>
 
         </div>
