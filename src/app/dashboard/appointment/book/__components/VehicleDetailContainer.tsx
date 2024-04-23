@@ -3,13 +3,13 @@ import VehicleCreateContainer from '@/app/employee/dashboard/appointment/book/__
 import { NEW_VEHICLE } from '@/app/employee/dashboard/appointment/book/__utils/constant'
 import { deleteVehicle, getVehicleByCustomerId } from '@/app/services/operations/appointment/vehicle'
 import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks'
+import { setVehicleLoading } from '@/app/store/slices/customerVehicleSlice'
 import { TAppointmentBook } from '@/app/types/appointment'
 import { Button, Typography } from 'antd'
 import { usePathname, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import VehicleDetails from './VehicleDetails'
 import VehicleUpdateContainer from './VehicleUpdateContainer'
-import { setVehicleLoading } from '@/app/store/slices/customerVehicleSlice'
 
 const { Title } = Typography
 

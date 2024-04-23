@@ -1,13 +1,11 @@
 import { setAppointmentData, setAppointmentLoading } from "@/app/store/slices/customerAppointmentSlice";
 import { RootState } from "@/app/store/store";
 import { TAppointment, TAppointmentReschedule } from "@/app/types/appointment";
+import { COMMON_ERROR } from "@/app/utils/constants/constant";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import { apiConnector } from "../../apiConnector";
 import { appointmentEndpoints } from "../../apis";
-import { AppointmentData } from "@/app/dashboard/appointment/__utils/FetchAppointments";
-import { COMMON_ERROR } from "@/app/utils/constants/constant";
-import { appointmentNotification } from "../notification/appointment";
 
 
 

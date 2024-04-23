@@ -21,6 +21,9 @@ const APPOINTMENT = "/appointment";
 const VEHICLE = "/vehicle";
 const CANCEL = "/cancel";
 const RAMP = '/ramp';
+const SERVICE_CATEGORY = '/service_category';
+const SERVICE_TASKS = '/service_tasks';
+const SERVICE_PLANS = '/service_plans';
 
 // Define endpoint generators
 const authUrl = (...paths: string[]) => createUrl(AUTH_BASE_URL, ...paths);
@@ -64,7 +67,18 @@ export const appointmentEndpoints = {
   CREATE_VEHICLE: appointmentUrl(VEHICLE, "/create"),
   GET_VEHICLE_BY_CUSTOMER_ID: appointmentUrl(VEHICLE, "/get-by-customer"),
   UPDATE_VEHICLE_BY_CUSTOMER_ID: appointmentUrl(VEHICLE, "/update"),
-  DELETE_VEHICLE_BY_CUSTOMER_ID: appointmentUrl(VEHICLE, "/delete")
+  DELETE_VEHICLE_BY_CUSTOMER_ID: appointmentUrl(VEHICLE, "/delete"),
+  CREATE_SERVICE_CATEGORY: appointmentUrl(SERVICE_CATEGORY, '/create'),
+  UPDATE_SERVICE_CATEGORY: appointmentUrl(SERVICE_CATEGORY, '/update'),
+  GET_SERVICE_CATEGORY: appointmentUrl(SERVICE_CATEGORY, '/get'),
+  CREATE_SERVICE_TASK: appointmentUrl(SERVICE_TASKS, '/create'),
+  UPDATE_SERVICE_TASK: appointmentUrl(SERVICE_TASKS, '/update'),
+  DELETE_SERVICE_TASK: appointmentUrl(SERVICE_TASKS, '/delete'),
+  GET_SERVICE_TASK: appointmentUrl(SERVICE_TASKS, '/get'),
+  CREATE_SERVICE_PLAN: appointmentUrl(SERVICE_PLANS, '/create'),
+  UPDATE_SERVICE_PLAN: appointmentUrl(SERVICE_PLANS, '/update'),
+  DELETE_SERVICE_PLAN: appointmentUrl(SERVICE_PLANS, '/delete'),
+  GET_SERVICE_PLAN: appointmentUrl(SERVICE_PLANS, '/get'),
 };
 
 export const workOrderEndpoints = {

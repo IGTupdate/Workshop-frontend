@@ -7,74 +7,54 @@ import { TAppointmentBook } from '@/app/types/appointment'
 import { Steps } from 'antd'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import ServicePlanSelection from './ServicePlanSelection'
 import VehicleDetailContainer from './VehicleDetailContainer'
 
-type Props = {}
-
-const BookAppointmentContainer = (props: Props) => {
+const BookAppointmentContainer: React.FC = () => {
     const searchParams = useSearchParams();
     const [currentStep, setCurrentStep] = useState<number>(0);
-
     const authData = useAppSelector(state => state.auth.authData);
-
     const [appointmentBookingData, setAppointmentBookingData] = useState<TAppointmentBook>({
         slot_id: "",
         calender_id: "",
         customer_id: "",
-        vehicle_id: ""
+        vehicle_id: "",
+        service_plans: []
     });
-
 
     useEffect(() => {
         if (authData._id) {
-            setAppointmentBookingData((prv) => {
-                return {
-                    ...prv,
-                    customer_id: authData._id || ""
-                }
-            })
+            setAppointmentBookingData(prevData => ({ ...prevData, customer_id: authData._id || '' }));
         }
-    }, [authData])
+    }, [authData]);
 
     useEffect(() => {
-        // console.log(searchParams.toString());
         const slot_id = searchParams.get("slot_id");
         const calender_id = searchParams.get("calender_id");
         if (slot_id && calender_id) {
-            setAppointmentBookingData((prv) => {
-                return {
-                    ...prv,
-                    slot_id,
-                    calender_id,
-                }
-            })
-        }else{
-            setAppointmentBookingData((prv) => {
-                return {
-                    ...prv,
-                    slot_id : '',
-                    calender_id : '',
-                }
-            })
+            setAppointmentBookingData(prevData => ({ ...prevData, slot_id, calender_id }));
+        } else {
+            setAppointmentBookingData(prevData => ({ ...prevData, slot_id: '', calender_id: '' }));
         }
-    }, [searchParams])
+    }, [searchParams]);
 
     useEffect(() => {
-        if (appointmentBookingData.calender_id &&
-            appointmentBookingData.slot_id &&
-            appointmentBookingData.customer_id &&
-            appointmentBookingData.vehicle_id) {
+        const service_plans = searchParams.get("plan_id");
+        setAppointmentBookingData(prevData => ({ ...prevData, service_plans: service_plans ? (typeof service_plans === 'string' ? [service_plans] : service_plans) : [] }));
+    }, [searchParams]);
+
+    useEffect(() => {
+        const { calender_id, slot_id, customer_id, vehicle_id, service_plans } = appointmentBookingData;
+        if (calender_id && slot_id && customer_id && vehicle_id && service_plans.length) {
+            setCurrentStep(3);
+        } else if (calender_id && slot_id && customer_id && vehicle_id) {
             setCurrentStep(2);
-        }
-        else if (appointmentBookingData.calender_id &&
-            appointmentBookingData.slot_id &&
-            appointmentBookingData.customer_id) {
+        } else if (calender_id && slot_id && customer_id) {
             setCurrentStep(1);
-        }
-        else {
+        } else {
             setCurrentStep(0);
         }
-    }, [appointmentBookingData])
+    }, [appointmentBookingData]);
 
     return (
         <div>
@@ -83,23 +63,12 @@ const BookAppointmentContainer = (props: Props) => {
                 current={currentStep}
                 items={slot_booking_customer_step}
             />
-            {
-                currentStep === 0 && <SlotAvailablityContainer />
-            }
-            {
-                currentStep === 1 && <VehicleDetailContainer
-                    setAppointmentBookingData={setAppointmentBookingData}
-                />
-            }
-            {
-                currentStep === 2 &&
-                <AppointmentBookingConfirmation
-                    appointmentBookingData={appointmentBookingData}
-                    setAppointmentBookingData={setAppointmentBookingData}
-                />
-            }
+            {currentStep === 0 && <SlotAvailablityContainer />}
+            {currentStep === 1 && <VehicleDetailContainer setAppointmentBookingData={setAppointmentBookingData} />}
+            {currentStep === 2 && <ServicePlanSelection />}
+            {currentStep === 3 && <AppointmentBookingConfirmation appointmentBookingData={appointmentBookingData} setAppointmentBookingData={setAppointmentBookingData} />}
         </div>
-    )
-}
+    );
+};
 
-export default BookAppointmentContainer
+export default BookAppointmentContainer;
