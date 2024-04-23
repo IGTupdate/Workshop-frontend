@@ -39,7 +39,7 @@ const App: React.FC = () => {
           <EmployeeLogin />
         </Flex>
       </Content>
-      <Footer className=' p-0 mt-[100px]'>
+      <Footer className=' p-0 mt-[60px]'>
         <AboutUsFooter />
       </Footer>
     </Layout>

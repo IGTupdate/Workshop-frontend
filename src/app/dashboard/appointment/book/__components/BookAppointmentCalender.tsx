@@ -82,6 +82,7 @@ const BookAppointmentContainer = (props: Props) => {
                 className='mb-4'
                 current={currentStep}
                 labelPlacement="vertical"
+                direction="horizontal"
                 items={slot_booking_customer_step}
             />
             {
