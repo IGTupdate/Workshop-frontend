@@ -2,36 +2,16 @@ import React from 'react';
 import { IoIosCheckmark } from "react-icons/io";
 import { IoMdTime } from "react-icons/io";
 import { minutesToHoursConverter, PriceCalculator } from '@/app/utils/helper';
-
-
-
-interface Task {
-    name: string,
-    price: number,
-    // Add any other properties of a task here
-}
-
-interface Category {
-    name: string,
-    // Add any other properties of a category here
-}
-
-interface Plan {
-    _id: string,
-    name: string,
-    description: string[],
-    price: number,
-    duration?: string, // Assuming duration is in minutes
-    category: Category,
-    tasks?: Task[],
-    // Add any other properties of a plan here
-}
+import { TServicePlans } from '@/app/types/service';
+import { Button } from 'antd';
 
 interface Props {
-    plan: Plan;
+    plan: TServicePlans;
+    addServicePlan?: (planId: string) => void,
+    removeServicePlan?: (planId: string) => void
 }
 
-const ServicePlans: React.FC<Props> = ({ plan }) => {
+const ServicePlans: React.FC<Props> = ({ plan, addServicePlan, removeServicePlan }) => {
     return (
         <div key={plan._id}>
 
@@ -55,7 +35,7 @@ const ServicePlans: React.FC<Props> = ({ plan }) => {
                 </div>
 
                 {/* tasks */}
-                {plan?.tasks?.length > 0 && <div className="flex flex-wrap justify-between items-center mt-4">
+                {plan.tasks && plan.tasks.length > 0 && <div className="flex flex-wrap justify-between items-center mt-4">
                     {plan?.tasks.map(task => (
                         <p className='w-1/2 flex items-center gap-2' key={task.name}><span className='flex justify-center items-center h-[15px] w-[15px] rounded-full bg-green-200'><IoIosCheckmark className='text-green-400 text-lg' /></span> <span>{task.name}</span></p>
                     ))}
@@ -67,6 +47,9 @@ const ServicePlans: React.FC<Props> = ({ plan }) => {
                         ₹ {PriceCalculator(plan.price)}
                     </span>
                     <span className='text-xl font-semibold'>₹ {plan.price}</span></p>
+
+                    { addServicePlan && <Button onClick={() => addServicePlan(plan._id)}>Add to cart</Button>}
+                    { removeServicePlan && <Button onClick={() => removeServicePlan(plan._id)}>Remove from cart</Button>}
 
             </div>
         </div>

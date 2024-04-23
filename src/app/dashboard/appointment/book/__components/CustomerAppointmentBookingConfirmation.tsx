@@ -2,7 +2,7 @@
 import DescriptionItem from '@/app/components/DescriptionItem.tsx';
 import Loader from '@/app/components/Loader';
 import { bookAppointment, getAppointMentBookInitData } from '@/app/services/operations/appointment/appointment';
-import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
+import { useAppSelector } from '@/app/store/reduxHooks';
 import { TAppointmentBook } from '@/app/types/appointment';
 import { TSlot } from '@/app/types/calender';
 import { TServicePlans } from '@/app/types/service';
@@ -13,6 +13,7 @@ import { Button, Divider, Typography } from 'antd';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import ServicePlans from './ServicePlans';
 
 const { Title } = Typography;
 
@@ -29,7 +30,7 @@ type TappointmentBookingConfirmationData = {
         name: string,
         email: string;
     },
-    service_plans_id: TServicePlans[] | [];
+    servicePlans: TServicePlans[] | [];
     service_description: string[] | [];
     slot_details: TSlot | null;
 };
@@ -47,7 +48,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
     const [appointmentBookingConfirmationData, setAppointmentBookingConfirmationData] = useState<TappointmentBookingConfirmationData>({
         vehicle: null,
         customer: null,
-        service_plans_id: [],
+        servicePlans: [],
         service_description: [],
         slot_details: null
     });
@@ -70,7 +71,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
                     .flatMap(category => category.plans)
                     .filter(plan => props.appointmentBookingData.service_plans?.includes(plan._id));
 
-                    setAppointmentBookingConfirmationData({...responseData, servicePlans: {...plans}});
+                    setAppointmentBookingConfirmationData({...responseData, servicePlans: plans});
                     setLoading(false);
                 } catch (err) {
                     // console.log(err);
@@ -180,16 +181,11 @@ const AppointmentBookingConfirmation = (props: Props) => {
                     </div>
                 </div>
                 <div className='grid grid-cols-2 gap-2'>
-                    <DescriptionItem title='Registeration Number'
-                        content={appointmentBookingConfirmationData.vehicle?.registeration_number || "-"} />
-                    <DescriptionItem title='Vin'
-                        content={appointmentBookingConfirmationData.vehicle?.vin || "-"} />
-                    <DescriptionItem title='Make'
-                        content={appointmentBookingConfirmationData.vehicle?.vehicle_make || "-"} />
-                    <DescriptionItem title='Model'
-                        content={appointmentBookingConfirmationData.vehicle?.vehicle_model || "-"} />
-                    <DescriptionItem title='Owner'
-                        content={appointmentBookingConfirmationData.vehicle?.owner || "-"} />
+                    {
+                        appointmentBookingConfirmationData.servicePlans.map(plan =>(
+                            <ServicePlans key={plan._id} plan={plan}/>
+                        ))
+                    }
                 </div>
             </div>
             <Divider />
@@ -220,8 +216,8 @@ const AppointmentBookingConfirmation = (props: Props) => {
             </div>
 
             <div className='mt-6 flex gap-4'>
-                <Button onClick={handleBack} >Back </Button>
-                <Button onClick={handleBookAppointment} className="bg-black border-none hover:shadow-lg text-white">Book</Button>
+                <Button onClick={() => handleBack()} >Back </Button>
+                <Button onClick={() => handleBookAppointment()} className="bg-black border-none hover:shadow-lg text-white">Book</Button>
             </div>
 
         </div>
