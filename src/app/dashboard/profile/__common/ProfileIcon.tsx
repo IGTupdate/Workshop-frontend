@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import { LiaEdit } from "react-icons/lia";
 import { TiArrowBackOutline } from "react-icons/ti";
-import { isNull } from 'util';
+
 
 
 const ProfileIcon: React.FC<Props> = ({ edit, setEdit }) => {
@@ -22,7 +22,7 @@ const ProfileIcon: React.FC<Props> = ({ edit, setEdit }) => {
       <div className="flex justify-end items-center w-full">
         {
           edit ? <TiArrowBackOutline className='text-xl font-bold cursor-pointer' onClick={() => setEdit(false)} />
-            : ''
+            : <LiaEdit className='text-xl font-bold cursor-pointer' onClick={() => setEdit(true)} />
 
         }
       </div>

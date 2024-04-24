@@ -15,9 +15,9 @@ import { TAppointment } from "@/app/types/appointment";
 
 type Props = {};
 type TAppointmentData = {
-  appointments: TAppointment[],
-  totalAppointments: number
-}
+  appointments: TAppointment[];
+  totalAppointments: number;
+};
 
 const AppointmentpageContainer = (props: Props) => {
   const [appointmentDataLoading, setAppointmentDataLoading] =
@@ -25,29 +25,26 @@ const AppointmentpageContainer = (props: Props) => {
 
   const [appointmentData, setAppointmentData] = useState<TAppointmentData>({
     appointments: [],
-    totalAppointments: 0
-  })
+    totalAppointments: 0,
+  });
 
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-
   // when search params changes then call api
   useEffect(() => {
     loadAppointement();
-    console.log("fetching");
   }, [searchParams, router]);
 
   const loadAppointement = async () => {
     setAppointmentDataLoading(true);
-    const appointmentData = await getAllAppointment(searchParams.toString())
+    const appointmentData = await getAllAppointment(searchParams.toString());
     if (appointmentData) {
-      console.log(appointmentData)
-      setAppointmentData(appointmentData)
+      setAppointmentData(appointmentData);
     }
     setAppointmentDataLoading(false);
-  }
+  };
 
   // create query string
   const createQueryString = useCallback(
@@ -76,7 +73,9 @@ const AppointmentpageContainer = (props: Props) => {
         <Loader />
       ) : (
         <div>
-          <AppointmentTableContainer appointmentData={appointmentData.appointments} />
+          <AppointmentTableContainer
+            appointmentData={appointmentData.appointments}
+          />
           <div className="mt-10 mx-auto w-max">
             <Pagination
               defaultCurrent={getCurrentPage()}

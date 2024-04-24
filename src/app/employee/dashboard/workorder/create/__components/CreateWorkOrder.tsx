@@ -1,79 +1,82 @@
-"use client"
+"use client";
 
-
-import React, { useEffect, useState } from 'react'
-import { employeeRole } from '@/app/utils/constants/employee-roles'
-import EmployementAvailabilityContainer from './EmployementAvailabilityContainer'
-import WorkOrderAppointmentContiner from './WorkOrderAppointmentContiner'
-import { TworkOrderCreate } from '@/app/validators/workorder'
-import { Button } from 'antd'
-import toast from 'react-hot-toast'
-import { COMMON_ERROR } from '@/app/utils/constants/constant'
-import { createWorkOrder } from '@/app/services/operations/workorder/workorder'
-import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from "react";
+import { employeeRole } from "@/app/utils/constants/employee-roles";
+import EmployementAvailabilityContainer from "./EmployementAvailabilityContainer";
+import WorkOrderAppointmentContiner from "./WorkOrderAppointmentContiner";
+import { TworkOrderCreate } from "@/app/validators/workorder";
+import { Button } from "antd";
+import toast from "react-hot-toast";
+import { COMMON_ERROR } from "@/app/utils/constants/constant";
+import { createWorkOrder } from "@/app/services/operations/workorder/workorder";
+import { useRouter } from "next/navigation";
 
 type Props = {
-    appointmentId: string | undefined
-}
+  appointmentId: string | undefined;
+};
 
 const CreateWorkOrder = (props: Props) => {
+  const [workOrderCreateData, setWorkOrderCreateData] =
+    useState<TworkOrderCreate>({
+      appointmentId: "",
+      advisorId: "",
+    });
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-    const [workOrderCreateData, setWorkOrderCreateData] = useState<TworkOrderCreate>({
-        appointmentId: "",
-        advisorId: ""
-    })
-    const [loading, setLoading] = useState(false);
-    const router = useRouter();
-
-    const handleCreateWorkOrder = async () => {
-        console.log(workOrderCreateData);
-
-        if (!workOrderCreateData.advisorId) {
-            toast.error("Select Advisor");
-            return;
-        }
-        else if (!workOrderCreateData.appointmentId) {
-            toast.error("Appointment Not Found");
-            return;
-        }
-        setLoading(true);
-        try {
-            const response = await createWorkOrder(workOrderCreateData);
-            toast.success(response.message)
-            router.push("/employee/dashboard/workorder")
-
-        } catch (err: any) {
-            toast.error(err?.response?.data?.message || COMMON_ERROR)
-        } finally {
-            setLoading(false);
-        }
+  const handleCreateWorkOrder = async () => {
+    if (!workOrderCreateData.advisorId) {
+      toast.error("Select Advisor");
+      return;
+    } else if (!workOrderCreateData.appointmentId) {
+      toast.error("Appointment Not Found");
+      return;
     }
-
-    const handleAdvisorSelect = (advisorId: string) => {
-        setWorkOrderCreateData((prv) => {
-            return {
-                ...prv,
-                advisorId: advisorId
-            }
-        })
+    setLoading(true);
+    try {
+      const response = await createWorkOrder(workOrderCreateData);
+      toast.success(response.message);
+      router.push("/employee/dashboard/workorder");
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message || COMMON_ERROR);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    return (
-        <div>
-            <WorkOrderAppointmentContiner
-                appointmentId={props.appointmentId}
-                setWorkOrderCreateData={setWorkOrderCreateData} />
+  const handleAdvisorSelect = (advisorId: string) => {
+    setWorkOrderCreateData((prv) => {
+      return {
+        ...prv,
+        advisorId: advisorId,
+      };
+    });
+  };
 
-            <EmployementAvailabilityContainer
-                role={employeeRole.advisor}
-                handleSetlect={handleAdvisorSelect}
-                selectedAdvisor={workOrderCreateData.advisorId} />
+  return (
+    <div>
+      <WorkOrderAppointmentContiner
+        appointmentId={props.appointmentId}
+        setWorkOrderCreateData={setWorkOrderCreateData}
+      />
 
-            <div className='w-full flex justify-end mt8'>
-                <Button disabled={loading} type='primary' onClick={handleCreateWorkOrder}>Create </Button>
-            </div>
-        </div>
-    )
-}
+      <EmployementAvailabilityContainer
+        role={employeeRole.advisor}
+        handleSetlect={handleAdvisorSelect}
+        selectedAdvisor={workOrderCreateData.advisorId}
+      />
 
-export default CreateWorkOrder
+      <div className="w-full flex justify-end mt8">
+        <Button
+          disabled={loading}
+          type="primary"
+          onClick={handleCreateWorkOrder}
+        >
+          Create{" "}
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default CreateWorkOrder;
