@@ -41,7 +41,9 @@ const AppointmentPageContiner = (props: Props) => {
   return (
     <div>
       {appointmentLoading ? (
-        <Loader />
+        <div className="flex justify-center items-center h-full">
+          <Loader />
+        </div>
       ) : appointment ? (
         <div>
           <AppointmentDetails appointmentData={appointment} />

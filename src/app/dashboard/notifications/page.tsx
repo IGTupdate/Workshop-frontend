@@ -39,7 +39,9 @@ const page = () => {
 
       {/* notifications */}
       {loading ? (
-        <Loader />
+        <div className="flex justify-center items-center h-full">
+          <Loader />
+        </div>
       ) : (
         <Notifications show={"All"} notificationData={notificationData} />
       )}

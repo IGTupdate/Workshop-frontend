@@ -137,7 +137,9 @@ const AppointmentBookingConfirmation = (props: Props) => {
   }, [appointmentBookingConfirmationData]);
 
   return loading ? (
-    <Loader />
+    <div className="flex justify-center items-center h-full">
+      <Loader />
+    </div>
   ) : (
     <div className="bg-white p-4 rounded-xl shadow-lg">
       <div>
