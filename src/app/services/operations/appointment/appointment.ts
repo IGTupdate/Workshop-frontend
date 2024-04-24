@@ -18,7 +18,6 @@ export const getAppointmentByCalenderId = async (calenderId: string, query: stri
             url: GET_APPOINTMENT_BY_CALENDAR + "/" + calenderId + "?" + query
         })
 
-        console.log(response);
         return response.data.data.length
     } catch (err) {
         console.log(err);
@@ -44,7 +43,6 @@ export const getAppointmentByAppointmentId = async (appointmentId: string): Prom
 
 export const getAllAppointment = async (query: string = "") => {
     try {
-        console.log("loading appointment api ", query);
         const response = await apiConnector({
             method: "GET",
             url: GET_ALL_APPOINTMENT + "?" + query

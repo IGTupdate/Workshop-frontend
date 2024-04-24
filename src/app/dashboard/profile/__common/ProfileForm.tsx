@@ -118,7 +118,7 @@ const ProfileForm = ({ edit, setEdit }) => {
             </div>
           </div>
 
-          <Button type="primary" onClick={() => setEdit(true)} className='custom-button mt-2'>Edit</Button>
+          {/* <Button type="primary" onClick={() => setEdit(true)} className='custom-button mt-2'>Edit</Button> */}
         </div>
 
 
