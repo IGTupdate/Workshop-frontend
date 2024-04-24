@@ -1,8 +1,10 @@
 "use client";
 import DescriptionItem from '@/app/components/DescriptionItem.tsx';
+import InputFieldWithButton from '@/app/components/Input/InputFieldWithButton';
 import Loader from '@/app/components/Loader';
 import { bookAppointment, getAppointMentBookInitData } from '@/app/services/operations/appointment/appointment';
-import { useAppSelector } from '@/app/store/reduxHooks';
+import { getAllServicePlans } from '@/app/services/operations/appointment/service-plans';
+import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import { TAppointmentBook } from '@/app/types/appointment';
 import { TSlot } from '@/app/types/calender';
 import { TServicePlans } from '@/app/types/service';
@@ -31,7 +33,6 @@ type TappointmentBookingConfirmationData = {
         email: string;
     },
     servicePlans: TServicePlans[] | [];
-    service_description: string[] | [];
     slot_details: TSlot | null;
 };
 
@@ -40,19 +41,18 @@ const AppointmentBookingConfirmation = (props: Props) => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const userRole = useAppSelector(state => state.auth.authData.role);
-    const servicePlans = useAppSelector((state) => state.servicePlan.servicePlansData)
-
+    const {servicePlansLoading ,servicePlansData} = useAppSelector((state) => state.servicePlan)
+    const [remarks, setRemarks] = useState<string[]>(props.appointmentBookingData.service_description)
     const pathname = usePathname();
     const searchParams = useSearchParams();
+    const dispatch = useAppDispatch()
 
     const [appointmentBookingConfirmationData, setAppointmentBookingConfirmationData] = useState<TappointmentBookingConfirmationData>({
         vehicle: null,
         customer: null,
         servicePlans: [],
-        service_description: [],
         slot_details: null
     });
-
 
     useEffect(() => {
         setLoading(true);
@@ -64,14 +64,8 @@ const AppointmentBookingConfirmation = (props: Props) => {
             props.appointmentBookingData.vehicle_id) {
             (async function () {
                 try {
-                    const responseData = await getAppointMentBookInitData(props.appointmentBookingData)
-
-                    let plans: TServicePlans[] = []
-                    plans = Object.values(servicePlans)
-                    .flatMap(category => category.plans)
-                    .filter(plan => props.appointmentBookingData.service_plans?.includes(plan._id));
-
-                    setAppointmentBookingConfirmationData({...responseData, servicePlans: plans});
+                    const responseData = await getAppointMentBookInitData(props.appointmentBookingData);
+                    setAppointmentBookingConfirmationData(prev => ({ ...prev, ...responseData}));
                     setLoading(false);
                 } catch (err) {
                     // console.log(err);
@@ -79,16 +73,54 @@ const AppointmentBookingConfirmation = (props: Props) => {
             }());
         }
 
-    }, [props.appointmentBookingData]);
+    }, [props.appointmentBookingData.calender_id ,
+        props.appointmentBookingData.slot_id ,
+        props.appointmentBookingData.customer_id ,
+        props.appointmentBookingData.vehicle_id]);
+
+    useEffect(() => {
+        if (servicePlansLoading) {
+            dispatch(getAllServicePlans());
+        }
+        // console.log(servicePlansData);
+        let plans: TServicePlans[] = [];
+        plans = Object.values(servicePlansData)
+          .flatMap(category => category.plans)
+          .filter(plan => props.appointmentBookingData.service_plans.includes(plan._id));
+        // console.log(plans)
+
+        setAppointmentBookingConfirmationData(prev => ({ ...prev, servicePlans: plans }));
+    }, [servicePlansLoading, servicePlansData]);
 
     const handleBack = () => {
-        props.setCurrentStep(2)
+        // localStorage.setItem('appointmentBookingData', JSON.stringify({...props.appointmentBookingData, showServicePlans: true}))
+        // props.setCurrentStep(2)
+        props.setAppointmentBookingData((prev) => ({...prev, showServicePlans: true}))
     };
+
+    // useEffect(() => {
+    //     console.log(appointmentBookingConfirmationData)
+    // },[appointmentBookingConfirmationData])
 
     const handleBookAppointment = async () => {
         try {
             setLoading(true);
-            const response = await bookAppointment(props.appointmentBookingData);
+            const {        
+                slot_id,
+                calender_id,
+                customer_id,
+                vehicle_id,
+                service_plans
+            } = props.appointmentBookingData
+            const newData = {
+                slot_id,
+                calender_id,
+                customer_id,
+                vehicle_id,
+                service_plans,
+                service_description: remarks
+            }
+            const response = await bookAppointment(newData);
             // console.log(response);
             toast.success(response?.message);
             localStorage.removeItem('selectedPlans')
@@ -118,10 +150,18 @@ const AppointmentBookingConfirmation = (props: Props) => {
         });
     };
 
-    useEffect(() => {
-        console.log(appointmentBookingConfirmationData)
-    },[appointmentBookingConfirmationData])
+    const addRemarks = (remark: string) => {
+        if(remarks.includes(remark)) return
+        setRemarks(prevRemarks => [...prevRemarks, remark]);
+    };
 
+    const removeRemarks = (remark: string) => {
+        setRemarks(prevRemarks => prevRemarks.filter(prevRemark => prevRemark !== remark));
+    };    
+
+    useEffect(() => {
+        localStorage.setItem('appointmentBookingData', JSON.stringify({...props.appointmentBookingData, service_description: remarks}))
+    }),[remarks]
 
     return (
         loading ? <Loader /> : <div className='bg-white p-4 rounded-xl shadow-lg'>
@@ -129,9 +169,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
                 <div className='grid grid-cols-2'>
                     <Title level={5}>Customer Details</Title>
                     <div className='flex justify-end'>
-                        <Button type='link' onClick={() => {
-                            changeAppointmentBookingData("customer_id", "");
-                        }}>Change</Button>
+                        <Button type='link' onClick={() => router.push('/dashboard/profile')}>Change</Button>
                     </div>
                 </div>
                 <div className='grid grid-cols-2 gap-2'>
@@ -175,15 +213,13 @@ const AppointmentBookingConfirmation = (props: Props) => {
                 <div className='grid grid-cols-2'>
                     <Title level={5}>Service Plan Details</Title>
                     <div className='flex justify-end'>
-                        <Button type='link' onClick={() => {
-                            props.setCurrentStep(2);
-                        }}>Change</Button>
+                        <Button type='link' onClick={() => handleBack()}>Change</Button>
                     </div>
                 </div>
                 <div className='grid grid-cols-2 gap-2'>
                     {
-                        appointmentBookingConfirmationData.servicePlans.map(plan =>(
-                            <ServicePlans key={plan._id} plan={plan}/>
+                        appointmentBookingConfirmationData.servicePlans && appointmentBookingConfirmationData.servicePlans.map((plan, i) =>(
+                            <ServicePlans key={i} plan={plan} />
                         ))
                     }
                 </div>
@@ -211,7 +247,14 @@ const AppointmentBookingConfirmation = (props: Props) => {
             <div>
                 <div className='grid grid-cols-2'>
                     <Title level={5}>Remarks</Title>
-                        Add Description
+                    <InputFieldWithButton name='desc' label='Add Description' placeholder='Add Description' type='text' handleButtonClick={addRemarks}/>
+                    <div>
+                        {
+                            remarks.map((ele,i) => (
+                                <p key={i}>{ele} <Button onClick={() => removeRemarks(ele)}>Cancel</Button></p>
+                            ))
+                        }
+                    </div>
                 </div>
             </div>
 

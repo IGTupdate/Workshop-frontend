@@ -42,7 +42,7 @@ const VehicleDetailContainer = (props: Props) => {
                     vehicle_id: vehicleId
                 };
             });
-        }
+        } 
     }, [vehicleId]);
 
     const handleAddNewVehicle = () => {

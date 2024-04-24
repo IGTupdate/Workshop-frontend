@@ -9,6 +9,7 @@ import ServicePlans from './ServicePlans';
 import Watermark from '@/app/components/Text/WatermarkText';
 
 type Props = {
+    appointmentBookingData: TAppointmentBook
     setAppointmentBookingData: React.Dispatch<React.SetStateAction<TAppointmentBook>>;
     setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -18,7 +19,7 @@ type Props = {
 const ServicePlanSelection: React.FC<Props> = (props) => {
     const { servicePlansLoading, servicePlansData } = useAppSelector((state) => state.servicePlan);
     const dispatch = useAppDispatch();
-    const [selectedPlans, setSelectedPlans] = useState<string[]>(JSON.parse(localStorage.getItem('selectedPlans') || ''));
+    const [selectedPlans, setSelectedPlans] = useState<string[]>(props.appointmentBookingData.service_plans);
 
     useEffect(() => {
         if (servicePlansLoading) {
@@ -28,6 +29,7 @@ const ServicePlanSelection: React.FC<Props> = (props) => {
 
     useEffect(() => {
         props.setAppointmentBookingData(prevData => ({ ...prevData, service_plans: selectedPlans ? selectedPlans : [] }));
+        if(localStorage.getItem('selectedPlans')) localStorage.removeItem('selectedPlans')
     }, [selectedPlans]);  
 
     const addServicePlan = (planId: string) => {
@@ -48,7 +50,8 @@ const ServicePlanSelection: React.FC<Props> = (props) => {
     }
 
     const handleNext = () => {
-        props.setCurrentStep(3)
+        // localStorage.setItem('appointmentBookingData', JSON.stringify({...props.appointmentBookingData, showServicePlans: false}))
+        props.setAppointmentBookingData((prev) => ({...prev, showServicePlans: false}))
     }
 
     return (

@@ -28,7 +28,7 @@ const InputFieldWithButton = (props: Props) => {
                     if (inputRef.current && inputRef.current.input && inputRef.current.input.value) {
                         props.handleButtonClick(inputRef.current.input.value);
                         inputRef.current.input.value = ""
-                        console.log(inputRef.current.input.value);
+                        // console.log(inputRef.current.input.value);
                         inputRef.current.input.setAttribute("value", "")
                     }
 

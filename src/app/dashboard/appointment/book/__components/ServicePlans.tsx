@@ -13,7 +13,7 @@ interface Props {
 
 const ServicePlans: React.FC<Props> = ({ plan, addServicePlan, removeServicePlan }) => {
     return (
-        <div key={plan._id}>
+        <div>
 
             {/* category */}
             <p className='mb-4 text-3xl font-bold'>{plan.category.name}</p>

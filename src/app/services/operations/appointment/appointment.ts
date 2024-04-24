@@ -92,7 +92,7 @@ export const getCustomerInitData = async (customerId: string) => {
 }
 
 
-export const bookAppointment = async (data: any) => {
+export const bookAppointment = async (data: TAppointmentBook) => {
     try {
         const response = await apiConnector({
             method: "POST",
