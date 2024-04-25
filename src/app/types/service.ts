@@ -19,7 +19,7 @@ export type TServicePlans = {
     description: string[];
     price: number;
     duration?: number;
-    category: IServiceCategory;
+    category: IServiceCategory | string;
     isActive?: boolean;
     tasks?: IServiceTask[]
     parts?: TParts[]

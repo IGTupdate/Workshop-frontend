@@ -13,13 +13,13 @@ type Props = {
 
 const Page = (props: Props) => {
   const [appointmentData, setAppointmentData] = useState<TAppointment | null>(
-    null
+    null,
   );
 
   const fetchAppointmentData = async () => {
     try {
       const result = await getAppointmentByAppointmentId(
-        props.params.appointmentId
+        props.params.appointmentId,
       );
       setAppointmentData(result);
     } catch (err) {

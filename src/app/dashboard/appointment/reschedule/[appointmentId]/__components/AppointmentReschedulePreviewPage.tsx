@@ -67,7 +67,7 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
       (async function () {
         try {
           const responseData = (await getAppointMentBookInitData(
-            props.appointmentRescheduleData
+            props.appointmentRescheduleData,
           )) as TappointmentRescheduleConfirmationData;
           setAppointmentRescheduleConfirmationData(responseData);
           setLoading(false);
@@ -198,7 +198,7 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
             content={
               appointmentRescheduleConfirmationData.slot_details?.start_time
                 ? new Date(
-                    appointmentRescheduleConfirmationData.slot_details?.start_time
+                    appointmentRescheduleConfirmationData.slot_details?.start_time,
                   ).toLocaleString()
                 : "-"
             }
@@ -208,7 +208,7 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
             content={
               appointmentRescheduleConfirmationData.slot_details?.end_time
                 ? new Date(
-                    appointmentRescheduleConfirmationData.slot_details?.end_time
+                    appointmentRescheduleConfirmationData.slot_details?.end_time,
                   ).toLocaleString()
                 : "-"
             }

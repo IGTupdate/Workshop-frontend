@@ -23,7 +23,7 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
     AppointmentData[]
   >([]);
   const { appointmentLoading, appointmentData } = useAppSelector(
-    (state) => state.customerAppointment
+    (state) => state.customerAppointment,
   );
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -43,7 +43,7 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
     if (appointmentLoading) {
       dispatch(getAllCustomerAppointment());
     }
-  }, [appointmentLoading, dispatch]);
+  }, [appointmentLoading]);
 
   useEffect(() => {
     const filteredAppointments: AppointmentData[] =

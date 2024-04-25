@@ -20,7 +20,9 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ServicePlans from "./ServicePlans";
 import { LiaEdit } from "react-icons/lia";
+import { setAppointmentLoading } from "@/app/store/slices/customerAppointmentSlice";
 import Watermark from "@/app/components/Text/WatermarkText";
+import CustomModal from "@/app/components/Model/CustomModel";
 
 const { Title } = Typography;
 
@@ -45,19 +47,28 @@ type TappointmentBookingConfirmationData = {
 };
 
 const CustomerAppointmentBookingConfirmation = (props: Props) => {
+  const [amount, setAmount] = useState(0);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const userRole = useAppSelector((state) => state.auth.authData.role);
   const { servicePlansLoading, servicePlansData } = useAppSelector(
     (state) => state.servicePlan
   );
-  const [remarks, setRemarks] = useState<string[]>(
-    props.appointmentBookingData.service_description
-  );
+
   const dispatch = useAppDispatch();
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const [visible, setVisible] = useState(false);
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
 
   const [
     appointmentBookingConfirmationData,
@@ -110,7 +121,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
     plans = Object.values(servicePlansData)
       .flatMap((category) => category.plans)
       .filter((plan) =>
-        props.appointmentBookingData.service_plans.includes(plan._id)
+        props.appointmentBookingData?.service_plans?.includes(plan._id as never)
       );
     // console.log(plans)
 
@@ -121,35 +132,36 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
   }, [servicePlansLoading, servicePlansData]);
 
   const handleBack = () => {
-    // localStorage.setItem('appointmentBookingData', JSON.stringify({...props.appointmentBookingData, showServicePlans: true}))
-    // props.setCurrentStep(2)
     props.setAppointmentBookingData((prev) => ({
       ...prev,
       showServicePlans: true,
     }));
   };
 
-  // useEffect(() => {
-  //     console.log(appointmentBookingConfirmationData)
-  // },[appointmentBookingConfirmationData])
-
   const handleBookAppointment = async () => {
     try {
       setLoading(true);
-      const { slot_id, calender_id, customer_id, vehicle_id, service_plans } =
-        props.appointmentBookingData;
+      const {
+        slot_id,
+        calender_id,
+        customer_id,
+        vehicle_id,
+        service_plans,
+        service_description,
+      } = props.appointmentBookingData;
       const newData = {
         slot_id,
         calender_id,
         customer_id,
         vehicle_id,
         service_plans,
-        service_description: remarks,
+        service_description,
       };
       const response = await bookAppointment(newData);
       // console.log(response);
       toast.success(response?.message);
-      localStorage.removeItem("selectedPlans");
+      localStorage.removeItem("appointmentBookingData");
+      dispatch(setAppointmentLoading(true));
       userRole === "customer"
         ? router.push(`/dashboard/appointment/${response.data._id}`)
         : router.push(`/employee/dashboard/appointment/${response.data._id}`);
@@ -157,6 +169,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
       toast.error(err?.response?.data?.message || COMMON_ERROR);
     } finally {
       setLoading(false);
+      setVisible(false);
     }
   };
 
@@ -176,27 +189,49 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
   };
 
   const addRemarks = (remark: string) => {
-    if (remarks.includes(remark)) return;
-    setRemarks((prevRemarks) => [...prevRemarks, remark]);
+    if (
+      props.appointmentBookingData?.service_description?.includes(
+        remark as never
+      )
+    )
+      return;
+    props.setAppointmentBookingData((prev) => {
+      return {
+        ...prev,
+        service_description: [...(prev.service_description || []), remark],
+      };
+    });
   };
 
   const removeRemarks = (remark: string) => {
-    setRemarks((prevRemarks) =>
-      prevRemarks.filter((prevRemark) => prevRemark !== remark)
-    );
+    props.setAppointmentBookingData((prev) => {
+      return {
+        ...prev,
+        service_description: prev?.service_description?.filter(
+          (ele) => ele !== remark
+        ),
+      };
+    });
   };
+  let total = 0;
 
   useEffect(() => {
-    localStorage.setItem(
-      "appointmentBookingData",
-      JSON.stringify({
-        ...props.appointmentBookingData,
-        service_description: remarks,
-      })
-    );
-    // props.setAppointmentBookingData((prv) => ({...prv, service_description: remarks}))
-  }),
-    [remarks];
+    for (
+      let i = 0;
+      i < appointmentBookingConfirmationData?.servicePlans?.length;
+      i++
+    ) {
+      total =
+        total + appointmentBookingConfirmationData?.servicePlans[i]?.price;
+    }
+
+    setAmount(total);
+  }, [appointmentBookingConfirmationData.servicePlans]);
+
+  // console.log(
+  //   appointmentBookingConfirmationData.servicePlans,
+  //   "appointmentBookingConfirmationData.servicePlans"
+  // );
 
   return (
     <>
@@ -308,6 +343,25 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                   <Watermark text="No Plans Selected" />
                 </div>
               )}
+
+              <div className=" bg-white p-4 my-4">
+                {appointmentBookingConfirmationData.servicePlans?.length > 0 &&
+                  appointmentBookingConfirmationData.servicePlans.map(
+                    (plan, i) => (
+                      <div
+                        key={i}
+                        className="flex justify-between items-center"
+                      >
+                        <p className="font-semibold">{plan.name}</p>
+                        <p className="text-lg font-semibold">$ {plan.price}</p>
+                      </div>
+                    )
+                  )}
+                <div className="border-t flex justify-between items-center mt-4">
+                  <p className="font-bold">Service plans total</p>
+                  <p className="text-lg font-bold">$ {amount}</p>
+                </div>
+              </div>
             </div>
           </div>
           <Divider />
@@ -349,20 +403,22 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
               <div>
                 <Title level={5}>Remarks</Title>
 
-                {remarks.map((ele, i) => (
-                  <p
-                    key={i}
-                    className="flex justify-between items-center capitalize gap-3 pe-4"
-                  >
-                    {ele}
-                    <button
-                      className="outline-0 rounded-full h-[15px] w-[15px] flex justify-center items-center text-red-500 border border-red-500 text-[10px]"
-                      onClick={() => removeRemarks(ele)}
+                {props?.appointmentBookingData?.service_description?.map(
+                  (ele, i) => (
+                    <p
+                      key={i}
+                      className="flex justify-between items-center capitalize gap-3 pe-4"
                     >
-                      x
-                    </button>
-                  </p>
-                ))}
+                      {ele}
+                      <button
+                        className="outline-0 rounded-full h-[15px] w-[15px] flex justify-center items-center text-red-500 border border-red-500 text-[10px]"
+                        onClick={() => removeRemarks(ele)}
+                      >
+                        x
+                      </button>
+                    </p>
+                  )
+                )}
               </div>
               <InputFieldWithButton
                 name="desc"
@@ -377,7 +433,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
           <div className="mt-6 flex gap-4">
             <Button onClick={() => handleBack()}>Back </Button>
             <Button
-              onClick={() => handleBookAppointment()}
+              onClick={() => setVisible(true)}
               className="bg-black border-none hover:shadow-lg text-white"
             >
               Book
@@ -385,108 +441,28 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
           </div>
         </div>
       )}
+
+      <CustomModal
+        title="Confirm Appointment"
+        open={visible}
+        onCancel={handleCancel}
+        footer={[
+          // <Button key="cancel" onClick={() => handleCancel()}>
+          //   Cancel
+          // </Button>,
+          <Button
+            type="primary"
+            key="confirm"
+            onClick={() => handleBookAppointment()}
+          >
+            Confirm
+          </Button>,
+        ]}
+      >
+        <p>Confirm Appointment</p>
+      </CustomModal>
     </>
   );
 };
 
 export default CustomerAppointmentBookingConfirmation;
-
-// loading ? <Loader /> : <div className='bg-white p-4 rounded-xl shadow-lg'>
-// <div >
-//   <div className='grid grid-cols-2'>
-//     <Title level={5}>Customer Details</Title>
-//     <div className='flex justify-end'>
-//       <Button type='link' onClick={() => router.push('/dashboard/profile')}>Change</Button>
-//     </div>
-//   </div>
-//   <div className='grid grid-cols-2 gap-2'>
-//     <DescriptionItem title='Name'
-//       content={appointmentBookingConfirmationData.customer?.name || "-"} />
-//     <DescriptionItem title='Phone'
-//       content={appointmentBookingConfirmationData.customer?.phone || "-"} />
-//     <DescriptionItem title='Email'
-//       content={appointmentBookingConfirmationData.customer?.email || "-"} />
-
-//   </div>
-// </div>
-// <Divider />
-// <div>
-
-//   <div className='grid grid-cols-2'>
-//     <Title level={5}>Vehicle Details</Title>
-//     <div className='flex justify-end'>
-//       <Button type='link' onClick={() => {
-//         changeAppointmentBookingData("vehicle_id", "");
-//       }}>Change</Button>
-//     </div>
-//   </div>
-//   <div className='grid grid-cols-2 gap-2'>
-//     <DescriptionItem title='Registeration Number'
-//       content={appointmentBookingConfirmationData.vehicle?.registeration_number || "-"} />
-//     <DescriptionItem title='Vin'
-//       content={appointmentBookingConfirmationData.vehicle?.vin || "-"} />
-//     <DescriptionItem title='Make'
-//       content={appointmentBookingConfirmationData.vehicle?.vehicle_make || "-"} />
-//     <DescriptionItem title='Model'
-//       content={appointmentBookingConfirmationData.vehicle?.vehicle_model || "-"} />
-//     <DescriptionItem title='Owner'
-//       content={appointmentBookingConfirmationData.vehicle?.owner || "-"} />
-
-//   </div>
-// </div>
-// <Divider />
-// <div>
-//   <div className='grid grid-cols-2'>
-//     <Title level={5}>Service Plan Details</Title>
-//     <div className='flex justify-end'>
-//       <Button type='link' onClick={() => handleBack()}>Change</Button>
-//     </div>
-//   </div>
-//   <div className='grid grid-cols-2 gap-2'>
-//     {
-//       appointmentBookingConfirmationData.servicePlans && appointmentBookingConfirmationData.servicePlans.map((plan, i) => (
-//         <ServicePlans key={i} plan={plan} />
-//       ))
-//     }
-//   </div>
-// </div>
-// <Divider />
-// <div>
-//   <div className='grid grid-cols-2'>
-//     <Title level={5}>Slot Details</Title>
-//     <div className='flex justify-end'>
-//       <Button type='link' onClick={changeSlotDetails}>Change</Button>
-//     </div>
-//   </div>
-//   <div className='grid grid-cols-2'>
-//     <DescriptionItem title='Start'
-//       content={appointmentBookingConfirmationData.slot_details?.start_time ?
-//         new Date(appointmentBookingConfirmationData.slot_details?.start_time).toLocaleString()
-//         : "-"} />
-//     <DescriptionItem title='End'
-//       content={appointmentBookingConfirmationData.slot_details?.end_time ?
-//         new Date(appointmentBookingConfirmationData.slot_details?.end_time).toLocaleString()
-//         : "-"} />
-//   </div>
-// </div>
-// <Divider />
-// <div>
-//   <div className='grid grid-cols-2'>
-//     <Title level={5}>Remarks</Title>
-//     <InputFieldWithButton name='desc' label='Add Description' placeholder='Add Description' type='text' handleButtonClick={addRemarks} />
-//     <div>
-//       {
-//         remarks.map((ele, i) => (
-//           <p key={i}>{ele} <Button onClick={() => removeRemarks(ele)}>Cancel</Button></p>
-//         ))
-//       }
-//     </div>
-//   </div>
-// </div>
-
-// <div className='mt-6 flex gap-4'>
-//   <Button onClick={() => handleBack()} >Back </Button>
-//   <Button onClick={() => handleBookAppointment()} className="bg-black border-none hover:shadow-lg text-white">Book</Button>
-// </div>
-
-// return loading ? (

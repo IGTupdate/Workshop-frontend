@@ -7,7 +7,7 @@ import { appointmentNotification } from "@/app/services/operations/notification/
 import { getCustomerInitData } from "@/app/services/operations/appointment/appointment";
 import Loader from "@/app/components/Loader";
 
-const page = () => {
+const Page = () => {
   const [notificationData, setNotificationData] = useState({});
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -19,7 +19,7 @@ const page = () => {
       setLoading(true);
       const initAppointmentData = await getCustomerInitData(customerId);
       const initNotificationData = await appointmentNotification(
-        initAppointmentData._id
+        initAppointmentData._id,
       );
       setNotificationData(initNotificationData);
       setLoading(false);
@@ -49,4 +49,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

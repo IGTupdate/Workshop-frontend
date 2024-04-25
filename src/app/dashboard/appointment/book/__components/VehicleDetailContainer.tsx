@@ -28,7 +28,7 @@ const VehicleDetailContainer = (props: Props) => {
   const router = useRouter();
   const pathname = usePathname();
   const { vehicleLoading, vehicleData } = useAppSelector(
-    (state) => state.customerVehicle
+    (state) => state.customerVehicle,
   );
   const customerId = useAppSelector((state) => state.auth.authData._id);
 
@@ -102,7 +102,7 @@ const VehicleDetailContainer = (props: Props) => {
                   setUpdateVehicleId={setUpdateVehicleId}
                   updateVehicleValues={
                     vehicleData.find(
-                      (vehicle) => vehicle._id === updateVehicleId
+                      (vehicle) => vehicle._id === updateVehicleId,
                     ) || {
                       registeration_number: "",
                       vin: "",

@@ -18,7 +18,12 @@ interface FormValues {
   email: string;
 }
 
-const ProfileForm = ({ edit, setEdit }) => {
+type Props = {
+  edit: boolean;
+  setEdit: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const ProfileForm = ({ edit, setEdit }: Props) => {
   const authData = useAppSelector((state) => state.auth.authData);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);

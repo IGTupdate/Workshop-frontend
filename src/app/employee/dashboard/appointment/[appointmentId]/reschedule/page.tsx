@@ -20,7 +20,7 @@ const Page = (props: Props) => {
     (async function () {
       try {
         const response = await getAppointmentByAppointmentId(
-          props.params.appointmentId
+          props.params.appointmentId,
         );
         setAppointment(response);
       } catch (err) {

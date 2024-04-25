@@ -2,7 +2,7 @@
 import AppointmentDetails from "@/app/components/Appointment/AppointmentDetails";
 import SlotAvailablityContainer from "@/app/employee/dashboard/appointment/book/__components/SlotAvailablityContainer";
 import { slot_booking_customer_reschedule_step } from "@/app/employee/dashboard/appointment/book/__utils/slot-booking-step";
-import { TAppointment } from "@/app/types/appointment";
+import { TAppointment, TAppointmentBook } from "@/app/types/appointment";
 import { Button, Steps, Typography } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -23,11 +23,13 @@ const RescheduleAppointmentContainer = (props: Props) => {
   const [currentStep, setCurrentStep] = useState<number>(0);
   const router = useRouter();
 
-  const [appointmentRescheduleData, setAppointmentRescheduleData] = useState({
+  const [appointmentRescheduleData, setAppointmentRescheduleData] = useState<TAppointmentBook>({
     slot_id: "",
     calender_id: "",
     vehicle_id,
     customer_id,
+    service_plans: props.appointmentData.service_plans || [],
+    service_description: props.appointmentData.service_description || []
   });
 
   useEffect(() => {

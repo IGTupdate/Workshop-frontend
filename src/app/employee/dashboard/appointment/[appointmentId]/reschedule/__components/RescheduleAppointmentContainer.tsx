@@ -19,8 +19,10 @@ const RescheduleAppointmentContainer = (props: Props) => {
     useState<TAppointmentBook>({
       slot_id: "",
       calender_id: "",
-      customer_id: "", // 661785421a07abb3ecb58cc0
+      customer_id: "",
       vehicle_id: "",
+      service_plans: props.appointment?.service_plans || [],
+      service_description: props.appointment?.service_description || []
     });
 
   useEffect(() => {

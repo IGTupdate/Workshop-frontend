@@ -1,12 +1,12 @@
 "use client";
 
-import SelectField from '@/app/components/Input/SelectField'
-import React, { useEffect, useState } from 'react'
-import ServicePlanDetailContainer from '../../__components/ServicePlanDetailContainer'
-import { demoserviceplans } from './__demoserviceplans'
-import { TServicePlans } from '@/app/types/service'
-import { UseFormWatch } from 'react-hook-form';
+import SelectField from '@/app/components/Input/SelectField';
+import { useAppSelector } from '@/app/store/reduxHooks';
+import { TServicePlans } from '@/app/types/service';
 import { TworkorderPrepare } from '@/app/validators/workorder';
+import { useEffect, useState } from 'react';
+import { UseFormWatch } from 'react-hook-form';
+import ServicePlanDetailContainer from '../../__components/ServicePlanDetailContainer';
 
 type Props = {
     errors: any,
@@ -16,7 +16,9 @@ type Props = {
 
 const SelectServicePlanForWorkOrder = (props: Props) => {
 
-    const servicePlans = demoserviceplans as TServicePlans[];
+    const servicePlansData = useAppSelector((state) => state.servicePlan.servicePlansData)
+    const servicePlans: TServicePlans[] = Object.values(servicePlansData).flatMap(category => category.plans)
+    console.log(servicePlans)
 
     const [servicePlanOptions, setServicePlanOptions] = useState<{ value: string, label: string }[]>([]);
 

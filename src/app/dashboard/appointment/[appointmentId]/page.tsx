@@ -42,8 +42,12 @@ const AppointmentPage: React.FC<Props> = ({ params }) => {
 
   useEffect(() => {
     if (!appointmentData) fetchAppointmentData();
-
-    initData();
+    
+    const timeoutId = setTimeout(() => {
+      initData();
+    }, 2000);
+  
+    return () => clearTimeout(timeoutId);
   }, [params.appointmentId]);
 
   return (

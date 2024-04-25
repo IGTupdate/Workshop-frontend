@@ -5,7 +5,7 @@ import SendOTP from './SendOTP';
 import Register from './Register';
 import VerifyOTP from './VerifyOTP';
 import { useAppSelector } from '@/app/store/reduxHooks';
-import Loading from '../Loading';
+import Loading from '../loading';
 
 type Props = {};
 

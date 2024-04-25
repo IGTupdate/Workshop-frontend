@@ -53,7 +53,7 @@ const AppointmentPageContiner = (props: Props) => {
               <Button
                 onClick={() => {
                   router.push(
-                    `/employee/dashboard/appointment/${props.appointmentId}/reschedule`
+                    `/employee/dashboard/appointment/${props.appointmentId}/reschedule`,
                   );
                 }}
                 type="primary"
