@@ -14,6 +14,7 @@ import Loader from '@/app/components/Loader';
 import AssignMechanicDrawer from './__components/AssignMechanicDrawerContainer';
 import InventoryOrderContainer from './__components/InventoryOrderContainer';
 import ManageMechanicDrawer from './__components/ManageMechanicDrawer';
+import { useRouter } from 'next/navigation';
 
 const { Text } = Typography
 
@@ -27,6 +28,8 @@ const Page = (props: Props) => {
 
     const [loading, setLoading] = useState(true);
     const [workOrder, setWorkOrder] = useState<TWorkOrder | null>(null);
+
+    const router = useRouter();
 
     // load work order
     useEffect(() => {
@@ -65,6 +68,9 @@ const Page = (props: Props) => {
                             <h2 className="text-xl font-semibold">WorkOrders - #{workOrder.orderNumber}</h2>
                             <div>
                                 <Button className='bg-orange-500 text-white'>Assign Ramp</Button>
+                                <Button type='primary' onClick={() => {
+                                    router.push(`/employee/dashboard/workorder/${props.params.workorderId}/prepare`)
+                                }}>Prepare</Button>
                                 <ManageMechanicDrawer
                                     assigned_mechanics={workOrder.mechanicId}
                                     handleUpdateWorkOrderData={handleUpdateWorkOrderData} />
