@@ -1,5 +1,5 @@
-import { Controller } from 'react-hook-form';
-import { Input } from 'antd';
+import { Controller } from "react-hook-form";
+import { Input } from "antd";
 
 interface FormComponentProps {
   name: string;
@@ -10,15 +10,25 @@ interface FormComponentProps {
   handleChange?: (value: any) => void;
 }
 
-const FormComponent = ({ name, label, control, errors, handleChange }: FormComponentProps) => (
-  <div className='form-component'>
-    <label className='font-semibold' htmlFor={name}>{label}</label>
+const FormComponent = ({
+  name,
+  label,
+  disabled,
+  control,
+  errors,
+  handleChange,
+}: FormComponentProps) => (
+  <div className="form-component">
+    <label className="font-semibold" htmlFor={name}>
+      {label}
+    </label>
     <Controller
       name={name}
       control={control}
       render={({ field }) => (
         <Input
-          className='form-field'
+          disabled={disabled}
+          className="form-field"
           {...field}
           onChange={(e) => {
             field.onChange(e);
@@ -27,7 +37,7 @@ const FormComponent = ({ name, label, control, errors, handleChange }: FormCompo
         />
       )}
     />
-    {errors[name] && <p className='form-error'>{errors[name].message}</p>}
+    {errors[name] && <p className="form-error">{errors[name].message}</p>}
   </div>
 );
 

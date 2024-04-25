@@ -73,7 +73,7 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
           <Loader />
         </div>
       ) : (
-        <div className="p-4 pt-28 pb-32 md:p-0 min-h-screen">
+        <div className="p-4 pt-28 pb-32 md:p-0 min-h-screen sm:min-h-full">
           <h1 className="text-lg font-bold bg-white p-4 rounded-xl">
             {pageTitle}
           </h1>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosCheckmark } from "react-icons/io";
 import { IoMdTime } from "react-icons/io";
 import { minutesToHoursConverter, PriceCalculator } from "@/app/utils/helper";
@@ -17,9 +17,19 @@ const ServicePlans: React.FC<Props> = ({
   removeServicePlan,
 }) => {
   const [view, setView] = useState<boolean>(false);
+  const [isInCart, setIsInCart] = useState<boolean>(false);
+  const plans = JSON.parse(localStorage.getItem("appointmentBookingData"));
+
+  useEffect(() => {
+    if (plans && plans.service_plans.includes(plan?._id)) {
+      setIsInCart(true);
+    } else {
+      setIsInCart(false);
+    }
+  }, [plan, addServicePlan, removeServicePlan, plans]);
 
   return (
-    <div key={plan._id}>
+    <div>
       {/* category */}
       <p className="mb-4 text-3xl font-bold">{plan.category.name}</p>
 
@@ -56,7 +66,7 @@ const ServicePlans: React.FC<Props> = ({
                   </span>
                 </p>
               ))}
-            {/* view more buttom */}
+            {/* view more button */}
             {plan?.tasks?.length > 5 && (
               <div
                 className="w-[48%] text-customYellow underline underline-offset-2 text-base font-medium cursor-pointer mb-3"
@@ -80,19 +90,24 @@ const ServicePlans: React.FC<Props> = ({
           </p>
 
           <div className="flex gap-4 items-center">
-            {addServicePlan && (
-              <Button onClick={() => addServicePlan(plan._id)}>
-                Add to cart
-              </Button>
-            )}
-            {removeServicePlan && (
-              <Button
-                type="primary"
-                onClick={() => removeServicePlan(plan._id)}
-              >
-                Remove from cart
-              </Button>
-            )}
+            {!isInCart
+              ? addServicePlan && (
+                  <Button
+                    type="primary"
+                    onClick={() => addServicePlan(plan._id)}
+                  >
+                    Add to cart
+                  </Button>
+                )
+              : removeServicePlan && (
+                  <Button
+                    type="primary"
+                    danger
+                    onClick={() => removeServicePlan(plan._id)}
+                  >
+                    Remove from cart
+                  </Button>
+                )}
           </div>
         </div>
       </div>

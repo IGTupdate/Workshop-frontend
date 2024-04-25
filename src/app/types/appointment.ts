@@ -46,8 +46,9 @@ export type TAppointmentBook = {
   calender_id: string,
   vehicle_id: string,
   customer_id: string,
-  service_description?: string[],
-  service_plans?: string[] 
+  service_plans: string[] | [],
+  service_description: string[] | [],
+  showServicePlans?: boolean
 }
 
 export type TAppointmentReschedule = {

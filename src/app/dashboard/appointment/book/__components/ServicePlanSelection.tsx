@@ -9,29 +9,33 @@ import ServicePlans from "./ServicePlans";
 import Watermark from "@/app/components/Text/WatermarkText";
 
 type Props = {
-  setAppointmentBookingData: React.Dispatch<
-    React.SetStateAction<TAppointmentBook>
-  >;
-  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
+    appointmentBookingData: TAppointmentBook
+    setAppointmentBookingData: React.Dispatch<React.SetStateAction<TAppointmentBook>>;
+    setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ServicePlanSelection: React.FC<Props> = (props) => {
-  const { servicePlansLoading, servicePlansData } = useAppSelector(
-    (state) => state.servicePlan
-  );
+    const { servicePlansLoading, servicePlansData } = useAppSelector((state) => state.servicePlan);
+    const dispatch = useAppDispatch();
+    const [selectedPlans, setSelectedPlans] = useState<string[]>(props.appointmentBookingData.service_plans);
 
   const [activeTab, setActiveTab] = useState<string>("");
 
-  const dispatch = useAppDispatch();
-  const [selectedPlans, setSelectedPlans] = useState<string[]>(
-    JSON.parse(localStorage.getItem("selectedPlans") || "")
-  );
+    useEffect(() => {
+        props.setAppointmentBookingData(prevData => ({ ...prevData, service_plans: selectedPlans ? selectedPlans : [] }));
+        if(localStorage.getItem('selectedPlans')) localStorage.removeItem('selectedPlans')
+    }, [selectedPlans]);  
 
   useEffect(() => {
     if (servicePlansLoading) {
       dispatch(getAllServicePlans());
     }
   }, [servicePlansLoading]);
+
+    const handleNext = () => {
+        // localStorage.setItem('appointmentBookingData', JSON.stringify({...props.appointmentBookingData, showServicePlans: false}))
+        props.setAppointmentBookingData((prev) => ({...prev, showServicePlans: false}))
+    }
 
   useEffect(() => {
     if (Object.keys(servicePlansData).length > 0) {
@@ -64,10 +68,6 @@ const ServicePlanSelection: React.FC<Props> = (props) => {
       ...prevData,
       vehicle_id: "",
     }));
-  };
-
-  const handleNext = () => {
-    props.setCurrentStep(3);
   };
 
   return (
