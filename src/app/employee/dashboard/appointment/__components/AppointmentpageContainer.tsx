@@ -1,17 +1,14 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
-import AppointmentTableContainer from "./AppointmentTableContainer";
-import { usePathname, useSearchParams } from "next/navigation";
-import { demoAppointmentData } from "../__demo";
 import Loader from "@/app/components/Loader";
-import { Pagination } from "antd";
-import { APPOINTMENT_DATA_PAGE_SIZE } from "../__utils/constant";
-import { removeQueryParams, setQueryParams } from "@/app/utils/helper";
-import { useRouter } from "next/navigation";
-import { useAppDispatch } from "@/app/store/reduxHooks";
 import { getAllAppointment } from "@/app/services/operations/appointment/appointment";
 import { TAppointment } from "@/app/types/appointment";
+import { removeQueryParams, setQueryParams } from "@/app/utils/helper";
+import { Pagination } from "antd";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+import { APPOINTMENT_DATA_PAGE_SIZE } from "../__utils/constant";
+import AppointmentTableContainer from "./AppointmentTableContainer";
 
 type Props = {};
 type TAppointmentData = {

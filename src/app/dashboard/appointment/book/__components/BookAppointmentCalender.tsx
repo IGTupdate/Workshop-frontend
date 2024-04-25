@@ -29,13 +29,16 @@ const BookAppointmentContainer: React.FC = () => {
     const router = useRouter()
 
     useEffect(() => {
-        localStorage.setItem('appointmentBookingData', JSON.stringify(appointmentBookingData))
         if(appointmentBookingData.slot_id && appointmentBookingData.calender_id){
             let queryParams = setQueryParams(searchParams.toString(), "slot_id", appointmentBookingData.slot_id);
             queryParams = setQueryParams(queryParams, "calender_id", appointmentBookingData.calender_id);
             router.push(`${pathname}?${queryParams}`);
         }
-    },[appointmentBookingData])
+    },[appointmentBookingData.slot_id, appointmentBookingData.calender_id])
+
+    useEffect(() => {
+        localStorage.setItem('appointmentBookingData', JSON.stringify(appointmentBookingData))
+    }, [appointmentBookingData])
 
   useEffect(() => {
     if (authData._id) {
@@ -68,7 +71,12 @@ const BookAppointmentContainer: React.FC = () => {
         } else {
             setCurrentStep(0);
         }
-    }, [appointmentBookingData]);
+        
+    }, [appointmentBookingData.calender_id,
+        appointmentBookingData.customer_id,
+        appointmentBookingData.vehicle_id, 
+        appointmentBookingData.slot_id, 
+        appointmentBookingData.showServicePlans]);
 
 
     return (

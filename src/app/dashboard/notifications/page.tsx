@@ -7,7 +7,7 @@ import { appointmentNotification } from '@/app/services/operations/notification/
 import { getCustomerInitData } from '@/app/services/operations/appointment/appointment';
 
 
-const page = () => {
+const Page = () => {
 
     const [notificationData, setNotificationData] = useState({});
 
@@ -39,4 +39,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

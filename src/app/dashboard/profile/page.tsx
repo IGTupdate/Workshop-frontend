@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 type Props = {};
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
   return (
     <div className='h-screen md:h-[85vh] p-4 sm:p-0 flex flex-col justify-center items-center gap-4 relative'>
@@ -19,4 +19,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

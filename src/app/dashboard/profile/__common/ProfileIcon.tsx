@@ -4,9 +4,12 @@ import React from 'react';
 import { LiaEdit } from "react-icons/lia";
 import { TiArrowBackOutline } from "react-icons/ti";
 
+type Props = {
+  edit: boolean,
+  setEdit: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-
-const ProfileIcon: React.FC<Props> = ({ edit, setEdit }) => {
+const ProfileIcon: React.FC<Props> = ({ edit, setEdit }: Props) => {
 
   return (
     <div>

@@ -23,21 +23,9 @@ const BookAppointmentContainer = (props: Props) => {
     const [appointmentBookingData, setAppointmentBookingData] = useState<TAppointmentBook>({
         slot_id: "",
         calender_id: "",
-        customer_id: "", // 661785421a07abb3ecb58cc0
+        customer_id: "",
         vehicle_id: ""
     });
-
-    // useEffect(() => {
-    //     console.log(authData);
-    //     if (authData._id) {
-    //         setAppointmentBookingData((prv) => {
-    //             return {
-    //                 ...prv,
-    //                 customer_id: authData._id || ""
-    //             }
-    //         })
-    //     }
-    // }, [authData])
 
     useEffect(() => {
         console.log(searchParams.toString());

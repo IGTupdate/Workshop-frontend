@@ -44,7 +44,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
   const router = useRouter();
   const userRole = useAppSelector(state => state.auth.authData.role);
   const { servicePlansLoading, servicePlansData } = useAppSelector((state) => state.servicePlan)
-  const [remarks, setRemarks] = useState<string[]>(props.appointmentBookingData.service_description)
+  const [remarks, setRemarks] = useState<string[]>(props.appointmentBookingData.service_description || [])
   const dispatch = useAppDispatch()
 
   const pathname = usePathname();
@@ -94,21 +94,16 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
     let plans: TServicePlans[] = [];
     plans = Object.values(servicePlansData)
       .flatMap(category => category.plans)
-      .filter(plan => props.appointmentBookingData.service_plans.includes(plan._id));
+      .filter(plan => props.appointmentBookingData?.service_plans?.includes(plan._id as never));
     // console.log(plans)
 
     setAppointmentBookingConfirmationData(prev => ({ ...prev, servicePlans: plans }));
   }, [servicePlansLoading, servicePlansData]);
 
   const handleBack = () => {
-    // localStorage.setItem('appointmentBookingData', JSON.stringify({...props.appointmentBookingData, showServicePlans: true}))
-    // props.setCurrentStep(2)
     props.setAppointmentBookingData((prev) => ({ ...prev, showServicePlans: true }))
   };
 
-  // useEffect(() => {
-  //     console.log(appointmentBookingConfirmationData)
-  // },[appointmentBookingConfirmationData])
 
   const handleBookAppointment = async () => {
     try {

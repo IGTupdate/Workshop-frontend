@@ -12,7 +12,7 @@ import React from "react";
 interface Props {
   appointmentData: any;
   bordered?: boolean;
-  notificationData: any;
+  notificationData?: any;
 }
 
 const AppointmentDetails: React.FC<Props> = ({

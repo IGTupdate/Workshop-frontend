@@ -7,10 +7,10 @@ import { Button } from 'antd';
 import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import { updateCustomer } from '@/app/services/operations/auth/customerAuth';
 import toast from 'react-hot-toast';
-import { useState } from 'react';
 import { AiOutlineUser } from "react-icons/ai";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { BsTelephone } from "react-icons/bs";
+import { useState } from 'react';
 
 interface FormValues {
   fullName: string;
@@ -18,7 +18,12 @@ interface FormValues {
   email: string;
 }
 
-const ProfileForm = ({ edit, setEdit }) => {
+type Props = {
+  edit: boolean,
+  setEdit: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const ProfileForm = ({edit, setEdit}: Props) => {
   const authData = useAppSelector((state) => state.auth.authData);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);

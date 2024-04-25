@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback } from "react";
-import GetColumnTextSearchProps from "../../../../components/TableSearch/GetColumnTextSearchProps";
+import GetColumnTextSearchProps from "@/app/components/TableSearch/getColumnTextSearchProps";
 import {
   Button,
   Flex,

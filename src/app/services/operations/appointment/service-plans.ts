@@ -1,11 +1,11 @@
-import toast from "react-hot-toast";
-import { ApiConnectorParams, apiConnector } from "../../apiConnector";
-import { appointmentEndpoints } from "../../apis";
-import { IServiceCategory, TServicePlans } from "@/app/types/service";
 import { setServicePlansData, setServicePlansLoading } from "@/app/store/slices/servicePlanSlice";
-import { Action, ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "@/app/store/store";
+import { IServiceCategory, TServicePlans } from "@/app/types/service";
+import { Action, ThunkAction } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
+import { apiConnector } from "../../apiConnector";
 import { apiOpenConnector } from "../../apiOpenConnector";
+import { appointmentEndpoints } from "../../apis";
 import { getServiceCategory } from "./service-category";
 
 
@@ -69,9 +69,12 @@ export const getAllServicePlans = (): ThunkAction<void, RootState, unknown, Acti
         
             // Organize service plans under their respective categories
             servicePlanData.forEach((plan: TServicePlans) => {
-                segregatedData[plan.category]?.plans.push(plan);
+                const _id = typeof(plan.category) === 'string'? plan.category : ''
+                segregatedData[_id].plans.push(plan);
             });
-        
+
+            // console.log(segregatedData)
+
             dispatch(setServicePlansData(segregatedData));
         }
     } catch (err) {
