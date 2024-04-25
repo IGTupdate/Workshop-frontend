@@ -2,7 +2,6 @@
 
 import SelectField from '@/app/components/Input/SelectField';
 import { useAppSelector } from '@/app/store/reduxHooks';
-import { TServicePlans } from '@/app/types/service';
 import { TworkorderPrepare } from '@/app/validators/workorder';
 import { useEffect, useState } from 'react';
 import { UseFormWatch } from 'react-hook-form';
@@ -16,9 +15,7 @@ type Props = {
 
 const SelectServicePlanForWorkOrder = (props: Props) => {
 
-    const servicePlansData = useAppSelector((state) => state.servicePlan.servicePlansData)
-    const servicePlans: TServicePlans[] = Object.values(servicePlansData).flatMap(category => category.plans)
-    console.log(servicePlans)
+    const servicePlans = useAppSelector((state) => state.servicePlan.servicePlansData)
 
     const [servicePlanOptions, setServicePlanOptions] = useState<{ value: string, label: string }[]>([]);
 

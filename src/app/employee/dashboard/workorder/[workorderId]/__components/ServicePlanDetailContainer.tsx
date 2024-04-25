@@ -13,9 +13,7 @@ type Props = {
 }
 
 const ServicePlanDetailContainer = (props: Props) => {
-    const servicePlansData = useAppSelector((state) => state.servicePlan.servicePlansData)
-    const servicePlans: TServicePlans[] = Object.values(servicePlansData).flatMap(category => category.plans)
-    console.log(servicePlans)
+    const servicePlans = useAppSelector((state) => state.servicePlan.servicePlansData)
 
     const [servicePlan, setServicePlan] = useState<TServicePlans | null | undefined>(null);
 
