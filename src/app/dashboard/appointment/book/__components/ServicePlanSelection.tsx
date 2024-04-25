@@ -3,8 +3,10 @@ import { getAllServicePlans } from "@/app/services/operations/appointment/servic
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { TAppointmentBook } from "@/app/types/appointment";
 import { Button, Tabs } from "antd";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ServicePlans from "./ServicePlans";
+import { getAllServicePlansCategoryWise } from "../../__utils/GetServicePlansSegregatedData";
+import { TSegregatedServiceData } from "@/app/types/service";
 
 type Props = {
   appointmentBookingData: TAppointmentBook
@@ -15,6 +17,15 @@ type Props = {
 const ServicePlanSelection: React.FC<Props> = (props) => {
   const { servicePlansLoading, servicePlansData } = useAppSelector((state) => state.servicePlan);
   const dispatch = useAppDispatch();
+  const [servicePlansDataCategoryWise, setServicePlansDataCategoryWise] = useState<TSegregatedServiceData | null>(null)
+
+  useEffect(() => {
+    (async function (){
+      const result = await getAllServicePlansCategoryWise(servicePlansData)
+      setServicePlansDataCategoryWise(result)
+    }())
+    
+  },[servicePlansData])
 
   useEffect(() => {
     if (localStorage.getItem('selectedPlans')) localStorage.removeItem('selectedPlans')
@@ -57,12 +68,12 @@ const ServicePlanSelection: React.FC<Props> = (props) => {
     }));
   };
 
-  const tabsItems = Object.keys(servicePlansData).map((categoryId, i) => ({
+  const tabsItems = servicePlansDataCategoryWise ? Object.keys(servicePlansDataCategoryWise).map((categoryId, i) => ({
     key: categoryId,
-    label: servicePlansData[categoryId].category.name,
+    label: servicePlansDataCategoryWise ? servicePlansDataCategoryWise[categoryId].category.name : '',
     children:
-      servicePlansData[categoryId].plans.length > 0 ? (
-        servicePlansData[categoryId].plans.map((plan, j) => (
+    servicePlansDataCategoryWise[categoryId].plans.length > 0 ? (
+      servicePlansDataCategoryWise[categoryId].plans.map((plan, j) => (
           <ServicePlans
             key={j}
             plan={plan}
@@ -74,7 +85,7 @@ const ServicePlanSelection: React.FC<Props> = (props) => {
       ) : (
         <div className="text-center text-2xl font-bold mt-4">No Plans available</div>
       ),
-  }));
+  })) : [];
 
   return (
     <div>

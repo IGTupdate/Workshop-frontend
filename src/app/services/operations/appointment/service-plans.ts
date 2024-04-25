@@ -1,12 +1,11 @@
-import { setServicePlansData, setServicePlansLoading } from "@/app/store/slices/servicePlanSlice";
+import { setServicePlansData } from "@/app/store/slices/servicePlanSlice";
 import { RootState } from "@/app/store/store";
-import { IServiceCategory, TServicePlans } from "@/app/types/service";
+import { TServicePlans } from "@/app/types/service";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import { apiConnector } from "../../apiConnector";
 import { apiOpenConnector } from "../../apiOpenConnector";
 import { appointmentEndpoints } from "../../apis";
-import { getServiceCategory } from "./service-category";
 
 
 const {
@@ -50,39 +49,9 @@ export const updateServicePlans = async (_id: string, data: TServicePlans): Prom
 };
 
 export const getAllServicePlans = (): ThunkAction<void, RootState, unknown, Action> => async (dispatch) => {
-    try {
-
-        const servicePlanData = await getServicePlans()
-
-        if (servicePlanData) {
-            const categories = await getServiceCategory();
-            
-            const segregatedData: Record<string, { category: IServiceCategory, plans: TServicePlans[] }> = {};
-
-            // Initialize segregatedData with empty arrays for each category and include category data
-            categories.forEach((category: IServiceCategory) => {
-                segregatedData[category._id] = {
-                    category: category,
-                    plans: [],
-                };
-            });
-        
-            // Organize service plans under their respective categories
-            servicePlanData.forEach((plan: TServicePlans) => {
-                const _id = typeof(plan.category) === 'string'? plan.category : ''
-                segregatedData[_id].plans.push(plan);
-            });
-
-            // console.log(segregatedData)
-
-            dispatch(setServicePlansData(segregatedData));
-        }
-    } catch (err) {
-        console.error(err);
-    } finally {
-        dispatch(setServicePlansLoading(false));
-    }
-};
+    const servicePlansData =  await getServicePlans()
+    dispatch(setServicePlansData(servicePlansData));
+}
 
 export const getServicePlans = async () => {
     try{

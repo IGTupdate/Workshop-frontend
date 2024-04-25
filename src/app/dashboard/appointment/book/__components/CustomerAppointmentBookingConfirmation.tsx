@@ -107,9 +107,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
     }
     // console.log(servicePlansData);
     let plans: TServicePlans[] = [];
-    plans = Object.values(servicePlansData)
-      .flatMap((category) => category.plans)
-      .filter((plan) =>
+    plans = servicePlansData.filter((plan) =>
         props.appointmentBookingData?.service_plans?.includes(
           plan._id as never,
         ),
