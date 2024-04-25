@@ -14,7 +14,7 @@ const CheckboxGroup = Checkbox.Group;
 
 type Props = {}
 
-const VehicleObservationContainer = (props: Props) => {
+const InventoryOrderContainer = (props: Props) => {
 
     const [checkedList, setCheckedList] = useState<CheckboxValueType[]>(defaultCheckedList);
 
@@ -41,4 +41,6 @@ const VehicleObservationContainer = (props: Props) => {
     )
 }
 
-export default VehicleObservationContainer
+
+
+export default InventoryOrderContainer

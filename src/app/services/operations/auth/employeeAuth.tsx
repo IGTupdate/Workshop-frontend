@@ -5,7 +5,7 @@ import { apiConnector } from "../../apiConnector";
 import { AppDispatch } from "@/app/store/store";
 import { setAuthData } from "@/app/store/slices/authSlice";
 
-const { EMPLOYEE_LOGIN_API, GET_EMPLOYEE_DATA_API } = authEndpoints;
+const { EMPLOYEE_LOGIN_API, GET_EMPLOYEE_DATA_API, GET_ALL_EMPLOYEES } = authEndpoints;
 
 export async function getEmployeeData(_id: string, dispatch: AppDispatch) {
   try {
@@ -42,6 +42,19 @@ export async function employeeLogin(email: string, password: string, dispatch: A
     }
   } catch (err) {
     toast.error("LOGIN FAILED");
+    throw err;
+  }
+}
+
+export const getAllEmployees = async (role?: string) => {
+  try {
+    const response = await apiConnector({
+      method: "GET",
+      url: role ? GET_ALL_EMPLOYEES + "?role=" + role : GET_ALL_EMPLOYEES,
+    });
+
+    return response.data.data;
+  } catch (err) {
     throw err;
   }
 }

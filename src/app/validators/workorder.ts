@@ -24,11 +24,22 @@ export const workorderPrepareYupSchema = Yup.object({
     estimatedTimeOfCompletion: Yup.string().test('is-greater-than-current-time',
         'Time must be greater than the current time', function (value) {
             if (!value) return false;
+            console.log(value);
             const currentTime = new Date().getTime();
             const inputValue = new Date(value).getTime();
+            console.log(currentTime, inputValue);
             return inputValue > currentTime;
         }).required(),
 })
+
+
+
+export const workOrderAssignMechanicsYupSchema = Yup.object({
+    mechanics: Yup.array(Yup.string().required()).default([])
+})
+
+
+export type TWorkOrderAssign = Yup.InferType<typeof workOrderAssignMechanicsYupSchema>
 
 export type TworkOrderCreate = Yup.InferType<typeof workOrderCreateYupSchema>
 

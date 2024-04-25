@@ -1,0 +1,83 @@
+"use client";
+
+import DescriptionItem from '@/app/components/DescriptionItem.tsx';
+import { assignMechanicWorkorder, getEmployeeWorkingStatus } from '@/app/services/operations/workorder/workorder';
+import { TEmployee, TEmployeeWorkStatus } from '@/app/types/employee';
+import { COMMON_ERROR } from '@/app/utils/constants/constant';
+import { employeeRole } from '@/app/utils/constants/employee-roles';
+import { Button, Divider, Drawer, Space, Tabs, Typography } from 'antd';
+import { useParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast';
+import type { TabsProps } from 'antd';
+
+import { MdOutlineCancelPresentation } from "react-icons/md";
+import AssignMechanicDrawer from './AssignMechanicDrawerContainer';
+import AssignMechanicDrawerContainer from './AssignMechanicDrawerContainer';
+import RemoveMechanicDrawerContainer from './RemoveMechanicDrawerContainer';
+import { TWorkOrder } from '@/app/types/work-order';
+
+
+const { Title, Text } = Typography;
+
+
+type Props = {
+    assigned_mechanics: string[] | TEmployee[]
+    handleUpdateWorkOrderData:  (field: keyof TWorkOrder, fieldData: any) => void,
+}
+
+const ManageMechanicDrawer = (props: Props) => {
+
+    const [openParentDrawer, setOpenParentDrawer] = useState(false);
+
+    // parent
+    const handleParentDrawerOnClose = () => {
+        setOpenParentDrawer(false);
+    }
+    const handleParentopenDrawer = () => {
+        setOpenParentDrawer(true);
+    }
+
+    const items: TabsProps['items'] = [
+        {
+            key: '1',
+            label: 'Assign',
+            children: <AssignMechanicDrawerContainer
+                assigned_mechanics={props.assigned_mechanics}
+                handleUpdateWorkOrderData={props.handleUpdateWorkOrderData}
+            />,
+        },
+        {
+            key: '2',
+            label: 'Remove',
+            children: <RemoveMechanicDrawerContainer
+                assigned_mechanics={props.assigned_mechanics}
+                handleUpdateWorkOrderData={props.handleUpdateWorkOrderData}
+            />,
+        },
+    ];
+
+
+    return (
+        <div>
+            <Button onClick={handleParentopenDrawer} type='primary' >Manage Mechanic</Button>
+
+            <Drawer title="Mechanics Status"
+                width={520}
+                // closable={false}
+                onClose={handleParentDrawerOnClose}
+                open={openParentDrawer}
+                // extra={
+
+                // }
+            >
+
+                <div>
+                    <Tabs defaultActiveKey="1" items={items} />
+                </div>
+            </Drawer>
+        </div>
+    )
+}
+
+export default ManageMechanicDrawer

@@ -6,7 +6,7 @@ import { removeQueryParams, setQueryParams } from '@/app/utils/helper';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect, useState } from 'react'
 import WorkOrderTableContainer from './WorkOrderTableContainer';
-import { getAllWorkOrder } from '@/app/services/operations/workorder/workorder';
+import { getPageWorkOrder } from '@/app/services/operations/workorder/workorder';
 import { Button, DatePicker } from 'antd';
 const { RangePicker } = DatePicker;
 
@@ -32,7 +32,7 @@ const WorkOrderPageContainer = (props: Props) => {
 
     const loadWorkOrders = async () => {
         setWorkOrderLoading(true);
-        const workOrderData = await getAllWorkOrder(searchParams.toString())
+        const workOrderData = await getPageWorkOrder(searchParams.toString())
         if (workOrderData) {
             console.log("workOrderData", workOrderData)
             setWorkOrderData(workOrderData)
