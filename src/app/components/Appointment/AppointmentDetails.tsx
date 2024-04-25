@@ -73,8 +73,8 @@ const AppointmentDetails: React.FC<Props> = ({
           </Descriptions.Item>
           <Descriptions.Item label="Remarks">
             <div>
-              {appointmentData.service_description.map((item, index) => (
-                <p key={index}>{item}</p>
+              {appointmentData.service_description.map((item: string, i: number) => (
+                <p key={i}>{item}</p>
               ))}
             </div>
           </Descriptions.Item>
