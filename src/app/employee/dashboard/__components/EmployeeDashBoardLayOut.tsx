@@ -16,9 +16,15 @@ const EmployeeDashBoardLayOut = ({
 }>) => {
   const [collapsed, setCollapsed] = useState(false);
 
-  useEffect(() => { });
+  useEffect(() => {});
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense
+      fallback={
+        <div className="flex justify-center items-center min-h-screen">
+          <Loader />
+        </div>
+      }
+    >
       <Layout className="w-full h-screen overflow-hidden">
         <SideBar collapsed={collapsed} setCollapsed={setCollapsed} />
         <Layout

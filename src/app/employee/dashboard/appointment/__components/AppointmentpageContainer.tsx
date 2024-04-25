@@ -50,7 +50,7 @@ const AppointmentpageContainer = (props: Props) => {
         return removeQueryParams(searchParams.toString(), name);
       else return setQueryParams(searchParams.toString(), name, value);
     },
-    [searchParams]
+    [searchParams],
   );
 
   // get current page
@@ -67,7 +67,9 @@ const AppointmentpageContainer = (props: Props) => {
   return (
     <div>
       {appointmentDataLoading ? (
-        <Loader />
+        <div className="flex justify-center items-center h-full">
+          <Loader />
+        </div>
       ) : (
         <div>
           <AppointmentTableContainer

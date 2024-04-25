@@ -43,19 +43,19 @@ const AppointmentCard: React.FC<AppointmentProps> = ({ appointmentData }) => {
           spaceBetween: 20,
         },
         980: {
-          slidesPerView: 2,
+          slidesPerView: Object.keys(appointmentData).length > 0 ? 2 : 1,
           spaceBetween: 20,
         },
         1024: {
-          slidesPerView: 2,
+          slidesPerView: Object.keys(appointmentData).length > 0 ? 2 : 1,
           spaceBetween: 20,
         },
         1280: {
-          slidesPerView: 2,
+          slidesPerView: Object.keys(appointmentData).length > 0 ? 2 : 1,
           spaceBetween: 20,
         },
         1400: {
-          slidesPerView: 2,
+          slidesPerView: Object.keys(appointmentData).length > 0 ? 2 : 1,
           spaceBetween: 20,
         },
       }}

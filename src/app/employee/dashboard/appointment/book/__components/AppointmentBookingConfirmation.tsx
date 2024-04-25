@@ -65,7 +65,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
       (async function () {
         try {
           const responseData = (await getAppointMentBookInitData(
-            props.appointmentBookingData
+            props.appointmentBookingData,
           )) as TappointmentBookingConfirmationData;
           // console.log(responseData);
           // console.log(responseData);
@@ -120,7 +120,9 @@ const AppointmentBookingConfirmation = (props: Props) => {
   };
 
   return loading ? (
-    <Loader />
+    <div className="flex justify-center items-center h-full">
+      <Loader />
+    </div>
   ) : (
     <div className="bg-white p-4 rounded-xl shadow-lg">
       <div>
@@ -213,7 +215,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
             content={
               appointmentBookingConfirmationData.slot_details?.start_time
                 ? new Date(
-                    appointmentBookingConfirmationData.slot_details?.start_time
+                    appointmentBookingConfirmationData.slot_details?.start_time,
                   ).toLocaleString()
                 : "-"
             }
@@ -223,7 +225,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
             content={
               appointmentBookingConfirmationData.slot_details?.end_time
                 ? new Date(
-                    appointmentBookingConfirmationData.slot_details?.end_time
+                    appointmentBookingConfirmationData.slot_details?.end_time,
                   ).toLocaleString()
                 : "-"
             }

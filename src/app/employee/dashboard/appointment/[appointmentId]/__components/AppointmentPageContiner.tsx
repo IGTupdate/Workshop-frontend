@@ -41,7 +41,9 @@ const AppointmentPageContiner = (props: Props) => {
   return (
     <div>
       {appointmentLoading ? (
-        <Loader />
+        <div className="flex justify-center items-center h-full">
+          <Loader />
+        </div>
       ) : appointment ? (
         <div>
           <AppointmentDetails appointmentData={appointment} />
@@ -51,7 +53,7 @@ const AppointmentPageContiner = (props: Props) => {
               <Button
                 onClick={() => {
                   router.push(
-                    `/employee/dashboard/appointment/${props.appointmentId}/reschedule`
+                    `/employee/dashboard/appointment/${props.appointmentId}/reschedule`,
                   );
                 }}
                 type="primary"
