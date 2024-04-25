@@ -20,6 +20,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ServicePlans from "./ServicePlans";
 import { LiaEdit } from "react-icons/lia";
+import Watermark from "@/app/components/Text/WatermarkText";
 
 const { Title } = Typography;
 
@@ -298,10 +299,15 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
               </div>
             </div>
             <div className="">
-              {appointmentBookingConfirmationData.servicePlans &&
+              {appointmentBookingConfirmationData.servicePlans?.length > 0 ? (
                 appointmentBookingConfirmationData.servicePlans.map(
                   (plan, i) => <ServicePlans key={i} plan={plan} />
-                )}
+                )
+              ) : (
+                <div className="relative">
+                  <Watermark text="No Plans Selected" />
+                </div>
+              )}
             </div>
           </div>
           <Divider />
