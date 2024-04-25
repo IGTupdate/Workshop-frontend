@@ -63,12 +63,20 @@ const AppointmentDetails: React.FC<Props> = ({
           <Descriptions.Item label="Vehicle Model">
             {appointmentData.vehicle_id.vehicle_model}
           </Descriptions.Item>
+
           <Descriptions.Item label="Status">
             <Tag
               color={appointmentData.status === "Cancelled" ? "red" : "green"}
             >
               {appointmentData.status}
             </Tag>
+          </Descriptions.Item>
+          <Descriptions.Item label="Remarks">
+            <div>
+              {appointmentData.service_description.map((item: string, i: number) => (
+                <p key={i}>{item}</p>
+              ))}
+            </div>
           </Descriptions.Item>
         </Descriptions>
       </div>

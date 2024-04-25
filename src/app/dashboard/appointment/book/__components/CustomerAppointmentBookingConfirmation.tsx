@@ -21,6 +21,8 @@ import toast from "react-hot-toast";
 import ServicePlans from "./ServicePlans";
 import { LiaEdit } from "react-icons/lia";
 import { setAppointmentLoading } from "@/app/store/slices/customerAppointmentSlice";
+import Watermark from "@/app/components/Text/WatermarkText";
+import CustomModal from "@/app/components/Model/CustomModel";
 
 const { Title } = Typography;
 
@@ -45,19 +47,28 @@ type TappointmentBookingConfirmationData = {
 };
 
 const CustomerAppointmentBookingConfirmation = (props: Props) => {
+  const [amount, setAmount] = useState(0);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const userRole = useAppSelector((state) => state.auth.authData.role);
   const { servicePlansLoading, servicePlansData } = useAppSelector(
-    (state) => state.servicePlan,
+    (state) => state.servicePlan
   );
-  // const [remarks, setRemarks] = useState<string[]>(
-  //   props.appointmentBookingData.service_description || [],
-  // );
+
   const dispatch = useAppDispatch();
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const [visible, setVisible] = useState(false);
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
 
   const [
     appointmentBookingConfirmationData,
@@ -82,7 +93,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
       (async function () {
         try {
           const responseData = await getAppointMentBookInitData(
-            props.appointmentBookingData,
+            props.appointmentBookingData
           );
           setAppointmentBookingConfirmationData((prev) => ({
             ...prev,
@@ -110,9 +121,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
     plans = Object.values(servicePlansData)
       .flatMap((category) => category.plans)
       .filter((plan) =>
-        props.appointmentBookingData?.service_plans?.includes(
-          plan._id as never,
-        ),
+        props.appointmentBookingData?.service_plans?.includes(plan._id as never)
       );
     // console.log(plans)
 
@@ -132,21 +141,27 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
   const handleBookAppointment = async () => {
     try {
       setLoading(true);
-      const { slot_id, calender_id, customer_id, vehicle_id, service_plans, service_description } =
-        props.appointmentBookingData;
+      const {
+        slot_id,
+        calender_id,
+        customer_id,
+        vehicle_id,
+        service_plans,
+        service_description,
+      } = props.appointmentBookingData;
       const newData = {
         slot_id,
         calender_id,
         customer_id,
         vehicle_id,
         service_plans,
-        service_description
+        service_description,
       };
       const response = await bookAppointment(newData);
       // console.log(response);
       toast.success(response?.message);
       localStorage.removeItem("appointmentBookingData");
-      dispatch(setAppointmentLoading(true))
+      dispatch(setAppointmentLoading(true));
       userRole === "customer"
         ? router.push(`/dashboard/appointment/${response.data._id}`)
         : router.push(`/employee/dashboard/appointment/${response.data._id}`);
@@ -154,6 +169,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
       toast.error(err?.response?.data?.message || COMMON_ERROR);
     } finally {
       setLoading(false);
+      setVisible(false);
     }
   };
 
@@ -173,23 +189,49 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
   };
 
   const addRemarks = (remark: string) => {
-    if (props.appointmentBookingData?.service_description?.includes(remark as never)) return;
+    if (
+      props.appointmentBookingData?.service_description?.includes(
+        remark as never
+      )
+    )
+      return;
     props.setAppointmentBookingData((prev) => {
       return {
         ...prev,
-        service_description: [...(prev.service_description || []), remark]
-      }
-    })
+        service_description: [...(prev.service_description || []), remark],
+      };
+    });
   };
 
   const removeRemarks = (remark: string) => {
     props.setAppointmentBookingData((prev) => {
       return {
         ...prev,
-        service_description: prev?.service_description?.filter(ele => ele !== remark)
-      }
-    })
+        service_description: prev?.service_description?.filter(
+          (ele) => ele !== remark
+        ),
+      };
+    });
   };
+  let total = 0;
+
+  useEffect(() => {
+    for (
+      let i = 0;
+      i < appointmentBookingConfirmationData?.servicePlans?.length;
+      i++
+    ) {
+      total =
+        total + appointmentBookingConfirmationData?.servicePlans[i]?.price;
+    }
+
+    setAmount(total);
+  }, [appointmentBookingConfirmationData.servicePlans]);
+
+  // console.log(
+  //   appointmentBookingConfirmationData.servicePlans,
+  //   "appointmentBookingConfirmationData.servicePlans"
+  // );
 
   return (
     <>
@@ -292,10 +334,34 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
               </div>
             </div>
             <div className="">
-              {appointmentBookingConfirmationData.servicePlans &&
+              {appointmentBookingConfirmationData.servicePlans?.length > 0 ? (
                 appointmentBookingConfirmationData.servicePlans.map(
-                  (plan, i) => <ServicePlans key={i} plan={plan} />,
-                )}
+                  (plan, i) => <ServicePlans key={i} plan={plan} />
+                )
+              ) : (
+                <div className="relative">
+                  <Watermark text="No Plans Selected" />
+                </div>
+              )}
+
+              <div className=" bg-white p-4 my-4">
+                {appointmentBookingConfirmationData.servicePlans?.length > 0 &&
+                  appointmentBookingConfirmationData.servicePlans.map(
+                    (plan, i) => (
+                      <div
+                        key={i}
+                        className="flex justify-between items-center"
+                      >
+                        <p className="font-semibold">{plan.name}</p>
+                        <p className="text-lg font-semibold">$ {plan.price}</p>
+                      </div>
+                    )
+                  )}
+                <div className="border-t flex justify-between items-center mt-4">
+                  <p className="font-bold">Service plans total</p>
+                  <p className="text-lg font-bold">$ {amount}</p>
+                </div>
+              </div>
             </div>
           </div>
           <Divider />
@@ -314,7 +380,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                 content={
                   appointmentBookingConfirmationData.slot_details?.start_time
                     ? new Date(
-                        appointmentBookingConfirmationData.slot_details?.start_time,
+                        appointmentBookingConfirmationData.slot_details?.start_time
                       ).toLocaleString()
                     : "-"
                 }
@@ -324,7 +390,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                 content={
                   appointmentBookingConfirmationData.slot_details?.end_time
                     ? new Date(
-                        appointmentBookingConfirmationData.slot_details?.end_time,
+                        appointmentBookingConfirmationData.slot_details?.end_time
                       ).toLocaleString()
                     : "-"
                 }
@@ -337,20 +403,22 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
               <div>
                 <Title level={5}>Remarks</Title>
 
-                {props?.appointmentBookingData?.service_description?.map((ele, i) => (
-                  <p
-                    key={i}
-                    className="flex justify-between items-center capitalize gap-3 pe-4"
-                  >
-                    {ele}
-                    <button
-                      className="outline-0 rounded-full h-[15px] w-[15px] flex justify-center items-center text-red-500 border border-red-500 text-[10px]"
-                      onClick={() => removeRemarks(ele)}
+                {props?.appointmentBookingData?.service_description?.map(
+                  (ele, i) => (
+                    <p
+                      key={i}
+                      className="flex justify-between items-center capitalize gap-3 pe-4"
                     >
-                      x
-                    </button>
-                  </p>
-                ))}
+                      {ele}
+                      <button
+                        className="outline-0 rounded-full h-[15px] w-[15px] flex justify-center items-center text-red-500 border border-red-500 text-[10px]"
+                        onClick={() => removeRemarks(ele)}
+                      >
+                        x
+                      </button>
+                    </p>
+                  )
+                )}
               </div>
               <InputFieldWithButton
                 name="desc"
@@ -365,7 +433,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
           <div className="mt-6 flex gap-4">
             <Button onClick={() => handleBack()}>Back </Button>
             <Button
-              onClick={() => handleBookAppointment()}
+              onClick={() => setVisible(true)}
               className="bg-black border-none hover:shadow-lg text-white"
             >
               Book
@@ -373,6 +441,26 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
           </div>
         </div>
       )}
+
+      <CustomModal
+        title="Confirm Appointment"
+        open={visible}
+        onCancel={handleCancel}
+        footer={[
+          // <Button key="cancel" onClick={() => handleCancel()}>
+          //   Cancel
+          // </Button>,
+          <Button
+            type="primary"
+            key="confirm"
+            onClick={() => handleBookAppointment()}
+          >
+            Confirm
+          </Button>,
+        ]}
+      >
+        <p>Confirm Appointment</p>
+      </CustomModal>
     </>
   );
 };

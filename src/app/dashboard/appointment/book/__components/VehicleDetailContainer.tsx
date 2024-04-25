@@ -91,6 +91,7 @@ const VehicleDetailContainer = (props: Props) => {
             <VehicleCreateContainer
               setVehicleId={setVehicleId}
               customer_id={customerId}
+              vehicle={vehicleData?.length}
               customer={true}
             />
           ) : (
