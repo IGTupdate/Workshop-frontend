@@ -31,7 +31,7 @@ const Page = (props: Props) => {
 
   // load work order
   useEffect(() => {
-    console.log("hello from work order", props.params.workorderId);
+    // console.log("hello from work order", props.params.workorderId);
     if (props.params.workorderId) {
       (async function () {
         try {
@@ -65,10 +65,13 @@ const Page = (props: Props) => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">WorkOrders - #{workOrder.orderNumber}</h2>
               <div>
+                
                 <Button className='bg-orange-500 text-white'>Assign Ramp</Button>
-                <Button type='primary' onClick={() => {
-                  router.push(`/employee/dashboard/workorder/${props.params.workorderId}/prepare`)
-                }}>Prepare</Button>
+                {
+                  workOrder.status === "Pending" && <Button type='primary' onClick={() => {
+                    router.push(`/employee/dashboard/workorder/${props.params.workorderId}/prepare`)
+                  }}>Prepare</Button>
+                }
                 <ManageMechanicDrawer
                   assigned_mechanics={workOrder.mechanicId}
                   handleUpdateWorkOrderData={handleUpdateWorkOrderData} />

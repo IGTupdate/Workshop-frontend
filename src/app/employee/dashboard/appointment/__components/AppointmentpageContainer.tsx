@@ -1,14 +1,16 @@
 "use client";
 
 import Loader from "@/app/components/Loader";
-import { getAllAppointment } from "@/app/services/operations/appointment/appointment";
+import { getPageAppointment } from "@/app/services/operations/appointment/appointment";
 import { TAppointment } from "@/app/types/appointment";
 import { removeQueryParams, setQueryParams } from "@/app/utils/helper";
-import { Pagination } from "antd";
+import { Button, DatePicker, Pagination } from "antd";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { APPOINTMENT_DATA_PAGE_SIZE } from "../__utils/constant";
 import AppointmentTableContainer from "./AppointmentTableContainer";
+import dayjs from "dayjs";
+const { RangePicker } = DatePicker;
 
 type Props = {};
 type TAppointmentData = {
@@ -31,12 +33,12 @@ const AppointmentpageContainer = (props: Props) => {
 
   // when search params changes then call api
   useEffect(() => {
-    loadAppointement();
+    loadAppointement(searchParams.toString());
   }, [searchParams, router]);
 
-  const loadAppointement = async () => {
+  const loadAppointement = async (querystring: string) => {
     setAppointmentDataLoading(true);
-    const appointmentData = await getAllAppointment(searchParams.toString());
+    const appointmentData = await getPageAppointment(querystring);
     if (appointmentData) {
       setAppointmentData(appointmentData);
     }
@@ -45,10 +47,10 @@ const AppointmentpageContainer = (props: Props) => {
 
   // create query string
   const createQueryString = useCallback(
-    (name: string, value?: string) => {
+    (name: string, value?: string, url: string = searchParams.toString()) => {
       if (!value || value === "")
-        return removeQueryParams(searchParams.toString(), name);
-      else return setQueryParams(searchParams.toString(), name, value);
+        return removeQueryParams(url, name);
+      else return setQueryParams(url, name, value);
     },
     [searchParams],
   );
@@ -64,6 +66,23 @@ const AppointmentpageContainer = (props: Props) => {
     router.push(`${pathname}?${queryParmas}`);
   };
 
+  const handleClearFilter = () => {
+    router.push(pathname);
+  };
+
+  const handleRangeSelect = (value: any) => {
+    if (!value) return;
+    console.log(value);
+    const startDate = value.length > 0 ? dayjs(value[0]).format('YYYY-MM-DDTHH:mm:ss.SSS') : new Date().toISOString()
+    const endDate = value.length > 1 ? dayjs(value[1]).format('YYYY-MM-DDTHH:mm:ss.SSS') : new Date().toISOString();
+
+    console.log(startDate, endDate);
+
+    let querystring = createQueryString("startDate", startDate);
+    querystring = createQueryString("endDate", endDate, querystring);
+    router.push(`${pathname}?${querystring}`);
+  }
+
   return (
     <div>
       {appointmentDataLoading ? (
@@ -72,6 +91,18 @@ const AppointmentpageContainer = (props: Props) => {
         </div>
       ) : (
         <div>
+          <div className="mb-4 flex justify-between">
+            <RangePicker
+              onChange={handleRangeSelect}
+              defaultValue={(searchParams.get("startDate") && searchParams.get("endDate")) ?
+                [dayjs(searchParams.get("startDate")), dayjs(searchParams.get("endDate"))] :
+                [dayjs(new Date()), dayjs(new Date())]} />
+            <div>
+              <Button type="link" onClick={handleClearFilter}>
+                Clear Filter
+              </Button>
+            </div>
+          </div>
           <AppointmentTableContainer
             appointmentData={appointmentData.appointments}
           />

@@ -3,6 +3,7 @@ import Loader from '@/app/components/Loader';
 import { getAppointmentByAppointmentId } from '@/app/services/operations/appointment/appointment';
 import { TAppointment } from '@/app/types/appointment';
 import { TworkOrderCreate } from '@/app/validators/workorder';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 type Props = {
@@ -13,6 +14,7 @@ type Props = {
 const WorkOrderAppointmentContiner = (props: Props) => {
     const [loading, setLoading] = useState(true);
     const [appointment, setAppointment] = useState<TAppointment | null>(null);
+    const router = useRouter();
 
     useEffect(() => {
         if (props.appointmentId) {
@@ -23,6 +25,9 @@ const WorkOrderAppointmentContiner = (props: Props) => {
                     const required_appointment = await getAppointmentByAppointmentId(props.appointmentId ? props.appointmentId : "");
                     if (required_appointment.status === "Scheduled") {
                         setAppointment(required_appointment);
+                    }
+                    else if (required_appointment.status === "Completed") {
+                        router.push("/employee/dashboard/workorder?appointmentId=" + props.appointmentId)
                     }
                 } catch (err) {
                     console.log(err);

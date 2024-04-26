@@ -59,6 +59,7 @@ export const appointmentEndpoints = {
   GET_APPOINTMENT_BY_CALENDAR: appointmentUrl(APPOINTMENT, "/get-by-calendar"),
   GET_APPOINTMENT_BY_APPOINTMENT_ID: appointmentUrl(APPOINTMENT, "/get"),
   GET_ALL_APPOINTMENT: appointmentUrl(APPOINTMENT, "/get-all"),
+  GET_PAGE_APPOINTMENT :  appointmentUrl(APPOINTMENT, "/get-page"),
   GET_APPOINTMENT_BOOK_INIT_DATA: appointmentUrl(APPOINTMENT, "/book/init"),
   GET_CUSTOMER_INIT_DATA: appointmentUrl(APPOINTMENT, "/get-customer/init"),
   APPOINTMENT_BOOK: appointmentUrl(APPOINTMENT, "/book"),

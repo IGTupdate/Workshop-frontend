@@ -35,8 +35,9 @@ const CreateWorkOrder = (props: Props) => {
     setLoading(true);
     try {
       const response = await createWorkOrder(workOrderCreateData);
+      // console.log(response);
       toast.success(response.message);
-      router.push("/employee/dashboard/workorder");
+      router.push("/employee/dashboard/workorder/");
     } catch (err: any) {
       toast.error(err?.response?.data?.message || COMMON_ERROR);
     } finally {

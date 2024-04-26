@@ -28,12 +28,17 @@ const WorkOrderPageContainer = (props: Props) => {
   }, [searchParams, router]);
 
   const loadWorkOrders = async () => {
-    setWorkOrderLoading(true);
-    const workOrderData = await getPageWorkOrder(searchParams.toString());
-    if (workOrderData) {
-      setWorkOrderData(workOrderData);
+    try {
+      setWorkOrderLoading(true);
+      const workOrderData = await getPageWorkOrder(searchParams.toString());
+      if (workOrderData) {
+        setWorkOrderData(workOrderData);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setWorkOrderLoading(false);
     }
-    setWorkOrderLoading(false);
   };
 
   // create query string
