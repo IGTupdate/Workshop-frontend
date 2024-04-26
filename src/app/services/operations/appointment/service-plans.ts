@@ -1,4 +1,4 @@
-import { setServicePlansData } from "@/app/store/slices/servicePlanSlice";
+import { setServicePlansData, setServicePlansLoading } from "@/app/store/slices/servicePlanSlice";
 import { RootState } from "@/app/store/store";
 import { TServicePlans } from "@/app/types/service";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
@@ -49,8 +49,14 @@ export const updateServicePlans = async (_id: string, data: TServicePlans): Prom
 };
 
 export const getAllServicePlans = (): ThunkAction<void, RootState, unknown, Action> => async (dispatch) => {
-    const servicePlansData =  await getServicePlans()
+    try{
+        const servicePlansData =  await getServicePlans()
     dispatch(setServicePlansData(servicePlansData));
+    }catch(err){
+
+    }finally{
+        dispatch(setServicePlansLoading(false));
+    }
 }
 
 export const getServicePlans = async () => {

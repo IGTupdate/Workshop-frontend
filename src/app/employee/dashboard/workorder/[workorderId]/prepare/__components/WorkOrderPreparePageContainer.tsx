@@ -34,10 +34,6 @@ const WorkOrderPreparePageContainer = (props: Props) => {
     }
   }, [props.workOrderId]);
 
-  useEffect(() => {
-    console.log(workOrder);
-  }, [workOrder]);
-
   return (
     <div>
       {loading ? (

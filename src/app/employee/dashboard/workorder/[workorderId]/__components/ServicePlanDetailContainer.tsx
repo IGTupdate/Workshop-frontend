@@ -1,6 +1,7 @@
 "use client"
 
-import { useAppSelector } from '@/app/store/reduxHooks';
+import { getAllServicePlans } from '@/app/services/operations/appointment/service-plans';
+import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import { TServicePlans } from '@/app/types/service';
 import { Descriptions, Typography } from 'antd';
 import { useEffect, useState } from 'react';
@@ -13,21 +14,28 @@ type Props = {
 }
 
 const ServicePlanDetailContainer = (props: Props) => {
-    const servicePlans = useAppSelector((state) => state.servicePlan.servicePlansData)
-
+    const servicePlanStore = useAppSelector((state) => state.servicePlan)
     const [servicePlan, setServicePlan] = useState<TServicePlans | null | undefined>(null);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         setServicePlan(() => {
             if (typeof props.servicePlan === "string") {
-                return servicePlans.find((el) => {
+
+                return servicePlanStore.servicePlansData.find((el) => {
                     return props.servicePlan === el._id
                 })
             }
             return props.servicePlan;
         })
-    }, [props.servicePlan]);
+    }, [props.servicePlan, servicePlanStore.servicePlansData]);
 
+
+    useEffect(() => {
+        if (servicePlanStore.servicePlansLoading) {
+            dispatch(getAllServicePlans())
+        }
+    }, [servicePlanStore.servicePlansLoading])
 
 
     return (

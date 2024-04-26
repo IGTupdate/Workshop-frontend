@@ -1,13 +1,13 @@
 "use client";
 
-import Loader from "@/app/components/Loader";
-import { TWorkOrderData } from "@/app/types/work-order";
-import { removeQueryParams, setQueryParams } from "@/app/utils/helper";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useCallback, useEffect, useState } from "react";
-import WorkOrderTableContainer from "./WorkOrderTableContainer";
-import { getAllWorkOrder } from "@/app/services/operations/workorder/workorder";
-import { Button, DatePicker } from "antd";
+import Loader from '@/app/components/Loader';
+import { TWorkOrderData } from '@/app/types/work-order';
+import { removeQueryParams, setQueryParams } from '@/app/utils/helper';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React, { useCallback, useEffect, useState } from 'react'
+import WorkOrderTableContainer from './WorkOrderTableContainer';
+import { getPageWorkOrder } from '@/app/services/operations/workorder/workorder';
+import { Button, DatePicker } from 'antd';
 const { RangePicker } = DatePicker;
 
 type Props = {};
@@ -27,14 +27,18 @@ const WorkOrderPageContainer = (props: Props) => {
     loadWorkOrders();
   }, [searchParams, router]);
 
+
+
   const loadWorkOrders = async () => {
     setWorkOrderLoading(true);
-    const workOrderData = await getAllWorkOrder(searchParams.toString());
+    const workOrderData = await getPageWorkOrder(searchParams.toString())
     if (workOrderData) {
-      setWorkOrderData(workOrderData);
+      console.log("workOrderData", workOrderData)
+      setWorkOrderData(workOrderData)
     }
     setWorkOrderLoading(false);
-  };
+  }
+
 
   // create query string
   const createQueryString = useCallback(
