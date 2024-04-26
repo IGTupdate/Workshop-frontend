@@ -3,7 +3,6 @@ import Loader from '@/app/components/Loader';
 import { getAppointmentByAppointmentId } from '@/app/services/operations/appointment/appointment';
 import { TAppointment } from '@/app/types/appointment';
 import { TworkOrderCreate } from '@/app/validators/workorder';
-import { Divider } from 'antd';
 import React, { useEffect, useState } from 'react'
 
 type Props = {

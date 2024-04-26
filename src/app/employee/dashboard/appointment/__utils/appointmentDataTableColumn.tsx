@@ -92,7 +92,7 @@ export function GetAppointmentDataTableColumn() {
         dataIndex: "date_time",
         key: "date_time",
         defaultSortOrder: "descend",
-        sorter: (a, b) => a.date_time.getTime() - b.date_time.getTime(),
+        // sorter: (a, b) => a.date_time.getTime() - b.date_time.getTime(),
         render: (value) => {
           return (
             <div>
