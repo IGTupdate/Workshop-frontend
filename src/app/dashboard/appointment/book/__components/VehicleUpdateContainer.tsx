@@ -15,13 +15,13 @@ import toast from 'react-hot-toast';
 type Props = {
     updateVehicleId: string,
     setUpdateVehicleId: React.Dispatch<React.SetStateAction<string>>,
-    updateVehicleValues: TvehicleCreateSchema
-}
+    updateVehicleValues: TvehicleCreateSchema;
+};
 
 const VehicleUpdateContainer = (props: Props) => {
 
     const [loading, setLoading] = useState(false);
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
 
     const { control, handleSubmit, formState: { errors }, setValue } = useForm({
         defaultValues: props.updateVehicleValues,
@@ -31,25 +31,25 @@ const VehicleUpdateContainer = (props: Props) => {
     const onSubmit = async (data: TvehicleCreateSchema) => {
         setLoading(true);
         try {
-            await updateVehicle(props.updateVehicleId, data)
+            await updateVehicle(props.updateVehicleId, data);
         } catch (err: any) {
             // console.log(err);
-            toast.error(err?.response?.data?.message || COMMON_ERROR)
+            toast.error(err?.response?.data?.message || COMMON_ERROR);
         }
         finally {
             setLoading(false);
-            props.setUpdateVehicleId('')
-            dispatch(setVehicleLoading(true))
+            props.setUpdateVehicleId('');
+            dispatch(setVehicleLoading(true));
         }
-    }
+    };
 
     const handleBack = () => {
         props.setUpdateVehicleId("");
-    }
+    };
     return (
         <div className='w-full'>
 
-            <div className='w-full grid grid-cols-2 gap-5 mb-5'>
+            <div className='w-full grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5'>
                 {
                     vehicleCreateInputFields.map((field, index) => {
                         return <InputField key={index}
@@ -59,7 +59,7 @@ const VehicleUpdateContainer = (props: Props) => {
                             placeholder={field.placeholder}
                             control={control}
                             error={errors[field.name as keyof TvehicleCreateSchema] ? errors[field.name as keyof TvehicleCreateSchema]?.message || "" : ""}
-                        />
+                        />;
                     })
                 }
             </div>
@@ -71,15 +71,16 @@ const VehicleUpdateContainer = (props: Props) => {
                     Back
                 </Button>
                 <Button
+                    type='primary'
                     disabled={loading}
                     onClick={handleSubmit(onSubmit)}
-                    className='bg-blue1 text-white'>
+                    className='text-white'>
                     Update
                 </Button>
 
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default VehicleUpdateContainer
+export default VehicleUpdateContainer;

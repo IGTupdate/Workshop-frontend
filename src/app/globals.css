@@ -20,18 +20,23 @@ input[type="number"] {
   .bold-text-lg {
     @apply font-bold text-lg;
   }
+
   .form-field {
     @apply px-4 py-1.5 text-base font-semibold
   }
+
   .form-component {
     @apply flex flex-col gap-1 relative
   }
+
   .form-error {
     @apply absolute right-0 -bottom-5 text-red-600
   }
+
   .custom-button {
     @apply bg-customGray text-customLightGray px-4 py-4 text-base rounded-md hover:bg-customGray hover:bg-opacity-75 transition-colors duration-200 flex items-center justify-center focus:outline-none focus:bg-customGray
   }
+
   .customer-page-title {
     @apply text-center text-2xl font-extrabold
   }
@@ -61,4 +66,28 @@ a {
 
 a:hover {
   color: inherit;
+}
+
+
+.input-otp {
+  justify-content: start !important;
+}
+
+
+
+:where(.css-dev-only-do-not-override-dg1m93).ant-descriptions .ant-descriptions-item-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+
+:where(.css-dev-only-do-not-override-1awui22).ant-descriptions .ant-descriptions-item-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+:where(.css-dev-only-do-not-override-ajbvw).ant-descriptions .ant-descriptions-item-container {
+  display: flex;
+  flex-wrap: wrap;
 }

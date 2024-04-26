@@ -1,7 +1,12 @@
 const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_BASE_URL || ''
 const APPOINTMENT_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_APPOINTMENT_SERVICE_BASE_URL + "/api";
 const WORK_ORDER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_WORK_ORDER_SERVICE_BASE_URL + "/api";
-const CONSUMER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_CONSUMER_BASE_URL
+const CONSUMER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_CONSUMER_BASE_URL || '';
+
+// const AUTH_BASE_URL = 'http://localhost:4000';
+// const APPOINTMENT_SERVICE_BASE_URL = 'http://localhost:5000' + "/api";
+// const WORK_ORDER_SERVICE_BASE_URL = 'http://localhost:4100' + "/api";
+// const CONSUMER_SERVICE_BASE_URL = 'http://localhost:4200'
 
 const createUrl = (baseUrl: string, ...paths: string[]) => `${baseUrl}${paths.join('')}`;
 
@@ -15,13 +20,17 @@ const CALENDAR = "/calender";
 const APPOINTMENT = "/appointment";
 const VEHICLE = "/vehicle";
 const CANCEL = "/cancel";
-const RAMP = '/ramp'
+const RAMP = '/ramp';
+const SERVICE_CATEGORY = '/service_category';
+const SERVICE_TASKS = '/service_tasks';
+const SERVICE_PLANS = '/service_plans';
 const WORKORDER = "/workorder"
 
 // Define endpoint generators
 const authUrl = (...paths: string[]) => createUrl(AUTH_BASE_URL, ...paths);
 const appointmentUrl = (...paths: string[]) => createUrl(APPOINTMENT_SERVICE_BASE_URL, ...paths);
 const workOrderUrl = (...paths: string[]) => createUrl(WORK_ORDER_SERVICE_BASE_URL, ...paths);
+const notificationUrl = (...paths: string[]) => createUrl(CONSUMER_SERVICE_BASE_URL, ...paths);
 
 // Define endpoint objects
 export const authEndpoints = {
@@ -51,6 +60,7 @@ export const appointmentEndpoints = {
   GET_APPOINTMENT_BY_APPOINTMENT_ID: appointmentUrl(APPOINTMENT, "/get"),
   GET_ALL_APPOINTMENT: appointmentUrl(APPOINTMENT, "/get-all"),
   GET_APPOINTMENT_BOOK_INIT_DATA: appointmentUrl(APPOINTMENT, "/book/init"),
+  GET_CUSTOMER_INIT_DATA: appointmentUrl(APPOINTMENT, "/get-customer/init"),
   APPOINTMENT_BOOK: appointmentUrl(APPOINTMENT, "/book"),
   APPOINTMENT_CANCEL_API: appointmentUrl(APPOINTMENT, CANCEL),
   APPOINTMENT_RESCHEDULE_API: appointmentUrl(APPOINTMENT, "/reschedule"),
@@ -59,7 +69,18 @@ export const appointmentEndpoints = {
   CREATE_VEHICLE: appointmentUrl(VEHICLE, "/create"),
   GET_VEHICLE_BY_CUSTOMER_ID: appointmentUrl(VEHICLE, "/get-by-customer"),
   UPDATE_VEHICLE_BY_CUSTOMER_ID: appointmentUrl(VEHICLE, "/update"),
-  DELETE_VEHICLE_BY_CUSTOMER_ID: appointmentUrl(VEHICLE, "/delete")
+  DELETE_VEHICLE_BY_CUSTOMER_ID: appointmentUrl(VEHICLE, "/delete"),
+  CREATE_SERVICE_CATEGORY: appointmentUrl(SERVICE_CATEGORY, '/create'),
+  UPDATE_SERVICE_CATEGORY: appointmentUrl(SERVICE_CATEGORY, '/update'),
+  GET_SERVICE_CATEGORY: appointmentUrl(SERVICE_CATEGORY, '/get'),
+  CREATE_SERVICE_TASK: appointmentUrl(SERVICE_TASKS, '/create'),
+  UPDATE_SERVICE_TASK: appointmentUrl(SERVICE_TASKS, '/update'),
+  DELETE_SERVICE_TASK: appointmentUrl(SERVICE_TASKS, '/delete'),
+  GET_SERVICE_TASK: appointmentUrl(SERVICE_TASKS, '/get'),
+  CREATE_SERVICE_PLAN: appointmentUrl(SERVICE_PLANS, '/create'),
+  UPDATE_SERVICE_PLAN: appointmentUrl(SERVICE_PLANS, '/update'),
+  DELETE_SERVICE_PLAN: appointmentUrl(SERVICE_PLANS, '/delete'),
+  GET_SERVICE_PLAN: appointmentUrl(SERVICE_PLANS, '/get'),
 };
 
 export const workOrderEndpoints = {
@@ -74,4 +95,9 @@ export const workOrderEndpoints = {
   PREPARE_WORK_ORDER: workOrderUrl(WORKORDER, "/prepare"),
   ASSIGN_MECHANIC_WORKORDER: workOrderUrl(WORKORDER, "/assign_mechanics"),
   REMOVE_MECHANIC_WORKORDER: workOrderUrl(WORKORDER, "/remove_mechanics"),
+};
+
+
+export const notificationEndpoints = {
+  GET_ALL_NOTIFICATIONS: notificationUrl("/notification/get-all")
 };

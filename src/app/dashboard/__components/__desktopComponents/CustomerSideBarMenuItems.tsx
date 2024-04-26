@@ -1,5 +1,5 @@
-'use client'
-import { TsideBarMenuItems } from "@/app/employee/dashboard/utils/sideBarMenuItems"
+'use client';
+import { TsideBarMenuItems } from "@/app/employee/dashboard/utils/sideBarMenuItems";
 
 
 export const sideBarMenuItems: TsideBarMenuItems[] = [
@@ -41,8 +41,13 @@ export const sideBarMenuItems: TsideBarMenuItems[] = [
     },
     {
         key: '8',
+        label: "Notifications",
+        pathname: '/dashboard/notifications'
+    },
+    {
+        key: '9',
         label: "Settings",
         pathname: '/dashboard/settings'
     }
 
-]
+];

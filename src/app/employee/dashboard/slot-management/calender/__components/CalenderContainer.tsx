@@ -9,22 +9,20 @@ import dateCellRender from "./dateCellRender";
 import monthCellRender from "./monthCellRender";
 import CalenderManageDrawer from "./CalenderManageDrawer";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
-import {
-  setActiveCalender,
-} from "@/app/store/slices/calenderSlice";
+import { setActiveCalender } from "@/app/store/slices/calenderSlice";
 import Loader from "@/app/components/Loader";
 import { getAllCalender } from "@/app/services/operations/appointment/calender";
 
-type Props = {
-
-};
+type Props = {};
 
 const CalenderContainer = (props: Props) => {
   /*
   state - 
   calenderData, calenderLoading, active calender
   */
-  const { calenderData, calenderLoading, activeCalender } = useAppSelector((state) => state.calender);
+  const { calenderData, calenderLoading, activeCalender } = useAppSelector(
+    (state) => state.calender
+  );
 
   // dispatch state action
   const dispatch = useAppDispatch();
@@ -32,7 +30,6 @@ const CalenderContainer = (props: Props) => {
   // for the first time
   useEffect(() => {
     if (calenderLoading) {
-      console.log("calender fetched");
       dispatch(getAllCalender());
     }
   }, [calenderLoading]);

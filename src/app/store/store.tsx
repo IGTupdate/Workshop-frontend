@@ -6,6 +6,8 @@ import { slotScheduleReducer } from "./slices/slot-scheduleSlice";
 import { deviceReducer } from "./slices/deviceSlice";
 import { customerAppointmentReducer } from "./slices/customerAppointmentSlice";
 import { customerVehicleReducer } from "./slices/customerVehicleSlice";
+import { customerNotificationReducer } from "./slices/notificationSlice";
+import { servicePlanReducer } from "./slices/servicePlanSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +17,9 @@ export const store = configureStore({
     slotSchedule: slotScheduleReducer,
     device: deviceReducer,
     customerAppointment: customerAppointmentReducer,
-    customerVehicle: customerVehicleReducer
+    customerVehicle: customerVehicleReducer,
+    notifications: customerNotificationReducer,
+    servicePlan: servicePlanReducer
   },
 });
 

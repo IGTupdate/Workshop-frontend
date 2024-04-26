@@ -1,5 +1,6 @@
 "use client";
 
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react'
 import { Button, Divider, Typography } from 'antd'
 import VehicleInspectionImagesContainer from './__components/VehicleInspectionImagesContainer';
@@ -15,17 +16,33 @@ import AssignMechanicDrawer from './__components/AssignMechanicDrawerContainer';
 import InventoryOrderContainer from './__components/InventoryOrderContainer';
 import ManageMechanicDrawer from './__components/ManageMechanicDrawer';
 import { useRouter } from 'next/navigation';
+=======
+import React, { useEffect, useState } from "react";
+import { Divider, Typography } from "antd";
+import VehicleInspectionImagesContainer from "./__components/VehicleInspectionImagesContainer";
+import VehicleFuelDetailContainer from "./__components/VehicleFuelDetailContainer";
+import VehicleObservationContainer from "./__components/VehicleObservationContainer";
+import { TWorkOrder } from "@/app/types/work-order";
+import WorkOrderCustomerDetails from "./__components/WorkOrderCustomerDetails";
+import WorkOrderObservations from "./__components/WorkOrderObservations";
+import WorkOrdersPlansWorkContainer from "./__components/WorkOrdersPlansWorkContainer";
+import { getWorkOrderById } from "@/app/services/operations/workorder/workorder";
+import Loader from "@/app/components/Loader";
+>>>>>>> 49e23fee6ee515b23afe02269c058e882d7c26c3
 
-const { Text } = Typography
+const { Text } = Typography;
 
 type Props = {
-    params: {
-        workorderId: string
-    }
-}
+  params: {
+    workorderId: string;
+  };
+};
 
 const Page = (props: Props) => {
+  const [loading, setLoading] = useState(true);
+  const [workOrder, setWorkOrder] = useState<TWorkOrder | null>(null);
 
+<<<<<<< HEAD
     const [loading, setLoading] = useState(true);
     const [workOrder, setWorkOrder] = useState<TWorkOrder | null>(null);
 
@@ -45,9 +62,28 @@ const Page = (props: Props) => {
                     setLoading(false);
                 }
             }())
+=======
+  // load work order
+  useEffect(() => {
+    if (props.params.workorderId) {
+      (async function () {
+        try {
+          const required_workorder = await getWorkOrderById(
+            props.params.workorderId,
+            true
+          );
+          setWorkOrder(required_workorder);
+        } catch (err) {
+          console.log(err);
+        } finally {
+          setLoading(false);
+>>>>>>> 49e23fee6ee515b23afe02269c058e882d7c26c3
         }
-    }, [props.params.workorderId]);
+      })();
+    }
+  }, [props.params.workorderId]);
 
+<<<<<<< HEAD
     const handleUpdateWorkOrderData = (field: keyof TWorkOrder, fieldData: any) => {
         setWorkOrder((prv) => {
             return {
@@ -101,9 +137,46 @@ const Page = (props: Props) => {
                 )
             }
 
+=======
+  return (
+    <div className="p-4 bg-white rounded-md">
+      {loading ? (
+        <Loader />
+      ) : workOrder ? (
+        <div>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-semibold">
+              WorkOrders - #{workOrder.orderNumber}
+            </h2>
+            <div></div>
+          </div>
+
+          <div>
+            <WorkOrderCustomerDetails
+            // customer={workOrder.appointmentId}
+            // vehicle={""}
+            />
+            <Divider />
+            <div className=" mt-4">
+              <WorkOrdersPlansWorkContainer
+                servicePlanId={workOrder.servicePlanId || []}
+                tasks={workOrder.tasks}
+              />
+              <div className="grid grid-cols-2 gap-4">
+                <WorkOrderObservations observations={workOrder.observations} />
+                <VehicleFuelDetailContainer />
+              </div>
+              <VehicleObservationContainer />
+              <VehicleInspectionImagesContainer />
+            </div>
+          </div>
+>>>>>>> 49e23fee6ee515b23afe02269c058e882d7c26c3
         </div>
-    )
-}
+      ) : (
+        <Text>Work Order not found</Text>
+      )}
+    </div>
+  );
+};
 
-
-export default Page
+export default Page;

@@ -1,9 +1,9 @@
 "use client"
 
-import { TServicePlans } from '@/app/types/service'
-import { Descriptions, Typography } from 'antd'
-import React, { useEffect, useState } from 'react'
-import { demoserviceplans } from '../prepare/__components/__demoserviceplans';
+import { useAppSelector } from '@/app/store/reduxHooks';
+import { TServicePlans } from '@/app/types/service';
+import { Descriptions, Typography } from 'antd';
+import { useEffect, useState } from 'react';
 
 
 const { Text } = Typography
@@ -13,7 +13,7 @@ type Props = {
 }
 
 const ServicePlanDetailContainer = (props: Props) => {
-    const servicePlans = demoserviceplans as TServicePlans[]; // fetch the data from the redux
+    const servicePlans = useAppSelector((state) => state.servicePlan.servicePlansData)
 
     const [servicePlan, setServicePlan] = useState<TServicePlans | null | undefined>(null);
 
@@ -31,6 +31,7 @@ const ServicePlanDetailContainer = (props: Props) => {
 
 
     return (
+
         <>
             {
                 servicePlan ? <div className='border rounded-md p-2 mb-2'>

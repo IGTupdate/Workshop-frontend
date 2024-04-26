@@ -15,14 +15,14 @@ export async function getCustomerData(_id: string, dispatch: AppDispatch) {
     const result = await apiConnector({
       method: "GET",
       url: GET_CUSTOMER_DATA_API + `/${_id}`
-    })
+    });
 
     if (result.data.success) {
-      window.localStorage.setItem('authData', JSON.stringify(result.data.data))
-      dispatch(setAuthData(result.data.data))
+      window.localStorage.setItem('authData', JSON.stringify(result.data.data));
+      dispatch(setAuthData(result.data.data));
     }
   } catch (err) {
-    throw err
+    throw err;
   }
 }
 
@@ -70,7 +70,7 @@ export async function verifyOTP(contactNumber: string, otp: string, dispatch: Ap
         });
 
         if (authResult?.data?.success) {
-          await getCustomerData(authResult.data.data._id, dispatch)
+          await getCustomerData(authResult.data.data._id, dispatch);
           toast.success("USER LOGGED IN SUCCESSFULLY");
         }
       } else {
@@ -98,7 +98,7 @@ export async function registerCustomer(fullName: string, email: string, dispatch
     });
 
     if (authResult?.data?.success) {
-      await getCustomerData(authResult.data.data._id, dispatch)
+      await getCustomerData(authResult.data.data._id, dispatch);
       toast.success("REGISTRATION SUCCESSFULL");
     }
   } catch (err) {
@@ -121,28 +121,28 @@ export const updateCustomer = (data: any, setLoading: React.Dispatch<React.SetSt
     const authData = getState().auth.authData;
     const response = await apiConnector({ method: "POST", url: CUSTOMER_UPDATE_API + "/" + authData._id, bodyData: data });
     if (response.data.success) {
-      const { fullName, email } = response.data.data
-      let newAuthData = { ...authData }
-      newAuthData.fullName = fullName
-      newAuthData.email = email
-      dispatch(setAuthData(newAuthData))
-      window.localStorage.setItem('authData', JSON.stringify(newAuthData))
-      toast.success("User Updated Successfully")
-      setLoading(false)
+      const { fullName, email } = response.data.data;
+      let newAuthData = { ...authData };
+      newAuthData.fullName = fullName;
+      newAuthData.email = email;
+      dispatch(setAuthData(newAuthData));
+      window.localStorage.setItem('authData', JSON.stringify(newAuthData));
+      toast.success("User Updated Successfully");
+      setLoading(false);
     }
   } catch (err) {
     // console.log(err);
-    toast.error("Updation Failed... Please Try Later")
+    toast.error("Updation Failed... Please Try Later");
     throw err;
   }
-}
+};
 
 export const logout = (): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
   try {
-    dispatch(setAuthLoading(true))
+    dispatch(setAuthLoading(true));
     const response = await apiOpenConnector({ method: "GET", url: LOGOUT_API });
     if (response.data.success) {
-      dispatch(logOut())
+      dispatch(logOut());
     }
   } catch (err) {
     console.log(err);

@@ -1,5 +1,6 @@
-"use client"
+"use client";
 
+<<<<<<< HEAD
 import Loader from '@/app/components/Loader';
 import { TWorkOrderData } from '@/app/types/work-order';
 import { removeQueryParams, setQueryParams } from '@/app/utils/helper';
@@ -8,23 +9,36 @@ import React, { useCallback, useEffect, useState } from 'react'
 import WorkOrderTableContainer from './WorkOrderTableContainer';
 import { getPageWorkOrder } from '@/app/services/operations/workorder/workorder';
 import { Button, DatePicker } from 'antd';
+=======
+import Loader from "@/app/components/Loader";
+import { TWorkOrderData } from "@/app/types/work-order";
+import { removeQueryParams, setQueryParams } from "@/app/utils/helper";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useCallback, useEffect, useState } from "react";
+import WorkOrderTableContainer from "./WorkOrderTableContainer";
+import { getAllWorkOrder } from "@/app/services/operations/workorder/workorder";
+import { Button, DatePicker } from "antd";
+>>>>>>> 49e23fee6ee515b23afe02269c058e882d7c26c3
 const { RangePicker } = DatePicker;
 
-
-type Props = {}
+type Props = {};
 
 const WorkOrderPageContainer = (props: Props) => {
-    const [workOrderLoading, setWorkOrderLoading] = useState(true);
-    const [workOrderData, setWorkOrderData] = useState<TWorkOrderData>({
-        workOrders: [],
-        totalWorkOrders: 0
-    })
+  const [workOrderLoading, setWorkOrderLoading] = useState(true);
+  const [workOrderData, setWorkOrderData] = useState<TWorkOrderData>({
+    workOrders: [],
+    totalWorkOrders: 0,
+  });
 
-    const searchParams = useSearchParams();
-    const router = useRouter();
-    const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
+  useEffect(() => {
+    loadWorkOrders();
+  }, [searchParams, router]);
 
+<<<<<<< HEAD
     useEffect(() => {
         loadWorkOrders();
         console.log("fetching workorder");
@@ -38,48 +52,61 @@ const WorkOrderPageContainer = (props: Props) => {
             setWorkOrderData(workOrderData)
         }
         setWorkOrderLoading(false);
+=======
+  const loadWorkOrders = async () => {
+    setWorkOrderLoading(true);
+    const workOrderData = await getAllWorkOrder(searchParams.toString());
+    if (workOrderData) {
+      setWorkOrderData(workOrderData);
+>>>>>>> 49e23fee6ee515b23afe02269c058e882d7c26c3
     }
+    setWorkOrderLoading(false);
+  };
 
-    // create query string
-    const createQueryString = useCallback(
-        (name: string, value?: string) => {
-            if (!value || value === "")
-                return removeQueryParams(searchParams.toString(), name);
-            else return setQueryParams(searchParams.toString(), name, value);
-        },
-        [searchParams]
-    );
+  // create query string
+  const createQueryString = useCallback(
+    (name: string, value?: string) => {
+      if (!value || value === "")
+        return removeQueryParams(searchParams.toString(), name);
+      else return setQueryParams(searchParams.toString(), name, value);
+    },
+    [searchParams]
+  );
 
-    // get current page
-    const getCurrentPage = useCallback(() => {
-        return Number(searchParams.get("page")) || 1;
-    }, [searchParams]);
+  // get current page
+  const getCurrentPage = useCallback(() => {
+    return Number(searchParams.get("page")) || 1;
+  }, [searchParams]);
 
-    // handle page change
-    const handlePageChange = (value: number) => {
-        const queryParmas = createQueryString("page", String(value));
-        router.push(`${pathname}?${queryParmas}`);
-    };
+  // handle page change
+  const handlePageChange = (value: number) => {
+    const queryParmas = createQueryString("page", String(value));
+    router.push(`${pathname}?${queryParmas}`);
+  };
 
-    const handleClearFilter = () => {
-        router.push(pathname);
-    }
+  const handleClearFilter = () => {
+    router.push(pathname);
+  };
 
-    return (
+  return (
+    <div>
+      {workOrderLoading ? (
+        <Loader />
+      ) : (
         <div>
-            {
-                workOrderLoading ? <Loader /> : <div>
-                    <div className='mb-4 flex justify-between'>
-                        <RangePicker />
-                        <div>
-                            <Button type='link' onClick={handleClearFilter}>Clear Filter</Button>
-                        </div>
-                    </div>
-                    <WorkOrderTableContainer workOrderData={workOrderData.workOrders} />
-                </div>
-            }
+          <div className="mb-4 flex justify-between">
+            <RangePicker />
+            <div>
+              <Button type="link" onClick={handleClearFilter}>
+                Clear Filter
+              </Button>
+            </div>
+          </div>
+          <WorkOrderTableContainer workOrderData={workOrderData.workOrders} />
         </div>
-    )
-}
+      )}
+    </div>
+  );
+};
 
 export default WorkOrderPageContainer;

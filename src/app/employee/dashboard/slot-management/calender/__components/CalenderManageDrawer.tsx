@@ -24,7 +24,6 @@ const CalenderManageDrawer = (props: Props) => {
   const closeDrawer = () => {
     if (!calenderDrawerLoading) {
       dispatch(setActiveCalender(null));
-      console.log("closing drawer");
     }
   };
 

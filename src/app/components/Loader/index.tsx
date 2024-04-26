@@ -1,13 +1,22 @@
-import React from 'react'
+"use client";
+import React from "react";
+import { TailSpin } from "react-loader-spinner";
 
-type Props = {}
+type Props = {};
 
 const Loader = (props: Props) => {
   return (
-    <div>
-      Loading ....
-    </div>
-  )
-}
+    <TailSpin
+      visible={true}
+      height="80"
+      width="80"
+      color="#ffe301"
+      ariaLabel="tail-spin-loading"
+      radius="1"
+      wrapperStyle={{}}
+      wrapperClass=""
+    />
+  );
+};
 
-export default Loader
+export default Loader;

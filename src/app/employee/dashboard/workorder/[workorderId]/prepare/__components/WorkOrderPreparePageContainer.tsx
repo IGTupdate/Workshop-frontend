@@ -1,27 +1,29 @@
 "use client";
 
-import { Typography } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { Typography } from "antd";
+import React, { useEffect, useState } from "react";
 
-import { TWorkOrder } from '@/app/types/work-order';
-import { getWorkOrderById } from '@/app/services/operations/workorder/workorder';
-import WorkOrderFormContainer from './WorkOrderFormContainer';
-import Loader from '@/app/components/Loader';
+import { TWorkOrder } from "@/app/types/work-order";
+import { getWorkOrderById } from "@/app/services/operations/workorder/workorder";
+import WorkOrderFormContainer from "./WorkOrderFormContainer";
+import Loader from "@/app/components/Loader";
 
-const { Title, Text } = Typography
+const { Title, Text } = Typography;
 
 type Props = {
-  workOrderId: string
-}
+  workOrderId: string;
+};
 
 const WorkOrderPreparePageContainer = (props: Props) => {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 49e23fee6ee515b23afe02269c058e882d7c26c3
   const [loading, setLoading] = useState(true);
   const [workOrder, setWorkOrder] = useState<TWorkOrder | null>(null);
 
   // load work order
   useEffect(() => {
-    console.log("hello from work order", props.workOrderId);
     if (props.workOrderId) {
       (async function () {
         try {
@@ -32,26 +34,37 @@ const WorkOrderPreparePageContainer = (props: Props) => {
         } finally {
           setLoading(false);
         }
-      }())
+      })();
     }
   }, [props.workOrderId]);
 
+<<<<<<< HEAD
+=======
+  useEffect(() => {
+    console.log(workOrder);
+  }, [workOrder]);
+
+>>>>>>> 49e23fee6ee515b23afe02269c058e882d7c26c3
   return (
     <div>
-      {
-        loading ? <Loader /> : <div>
-          {
-            workOrder ? <div>
-              <Title level={5} className='mb-8'>Work Order for #{workOrder.orderNumber}</Title>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div>
+          {workOrder ? (
+            <div>
+              <Title level={5} className="mb-8">
+                Work Order for #{workOrder.orderNumber}
+              </Title>
               <WorkOrderFormContainer workOrder={workOrder} />
-            </div> : <Text>Work Order Not Found</Text>
-          }
+            </div>
+          ) : (
+            <Text>Work Order Not Found</Text>
+          )}
         </div>
-      }
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default WorkOrderPreparePageContainer
-
-
+export default WorkOrderPreparePageContainer;

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { sideBarMenuItems } from '@/app/dashboard/__components/__desktopComponents/CustomerSideBarMenuItems';
 import { DesktopOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
@@ -6,16 +6,18 @@ import { usePathname, useRouter } from 'next/navigation';
 import { CgProfile } from "react-icons/cg";
 import { RxDashboard } from "react-icons/rx";
 import { GrBook } from "react-icons/gr";
+import { IoNotifications } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
 import { getActiveSideBarMenu, getSideBarMenuItems } from '@/app/employee/dashboard/utils/sideBarMenuItems';
 
 const dashBoardIcons = {
     Dashboard: <RxDashboard />,
     Appointment: <DesktopOutlined />,
-    Profile: <CgProfile/>,
-    PreviousBookings: <GrBook/>,
-    Settings: <IoSettingsOutline/>
-}
+    Profile: <CgProfile />,
+    PreviousBookings: <GrBook />,
+    Notifications: <IoNotifications />,
+    Settings: <IoSettingsOutline />
+};
 
 const SideBarMenus = () => {
     const router = useRouter();
@@ -34,7 +36,7 @@ const SideBarMenus = () => {
             defaultOpenKeys={['sub1']}
             items={sideBarMenus}
         />
-    )
-}
+    );
+};
 
 export default SideBarMenus;

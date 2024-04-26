@@ -10,11 +10,15 @@ const config: Config = {
     screens: {
       sm: "640px",
       md: "768px",
+      xmd: "980px",
       lg: "1024px",
       xl: "1250px",
       "2xl": "1536px",
     },
     extend: {
+      boxShadow: {
+        'top': '0px -8px 30px #0000001f',
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -31,6 +35,7 @@ const config: Config = {
         customLightGray: "#CDCDCE",
         customYellow: "#FFE200",
         customBrown: "#A49339",
+        antGreay: "#00000073"
       },
       fontFamily: {
         kanit: [

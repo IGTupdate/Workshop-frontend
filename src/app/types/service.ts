@@ -19,11 +19,18 @@ export type TServicePlans = {
     description: string[];
     price: number;
     duration?: number;
-    category: string | IServiceCategory;
+    category: IServiceCategory | string;
     isActive?: boolean;
-    tasks?: string[] | IServiceTask[]
-    parts?: TParts[] | string[]
+    tasks?: IServiceTask[]
+    parts?: TParts[]
     remarks?: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface TSegregatedServiceData {
+    [categoryId: string]: {
+        category: IServiceCategory;
+        plans: TServicePlans[];
+    };
 }
