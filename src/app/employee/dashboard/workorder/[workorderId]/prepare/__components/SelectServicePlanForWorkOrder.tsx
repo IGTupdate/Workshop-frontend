@@ -1,11 +1,12 @@
 "use client";
 
 import SelectField from '@/app/components/Input/SelectField';
-import { useAppSelector } from '@/app/store/reduxHooks';
+import { useAppDispatch, useAppSelector } from '@/app/store/reduxHooks';
 import { TworkorderPrepare } from '@/app/validators/workorder';
 import { useEffect, useState } from 'react';
 import { UseFormWatch } from 'react-hook-form';
 import ServicePlanDetailContainer from '../../__components/ServicePlanDetailContainer';
+import { getAllServicePlans } from '@/app/services/operations/appointment/service-plans';
 
 type Props = {
     errors: any,
@@ -15,13 +16,23 @@ type Props = {
 
 const SelectServicePlanForWorkOrder = (props: Props) => {
 
-    const servicePlans = useAppSelector((state) => state.servicePlan.servicePlansData)
-
+    const servicePlansStore = useAppSelector((state) => state.servicePlan);
     const [servicePlanOptions, setServicePlanOptions] = useState<{ value: string, label: string }[]>([]);
 
+    const dispatch = useAppDispatch();
+
+    console.log(servicePlansStore.servicePlansData)
+
     useEffect(() => {
+        if (servicePlansStore.servicePlansLoading) {
+            dispatch(getAllServicePlans())
+        }
+    }, [servicePlansStore.servicePlansLoading])
+
+    useEffect(() => {
+        console.log(servicePlansStore.servicePlansData);
         setServicePlanOptions((prv) => {
-            return servicePlans.map((plan) => {
+            return servicePlansStore.servicePlansData.map((plan) => {
                 const label = (typeof plan.category === "string") ? plan.name : `${plan.category.name} - ${plan.name}`
                 return {
                     label,
@@ -29,7 +40,7 @@ const SelectServicePlanForWorkOrder = (props: Props) => {
                 }
             })
         })
-    }, [servicePlans]);
+    }, [servicePlansStore.servicePlansData]);
 
     return (
         <div>

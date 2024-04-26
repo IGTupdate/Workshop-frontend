@@ -15,10 +15,6 @@ type Props = {
 };
 
 const WorkOrderPreparePageContainer = (props: Props) => {
-<<<<<<< HEAD
-
-=======
->>>>>>> 49e23fee6ee515b23afe02269c058e882d7c26c3
   const [loading, setLoading] = useState(true);
   const [workOrder, setWorkOrder] = useState<TWorkOrder | null>(null);
 
@@ -38,13 +34,10 @@ const WorkOrderPreparePageContainer = (props: Props) => {
     }
   }, [props.workOrderId]);
 
-<<<<<<< HEAD
-=======
   useEffect(() => {
     console.log(workOrder);
   }, [workOrder]);
 
->>>>>>> 49e23fee6ee515b23afe02269c058e882d7c26c3
   return (
     <div>
       {loading ? (
