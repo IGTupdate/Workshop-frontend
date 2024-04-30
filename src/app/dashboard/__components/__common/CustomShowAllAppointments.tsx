@@ -69,7 +69,7 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
   return (
     <>
       {appointmentLoading ? (
-        <div className="flex justify-center items-center min-h-screen">
+        <div className="flex justify-center items-center min-h-screen sm:min-h-full">
           <Loader />
         </div>
       ) : (

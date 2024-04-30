@@ -67,14 +67,16 @@ const AppointmentpageContainer = (props: Props) => {
   return (
     <div>
       {appointmentDataLoading ? (
-        <div className="flex justify-center items-center h-full">
+        <div style={{height: 'calc(100vh - 300px)'}} className="flex justify-center items-center w-full">
           <Loader />
         </div>
       ) : (
         <div>
+          <div className="shadow-xl overflow-hidden rounded-xl">
           <AppointmentTableContainer
             appointmentData={appointmentData.appointments}
           />
+          </div>
           <div className="mt-10 mx-auto w-max">
             <Pagination
               defaultCurrent={getCurrentPage()}

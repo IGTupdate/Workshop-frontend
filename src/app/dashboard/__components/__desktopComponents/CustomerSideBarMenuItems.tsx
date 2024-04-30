@@ -2,7 +2,7 @@
 import { TsideBarMenuItems } from "@/app/employee/dashboard/utils/sideBarMenuItems";
 
 
-export const sideBarMenuItems: TsideBarMenuItems[] = [
+export const CustomerSideBarMenuItems: TsideBarMenuItems[] = [
     {
         key: '1',
         label: 'Dashboard',

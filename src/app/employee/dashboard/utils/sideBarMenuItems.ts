@@ -1,13 +1,14 @@
-import { MenuProps } from "antd"
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime"
+import { CustomerSideBarMenuItems } from "@/app/dashboard/__components/__desktopComponents/CustomerSideBarMenuItems";
+import { MenuProps } from "antd";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 
 export type TsideBarMenuItems = {
     key: string,
     label: string,
     pathname?: string,
-    children?: TsideBarMenuItems[]
-}
+    children?: TsideBarMenuItems[];
+};
 
 export const sideBarMenuItems: TsideBarMenuItems[] = [
     {
@@ -58,31 +59,32 @@ export const sideBarMenuItems: TsideBarMenuItems[] = [
         pathname: "/employee/dashboard/workorder"
     },
 
-]
+];
 
 export function getSideBarMenuItems(router: AppRouterInstance, sideBarMenuItems: TsideBarMenuItems[], dashBoardIcons: any,)
     : MenuProps["items"] {
 
     return sideBarMenuItems.map((item) => {
-        let children = item.children ? getSideBarMenuItems(router, item.children, dashBoardIcons) : undefined
+        let children = item.children ? getSideBarMenuItems(router, item.children, dashBoardIcons) : undefined;
         return {
             ...item,
             children,
             icon: dashBoardIcons[item.label.replace(/\s/g, '')],
             onClick: () => {
                 if (item.pathname) {
-                    router.push(item.pathname)
+                    router.push(item.pathname);
                 }
             },
-        }
-    })
+        };
+    });
 }
 
 export const findRecursiveByPathName = (sideBarMenuItems: TsideBarMenuItems[], pathname: string): TsideBarMenuItems | null => {
 
+
     for (const item of sideBarMenuItems) {
         // console.log(pathname, item?.pathname?.substring(19), pathname.substring(19).includes(item?.pathname?.substring(19)|| "-" ))
-        if (item.pathname && (pathname === item.pathname || pathname.substring(19).includes(item.pathname.substring(19) || "-"))) {
+        if (item.pathname && (pathname === item.pathname || pathname.substring(pathname.split("/")[1] === 'dashboard' ? 10 : 19).includes(item.pathname.substring(pathname.split("/")[1] === 'dashboard' ? 10 : 19) || "-"))) {
             return item;
         }
         else if (item.children) {
@@ -92,7 +94,7 @@ export const findRecursiveByPathName = (sideBarMenuItems: TsideBarMenuItems[], p
     }
 
     return null;
-}
+};
 
 export const findRecursiveByPathNameExact = (sideBarMenuItems: TsideBarMenuItems[], pathname: string): TsideBarMenuItems | null => {
 
@@ -108,11 +110,11 @@ export const findRecursiveByPathNameExact = (sideBarMenuItems: TsideBarMenuItems
     }
 
     return null;
-}
+};
 
 
 export function getActiveSideBarMenu(pathname: string): string {
-    const active_menu = findRecursiveByPathName(sideBarMenuItems, pathname);
+    const active_menu = findRecursiveByPathName(pathname.split("/")[1] === 'dashboard' ? CustomerSideBarMenuItems : sideBarMenuItems, pathname);
     if (!active_menu) return "1";
-    return active_menu.key
+    return active_menu.key;
 }

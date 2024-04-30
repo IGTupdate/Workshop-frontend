@@ -92,7 +92,7 @@ const LogIn: React.FC = () => {
           type="primary"
           size="large"
           htmlType="submit"
-          className="bg-blue1 text-white1 font-semibold w-full"
+          className="bg-black text-white1 font-semibold w-full border-none hover:shadow-xl"
         >
           Login
         </Button>

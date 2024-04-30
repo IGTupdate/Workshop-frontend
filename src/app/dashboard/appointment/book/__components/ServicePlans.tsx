@@ -64,8 +64,8 @@ const ServicePlans: React.FC<Props> = ({
                 className="w-[48%] text-customYellow underline underline-offset-2 text-base font-medium cursor-pointer mb-3"
                 onClick={() => setView(!view)}
               >
-                {view ? "-" : "+"}
-                {plan?.tasks?.slice(5, plan.tasks.length)?.length}{" "}
+                {view ? "" : "+"} 
+                {!view&& plan?.tasks?.slice(5, plan.tasks.length)?.length}
                 {view ? "View Less" : "View More"}
               </div>
             )}

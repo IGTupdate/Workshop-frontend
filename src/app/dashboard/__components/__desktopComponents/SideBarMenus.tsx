@@ -1,5 +1,5 @@
 'use client';
-import { sideBarMenuItems } from '@/app/dashboard/__components/__desktopComponents/CustomerSideBarMenuItems';
+import { CustomerSideBarMenuItems } from '@/app/dashboard/__components/__desktopComponents/CustomerSideBarMenuItems';
 import { DesktopOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { usePathname, useRouter } from 'next/navigation';
@@ -24,7 +24,7 @@ const SideBarMenus = () => {
     const pathname = usePathname();
 
     // sidebar menus
-    const sideBarMenus = getSideBarMenuItems(router, sideBarMenuItems, dashBoardIcons);
+    const sideBarMenus = getSideBarMenuItems(router, CustomerSideBarMenuItems, dashBoardIcons);
 
     const activeDashboardKey = getActiveSideBarMenu(pathname);
 
@@ -33,7 +33,7 @@ const SideBarMenus = () => {
             mode="inline"
             defaultSelectedKeys={[activeDashboardKey]}
             theme='light'
-            defaultOpenKeys={['sub1']}
+            defaultOpenKeys={[activeDashboardKey]}
             items={sideBarMenus}
         />
     );

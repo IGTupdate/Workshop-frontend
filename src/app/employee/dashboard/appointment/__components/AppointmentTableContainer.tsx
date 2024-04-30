@@ -25,10 +25,8 @@ const AppointmentTableContainer = (props: Props) => {
         return {
           key: appointment._id,
           _id: appointment._id,
-          customer: {
-            name: (typeof appointment.customer_id !== "string" ? appointment.customer_id && appointment.customer_id.fullName : "-"),
-            phone: (typeof appointment.customer_id !== "string" ? appointment.customer_id && appointment.customer_id.contactNumber : "-"),
-          },
+          name: (typeof appointment.customer_id !== "string" ? appointment.customer_id && appointment.customer_id.fullName : "-"),
+          phone: (typeof appointment.customer_id !== "string" ? appointment.customer_id && appointment.customer_id.contactNumber : "-"),
           registeration_number: (typeof appointment.vehicle_id !== "string" ? appointment.vehicle_id.registeration_number : ""),
           date_time: new Date(slotTime),
           status: appointment.status,
@@ -43,6 +41,7 @@ const AppointmentTableContainer = (props: Props) => {
       pagination={false}
       columns={GetAppointmentDataTableColumn()}
       dataSource={appointmentDataTable}
+      scroll={{x:980}}
     />
   );
 };

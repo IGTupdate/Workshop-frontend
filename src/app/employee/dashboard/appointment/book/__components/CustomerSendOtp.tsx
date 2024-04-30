@@ -81,7 +81,7 @@ const CustomerSendOtp = (props: Tprops) => {
                     disabled={loading}
                     size='large'
                     htmlType='submit'
-                    className='bg-customYellow text-white1 font-semibold w-full'>
+                    type='primary'>
                     Send
                 </Button>
             </form>

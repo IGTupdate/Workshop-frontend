@@ -1,7 +1,8 @@
+import CustomModal from "@/app/components/Model/CustomModel";
 import { TVehicle } from "@/app/types/vehicle";
 import { formatDateAndTime } from "@/app/utils/dateFormatter";
 import { Button, Descriptions } from "antd";
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {
   vehicleDetails: TVehicle;
@@ -12,6 +13,16 @@ type Props = {
 
 const VehicleDetails = (props: Props) => {
   const { vehicleDetails, setVehicleId, setUpdateVehicleId } = props;
+
+  const [visible, setVisible] = useState(false);
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
 
   return (
     <>
@@ -74,10 +85,7 @@ const VehicleDetails = (props: Props) => {
             >
               Update Vehicle
             </Button>
-            <Button
-              type="primary"
-              onClick={() => props.onDeleteVehicle(vehicleDetails._id)}
-            >
+            <Button type="primary" onClick={() => setVisible(true)}>
               Delete Vehicle
             </Button>
           </Descriptions.Item>
@@ -142,15 +150,35 @@ const VehicleDetails = (props: Props) => {
             >
               Update
             </Button>
-            <Button
-              type="primary"
-              onClick={() => props.onDeleteVehicle(vehicleDetails._id)}
-            >
+            <Button type="primary" onClick={() => setVisible(true)}>
               Delete
             </Button>
           </div>
         </div>
       </div>
+
+      <CustomModal
+        title="Delete Vehicle"
+        open={visible}
+        onCancel={handleCancel}
+        footer={[
+          // <Button key="cancel" onClick={() => handleCancel()}>
+          //   Cancel
+          // </Button>,
+          <Button
+            type="primary"
+            key="confirm"
+            onClick={() => {
+              props.onDeleteVehicle(vehicleDetails._id);
+              setVisible(false);
+            }}
+          >
+            Confirm
+          </Button>,
+        ]}
+      >
+        <p>Are you sure you want to delete your vehicle</p>
+      </CustomModal>
     </>
   );
 };
