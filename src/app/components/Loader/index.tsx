@@ -2,9 +2,8 @@
 import React from "react";
 import { TailSpin } from "react-loader-spinner";
 
-type Props = {};
 
-const Loader = (props: Props) => {
+const Loader = () => {
   return (
     <TailSpin
       visible={true}

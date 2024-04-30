@@ -236,7 +236,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center h-screen w-full">
           <Loader />
         </div>
       ) : (

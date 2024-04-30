@@ -5,6 +5,7 @@ import { MdBlockFlipped } from "react-icons/md";
 import { calender_status } from "../__utils/constant";
 import { calenderCellBgColorByStatus } from "../__utils/constant";
 import { getAllSlotOfCalender } from "../__utils/helper";
+import { CgCloseO } from "react-icons/cg";
 
 const getRequiredCalenderByDate = (
   calenderData: TCalender[],
@@ -57,11 +58,12 @@ const dateCellRender = (params: TdateCellRender) => {
   if (isPastDate(new Date(value.toISOString())) && !required_calender) {
     return (
       <div
-        className={`group w-full h-full ${calenderCellBgColorByStatus["Default"]} flex items-center justify-center relative overflow-hidden`}
+        className={`group w-full h-full ${calenderCellBgColorByStatus["Default"]} flex flex-col items-center justify-center relative overflow-hidden h-full w-full bg-[CDCDCE]`}
       >
         <MdBlockFlipped
-          style={{ width: "100%", height: "100%", color: "#dbdbdb" }}
+          size={25} className="text-white"
         />
+        <p className="text-md font-normal text-center text-white">Not Opened</p>
       </div>
     );
   }
@@ -75,30 +77,25 @@ const dateCellRender = (params: TdateCellRender) => {
         ]
       } flex items-center justify-center relative overflow-hidden`}
     >
-      <div className="text-center">
-        {!required_calender ? (
-          <div className="text-center">
-            <p className="text-md font-normal transform -rotate-45">
-              Not Scheduled
-            </p>
-          </div>
-        ) : (
-          <>
-            {required_calender.status === calender_status.open && (
-              <div>
-                <h2 className="text-xl font-semibold">
+      <div className="flex flex-col justify-center items-center bg-[#aef2c0] w-full h-full">
+       
+        
+            {required_calender?.status === calender_status.open && (
+              <div className="flex flex-col justify-center items-center bg-[#fffaeb] w-full h-full">
+                <h2 className="text-xl font-semibold text-center">
                   {getAllSlotOfCalender(required_calender)}
                 </h2>
-                <p className="text-md font-normal">Slots Open</p>
+                <p className="text-md font-normal text-center">Slots Open</p>
               </div>
             )}
-            {required_calender.status === calender_status.close && (
-              <div>
-                <p className="text-md font-normal">Closed</p>
+            {required_calender?.status === calender_status.close && (
+              <div className="flex flex-col justify-center items-center bg-[#eba78a] w-full h-full"> 
+              <CgCloseO size={25} className="text-white"/>
+                <p className="text-md font-normal text-center text-white">Closed</p>
               </div>
             )}
-          </>
-        )}
+        
+      
       </div>
       <button
         onClick={handleClick}

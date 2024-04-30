@@ -54,7 +54,7 @@ const SideBar = (props: Props) => {
         {!props.collapsed && (
           <div>
             <Title level={5} style={{ color: "white", textTransform: "capitalize", marginBottom: 0 }}>Hello {user?.fullName?.split(" ")[0]}</Title>
-            <Text style={{ color: "#CDCDCE" }}>{user?.role || "-"}</Text>
+            <Text className="capitalize" style={{ color: "#CDCDCE" }}>{user?.role || "-"}</Text>
           </div>
         )}
       </Space>
@@ -63,7 +63,7 @@ const SideBar = (props: Props) => {
         <SideBarMenus />
       </div>
 
-      <div className="w-full absolute bottom-0 ">
+      <div className="w-[150px] lg:w-[200px]  absolute bottom-6 left-1/2 translate-x-[-50%] border-t pt-10">
         <Logout />
       </div>
     </Sider>

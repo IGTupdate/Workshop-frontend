@@ -2,8 +2,8 @@
 
 import React, { useEffect } from "react";
 import type { Dayjs } from "dayjs";
-import { Calendar } from "antd";
-import type { CalendarProps } from "antd";
+import { Badge, Calendar } from "antd";
+import type { BadgeProps, CalendarProps } from "antd";
 import { TCalender } from "@/app/types/calender";
 import dateCellRender from "./dateCellRender";
 import monthCellRender from "./monthCellRender";
@@ -40,6 +40,8 @@ const CalenderContainer = (props: Props) => {
   };
 
   // which cell to render monthly or daily
+
+
   const cellRender: CalendarProps<Dayjs>["cellRender"] = (current, info) => {
     if (info.type === "date")
       return dateCellRender({
@@ -56,7 +58,9 @@ const CalenderContainer = (props: Props) => {
   return (
     <div>
       {calenderLoading ? (
-        <Loader />
+        <div className="flex justify-center items-center h-screen w-full">
+          <Loader />
+        </div>
       ) : (
         <div>
           <Calendar cellRender={cellRender} />
