@@ -72,11 +72,11 @@ const AppointmentpageContainer = (props: Props) => {
 
   const handleRangeSelect = (value: any) => {
     if (!value) return;
-    console.log(value);
+    // console.log(value);
     const startDate = value.length > 0 ? dayjs(value[0]).format('YYYY-MM-DDTHH:mm:ss.SSS') : new Date().toISOString()
     const endDate = value.length > 1 ? dayjs(value[1]).format('YYYY-MM-DDTHH:mm:ss.SSS') : new Date().toISOString();
 
-    console.log(startDate, endDate);
+    // console.log(startDate, endDate);
 
     let querystring = createQueryString("startDate", startDate);
     querystring = createQueryString("endDate", endDate, querystring);
@@ -92,11 +92,15 @@ const AppointmentpageContainer = (props: Props) => {
       ) : (
         <div>
           <div className="mb-4 flex justify-between">
-            <RangePicker
-              onChange={handleRangeSelect}
-              defaultValue={(searchParams.get("startDate") && searchParams.get("endDate")) ?
-                [dayjs(searchParams.get("startDate")), dayjs(searchParams.get("endDate"))] :
-                [dayjs(new Date()), dayjs(new Date())]} />
+            {
+              (searchParams.get("startDate") && searchParams.get("endDate")) ? <RangePicker
+                onChange={handleRangeSelect}
+                defaultValue={[dayjs(searchParams.get("startDate")), dayjs(searchParams.get("endDate"))]}
+              />
+                : <RangePicker
+                  onChange={handleRangeSelect}
+                />
+            }
             <div>
               <Button type="link" onClick={handleClearFilter}>
                 Clear Filter

@@ -59,7 +59,7 @@ export const appointmentEndpoints = {
   GET_APPOINTMENT_BY_CALENDAR: appointmentUrl(APPOINTMENT, "/get-by-calendar"),
   GET_APPOINTMENT_BY_APPOINTMENT_ID: appointmentUrl(APPOINTMENT, "/get"),
   GET_ALL_APPOINTMENT: appointmentUrl(APPOINTMENT, "/get-all"),
-  GET_PAGE_APPOINTMENT :  appointmentUrl(APPOINTMENT, "/get-page"),
+  GET_PAGE_APPOINTMENT: appointmentUrl(APPOINTMENT, "/get-page"),
   GET_APPOINTMENT_BOOK_INIT_DATA: appointmentUrl(APPOINTMENT, "/book/init"),
   GET_CUSTOMER_INIT_DATA: appointmentUrl(APPOINTMENT, "/get-customer/init"),
   APPOINTMENT_BOOK: appointmentUrl(APPOINTMENT, "/book"),
@@ -88,7 +88,7 @@ export const workOrderEndpoints = {
   GET_EMPLOYEE_WORK_STATUS: workOrderUrl("/employee/status"),
   CREATE_WORK_ORDER: workOrderUrl("/workorder/create"),
   GET_ALL_WORK_ORDER: workOrderUrl("/workorder/get-all"),
-  GET_PAGE_WORK_ORDER:  workOrderUrl("/workorder/get-page"),
+  GET_PAGE_WORK_ORDER: workOrderUrl("/workorder/get-page"),
   RAMP_CREATE_API: workOrderUrl("/create"),
   GET_ALL_RAMP_API: workOrderUrl(RAMP, "/get"),
   GET_ALL_RAMP_STATUS_API: workOrderUrl(RAMP, "/get/status"),
@@ -96,6 +96,8 @@ export const workOrderEndpoints = {
   PREPARE_WORK_ORDER: workOrderUrl(WORKORDER, "/prepare"),
   ASSIGN_MECHANIC_WORKORDER: workOrderUrl(WORKORDER, "/assign_mechanics"),
   REMOVE_MECHANIC_WORKORDER: workOrderUrl(WORKORDER, "/remove_mechanics"),
+  REQUEST_ADDITIONAL_WORK: workOrderUrl(WORKORDER, "/additional_work_request/create"),
+  GET_ADDITIONAL_WORK : workOrderUrl(WORKORDER, "/additional_work_request/get"),
 };
 
 

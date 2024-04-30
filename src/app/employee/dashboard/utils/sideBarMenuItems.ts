@@ -25,17 +25,17 @@ export const sideBarMenuItems: TsideBarMenuItems[] = [
         label: 'Work Order',
         pathname: "/employee/dashboard/workorder"
     },
-    {
-        key: '4',
-        label: 'Work Order',
-        children: [
-            {
-                key: '5',
-                label: 'Create',
-                pathname: "/employee/dashboard/workorder/have",
-            }
-        ]
-    },
+    // {
+    //     key: '4',
+    //     label: 'Work Order',
+    //     children: [
+    //         {
+    //             key: '5',
+    //             label: 'Create',
+    //             pathname: "/employee/dashboard/workorder/have",
+    //         }
+    //     ]
+    // },
     {
         key: '6',
         label: "Slot Management",

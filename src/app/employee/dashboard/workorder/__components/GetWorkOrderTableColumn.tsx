@@ -11,6 +11,7 @@ import {
     TableProps,
     Typography,
 } from "antd";
+// import { workOrderStatusText } from "../__utils/workOrderStatus";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FilterDropdownProps } from "antd/es/table/interface";
@@ -66,7 +67,7 @@ export function GetWorkOrderTableColumn() {
                 render: (orderNumber) => {
                     return (
                         <div>
-                            <Title level={5}>{orderNumber}</Title>
+                            {/* <Title level={5}>{orderNumber}</Title> */}
                             <Text>{orderNumber}</Text>
                         </div>
                     );
@@ -80,22 +81,22 @@ export function GetWorkOrderTableColumn() {
                     "registeration_number"
                 ),
             },
-            // {
-            //     title: "Date & Time",
-            //     dataIndex: "date_time",
-            //     key: "date_time",
-            //     defaultSortOrder: "descend",
-            //     sorter: (a, b) => a.date_time.getTime() - b.date_time.getTime(),
-            //     render: (value) => {
-            //         return (
-            //             <div>
-            //                 <Text>{value.toLocaleDateString()}</Text>
-            //                 <br />
-            //                 <Text>{new Date(value).toLocaleTimeString()}</Text>
-            //             </div>
-            //         );
-            //     },
-            // },
+            {
+                title: "Created At",
+                dataIndex: "createdAt",
+                key: "createdAt",
+                defaultSortOrder: "descend",
+                // sorter: (a, b) => a.date_time.getTime() - b.date_time.getTime(),
+                render: (value) => {
+                    return (
+                        <div>
+                            <Text>{value.toLocaleDateString()}</Text>
+                            <br />
+                            <Text>{new Date(value).toLocaleTimeString()}</Text>
+                        </div>
+                    );
+                },
+            },
             {
                 title: "Status",
                 dataIndex: "status",

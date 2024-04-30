@@ -20,13 +20,14 @@ const WorkOrderTableContainer = (props: Props) => {
         setWorkOrderTableData((prv) => {
             return props.workOrderData.map((el) => {
                 return {
-                    key:el._id,
+                    key: el._id,
                     orderNumber: el.orderNumber,
                     vehicle_registeration_number: (el.appointmentId && typeof el.appointmentId !== "string" ?
                         (typeof el.appointmentId.vehicle_id !== "string" ?
                             el.appointmentId.vehicle_id.registeration_number : "") : "") || "",
                     status: el.status,
-                    _id: el._id
+                    _id: el._id,
+                    createdAt : new Date(el.createdAt)
                 }
             })
         })

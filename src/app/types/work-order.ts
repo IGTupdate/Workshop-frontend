@@ -5,7 +5,8 @@ import { TServicePlans } from "./service";
 export type TWorkOrderStatus =
     | "Pending"
     | "Processing"
-    | "Completed";
+    | "Completed"
+    | "Assigned";
 
 export type TTask = {
     title: string;
@@ -36,7 +37,7 @@ export type TPartRequested = {
     orderTime: Date;
     received: boolean;
     quantity: number;
-    _id?: string;
+    _id: string;
 };
 
 
@@ -46,7 +47,7 @@ export type TWorkOrder = {
     appointmentId: string | TAppointment;
     advisorId: string | TEmployee;
     mechanicId: string[] | TEmployee[];
-    status: string;
+    status: TWorkOrderStatus;
     estimatedCost?: number;
     estimatedTimeOfCompletion?: string;
     serviceType?: string;
@@ -60,6 +61,8 @@ export type TWorkOrder = {
     odometerReading?: number;
     fuelQuantity?: number;
     observations: string[];
+    createdAt: string,
+    updatedAt: string
 };
 
 
@@ -72,5 +75,31 @@ export type TWorkOrderDataTable = {
     orderNumber: string,
     status: string,
     vehicle_registeration_number: string,
-    _id: string
+    _id: string,
+    createdAt: Date,
 }
+
+
+export type TAddionalTaskRequest = {
+    _id: string;
+    title: string;
+    description?: string;
+    critical?: boolean;
+    approved: boolean;
+    partsRequired: {
+        partId?: string;
+        partName: string;
+        price?: string;
+    }[];
+};
+
+export type TAdditonalWorkRequest = {
+    workOrderId: string;
+    description?: string;
+    tasks: TAddionalTaskRequest[];
+    estimatedCost: number;
+    status: "Pending" | "Processed";
+    requestby: string;
+    createdAt: string,
+    updatedAt: string
+};

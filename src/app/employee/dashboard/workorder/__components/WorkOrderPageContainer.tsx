@@ -8,6 +8,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import WorkOrderTableContainer from "./WorkOrderTableContainer";
 import { getPageWorkOrder } from "@/app/services/operations/workorder/workorder";
 import { Button, DatePicker } from "antd";
+import dayjs from "dayjs";
 const { RangePicker } = DatePicker;
 
 type Props = {};
@@ -43,12 +44,12 @@ const WorkOrderPageContainer = (props: Props) => {
 
   // create query string
   const createQueryString = useCallback(
-    (name: string, value?: string) => {
+    (name: string, value?: string, url: string = searchParams.toString()) => {
       if (!value || value === "")
-        return removeQueryParams(searchParams.toString(), name);
-      else return setQueryParams(searchParams.toString(), name, value);
+        return removeQueryParams(url, name);
+      else return setQueryParams(url, name, value);
     },
-    [searchParams]
+    [searchParams],
   );
 
   // get current page
@@ -66,6 +67,19 @@ const WorkOrderPageContainer = (props: Props) => {
     router.push(pathname);
   };
 
+  const handleRangeSelect = (value: any) => {
+    if (!value) return;
+    // console.log(value);
+    const startDate = value.length > 0 ? dayjs(value[0]).format('YYYY-MM-DDTHH:mm:ss.SSS') : new Date().toISOString()
+    const endDate = value.length > 1 ? dayjs(value[1]).format('YYYY-MM-DDTHH:mm:ss.SSS') : new Date().toISOString();
+
+    // console.log(startDate, endDate);
+
+    let querystring = createQueryString("startDate", startDate);
+    querystring = createQueryString("endDate", endDate, querystring);
+    router.push(`${pathname}?${querystring}`);
+  }
+
   return (
     <div>
       {workOrderLoading ? (
@@ -73,7 +87,15 @@ const WorkOrderPageContainer = (props: Props) => {
       ) : (
         <div>
           <div className="mb-4 flex justify-between">
-            <RangePicker />
+            {
+              (searchParams.get("startDate") && searchParams.get("endDate")) ? <RangePicker
+                onChange={handleRangeSelect}
+                defaultValue={[dayjs(searchParams.get("startDate")), dayjs(searchParams.get("endDate"))]}
+              />
+                : <RangePicker
+                  onChange={handleRangeSelect}
+                />
+            }
             <div>
               <Button type="link" onClick={handleClearFilter}>
                 Clear Filter

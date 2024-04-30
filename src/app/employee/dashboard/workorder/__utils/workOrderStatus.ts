@@ -2,6 +2,8 @@
 import { TWorkOrderStatus } from "@/app/types/work-order";
 import { ReactNode } from "react";
 import { Tag } from "antd";
+import { TAppointmentStatus } from "@/app/types/appointment";
+
 
 
 export const workOrderStatus: TWorkOrderStatus[] = [
@@ -24,5 +26,13 @@ export const getWorkOrderStatus = () => {
 //     Processing: <></>,
 //     Completed: <></>,
 // }
+
+// export const workOrderStatusText: Record<TWorkOrderStatus, ReactNode> = {
+//     Pending: <h2></h2>,
+//     Completed: <Tag></Tag>,
+//     Processing: <></>,
+//     Assigned: <></>,
+// };
+
 
 

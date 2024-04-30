@@ -30,7 +30,7 @@ const InputField = (props: Props) => {
               type={props.type}
               {...field}
               placeholder={props.placeholder}
-              className="uppercase"
+            // className="uppercase"
             />
           );
         }}

@@ -2,10 +2,10 @@ import { TRamp } from "./ramp"
 
 export type TEmployee = {
     userType: "employee",
-    _id:string,
+    _id: string,
     fullName: string,
-    email:string,
-    roleId:string,
+    email: string,
+    roleId: string,
 }
 
 export type TEmployeeWorkStatus = {
@@ -17,7 +17,7 @@ export type TEmployeeWorkStatus = {
     assigned_workOrder: {
         _id: string,
         ramdId?: TRamp | string,
-        orderNumber:string
+        orderNumber: string
         estimatedTimeOfCompletion?: string
     }[]
 }

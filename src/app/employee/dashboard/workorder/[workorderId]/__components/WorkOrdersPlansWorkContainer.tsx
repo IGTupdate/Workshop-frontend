@@ -3,7 +3,8 @@ import ServicePlanDetailContainer from './ServicePlanDetailContainer'
 import { Typography } from 'antd'
 import { TServicePlans } from '@/app/types/service'
 import { TTask } from '@/app/types/work-order'
-const { Title } = Typography
+import AdditionalWorkRequest from './AdditionalWorkRequest'
+const { Title, Text } = Typography
 
 type Props = {
     servicePlanId: string[] | TServicePlans[]
@@ -15,25 +16,50 @@ const WorkOrdersPlansWorkContainer = (props: Props) => {
         <div>
             <Title level={5}>Work to be done</Title>
             <div>
-                <h2 className='mb-2'>Service Plans Opted</h2>
-                <div className='grid md:grid-cols-2 grid-cols-1 gap-4'>
+
+                {/* service plans opted */}
+                <div className='mt-4'>
+                    <div className='flex justify-between items-center'>
+                        <Title level={5}>Service Plan Opted</Title>
+                    </div>
                     {
-                        props.servicePlanId.map((plan, index)=>{
-                            return <ServicePlanDetailContainer key={index} servicePlan={plan}/>
-                        })
+                        props.servicePlanId && props.servicePlanId.length > 0 ?
+                            <div>
+
+                                <div className='grid md:grid-cols-2 grid-cols-1 gap-4'>
+                                    {
+                                        props.servicePlanId.map((plan, index) => {
+                                            return <ServicePlanDetailContainer key={index} servicePlan={plan} />
+                                        })
+                                    }
+                                </div>
+                            </div> : <div>No plans Opted</div>
                     }
                 </div>
 
-                <h2 className='my-2'>More Works</h2>
-                <ul>
+                {/* tasks */}
+                <div className='mt-4'>
+                    <div className='flex justify-between items-center'>
+                        <Title level={5}>Tasks</Title>
+                    </div>
                     {
-                        props.tasks.map((el, index) => {
-                            return <li key={index} className='relative flex items-center gap-4 ps-6 before:content=[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:h-[10px] before:w-[10px] before:rounded-full before:bg-yellow-300'>
-                                <p>{el.title}</p>
-                            </li>
-                        })
+                        props.tasks && props.tasks.length > 0 ?
+                            <ul>
+                                {
+                                    props.tasks.map((el, index) => {
+                                        return <li key={index} className='relative flex items-center gap-4 ps-6 before:content=[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:h-[10px] before:w-[10px] before:rounded-full before:bg-yellow-300'>
+                                            <p>{el.title}</p>
+                                        </li>
+                                    })
+                                }
+                            </ul>
+                            : <div>No tasks found</div>
                     }
-                </ul>
+                </div>
+
+                <div className='mt-4'>
+                    <AdditionalWorkRequest />
+                </div>
             </div>
         </div>
     )

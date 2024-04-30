@@ -12,7 +12,7 @@ type Props = {
     setValue: any,
     defaultValue?: string[] | string
     options: {
-        value: string,
+        value: any,
         label: string
     }[]
 }

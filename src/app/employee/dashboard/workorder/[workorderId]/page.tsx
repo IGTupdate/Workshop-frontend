@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react'
-import { Button, Divider, Typography } from 'antd'
-import VehicleInspectionImagesContainer from './__components/VehicleInspectionImagesContainer';
+import { Button, Divider, Tag, Typography } from 'antd'
 import VehicleFuelDetailContainer from './__components/VehicleFuelDetailContainer';
 import { TWorkOrder } from '@/app/types/work-order';
 import WorkOrderCustomerDetails from './__components/WorkOrderCustomerDetails';
@@ -11,10 +10,13 @@ import WorkOrdersPlansWorkContainer from './__components/WorkOrdersPlansWorkCont
 import { getWorkOrderById } from '@/app/services/operations/workorder/workorder';
 import Loader from '@/app/components/Loader';
 import InventoryOrderContainer from './__components/InventoryOrderContainer';
-import ManageMechanicDrawer from './__components/ManageMechanicDrawer';
 import { useRouter } from 'next/navigation';
+import WorkOrderMechanicDetailContainer from './__components/WorkOrderMechanicDetailContainer';
+import WorkOrderAdvisorDetails from './__components/WorkOrderAdvisorDetails';
+import WorkOrderServiceDetailContainer from './__components/WorkOrderServiceDetailContainer';
 
-const { Text } = Typography;
+
+const { Text, Title } = Typography;
 
 type Props = {
   params: {
@@ -65,38 +67,45 @@ const Page = (props: Props) => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">WorkOrders - #{workOrder.orderNumber}</h2>
               <div>
-                
-                <Button className='bg-orange-500 text-white'>Assign Ramp</Button>
-                {
-                  workOrder.status === "Pending" && <Button type='primary' onClick={() => {
-                    router.push(`/employee/dashboard/workorder/${props.params.workorderId}/prepare`)
-                  }}>Prepare</Button>
-                }
-                <ManageMechanicDrawer
-                  assigned_mechanics={workOrder.mechanicId}
-                  handleUpdateWorkOrderData={handleUpdateWorkOrderData} />
-                {/* <Button className='bg-red-500 text-white'>Assign Ramp</Button> */}
-
+                <Tag> {workOrder.status}</Tag>
               </div>
             </div>
 
             <div>
               <WorkOrderCustomerDetails
-              // customer={workOrder.appointmentId}
-              // vehicle={""}
+                vehicle={(typeof workOrder.appointmentId !== "string") ? workOrder.appointmentId.vehicle_id : ""}
+                customer={(typeof workOrder.appointmentId !== "string") ? workOrder.appointmentId.customer_id : ""}
               />
               <Divider />
-              <div className=' mt-4'>
-                <WorkOrdersPlansWorkContainer
-                  servicePlanId={workOrder.servicePlanId || []}
-                  tasks={workOrder.tasks} />
-                <div className='grid grid-cols-2 gap-4'>
-                  <WorkOrderObservations observations={workOrder.observations} />
-                  <VehicleFuelDetailContainer />
+              <WorkOrderAdvisorDetails advisor={workOrder.advisorId} />
+              <Divider />
+              <WorkOrderMechanicDetailContainer
+                assigned_mechanics={workOrder.mechanicId}
+                handleUpdateWorkOrderData={handleUpdateWorkOrderData} />
+              <Divider />
+
+              {
+                workOrder.status === "Pending" ? <div>
+                  <Title level={5}>Prepare WorkOrder</Title>
+                  <Button type='primary' onClick={() => {
+                    router.push(`/employee/dashboard/workorder/${props.params.workorderId}/prepare`)
+                  }}>Prepare</Button>
+                </div> : <div>
+                  <WorkOrderServiceDetailContainer workOrder={workOrder} />
+                  <Divider />
+                  <WorkOrdersPlansWorkContainer
+                    servicePlanId={workOrder.servicePlanId || []}
+                    tasks={workOrder.tasks} />
+                  <Divider />
+                  <div className='grid grid-cols-2 gap-4'>
+                    <WorkOrderObservations observations={workOrder.observations} />
+                    <VehicleFuelDetailContainer />
+                  </div>
+                  <Divider />
+                  <InventoryOrderContainer parts={workOrder.partsRequested} />
                 </div>
-                <InventoryOrderContainer />
-                <VehicleInspectionImagesContainer />
-              </div>
+              }
+              {/* <VehicleInspectionImagesContainer /> */}
             </div>
           </div> : <Text>Work Order not found</Text>
         )
