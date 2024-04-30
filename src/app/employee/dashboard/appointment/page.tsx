@@ -5,8 +5,8 @@ import Link from "next/link";
 type Props = {};
 const page = async (props: Props) => {
   return (
-    <div className="p-4 bg-white rounded-md">
-      <div className="flex justify-between items-center mb-8">
+    <div className="relative">
+      <div className="flex justify-between items-center mb-8 p-4 bg-white rounded-xl">
         <h2 className="text-xl font-semibold">Manage Appointments</h2>
         <Link
           href={`/employee/dashboard/appointment/book`}

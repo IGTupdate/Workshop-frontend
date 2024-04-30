@@ -24,8 +24,10 @@ import {
   TAppointmentDataTable,
   TAppointmentStatus,
 } from "@/app/types/appointment";
-import { FaEye } from "react-icons/fa";
+import { IoIosEye } from "react-icons/io";
+
 import { MdAddChart } from "react-icons/md";
+import dayjs from "dayjs";
 
 const { Title, Text } = Typography;
 
@@ -66,18 +68,20 @@ export function GetAppointmentDataTableColumn() {
   const column_appointment_data_table: TableProps<TAppointmentDataTable>["columns"] =
     [
       {
-        title: "Customer",
-        dataIndex: "customer",
-        key: "customer",
+        title: "Name",
+        dataIndex: "name",
+        key: "name",
+        ...GetColumnTextSearchProps<TAppointmentDataTable>("name"),
+        render: (name) => {
+          return <p className="capitalize font-semibold">{name}</p>
+        }
+
+      },
+      {
+        title: "Phone",
+        dataIndex: "phone",
+        key: "phone",
         ...GetColumnTextSearchProps<TAppointmentDataTable>("phone"),
-        render: (customer) => {
-          return (
-            <div>
-              <Title level={5}>{customer.name}</Title>
-              <Text>{customer.phone}</Text>
-            </div>
-          );
-        },
       },
       {
         title: "Vehicle Reg No.",
@@ -86,6 +90,10 @@ export function GetAppointmentDataTableColumn() {
         ...GetColumnTextSearchProps<TAppointmentDataTable>(
           "registeration_number"
         ),
+
+        render: (register) => {
+          return <p className="uppercase">{register}</p>
+        }
       },
       {
         title: "Date & Time",
@@ -95,10 +103,10 @@ export function GetAppointmentDataTableColumn() {
         // sorter: (a, b) => a.date_time.getTime() - b.date_time.getTime(),
         render: (value) => {
           return (
-            <div>
-              <Text>{value.toLocaleDateString()}</Text>
-              <br />
-              <Text>{new Date(value).toLocaleTimeString()}</Text>
+            <div className="flex flex-wrap items-center gap-3">
+              <Text>{dayjs(value).format('DD/MMM/YYYY')}</Text>
+
+              <Text>{dayjs(value).format('h:mm A')}</Text>
             </div>
           );
         },
@@ -161,27 +169,25 @@ export function GetAppointmentDataTableColumn() {
         key: "action",
         render: (_, { _id, status }) => {
           return (
-            <Flex wrap="wrap" gap="small">
+            <Flex wrap="wrap" gap="small" align="center">
               {/* view appointments */}
-              <Button
+              <div
                 onClick={() => {
                   router.push("/employee/dashboard/appointment/" + _id)
                 }}
-                style={{ border: "1px #1890ff solid", color: "#1890ff" }}
-                size="middle"
-                icon={<FaEye size={"22px"} title="View Appointments" />}
-              ></Button>
+                style={{ color: "#1890ff" }}
+                className="cursor-pointer"
+              ><IoIosEye size={"22px"} title="View Appointments" /></div>
 
               {/* create workorder */}
               {
-                status === appointmentStatus[0] && <Button
+                status === appointmentStatus[0] && <div
                   onClick={() => {
                     router.push("/employee/dashboard/workorder/create?appointmentId=" + _id)
                   }}
-                  style={{ border: "1px #24ae55 solid", color: "#24ae55" }}
-                  size="middle"
-                  icon={<MdAddChart size={"22px"} title="Create WorkOrder" />}
-                ></Button>
+                  style={{ color: "#24ae55" }}
+                  className="cursor-pointer"
+                ><MdAddChart size={"22px"} title="Create WorkOrder" /></div>
               }
 
             </Flex>

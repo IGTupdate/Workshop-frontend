@@ -56,17 +56,19 @@ const EmployementAvailabilityContainer = (props: Props) => {
         }
     }
 
+
     return (
         <div>
-            <div className='mt-4'>
+            <div className='mt-8'>
                 <Title level={5}>Select Advisor for the work order</Title>
             </div>
 
             {
-                loading ? <CardSkeleton loading={loading} /> : <div className='grid grid-cols-3 justify-between'>
+                loading ? <CardSkeleton loading={loading} /> : <div className='flex flex-wrap items-center gap-4'>
                     {
                         advisors.map((advisor) => {
                             return <Card key={advisor._id}
+                            className='rounded-xl'
                                 loading={loading}
                                 style={{ width: 300, marginTop: 16 }}
                                 actions={[

@@ -22,10 +22,11 @@ const AppointmentDetails: React.FC<Props> = ({
 }) => {
   const { isSmallDevice } = useAppSelector((state) => state.device);
   const pathname = usePathname();
+  const {role} = useAppSelector(state=>state.auth.authData)
 
   return (
     <>
-      <div className="bg-white shadow-xl rounded-xl overflow-hidden mb-8">
+      <div className="bg-white shadow-xl rounded-xl overflow-hidden">
         <Descriptions
           title={`Appointment Id: ${appointmentData._id}`}
           column={isSmallDevice === 1 ? 1 : 2}
@@ -63,6 +64,7 @@ const AppointmentDetails: React.FC<Props> = ({
           <Descriptions.Item label="Vehicle Model">
             {appointmentData.vehicle_id.vehicle_model}
           </Descriptions.Item>
+
           <Descriptions.Item label="Status">
             <Tag
               color={appointmentData.status === "Cancelled" ? "red" : "green"}
@@ -70,12 +72,19 @@ const AppointmentDetails: React.FC<Props> = ({
               {appointmentData.status}
             </Tag>
           </Descriptions.Item>
+          <Descriptions.Item label="Remarks">
+            <div>
+              {appointmentData.service_description.map((item: string, i: number) => (
+                <p key={i}>{item}</p>
+              ))}
+            </div>
+          </Descriptions.Item>
         </Descriptions>
       </div>
 
-      {pathname.split("/")[3] !== "reschedule" && (
+      {role==="customer"? pathname.split("/")[3] !== "reschedule" && (
         <Notifications show={"all"} notificationData={notificationData} />
-      )}
+      ):''}
     </>
   );
 };

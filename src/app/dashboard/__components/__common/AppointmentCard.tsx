@@ -67,7 +67,7 @@ const AppointmentCard: React.FC<AppointmentProps> = ({ appointmentData }) => {
       )}
 
       <SwiperSlide>
-        <div className="bg-gradient-to-r from-[#FFE301] to-[#D7C000] rounded-2xl p-4  min-h-[121px]">
+        <div className="bg-gradient-to-r from-[#FFE301] to-[#D7C000] rounded-2xl p-4  min-h-[121px] shadow-3d">
           <h3 className="font-bold text-2xl text-white text-center">
             {Object.keys(appointmentData).length > 0
               ? "Book your appointment"
@@ -75,7 +75,7 @@ const AppointmentCard: React.FC<AppointmentProps> = ({ appointmentData }) => {
           </h3>
           <div className="flex justify-center items-center mt-4">
             <Link href={"/dashboard/appointment/book"}>
-              <button className="bg-black rounded-xl p-2 px-4 text-white hover:shadow-xl">
+              <button className="bg-slate-950 uppercase relative border border-transparent text-base border-3 hover:border-slate-900 rounded-lg m-0 hover:bg-transparent hover:shadow-xl py-1 px-4 text-white">
                 Book Appointment
               </button>
             </Link>

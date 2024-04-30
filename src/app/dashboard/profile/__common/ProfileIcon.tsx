@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { LiaEdit } from "react-icons/lia";
-import { TiArrowBackOutline } from "react-icons/ti";
+import { IoMdArrowBack } from "react-icons/io";
 
 type Props = {
   edit: boolean,
@@ -24,7 +24,7 @@ const ProfileIcon: React.FC<Props> = ({ edit, setEdit }: Props) => {
       </div>
       <div className="flex justify-end items-center w-full">
         {
-          edit ? <TiArrowBackOutline className='text-xl font-bold cursor-pointer' onClick={() => setEdit(false)} />
+          edit ? <IoMdArrowBack className='text-xl font-bold cursor-pointer' onClick={() => setEdit(false)} />
             : <LiaEdit className='text-xl font-bold cursor-pointer' onClick={() => setEdit(true)} />
 
         }

@@ -18,7 +18,7 @@ export type TAppointment = {
   slot_id: string | TSlot;
   extensions: any[];
   service_plans: string[] | [];
-  service_description: string[] | []
+  service_description: string[] | [];
   status: TAppointmentStatus;
   bookedBy: {
     role_id: string;
@@ -30,11 +30,11 @@ export type TAppointment = {
 };
 
 export type TAppointmentDataTable = {
-  _id: string
-  customer: {
-    name: string;
-    phone: string;
-  };
+  _id: string;
+
+  name: string;
+  phone: string;
+
   registeration_number: string;
   date_time: Date;
   status: TAppointmentStatus;
@@ -48,10 +48,10 @@ export type TAppointmentBook = {
   customer_id: string,
   service_plans?: string[] | [],
   service_description?: string[] | [],
-  showServicePlans?: boolean
-}
+  showServicePlans?: boolean;
+};
 
 export type TAppointmentReschedule = {
   slot_id: string,
-  calender_id: string
-}
+  calender_id: string;
+};

@@ -91,3 +91,10 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
 }
+
+
+.swiper-slide {
+  padding: 1em !important;
+  padding-bottom: 2em !important;
+  padding-top: 0em !important;
+}

@@ -27,7 +27,7 @@ const AppointmentContent: React.FC<Props> = ({ item }) => {
 
     return (
         <>
-            <div className='bg-gradient-to-r from-[#FFE301] to-[#D7C000] rounded-2xl p-4 min-h-[121px]'>
+            <div className='bg-gradient-to-r from-[#FFE301] to-[#D7C000] rounded-2xl p-4 min-h-[121px] shadow-3d'>
                 <div className="flex justify-between items-center">
                     <div>
                         <h4 className='text-white text-2xl font-bold'>{item.status}</h4>

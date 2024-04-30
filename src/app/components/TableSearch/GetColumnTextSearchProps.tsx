@@ -128,19 +128,6 @@ function GetColumnTextSearchProps<T>(dataIndex: DataIndex): TableColumnType<T> {
     filterIcon: (filtered: boolean) => (
       <SearchOutlined style={{ color: filtered ? "#1677ff" : undefined }} />
     ),
-    // render: (text) => {
-    //   console.log(text)
-    //   return searchedColumn === dataIndex ? (
-    //     <Highlighter
-    //       highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-    //       searchWords={[searchText]}
-    //       autoEscape
-    //       textToHighlight={text ? text.toString() : ""}
-    //     />
-    //   ) : (
-    //     text
-    //   );
-    // },
   };
 }
 

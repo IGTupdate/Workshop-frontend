@@ -38,7 +38,7 @@ const VehicleDetailContainer = (props: Props) => {
     if (vehicleLoading) {
       dispatch(getVehicleByCustomerId());
     }
-  }, [vehicleLoading]);
+  }, [vehicleLoading,vehicleId]);
 
   useEffect(() => {
     if (vehicleId !== NEW_VEHICLE.value) {
@@ -91,6 +91,7 @@ const VehicleDetailContainer = (props: Props) => {
             <VehicleCreateContainer
               setVehicleId={setVehicleId}
               customer_id={customerId}
+              vehicle={vehicleData?.length}
               customer={true}
             />
           ) : (
