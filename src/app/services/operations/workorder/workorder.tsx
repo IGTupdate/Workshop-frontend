@@ -2,11 +2,14 @@ import { TWorkOrderAssign, TworkOrderCreate, TworkorderPrepare } from "@/app/val
 import { apiConnector } from "../../apiConnector";
 import { workOrderEndpoints } from "../../apis";
 import { TWorkOrder } from "@/app/types/work-order";
+import { TRamp } from "@/app/types/ramp";
+import toast from "react-hot-toast";
 
 const { GET_EMPLOYEE_WORK_STATUS,
     GET_ALL_RAMP_API,
     GET_ALL_RAMP_STATUS_API,
     RAMP_CREATE_API,
+    RAMP_UPDATE_API,
     CREATE_WORK_ORDER,
     GET_ALL_WORK_ORDER,
     GET_WORK_ORDER_BY_ID,
@@ -58,19 +61,34 @@ export const getAllRampStatus = async () => {
     }
 }
 
-export const rampCreateApi = async () => {
+export const rampCreateApi = async (data: TRamp) => {
     try {
         const response = await apiConnector({
             method: "POST",
-            url: RAMP_CREATE_API
+            url: RAMP_CREATE_API,
+            bodyData: data
         })
-
+        if(response.data.success) toast.success("RAMP CREATED SUCCESSFULLY")
         return response.data.data;
 
     } catch (err) {
     }
-
 }
+
+export const rampUpdateApi = async (data: TRamp) => {
+    try {
+        const response = await apiConnector({
+            method: "POST",
+            url: RAMP_UPDATE_API,
+            bodyData: data
+        });
+        if(response.data.success) toast.success("RAMP UPDATED SUCCESSFULLY")
+        return response.data.data;
+    } catch (err) {
+        // Handle errors if needed
+    }
+};
+
 export const createWorkOrder = async (data: TworkOrderCreate) => {
     try {
         console.log("data ,", data)
