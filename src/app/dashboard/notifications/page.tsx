@@ -33,7 +33,7 @@ const Page = () => {
   }, [customerId]);
 
   return (
-    <div className="h-screen pt-20 pb-32 px-4 md:py-0 overflow-auto">
+    <div className="h-screen sm:h-full pt-20 pb-32 px-4 md:py-0 overflow-auto">
       {/* step bar */}
       <StepBar />
 

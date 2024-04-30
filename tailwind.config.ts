@@ -18,6 +18,7 @@ const config: Config = {
     extend: {
       boxShadow: {
         'top': '0px -8px 30px #0000001f',
+        '3d': 'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px'
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

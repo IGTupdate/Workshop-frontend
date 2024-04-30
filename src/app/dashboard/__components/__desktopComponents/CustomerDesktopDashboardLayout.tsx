@@ -41,7 +41,7 @@ const CustomerDashBoardLayout = ({ children }: ChildrenProps) => {
       >
         <HeaderContainer/>
         <Content className={`overflow-auto`}>
-          <div className="p-4 w-[100%]">{children}</div>
+          <div className="p-4 w-full relative">{children}</div>
         </Content>
       </Layout>
     </Layout>

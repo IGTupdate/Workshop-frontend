@@ -236,7 +236,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center min-h-screen">
+        <div className="flex justify-center items-center">
           <Loader />
         </div>
       ) : (
@@ -344,24 +344,29 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                 </div>
               )}
 
-              <div className=" bg-white p-4 my-4">
-                {appointmentBookingConfirmationData.servicePlans?.length > 0 &&
-                  appointmentBookingConfirmationData.servicePlans.map(
-                    (plan, i) => (
-                      <div
-                        key={i}
-                        className="flex justify-between items-center"
-                      >
-                        <p className="font-semibold">{plan.name}</p>
-                        <p className="text-lg font-semibold">$ {plan.price}</p>
-                      </div>
-                    )
-                  )}
-                <div className="border-t flex justify-between items-center mt-4">
-                  <p className="font-bold">Service plans total</p>
-                  <p className="text-lg font-bold">$ {amount}</p>
+              {appointmentBookingConfirmationData.servicePlans?.length > 0 && (
+                <div className=" bg-white p-4 my-4">
+                  {appointmentBookingConfirmationData.servicePlans?.length >
+                    0 &&
+                    appointmentBookingConfirmationData.servicePlans.map(
+                      (plan, i) => (
+                        <div
+                          key={i}
+                          className="flex justify-between items-center"
+                        >
+                          <p className="font-semibold">{plan.name}</p>
+                          <p className="text-lg font-semibold">
+                            $ {plan.price}
+                          </p>
+                        </div>
+                      )
+                    )}
+                  <div className="border-t flex justify-between items-center mt-4">
+                    <p className="font-bold">Service plans total</p>
+                    <p className="text-lg font-bold">$ {amount}</p>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
           <Divider />
@@ -381,7 +386,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                   appointmentBookingConfirmationData.slot_details?.start_time
                     ? new Date(
                         appointmentBookingConfirmationData.slot_details?.start_time
-                      ).toLocaleString()
+                      ).toLocaleString("en-GB")
                     : "-"
                 }
               />
@@ -391,7 +396,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                   appointmentBookingConfirmationData.slot_details?.end_time
                     ? new Date(
                         appointmentBookingConfirmationData.slot_details?.end_time
-                      ).toLocaleString()
+                      ).toLocaleString("en-GB")
                     : "-"
                 }
               />
@@ -399,8 +404,8 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
           </div>
           <Divider />
           <div>
-            <div className="grid grid-cols-2">
-              <div>
+            <div className="flex flex-wrap justify-between items-start gap-2 sm:gap-0 flex-col-reverse sm:flex-row">
+              <div className="w-full sm:w-1/2">
                 <Title level={5}>Remarks</Title>
 
                 {props?.appointmentBookingData?.service_description?.map(
@@ -411,7 +416,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                     >
                       {ele}
                       <button
-                        className="outline-0 rounded-full h-[15px] w-[15px] flex justify-center items-center text-red-500 border border-red-500 text-[10px]"
+                        className="outline-0 rounded-full h-[16px] w-[15px] flex justify-center items-center text-red-500 border border-red-500 text-[10px]"
                         onClick={() => removeRemarks(ele)}
                       >
                         x
@@ -420,6 +425,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                   )
                 )}
               </div>
+              <div className="w-full sm:w-1/2">
               <InputFieldWithButton
                 name="desc"
                 label="Add Description"
@@ -427,6 +433,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                 type="text"
                 handleButtonClick={addRemarks}
               />
+              </div>
             </div>
           </div>
 

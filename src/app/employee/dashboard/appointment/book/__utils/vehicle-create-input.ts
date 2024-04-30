@@ -30,3 +30,12 @@ export const vehicleCreateInputFields = [
         type: "text",
     }
 ];
+
+export const vehicleNumberInputFields = [
+    {
+        name: "registeration_number",
+        label: "Registration number",
+        placeholder: "MP09PD4567",
+        type: "text",
+    },
+];

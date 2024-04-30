@@ -77,7 +77,7 @@ const SlotAvailablityContainer = (props: Props) => {
   };
 
   return loading ? (
-    <div className="flex justify-center items-center min-h-screen sm:min-h-full">
+    <div className="flex justify-center items-center">
       <Loader />
     </div>
   ) : (

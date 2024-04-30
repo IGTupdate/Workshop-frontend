@@ -34,6 +34,10 @@ export default function RootLayout({
                 colorInfo: "#fadb14",
               },
               components: {
+                "Button": {
+                  "colorPrimary": "rgb(250, 219, 20)",
+                  "primaryColor": "rgb(0, 0, 0)"
+                },
                 Menu: {
                   colorBgContainer: "#031c30",
                   colorFillAlter: "#031c30",
@@ -48,7 +52,7 @@ export default function RootLayout({
                 },
                 Table: {
                   headerBg: "#fadb14",
-                  headerColor: "rgba(255, 255, 255, 0.88)",
+                  headerColor: "rgb(0, 0, 0)",
                   rowHoverBg: "rgb(245, 245, 245)",
                 },
                 Descriptions: {
