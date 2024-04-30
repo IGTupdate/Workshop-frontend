@@ -66,13 +66,13 @@ const CreateWorkOrder = (props: Props) => {
         selectedAdvisor={workOrderCreateData.advisorId}
       />
 
-      <div className="w-full flex justify-end mt8">
+      <div className="w-full flex justify-end mt-8">
         <Button
           disabled={loading}
           type="primary"
           onClick={handleCreateWorkOrder}
         >
-          Create{" "}
+          Create
         </Button>
       </div>
     </div>

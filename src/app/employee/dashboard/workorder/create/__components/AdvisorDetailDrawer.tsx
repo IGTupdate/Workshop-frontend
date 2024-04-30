@@ -1,4 +1,5 @@
 import DescriptionItem from '@/app/components/DescriptionItem.tsx'
+import Watermark from '@/app/components/Text/WatermarkText';
 import { TEmployeeWorkStatus } from '@/app/types/employee'
 import { Divider, Drawer, Typography } from 'antd'
 import React, { useState } from 'react'
@@ -52,7 +53,9 @@ const AdvisorDetailDrawer = (props: Props) => {
                                                     </div>
                                                     <Divider />
                                                 </li>
-                                            }) : <>No Assigned Work order found</>
+                                            }) : <div className="relative mt-8">
+                                                <Watermark text='No Assigned Work order found'/>
+                                            </div>
                                     }
                                 </ul>
                             </div>

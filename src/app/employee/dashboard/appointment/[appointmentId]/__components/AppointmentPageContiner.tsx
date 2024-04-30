@@ -41,7 +41,7 @@ const AppointmentPageContiner = (props: Props) => {
   return (
     <div>
       {appointmentLoading ? (
-        <div className="flex justify-center items-center h-full">
+        <div style={{height: 'calc(100vh - 200px)'}} className="flex justify-center items-center w-full">
           <Loader />
         </div>
       ) : appointment ? (

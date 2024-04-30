@@ -52,7 +52,9 @@ const WorkOrderAppointmentContiner = (props: Props) => {
     return (
         <div>
             {
-                loading ? <Loader /> : <div>
+                loading ? <div className="flex justify-center items-center h-full w-full">
+                    <Loader />
+                </div> : <div>
                     {
                         appointment ? <AppointmentDetails appointmentData={appointment} />
                             : <>No Scheduled Appointment Found</>}

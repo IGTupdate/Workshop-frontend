@@ -37,7 +37,7 @@ const Page = (props: Props) => {
         <h2 className="text-xl font-semibold">Reschedule Appointment</h2>
       </div>
       {loading ? (
-        <div className="flex justify-center items-center h-full">
+        <div className="flex justify-center items-center w-full min-h-screen sm:min-h-full">
           <Loader />
         </div>
       ) : (

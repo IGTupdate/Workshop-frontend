@@ -22,10 +22,11 @@ const AppointmentDetails: React.FC<Props> = ({
 }) => {
   const { isSmallDevice } = useAppSelector((state) => state.device);
   const pathname = usePathname();
+  const {role} = useAppSelector(state=>state.auth.authData)
 
   return (
     <>
-      <div className="bg-white shadow-xl rounded-xl overflow-hidden mb-8">
+      <div className="bg-white shadow-xl rounded-xl overflow-hidden">
         <Descriptions
           title={`Appointment Id: ${appointmentData._id}`}
           column={isSmallDevice === 1 ? 1 : 2}
@@ -81,9 +82,9 @@ const AppointmentDetails: React.FC<Props> = ({
         </Descriptions>
       </div>
 
-      {pathname.split("/")[3] !== "reschedule" && (
+      {role==="customer"? pathname.split("/")[3] !== "reschedule" && (
         <Notifications show={"all"} notificationData={notificationData} />
-      )}
+      ):''}
     </>
   );
 };
