@@ -1,6 +1,6 @@
 'use client'
 import { getAllRampStatus } from '@/app/services/operations/workorder/workorder';
-import { TActiveRamp, TRamp } from '@/app/types/ramp';
+import { TActiveRamp, TRampDetails } from '@/app/types/ramp';
 import { Button, Table } from 'antd'; // Import Space from Ant Design
 import { useEffect, useState } from 'react';
 import RampDrawer from './__components/RampDrawer';
@@ -14,7 +14,7 @@ const Page = () => {
   const allRampsData = async () => {
     try {
       const rampDetails = await getAllRampStatus();
-      const rampDetailsWithKeys = rampDetails.map((ramp: TRamp, index: number) => ({
+      const rampDetailsWithKeys = rampDetails.map((ramp: TRampDetails, index: number) => ({
         ...ramp,
         key: index.toString(),
       }));

@@ -31,11 +31,11 @@ const WorkOrderMechanicDetailContainer = (props: Props) => {
                     {
                         props.assigned_mechanics.length > 0 ?
                             props.assigned_mechanics.map((el, ind) => {
-                                return <li key={ind}>Puneet Dwivedi</li>
+                                return <li key={ind}>{typeof el === "string" ? el : el.fullName}</li>
                             }) : <li>No Mechanics are assigned</li>
                     }
-                    <li>Puneet Dwivedi</li>
-                    <li>Puneet Dwivedi</li>
+                    {/* <li>Puneet Dwivedi</li>
+                    <li>Puneet Dwivedi</li> */}
                 </ul>
             </div>
         </div>

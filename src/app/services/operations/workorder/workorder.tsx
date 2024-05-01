@@ -2,7 +2,7 @@ import { TWorkOrderAssign, TworkOrderCreate, TworkorderPrepare } from "@/app/val
 import { apiConnector } from "../../apiConnector";
 import { workOrderEndpoints } from "../../apis";
 import { TWorkOrder } from "@/app/types/work-order";
-import { TRamp } from "@/app/types/ramp";
+import { TRampDetails } from "@/app/types/ramp";
 import toast from "react-hot-toast";
 
 const { GET_EMPLOYEE_WORK_STATUS,
@@ -16,7 +16,8 @@ const { GET_EMPLOYEE_WORK_STATUS,
     PREPARE_WORK_ORDER,
     ASSIGN_MECHANIC_WORKORDER,
     REMOVE_MECHANIC_WORKORDER,
-    GET_PAGE_WORK_ORDER
+    GET_PAGE_WORK_ORDER,
+    WORK_ORDER_RAMP_ASSIGN
 } = workOrderEndpoints;
 
 export const getEmployeeWorkingStatus = async (employeeRole: string) => {
@@ -61,33 +62,47 @@ export const getAllRampStatus = async () => {
     }
 }
 
-export const rampCreateApi = async (data: TRamp) => {
+export const rampCreateApi = async (data: TRampDetails) => {
     try {
         const response = await apiConnector({
             method: "POST",
             url: RAMP_CREATE_API,
             bodyData: data
         })
-        if(response.data.success) toast.success("RAMP CREATED SUCCESSFULLY")
+        if (response.data.success) toast.success("RAMP CREATED SUCCESSFULLY")
         return response.data.data;
 
     } catch (err) {
     }
 }
 
-export const rampUpdateApi = async (data: TRamp) => {
+export const rampUpdateApi = async (data: TRampDetails) => {
     try {
         const response = await apiConnector({
             method: "POST",
             url: RAMP_UPDATE_API,
             bodyData: data
         });
-        if(response.data.success) toast.success("RAMP UPDATED SUCCESSFULLY")
+        if (response.data.success) toast.success("RAMP UPDATED SUCCESSFULLY")
         return response.data.data;
     } catch (err) {
         // Handle errors if needed
     }
 };
+
+export const assignRampInWorkOrder = async (workOrderId: string, data: { rampId: string }) => {
+    try {
+        const response = await apiConnector({
+            method: "POST",
+            url: WORK_ORDER_RAMP_ASSIGN  + "/" + workOrderId,
+            bodyData: data
+        });
+        // if (response.data.success) toast.success("RAMP UPDATED SUCCESSFULLY")
+        return response.data.data;
+    } catch (err) {
+        throw err;
+    }
+}
 
 export const createWorkOrder = async (data: TworkOrderCreate) => {
     try {

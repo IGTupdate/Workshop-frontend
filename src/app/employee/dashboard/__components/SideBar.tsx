@@ -7,10 +7,8 @@ import { FiLogOut } from "react-icons/fi";
 
 import { SIDEBAR_COLLAPSED_WIDTH, SIDEBAR_WIDTH } from "../utils/variables";
 import { useRouter } from "next/navigation";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import SideBarMenus from "./SideBarMenus";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
-import { logout } from "@/app/services/operations/auth/customerAuth";
 import { IAuthData } from "@/app/store/slices/authSlice";
 import Logout from "@/app/components/Logout/Logout";
 
@@ -25,12 +23,7 @@ type Props = {
 const SideBar = (props: Props) => {
 
   const [user, setUser] = useState<IAuthData>();
-
-
   const { authData } = useAppSelector((state) => state.auth)
-
-  const dispatch = useAppDispatch();
-  const router = useRouter();
 
 
   useEffect(() => {

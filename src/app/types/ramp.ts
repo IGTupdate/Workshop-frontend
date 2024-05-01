@@ -5,9 +5,12 @@ export type TRamp = {
     name: string;
     location?: string;
     _id?: string,
-    assigned_workOrder?: TWorkOrder[],
     isActive?: boolean
 };
+
+export type TRampDetails = TRamp & {
+    assigned_workOrder?: TWorkOrder[],
+} 
 
 export type TActiveRampNewRamp = {
     type: "newramp",

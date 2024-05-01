@@ -26,6 +26,11 @@ export const sideBarMenuItems: TsideBarMenuItems[] = [
         label: 'Work Order',
         pathname: "/employee/dashboard/workorder"
     },
+    {
+        key: '4',
+        label: "Ramp",
+        pathname: "/employee/dashboard/ramp"
+    },
     // {
     //     key: '4',
     //     label: 'Work Order',

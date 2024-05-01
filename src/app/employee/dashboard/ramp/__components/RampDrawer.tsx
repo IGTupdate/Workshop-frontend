@@ -1,6 +1,6 @@
 "use client";
 
-import { TActiveRamp, TRamp } from "@/app/types/ramp";
+import { TActiveRamp, TRampDetails } from "@/app/types/ramp";
 import { TRampManageSchema } from "@/app/validators/ramp";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -57,7 +57,7 @@ const RampDrawer = ({ drawerData, setDrawerData, setRampLoading }: Props) => {
     }
   }, [drawerData]);
 
-  const onSubmit = async (data: TRamp) => {
+  const onSubmit = async (data: TRampDetails) => {
     // console.log(data, drawerData)
     if (!drawerData || drawerData.type === 'workorder') return;
     if (drawerData.type === 'newramp') {

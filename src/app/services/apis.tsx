@@ -99,6 +99,7 @@ export const workOrderEndpoints = {
   REMOVE_MECHANIC_WORKORDER: workOrderUrl(WORKORDER, "/remove_mechanics"),
   REQUEST_ADDITIONAL_WORK: workOrderUrl(WORKORDER, "/additional_work_request/create"),
   GET_ADDITIONAL_WORK: workOrderUrl(WORKORDER, "/additional_work_request/get"),
+  WORK_ORDER_RAMP_ASSIGN: workOrderUrl(WORKORDER, "/assign_ramp"),
 };
 
 
