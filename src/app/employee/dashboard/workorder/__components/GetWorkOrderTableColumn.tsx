@@ -84,7 +84,7 @@ export function GetWorkOrderTableColumn() {
                 ...GetColumnTextSearchProps<TWorkOrderDataTable>(
                     "registeration_number"
                 ),
-                render:(register)=>{
+                render: (register) => {
                     return <p className="uppercase">{register}</p>
                 }
             },
@@ -96,13 +96,13 @@ export function GetWorkOrderTableColumn() {
                 // sorter: (a, b) => a.date_time.getTime() - b.date_time.getTime(),
                 render: (value) => {
                     return (
-                      <div className="flex flex-wrap items-center gap-3">
-                        <Text>{dayjs(value).format('DD/MMM/YYYY')}</Text>
-          
-                        <Text>{dayjs(value).format('h:mm A')}</Text>
-                      </div>
+                        <div className="flex flex-wrap items-center gap-3">
+                            <Text>{dayjs(value).format('DD/MMM/YYYY')}</Text>
+
+                            <Text>{dayjs(value).format('h:mm A')}</Text>
+                        </div>
                     );
-                  },
+                },
             },
             {
                 title: "Status",
@@ -165,12 +165,12 @@ export function GetWorkOrderTableColumn() {
                     return (
                         <Flex wrap="wrap" gap="small">
                             <div
-                onClick={() => {
-                  router.push("/employee/dashboard/appointment/" + _id)
-                }}
-                style={{ color: "#1890ff" }}
-                className="cursor-pointer"
-              ><IoIosEye size={"22px"} title="View Appointments" /></div>
+                                onClick={() => {
+                                    router.push("/employee/dashboard/workorder/" + _id)
+                                }}
+                                style={{ color: "#1890ff" }}
+                                className="cursor-pointer"
+                            ><IoIosEye size={"22px"} title="View Appointments" /></div>
                             {/* view appointments */}
                             {/* <Button
                                 onClick={() => {

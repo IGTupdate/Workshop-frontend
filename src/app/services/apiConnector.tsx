@@ -29,7 +29,7 @@ axiosInstance.interceptors.request.use(
     }
 
     accessToken = get_client_cookie("accessToken");
-    
+
     if (!accessToken) {
       redirect('/')
       throw Error
