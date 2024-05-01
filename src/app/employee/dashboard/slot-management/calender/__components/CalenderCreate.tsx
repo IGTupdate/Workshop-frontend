@@ -64,6 +64,7 @@ const CalenderCreate = (props: Props) => {
     }
 
 
+
     return (
         <div>
             <div className="flex justify-between items-center mb-4">
@@ -78,7 +79,7 @@ const CalenderCreate = (props: Props) => {
                                     className='w-full'
                                     {...field}
                                     showSearch
-                                    placeholder="Select Schedule"
+                                    placeholder="Select a person"
                                     optionFilterProp="children"
                                     filterOption={filterOption}
                                     options={slotScheduleOptions}
@@ -114,7 +115,7 @@ const CalenderCreate = (props: Props) => {
                         <Button
                             disabled={calenderDrawerLoading}
                             htmlType='submit'
-                            className="bg-blue1 text-white1 font-medium text-md"
+                            type='primary'
                         >
                             Create
                         </Button>

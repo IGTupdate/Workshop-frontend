@@ -83,7 +83,9 @@ const WorkOrderPageContainer = (props: Props) => {
   return (
     <div>
       {workOrderLoading ? (
-        <Loader />
+        <div className="flex justify-center items-center h-screen w-full">
+          <Loader />
+        </div>
       ) : (
         <div>
           <div className="mb-4 flex justify-between">
@@ -102,7 +104,10 @@ const WorkOrderPageContainer = (props: Props) => {
               </Button>
             </div>
           </div>
+          
+          <div className="shadow-xl overflow-hidden rounded-xl">
           <WorkOrderTableContainer workOrderData={workOrderData.workOrders} />
+          </div>
         </div>
       )}
     </div>
