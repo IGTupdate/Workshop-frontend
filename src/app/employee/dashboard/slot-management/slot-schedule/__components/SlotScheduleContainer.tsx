@@ -43,7 +43,7 @@ const SlotScheduleContainer = (props: Props) => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center mb-8 p-4 bg-white rounded-md">
         <h2 className="text-xl font-semibold">Slot Schedule</h2>
         <Button
           onClick={() => {
@@ -56,16 +56,23 @@ const SlotScheduleContainer = (props: Props) => {
       </div>
 
       {slotScheduleLoading ? (
-        <Loader />
+        <div className="flex justify-center items-center h-screen w-full">
+          <Loader />
+        </div>
       ) : (
-        <Table
-          dataSource={slotScheduleData}
-          columns={get_slot_schedule_columns(
-            handleSlotScheduleDrawer,
-            handleSlotScheduleDeleteModal
-          )}
-        />
+        <div className="shadow-xl rounded-xl overflow-hidden">
+          <Table
+            scroll={{ x: 980 }}
+            pagination={false}
+            dataSource={slotScheduleData}
+            columns={get_slot_schedule_columns(
+              handleSlotScheduleDrawer,
+              handleSlotScheduleDeleteModal
+            )}
+          />
+        </div>
       )}
+
 
       <SlotScheduleManageDrawer />
       <SlotScheduleDeleteModal />

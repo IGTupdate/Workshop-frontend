@@ -20,7 +20,7 @@ const EmployeeDashBoardLayOut = ({
   return (
     <Suspense
       fallback={
-        <div className="flex justify-center items-center w-full min-h-screen">
+        <div className="flex justify-center items-center w-screen min-h-screen">
           <Loader />
         </div>
       }

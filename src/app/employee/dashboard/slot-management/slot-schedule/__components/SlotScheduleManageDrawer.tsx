@@ -32,6 +32,7 @@ import {
   createSlotSchedule,
   updateSlotSchedule,
 } from "@/app/services/operations/appointment/slotSchedule";
+import toast from "react-hot-toast";
 
 const { Text } = Typography;
 type Props = {};
@@ -73,6 +74,17 @@ const SlotScheduleManageDrawer = (props: Props) => {
   }, [activeSlotSchedule]);
 
   const onSubmit = (data: TSlotScheduleManage) => {
+
+    if(data?.slot_details?.length>0){
+      for(let i=0; i<data?.slot_details?.length; i++){
+        if(data?.slot_details[i]?.start_time?.hour > data?.slot_details[i]?.end_time?.hour){
+          toast.error(`The start time must be before the end time. Slot ${i + 1}`);
+          return
+        }
+      }
+    }
+
+
     if (!activeSlotSchedule) return;
     dispatch(setSlotScheduleDrawerLoading(true));
     if (activeSlotSchedule === NEW_SLOT_SCHEDULE) {
@@ -128,7 +140,7 @@ const SlotScheduleManageDrawer = (props: Props) => {
           {errors.name && <Text type="danger"> {errors.name.message}</Text>}
         </Row>
 
-        <SlotDetailsManageContainer control={control} />
+        <SlotDetailsManageContainer control={control} errors={errors} />
       </Form>
     </Drawer>
   );

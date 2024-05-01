@@ -21,10 +21,10 @@ export const getAppointMentStatus = () => {
 };
 
 export const appointmentStatusText: Record<TAppointmentStatus, ReactNode> = {
-  Missed: <h2 className="text-orange-500">Missed</h2>,
+  Missed: <Tag color="orange">Missed</Tag>,
   Scheduled: <Tag color="green">Scheduled</Tag>,
   Assigned: <Tag color="blue">Assigned</Tag>,
   Completed: <Tag color="gray">Completed</Tag>,
   Cancelled: <Tag color="red">Cancelled</Tag>,
-  Pending: <h2 className="text-red-500">Pending</h2>,
+  Pending: <Tag color="yellow">Pending</Tag>,
 };

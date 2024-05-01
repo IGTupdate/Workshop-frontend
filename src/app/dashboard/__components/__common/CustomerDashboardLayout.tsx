@@ -13,7 +13,7 @@ const CustomerDashboardLayout = ({ children }: ChildrenProps) => {
   return (
     <>
       {isSmallDevice === -1 ? (
-        <div className="flex justify-center items-center min-h-screen">
+        <div className="flex justify-center items-center min-h-screen w-full">
           <Loader />
         </div>
       ) : isSmallDevice ? (

@@ -48,7 +48,7 @@ const AppointmentPageContiner = (props: Props) => {
         <div>
           <AppointmentDetails appointmentData={appointment} />
 
-          <div className="flex justify-end items-center  gap-3 ">
+          <div className="flex justify-end items-center  gap-3  mt-8">
             {appointment.status === "Scheduled" && (
               <Button
                 onClick={() => {

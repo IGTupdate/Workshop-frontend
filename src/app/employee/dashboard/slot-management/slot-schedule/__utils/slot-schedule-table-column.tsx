@@ -1,5 +1,6 @@
 import { TActiveSlotSchedule, TSlotSchedule } from "@/app/types/slot-schedule";
-import { Space, TableProps, Tag, Typography } from "antd";
+import { Button, Space, TableProps, Tag, Typography } from "antd";
+import { formatTime } from "../../../utils/helper";
 
 export interface ISlotSchedule {
   _id: string;
@@ -19,17 +20,20 @@ export const get_slot_schedule_columns = (
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text: string) => <a>{text}</a>,
+      render: (text: string) => <p className="capitalize text-base font-semibold">{text}</p>,
     },
     {
       title: "Limit",
       dataIndex: "limit",
       key: "limit",
       render: (_, { slot_details }) => {
-        return slot_details.reduce((accumalator, currvalue) => {
-          return (accumalator += currvalue.slot_limit);
-        }, 0);
+          const totalLimit = slot_details.reduce((accumulator, currValue) => {
+              return accumulator + currValue.slot_limit;
+          }, 0);
+      
+          return <p className="p-1 text-center rounded-md bg-green-300 ">{totalLimit}</p>;
       },
+      
     },
     {
       title: "Details",
@@ -39,12 +43,15 @@ export const get_slot_schedule_columns = (
         <div style={{ maxWidth: 300 }} className="">
           {slot_details.map((slot, index) => {
             let color = slot.start_time.hour >= 12 ? "orange" : "geekblue";
-            return (<div key={index} className="mb-2 pb-2 border-b">
-              <div className="grid grid-cols-2 gap-2">
-                <p>Start Time : {slot.start_time.hour}:{slot.start_time.minute}</p>
-                <p>End Time :{slot.end_time.hour}:{slot.end_time.minute}</p>
+            return (<div key={index} className={`my-2 py-2  ${slot_details?.length === index+1?"border-none":"border-b"}`}>
+              <h4 className="p-2 py-1 font-semibold bg-yellow-100 border rounded-lg inline-block mb-2 ms-2">{`Slot : ${index+1}`}</h4>
+              <div className="grid grid-cols-3 gap-2">
+                  <p className="flex flex-col items-center"><span className="text-sm font-semibold">Start Time</span>  <span>{formatTime(slot.start_time)}</span></p>
+                  <p className="flex flex-col items-center"><span className="text-sm font-semibold">End Time</span>  <span>{formatTime(slot.end_time)}</span></p>
+              <p className="flex flex-col items-center"><span className="text-sm font-semibold">Slot Limit</span>  <span>{slot.slot_limit}</span></p>
+
               </div>
-              <p>Slot Limit : {slot.slot_limit}</p>
+
             </div>
               // <Tag color={color} key={index}>
               //   {`${slot.start_time.hour}:${slot.start_time.minute} - ${slot.end_time.hour}:${slot.end_time.minute} = ${slot.slot_limit}`}
@@ -59,16 +66,20 @@ export const get_slot_schedule_columns = (
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <button
+          <Button
+          type="primary"
             onClick={() => {
               setOpenDrawer(record);
             }}
           >
-            Update{" "}
-          </button>
-          <button onClick={() => {
+            Update
+          </Button>
+          <Button onClick={() => {
             handleSlotScheduleDeleteModal(record)
-          }} className="text-red-500">Delete</button>
+          }}
+          type="primary"
+          danger
+          >Delete</Button>
         </Space>
       ),
     },
