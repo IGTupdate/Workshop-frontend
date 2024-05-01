@@ -56,9 +56,12 @@ const SlotScheduleContainer = (props: Props) => {
       </div>
 
       {slotScheduleLoading ? (
-        <Loader />
+        <div className="flex justify-center items-center h-screen w-full">
+          <Loader />
+        </div>
       ) : (
         <Table
+        scroll={{x:980}}
           dataSource={slotScheduleData}
           columns={get_slot_schedule_columns(
             handleSlotScheduleDrawer,

@@ -6,7 +6,11 @@ import { useAppDispatch } from '@/app/store/reduxHooks';
 import { logout } from '@/app/services/operations/auth/customerAuth';
 import { useRouter } from 'next/navigation';
 
-const Logout: React.FC = () => {
+type Props = {
+    collapsed: boolean;
+  };
+
+const Logout = (props: Props) => {
     const [visible, setVisible] = useState(false);
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -36,11 +40,11 @@ const Logout: React.FC = () => {
                 style={{
                     padding: "1.5em 0", display: "flex", justifyContent: "center", alignItems: "center", border: "none", color: "white"
                 }}
-                className='bg-[#063146] w-full hover:bg-[#063142] shadow-xl'
+                className={`${!props.collapsed?'bg-[#063146]':'bg-transparent'} w-full hover:bg-[#063142] shadow-xl`}
                 icon={< FiLogOut />}
                 onClick={showModal}
             >
-                LogOut
+                {!props.collapsed?<span>LogOut</span>:''}
             </Button>
             {/* Use the custom modal component */}
             <CustomModal

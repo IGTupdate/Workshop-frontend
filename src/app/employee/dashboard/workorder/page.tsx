@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import WorkOrderPageContainer from './__components/WorkOrderPageContainer'
+import { Button } from 'antd';
 
 type Props = {}
 
@@ -11,9 +12,8 @@ const page = (props: Props) => {
                 <h2 className="text-xl font-semibold">Manage WorkOrders</h2>
                 <Link
                     href={`/employee/dashboard/workorder/create`}
-                    className="bg-customYellow text-white1 font-medium text-md px-4 py-2 rounded-md"
                 >
-                    Create WorkOrder
+                    <Button type='primary'>Create WorkOrder</Button>
                 </Link>
             </div>
 

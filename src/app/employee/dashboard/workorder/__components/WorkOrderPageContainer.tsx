@@ -97,7 +97,7 @@ const WorkOrderPageContainer = (props: Props) => {
                 />
             }
             <div>
-              <Button type="link" onClick={handleClearFilter}>
+              <Button type="primary"  onClick={handleClearFilter}>
                 Clear Filter
               </Button>
             </div>

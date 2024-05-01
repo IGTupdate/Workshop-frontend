@@ -58,7 +58,7 @@ const dateCellRender = (params: TdateCellRender) => {
   if (isPastDate(new Date(value.toISOString())) && !required_calender) {
     return (
       <div
-        className={`group w-full h-full ${calenderCellBgColorByStatus["Default"]} flex flex-col items-center justify-center relative overflow-hidden h-full w-full bg-[CDCDCE]`}
+        className={`group w-full h-full ${calenderCellBgColorByStatus["Default"]} flex flex-col items-center justify-center relative overflow-hidden h-full w-full bg-[#CDCDCE]`}
       >
         <MdBlockFlipped
           size={25} className="text-white"

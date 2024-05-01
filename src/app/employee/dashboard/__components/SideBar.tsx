@@ -39,6 +39,7 @@ const SideBar = (props: Props) => {
     })
   }, [authData]);
 
+
   return (
     <Sider
       width={SIDEBAR_WIDTH}
@@ -64,7 +65,7 @@ const SideBar = (props: Props) => {
       </div>
 
       <div className="w-[150px] lg:w-[200px]  absolute bottom-6 left-1/2 translate-x-[-50%] border-t pt-10">
-        <Logout />
+        <Logout collapsed={props.collapsed}/>
       </div>
     </Sider>
   );

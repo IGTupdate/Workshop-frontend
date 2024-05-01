@@ -20,6 +20,10 @@ import { FaEye } from "react-icons/fa";
 import { MdAddChart } from "react-icons/md";
 import { TWorkOrder, TWorkOrderDataTable, TWorkOrderStatus } from "@/app/types/work-order";
 import { getWorkOrderStatus } from "../__utils/workOrderStatus";
+import { appointmentStatusText } from "../../appointment/__utils/appointmentStatus";
+import { TAppointmentStatus } from "@/app/types/appointment";
+import dayjs from "dayjs";
+import { IoIosEye } from "react-icons/io";
 
 const { Title, Text } = Typography;
 
@@ -66,9 +70,9 @@ export function GetWorkOrderTableColumn() {
                 ...GetColumnTextSearchProps<TWorkOrderDataTable>("orderNumber"),
                 render: (orderNumber) => {
                     return (
-                        <div>
+                        <div className="font-semibold">
                             {/* <Title level={5}>{orderNumber}</Title> */}
-                            <Text>{orderNumber}</Text>
+                            {orderNumber}
                         </div>
                     );
                 },
@@ -80,6 +84,9 @@ export function GetWorkOrderTableColumn() {
                 ...GetColumnTextSearchProps<TWorkOrderDataTable>(
                     "registeration_number"
                 ),
+                render:(register)=>{
+                    return <p className="uppercase">{register}</p>
+                }
             },
             {
                 title: "Created At",
@@ -89,13 +96,13 @@ export function GetWorkOrderTableColumn() {
                 // sorter: (a, b) => a.date_time.getTime() - b.date_time.getTime(),
                 render: (value) => {
                     return (
-                        <div>
-                            <Text>{value.toLocaleDateString()}</Text>
-                            <br />
-                            <Text>{new Date(value).toLocaleTimeString()}</Text>
-                        </div>
+                      <div className="flex flex-wrap items-center gap-3">
+                        <Text>{dayjs(value).format('DD/MMM/YYYY')}</Text>
+          
+                        <Text>{dayjs(value).format('h:mm A')}</Text>
+                      </div>
                     );
-                },
+                  },
             },
             {
                 title: "Status",
@@ -141,11 +148,11 @@ export function GetWorkOrderTableColumn() {
                         </div>
                     );
                 },
-                render: (text: TWorkOrderStatus) => {
+                render: (text: TAppointmentStatus) => {
                     return (
                         <div className="text-md font-semibold">
                             {/* {workOrderStatusText[text]} */}
-                            {text}
+                            {appointmentStatusText[text]}
                         </div>
                     );
                 },
@@ -157,14 +164,13 @@ export function GetWorkOrderTableColumn() {
                 render: (_, { _id }) => {
                     return (
                         <Flex wrap="wrap" gap="small">
-                            <Button
-                                onClick={() => {
-                                    router.push("/employee/dashboard/workorder/" + _id)
-                                }}
-                                style={{ border: "1px #1890ff solid", color: "#1890ff" }}
-                                size="middle"
-                                icon={<FaEye size={"22px"} title="View Appointments" />}
-                            ></Button>
+                            <div
+                onClick={() => {
+                  router.push("/employee/dashboard/appointment/" + _id)
+                }}
+                style={{ color: "#1890ff" }}
+                className="cursor-pointer"
+              ><IoIosEye size={"22px"} title="View Appointments" /></div>
                             {/* view appointments */}
                             {/* <Button
                                 onClick={() => {
