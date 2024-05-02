@@ -1,17 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import { createWorkOrder } from "@/app/services/operations/workorder/workorder";
+import { COMMON_ERROR } from "@/app/utils/constants/constant";
 import { employeeRole } from "@/app/utils/constants/employee-roles";
-import EmployementAvailabilityContainer from "./EmployementAvailabilityContainer";
-import WorkOrderAppointmentContiner from "./WorkOrderAppointmentContiner";
 import { TworkOrderCreate } from "@/app/validators/workorder";
 import { Button } from "antd";
-import toast from "react-hot-toast";
-import { COMMON_ERROR } from "@/app/utils/constants/constant";
-import { createWorkOrder } from "@/app/services/operations/workorder/workorder";
 import { useRouter } from "next/navigation";
-import Watermark from "@/app/components/Text/WatermarkText";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 import CreateWorkOrderByDate from "./CreateWorkOrderByDate";
+import EmployementAvailabilityContainer from "./EmployementAvailabilityContainer";
+import WorkOrderAppointmentContiner from "./WorkOrderAppointmentContiner";
 
 type Props = {
   appointmentId?: string;

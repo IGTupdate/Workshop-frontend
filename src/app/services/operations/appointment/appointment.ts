@@ -61,7 +61,7 @@ export const getAppointmentByAppointmentId = async (
   }
 };
 
-export const getAllAppointment = async (query: string = "") => {
+export const getAllAppointment = async (query: string = ""): Promise<TAppointment[]> => {
   try {
     const response = await apiConnector({
       method: "GET",
@@ -70,8 +70,8 @@ export const getAllAppointment = async (query: string = "") => {
 
     return response.data.data;
   } catch (err) {
-    console.log(err);
-    return null;
+    // console.log(err);
+    throw err
   }
 };
 
