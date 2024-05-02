@@ -23,7 +23,7 @@ const SendOTP = (props: Tprops) => {
 
   const dispatch = useAppDispatch();
   const contact = useAppSelector((state) => state.auth.authData.contactNumber);
-  const [contactNumber, setContactNumber] = useState(contact);
+  const [contactNumber, setContactNumber] = useState('');
   const [contactNumberError, setContactNumberError] = useState("");
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
@@ -85,7 +85,8 @@ const SendOTP = (props: Tprops) => {
           onChange={handleChange}
           placeholder="Enter Your Contact Number"
           maxLength={10}
-          //   className="border-0 p-0 outline-none shadow-none"
+
+        //   className="border-0 p-0 outline-none shadow-none"
         />
         {contactNumberError && <ErrorText text={contactNumberError} />}
         {/* </div> */}

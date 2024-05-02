@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { employeeRole } from "@/app/utils/constants/employee-roles";
 import EmployementAvailabilityContainer from "./EmployementAvailabilityContainer";
 import WorkOrderAppointmentContiner from "./WorkOrderAppointmentContiner";
@@ -10,12 +10,14 @@ import toast from "react-hot-toast";
 import { COMMON_ERROR } from "@/app/utils/constants/constant";
 import { createWorkOrder } from "@/app/services/operations/workorder/workorder";
 import { useRouter } from "next/navigation";
+import Watermark from "@/app/components/Text/WatermarkText";
+import CreateWorkOrderByDate from "./CreateWorkOrderByDate";
 
 type Props = {
-  appointmentId: string | undefined;
+  appointmentId?: string;
 };
 
-const CreateWorkOrder = (props: Props) => {
+const CreateWorkOrder: React.FC<Props> = (props) => {
   const [workOrderCreateData, setWorkOrderCreateData] =
     useState<TworkOrderCreate>({
       appointmentId: "",
@@ -56,10 +58,14 @@ const CreateWorkOrder = (props: Props) => {
 
   return (
     <div>
-      <WorkOrderAppointmentContiner
-        appointmentId={props.appointmentId}
-        setWorkOrderCreateData={setWorkOrderCreateData}
-      />
+      {props.appointmentId ? (
+        <WorkOrderAppointmentContiner
+          appointmentId={props.appointmentId}
+          setWorkOrderCreateData={setWorkOrderCreateData}
+        />
+      ) : (
+        <CreateWorkOrderByDate setWorkOrderCreateData={setWorkOrderCreateData} />
+      )}
 
       <EmployementAvailabilityContainer
         role={employeeRole.advisor}
