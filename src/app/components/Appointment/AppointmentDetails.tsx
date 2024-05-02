@@ -22,7 +22,7 @@ const AppointmentDetails: React.FC<Props> = ({
 }) => {
   const { isSmallDevice } = useAppSelector((state) => state.device);
   const pathname = usePathname();
-  const {role} = useAppSelector(state=>state.auth.authData)
+  const role = useAppSelector(state=>state.auth.authData?.role)
 
   return (
     <>

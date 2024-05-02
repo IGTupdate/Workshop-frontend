@@ -11,12 +11,16 @@ export interface IAuthData {
 
 export interface IAuthState {
     authStep: number,
-    authData: IAuthData | {},
+    authData: IAuthData,
     authLoading: boolean;
 }
 
 const initialAuthDataState: IAuthData = {
-    contactNumber: ''
+    _id: '',
+    contactNumber: '',
+    fullName: '',
+    email: '',
+    role: ''
 };
 
 const initialState: IAuthState = {

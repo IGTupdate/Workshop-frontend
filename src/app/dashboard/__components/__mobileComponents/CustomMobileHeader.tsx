@@ -21,7 +21,7 @@ import CustomModal from "@/app/components/Model/CustomModel";
 
 const CustomMobileHeader = () => {
   const [visible, setVisible] = useState(false);
-  const [user, setUser] = useState<IAuthData>();
+  const [user, setUser] = useState<IAuthData | null>(null);
   const authData = useAppSelector((state) => state.auth.authData);
   const pathName = usePathname();
 
