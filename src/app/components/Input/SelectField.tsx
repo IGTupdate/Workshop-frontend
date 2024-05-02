@@ -1,7 +1,7 @@
 import { Select, Typography } from 'antd';
-import React from 'react'
+import React from 'react';
 
-const { Text } = Typography
+const { Text } = Typography;
 
 type Props = {
     mode: "multiple" | "single" | "tags";
@@ -10,17 +10,20 @@ type Props = {
     placeholder: string;
     error: string,
     setValue: any,
-    defaultValue?: string[] | string
+    defaultValue?: string[] | string;
     options: {
         value: any,
-        label: string
-    }[]
-}
+        label: string;
+    }[];
+};
 
 const SelectField = (props: Props) => {
 
-    const filterOption = (input: string, option?: { label: string; value: string }) =>
+    const filterOption = (input: string, option?: { label: string; value: string; }) =>
         (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
+
+
+    console.log(props.placeholder, 'placeholder');
 
     return (
         <div>
@@ -30,6 +33,7 @@ const SelectField = (props: Props) => {
                     allowClear
                     showSearch
                     className='w-full'
+                    placeholder={props?.placeholder}
                     filterOption={filterOption}
                     defaultValue={props.defaultValue || ""}
                     options={props.options}
@@ -38,6 +42,7 @@ const SelectField = (props: Props) => {
                     }}
                 /> : <Select
                     mode='multiple'
+                    placeholder={props.placeholder}
                     allowClear
                     defaultValue={props.defaultValue || []}
                     showSearch
@@ -51,7 +56,7 @@ const SelectField = (props: Props) => {
             }
             {props.error && <Text type='danger'> {props.error}</Text>}
         </div>
-    )
-}
+    );
+};
 
-export default SelectField
+export default SelectField;

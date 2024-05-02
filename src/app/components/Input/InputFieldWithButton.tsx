@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Input, Space, Typography } from "antd";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Controller } from "react-hook-form";
 
 const { Text } = Typography;
@@ -17,7 +17,16 @@ export type InputField = {
 type Props = InputField & {};
 
 const InputFieldWithButton = (props: Props) => {
+  const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<any>();
+
+
+  const handleButtonClick = () => {
+    if (inputValue.trim() !== "") { // Ensure input value is not empty or whitespace
+      props.handleButtonClick(inputValue.trim());
+      setInputValue(""); // Clear input value
+    }
+  };
   return (
     <div>
       <label className="font-medium mb-2 block text-black1" htmlFor="name">
@@ -28,19 +37,11 @@ const InputFieldWithButton = (props: Props) => {
           ref={inputRef}
           type={props.type}
           placeholder={props.placeholder}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
         />
         <Button
-          onClick={() => {
-            if (
-              inputRef.current &&
-              inputRef.current.input &&
-              inputRef.current.input.value
-            ) {
-              props.handleButtonClick(inputRef.current.input.value);
-              inputRef.current.input.value = "";
-              inputRef.current.input.setAttribute("value", "");
-            }
-          }}
+          onClick={handleButtonClick}
           type="primary"
         >
           Submit

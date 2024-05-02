@@ -1,7 +1,7 @@
 "use client";
 
-import { Button, Drawer, Form, Space } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { Button, Drawer, Form, Space } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import RequestAdditionalWorkFormContainer from './RequestAdditionalWorkFormContainer';
 import { TworkOrderAdditionalWorkCreateRequest, workOrderAdditionalWorkCreateRequest } from '@/app/validators/workorder';
@@ -14,7 +14,7 @@ import toast from 'react-hot-toast';
 import { COMMON_ERROR } from '@/app/utils/constants/constant';
 
 
-type Props = {}
+type Props = {};
 
 const RequestAdditonalWorkDrawerContainer = (props: Props) => {
 
@@ -26,11 +26,11 @@ const RequestAdditonalWorkDrawerContainer = (props: Props) => {
 
     const handleOpenDrawer = () => {
         setOpenDrawer(true);
-    }
+    };
 
     const handleCloseDrawer = () => {
         setOpenDrawer(false);
-    }
+    };
 
 
 
@@ -44,24 +44,24 @@ const RequestAdditonalWorkDrawerContainer = (props: Props) => {
     const onSubmit = async (data: TworkOrderAdditionalWorkCreateRequest) => {
         try {
             setLoading(true);
-            const response = await requestAdditionalWork(data)
-            toast.success(response.message || "")
+            const response = await requestAdditionalWork(data);
+            toast.success(response.message || "");
             handleCloseDrawer();
             reset();
 
         } catch (err: any) {
-            toast.error(err?.response?.data?.message || COMMON_ERROR)
+            toast.error(err?.response?.data?.message || COMMON_ERROR);
         }
         finally {
             setLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         if (openDrawer) {
-            setValue("workOrderId", params.workorderId as string)
+            setValue("workOrderId", params.workorderId as string);
         }
-    }, [params, openDrawer])
+    }, [params, openDrawer]);
 
 
     return (
@@ -74,7 +74,6 @@ const RequestAdditonalWorkDrawerContainer = (props: Props) => {
                 width={480}
                 onClose={handleCloseDrawer}
                 open={openDrawer}
-                styles={{ body: { paddingBottom: 80, } }}
                 extra={
                     <Space>
                         <Button onClick={handleCloseDrawer}>Cancel</Button>
@@ -92,7 +91,7 @@ const RequestAdditonalWorkDrawerContainer = (props: Props) => {
                 />
             </Drawer>
         </div>
-    )
-}
+    );
+};
 
-export default RequestAdditonalWorkDrawerContainer
+export default RequestAdditonalWorkDrawerContainer;

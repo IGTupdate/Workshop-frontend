@@ -125,7 +125,7 @@ const WorkOrderFormContainer = (props: Props) => {
         />
 
         <div>
-          <div className="mb-4 md:w-1/2">
+          <div className="mb-4 w-full">
             <InputFieldWithButton
               handleButtonClick={(value: string) => {
                 if (value) {
@@ -138,20 +138,20 @@ const WorkOrderFormContainer = (props: Props) => {
               placeholder={"Check the headlight"}
             />
 
-            <ul className="mt-2">
+            <ul className="mt-2 flex flex-wrap justify-between items-center">
               {watch("tasks")?.map((task, index) => {
                 return (
                   <li
                     key={index}
-                    className='relative flex items-center gap-4 ps-6 before:content=[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:h-[10px] before:w-[10px] before:rounded-full before:bg-yellow-300'
+                    className='relative mb-2 flex justify-between items-center gap-4 ps-6 before:content=[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:h-[10px] before:w-[10px] before:rounded-full before:bg-yellow-300 w-1/2 pe-2'
                   >
-                    <p>{task.title}</p>{" "}
+                    <p>{task.title}</p>
                     <button
                       onClick={() => {
                         removeValueInArrayField("tasks", index);
                       }}
                     >
-                      <MdOutlineCancel />
+                      <MdOutlineCancel size={16} className="text-red-500" />
                     </button>
                   </li>
                 );
@@ -161,7 +161,7 @@ const WorkOrderFormContainer = (props: Props) => {
         </div>
 
         <div>
-          <div className="mb-4 md:w-1/2">
+          <div className="mb-4 w-full">
             <InputFieldWithButton
               handleButtonClick={(value: string) => {
                 if (value) {
@@ -175,20 +175,20 @@ const WorkOrderFormContainer = (props: Props) => {
               type={"text"}
               placeholder={"MRF Tyre"}
             />
-            <ul className="mt-2">
+            <ul className="mt-2 flex flex-wrap justify-between items-center">
               {watch("partsRequested")?.map((part, index) => {
                 return (
                   <li
                     key={index}
-                    className='relative flex items-center gap-4 ps-6 before:content=[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:h-[10px] before:w-[10px] before:rounded-full before:bg-yellow-300'
+                    className='relative mb-2 flex justify-between items-center gap-4 ps-6 before:content=[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:h-[10px] before:w-[10px] before:rounded-full before:bg-yellow-300 w-1/2 pe-2'
                   >
-                    <p>{part.partName}</p>{" "}
+                    <p>{part.partName}</p>
                     <button
                       onClick={() => {
                         removeValueInArrayField("partsRequested", index);
                       }}
                     >
-                      <MdOutlineCancel />
+                      <MdOutlineCancel size={16} className="text-red-500" />
                     </button>
                   </li>
                 );
@@ -198,7 +198,7 @@ const WorkOrderFormContainer = (props: Props) => {
         </div>
 
         <div>
-          <div className="mb-4 md:w-1/2">
+          <div className="mb-4 w-full">
             <InputFieldWithButton
               handleButtonClick={(value: string) => {
                 if (value) {
@@ -210,12 +210,12 @@ const WorkOrderFormContainer = (props: Props) => {
               type={"text"}
               placeholder={"Right Tyre"}
             />
-            <ul className="mt-2">
+            <ul className="mt-2 flex flex-wrap justify-between items-center">
               {watch("observations")?.map((observation, index) => {
                 return (
                   <li
                     key={index}
-                    className='relative flex items-center gap-4 ps-6 before:content=[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:h-[10px] before:w-[10px] before:rounded-full before:bg-yellow-300'
+                    className='relative mb-2 flex justify-between items-center gap-4 ps-6 before:content=[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:h-[10px] before:w-[10px] before:rounded-full before:bg-yellow-300 w-1/2 pe-2'
                   >
                     <p>{observation || ""}</p>
                     <button
@@ -224,7 +224,7 @@ const WorkOrderFormContainer = (props: Props) => {
                         removeValueInArrayField("observations", index);
                       }}
                     >
-                      <MdOutlineCancel />
+                      <MdOutlineCancel size={16} className="text-red-500" />
                     </button>
                   </li>
                 );

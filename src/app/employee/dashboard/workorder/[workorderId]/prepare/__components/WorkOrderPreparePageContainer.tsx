@@ -41,8 +41,8 @@ const WorkOrderPreparePageContainer = (props: Props) => {
   return (
     <div>
       {loading ? (
-        <div className="flex justify-center items-center h-scree w-full">
-        <Loader />
+        <div className="flex justify-center items-center h-screen w-full">
+          <Loader />
         </div>
       ) : (
         <div>

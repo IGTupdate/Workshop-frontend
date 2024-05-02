@@ -5,22 +5,25 @@ import SelectField from '@/app/components/Input/SelectField';
 import TextAreaField from '@/app/components/Input/TextArea';
 import { TworkOrderAdditionalWorkCreateRequest, workOrderAdditionalWorkCreateRequest } from '@/app/validators/workorder';
 import { Button, Divider, Input } from 'antd';
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useFieldArray, useForm, Control, FieldErrors, UseFormSetValue, UseFormGetValues, FieldArrayWithId } from 'react-hook-form';
 import { NEW_ADDITIONAL_WORK } from '../__utils/constant';
 import { MdOutlineCancel } from "react-icons/md";
 
+import { TbPlus } from "react-icons/tb";
+import { AiFillPlusCircle } from 'react-icons/ai';
+
 
 type Props = {
     control: Control<TworkOrderAdditionalWorkCreateRequest>,
-    errors: FieldErrors<TworkOrderAdditionalWorkCreateRequest>
-    setValue: UseFormSetValue<TworkOrderAdditionalWorkCreateRequest>
-    getValues: UseFormGetValues<TworkOrderAdditionalWorkCreateRequest>
-}
+    errors: FieldErrors<TworkOrderAdditionalWorkCreateRequest>;
+    setValue: UseFormSetValue<TworkOrderAdditionalWorkCreateRequest>;
+    getValues: UseFormGetValues<TworkOrderAdditionalWorkCreateRequest>;
+};
 
 const RequestAdditionalWorkFormContainer = (props: Props) => {
 
-    const { control, errors, setValue, getValues } = props
+    const { control, errors, setValue, getValues } = props;
 
     const { fields, append, remove, } = useFieldArray({
         control,
@@ -28,12 +31,12 @@ const RequestAdditionalWorkFormContainer = (props: Props) => {
     });
 
     const addAdditionalTask = () => {
-        append(NEW_ADDITIONAL_WORK.tasks)
-    }
+        append(NEW_ADDITIONAL_WORK.tasks);
+    };
 
     const removeAdditionalTask = (index: number) => {
-        remove(index)
-    }
+        remove(index);
+    };
 
 
     return (
@@ -67,7 +70,7 @@ const RequestAdditionalWorkFormContainer = (props: Props) => {
                                         errors.tasks[index]?.critical?.message || "" : ""}
                                     label='Critical Task'
                                     mode='single'
-                                    placeholder='Critical Task'
+                                    placeholder={'Critical Task'}
                                     setValue={setValue}
                                     options={[
                                         {
@@ -103,19 +106,19 @@ const RequestAdditionalWorkFormContainer = (props: Props) => {
 
                                 </div>
                             </div>
-                            <div className='flex justify-end items-center'>
-                                <button
-                                    className="text-red-500"
-                                    type="button"
+                            <div className='flex justify-end items-center mt-4'>
+                                <Button
+                                    danger
+                                    type="primary"
                                     onClick={(e) => {
-                                        removeAdditionalTask(index);
+                                        if (fields?.length > 1) removeAdditionalTask(index);
                                     }}
                                 >
                                     Remove
-                                </button>
+                                </Button>
                             </div>
                             <Divider />
-                        </div>
+                        </div>;
                     })
                 }
 
@@ -140,16 +143,16 @@ const RequestAdditionalWorkFormContainer = (props: Props) => {
                 />
             </div>
         </div>
-    )
-}
+    );
+};
 
 
 
 type TPropsPartsRequired = {
     control: Control<TworkOrderAdditionalWorkCreateRequest>,
     errors: FieldErrors<TworkOrderAdditionalWorkCreateRequest>,
-    index: number
-}
+    index: number;
+};
 
 
 const PartsRequiredInTask = (props: TPropsPartsRequired) => {
@@ -160,16 +163,26 @@ const PartsRequiredInTask = (props: TPropsPartsRequired) => {
     });
 
     const addPartsRequiredInAdditionaltask = () => {
-        append(NEW_ADDITIONAL_WORK.tasks[0].partsRequired)
-    }
+        append(NEW_ADDITIONAL_WORK.tasks[0].partsRequired);
+    };
 
     const removePartsRequiredInAdditionaltask = (index: number) => {
-        remove(index)
-    }
+        remove(index);
+    };
 
 
     return <div className=''>
-        <label className='font-medium mb-2 block text-black1'>Parts Required</label>
+        <div className="flex justify-between items-center mb-2">
+            <label className='font-medium block text-black1'>Parts Required</label>
+
+            {/* <div className='flex justify-end mt-2'> */}
+
+            <AiFillPlusCircle size={22} onClick={addPartsRequiredInAdditionaltask} className='cursor-pointer text-slate-950 hover:text-slate-900' />
+            {/* <Button type='primary' onClick={addPartsRequiredInAdditionaltask}>Add Parts</Button> */}
+            {/* </div> */}
+        </div>
+
+
         <div className='grid grid-cols-3 gap-3'>
             <label className='col-span-2 font-medium mb-2 block text-black1'>Name</label>
             <label className=' font-medium mb-2 block text-black1'>Price</label>
@@ -188,7 +201,7 @@ const PartsRequiredInTask = (props: TPropsPartsRequired) => {
                             type='text'
                         />
                     </div>
-                    <div className='flex justify-between gap-2'>
+                    <div className='flex justify-between items-center gap-2'>
                         <InputField
                             control={props.control}
                             name={`tasks.${props.index}.partsRequired.${ind}.price`}
@@ -198,19 +211,17 @@ const PartsRequiredInTask = (props: TPropsPartsRequired) => {
                             type='text'
                         />
                         <button onClick={() => {
-                            removePartsRequiredInAdditionaltask(ind);
+                            if (fields?.length > 1) removePartsRequiredInAdditionaltask(ind);
                         }}>
-                            <MdOutlineCancel />
+                            <MdOutlineCancel size={14} className='text-red-500 mt-2' />
                         </button>
                     </div>
-                </div>
+                </div>;
             })
         }
 
-        <div className='flex justify-end mt-2'>
-            <button onClick={addPartsRequiredInAdditionaltask}>Add Parts</button>
-        </div>
-    </div>
-}
 
-export default RequestAdditionalWorkFormContainer
+    </div>;
+};
+
+export default RequestAdditionalWorkFormContainer;

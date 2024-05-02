@@ -8,8 +8,8 @@ export const NEW_ADDITIONAL_WORK = {
             critical: false,
             partsRequired: [
                 {
-                    partName:"",
-                    partPrice:0
+                    partName: "",
+                    partPrice: 0
                 }
             ]
         }

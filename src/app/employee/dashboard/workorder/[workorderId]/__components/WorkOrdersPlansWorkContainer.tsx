@@ -1,15 +1,15 @@
-import React from 'react'
-import ServicePlanDetailContainer from './ServicePlanDetailContainer'
-import { Typography } from 'antd'
-import { TServicePlans } from '@/app/types/service'
-import { TTask } from '@/app/types/work-order'
-import AdditionalWorkRequest from './AdditionalWorkRequest'
-const { Title, Text } = Typography
+import React from 'react';
+import ServicePlanDetailContainer from './ServicePlanDetailContainer';
+import { Typography } from 'antd';
+import { TServicePlans } from '@/app/types/service';
+import { TTask } from '@/app/types/work-order';
+import AdditionalWorkRequest from './AdditionalWorkRequest';
+const { Title, Text } = Typography;
 
 type Props = {
-    servicePlanId: string[] | TServicePlans[]
-    tasks: TTask[]
-}
+    servicePlanId: string[] | TServicePlans[];
+    tasks: TTask[];
+};
 
 const WorkOrdersPlansWorkContainer = (props: Props) => {
     return (
@@ -26,10 +26,10 @@ const WorkOrdersPlansWorkContainer = (props: Props) => {
                         props.servicePlanId && props.servicePlanId.length > 0 ?
                             <div>
 
-                                <div className='grid md:grid-cols-2 grid-cols-1 gap-4'>
+                                <div className='grid grid-cols-1 gap-4'>
                                     {
                                         props.servicePlanId.map((plan, index) => {
-                                            return <ServicePlanDetailContainer key={index} servicePlan={plan} />
+                                            return <ServicePlanDetailContainer key={index} servicePlan={plan} />;
                                         })
                                     }
                                 </div>
@@ -44,12 +44,12 @@ const WorkOrdersPlansWorkContainer = (props: Props) => {
                     </div>
                     {
                         props.tasks && props.tasks.length > 0 ?
-                            <ul>
+                            <ul className='flex flex-wrap justify-between items-center'>
                                 {
                                     props.tasks.map((el, index) => {
-                                        return <li key={index} className='relative flex items-center gap-4 ps-6 before:content=[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:h-[10px] before:w-[10px] before:rounded-full before:bg-yellow-300'>
+                                        return <li key={index} className='relative flex items-center gap-4 ps-6 before:content=[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:h-[10px] before:w-[10px] before:rounded-full before:bg-yellow-300 w-1/2 mb-2'>
                                             <p>{el.title}</p>
-                                        </li>
+                                        </li>;
                                     })
                                 }
                             </ul>
@@ -62,7 +62,7 @@ const WorkOrdersPlansWorkContainer = (props: Props) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default WorkOrdersPlansWorkContainer
+export default WorkOrdersPlansWorkContainer;
