@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from 'react'
-import { Button, Divider, Tag, Typography } from 'antd'
+import React, { useEffect, useState } from 'react';
+import { Button, Divider, Tag, Typography } from 'antd';
 import VehicleFuelDetailContainer from './__components/VehicleFuelDetailContainer';
 import { TWorkOrder } from '@/app/types/work-order';
 import WorkOrderCustomerDetails from './__components/WorkOrderCustomerDetails';
@@ -15,6 +15,7 @@ import WorkOrderMechanicDetailContainer from './__components/WorkOrderMechanicDe
 import WorkOrderAdvisorDetails from './__components/WorkOrderAdvisorDetails';
 import WorkOrderServiceDetailContainer from './__components/WorkOrderServiceDetailContainer';
 import WorkOrderRampDetails from './__components/WorkOrderRampDetails';
+import { appointmentStatusText } from '../../appointment/__utils/appointmentStatus';
 
 
 const { Text, Title } = Typography;
@@ -45,7 +46,7 @@ const Page = (props: Props) => {
         } finally {
           setLoading(false);
         }
-      }())
+      }());
     }
   }, [props.params.workorderId]);
 
@@ -54,21 +55,22 @@ const Page = (props: Props) => {
       return {
         ...prv,
         [field]: fieldData
-      } as TWorkOrder
-    })
-  }
+      } as TWorkOrder;
+    });
+  };
 
 
   return (
     <div className='p-4 bg-white rounded-md'>
 
       {
-        loading ? <div  className="flex justify-center items-center h-screen w-full"><Loader /></div>  : (
+        loading ? <div className="flex justify-center items-center h-screen w-full"><Loader /></div> : (
           workOrder ? <div>
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">WorkOrders - #{workOrder.orderNumber}</h2>
+              <h2 className="text-xl font-semibold">Work Order - #{workOrder.orderNumber}</h2>
               <div>
-                <Tag> {workOrder.status}</Tag>
+                {appointmentStatusText[workOrder.status]}
+                {/* <Tag> {workOrder.status}</Tag> */}
               </div>
             </div>
 
@@ -94,7 +96,7 @@ const Page = (props: Props) => {
                 workOrder.status === "Pending" ? <div>
                   <Title level={5}>Prepare WorkOrder</Title>
                   <Button type='primary' onClick={() => {
-                    router.push(`/employee/dashboard/workorder/${props.params.workorderId}/prepare`)
+                    router.push(`/employee/dashboard/workorder/${props.params.workorderId}/prepare`);
                   }}>Prepare</Button>
                 </div> : <div>
                   <WorkOrderServiceDetailContainer workOrder={workOrder} />

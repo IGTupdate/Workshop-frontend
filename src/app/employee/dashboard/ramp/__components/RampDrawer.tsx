@@ -21,6 +21,7 @@ import { Controller, useForm } from "react-hook-form";
 import { RAMP_INITIAL_DATA } from "../_utils/constants";
 import { rampCreateApi, rampUpdateApi } from "@/app/services/operations/workorder/workorder";
 import dayjs from "dayjs";
+import Watermark from "@/app/components/Text/WatermarkText";
 
 const { Text } = Typography;
 
@@ -61,14 +62,14 @@ const RampDrawer = ({ drawerData, setDrawerData, setRampLoading }: Props) => {
     // console.log(data, drawerData)
     if (!drawerData || drawerData.type === 'workorder') return;
     if (drawerData.type === 'newramp') {
-      const res = await rampCreateApi(data)
-      console.log(res)
+      const res = await rampCreateApi(data);
+      console.log(res);
     } else {
-      const res = await rampUpdateApi({ ...data, _id: drawerData.value._id })
-      console.log(res)
+      const res = await rampUpdateApi({ ...data, _id: drawerData.value._id });
+      console.log(res);
     }
-    setRampLoading(true)
-    closeDrawer()
+    setRampLoading(true);
+    closeDrawer();
   };
 
   return (
@@ -88,7 +89,7 @@ const RampDrawer = ({ drawerData, setDrawerData, setRampLoading }: Props) => {
       }}
       footer={
         <Space>
-          <Button onClick={closeDrawer}>Cancel</Button>
+          {drawerData && drawerData.type !== 'workorder' && <Button onClick={closeDrawer}>Cancel</Button>}
           {
             drawerData && drawerData.type !== 'workorder' && <Button type="primary" onClick={handleSubmit(onSubmit)}>
               Save
@@ -152,10 +153,10 @@ const RampDrawer = ({ drawerData, setDrawerData, setRampLoading }: Props) => {
                       location: getValues('location'),
                       isActive: !drawerData.value.isActive
                     }
-                  })
+                  });
                 }}
               />
-              <p>{drawerData.value.isActive? 'true' : 'false'}</p>
+              <p>{drawerData.value.isActive ? 'true' : 'false'}</p>
             </Row>
           )
         }
@@ -168,19 +169,35 @@ const RampDrawer = ({ drawerData, setDrawerData, setRampLoading }: Props) => {
               </label>
               {
                 drawerData.value.map((ele, i) => (
-                  <Card key={i} className=" my-4 ">
-                    <p>
-                      OrderId: &nbsp;
-                      <Link href={`/employee/dashboard/workorder/${ele._id}`}>
-                        {ele.orderNumber}
-                      </Link>
-                    </p>
-                    {ele.estimatedTimeOfCompletion && <p>Estimated Time of Completion: {dayjs(ele.estimatedTimeOfCompletion).format('DD-MM-YYYY hh:mm A')}</p>}
-                  </Card>
+                  <div key={i} className="flex justify-between items-center pb-4">
+                    <div className={`flex w-1/2 flex-col ps-6 relative before:content-[''] before:absolute ${drawerData.value.length - 1 === i ? 'before:h-0' : 'before:h-full'} before:w-[1px] before:bg-slate-300 before:left-[0.2em] before:top-[1.15rem]
+                                                              `}>
+                      <h3 className='font-medium relative before:content-[""] before:absolute before:h-2 before:w-2 before:rounded-full before:bg-customYellow before:left-[-1.8em] before:top-1/2 before:translate-y-[-50%]'>OrderId</h3>
+                      <Link href={`/employee/dashboard/workorder/${ele._id}`}>{ele.orderNumber}</Link>
+                    </div>
+                    <div className="flex w-1/2 flex-col">
+                      <h3 className='font-medium'>Estimated Time of Completion</h3>
+                      <p>{ele.estimatedTimeOfCompletion ? dayjs(ele.estimatedTimeOfCompletion).format('DD-MM-YYYY hh:mm A') : 'Time is unavailable'}</p>
+                    </div>
+                  </div>
+
+
+
+                  // <Card key={i} className=" my-4 ">
+                  //   <p>
+                  //     OrderId: &nbsp;
+                  //     <Link href={`/employee/dashboard/workorder/${ele._id}`}>
+                  //       {ele.orderNumber}
+                  //     </Link>
+                  //   </p>
+                  //   {ele.estimatedTimeOfCompletion && <p>Estimated Time of Completion: {dayjs(ele.estimatedTimeOfCompletion).format('DD-MM-YYYY hh:mm A')}</p>}
+                  // </Card>
                 ))
               }
               {
-                drawerData.value.length === 0 && <p>No Work Orders Assigned</p>
+                drawerData.value.length === 0 && <div className="relative mt-8">
+                  <Watermark text="No Work Orders Assigned" />
+                </div>
               }
             </div>
           )
