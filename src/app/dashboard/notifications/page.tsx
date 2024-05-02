@@ -4,38 +4,58 @@ import StepBar from "./__components/StepBar";
 import Notifications from "./__components/Notifications";
 import { useAppSelector } from "@/app/store/reduxHooks";
 import { appointmentNotification } from "@/app/services/operations/notification/appointment";
-import { getCustomerInitData } from "@/app/services/operations/appointment/appointment";
+import { getAppointmentStatus, getCustomerInitData } from "@/app/services/operations/appointment/appointment";
 import Loader from "@/app/components/Loader";
 
 const Page = () => {
   const [notificationData, setNotificationData] = useState({});
+  const [status, setStatus] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const customerId = useAppSelector((state) => state.auth.authData._id);
+
+
+
+  useEffect(() => {
+    initData();
+  }, [customerId]);
+
 
   const initData = async () => {
     try {
       if (!customerId) return;
       setLoading(true);
       const initAppointmentData = await getCustomerInitData(customerId);
-      const initNotificationData = await appointmentNotification(
-        initAppointmentData._id,
-      );
-      setNotificationData(initNotificationData);
+      if (initAppointmentData?._id) {
+        getAllNotificationsData(initAppointmentData?._id);
+        getAppointmentStatusData(initAppointmentData?._id);
+      }
+
       setLoading(false);
     } catch (err) {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    initData();
-  }, [customerId]);
+  const getAllNotificationsData = async (id) => {
+    const initNotificationData = await appointmentNotification(
+      id
+    );
+
+
+    setNotificationData(initNotificationData);
+  };
+
+  const getAppointmentStatusData = async (id) => {
+    const initAppointmentStatus = await getAppointmentStatus(id);
+
+    setStatus(initAppointmentStatus);
+  };
 
   return (
     <div className="h-screen sm:h-full pt-20 pb-32 px-4 md:py-0 overflow-auto">
       {/* step bar */}
-      <StepBar />
+      <StepBar status={status} />
 
       {/* notifications */}
       {loading ? (

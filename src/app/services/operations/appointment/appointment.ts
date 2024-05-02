@@ -24,7 +24,8 @@ const {
   GET_APPOINTMENT_BY_APPOINTMENT_ID,
   APPOINTMENT_CANCEL_API,
   APPOINTMENT_RESCHEDULE_API,
-  GET_PAGE_APPOINTMENT
+  GET_PAGE_APPOINTMENT,
+  GET_ALL_APPOINTMENT_STATUS
 } = appointmentEndpoints;
 
 export const getAppointmentByCalenderId = async (
@@ -187,6 +188,24 @@ export const rescheduleAppointment = async (
     if (response.data.success) {
       toast.success("Appointment Re-Scheduled Successfully");
     }
+  } catch (err) {
+    throw err;
+  }
+};
+
+
+
+export const getAppointmentStatus = async (appointmentId: string) => {
+  try {
+    const response = await apiConnector({
+      method: "GET",
+      url: GET_ALL_APPOINTMENT_STATUS + `/${appointmentId}`,
+    });
+
+    if (response.data.success) {
+      return response.data.data;
+    }
+    return {};
   } catch (err) {
     throw err;
   }

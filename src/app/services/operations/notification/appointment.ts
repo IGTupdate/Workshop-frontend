@@ -23,3 +23,5 @@ export async function appointmentNotification(appointmentId: string) {
         // throw err; // Rethrow the error for the caller to handle
     }
 }
+
+

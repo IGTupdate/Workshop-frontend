@@ -1,4 +1,4 @@
-const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_BASE_URL || ''
+const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_BASE_URL || '';
 const APPOINTMENT_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_APPOINTMENT_SERVICE_BASE_URL + "/api";
 const WORK_ORDER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_WORK_ORDER_SERVICE_BASE_URL + "/api";
 const CONSUMER_SERVICE_BASE_URL = process.env.NEXT_PUBLIC_CONSUMER_BASE_URL || '';
@@ -24,7 +24,7 @@ const RAMP = '/ramp';
 const SERVICE_CATEGORY = '/service_category';
 const SERVICE_TASKS = '/service_tasks';
 const SERVICE_PLANS = '/service_plans';
-const WORKORDER = "/workorder"
+const WORKORDER = "/workorder";
 
 // Define endpoint generators
 const authUrl = (...paths: string[]) => createUrl(AUTH_BASE_URL, ...paths);
@@ -59,6 +59,7 @@ export const appointmentEndpoints = {
   GET_APPOINTMENT_BY_CALENDAR: appointmentUrl(APPOINTMENT, "/get-by-calendar"),
   GET_APPOINTMENT_BY_APPOINTMENT_ID: appointmentUrl(APPOINTMENT, "/get"),
   GET_ALL_APPOINTMENT: appointmentUrl(APPOINTMENT, "/get-all"),
+  GET_ALL_APPOINTMENT_STATUS: appointmentUrl(APPOINTMENT, "/get-status"),
   GET_PAGE_APPOINTMENT: appointmentUrl(APPOINTMENT, "/get-page"),
   GET_APPOINTMENT_BOOK_INIT_DATA: appointmentUrl(APPOINTMENT, "/book/init"),
   GET_CUSTOMER_INIT_DATA: appointmentUrl(APPOINTMENT, "/get-customer/init"),
