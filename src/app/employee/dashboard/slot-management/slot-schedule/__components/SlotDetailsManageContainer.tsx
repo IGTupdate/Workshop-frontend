@@ -8,6 +8,7 @@ import { TSlotScheduleManage } from "@/app/validators/slot-schedule";
 import { NEW_SLOT_SCHEDULE_INITIAL_DATA } from "../__utils/constant";
 type Props = {
   control: Control<TSlotScheduleManage, any>,
+  errors:any
 };
 
 
@@ -31,10 +32,25 @@ const SlotDetailsManageContainer = (props: Props) => {
 
       {
         fields.map((slot_details, index) => {
-          return <div key={slot_details.id} className="mb-4">
-            <Typography>Slot : {index + 1}</Typography>
-            <div className="mb-2">
-              <Typography>Start Time - </Typography>
+          return <div key={slot_details.id} className="mb-8">
+
+            <div className="flex justify-between items-center mb-2">
+            <Typography className="p-2 py-1 font-semibold bg-yellow-100 border rounded-lg inline-block">Slot : {index + 1}</Typography>
+            <div className="flex justify-end">
+              <Button
+                type="primary"
+                danger
+                onClick={(e) => {
+                  removeSlotDetail(index);
+                }}
+              >
+                Remove
+              </Button>
+            </div>
+
+            </div>
+            <div className="mb-4">
+              <Typography className="font-semibold mb-2">Start Time</Typography>
               <Row gutter={16}>
                 <Col span={12}>
                   <label className='mb-2 block text-black1' htmlFor="name">Hour</label>
@@ -42,8 +58,9 @@ const SlotDetailsManageContainer = (props: Props) => {
                     name={`slot_details.${index}.start_time.hour`}
                     control={props.control}
                     render={({ field }) => {
-                      return <Input {...field} type="number" placeholder="Enter Hour" />
+                      return <Input {...field} type="number" placeholder="Enter Hour" min={0} max={24} />
                     }} />
+                    {props.errors?.slot_details && <span className="text-xs text-red-500">{props.errors?.slot_details[index]?.start_time?.hour?.message}</span>}
                 </Col>
                 <Col span={12}>
                   <label className='mb-2 block text-black1' htmlFor="name">Minute</label>
@@ -52,13 +69,14 @@ const SlotDetailsManageContainer = (props: Props) => {
                     control={props.control}
                     render={({ field }) => {
                       // {field.}
-                      return <Input {...field} placeholder="Enter Minute" />
+                      return <Input {...field} type="number" placeholder="Enter Minute" min={0} max={59}/>
                     }} />
+                    {props.errors?.slot_details?.[index]?.start_time?.minute && <span className="text-xs text-red-500">{props.errors?.slot_details[index]?.start_time.minute?.message}</span>}
                 </Col>
               </Row>
             </div>
-            <div className="mb-2">
-              <Typography>End Time - </Typography>
+            <div className="mb-4">
+              <Typography className="font-semibold mb-2">End Time</Typography>
               <Row gutter={16}>
                 <Col span={12}>
                   <label className='mb-2 block text-black1' htmlFor="name">Hour</label>
@@ -82,7 +100,7 @@ const SlotDetailsManageContainer = (props: Props) => {
             </div>
 
             <Row className="w-full">
-              <label className='mb-2 block text-black1' htmlFor="Limit">Limit</label>
+              <label className="font-semibold mb-2" htmlFor="Limit">Limit</label>
               <Controller
                 name={`slot_details.${index}.slot_limit`}
                 control={props.control}
@@ -90,18 +108,6 @@ const SlotDetailsManageContainer = (props: Props) => {
                   return <Input {...field} type="number" placeholder="Enter Limit" />
                 }} />
             </Row>
-
-            <div className="mb-2 flex justify-end">
-              <button
-                className="text-red-500"
-                type="button"
-                onClick={(e) => {
-                  removeSlotDetail(index);
-                }}
-              >
-                Remove
-              </button>
-            </div>
           </div>
         })
       }

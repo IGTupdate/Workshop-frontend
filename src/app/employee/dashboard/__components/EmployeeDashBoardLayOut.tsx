@@ -16,11 +16,11 @@ const EmployeeDashBoardLayOut = ({
 }>) => {
   const [collapsed, setCollapsed] = useState(false);
 
-  useEffect(() => {});
+  useEffect(() => { });
   return (
     <Suspense
       fallback={
-        <div className="flex justify-center items-center w-full min-h-screen">
+        <div className="flex justify-center items-center w-screen h-screen">
           <Loader />
         </div>
       }

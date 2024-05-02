@@ -18,7 +18,7 @@ const LogIn: React.FC = () => {
   const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
   const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
     dispatch(setAuthLoading(true));
@@ -27,8 +27,9 @@ const LogIn: React.FC = () => {
       router.push("/employee/dashboard");
     } catch (err) {
       // console.log(error)
+    } finally {
+      dispatch(setAuthLoading(false));
     }
-    dispatch(setAuthLoading(false));
   };
 
   return (
@@ -72,7 +73,7 @@ const LogIn: React.FC = () => {
             render={({ field }) => (
               <div className="relative">
                 <Input
-                  type={showPassword ? ("text"):("password")}
+                  type={showPassword ? ("text") : ("password")}
                   size="large"
                   placeholder="Enter Password"
                   className="w-full text"
@@ -80,7 +81,7 @@ const LogIn: React.FC = () => {
                 />
                 <span className="absolute right-2 bottom-3 cursor-pointer"
                   onClick={() => setShowPassword((prev) => !prev)}>
-                      { showPassword ? <FaEyeSlash fontSize={18} fill="#AFB2BF"/> : <FaEye fontSize={18} fill="#AFB2BF"/>}
+                  {showPassword ? <FaEyeSlash fontSize={18} fill="#AFB2BF" /> : <FaEye fontSize={18} fill="#AFB2BF" />}
                 </span>
               </div>
             )}

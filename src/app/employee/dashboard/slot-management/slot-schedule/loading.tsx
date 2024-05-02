@@ -5,9 +5,9 @@ type Props = {};
 
 const loading = (props: Props) => {
   return (
-    <div className="p-4 bg-white rounded-md">
-      <Loader />
-    </div>
+    <div className="flex justify-center items-center h-screen w-full">
+    <Loader />
+  </div>
   );
 };
 

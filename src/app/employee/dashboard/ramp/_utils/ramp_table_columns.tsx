@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { TActiveRamp, TRamp } from "@/app/types/ramp";
 import { TWorkOrder } from "@/app/types/work-order";
 import { Button, Space, TableProps } from "antd";
@@ -18,7 +18,7 @@ export const ramp_table_columns = (
       title: "Ramp Name",
       dataIndex: "name",
       key: "name",
-      render: (text: string) => <a>{text}</a>,
+      render: (text: string) => <p className="uppercase font-semibold">{text}</p>,
     },
     {
       title: 'Assigned Work Orders',
@@ -27,9 +27,9 @@ export const ramp_table_columns = (
       render: (assigned_workOrder: TWorkOrder[]) => (
         <>
           <Button onClick={() => setOpenDrawer({
-          type: 'workorder',
-          value: assigned_workOrder
-       })}>Show Details</Button>
+            type: 'workorder',
+            value: assigned_workOrder
+          })}>Show Details</Button>
         </>
       ),
     },
@@ -38,10 +38,10 @@ export const ramp_table_columns = (
       key: "action",
       render: (_, record: TRamp) => (
         <Space size="middle">
-          <Button onClick={() => setOpenDrawer({
-          type: 'ramp',
-          value: record
-       })}>Update</Button>
+          <Button type="primary" onClick={() => setOpenDrawer({
+            type: 'ramp',
+            value: record
+          })}>Update</Button>
           {/* <button onClick={() => handleRampDeleteModal(record)} className="text-red-500">Delete</button> */}
         </Space>
       ),

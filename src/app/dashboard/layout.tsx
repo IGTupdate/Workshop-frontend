@@ -13,7 +13,7 @@ const RootLayout: React.FC<ChildrenProps> = ({ children }) => {
   return (
     <>
       {authLoading ? (
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center items-center h-screen w-full">
           <Loader />
         </div>
       ) : (

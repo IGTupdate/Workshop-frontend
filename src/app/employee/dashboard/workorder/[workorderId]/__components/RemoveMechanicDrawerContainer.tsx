@@ -119,7 +119,9 @@ const RemoveMechanicDrawerContainer = (props: Props) => {
     return (
         <>
             {
-                loading ? <Loader /> : <div>
+                loading ? <div className="flex justify-center items-center h-scree w-full">
+                    <Loader />
+                </div> : <div>
                     <Checkbox.Group style={{ width: '100%' }} onChange={handleSelectMechanic}>
                         {
                             mechanics.map((el, index) => {

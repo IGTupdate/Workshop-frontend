@@ -1,6 +1,7 @@
 import React from "react";
 import AppointmentpageContainer from "./__components/AppointmentpageContainer";
 import Link from "next/link";
+import { Button } from "antd";
 
 type Props = {};
 const page = async (props: Props) => {
@@ -10,9 +11,8 @@ const page = async (props: Props) => {
         <h2 className="text-xl font-semibold">Manage Appointments</h2>
         <Link
           href={`/employee/dashboard/appointment/book`}
-          className="bg-customYellow text-white1 font-medium text-md px-4 py-2 rounded-md"
         >
-          Book Appointment
+          <Button type="primary">Book Appointment</Button>
         </Link>
       </div>
 

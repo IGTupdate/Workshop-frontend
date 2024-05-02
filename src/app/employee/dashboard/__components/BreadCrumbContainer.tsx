@@ -54,6 +54,7 @@ const BreadCrumbContainer = (props: Props) => {
                 <Breadcrumb
                     separator=">"
                     items={breadcrumbItem}
+                    className='font-semibold text-black'
                 />
             </div>
         </div>

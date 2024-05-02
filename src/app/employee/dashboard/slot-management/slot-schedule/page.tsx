@@ -5,7 +5,7 @@ type Props = {};
 
 const page = (props: Props) => {
   return (
-    <div className="p-4 bg-white rounded-md">
+    <div>
       <SlotScheduleContainer />
     </div>
   );

@@ -29,8 +29,9 @@ const Register: React.FC = () => {
       router.push("/dashboard");
     } catch (err) {
       // console.log(error)
+    } finally {
+      dispatch(setAuthLoading(false));
     }
-    dispatch(setAuthLoading(false));
   };
 
   return (

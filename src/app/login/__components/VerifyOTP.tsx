@@ -45,6 +45,7 @@ const VerifyOTP = () => {
       if (result.data.success) {
         if (result?.data?.data?.userExists) router.push("/dashboard");
         else dispatch(setAuthStep(2));
+
       }
     } catch (error) {
       toast.error("Invalid OTP");

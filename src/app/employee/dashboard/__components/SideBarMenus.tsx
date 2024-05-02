@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { SiReacthookform } from "react-icons/si";
+import { FaTruckRampBox } from "react-icons/fa6";
 import { RxDashboard } from "react-icons/rx";
 import { IoIosApps } from "react-icons/io";
 import { FaRegCalendarAlt } from "react-icons/fa";
@@ -12,7 +12,7 @@ import { FaRegUser } from "react-icons/fa";
 
 import { DesktopOutlined, } from '@ant-design/icons';
 import { usePathname, useRouter } from 'next/navigation';
-import { Menu, MenuProps } from 'antd';
+import { Menu } from 'antd';
 import { getActiveSideBarMenu, getSideBarMenuItems, sideBarMenuItems } from '../utils/sideBarMenuItems';
 
 const dashBoardIcons = {
@@ -23,7 +23,8 @@ const dashBoardIcons = {
     Calender: <FaRegCalendarAlt />,
     SlotSchedule: <MdSchedule />,
     WorkOrder: <FaHouseUser />,
-    Employee: <FaRegUser />
+    Employee: <FaRegUser />,
+    Ramp: <FaTruckRampBox />,
 }
 
 type Props = {}

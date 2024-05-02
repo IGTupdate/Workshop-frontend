@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import WorkOrderMechanicDetailContainer from './__components/WorkOrderMechanicDetailContainer';
 import WorkOrderAdvisorDetails from './__components/WorkOrderAdvisorDetails';
 import WorkOrderServiceDetailContainer from './__components/WorkOrderServiceDetailContainer';
+import WorkOrderRampDetails from './__components/WorkOrderRampDetails';
 
 
 const { Text, Title } = Typography;
@@ -62,7 +63,7 @@ const Page = (props: Props) => {
     <div className='p-4 bg-white rounded-md'>
 
       {
-        loading ? <Loader /> : (
+        loading ? <div  className="flex justify-center items-center h-screen w-full"><Loader /></div>  : (
           workOrder ? <div>
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">WorkOrders - #{workOrder.orderNumber}</h2>
@@ -82,6 +83,11 @@ const Page = (props: Props) => {
               <WorkOrderMechanicDetailContainer
                 assigned_mechanics={workOrder.mechanicId}
                 handleUpdateWorkOrderData={handleUpdateWorkOrderData} />
+              <Divider />
+              <WorkOrderRampDetails
+                ramp={workOrder.rampId}
+                handleUpdateWorkOrderData={handleUpdateWorkOrderData}
+              />
               <Divider />
 
               {
