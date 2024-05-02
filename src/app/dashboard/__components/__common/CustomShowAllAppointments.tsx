@@ -77,8 +77,8 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
           <h1 className="text-lg font-bold bg-white p-4 rounded-xl">
             {pageTitle}
           </h1>
-          <div className=" flex flex-col gap-6 my-4 ">
-            {processedAppointmentData?.length > 0 ? (
+          {processedAppointmentData?.length > 0 ? <div className=" flex flex-col gap-6 my-4 ">
+            {processedAppointmentData?.length > 0 && (
               processedAppointmentData?.map((appointment) => (
                 <AllAppointments
                   key={appointment.appointmentId}
@@ -100,12 +100,12 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
                   }
                 />
               ))
-            ) : (
-              <div>
-                <Watermark text={pageDetailsNotFound} />
-              </div>
             )}
-          </div>
+          </div> : (
+            <div className="relative py-8">
+              <Watermark text={pageDetailsNotFound} />
+            </div>
+          )}
         </div>
       )}
     </>

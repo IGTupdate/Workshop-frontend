@@ -13,7 +13,7 @@ const StepBar = ({ status }) => {
         if (status?.appointmentStatus === "Washing") setStep(4);
         if (status?.appointmentStatus === "Payment") setStep(5);
         if (status?.appointmentStatus === "Delivery") setStep(6);
-    }, []);
+    }, [status]);
     return (
         <div className='flex justify-between items-center relative before:content-[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:w-full before:h-2 before:bg-gradient-to-r before:from-[#FFE301] before:to-[#A79638]'>
             {
