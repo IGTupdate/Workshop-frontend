@@ -16,6 +16,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
+import { FiEdit } from "react-icons/fi";
+
 const { Title } = Typography;
 
 type Props = {
@@ -28,8 +30,8 @@ type Props = {
 type TappointmentBookingConfirmationData = {
   vehicle: null | TVehicle;
   customer: null | {
-    phone: string;
-    name: string;
+    contactNumber: string;
+    fullName: string;
     email: string;
   };
   slot_details: TSlot | null;
@@ -119,6 +121,8 @@ const AppointmentBookingConfirmation = (props: Props) => {
     });
   };
 
+
+
   return loading ? (
     <div className="flex justify-center items-center h-full">
       <Loader />
@@ -128,29 +132,29 @@ const AppointmentBookingConfirmation = (props: Props) => {
       <div>
         <div className="grid grid-cols-2">
           <Title level={5}>Customer Details</Title>
-          <div className="flex justify-end">
+          {userRole === "customer" && <div className="flex justify-end">
             <Button
               type="link"
               onClick={() => {
                 changeAppointmentBookingData("customer_id", "");
               }}
             >
-              Change
+              <FiEdit />
             </Button>
-          </div>
+          </div>}
         </div>
         <div className="grid grid-cols-2 gap-2">
           <DescriptionItem
             title="Name"
-            content={appointmentBookingConfirmationData.customer?.name || "-"}
+            content={appointmentBookingConfirmationData?.customer?.fullName || "-"}
           />
           <DescriptionItem
             title="Phone"
-            content={appointmentBookingConfirmationData.customer?.phone || "-"}
+            content={appointmentBookingConfirmationData?.customer?.contactNumber || "-"}
           />
           <DescriptionItem
             title="Email"
-            content={appointmentBookingConfirmationData.customer?.email || "-"}
+            content={appointmentBookingConfirmationData?.customer?.email || "-"}
           />
         </div>
       </div>
@@ -165,7 +169,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
                 changeAppointmentBookingData("vehicle_id", "");
               }}
             >
-              Change
+              <FiEdit />
             </Button>
           </div>
         </div>
@@ -205,7 +209,7 @@ const AppointmentBookingConfirmation = (props: Props) => {
           <Title level={5}>Slot Details</Title>
           <div className="flex justify-end">
             <Button type="link" onClick={changeSlotDetails}>
-              Change
+              <FiEdit />
             </Button>
           </div>
         </div>
@@ -215,8 +219,8 @@ const AppointmentBookingConfirmation = (props: Props) => {
             content={
               appointmentBookingConfirmationData.slot_details?.start_time
                 ? new Date(
-                    appointmentBookingConfirmationData.slot_details?.start_time,
-                  ).toLocaleString()
+                  appointmentBookingConfirmationData.slot_details?.start_time,
+                ).toLocaleString()
                 : "-"
             }
           />
@@ -225,8 +229,8 @@ const AppointmentBookingConfirmation = (props: Props) => {
             content={
               appointmentBookingConfirmationData.slot_details?.end_time
                 ? new Date(
-                    appointmentBookingConfirmationData.slot_details?.end_time,
-                  ).toLocaleString()
+                  appointmentBookingConfirmationData.slot_details?.end_time,
+                ).toLocaleString()
                 : "-"
             }
           />

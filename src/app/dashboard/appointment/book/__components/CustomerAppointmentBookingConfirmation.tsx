@@ -37,8 +37,8 @@ type Props = {
 type TappointmentBookingConfirmationData = {
   vehicle: null | TVehicle;
   customer: null | {
-    phone: string;
-    name: string;
+    contactNumber: string;
+    fullName: string;
     email: string;
   };
   servicePlans: TServicePlans[] | [];
@@ -228,10 +228,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
     setAmount(total);
   }, [appointmentBookingConfirmationData.servicePlans]);
 
-  // console.log(
-  //   appointmentBookingConfirmationData.servicePlans,
-  //   "appointmentBookingConfirmationData.servicePlans"
-  // );
+
 
   return (
     <>
@@ -257,13 +254,13 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
               <DescriptionItem
                 title="Name"
                 content={
-                  appointmentBookingConfirmationData.customer?.name || "-"
+                  appointmentBookingConfirmationData.customer?.fullName || "-"
                 }
               />
               <DescriptionItem
                 title="Phone"
                 content={
-                  appointmentBookingConfirmationData.customer?.phone || "-"
+                  appointmentBookingConfirmationData.customer?.contactNumber || "-"
                 }
               />
               <DescriptionItem
