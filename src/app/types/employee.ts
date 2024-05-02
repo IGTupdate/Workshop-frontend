@@ -21,3 +21,12 @@ export type TEmployeeWorkStatus = {
         estimatedTimeOfCompletion?: string
     }[]
 }
+
+export type TEmployeeTableDataType = {
+    _id:string,
+    fullName:string
+    contactNumber: string,
+    email: string,
+    status: string,
+    role: string
+}

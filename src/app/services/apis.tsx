@@ -43,7 +43,8 @@ export const authEndpoints = {
   GET_EMPLOYEE_DATA_API: authUrl(EMPLOYEE),
   LOGOUT_API: authUrl(AUTH, '/logout'),
   CUSTOMER_UPDATE_API: authUrl(CUSTOMER, '/update'),
-  GET_ALL_EMPLOYEES: authUrl(EMPLOYEE, "/getAll")
+  GET_ALL_EMPLOYEES: authUrl(EMPLOYEE, "/getAll"),
+  EMPLOYEE_REGISTER: authUrl(EMPLOYEE, "/register"),
 };
 
 export const appointmentEndpoints = {
@@ -101,7 +102,6 @@ export const workOrderEndpoints = {
   GET_ADDITIONAL_WORK: workOrderUrl(WORKORDER, "/additional_work_request/get"),
   WORK_ORDER_RAMP_ASSIGN: workOrderUrl(WORKORDER, "/assign_ramp"),
 };
-
 
 export const notificationEndpoints = {
   GET_ALL_NOTIFICATIONS: notificationUrl("/notification/get-all")
