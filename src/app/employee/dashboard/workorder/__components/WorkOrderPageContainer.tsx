@@ -99,14 +99,14 @@ const WorkOrderPageContainer = (props: Props) => {
                 />
             }
             <div>
-              <Button type="primary"  onClick={handleClearFilter}>
+              <Button type="primary" onClick={handleClearFilter}>
                 Clear Filter
               </Button>
             </div>
           </div>
-          
+
           <div className="shadow-xl overflow-hidden rounded-xl">
-          <WorkOrderTableContainer workOrderData={workOrderData.workOrders} />
+            <WorkOrderTableContainer workOrderData={workOrderData.workOrders} />
           </div>
         </div>
       )}
