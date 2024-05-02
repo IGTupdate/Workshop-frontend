@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { Kanit } from "next/font/google";
 import "./globals.css";
+import App from "./app";
+import { kanit } from "./fontConfig";
 import StoreProvider from "./StoreProvider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider } from "antd";
-
-const kanit = Kanit({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-kanit",
-});
+import { antdConfig } from "./antdConfig";
+import { get_server_cookie } from "./utils/get_server_cookie";
 
 export const metadata: Metadata = {
   title: "Workshop Module",
@@ -23,46 +18,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const refreshToken = get_server_cookie('refreshToken')
   return (
     <html lang="en">
       <body className={kanit.className}>
         <AntdRegistry>
-          <ConfigProvider
-            theme={{
-              token: {
-                colorPrimary: "#fadb14",
-                colorInfo: "#fadb14",
-              },
-              components: {
-                "Button": {
-                  "colorPrimary": "rgb(250, 219, 20)",
-                  "primaryColor": "rgb(0, 0, 0)"
-                },
-                Menu: {
-                  colorBgContainer: "#031c30",
-                  colorFillAlter: "#031c30",
-                  itemHoverBg: "#063146",
-                  itemHoverColor: "rgba(255, 255, 255, 0.88)",
-                  itemSelectedBg: "#063146",
-                  itemSelectedColor: "rgb(255, 255, 255)",
-                  itemColor: "#FFFFFF",
-                },
-                Layout: {
-                  colorBgContainer: "#031c30",
-                },
-                Table: {
-                  headerBg: "#fadb14",
-                  headerColor: "rgb(0, 0, 0)",
-                  rowHoverBg: "rgb(245, 245, 245)",
-                },
-                Descriptions: {
-                  labelBg: "rgb(245, 245, 245)",
-                },
-              },
-            }}
-          >
-            <StoreProvider>{children}</StoreProvider>
-          </ConfigProvider>
+            <ConfigProvider {...antdConfig}>
+            <StoreProvider>
+              <App refreshToken={refreshToken}>
+                {children}
+              </App>
+            </StoreProvider>
+            </ConfigProvider>
         </AntdRegistry>
       </body>
     </html>

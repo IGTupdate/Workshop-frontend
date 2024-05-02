@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { jwtDecode } from "jwt-decode";
-import { generateAccessToken } from "./operations/auth/customerAuth";
+import { generateAccessToken, logout } from "./operations/auth/customerAuth";
 import { get_client_cookie } from "../utils/get_client_cookie";
 import { redirect } from "next/navigation";
 
@@ -31,6 +31,7 @@ axiosInstance.interceptors.request.use(
     accessToken = get_client_cookie("accessToken");
     
     if (!accessToken) {
+      logout()
       redirect('/')
       throw Error
     }

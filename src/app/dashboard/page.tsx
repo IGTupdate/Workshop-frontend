@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import AddImage from '../../../public/images/image-2.webp';
-import { getCustomerInitData } from '../services/operations/appointment/appointment';
+import { getCustomerAppointmentInitData } from '../services/operations/appointment/appointment';
 import { useAppSelector } from '../store/reduxHooks';
 import AppointmentCard from './__components/__common/AppointmentCard';
 import PaymentMethods from './__components/__common/PaymentMethods';
@@ -21,7 +21,7 @@ const Page = (props: Props) => {
   const initData = async () => {
     try {
       if (!customerId) return;
-      const initAppointmentData = await getCustomerInitData(customerId);
+      const initAppointmentData = await getCustomerAppointmentInitData(customerId);
       const initNotificationData = await appointmentNotification(initAppointmentData._id);
       setAppointmentData(initAppointmentData);
       setNotificationData(initNotificationData);

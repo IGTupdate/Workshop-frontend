@@ -4,7 +4,7 @@ import StepBar from "./__components/StepBar";
 import Notifications from "./__components/Notifications";
 import { useAppSelector } from "@/app/store/reduxHooks";
 import { appointmentNotification } from "@/app/services/operations/notification/appointment";
-import { getCustomerInitData } from "@/app/services/operations/appointment/appointment";
+import { getCustomerAppointmentInitData } from "@/app/services/operations/appointment/appointment";
 import Loader from "@/app/components/Loader";
 
 const Page = () => {
@@ -17,7 +17,7 @@ const Page = () => {
     try {
       if (!customerId) return;
       setLoading(true);
-      const initAppointmentData = await getCustomerInitData(customerId);
+      const initAppointmentData = await getCustomerAppointmentInitData(customerId);
       const initNotificationData = await appointmentNotification(
         initAppointmentData._id,
       );

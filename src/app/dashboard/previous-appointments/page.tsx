@@ -1,12 +1,13 @@
-import React from 'react'
+'use client'
 import CustomShowAllAppointments from '../__components/__common/CustomShowAllAppointments'
 
 type Props = {}
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
+
   return (
     <CustomShowAllAppointments pageType='previous'/>
   )
 }
 
-export default page
+export default Page

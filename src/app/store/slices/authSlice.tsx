@@ -11,14 +11,9 @@ export interface IAuthData {
 
 export interface IAuthState {
     authStep: number,
-    authData: IAuthData,
+    authData: IAuthData | {},
     authLoading: boolean;
 }
-
-const authDataString: string | null = typeof window !== "undefined" ? window.localStorage.getItem("authData") : null;
-
-// Parse the JSON string to convert it into an object
-const authData: IAuthData | null = authDataString ? JSON.parse(authDataString) : null;
 
 const initialAuthDataState: IAuthData = {
     contactNumber: ''
@@ -26,7 +21,7 @@ const initialAuthDataState: IAuthData = {
 
 const initialState: IAuthState = {
     authStep: 0,
-    authData: authData ? authData : initialAuthDataState,
+    authData: initialAuthDataState,
     authLoading: false
 };
 

@@ -103,7 +103,7 @@ export const getAppointMentBookInitData = async (data: TAppointmentBook) => {
   }
 };
 
-export const getCustomerInitData = async (customerId: string) => {
+export const getCustomerAppointmentInitData = async (customerId: string) => {
   try {
     const response = await apiConnector({
       method: "GET",
