@@ -3,7 +3,7 @@
 import InputField from '@/app/components/Input/InputField';
 import SelectField from '@/app/components/Input/SelectField';
 import TextAreaField from '@/app/components/Input/TextArea';
-import { updateEmployeeYupSchema } from '@/app/validators/employee';
+import { TUpdateEmpoloyee, updateEmployeeYupSchema } from '@/app/validators/employee';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from 'antd';
 import React from 'react'
@@ -13,7 +13,7 @@ type Props = {}
 
 const UpdateEmployeeForm = (props: Props) => {
 
-    const { control, formState: { errors }, setValue, handleSubmit } = useForm({
+    const { control, formState: { errors }, setValue, handleSubmit } = useForm<TUpdateEmpoloyee>({
         resolver: yupResolver(updateEmployeeYupSchema)
     });
 
@@ -28,7 +28,7 @@ const UpdateEmployeeForm = (props: Props) => {
         },
         {
             name: 'lastName',
-            error: errors?.firstName?.message || "",
+            error: errors?.lastName?.message || "",
             label: "Last Name",
             type: "text",
             control: control,
@@ -60,16 +60,16 @@ const UpdateEmployeeForm = (props: Props) => {
         },
         {
             name: 'address',
-            error: errors?.role?.message || "",
+            error: errors?.address?.message || "",
             label: "Address",
             type: "textarea",
             control: control,
-            placeholder: "Role"
+            placeholder: "Address"
         },
     ];
 
-    const onSubmit = ()=>{
-
+    const onSubmit = (data: TUpdateEmpoloyee) => {
+        console.log(data);
     }
 
 
@@ -103,7 +103,7 @@ const UpdateEmployeeForm = (props: Props) => {
                 </div>
 
                 <div className='flex justify-end mt-8'>
-                    <Button type='primary'>Update</Button>
+                    <Button htmlType='submit' type='primary'>Update</Button>
                 </div>
 
             </form>

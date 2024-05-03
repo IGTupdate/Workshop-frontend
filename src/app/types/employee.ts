@@ -6,6 +6,7 @@ export type TEmployee = {
     fullName: string,
     email: string,
     roleId: string,
+    contactNumber?:string
 }
 
 export type TEmployeeWorkStatus = {

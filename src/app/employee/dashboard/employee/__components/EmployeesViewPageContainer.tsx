@@ -28,7 +28,7 @@ const EmployeesViewPageContainer = (props: Props) => {
                             status: "",
                             email: el.email,
                             role: el.roleId,
-                            contactNumber: ""
+                            contactNumber: el.contactNumber || ""
                         }
                     })
                 })
