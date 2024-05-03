@@ -11,4 +11,4 @@ const loading = (props: Props) => {
   );
 };
 
-export default loading;
+export default loading; 

@@ -69,9 +69,8 @@ const ProfileForm = ({ edit, setEdit }: Props) => {
       return;
     }
 
-    dispatch(updateCustomer(newData, setLoading));
+    dispatch(updateCustomer(newData, setLoading, setEdit));
 
-    setEdit(false);
   };
 
   return (

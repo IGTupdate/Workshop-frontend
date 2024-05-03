@@ -15,10 +15,10 @@ export async function getAccess(dispatch: AppDispatch) {
     const accessData = await apiConnector({
       method: "GET",
       url: GET_ACCESS
-    })
+    });
 
     if (accessData.data.success) {
-      dispatch(accessData.data.data)
+      dispatch(accessData.data.data);
     }
   } catch (err) { }
 }
@@ -83,7 +83,7 @@ export async function verifyOTP(contactNumber: string, otp: string, dispatch: Ap
         });
 
         if (authResult?.data?.success) {
-          dispatch(getCustomerAuthInitData())
+          dispatch(getCustomerAuthInitData());
           // await getCustomerData(authResult.data.data._id, dispatch);
           // await getAccess(dispatch)
           toast.success("USER LOGGED IN SUCCESSFULLY");
@@ -113,7 +113,7 @@ export async function registerCustomer(fullName: string, email: string, dispatch
     });
 
     if (authResult?.data?.success) {
-      dispatch(getCustomerAuthInitData())
+      dispatch(getCustomerAuthInitData());
       // await getCustomerData(authResult.data.data._id, dispatch);
       // await getAccess(dispatch)
       toast.success("REGISTRATION SUCCESSFULL");
@@ -133,7 +133,7 @@ export async function generateAccessToken() {
   }
 }
 
-export const updateCustomer = (data: any, setLoading: React.Dispatch<React.SetStateAction<boolean>>): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
+export const updateCustomer = (data: any, setLoading: React.Dispatch<React.SetStateAction<boolean>>, setEdit: React.Dispatch<React.SetStateAction<boolean>>): ThunkAction<void, RootState, unknown, Action> => async (dispatch, getState) => {
   try {
     const authData = getState().auth.authData;
     const response = await apiConnector({ method: "POST", url: CUSTOMER_UPDATE_API + "/" + authData._id, bodyData: data });
@@ -145,6 +145,7 @@ export const updateCustomer = (data: any, setLoading: React.Dispatch<React.SetSt
       dispatch(setAuthData(newAuthData));
       toast.success("User Updated Successfully");
       setLoading(false);
+      setEdit(false);
     }
   } catch (err) {
     // console.log(err);
