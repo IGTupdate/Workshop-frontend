@@ -6,6 +6,8 @@ import HeaderContainer from "./HeaderContainer";
 import { SIDEBAR_COLLAPSED_WIDTH, SIDEBAR_WIDTH } from "../utils/variables";
 import Loader from "@/app/components/Loader";
 import BreadCrumbContainer from "./BreadCrumbContainer";
+import { useAppSelector } from "@/app/store/reduxHooks";
+import useDeviceType from "../__hooks/useDeviceType";
 
 const { Header, Sider, Content } = Layout;
 
@@ -14,7 +16,17 @@ const EmployeeDashBoardLayOut = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
+  useDeviceType();
+
+
+  const { employeeSmallDevice } = useAppSelector((state) => state.device);
+
   const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    setCollapsed(employeeSmallDevice);
+  }, [employeeSmallDevice]);
+
 
   useEffect(() => { });
   return (

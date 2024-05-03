@@ -92,6 +92,10 @@ a:hover {
   flex-wrap: wrap;
 }
 
+:where(.css-dev-only-do-not-override-1jh2zmy).ant-table-wrapper .ant-table-sticky-scroll {
+  display: none !important;
+}
+
 
 .swiper-slide {
   padding: 1em !important;

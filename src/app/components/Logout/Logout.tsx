@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { setAuthLoading } from '@/app/store/slices/authSlice';
 
 type Props = {
-  collapsed?: boolean;
+  collapsed: boolean;
 };
 
 const Logout = (props: Props) => {
@@ -23,7 +23,7 @@ const Logout = (props: Props) => {
       router.push('/');
       dispatch(setAuthLoading(false));
     } catch (err) {
-      // Handle error
+      // console.error(err);
     } finally {
       dispatch(setAuthLoading(false));
     }
@@ -40,11 +40,15 @@ const Logout = (props: Props) => {
   return (
     <>
       <Button
-        className={`w-full ${!props.collapsed ? 'bg-[#063146] text-white' : 'bg-transparent text-[#063146]'} hover:bg-[#063142] shadow-xl`}
-        icon={<FiLogOut />}
+        // type="primary"
+        style={{
+          padding: "1.5em 0", display: "flex", justifyContent: "center", alignItems: "center", border: "none", color: "white"
+        }}
+        className={`${!props.collapsed ? 'bg-[#063146]' : 'bg-transparent'} w-full hover:bg-[#063142] shadow-xl`}
+        icon={< FiLogOut />}
         onClick={showModal}
       >
-        {props.collapsed ? null : 'LogOut'}
+        {!props.collapsed ? <span>LogOut</span> : ''}
       </Button>
       {/* Use the custom modal component */}
       <CustomModal

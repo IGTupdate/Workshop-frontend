@@ -30,8 +30,8 @@ type Props = {
 type TappointmentRescheduleConfirmationData = {
   vehicle: null | TVehicle;
   customer: null | {
-    phone: string;
-    name: string;
+    contactNumber: string;
+    fullName: string;
     email: string;
   };
   slot_details: TSlot | null;
@@ -127,13 +127,13 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
           <DescriptionItem
             title="Name"
             content={
-              appointmentRescheduleConfirmationData.customer?.name || "-"
+              appointmentRescheduleConfirmationData.customer?.fullName || "-"
             }
           />
           <DescriptionItem
             title="Phone"
             content={
-              appointmentRescheduleConfirmationData.customer?.phone || "-"
+              appointmentRescheduleConfirmationData.customer?.contactNumber || "-"
             }
           />
           <DescriptionItem
@@ -198,8 +198,8 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
             content={
               appointmentRescheduleConfirmationData.slot_details?.start_time
                 ? new Date(
-                    appointmentRescheduleConfirmationData.slot_details?.start_time,
-                  ).toLocaleString()
+                  appointmentRescheduleConfirmationData.slot_details?.start_time,
+                ).toLocaleString()
                 : "-"
             }
           />
@@ -208,8 +208,8 @@ const AppointmentRescheduleConfirmation = (props: Props) => {
             content={
               appointmentRescheduleConfirmationData.slot_details?.end_time
                 ? new Date(
-                    appointmentRescheduleConfirmationData.slot_details?.end_time,
-                  ).toLocaleString()
+                  appointmentRescheduleConfirmationData.slot_details?.end_time,
+                ).toLocaleString()
                 : "-"
             }
           />

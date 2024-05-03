@@ -5,9 +5,9 @@ type Props = {};
 
 const loading = (props: Props) => {
   return (
-    <div className="flex justify-center items-center h-screen w-full">
-    <Loader />
-  </div>
+    <div style={{ height: 'calc(100vh - 200px)' }} className="flex justify-center items-center w-full">
+      <Loader />
+    </div>
   );
 };
 

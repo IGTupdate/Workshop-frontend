@@ -69,46 +69,44 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
   return (
     <>
       {appointmentLoading ? (
-        <div className="flex justify-center items-center min-h-screen sm:min-h-full">
+        <div className="flex justify-center items-center min-h-screen sm:min-h-[95vh]">
           <Loader />
         </div>
       ) : (
-        <div className="p-4 pt-28 pb-32 md:p-0 min-h-screen sm:min-h-full">
-          <h1 className="text-lg font-bold bg-white p-4 rounded-xl">
-            {pageTitle}
-          </h1>
-          {processedAppointmentData?.length > 0 ? <div className=" flex flex-col gap-6 my-4 ">
-            {processedAppointmentData?.length > 0 && (
-              processedAppointmentData?.map((appointment) => (
-                <AllAppointments
-                  key={appointment.appointmentId}
-                  appointment={appointment}
-                  onRescheduleAppointment={
-                    pageType === "reschedule" || pageType === "cancelled"
-                      ? handleRescheduleAppointment
-                      : undefined
-                  }
-                  onShowAppointmentDetails={
-                    pageType === "previous"
-                      ? handleShowAppointmentDetails
-                      : undefined
-                  }
-                  onCancelAppointment={
-                    pageType === "cancelled"
-                      ? handleCancelAppointment
-                      : undefined
-                  }
-                />
-              ))
-            )}
-          </div> : (
+        <>
+          {processedAppointmentData?.length > 0 ? (
+            <div className="p-4 pt-28 pb-32 md:p-0 min-h-screen sm:min-h-full">
+              <h1 className="text-lg font-bold bg-white p-4 rounded-xl">
+                {pageTitle}
+              </h1>
+              <div className="flex flex-col gap-6 my-4">
+                {processedAppointmentData?.map((appointment) => (
+                  <AllAppointments
+                    key={appointment.appointmentId}
+                    appointment={appointment}
+                    onRescheduleAppointment={
+                      (pageType === "reschedule" || pageType === "cancelled") ?
+                        handleRescheduleAppointment : undefined
+                    }
+                    onShowAppointmentDetails={
+                      pageType === "previous" ? handleShowAppointmentDetails : undefined
+                    }
+                    onCancelAppointment={
+                      pageType === "cancelled" ? handleCancelAppointment : undefined
+                    }
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
             <div className="relative py-8">
               <Watermark text={pageDetailsNotFound} />
             </div>
           )}
-        </div>
+        </>
       )}
     </>
+
   );
 };
 

@@ -3,8 +3,9 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import Fly from "../../../../../public/images/fly.webp";
 
+
 const StepBar = ({ status }) => {
-    const [step, setStep] = useState<number>(5);
+    const [step, setStep] = useState<number>(0);
 
     useEffect(() => {
         if (status?.appointmentStatus === "Assigned") setStep(1);

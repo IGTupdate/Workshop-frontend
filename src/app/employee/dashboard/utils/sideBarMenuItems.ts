@@ -119,7 +119,7 @@ export const findRecursiveByPathNameExact = (sideBarMenuItems: TsideBarMenuItems
 
 
 export function getActiveSideBarMenu(pathname: string): string {
-    const active_menu = findRecursiveByPathName(pathname.split("/")[1] === 'dashboard' ? CustomerSideBarMenuItems : sideBarMenuItems, pathname);
+    const active_menu = findRecursiveByPathNameExact(pathname.split("/")[1] === 'dashboard' ? CustomerSideBarMenuItems : sideBarMenuItems, pathname);
     if (!active_menu) return "1";
     return active_menu.key;
 }

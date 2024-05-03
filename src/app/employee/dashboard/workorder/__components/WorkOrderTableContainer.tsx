@@ -1,14 +1,14 @@
 "use client";
 
-import { Table } from 'antd'
-import React, { useEffect, useState } from 'react'
-import { GetWorkOrderTableColumn } from './GetWorkOrderTableColumn'
+import { Table } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { GetWorkOrderTableColumn } from './GetWorkOrderTableColumn';
 import { Tag } from "antd";
 import { TWorkOrder, TWorkOrderDataTable } from '@/app/types/work-order';
 
 type Props = {
     workOrderData: TWorkOrder[];
-}
+};
 
 const WorkOrderTableContainer = (props: Props) => {
 
@@ -27,11 +27,11 @@ const WorkOrderTableContainer = (props: Props) => {
                             el.appointmentId.vehicle_id.registeration_number : "") : "") || "",
                     status: el.status,
                     _id: el._id,
-                    createdAt : new Date(el.createdAt)
-                }
-            })
-        })
-    }, [props.workOrderData])
+                    createdAt: new Date(el.createdAt)
+                };
+            });
+        });
+    }, [props.workOrderData]);
 
     return (
         <div>
@@ -40,9 +40,10 @@ const WorkOrderTableContainer = (props: Props) => {
                 pagination={false}
                 columns={GetWorkOrderTableColumn()}
                 dataSource={workOrderTableData}
+                scroll={{ x: 980 }}
             />
         </div>
-    )
-}
+    );
+};
 
-export default WorkOrderTableContainer
+export default WorkOrderTableContainer;

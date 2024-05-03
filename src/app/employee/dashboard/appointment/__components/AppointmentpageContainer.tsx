@@ -73,7 +73,7 @@ const AppointmentpageContainer = (props: Props) => {
   const handleRangeSelect = (value: any) => {
     if (!value) return;
     // console.log(value);
-    const startDate = value.length > 0 ? dayjs(value[0]).format('YYYY-MM-DDTHH:mm:ss.SSS') : new Date().toISOString()
+    const startDate = value.length > 0 ? dayjs(value[0]).format('YYYY-MM-DDTHH:mm:ss.SSS') : new Date().toISOString();
     const endDate = value.length > 1 ? dayjs(value[1]).format('YYYY-MM-DDTHH:mm:ss.SSS') : new Date().toISOString();
 
     // console.log(startDate, endDate);
@@ -81,7 +81,7 @@ const AppointmentpageContainer = (props: Props) => {
     let querystring = createQueryString("startDate", startDate);
     querystring = createQueryString("endDate", endDate, querystring);
     router.push(`${pathname}?${querystring}`);
-  }
+  };
 
   return (
     <div>
@@ -107,7 +107,7 @@ const AppointmentpageContainer = (props: Props) => {
               </Button>
             </div>
           </div>
-          <div className="shadow-xl overflow-hidden rounded-xl">
+          <div className="shadow-xl rounded-xl">
             <AppointmentTableContainer
               appointmentData={appointmentData.appointments}
             />

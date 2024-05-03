@@ -71,7 +71,7 @@ const RequestAdditonalWorkDrawerContainer = (props: Props) => {
             </div>
             <Drawer
                 title="Request Additonal Work"
-                width={480}
+                width={550}
                 onClose={handleCloseDrawer}
                 open={openDrawer}
                 extra={

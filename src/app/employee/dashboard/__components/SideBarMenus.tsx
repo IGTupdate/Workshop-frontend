@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import React from 'react'
+import React from 'react';
 import { FaTruckRampBox } from "react-icons/fa6";
 import { RxDashboard } from "react-icons/rx";
 import { IoIosApps } from "react-icons/io";
@@ -25,9 +25,9 @@ const dashBoardIcons = {
     WorkOrder: <FaHouseUser />,
     Employee: <FaRegUser />,
     Ramp: <FaTruckRampBox />,
-}
+};
 
-type Props = {}
+type Props = {};
 
 const SideBarMenus = (props: Props) => {
     const router = useRouter();
@@ -48,7 +48,7 @@ const SideBarMenus = (props: Props) => {
             defaultOpenKeys={['sub1']}
             items={sideBarMenus}
         />
-    )
-}
+    );
+};
 
-export default SideBarMenus
+export default SideBarMenus;

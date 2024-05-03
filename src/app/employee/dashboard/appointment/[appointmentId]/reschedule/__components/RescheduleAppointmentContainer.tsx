@@ -84,7 +84,10 @@ const RescheduleAppointmentContainer = (props: Props) => {
           <Steps
             className="m-4 mx-auto"
             current={currentStep}
+            labelPlacement="vertical"
+            direction="horizontal"
             items={slot_booking_customer_reschedule_step}
+
           />
 
           {currentStep === 0 && <SlotAvailablityContainer />}

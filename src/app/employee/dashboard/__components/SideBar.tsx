@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { IAuthData } from "@/app/store/slices/authSlice";
 import Logout from "@/app/components/Logout/Logout";
 
-const { Text, Title } = Typography
+const { Text, Title } = Typography;
 
 const { Header, Sider, Content } = Layout;
 
@@ -23,14 +23,16 @@ type Props = {
 const SideBar = (props: Props) => {
 
   const [user, setUser] = useState<IAuthData>();
-  const { authData } = useAppSelector((state) => state.auth)
+  const { authData } = useAppSelector((state) => state.auth);
+
 
 
   useEffect(() => {
     setUser(() => {
       return authData;
-    })
+    });
   }, [authData]);
+
 
 
   return (
@@ -47,8 +49,8 @@ const SideBar = (props: Props) => {
         <Avatar size={"large"} icon={<UserOutlined />} />
         {!props.collapsed && (
           <div>
-            <Title level={5} style={{ color: "white", textTransform: "capitalize", marginBottom: 0 }}>Hello {user?.fullName?.split(" ")[0]}</Title>
-            <Text className="capitalize" style={{ color: "#CDCDCE" }}>{user?.role || "-"}</Text>
+            <Title level={5} style={{ color: "white", textTransform: "capitalize", marginBottom: 0 }}>Hello {user?.firstName}</Title>
+            <Text className="capitalize" style={{ color: "#CDCDCE" }}>{user?.roleId?.role || "-"}</Text>
           </div>
         )}
       </Space>
@@ -58,7 +60,7 @@ const SideBar = (props: Props) => {
       </div>
 
       <div className="w-[150px] lg:w-[200px]  absolute bottom-6 left-1/2 translate-x-[-50%] border-t pt-10">
-        <Logout collapsed={props.collapsed}/>
+        <Logout collapsed={props.collapsed} />
       </div>
     </Sider>
   );

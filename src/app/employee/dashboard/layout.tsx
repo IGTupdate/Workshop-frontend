@@ -1,3 +1,4 @@
+
 import EmployeeDashBoardLayOut from "./__components/EmployeeDashBoardLayOut";
 
 export default function RootLayout({
@@ -5,6 +6,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <div>
       <EmployeeDashBoardLayOut>{children}</EmployeeDashBoardLayOut>
