@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
-import { IAuthData } from "@/app/store/slices/authSlice";
+import { IAuthData, setAuthLoading } from "@/app/store/slices/authSlice";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Fly from "../../../../../public/images/fly.webp";
@@ -33,8 +33,11 @@ const CustomMobileHeader = () => {
       dispatch(logout());
       setVisible(false);
       router.push("/");
+      dispatch(setAuthLoading(false));
     } catch (err) {
       // console.error(err);
+    } finally {
+      dispatch(setAuthLoading(false));
     }
   };
 

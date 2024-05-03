@@ -1,14 +1,14 @@
-import React from 'react'
-import Loader from './components/Loader'
+import React from 'react';
+import Loader from './components/Loader';
 
-type Props = {}
+type Props = {};
 
 const loading = (props: Props) => {
   return (
-    <div className="flex justify-center items-center h-full w-full">
-    <Loader />
-  </div>
-  )
-}
+    <div className="flex justify-center items-center h-screen w-full">
+      <Loader />
+    </div>
+  );
+};
 
-export default loading
+export default loading;
