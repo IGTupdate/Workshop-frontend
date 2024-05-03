@@ -62,7 +62,7 @@ export const getAppointmentByAppointmentId = async (
   }
 };
 
-export const getAllAppointment = async (query: string = "") => {
+export const getAllAppointment = async (query: string = ""): Promise<TAppointment[]> => {
   try {
     const response = await apiConnector({
       method: "GET",
@@ -71,8 +71,8 @@ export const getAllAppointment = async (query: string = "") => {
 
     return response.data.data;
   } catch (err) {
-    console.log(err);
-    return null;
+    // console.log(err);
+    throw err
   }
 };
 
@@ -104,7 +104,7 @@ export const getAppointMentBookInitData = async (data: TAppointmentBook) => {
   }
 };
 
-export const getCustomerInitData = async (customerId: string) => {
+export const getCustomerAppointmentInitData = async (customerId: string) => {
   try {
     const response = await apiConnector({
       method: "GET",

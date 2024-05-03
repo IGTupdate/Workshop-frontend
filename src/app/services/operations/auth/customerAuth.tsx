@@ -5,9 +5,23 @@ import toast from "react-hot-toast";
 import { apiConnector } from "../../apiConnector";
 import { apiOpenConnector } from "../../apiOpenConnector";
 import { authEndpoints } from "../../apis";
+import { getCustomerAuthInitData } from "./common";
 
-const { SEND_OTP_API, VERIFY_OTP_API, AUTH_API, GENERATE_ACCESS_TOKEN_API, GET_CUSTOMER_DATA_API, CUSTOMER_UPDATE_API, LOGOUT_API } =
+const { SEND_OTP_API, VERIFY_OTP_API, AUTH_API, GENERATE_ACCESS_TOKEN_API, GET_CUSTOMER_DATA_API, CUSTOMER_UPDATE_API, LOGOUT_API, GET_ACCESS } =
   authEndpoints;
+
+export async function getAccess(dispatch: AppDispatch) {
+  try {
+    const accessData = await apiConnector({
+      method: "GET",
+      url: GET_ACCESS
+    })
+
+    if (accessData.data.success) {
+      dispatch(accessData.data.data)
+    }
+  } catch (err) { }
+}
 
 
 export async function getCustomerData(_id: string, dispatch: AppDispatch) {
@@ -18,7 +32,6 @@ export async function getCustomerData(_id: string, dispatch: AppDispatch) {
     });
 
     if (result.data.success) {
-      window.localStorage.setItem('authData', JSON.stringify(result.data.data));
       dispatch(setAuthData(result.data.data));
     }
   } catch (err) {
@@ -52,7 +65,7 @@ export async function sendOTP(contactNumber: string, resend?: boolean) {
 
 export async function verifyOTP(contactNumber: string, otp: string, dispatch: AppDispatch) {
   try {
-    console.log(VERIFY_OTP_API);
+    // console.log(VERIFY_OTP_API);
     // Sending OTP verification request
     const otpVerificationResult = await apiOpenConnector({
       method: "POST",
@@ -70,7 +83,9 @@ export async function verifyOTP(contactNumber: string, otp: string, dispatch: Ap
         });
 
         if (authResult?.data?.success) {
-          await getCustomerData(authResult.data.data._id, dispatch);
+          dispatch(getCustomerAuthInitData())
+          // await getCustomerData(authResult.data.data._id, dispatch);
+          // await getAccess(dispatch)
           toast.success("USER LOGGED IN SUCCESSFULLY");
         }
       } else {
@@ -98,7 +113,9 @@ export async function registerCustomer(fullName: string, email: string, dispatch
     });
 
     if (authResult?.data?.success) {
-      await getCustomerData(authResult.data.data._id, dispatch);
+      dispatch(getCustomerAuthInitData())
+      // await getCustomerData(authResult.data.data._id, dispatch);
+      // await getAccess(dispatch)
       toast.success("REGISTRATION SUCCESSFULL");
     }
   } catch (err) {
@@ -126,7 +143,6 @@ export const updateCustomer = (data: any, setLoading: React.Dispatch<React.SetSt
       newAuthData.fullName = fullName;
       newAuthData.email = email;
       dispatch(setAuthData(newAuthData));
-      window.localStorage.setItem('authData', JSON.stringify(newAuthData));
       toast.success("User Updated Successfully");
       setLoading(false);
     }

@@ -1,9 +1,10 @@
+import { setAuthData } from "@/app/store/slices/authSlice";
+import { AppDispatch } from "@/app/store/store";
 import toast from "react-hot-toast";
+import { apiConnector } from "../../apiConnector";
 import { apiOpenConnector } from "../../apiOpenConnector";
 import { authEndpoints } from "../../apis";
-import { apiConnector } from "../../apiConnector";
-import { AppDispatch } from "@/app/store/store";
-import { setAuthData } from "@/app/store/slices/authSlice";
+import { getCustomerAuthInitData } from "./common";
 
 const { EMPLOYEE_LOGIN_API, GET_EMPLOYEE_DATA_API, GET_ALL_EMPLOYEES } = authEndpoints;
 
@@ -16,7 +17,6 @@ export async function getEmployeeData(_id: string, dispatch: AppDispatch) {
 
     if (result.data.success) {
       const { _id, fullName, contactNumber, email, role } = result.data.data
-      window.localStorage.setItem("authData", JSON.stringify(result.data.data));
       dispatch(setAuthData({ _id, fullName, contactNumber, email, role }))
     }
   } catch (err) {
@@ -37,7 +37,7 @@ export async function employeeLogin(email: string, password: string, dispatch: A
 
     if (authResult?.data?.success) {
       // window.localStorage.setItem("accessToken", authResult?.data?.accessToken);
-      await getEmployeeData(authResult.data.data._id, dispatch)
+      dispatch(getCustomerAuthInitData())
       toast.success("LOGIN SUCCESSFULL");
     }
   } catch (err) {

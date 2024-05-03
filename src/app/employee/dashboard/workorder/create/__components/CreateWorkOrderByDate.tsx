@@ -6,7 +6,7 @@ import { Select } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 type Props = {
-    appointmentId: string | undefined;
+    appointmentId?: string;
     setWorkOrderCreateData: React.Dispatch<React.SetStateAction<TworkOrderCreate>>;
 };
 
@@ -36,7 +36,7 @@ const CreateWorkOrderByDate: React.FC<Props> = (props) => {
         const result = await getAllAppointment(`date=${formattedDate}&populate=true`);
 
         if (result?.length > 0) {
-            const updatedData: Options[] = result.map(element => ({ value: element._id, label: element.vehicle_id.registeration_number }));
+            const updatedData: Options[] = result.map(element => ({ value: element._id, label: typeof(element.vehicle_id) === 'string' ? '' : element.vehicle_id.registeration_number }));
 
             setAppointmentData(updatedData);
         }

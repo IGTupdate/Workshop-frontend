@@ -43,7 +43,9 @@ export const authEndpoints = {
   GET_EMPLOYEE_DATA_API: authUrl(EMPLOYEE),
   LOGOUT_API: authUrl(AUTH, '/logout'),
   CUSTOMER_UPDATE_API: authUrl(CUSTOMER, '/update'),
-  GET_ALL_EMPLOYEES: authUrl(EMPLOYEE, "/getAll")
+  GET_ALL_EMPLOYEES: authUrl(EMPLOYEE, "/getAll"),
+  GET_ACCESS: authUrl(AUTH, '/getAccess'),
+  GET_CUSTOMER_AUTH_INIT: authUrl(AUTH, '/init')
 };
 
 export const appointmentEndpoints = {
