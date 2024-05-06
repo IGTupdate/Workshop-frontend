@@ -1,6 +1,6 @@
 import Heading from "@/app/components/Heading";
 import { registerCustomer } from "@/app/services/operations/auth/customerAuth";
-import { useAppDispatch } from "@/app/store/reduxHooks";
+import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { setAuthLoading } from "@/app/store/slices/authSlice";
 import { Button, Input } from "antd";
 import { useRouter } from "next/navigation";
@@ -18,6 +18,8 @@ const Register: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
+
+  const { authLoading } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -102,6 +104,8 @@ const Register: React.FC = () => {
 
         <Button
           // type='primary'
+          loading={authLoading}
+          disabled={authLoading}
           size="large"
           htmlType="submit"
           className="bg-black text-white1 font-semibold w-full border-none hover:shadow-xl"
