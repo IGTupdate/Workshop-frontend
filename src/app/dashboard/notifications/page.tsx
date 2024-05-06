@@ -7,6 +7,7 @@ import { appointmentNotification } from "@/app/services/operations/notification/
 import { getAppointmentStatus, getCustomerAppointmentInitData } from "@/app/services/operations/appointment/appointment";
 import Loader from "@/app/components/Loader";
 import { getCustomerAuthInitData } from "@/app/services/operations/auth/common";
+import { TAppointmentWorkOrderStatus } from "@/app/types/appointment";
 
 interface NotificationData {
   // Define the structure of your notification data here
@@ -18,7 +19,7 @@ interface AppointmentStatus {
 
 const Page: React.FC = () => {
   const [notificationData, setNotificationData] = useState<NotificationData | null>(null);
-  const [status, setStatus] = useState<AppointmentStatus[]>([]);
+  const [status, setStatus] = useState<TAppointmentWorkOrderStatus | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   const customerId = useAppSelector((state) => state.auth.authData?._id);

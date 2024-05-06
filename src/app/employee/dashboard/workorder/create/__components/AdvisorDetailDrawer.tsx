@@ -47,11 +47,11 @@ const AdvisorDetailDrawer = (props: Props) => {
                                 <Title level={5} className='mb-4 text-base font-bold'>Assigned Work Order</Title>
                                 <ul className=''>
                                     {
-                                        props.activeAdvisor.assigned_workOrder.length > 0 ?
+                                        props.activeAdvisor && props.activeAdvisor.assigned_workOrder.length > 0 ?
                                             props.activeAdvisor.assigned_workOrder.map((el, index) => {
 
                                                 return <div key={index} className="flex justify-between items-center pb-4">
-                                                    <div className={`flex w-1/2 flex-col ps-6 relative before:content-[''] before:absolute ${props.activeAdvisor?.assigned_workOrder.length - 1 === index ? 'before:h-0' : 'before:h-full'} before:w-[1px] before:bg-slate-300 before:left-[0.2em] before:top-[1.15rem]
+                                                    <div className={`flex w-1/2 flex-col ps-6 relative before:content-[''] before:absolute ${(props.activeAdvisor && (props.activeAdvisor.assigned_workOrder.length - 1)) === index ? 'before:h-0' : 'before:h-full'} before:w-[1px] before:bg-slate-300 before:left-[0.2em] before:top-[1.15rem]
                                                     `}>
                                                         <h3 className='font-medium relative before:content-[""] before:absolute before:h-2 before:w-2 before:rounded-full before:bg-customYellow before:left-[-1.8em] before:top-1/2 before:translate-y-[-50%]'>Estimated Time</h3>
                                                         <p>{el.estimatedTimeOfCompletion ? new Date(el.estimatedTimeOfCompletion).toLocaleTimeString() : "Time is unavailable"}</p>

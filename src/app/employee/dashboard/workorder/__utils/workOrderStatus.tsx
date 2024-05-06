@@ -21,18 +21,13 @@ export const getWorkOrderStatus = () => {
     });
 }
 
-// export const workOrderStatusText: Record<TWorkOrderStatus, ReactNode> = {
-//     Pending: <h2></h2>,
-//     Processing: <></>,
-//     Completed: <></>,
-// }
-
-// export const workOrderStatusText: Record<TWorkOrderStatus, ReactNode> = {
-//     Pending: <h2></h2>,
-//     Completed: <Tag></Tag>,
-//     Processing: <></>,
-//     Assigned: <></>,
-// };
+export const workOrderStatusText = {
+    Pending: <Tag color="orange">Pending</Tag>,
+    Processing: <Tag color="green">Processing</Tag>,
+    Completed: <Tag color="blue">Completed</Tag>,
+    Assigned: <Tag color="gray">Assigned</Tag>,
+}
+// ["Pending", "Assigned", "Processing", "Completed"];
 
 
 

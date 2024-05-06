@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { setAuthLoading } from '@/app/store/slices/authSlice';
 
 type Props = {
-  collapsed: boolean;
+  collapsed?: boolean;
 };
 
 const Logout = (props: Props) => {

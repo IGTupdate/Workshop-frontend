@@ -16,6 +16,7 @@ import WorkOrderAdvisorDetails from './__components/WorkOrderAdvisorDetails';
 import WorkOrderServiceDetailContainer from './__components/WorkOrderServiceDetailContainer';
 import WorkOrderRampDetails from './__components/WorkOrderRampDetails';
 import { appointmentStatusText } from '../../appointment/__utils/appointmentStatus';
+import { workOrderStatusText } from '../__utils/workOrderStatus';
 
 
 const { Text, Title } = Typography;
@@ -69,7 +70,8 @@ const Page = (props: Props) => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Work Order - #{workOrder.orderNumber}</h2>
               <div>
-                {appointmentStatusText[workOrder.status]}
+                {workOrderStatusText[workOrder.status]}
+
                 {/* <Tag> {workOrder.status}</Tag> */}
               </div>
             </div>

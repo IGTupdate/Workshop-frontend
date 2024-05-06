@@ -1,3 +1,4 @@
+import { TEmployeeStatus } from "@/app/types/employee";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
@@ -7,6 +8,7 @@ export interface IAuthData {
     fullName?: string,
     email?: string,
     role?: string;
+    roleId?: string,
 }
 
 export interface IAuthState {
@@ -20,7 +22,8 @@ const initialAuthDataState: IAuthData = {
     contactNumber: '',
     fullName: '',
     email: '',
-    role: ''
+    role: '',
+    roleId: '',
 };
 
 const initialState: IAuthState = {
