@@ -5,7 +5,7 @@ export const createEmployeeYupSchema = Yup.object({
     lastName: Yup.string().default(""),
     email: Yup.string().required("Email is Required"),
     contactNumber: Yup.string().required("Contact Number is required"),
-    role: Yup.string().required("Role is required"),
+    roleId: Yup.string().required("Role is required"),
     password: Yup.string().required("Password is reuqired")
 });
 
@@ -14,7 +14,7 @@ export const updateEmployeeYupSchema = Yup.object({
     lastName: Yup.string().default(""),
     email: Yup.string().required("Email is Required"),
     contactNumber: Yup.string().required("Contact Number is required"),
-    role: Yup.string().required("Role is required"),
+    roleId: Yup.string().required("Role is required"),
     address: Yup.string().required("Address is required")
 })
 

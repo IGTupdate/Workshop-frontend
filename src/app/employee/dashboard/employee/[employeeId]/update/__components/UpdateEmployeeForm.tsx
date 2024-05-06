@@ -3,10 +3,12 @@
 import InputField from '@/app/components/Input/InputField';
 import SelectField from '@/app/components/Input/SelectField';
 import TextAreaField from '@/app/components/Input/TextArea';
+import { getAllEmployeeRole } from '@/app/services/operations/employee/employee';
+import { TRole } from '@/app/types/employee';
 import { TUpdateEmpoloyee, updateEmployeeYupSchema } from '@/app/validators/employee';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from 'antd';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 type Props = {}
@@ -16,6 +18,35 @@ const UpdateEmployeeForm = (props: Props) => {
     const { control, formState: { errors }, setValue, handleSubmit } = useForm<TUpdateEmpoloyee>({
         resolver: yupResolver(updateEmployeeYupSchema)
     });
+
+    const [employee, setEmployee] = useState()
+
+    const [employeeRoleOption, setEmployeeRoleOption] = useState<{ value: string, label: string }[]>([]);
+
+    useEffect(() => {
+        (async function () {
+            try {
+                const response = await getAllEmployeeRole();
+
+                const employeeRoles = response.data as TRole[]
+                setEmployeeRoleOption(() => {
+                    return employeeRoles.map((el) => {
+                        return {
+                            value: el._id,
+                            label: el.role
+                        }
+                    })
+                })
+
+            } catch (err) {
+                console.log(err);
+            }
+        }())
+    }, [])
+
+    useEffect(() => {
+
+    }, [])
 
     const employee_update_fields = [
         {
@@ -52,7 +83,7 @@ const UpdateEmployeeForm = (props: Props) => {
         },
         {
             name: 'role',
-            error: errors?.role?.message || "",
+            error: errors?.roleId?.message || "",
             label: "Role",
             type: "select",
             control: control,
@@ -75,7 +106,6 @@ const UpdateEmployeeForm = (props: Props) => {
 
     return (
         <div>
-
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='grid grid-cols-2 gap-3'>
                     {
@@ -86,7 +116,7 @@ const UpdateEmployeeForm = (props: Props) => {
                                         key={index}
                                         {...field}
                                         mode='single'
-                                        options={[]}
+                                        options={employeeRoleOption}
                                         setValue={setValue}
                                     />
                                 case "textarea":

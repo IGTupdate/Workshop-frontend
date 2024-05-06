@@ -8,7 +8,7 @@ export type TEmployee = {
     fullName: string,
     email: string,
     roleId: string,
-    contactNumber?:string
+    contactNumber?: string
 }
 
 export type TEmployeeWorkStatus = {
@@ -26,10 +26,15 @@ export type TEmployeeWorkStatus = {
 }
 
 export type TEmployeeTableDataType = {
-    _id:string,
-    fullName:string
+    _id: string,
+    fullName: string
     contactNumber: string,
     email: string,
     status: string,
+    role: string
+}
+
+export type TRole = {
+    _id: string,
     role: string
 }
