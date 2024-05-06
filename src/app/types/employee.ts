@@ -36,5 +36,5 @@ export type TEmployeeTableDataType = {
 
 export type TRole = {
     _id: string,
-    role: string
+    role: string,
 }

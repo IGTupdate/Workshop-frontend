@@ -1,20 +1,17 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Avatar, Button, Divider, Layout, Menu, Space, Typography } from "antd";
+import { Avatar, Layout, Space, Typography } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { FiLogOut } from "react-icons/fi";
-
 import { SIDEBAR_COLLAPSED_WIDTH, SIDEBAR_WIDTH } from "../utils/variables";
-import { useRouter } from "next/navigation";
 import SideBarMenus from "./SideBarMenus";
-import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
+import { useAppSelector } from "@/app/store/reduxHooks";
 import { IAuthData } from "@/app/store/slices/authSlice";
 import Logout from "@/app/components/Logout/Logout";
 
 const { Text, Title } = Typography;
 
-const { Header, Sider, Content } = Layout;
+const { Sider } = Layout;
 
 type Props = {
   collapsed: boolean;
@@ -25,17 +22,13 @@ const SideBar = (props: Props) => {
   const [user, setUser] = useState<IAuthData>();
   const { authData } = useAppSelector((state) => state.auth);
 
-
-
   useEffect(() => {
     setUser(() => {
       return authData;
     });
   }, [authData]);
 
-  console.log(authData)
-
-
+  // console.log(authData)
 
   return (
     <Sider

@@ -12,6 +12,9 @@ import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { setActiveCalender } from "@/app/store/slices/calenderSlice";
 import Loader from "@/app/components/Loader";
 import { getAllCalender } from "@/app/services/operations/appointment/calender";
+import useAbility from "@/app/__hooks/useAbility";
+import { casl_action, casl_subject } from "@/app/utils/casl/constant";
+import UnAuthorized from "@/app/components/UnAuthorized/UnAuthorized";
 
 type Props = {};
 
@@ -27,12 +30,18 @@ const CalenderContainer = (props: Props) => {
   // dispatch state action
   const dispatch = useAppDispatch();
 
+  // ability
+  const ability = useAbility();
+
   // for the first time
   useEffect(() => {
-    if (calenderLoading) {
-      dispatch(getAllCalender());
+    if (ability && ability.can(casl_action.get, casl_subject.calender)) {
+      if (calenderLoading) {
+        dispatch(getAllCalender());
+      }
     }
-  }, [calenderLoading]);
+
+  }, [calenderLoading, ability]);
 
   // calender button cell click schedule, view
   const handleCalenderCellButtonClick = (data: Partial<TCalender> | null) => {
@@ -57,16 +66,21 @@ const CalenderContainer = (props: Props) => {
 
   return (
     <div>
-      {calenderLoading ? (
-        <div className="flex justify-center items-center h-screen w-full">
-          <Loader />
-        </div>
-      ) : (
-        <div>
-          <Calendar cellRender={cellRender} />
-          <CalenderManageDrawer />
-        </div>
-      )}
+      {
+        (ability && ability.can(casl_action.get, casl_subject.calender)) ? <div>
+          {calenderLoading ? (
+            <div className="flex justify-center items-center h-screen w-full">
+              <Loader />
+            </div>
+          ) : (
+            <div>
+              <Calendar cellRender={cellRender} />
+              <CalenderManageDrawer />
+            </div>
+          )}
+        </div> :  <UnAuthorized />
+      }
+
     </div>
   );
 };

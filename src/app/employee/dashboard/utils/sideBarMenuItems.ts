@@ -1,4 +1,5 @@
 import { CustomerSideBarMenuItems } from "@/app/dashboard/__components/__desktopComponents/CustomerSideBarMenuItems";
+import { AbilityTuple, MongoAbility, MongoQuery } from "@casl/ability";
 import { MenuProps } from "antd";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
@@ -8,6 +9,7 @@ export type TsideBarMenuItems = {
     label: string,
     pathname?: string,
     children?: TsideBarMenuItems[];
+    resourcetype?: string
 };
 
 export const sideBarMenuItems: TsideBarMenuItems[] = [
@@ -15,33 +17,26 @@ export const sideBarMenuItems: TsideBarMenuItems[] = [
         key: '1',
         label: 'Dashboard',
         pathname: "/employee/dashboard",
+        resourcetype: "dashboard"
     },
     {
         key: '2',
         label: 'Appointment',
-        pathname: "/employee/dashboard/appointment"
+        pathname: "/employee/dashboard/appointment",
+        resourcetype: "appointment"
     },
     {
         key: '3',
         label: 'Work Order',
-        pathname: "/employee/dashboard/workorder"
+        pathname: "/employee/dashboard/workorder",
+        resourcetype: "workorder"
     },
     {
         key: '4',
         label: "Ramp",
-        pathname: "/employee/dashboard/ramp"
+        pathname: "/employee/dashboard/ramp",
+        resourcetype: "ramp"
     },
-    // {
-    //     key: '4',
-    //     label: 'Work Order',
-    //     children: [
-    //         {
-    //             key: '5',
-    //             label: 'Create',
-    //             pathname: "/employee/dashboard/workorder/have",
-    //         }
-    //     ]
-    // },
     {
         key: '6',
         label: "Slot Management",
@@ -50,27 +45,35 @@ export const sideBarMenuItems: TsideBarMenuItems[] = [
                 key: '7',
                 label: 'Calender',
                 pathname: "/employee/dashboard/slot-management/calender",
+                resourcetype: "calender"
             },
             {
                 key: '8',
                 label: 'Slot Schedule',
                 pathname: "/employee/dashboard/slot-management/slot-schedule",
+                resourcetype: "slot_schedule"
             }
-        ]
+        ],
+
     },
     {
         key: '9',
         label: 'Employee',
-        pathname: "/employee/dashboard/employee"
+        pathname: "/employee/dashboard/employee",
+        resourcetype: "employee"
     },
-
 ];
 
-export function getSideBarMenuItems(router: AppRouterInstance, sideBarMenuItems: TsideBarMenuItems[], dashBoardIcons: any,)
+export const commonResources = ["profile", "dashboard"]
+
+export function getSideBarMenuItems(router: AppRouterInstance,
+    sideBarMenuItems: TsideBarMenuItems[],
+    dashBoardIcons: any,
+    ability: MongoAbility<AbilityTuple, MongoQuery> | undefined)
     : MenuProps["items"] {
 
-    return sideBarMenuItems.map((item) => {
-        let children = item.children ? getSideBarMenuItems(router, item.children, dashBoardIcons) : undefined;
+    const sideBarMenus = sideBarMenuItems.map((item) => {
+        let children = item.children ? getSideBarMenuItems(router, item.children, dashBoardIcons, ability) : undefined;
         return {
             ...item,
             children,
@@ -82,6 +85,30 @@ export function getSideBarMenuItems(router: AppRouterInstance, sideBarMenuItems:
             },
         };
     });
+
+    const filteredSideBarMenus = sideBarMenus.filter((el) => {
+        // eitehr 
+        if (!ability) return false;
+        // include if any of the children are accessible
+        if (el.children && el.children.length > 0) return true;
+        // include if it is common resource type
+        if (commonResources.includes(el.resourcetype || "")) return true;
+
+        // include if it has the access
+        const subject = el.resourcetype || "";
+        const actions = ["get", "update", "create", "delete"];
+
+        const can_perform_action = actions.find((action) => {
+            // console.log(subject, action);
+            // console.log(ability && ability.can(action, subject))
+            return ability && ability.can(action, subject);
+        })
+
+
+        return can_perform_action !== undefined;
+    })
+
+    return filteredSideBarMenus
 }
 
 export const findRecursiveByPathName = (sideBarMenuItems: TsideBarMenuItems[], pathname: string): TsideBarMenuItems | null => {
