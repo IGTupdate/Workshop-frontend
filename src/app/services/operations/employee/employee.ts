@@ -1,9 +1,11 @@
+import { TCreateEmployee } from "@/app/validators/employee";
 import { apiConnector } from "../../apiConnector";
 import { authEndpoints } from "../../apis";
 
 const { GET_ALL_EMPLOYEES,
     EMPLOYEE_REGISTER,
-    GET_EMPLOYEE_DATA_API
+    GET_EMPLOYEE_DATA_API,
+    GET_ALL_EMPLOYEE_ROLE
 } = authEndpoints;
 
 
@@ -36,11 +38,25 @@ export const getEmployeeByEmployeeId = async (employeeId: string, data: string =
     }
 };
 
-export const createEmployee = async () => {
+export const createEmployee = async (data: TCreateEmployee) => {
     try {
         const response = await apiConnector({
             method: "POST",
             url: EMPLOYEE_REGISTER,
+            bodyData: data,
+        });
+
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const getAllEmployeeRole = async () => {
+    try {
+        const response = await apiConnector({
+            method: "GET",
+            url: GET_ALL_EMPLOYEE_ROLE,
         });
         return response.data;
     } catch (err) {

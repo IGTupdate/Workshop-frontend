@@ -47,6 +47,7 @@ export const authEndpoints = {
   GET_ACCESS: authUrl(AUTH, '/getAccess'),
   GET_CUSTOMER_AUTH_INIT: authUrl(AUTH, '/init'),
   EMPLOYEE_REGISTER: authUrl(EMPLOYEE, "/register"),
+  GET_ALL_EMPLOYEE_ROLE : authUrl(EMPLOYEE, "/role/getAll")
 };
 
 export const appointmentEndpoints = {

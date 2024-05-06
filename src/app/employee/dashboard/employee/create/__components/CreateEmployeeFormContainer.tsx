@@ -1,5 +1,7 @@
 import InputField from '@/app/components/Input/InputField'
 import SelectField from '@/app/components/Input/SelectField'
+import { getAllEmployeeRole } from '@/app/services/operations/employee/employee'
+import { TRole } from '@/app/types/employee'
 import { TCreateEmployee } from '@/app/validators/employee'
 import { error } from 'console'
 import React, { useEffect, useState } from 'react'
@@ -21,6 +23,8 @@ export type TEmployeeCreateField = {
 }
 
 const CreateEmployeeFormContainer = (props: Props) => {
+
+    const [employeeRoleOption, setEmployeeRoleOption] = useState<{ value: string, label: string }[]>([]);
 
     const employee_create_fields: TEmployeeCreateField[] = [
         {
@@ -48,8 +52,8 @@ const CreateEmployeeFormContainer = (props: Props) => {
             placeholder: "123-456-7890"
         },
         {
-            name: 'role',
-            error: props.errors?.role?.message || "",
+            name: 'roleId',
+            error: props.errors?.roleId?.message || "",
             label: "Role",
             type: "select",
             control: props.control,
@@ -73,10 +77,25 @@ const CreateEmployeeFormContainer = (props: Props) => {
         },
     ];
 
-    const [employeeRole, setEmployeeRole] = useState([])
-
     useEffect(() => {
-        
+        (async function () {
+            try {
+                const response = await getAllEmployeeRole();
+
+                const employeeRoles = response.data as TRole[]
+                setEmployeeRoleOption(() => {
+                    return employeeRoles.map((el) => {
+                        return {
+                            value: el._id,
+                            label: el.role
+                        }
+                    })
+                })
+
+            } catch (err) {
+                console.log(err);
+            }
+        }())
     }, [])
 
     return (
@@ -90,7 +109,7 @@ const CreateEmployeeFormContainer = (props: Props) => {
                                     key={index}
                                     {...field}
                                     mode='single'
-                                    options={[]}
+                                    options={employeeRoleOption}
                                     setValue={props.setValue}
                                 />
                             default:

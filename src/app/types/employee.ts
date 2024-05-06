@@ -7,9 +7,9 @@ export type TEmployee = {
     _id: string,
     fullName: string,
     email: string,
-    roleId: string,
-    role?: string,
     status?: string,
+    role?: string,
+    roleId: string,
     contactNumber?: string;
 };
 
