@@ -5,27 +5,27 @@ export type TRamp = {
     name: string;
     location?: string;
     _id?: string,
-    isActive?: boolean
+    isActive?: boolean;
 };
 
 export type TRampDetails = TRamp & {
     assigned_workOrder?: TWorkOrder[],
-} 
+};
 
 export type TActiveRampNewRamp = {
     type: "newramp",
-    value : typeof NEW_RAMP
-}
+    value: typeof NEW_RAMP;
+};
 
 export type TActiveRampRamp = {
     type: "ramp",
-    value : TRamp
-}
+    value: TRamp;
+};
 
 export type TActiveRampWorkOrder = {
     type: "workorder",
-    value : TWorkOrder[]
-}
+    value: TWorkOrder[];
+};
 
 
 export type TActiveRamp =
@@ -33,3 +33,6 @@ export type TActiveRamp =
     | null
     | TActiveRampNewRamp
     | TActiveRampWorkOrder
+
+
+

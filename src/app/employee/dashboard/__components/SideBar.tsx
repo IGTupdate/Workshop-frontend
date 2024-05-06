@@ -17,7 +17,7 @@ const { Text, Title } = Typography;
 const { Header, Sider, Content } = Layout;
 
 type Props = {
-  collapsed: boolean;
+  collapsed?: boolean;
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const SideBar = (props: Props) => {
@@ -33,7 +33,6 @@ const SideBar = (props: Props) => {
     });
   }, [authData]);
 
-  console.log(authData)
 
 
 
@@ -44,14 +43,14 @@ const SideBar = (props: Props) => {
       theme="light"
       trigger={null}
       collapsible
-      collapsed={props.collapsed}
+      collapsed={props?.collapsed}
       style={{ height: "100vh", position: "fixed", top: 0, overflow: "hidden" }}
     >
       <Space className={`w-full p-4`}>
         <Avatar size={"large"} icon={<UserOutlined />} />
-        {!props.collapsed && (
+        {!props?.collapsed && (
           <div>
-            <Title level={5} style={{ color: "white", textTransform: "capitalize", marginBottom: 0 }}>Hello {user?.fullName}</Title>
+            <Title level={5} style={{ color: "white", textTransform: "capitalize", marginBottom: 0 }}>Hello {user?.fullName?.split(" ")[0]}</Title>
             <Text className="capitalize" style={{ color: "#CDCDCE" }}>{user?.role || "-"}</Text>
           </div>
         )}
@@ -62,7 +61,7 @@ const SideBar = (props: Props) => {
       </div>
 
       <div className="w-[150px] lg:w-[200px]  absolute bottom-6 left-1/2 translate-x-[-50%] border-t pt-10">
-        <Logout collapsed={props.collapsed} />
+        <Logout collapsed={props?.collapsed} />
       </div>
     </Sider>
   );

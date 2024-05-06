@@ -1,6 +1,6 @@
-import { TRamp } from "./ramp"
+import { TRamp } from "./ramp";
 
-export type TEmployeeStatus = "Active" | "InActive"
+export type TEmployeeStatus = "active" | "inactive";
 
 export type TEmployee = {
     userType: "employee",
@@ -8,8 +8,10 @@ export type TEmployee = {
     fullName: string,
     email: string,
     roleId: string,
-    contactNumber?:string
-}
+    role?: string,
+    status?: string,
+    contactNumber?: string;
+};
 
 export type TEmployeeWorkStatus = {
     _id: string,
@@ -20,16 +22,31 @@ export type TEmployeeWorkStatus = {
     assigned_workOrder: {
         _id: string,
         ramdId?: TRamp | string,
-        orderNumber: string
-        estimatedTimeOfCompletion?: string
-    }[]
-}
+        orderNumber: string;
+        estimatedTimeOfCompletion?: string;
+    }[];
+};
 
 export type TEmployeeTableDataType = {
-    _id:string,
-    fullName:string
+    _id: string,
+    fullName: string;
     contactNumber: string,
     email: string,
     status: string,
-    role: string
-}
+    role: string;
+};
+
+export type TRole = {
+    _id: string,
+    role: string,
+};
+
+export type TEmployeeDetails = {
+    _id: string,
+    contactNumber: string,
+    email: string,
+    firstName: string,
+    lastName: string,
+    role: string,
+    roleId: TRole | string,
+};

@@ -12,7 +12,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FilterDropdownProps } from "antd/es/table/interface";
 import { removeQueryParams, setQueryParams } from "@/app/utils/helper";
 import { IoIosEye } from "react-icons/io";
-import { TEmployeeTableDataType } from "@/app/types/employee";
+import { TEmployeeStatus, TEmployeeTableDataType } from "@/app/types/employee";
+import { employeeStatusText } from "../__utils/employeeStatusText";
 
 const { Title, Text } = Typography;
 
@@ -73,7 +74,7 @@ export function EmployeeTableColumns() {
                     "contactNumber"
                 ),
                 render: (contactNumber) => {
-                    return <p className="uppercase">{contactNumber}</p>
+                    return <p className="uppercase">{contactNumber}</p>;
                 }
             },
             {
@@ -107,7 +108,7 @@ export function EmployeeTableColumns() {
                 defaultSortOrder: "descend",
                 render: (value) => {
                     return (
-                        <p className="uppercase">{value}</p>
+                        employeeStatusText[value as TEmployeeStatus]
                     );
                 },
             },
@@ -173,7 +174,7 @@ export function EmployeeTableColumns() {
                         <Flex wrap="wrap" gap="small">
                             <div
                                 onClick={() => {
-                                    router.push("/employee/dashboard/employee/" + _id)
+                                    router.push("/employee/dashboard/employee/" + _id);
                                 }}
                                 style={{ color: "#1890ff" }}
                                 className="cursor-pointer"

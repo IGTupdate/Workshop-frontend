@@ -1,12 +1,13 @@
 "use client";
 
-import { TEmployee, TEmployeeTableDataType } from '@/app/types/employee'
-import React, { useEffect, useState } from 'react'
+import { TEmployee, TEmployeeTableDataType } from '@/app/types/employee';
+import React, { useEffect, useState } from 'react';
 import Loader from '@/app/components/Loader';
 import { getAllEmployees } from '@/app/services/operations/auth/employeeAuth';
 import EmployeeTableContainer from './EmployeeTableContainer';
+import { calc } from 'antd/es/theme/internal';
 
-type Props = {}
+type Props = {};
 
 const EmployeesViewPageContainer = (props: Props) => {
 
@@ -18,20 +19,18 @@ const EmployeesViewPageContainer = (props: Props) => {
             try {
                 const response = await getAllEmployees() as TEmployee[];
 
-                console.log(response);
-
                 return setEmployees(() => {
                     return response.map((el) => {
                         return {
                             fullName: el.fullName,
                             _id: el._id,
-                            status: "",
+                            status: el.status || "",
                             email: el.email,
-                            role: el.roleId,
+                            role: el.role || '',
                             contactNumber: el.contactNumber || ""
-                        }
-                    })
-                })
+                        };
+                    });
+                });
 
             } catch (err) {
                 console.log(err);
@@ -39,21 +38,21 @@ const EmployeesViewPageContainer = (props: Props) => {
                 setLoading(false);
             }
         }());
-    }, [])
+    }, []);
 
 
     return (
         <div>
 
             {
-                loading ? <div>
+                loading ? <div style={{ height: 'calc(100vh - 300px)' }} className='flex justify-center items-center w-full'>
                     <Loader />
                 </div> : <div>
                     <EmployeeTableContainer employees={employees} />
                 </div>
             }
         </div>
-    )
-}
+    );
+};
 
-export default EmployeesViewPageContainer
+export default EmployeesViewPageContainer;

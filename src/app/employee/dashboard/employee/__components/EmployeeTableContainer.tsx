@@ -1,19 +1,19 @@
-import { TEmployeeTableDataType } from '@/app/types/employee'
-import { Table } from 'antd'
-import React from 'react'
-import { EmployeeTableColumns } from './EmployeeTableColumns'
+import { TEmployeeTableDataType } from '@/app/types/employee';
+import { Table } from 'antd';
+import React from 'react';
+import { EmployeeTableColumns } from './EmployeeTableColumns';
 
 type Props = {
-    employees: TEmployeeTableDataType[]
-}
+    employees: TEmployeeTableDataType[];
+};
 
 const EmployeeTableContainer = (props: Props) => {
-    
-    return (
-        <div>
-            <Table dataSource={props.employees} columns={EmployeeTableColumns()} />
-        </div>
-    )
-}
 
-export default EmployeeTableContainer
+    return (
+        <div className='overflow-hidden rounded-xl shadow-xl'>
+            <Table scroll={{ x: 980 }} pagination={false} dataSource={props.employees} columns={EmployeeTableColumns()} />
+        </div>
+    );
+};
+
+export default EmployeeTableContainer;

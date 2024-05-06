@@ -13,14 +13,14 @@ export async function getEmployeeData(_id: string, dispatch: AppDispatch) {
     const result = await apiConnector({
       method: "GET",
       url: GET_EMPLOYEE_DATA_API + "/" + _id,
-    })
+    });
 
     if (result.data.success) {
-      const { _id, fullName, contactNumber, email, role } = result.data.data
-      dispatch(setAuthData({ _id, fullName, contactNumber, email, role }))
+      const { _id, fullName, contactNumber, email, role } = result.data.data;
+      dispatch(setAuthData({ _id, fullName, contactNumber, email, role }));
     }
   } catch (err) {
-    throw err
+    throw err;
   }
 }
 
@@ -37,7 +37,7 @@ export async function employeeLogin(email: string, password: string, dispatch: A
 
     if (authResult?.data?.success) {
       // window.localStorage.setItem("accessToken", authResult?.data?.accessToken);
-      dispatch(getCustomerAuthInitData())
+      dispatch(getCustomerAuthInitData());
       toast.success("LOGIN SUCCESSFULL");
     }
   } catch (err) {
@@ -57,4 +57,4 @@ export const getAllEmployees = async (role?: string) => {
   } catch (err) {
     throw err;
   }
-}
+};
