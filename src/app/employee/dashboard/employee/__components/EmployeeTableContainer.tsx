@@ -11,7 +11,7 @@ const EmployeeTableContainer = (props: Props) => {
 
     return (
         <div className='overflow-hidden rounded-xl shadow-xl'>
-            <Table scroll={{ x: 980 }} pagination={false} dataSource={props.employees} columns={EmployeeTableColumns()} />
+            <Table scroll={{ x: 980 }} pagination={false} dataSource={[...props.employees].reverse()} columns={EmployeeTableColumns()} />
         </div>
     );
 };

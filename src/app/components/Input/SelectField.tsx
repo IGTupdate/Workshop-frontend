@@ -23,7 +23,6 @@ const SelectField = (props: Props) => {
         (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
 
-    console.log(props.placeholder, 'placeholder');
 
     return (
         <div>

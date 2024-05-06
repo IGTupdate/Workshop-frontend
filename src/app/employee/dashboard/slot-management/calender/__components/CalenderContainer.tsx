@@ -58,7 +58,7 @@ const CalenderContainer = (props: Props) => {
   return (
     <div>
       {calenderLoading ? (
-        <div className="flex justify-center items-center h-screen w-full">
+        <div style={{ height: "calc(100vh - 300px)" }} className="flex justify-center items-center w-full">
           <Loader />
         </div>
       ) : (

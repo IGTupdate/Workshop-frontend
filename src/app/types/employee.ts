@@ -49,4 +49,5 @@ export type TEmployeeDetails = {
     lastName: string,
     role: string,
     roleId: TRole | string,
+    address?: string,
 };

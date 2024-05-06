@@ -16,9 +16,9 @@ export const updateEmployeeYupSchema = Yup.object({
     contactNumber: Yup.string().required("Contact Number is required"),
     roleId: Yup.string().required("Role is required"),
     address: Yup.string().required("Address is required")
-})
+});
 
 
-export type TCreateEmployee = Yup.InferType<typeof createEmployeeYupSchema>
+export type TCreateEmployee = Yup.InferType<typeof createEmployeeYupSchema>;
 
-export type TUpdateEmpoloyee = Yup.InferType<typeof updateEmployeeYupSchema>
+export type TUpdateEmployee = Yup.InferType<typeof updateEmployeeYupSchema>;

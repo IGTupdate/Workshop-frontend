@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import GetColumnTextSearchProps from "@/app/components/TableSearch/GetColumnTextSearchProps";
 import {
     Flex,
@@ -12,12 +12,35 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FilterDropdownProps } from "antd/es/table/interface";
 import { removeQueryParams, setQueryParams } from "@/app/utils/helper";
 import { IoIosEye } from "react-icons/io";
-import { TEmployeeStatus, TEmployeeTableDataType } from "@/app/types/employee";
+import { TEmployeeStatus, TEmployeeTableDataType, TRole } from "@/app/types/employee";
 import { employeeStatusText } from "../__utils/employeeStatusText";
+import { FaUserPen } from "react-icons/fa6";
+import { getAllEmployeeRole } from "@/app/services/operations/employee/employee";
 
 const { Title, Text } = Typography;
 
 export function EmployeeTableColumns() {
+    const [employeeRoleOption, setEmployeeRoleOption] = useState([]);
+
+    useEffect(() => {
+        (async function () {
+            try {
+                const response = await getAllEmployeeRole();
+                const employeeRoles = response.data as TRole[];
+                setEmployeeRoleOption(() => {
+                    return employeeRoles.map((el) => {
+                        return {
+                            value: el.role,
+                            text: el.role
+                        };
+                    });
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        })();
+    }, []);
+
     const router = useRouter();
 
     const searchParams = useSearchParams();
@@ -95,6 +118,13 @@ export function EmployeeTableColumns() {
                 dataIndex: "role",
                 key: "role",
                 defaultSortOrder: "descend",
+                filters: employeeRoleOption,
+
+                onFilter: (value, record) => {
+                    console.log(record, 'record');
+
+                    return record.role === value;
+                },
                 render: (value) => {
                     return (
                         <p className="uppercase">{value}</p>
@@ -171,7 +201,7 @@ export function EmployeeTableColumns() {
                 key: "action",
                 render: (_, { _id }) => {
                     return (
-                        <Flex wrap="wrap" gap="small">
+                        <Flex align="center" wrap="wrap" gap="small">
                             <div
                                 onClick={() => {
                                     router.push("/employee/dashboard/employee/" + _id);
@@ -179,6 +209,13 @@ export function EmployeeTableColumns() {
                                 style={{ color: "#1890ff" }}
                                 className="cursor-pointer"
                             ><IoIosEye size={"22px"} title="View Appointments" /></div>
+
+                            <div onClick={() => {
+                                router.push("/employee/dashboard/employee/" + _id + "/update");
+                            }} style={{ color: "#1890ff" }}
+                                className="cursor-pointer">
+                                <FaUserPen size={"22px"} />
+                            </div>
                         </Flex>
                     );
                 },

@@ -1,24 +1,24 @@
 
 
 import { Input, Typography } from 'antd';
-import React from 'react'
+import React from 'react';
 import { Controller } from 'react-hook-form';
 
-const { Text } = Typography
+const { Text } = Typography;
 
-const { TextArea } = Input
+const { TextArea } = Input;
 
 export type InputField = {
     name: string;
     label: string;
     placeholder: string;
     error: string | undefined,
-    control: any
+    control: any;
 };
 
 type Props = InputField & {
 
-}
+};
 
 const TextAreaField = (props: Props) => {
     return (
@@ -27,11 +27,11 @@ const TextAreaField = (props: Props) => {
             <Controller name={props.name}
                 control={props.control}
                 render={({ field }) => {
-                    return <TextArea {...field} placeholder={props.placeholder} />
+                    return <TextArea {...field} placeholder={props.placeholder} size='large' />;
                 }} />
             {props.error && <Text type='danger'> {props.error}</Text>}
         </div>
-    )
-}
+    );
+};
 
-export default TextAreaField
+export default TextAreaField;

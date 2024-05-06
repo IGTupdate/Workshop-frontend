@@ -1,52 +1,82 @@
 "use client";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Button } from 'antd';
 
 import InputField from '@/app/components/Input/InputField';
 import SelectField from '@/app/components/Input/SelectField';
 import TextAreaField from '@/app/components/Input/TextArea';
-import { getAllEmployeeRole } from '@/app/services/operations/employee/employee';
-import { TRole } from '@/app/types/employee';
-import { TUpdateEmpoloyee, updateEmployeeYupSchema } from '@/app/validators/employee';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Button } from 'antd';
-import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { getAllEmployeeRole, getEmployeeByEmployeeId, updateEmployeeDetails } from '@/app/services/operations/employee/employee';
+import { TEmployeeDetails, TRole } from '@/app/types/employee';
+import { TUpdateEmployee, updateEmployeeYupSchema } from '@/app/validators/employee';
+import { useParams, useRouter } from 'next/navigation';
+import Loader from '@/app/components/Loader';
 
-type Props = {}
+type Props = {
+    employeeId: string;
+};
 
 const UpdateEmployeeForm = (props: Props) => {
-
-    const { control, formState: { errors }, setValue, handleSubmit } = useForm<TUpdateEmpoloyee>({
-        resolver: yupResolver(updateEmployeeYupSchema)
+    const [employee, setEmployee] = useState<TEmployeeDetails | null>(null);
+    const [loading, setLoading] = useState(false);
+    const [employeeRoleOption, setEmployeeRoleOption] = useState<{ value: string, label: string; }[]>([]);
+    const { control, formState: { errors }, setValue, handleSubmit } = useForm<TUpdateEmployee>({
+        resolver: yupResolver(updateEmployeeYupSchema),
     });
+    const router = useRouter();
 
-    const [employee, setEmployee] = useState()
-
-    const [employeeRoleOption, setEmployeeRoleOption] = useState<{ value: string, label: string }[]>([]);
+    useEffect(() => {
+        if (employee) {
+            setValue('firstName', employee?.firstName);
+            setValue('lastName', employee?.lastName);
+            setValue('email', employee?.email);
+            setValue('contactNumber', employee?.contactNumber);
+            setValue('roleId', typeof employee?.roleId === "string" ? employee.roleId : employee.roleId._id);
+            setValue('address', employee?.address || '');
+        }
+    }, [employee]);
 
     useEffect(() => {
         (async function () {
             try {
                 const response = await getAllEmployeeRole();
-
-                const employeeRoles = response.data as TRole[]
+                const employeeRoles = response.data as TRole[];
                 setEmployeeRoleOption(() => {
                     return employeeRoles.map((el) => {
                         return {
                             value: el._id,
                             label: el.role
-                        }
-                    })
-                })
-
+                        };
+                    });
+                });
             } catch (err) {
                 console.log(err);
             }
-        }())
-    }, [])
+        })();
+    }, []);
 
     useEffect(() => {
+        if (props.employeeId) {
+            getEmployeeData(props.employeeId);
+        }
+    }, [props.employeeId]);
 
-    }, [])
+    const getEmployeeData = async (employeeId: string) => {
+        try {
+            setLoading(true);
+            const result = await getEmployeeByEmployeeId(employeeId, "full");
+
+            if (result?.success === true) {
+                setEmployee(result?.data);
+            }
+
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const employee_update_fields = [
         {
@@ -55,7 +85,7 @@ const UpdateEmployeeForm = (props: Props) => {
             label: "First Name",
             type: "text",
             control: control,
-            placeholder: "John"
+            placeholder: "John",
         },
         {
             name: 'lastName',
@@ -82,7 +112,7 @@ const UpdateEmployeeForm = (props: Props) => {
             placeholder: "123-456-7890"
         },
         {
-            name: 'role',
+            name: 'roleId',
             error: errors?.roleId?.message || "",
             label: "Role",
             type: "select",
@@ -99,17 +129,31 @@ const UpdateEmployeeForm = (props: Props) => {
         },
     ];
 
-    const onSubmit = (data: TUpdateEmpoloyee) => {
-        console.log(data);
-    }
+    const onSubmit = async (data: TUpdateEmployee) => {
+
+        try {
+            setLoading(true);
+            const result = await updateEmployeeDetails(props?.employeeId, data);
+
+            if (result) {
+                setLoading(false);
+                router.push(`/employee/dashboard/employee/`);
+            }
+        } catch (error) {
+            console.log(error);
+
+        } finally {
+            setLoading(false);
+        }
+    };
 
 
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className='grid grid-cols-2 gap-3'>
-                    {
-                        employee_update_fields.map((field, index) => {
+            {
+                employee ? <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className='grid grid-cols-2 gap-3'>
+                        {employee_update_fields.map((field, index) => {
                             switch (field.type) {
                                 case "select":
                                     return <SelectField
@@ -118,27 +162,27 @@ const UpdateEmployeeForm = (props: Props) => {
                                         mode='single'
                                         options={employeeRoleOption}
                                         setValue={setValue}
-                                    />
+                                        defaultValue={typeof employee?.roleId === "string" ? employee.roleId : employee.roleId._id}
+                                    />;
                                 case "textarea":
-                                    return <TextAreaField key={index}
-                                        {...field} />
+                                    return <TextAreaField key={index} {...field} />;
                                 default:
-                                    return <InputField
-                                        key={index}
-                                        {...field}
-                                    />
+                                    return <InputField key={index} {...field} />;
                             }
-                        })
-                    }
-                </div>
+                        })}
+                    </div>
 
-                <div className='flex justify-end mt-8'>
-                    <Button htmlType='submit' type='primary'>Update</Button>
-                </div>
+                    <div className='flex justify-end mt-8'>
+                        <Button loading={loading} disabled={loading} htmlType='submit' type='primary'>Update</Button>
+                    </div>
 
-            </form>
+                </form> : <div style={{ height: "calc(100vh - 200px)" }} className="flex justify-center items-center">
+                    <Loader />
+                </div>
+            }
+
         </div>
-    )
-}
+    );
+};
 
-export default UpdateEmployeeForm
+export default UpdateEmployeeForm;
