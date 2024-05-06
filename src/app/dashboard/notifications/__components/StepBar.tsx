@@ -2,18 +2,22 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import Fly from "../../../../../public/images/fly.webp";
+import { TAppointmentWorkOrderStatus } from '@/app/types/appointment';
 
+type Props = {
+    status: TAppointmentWorkOrderStatus | null
+}
 
-const StepBar = ({ status }) => {
+const StepBar = ({ status }: Props) => {
     const [step, setStep] = useState<number>(0);
 
     useEffect(() => {
         if (status?.appointmentStatus === "Assigned") setStep(1);
         if (status?.appointmentStatus === "Scheduled") setStep(2);
-        if (status?.appointmentStatus === "Repairing") setStep(3);
-        if (status?.appointmentStatus === "Washing") setStep(4);
-        if (status?.appointmentStatus === "Payment") setStep(5);
-        if (status?.appointmentStatus === "Delivery") setStep(6);
+        if (status?.appointmentStatus === "Cancelled") setStep(3);
+        if (status?.appointmentStatus === "Completed") setStep(4);
+        if (status?.appointmentStatus === "Scheduled") setStep(5);
+        if (status?.appointmentStatus === "Missed") setStep(6);
     }, [status]);
     return (
         <div className='flex justify-between items-center relative before:content-[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:w-full before:h-2 before:bg-gradient-to-r before:from-[#FFE301] before:to-[#A79638]'>

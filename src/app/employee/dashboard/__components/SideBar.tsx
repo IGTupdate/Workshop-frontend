@@ -33,6 +33,8 @@ const SideBar = (props: Props) => {
     });
   }, [authData]);
 
+  console.log(authData)
+
 
 
   return (
@@ -49,8 +51,8 @@ const SideBar = (props: Props) => {
         <Avatar size={"large"} icon={<UserOutlined />} />
         {!props.collapsed && (
           <div>
-            <Title level={5} style={{ color: "white", textTransform: "capitalize", marginBottom: 0 }}>Hello {user?.firstName}</Title>
-            <Text className="capitalize" style={{ color: "#CDCDCE" }}>{user?.roleId?.role || "-"}</Text>
+            <Title level={5} style={{ color: "white", textTransform: "capitalize", marginBottom: 0 }}>Hello {user?.fullName}</Title>
+            <Text className="capitalize" style={{ color: "#CDCDCE" }}>{user?.role || "-"}</Text>
           </div>
         )}
       </Space>

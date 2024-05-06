@@ -1,11 +1,14 @@
 import { TRamp } from "./ramp"
 
+export type TEmployeeStatus = "Active" | "InActive"
+
 export type TEmployee = {
     userType: "employee",
     _id: string,
     fullName: string,
     email: string,
     roleId: string,
+    contactNumber?:string
 }
 
 export type TEmployeeWorkStatus = {
@@ -20,4 +23,13 @@ export type TEmployeeWorkStatus = {
         orderNumber: string
         estimatedTimeOfCompletion?: string
     }[]
+}
+
+export type TEmployeeTableDataType = {
+    _id:string,
+    fullName:string
+    contactNumber: string,
+    email: string,
+    status: string,
+    role: string
 }

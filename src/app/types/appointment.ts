@@ -1,6 +1,7 @@
 import { TCalender, TSlot } from "./calender";
 import { TCustomer } from "./customer";
 import { TVehicle } from "./vehicle";
+import { TWorkOrderStatus } from "./work-order";
 
 export type TAppointmentStatus =
   | "Missed"
@@ -55,3 +56,10 @@ export type TAppointmentReschedule = {
   slot_id: string,
   calender_id: string;
 };
+
+export type TAppointmentWorkOrderStatus = {
+  appointmentId:string,
+  appointmentStatus : TAppointmentStatus,
+  workOrderId?:string,
+  workOrderStatus: TWorkOrderStatus
+}
