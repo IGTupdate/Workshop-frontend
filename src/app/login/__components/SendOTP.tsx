@@ -23,6 +23,7 @@ const SendOTP = (props: Tprops) => {
 
   const dispatch = useAppDispatch();
   const contact = useAppSelector((state) => state.auth.authData.contactNumber);
+  const { authLoading } = useAppSelector((state) => state.auth);
   const [contactNumber, setContactNumber] = useState('');
   const [contactNumberError, setContactNumberError] = useState("");
 
@@ -91,6 +92,8 @@ const SendOTP = (props: Tprops) => {
         {contactNumberError && <ErrorText text={contactNumberError} />}
         {/* </div> */}
         <Button
+          loading={authLoading}
+          disabled={authLoading}
           size="large"
           htmlType="submit"
           className="bg-black text-white1 font-semibold w-full border-none hover:shadow-xl"

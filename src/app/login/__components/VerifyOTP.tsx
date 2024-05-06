@@ -17,7 +17,8 @@ import { FaRegEdit } from "react-icons/fa";
 import Logo from "../../../../public/images/logo-3.webp";
 
 const VerifyOTP = () => {
-  const contact = useAppSelector((state) => state.auth.authData.contactNumber);
+  const { authLoading, authData } = useAppSelector((state) => state.auth);
+  const { contactNumber } = authData;
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [otpValues, setOtpValues] = useState<string[]>([]);
@@ -41,7 +42,7 @@ const VerifyOTP = () => {
 
     let result;
     try {
-      result = await verifyOTP(contact, otp, dispatch);
+      result = await verifyOTP(contactNumber, otp, dispatch);
       if (result.data.success) {
         if (result?.data?.data?.userExists) router.push("/dashboard");
         else dispatch(setAuthStep(2));
@@ -51,14 +52,16 @@ const VerifyOTP = () => {
       toast.error("Invalid OTP");
       router.push("/login");
     } finally {
-      dispatch(setAuthLoading(false));
+      setTimeout(() => {
+        dispatch(setAuthLoading(false));
+      }, 1000);
     }
   };
 
   const resendOTP = async () => {
     dispatch(setAuthLoading(true));
     try {
-      await sendOTP(contact, true);
+      await sendOTP(contactNumber, true);
     } catch (error) {
       // console.error("Error sending OTP:", error);
     } finally {
@@ -83,7 +86,7 @@ const VerifyOTP = () => {
 
       <div className=" flex flex-col gap-5">
         <div className=" flex gap-4 text-xs">
-          Your Verification code has been sent to ******{contact.substring(6)}{" "}
+          Your Verification code has been sent to ******{contactNumber.substring(6)}{" "}
           <FaRegEdit
             onClick={() => editContactNumber()}
             className=" cursor-pointer"
@@ -99,6 +102,8 @@ const VerifyOTP = () => {
           {otpErrors && <ErrorText text={otpErrors} />}
         </div>
         <Button
+          loading={authLoading}
+          disabled={authLoading}
           size="large"
           className="bg-black text-white1 font-semibold w-full border-none hover:shadow-xl"
           onClick={handleFinish}
