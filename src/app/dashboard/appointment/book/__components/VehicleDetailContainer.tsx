@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import VehicleDetails from "./VehicleDetails";
 import VehicleUpdateContainer from "./VehicleUpdateContainer";
 import { setVehicleLoading } from "@/app/store/slices/customerVehicleSlice";
+import Loader from "@/app/components/Loader";
 
 const { Title } = Typography;
 
@@ -38,7 +39,7 @@ const VehicleDetailContainer = (props: Props) => {
     if (vehicleLoading) {
       dispatch(getVehicleByCustomerId());
     }
-  }, [vehicleLoading,vehicleId]);
+  }, [vehicleLoading, vehicleId]);
 
   useEffect(() => {
     if (vehicleId !== NEW_VEHICLE.value) {
@@ -80,7 +81,9 @@ const VehicleDetailContainer = (props: Props) => {
   return (
     <>
       {vehicleLoading ? (
-        <div>Loading</div>
+        <div className="flex justify-center items-center w-full h-full">
+          <Loader />
+        </div>
       ) : (
         <div>
           <div className="mb-5">

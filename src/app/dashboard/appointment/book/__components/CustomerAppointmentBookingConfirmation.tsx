@@ -23,6 +23,7 @@ import { LiaEdit } from "react-icons/lia";
 import { setAppointmentLoading } from "@/app/store/slices/customerAppointmentSlice";
 import Watermark from "@/app/components/Text/WatermarkText";
 import CustomModal from "@/app/components/Model/CustomModel";
+import { MdOutlineCancel } from "react-icons/md";
 
 const { Title } = Typography;
 
@@ -412,12 +413,8 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                       className="flex justify-between items-center capitalize gap-3 pe-4"
                     >
                       {ele}
-                      <button
-                        className="outline-0 rounded-full h-[16px] w-[15px] flex justify-center items-center text-red-500 border border-red-500 text-[10px]"
-                        onClick={() => removeRemarks(ele)}
-                      >
-                        x
-                      </button>
+
+                      <MdOutlineCancel onClick={() => removeRemarks(ele)} size={14} className="text-red-500" />
                     </p>
                   )
                 )}
