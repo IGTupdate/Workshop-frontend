@@ -5,7 +5,7 @@ import { TEmployeeDetails } from '@/app/types/employee';
 import React, { useEffect, useState } from 'react';
 
 type Props = {
-    employee: TEmployeeDetails | null;
+    employee: TEmployeeDetails;
 };
 
 function EmployeeViewpageContainer({ employee }: Props) {
