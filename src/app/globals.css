@@ -70,7 +70,7 @@ a:hover {
 
 
 .input-otp {
-  justify-content: start !important;
+  justify-content: space-between !important;
 }
 
 
@@ -94,6 +94,14 @@ a:hover {
 
 :where(.css-dev-only-do-not-override-1jh2zmy).ant-table-wrapper .ant-table-sticky-scroll {
   display: none !important;
+}
+
+:where(.css-dev-only-do-not-override-1jh2zmy).ant-input-group {
+  height: 100%;
+}
+
+:where(.css-dev-only-do-not-override-1jh2zmy).ant-input-group .ant-input {
+  height: 100%;
 }
 
 

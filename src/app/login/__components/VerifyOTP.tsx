@@ -17,7 +17,9 @@ import { FaRegEdit } from "react-icons/fa";
 import Logo from "../../../../public/images/logo-3.webp";
 
 const VerifyOTP = () => {
-  const { authLoading, authData } = useAppSelector((state) => state.auth);
+  const { authLoading, authData, countryCode } = useAppSelector((state) => state.auth);
+
+
   const { contactNumber } = authData;
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -42,7 +44,7 @@ const VerifyOTP = () => {
 
     let result;
     try {
-      result = await verifyOTP(contactNumber, otp, dispatch);
+      result = await verifyOTP(countryCode, contactNumber, otp, dispatch);
       if (result.data.success) {
         if (result?.data?.data?.userExists) router.push("/dashboard");
         else dispatch(setAuthStep(2));
@@ -61,7 +63,7 @@ const VerifyOTP = () => {
   const resendOTP = async () => {
     dispatch(setAuthLoading(true));
     try {
-      await sendOTP(contactNumber, true);
+      await sendOTP(countryCode, contactNumber, true);
     } catch (error) {
       // console.error("Error sending OTP:", error);
     } finally {

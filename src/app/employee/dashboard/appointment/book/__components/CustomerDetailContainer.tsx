@@ -1,8 +1,8 @@
 "use client";
 
 
-import { TAppointmentBook } from '@/app/types/appointment'
-import { Button, Typography } from 'antd'
+import { TAppointmentBook } from '@/app/types/appointment';
+import { Button, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import CustomerSendOtp from './CustomerSendOtp';
 import CustomerVerifyOtp from './CustomerVerifyOtp';
@@ -13,9 +13,9 @@ import { usePathname, useRouter } from 'next/navigation';
 const { Title } = Typography;
 
 type Props = {
-    setCurrentStep: React.Dispatch<React.SetStateAction<number>>
-    setAppointmentBookingData: React.Dispatch<React.SetStateAction<TAppointmentBook>>
-}
+    setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
+    setAppointmentBookingData: React.Dispatch<React.SetStateAction<TAppointmentBook>>;
+};
 
 const CustomerDetailContainer = (props: Props) => {
     const [authStep, setAuthStep] = useState(0);
@@ -25,7 +25,7 @@ const CustomerDetailContainer = (props: Props) => {
         fullName: "",
         _id: "",
         userType: "customer"
-    })
+    });
 
     const router = useRouter();
     const pathname = usePathname();
@@ -36,16 +36,16 @@ const CustomerDetailContainer = (props: Props) => {
                 return {
                     ...prv,
                     customer_id: customer._id
-                }
-            })
+                };
+            });
         }
         // console.log("customer", setCustomer)
-    }, [authStep])
+    }, [authStep]);
 
 
     const handleBack = () => {
-        router.push("/employee/dashboard/appointment/book")
-    }
+        router.push("/employee/dashboard/appointment/book");
+    };
 
     return (
         <div>
@@ -56,7 +56,7 @@ const CustomerDetailContainer = (props: Props) => {
 
             <div className='grid grid-cols-2'>
                 {
-                    <div className='w-full sm:max-w-[320px]'>
+                    <div className='w-full sm:max-w-[420px]'>
                         {
                             authStep === 0 && <CustomerSendOtp
                                 setAuthStep={setAuthStep}
@@ -86,7 +86,7 @@ const CustomerDetailContainer = (props: Props) => {
                 Back
             </Button>
         </div>
-    )
-}
+    );
+};
 
-export default CustomerDetailContainer
+export default CustomerDetailContainer;

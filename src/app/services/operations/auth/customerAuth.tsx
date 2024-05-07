@@ -39,13 +39,13 @@ export async function getCustomerData(_id: string, dispatch: AppDispatch) {
   }
 }
 
-export async function sendOTP(contactNumber: string, resend?: boolean) {
+export async function sendOTP(countryCode: string, number: string, resend?: boolean) {
   try {
     // Sending OTP request
     const otpResult = await apiOpenConnector({
       method: "POST",
       url: SEND_OTP_API,
-      bodyData: { contactNumber },
+      bodyData: { countryCode, contactNumber: number },
     });
 
     if (otpResult?.data?.success) {
@@ -63,14 +63,14 @@ export async function sendOTP(contactNumber: string, resend?: boolean) {
   }
 }
 
-export async function verifyOTP(contactNumber: string, otp: string, dispatch: AppDispatch) {
+export async function verifyOTP(countryCode: string, contactNumber: string, otp: string, dispatch: AppDispatch) {
   try {
     // console.log(VERIFY_OTP_API);
     // Sending OTP verification request
     const otpVerificationResult = await apiOpenConnector({
       method: "POST",
       url: VERIFY_OTP_API,
-      bodyData: { contactNumber, otp },
+      bodyData: { countryCode, contactNumber, otp },
     });
 
     if (otpVerificationResult?.data?.success) {

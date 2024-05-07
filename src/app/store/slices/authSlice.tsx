@@ -14,7 +14,8 @@ export interface IAuthData {
 export interface IAuthState {
     authStep: number,
     authData: IAuthData,
-    authLoading: boolean;
+    authLoading: boolean,
+    countryCode: string;
 }
 
 const initialAuthDataState: IAuthData = {
@@ -29,7 +30,8 @@ const initialAuthDataState: IAuthData = {
 const initialState: IAuthState = {
     authStep: 0,
     authData: initialAuthDataState,
-    authLoading: false
+    authLoading: false,
+    countryCode: ''
 };
 
 export const authSlice = createSlice({
@@ -41,6 +43,9 @@ export const authSlice = createSlice({
         },
         setAuthData: (state, action: PayloadAction<IAuthData>) => {
             state.authData = action.payload;
+        },
+        setAuthCountryCode: (state, action: PayloadAction<string>) => {
+            state.countryCode = action.payload;
         },
         setAuthLoading: (state, action: PayloadAction<boolean>) => {
             state.authLoading = action.payload;
@@ -57,5 +62,5 @@ export const authSlice = createSlice({
     }
 });
 
-export const { setAuthStep, setAuthData, setAuthLoading, resetAuthSlice, logOut } = authSlice.actions;
+export const { setAuthStep, setAuthData, setAuthCountryCode, setAuthLoading, resetAuthSlice, logOut } = authSlice.actions;
 export const authReducer = authSlice.reducer;

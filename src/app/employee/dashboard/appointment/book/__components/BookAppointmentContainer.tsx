@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from 'react'
-import SlotAvailablityContainer from './SlotAvailablityContainer'
-import { Steps } from 'antd'
-import { slot_booking_step } from '../__utils/slot-booking-step'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { TAppointmentBook } from '@/app/types/appointment'
-import CustomerDetailContainer from './CustomerDetailContainer'
-import VehicleDetailContainer from './VehicleDetailContainer'
-import AppointmentBookingConfirmation from './AppointmentBookingConfirmation'
-import { useAppSelector } from '@/app/store/reduxHooks'
+import React, { useEffect, useState } from 'react';
+import SlotAvailablityContainer from './SlotAvailablityContainer';
+import { Steps } from 'antd';
+import { slot_booking_step } from '../__utils/slot-booking-step';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { TAppointmentBook } from '@/app/types/appointment';
+import CustomerDetailContainer from './CustomerDetailContainer';
+import VehicleDetailContainer from './VehicleDetailContainer';
+import AppointmentBookingConfirmation from './AppointmentBookingConfirmation';
+import { useAppSelector } from '@/app/store/reduxHooks';
 
-type Props = {}
+type Props = {};
 
 const BookAppointmentContainer = (props: Props) => {
     const router = useRouter();
@@ -28,7 +28,6 @@ const BookAppointmentContainer = (props: Props) => {
     });
 
     useEffect(() => {
-        console.log(searchParams.toString());
         const slot_id = searchParams.get("slot_id");
         const calender_id = searchParams.get("calender_id");
         if (slot_id && calender_id) {
@@ -37,8 +36,8 @@ const BookAppointmentContainer = (props: Props) => {
                     ...prv,
                     slot_id,
                     calender_id,
-                }
-            })
+                };
+            });
         }
         else {
             setAppointmentBookingData((prv) => {
@@ -46,10 +45,10 @@ const BookAppointmentContainer = (props: Props) => {
                     ...prv,
                     slot_id: "",
                     calender_id: "",
-                }
-            })
+                };
+            });
         }
-    }, [searchParams])
+    }, [searchParams]);
 
     useEffect(() => {
 
@@ -70,7 +69,7 @@ const BookAppointmentContainer = (props: Props) => {
         else {
             setCurrentStep(0);
         }
-    }, [appointmentBookingData])
+    }, [appointmentBookingData]);
 
     return (
         <div>
@@ -105,7 +104,7 @@ const BookAppointmentContainer = (props: Props) => {
                 />
             }
         </div>
-    )
-}
+    );
+};
 
-export default BookAppointmentContainer
+export default BookAppointmentContainer;

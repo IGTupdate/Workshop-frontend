@@ -88,9 +88,11 @@ const CustomerVerifyOtp = (props: Props) => {
           {otpErrors && <ErrorText text={otpErrors} />}
         </div>
         <Button
+          loading={loading}
           disabled={loading}
           size="large"
-          className="bg-customYellow text-white1 font-semibold w-full"
+          htmlType="submit"
+          className="bg-black text-white1 font-semibold w-full border-none hover:shadow-xl"
           onClick={handleFinish}
         >
           Send
