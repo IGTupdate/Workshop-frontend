@@ -9,7 +9,7 @@ export type TsideBarMenuItems = {
     label: string,
     pathname?: string,
     children?: TsideBarMenuItems[];
-    resourcetype?: string
+    resourcetype?: string;
 };
 
 export const sideBarMenuItems: TsideBarMenuItems[] = [
@@ -64,12 +64,12 @@ export const sideBarMenuItems: TsideBarMenuItems[] = [
     },
 ];
 
-export const commonResources = ["profile", "dashboard"]
+export const commonResources = ["profile", "dashboard"];
 
 export function getSideBarMenuItems(router: AppRouterInstance,
     sideBarMenuItems: TsideBarMenuItems[],
     dashBoardIcons: any,
-    ability: MongoAbility<AbilityTuple, MongoQuery> | undefined)
+    ability?: MongoAbility<AbilityTuple, MongoQuery> | undefined)
     : MenuProps["items"] {
 
     const sideBarMenus = sideBarMenuItems.map((item) => {
@@ -102,13 +102,13 @@ export function getSideBarMenuItems(router: AppRouterInstance,
             // console.log(subject, action);
             // console.log(ability && ability.can(action, subject))
             return ability && ability.can(action, subject);
-        })
+        });
 
 
         return can_perform_action !== undefined;
-    })
+    });
 
-    return filteredSideBarMenus
+    return filteredSideBarMenus;
 }
 
 export const findRecursiveByPathName = (sideBarMenuItems: TsideBarMenuItems[], pathname: string): TsideBarMenuItems | null => {

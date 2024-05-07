@@ -19,22 +19,24 @@ import { getAllEmployeeRole } from "@/app/services/operations/employee/employee"
 
 const { Title, Text } = Typography;
 
+interface TempOpton {
+    value: string,
+    text: string;
+}
+
 export function EmployeeTableColumns() {
-    const [employeeRoleOption, setEmployeeRoleOption] = useState([]);
+    const [employeeRoleOption, setEmployeeRoleOption] = useState<TempOpton[]>([]);
 
     useEffect(() => {
         (async function () {
             try {
                 const response = await getAllEmployeeRole();
                 const employeeRoles = response.data as TRole[];
-                setEmployeeRoleOption(() => {
-                    return employeeRoles.map((el) => {
-                        return {
-                            value: el.role,
-                            text: el.role
-                        };
-                    });
-                });
+                const options = employeeRoles.map((role: TRole) => ({ // Corrected mapping function
+                    value: role.role,
+                    text: role.role,
+                }));
+                setEmployeeRoleOption(options);
             } catch (err) {
                 console.log(err);
             }
