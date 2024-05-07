@@ -26,7 +26,7 @@ const SendOTP = (props: Tprops) => {
   const dispatch = useAppDispatch();
   // const contact = useAppSelector((state) => state.auth.authData.contactNumber);
   const { authLoading } = useAppSelector((state) => state.auth);
-  const [countryCode, setCountryCode] = useState('+91');
+  const [countryCode, setCountryCode] = useState('+52');
   const [contactNumber, setContactNumber] = useState('');
   const [contactNumberError, setContactNumberError] = useState("");
 
@@ -105,13 +105,13 @@ const SendOTP = (props: Tprops) => {
 
           <Select
             size="large"
-            defaultValue="+91"
+            defaultValue="+52"
             // style={{ width: '22%', height: 42 }}
             className="w-[28%] sm:w-[25%] h-[42px]"
             onChange={handleSelect}
             options={[
-              { value: '+91', label: '+91' },
               { value: '+52', label: '+52' },
+              { value: '+91', label: '+91' },
             ]}
           />
 

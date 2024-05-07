@@ -10,6 +10,8 @@ import { useCallback, useEffect, useState } from "react";
 import { APPOINTMENT_DATA_PAGE_SIZE } from "../__utils/constant";
 import AppointmentTableContainer from "./AppointmentTableContainer";
 import dayjs from "dayjs";
+import useAbility from "@/app/__hooks/useAbility";
+import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 const { RangePicker } = DatePicker;
 
 type Props = {};
@@ -31,10 +33,16 @@ const AppointmentpageContainer = (props: Props) => {
   const router = useRouter();
   const pathname = usePathname();
 
+  // ability
+  const ability = useAbility();
+
+
   // when search params changes then call api
   useEffect(() => {
-    loadAppointement(searchParams.toString());
-  }, [searchParams, router]);
+    if (ability && ability.can(casl_action.get, casl_subject.appointment)) {
+      loadAppointement(searchParams.toString());
+    }
+  }, [searchParams, router, ability]);
 
   const loadAppointement = async (querystring: string) => {
     setAppointmentDataLoading(true);

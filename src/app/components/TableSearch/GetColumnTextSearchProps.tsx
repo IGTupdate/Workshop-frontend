@@ -38,7 +38,6 @@ function GetColumnTextSearchProps<T>(dataIndex: DataIndex): TableColumnType<T> {
 
   // update the router on search text
   useEffect(() => {
-    console.log("changed");
     const queryParmas = createQueryString(dataIndex, searchText);
     router.push(`${pathname}?${queryParmas}`);
   }, [searchText]);
