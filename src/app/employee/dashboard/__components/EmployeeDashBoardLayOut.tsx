@@ -9,7 +9,7 @@ import BreadCrumbContainer from "./BreadCrumbContainer";
 import { useAppSelector } from "@/app/store/reduxHooks";
 import useDeviceType from "../__hooks/useDeviceType";
 
-const { Header, Sider, Content } = Layout;
+const { Content } = Layout;
 
 const EmployeeDashBoardLayOut = ({
   children,

@@ -8,27 +8,26 @@ class AccessAbility {
 
   private constructor() { }
 
-  static getAbility() {
-    if (!AccessAbility.ability) {
-      const access = store.getState().access.accessData;
+  static getAbility(access: ICaslData[]) {
 
-      if (access.length === 0) return undefined;
+    // undefined in case of the no access
+    if (access.length === 0)
+      return AccessAbility.ability = undefined;
 
-      AccessAbility.ability = defineAbility((can, cannot) => {
-        access.forEach((ele: ICaslData) => {
-          const { action, subject, fields, conditions } = ele;
-          if (fields && fields.length && conditions && conditions.length) {
-            can(action, subject, fields, conditions);
-          } else if (fields && fields.length) {
-            can(action, subject, fields);
-          } else if (conditions && conditions.length) {
-            can(action, subject, undefined, conditions);
-          } else {
-            can(action, subject);
-          }
-        });
+    AccessAbility.ability = defineAbility((can, cannot) => {
+      access.forEach((ele: ICaslData) => {
+        const { action, subject, fields, conditions } = ele;
+        if (fields && fields.length && conditions && conditions.length) {
+          can(action, subject, fields, conditions);
+        } else if (fields && fields.length) {
+          can(action, subject, fields);
+        } else if (conditions && conditions.length) {
+          can(action, subject, undefined, conditions);
+        } else {
+          can(action, subject);
+        }
       });
-    }
+    });
     return AccessAbility.ability;
   }
 }
