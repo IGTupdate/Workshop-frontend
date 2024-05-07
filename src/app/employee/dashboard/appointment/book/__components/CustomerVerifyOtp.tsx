@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { TCustomer } from "@/app/types/customer";
 import { authEndpoints } from "@/app/services/apis";
 import { apiOpenConnector } from "@/app/services/apiOpenConnector";
+import { useAppSelector } from "@/app/store/reduxHooks";
 
 const { VERIFY_OTP_API } = authEndpoints;
 
@@ -19,6 +20,7 @@ type Props = {
 };
 
 const CustomerVerifyOtp = (props: Props) => {
+  const { countryCode } = useAppSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
   const [otpValues, setOtpValues] = useState<string[]>([]);
   const [otpErrors, setOTPErrors] = useState("");
@@ -45,7 +47,7 @@ const CustomerVerifyOtp = (props: Props) => {
       const response = await apiOpenConnector({
         method: "POST",
         url: VERIFY_OTP_API,
-        bodyData: { contactNumber: props.customer.contactNumber, otp },
+        bodyData: { countryCode, contactNumber: props.customer.contactNumber, otp },
       });
       props.setCustomer((prv) => {
         return {

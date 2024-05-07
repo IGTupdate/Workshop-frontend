@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Heading from '@/app/components/Heading';
 import { apiOpenConnector } from '@/app/services/apiOpenConnector';
@@ -21,8 +21,8 @@ const { AUTH_API } = authEndpoints;
 type Props = {
     setCustomer: React.Dispatch<React.SetStateAction<TCustomer>>,
     setAuthStep: React.Dispatch<React.SetStateAction<number>>,
-    customer: TCustomer
-}
+    customer: TCustomer;
+};
 
 const Register = (props: Props) => {
     const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
@@ -40,11 +40,11 @@ const Register = (props: Props) => {
                     fullName: data.fullName,
                     email: data.email
                 }
-            })
+            });
             props.setAuthStep(3);
 
         } catch (err: any) {
-            toast.error(err?.response?.data?.message || COMMON_ERROR)
+            toast.error(err?.response?.data?.message || COMMON_ERROR);
         } finally {
             setLoading(false);
         }
@@ -102,11 +102,11 @@ const Register = (props: Props) => {
                 </div>
 
                 <Button
+                    loading={loading}
                     disabled={loading}
-                    type='primary'
-                    size='large'
-                    htmlType='submit'
-                    className='bg-customYellow text-white1 font-semibold w-full'>
+                    size="large"
+                    htmlType="submit"
+                    className="bg-black text-white1 font-semibold w-full border-none hover:shadow-xl">
                     Save
                 </Button>
             </form>
