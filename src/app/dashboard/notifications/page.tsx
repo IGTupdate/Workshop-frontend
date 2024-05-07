@@ -4,7 +4,10 @@ import StepBar from "./__components/StepBar";
 import Notifications from "./__components/Notifications";
 import { useAppSelector } from "@/app/store/reduxHooks";
 import { appointmentNotification } from "@/app/services/operations/notification/appointment";
-import { getAppointmentStatus, getCustomerAppointmentInitData } from "@/app/services/operations/appointment/appointment";
+import {
+  getAppointmentStatus,
+  getCustomerAppointmentInitData,
+} from "@/app/services/operations/appointment/appointment";
 import Loader from "@/app/components/Loader";
 import { getCustomerAuthInitData } from "@/app/services/operations/auth/common";
 import { TAppointmentWorkOrderStatus } from "@/app/types/appointment";
@@ -18,8 +21,11 @@ interface AppointmentStatus {
 }
 
 const Page: React.FC = () => {
-  const [notificationData, setNotificationData] = useState<NotificationData | null>(null);
-  const [status, setStatus] = useState<TAppointmentWorkOrderStatus | null>(null);
+  const [notificationData, setNotificationData] =
+    useState<NotificationData | null>(null);
+  const [status, setStatus] = useState<TAppointmentWorkOrderStatus | null>(
+    null,
+  );
   const [loading, setLoading] = useState<boolean>(false);
 
   const customerId = useAppSelector((state) => state.auth.authData?._id);
@@ -32,7 +38,8 @@ const Page: React.FC = () => {
     try {
       if (!customerId) return;
       setLoading(true);
-      const initAppointmentData = await getCustomerAppointmentInitData(customerId);
+      const initAppointmentData =
+        await getCustomerAppointmentInitData(customerId);
       if (initAppointmentData?._id) {
         await getAllNotificationsData(initAppointmentData._id);
         await getAppointmentStatusData(initAppointmentData._id);

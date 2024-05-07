@@ -21,7 +21,7 @@ export const store = configureStore({
     customerVehicle: customerVehicleReducer,
     notifications: customerNotificationReducer,
     servicePlan: servicePlanReducer,
-    access: accessReducer
+    access: accessReducer,
   },
 });
 

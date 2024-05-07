@@ -1,13 +1,9 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const WorkOrderContainer = (props: Props) => {
-    return (
-        <div>
+  return <div></div>;
+};
 
-        </div>
-    )
-}
-
-export default WorkOrderContainer
+export default WorkOrderContainer;

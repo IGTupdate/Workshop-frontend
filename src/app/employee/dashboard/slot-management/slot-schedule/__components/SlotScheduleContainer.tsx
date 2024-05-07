@@ -22,7 +22,7 @@ type Props = {};
 const SlotScheduleContainer = (props: Props) => {
   const dispatch = useAppDispatch();
   const { slotScheduleData, slotScheduleLoading } = useAppSelector(
-    (state) => state.slotSchedule
+    (state) => state.slotSchedule,
   );
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const SlotScheduleContainer = (props: Props) => {
   };
 
   const handleSlotScheduleDeleteModal = (
-    newDeleteModal: TSlotSchedule | null
+    newDeleteModal: TSlotSchedule | null,
   ) => {
     dispatch(setDeleteSlotSchedule(newDeleteModal));
   };
@@ -67,12 +67,11 @@ const SlotScheduleContainer = (props: Props) => {
             dataSource={slotScheduleData}
             columns={get_slot_schedule_columns(
               handleSlotScheduleDrawer,
-              handleSlotScheduleDeleteModal
+              handleSlotScheduleDeleteModal,
             )}
           />
         </div>
       )}
-
 
       <SlotScheduleManageDrawer />
       <SlotScheduleDeleteModal />

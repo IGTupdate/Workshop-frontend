@@ -20,9 +20,9 @@ const InputFieldWithButton = (props: Props) => {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<any>();
 
-
   const handleButtonClick = () => {
-    if (inputValue.trim() !== "") { // Ensure input value is not empty or whitespace
+    if (inputValue.trim() !== "") {
+      // Ensure input value is not empty or whitespace
       props.handleButtonClick(inputValue.trim());
       setInputValue(""); // Clear input value
     }
@@ -40,10 +40,7 @@ const InputFieldWithButton = (props: Props) => {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
-        <Button
-          onClick={handleButtonClick}
-          type="primary"
-        >
+        <Button onClick={handleButtonClick} type="primary">
           Submit
         </Button>
       </Space.Compact>

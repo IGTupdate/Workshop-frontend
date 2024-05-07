@@ -9,7 +9,7 @@ import { CgCloseO } from "react-icons/cg";
 
 const getRequiredCalenderByDate = (
   calenderData: TCalender[],
-  value: Dayjs
+  value: Dayjs,
 ): TCalender | null => {
   const required_calender = calenderData.find((calender) => {
     return (
@@ -60,9 +60,7 @@ const dateCellRender = (params: TdateCellRender) => {
       <div
         className={`group w-full h-full ${calenderCellBgColorByStatus["Default"]} flex flex-col items-center justify-center relative overflow-hidden h-full w-full bg-[#CDCDCE]`}
       >
-        <MdBlockFlipped
-          size={25} className="text-white"
-        />
+        <MdBlockFlipped size={25} className="text-white" />
         <p className="text-md font-normal text-center text-white">Not Opened</p>
       </div>
     );
@@ -78,24 +76,20 @@ const dateCellRender = (params: TdateCellRender) => {
       } flex items-center justify-center relative overflow-hidden`}
     >
       <div className="flex flex-col justify-center items-center bg-[#aef2c0] w-full h-full">
-       
-        
-            {required_calender?.status === calender_status.open && (
-              <div className="flex flex-col justify-center items-center bg-[#fffaeb] w-full h-full">
-                <h2 className="text-xl font-semibold text-center">
-                  {getAllSlotOfCalender(required_calender)}
-                </h2>
-                <p className="text-md font-normal text-center">Slots Open</p>
-              </div>
-            )}
-            {required_calender?.status === calender_status.close && (
-              <div className="flex flex-col justify-center items-center bg-[#eba78a] w-full h-full"> 
-              <CgCloseO size={25} className="text-white"/>
-                <p className="text-md font-normal text-center text-white">Closed</p>
-              </div>
-            )}
-        
-      
+        {required_calender?.status === calender_status.open && (
+          <div className="flex flex-col justify-center items-center bg-[#fffaeb] w-full h-full">
+            <h2 className="text-xl font-semibold text-center">
+              {getAllSlotOfCalender(required_calender)}
+            </h2>
+            <p className="text-md font-normal text-center">Slots Open</p>
+          </div>
+        )}
+        {required_calender?.status === calender_status.close && (
+          <div className="flex flex-col justify-center items-center bg-[#eba78a] w-full h-full">
+            <CgCloseO size={25} className="text-white" />
+            <p className="text-md font-normal text-center text-white">Closed</p>
+          </div>
+        )}
       </div>
       <button
         onClick={handleClick}

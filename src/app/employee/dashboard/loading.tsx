@@ -5,7 +5,10 @@ type Props = {};
 
 const loading = (props: Props) => {
   return (
-    <div style={{ height: 'calc(100vh - 200px)' }} className="flex justify-center items-center w-full">
+    <div
+      style={{ height: "calc(100vh - 200px)" }}
+      className="flex justify-center items-center w-full"
+    >
       <Loader />
     </div>
   );

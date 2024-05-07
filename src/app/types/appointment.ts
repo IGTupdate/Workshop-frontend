@@ -41,25 +41,24 @@ export type TAppointmentDataTable = {
   status: TAppointmentStatus;
 };
 
-
 export type TAppointmentBook = {
-  slot_id: string,
-  calender_id: string,
-  vehicle_id: string,
-  customer_id: string,
-  service_plans?: string[] | [],
-  service_description?: string[] | [],
+  slot_id: string;
+  calender_id: string;
+  vehicle_id: string;
+  customer_id: string;
+  service_plans?: string[] | [];
+  service_description?: string[] | [];
   showServicePlans?: boolean;
 };
 
 export type TAppointmentReschedule = {
-  slot_id: string,
+  slot_id: string;
   calender_id: string;
 };
 
 export type TAppointmentWorkOrderStatus = {
-  appointmentId:string,
-  appointmentStatus : TAppointmentStatus,
-  workOrderId?:string,
-  workOrderStatus: TWorkOrderStatus
-}
+  appointmentId: string;
+  appointmentStatus: TAppointmentStatus;
+  workOrderId?: string;
+  workOrderStatus: TWorkOrderStatus;
+};

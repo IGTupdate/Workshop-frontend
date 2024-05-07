@@ -1,4 +1,4 @@
 export const employeeRole = {
-    advisor: "advisor",
-    mechanic: "mechanic",
-}
+  advisor: "advisor",
+  mechanic: "mechanic",
+};

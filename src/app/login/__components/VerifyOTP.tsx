@@ -17,8 +17,9 @@ import { FaRegEdit } from "react-icons/fa";
 import Logo from "../../../../public/images/logo-3.webp";
 
 const VerifyOTP = () => {
-  const { authLoading, authData, countryCode } = useAppSelector((state) => state.auth);
-
+  const { authLoading, authData, countryCode } = useAppSelector(
+    (state) => state.auth,
+  );
 
   const { contactNumber } = authData;
   const router = useRouter();
@@ -48,7 +49,6 @@ const VerifyOTP = () => {
       if (result.data.success) {
         if (result?.data?.data?.userExists) router.push("/dashboard");
         else dispatch(setAuthStep(2));
-
       }
     } catch (error) {
       toast.error("Invalid OTP");
@@ -88,7 +88,8 @@ const VerifyOTP = () => {
 
       <div className=" flex flex-col gap-5">
         <div className=" flex gap-4 text-xs">
-          Your Verification code has been sent to ******{contactNumber.substring(6)}{" "}
+          Your Verification code has been sent to ******
+          {contactNumber.substring(6)}{" "}
           <FaRegEdit
             onClick={() => editContactNumber()}
             className=" cursor-pointer"

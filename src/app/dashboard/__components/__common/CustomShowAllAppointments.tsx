@@ -69,7 +69,10 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
   return (
     <>
       {appointmentLoading ? (
-        <div style={{ height: 'calc(100vh - 200px)' }} className="flex justify-center items-center ">
+        <div
+          style={{ height: "calc(100vh - 200px)" }}
+          className="flex justify-center items-center "
+        >
           <Loader />
         </div>
       ) : (
@@ -85,14 +88,19 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
                     key={appointment.appointmentId}
                     appointment={appointment}
                     onRescheduleAppointment={
-                      (pageType === "reschedule" || pageType === "cancelled") ?
-                        handleRescheduleAppointment : undefined
+                      pageType === "reschedule" || pageType === "cancelled"
+                        ? handleRescheduleAppointment
+                        : undefined
                     }
                     onShowAppointmentDetails={
-                      pageType === "previous" ? handleShowAppointmentDetails : undefined
+                      pageType === "previous"
+                        ? handleShowAppointmentDetails
+                        : undefined
                     }
                     onCancelAppointment={
-                      pageType === "cancelled" ? handleCancelAppointment : undefined
+                      pageType === "cancelled"
+                        ? handleCancelAppointment
+                        : undefined
                     }
                   />
                 ))}
@@ -106,7 +114,6 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
         </>
       )}
     </>
-
   );
 };
 

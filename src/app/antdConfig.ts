@@ -1,4 +1,3 @@
-
 export const antdConfig = {
   theme: {
     token: {
@@ -18,7 +17,7 @@ export const antdConfig = {
         itemSelectedBg: "#063146",
         itemSelectedColor: "rgb(255, 255, 255)",
         itemColor: "#FFFFFF",
-        popupBg: "#031c30"
+        popupBg: "#031c30",
       },
       Layout: {
         colorBgContainer: "#031c30",

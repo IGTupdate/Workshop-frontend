@@ -70,7 +70,6 @@ const ProfileForm = ({ edit, setEdit }: Props) => {
     }
 
     dispatch(updateCustomer(newData, setLoading, setEdit));
-
   };
 
   return (

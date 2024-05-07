@@ -1,7 +1,7 @@
-'use client';
-import { useEffect } from 'react';
-import { useAppDispatch } from '@/app/store/reduxHooks';
-import { setEmployeeSmallDevice } from '@/app/store/slices/deviceSlice';
+"use client";
+import { useEffect } from "react";
+import { useAppDispatch } from "@/app/store/reduxHooks";
+import { setEmployeeSmallDevice } from "@/app/store/slices/deviceSlice";
 
 const useDeviceType = () => {
   const dispatch = useAppDispatch();
@@ -13,11 +13,11 @@ const useDeviceType = () => {
 
     // Update device type on mount and window resize
     updateDeviceType();
-    window.addEventListener('resize', updateDeviceType);
+    window.addEventListener("resize", updateDeviceType);
 
     // Cleanup event listener
     return () => {
-      window.removeEventListener('resize', updateDeviceType);
+      window.removeEventListener("resize", updateDeviceType);
     };
   }, []);
 };

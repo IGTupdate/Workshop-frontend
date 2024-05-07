@@ -1,6 +1,6 @@
 import { TCalender } from "@/app/types/calender";
 
-export const calenderData : TCalender[]= [
+export const calenderData: TCalender[] = [
   {
     _id: "65d3564570fb6acd621ad4c9",
     date: "2024-03-16T00:00:00.000Z",
@@ -21,7 +21,6 @@ export const calenderData : TCalender[]= [
     ],
     createdAt: "2024-03-19T13:23:17.870Z",
     updatedAt: "2024-03-19T13:23:17.870Z",
-  
   },
   {
     _id: "65d6ff5b3a0f121aa9ef4610",
@@ -50,7 +49,6 @@ export const calenderData : TCalender[]= [
     createdBy: "65d5b29fbb40eecbcf7b9c04",
     createdAt: "2024-03-22T08:01:31.158Z",
     updatedAt: "2024-03-22T08:01:31.158Z",
-   
   },
   {
     _id: "65d6ff5b3a0f121aa9ef4610",

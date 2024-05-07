@@ -7,8 +7,8 @@ type TinitialState = {
   slotScheduleLoading: boolean;
   activeSlotSchedule: TActiveSlotSchedule;
   slotScheduleDrawerLoading: boolean;
-  deleteSlotSchedule: TSlotSchedule | null
-  deleteSlotScheduleLoading: boolean
+  deleteSlotSchedule: TSlotSchedule | null;
+  deleteSlotScheduleLoading: boolean;
 };
 
 const initialState: TinitialState = {
@@ -18,7 +18,6 @@ const initialState: TinitialState = {
   slotScheduleDrawerLoading: false,
   deleteSlotSchedule: null,
   deleteSlotScheduleLoading: false,
-  
 };
 
 export const slotScheduleSlice = createSlice({
@@ -35,7 +34,7 @@ export const slotScheduleSlice = createSlice({
     },
     setActiveSlotSchedule: (
       state,
-      action: PayloadAction<TActiveSlotSchedule>
+      action: PayloadAction<TActiveSlotSchedule>,
     ) => {
       state.activeSlotSchedule = action.payload;
       return state;
@@ -44,9 +43,12 @@ export const slotScheduleSlice = createSlice({
       state.slotScheduleDrawerLoading = action.payload;
       return state;
     },
-    setDeleteSlotSchedule: (state, action: PayloadAction<TSlotSchedule | null>) => {
-      state.deleteSlotSchedule = action.payload
-      return state
+    setDeleteSlotSchedule: (
+      state,
+      action: PayloadAction<TSlotSchedule | null>,
+    ) => {
+      state.deleteSlotSchedule = action.payload;
+      return state;
     },
     setDeleteSlotScheduleLoading: (state, action: PayloadAction<boolean>) => {
       state.deleteSlotScheduleLoading = action.payload;
@@ -65,6 +67,6 @@ export const {
   resetSlotSchedule,
   setActiveSlotSchedule,
   setDeleteSlotSchedule,
-  setDeleteSlotScheduleLoading
+  setDeleteSlotScheduleLoading,
 } = slotScheduleSlice.actions;
 export const slotScheduleReducer = slotScheduleSlice.reducer;

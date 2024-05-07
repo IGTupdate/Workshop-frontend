@@ -66,7 +66,7 @@ const WorkOrderFormContainer = (props: Props) => {
 
   const appendValueInArrayField = (
     fieldName: keyof TworkorderPrepare,
-    data: any
+    data: any,
   ) => {
     const prvVal = getValues(fieldName);
     if (prvVal && typeof prvVal === "object") {
@@ -78,7 +78,7 @@ const WorkOrderFormContainer = (props: Props) => {
 
   const removeValueInArrayField = (
     fieldName: keyof TworkorderPrepare,
-    index: number
+    index: number,
   ) => {
     const prvVal = getValues(fieldName);
     if (prvVal && typeof prvVal === "object") {

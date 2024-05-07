@@ -9,21 +9,23 @@ interface Props {
   plan: TServicePlans;
   addServicePlan?: (planId: string) => void;
   removeServicePlan?: (planId: string) => void;
-  selectedPlans?: string[]
+  selectedPlans?: string[];
 }
 
 const ServicePlans: React.FC<Props> = ({
   plan,
   addServicePlan,
   removeServicePlan,
-  selectedPlans
+  selectedPlans,
 }) => {
   const [view, setView] = useState<boolean>(false);
 
   return (
-    <div >
+    <div>
       {/* category */}
-      <p className="mb-4 text-3xl font-bold">{typeof(plan.category) === 'string'? '' : plan.category.name}</p>
+      <p className="mb-4 text-3xl font-bold">
+        {typeof plan.category === "string" ? "" : plan.category.name}
+      </p>
 
       <div className="bg-white p-4 pt-8 sm:pt-4 rounded-xl shadow-lg mb-4 relative">
         {/* bag */}
@@ -47,7 +49,7 @@ const ServicePlans: React.FC<Props> = ({
           <div className="flex gap-4 flex-wrap justify-between items-center mt-4 overflow-hidden">
             {plan?.tasks
               ?.slice(0, view ? plan?.tasks?.length : 5)
-              ?.map((task,i) => (
+              ?.map((task, i) => (
                 // show tasks
                 <p className="w-[48%] flex items-center gap-2" key={i}>
                   <span className="flex justify-center items-center h-[20px] w-[20px] rounded-full bg-green-200">
@@ -64,8 +66,8 @@ const ServicePlans: React.FC<Props> = ({
                 className="w-[48%] text-customYellow underline underline-offset-2 text-base font-medium cursor-pointer mb-3"
                 onClick={() => setView(!view)}
               >
-                {view ? "" : "+"} 
-                {!view&& plan?.tasks?.slice(5, plan.tasks.length)?.length}
+                {view ? "" : "+"}
+                {!view && plan?.tasks?.slice(5, plan.tasks.length)?.length}
                 {view ? "View Less" : "View More"}
               </div>
             )}
@@ -82,9 +84,8 @@ const ServicePlans: React.FC<Props> = ({
           </p>
 
           <div className="flex gap-4 items-center">
-            {
-              selectedPlans && selectedPlans.includes(plan._id) ? (
-                removeServicePlan && (
+            {selectedPlans && selectedPlans.includes(plan._id)
+              ? removeServicePlan && (
                   <Button
                     type="primary"
                     onClick={() => removeServicePlan(plan._id)}
@@ -92,14 +93,11 @@ const ServicePlans: React.FC<Props> = ({
                     Remove from cart
                   </Button>
                 )
-              ) : (
-                addServicePlan && (
+              : addServicePlan && (
                   <Button onClick={() => addServicePlan(plan._id)}>
                     Add to cart
                   </Button>
-                )
-              )
-            }
+                )}
           </div>
         </div>
       </div>

@@ -49,7 +49,7 @@ export const createSlotSchedule =
 export const updateSlotSchedule =
   (
     slotScheduleId: string,
-    data: TSlotScheduleManage
+    data: TSlotScheduleManage,
   ): ThunkAction<void, RootState, unknown, Action> =>
   async (dispatch, getState) => {
     try {

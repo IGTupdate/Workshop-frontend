@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { ReactNode } from "react";
@@ -9,8 +9,10 @@ interface Props {
 }
 
 export default function StoreProvider({ children }: Props) {
-  return <Provider store={store}>
-    <Toaster />
-    {children}
-  </Provider>;
+  return (
+    <Provider store={store}>
+      <Toaster />
+      {children}
+    </Provider>
+  );
 }

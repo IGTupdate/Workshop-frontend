@@ -1,18 +1,18 @@
 export const NEW_ADDITIONAL_WORK = {
-    workOrderId: "",
-    description: "",
-    tasks: [
+  workOrderId: "",
+  description: "",
+  tasks: [
+    {
+      title: "",
+      description: "",
+      critical: false,
+      partsRequired: [
         {
-            title: "",
-            description: "",
-            critical: false,
-            partsRequired: [
-                {
-                    partName: "",
-                    partPrice: 0
-                }
-            ]
-        }
-    ],
-    estimatedCost: 0
+          partName: "",
+          partPrice: 0,
+        },
+      ],
+    },
+  ],
+  estimatedCost: 0,
 };

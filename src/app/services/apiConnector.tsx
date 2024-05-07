@@ -21,7 +21,7 @@ axiosInstance.interceptors.request.use(
     } else {
       const currentTime = new Date().getTime();
       const decode = jwtDecode(accessToken);
-      if (decode.exp && ((decode.exp * 1000) + (60 * 1000) < currentTime)) {
+      if (decode.exp && decode.exp * 1000 + 60 * 1000 < currentTime) {
         // If expired, generate a new access token
         await generateAccessToken();
         accessToken = get_client_cookie("accessToken");
@@ -31,9 +31,9 @@ axiosInstance.interceptors.request.use(
     accessToken = get_client_cookie("accessToken");
 
     if (!accessToken) {
-      logout()
-      redirect('/')
-      throw Error
+      logout();
+      redirect("/");
+      throw Error;
     }
 
     // Set the authorization header with the new access token
@@ -43,7 +43,7 @@ axiosInstance.interceptors.request.use(
   (error) => {
     // handle logout
     return Promise.reject(error);
-  }
+  },
 );
 
 type Method = "GET" | "POST" | "PUT" | "DELETE";
@@ -64,7 +64,6 @@ export const apiConnector = async ({
   params,
 }: ApiConnectorParams): Promise<AxiosResponse<any>> => {
   try {
-
     const response = await axiosInstance({
       method: `${method}`,
       url: `${url}`,

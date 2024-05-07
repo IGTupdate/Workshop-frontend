@@ -1,5 +1,5 @@
-import React from 'react';
-import Loader from './components/Loader';
+import React from "react";
+import Loader from "./components/Loader";
 
 type Props = {};
 
@@ -11,4 +11,4 @@ const loading = (props: Props) => {
   );
 };
 
-export default loading; 
+export default loading;

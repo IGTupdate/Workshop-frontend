@@ -1,13 +1,11 @@
-import { TEmployee } from "./employee"
+import { TEmployee } from "./employee";
 
 export type TCustomer = {
-    contactNumber: string,
-    fullName: string,
-    email: string,
-    _id: string,
-    userType: "customer"
-}
+  contactNumber: string;
+  fullName: string;
+  email: string;
+  _id: string;
+  userType: "customer";
+};
 
-
-
-export type TUser = TEmployee | TCustomer
+export type TUser = TEmployee | TCustomer;

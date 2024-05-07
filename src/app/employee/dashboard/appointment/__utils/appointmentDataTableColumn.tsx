@@ -43,17 +43,17 @@ export function GetAppointmentDataTableColumn() {
         return removeQueryParams(searchParams.toString(), name);
       else return setQueryParams(searchParams.toString(), name, value);
     },
-    [searchParams]
+    [searchParams],
   );
 
   // select status
   const handleStatusSelect = (
     e: RadioChangeEvent,
-    props: FilterDropdownProps
+    props: FilterDropdownProps,
   ) => {
     const queryParmas = createQueryString(
       e.target.name || "status",
-      e.target.value
+      e.target.value,
     );
     router.push(`${pathname}?${queryParmas}`);
     props.close();
@@ -73,9 +73,8 @@ export function GetAppointmentDataTableColumn() {
         key: "name",
         ...GetColumnTextSearchProps<TAppointmentDataTable>("name"),
         render: (name) => {
-          return <p className="capitalize font-semibold">{name}</p>
-        }
-
+          return <p className="capitalize font-semibold">{name}</p>;
+        },
       },
       {
         title: "Phone",
@@ -88,12 +87,12 @@ export function GetAppointmentDataTableColumn() {
         dataIndex: "registeration_number",
         key: "registeration_number",
         ...GetColumnTextSearchProps<TAppointmentDataTable>(
-          "registeration_number"
+          "registeration_number",
         ),
 
         render: (register) => {
-          return <p className="uppercase">{register}</p>
-        }
+          return <p className="uppercase">{register}</p>;
+        },
       },
       {
         title: "Date & Time",
@@ -104,9 +103,9 @@ export function GetAppointmentDataTableColumn() {
         render: (value) => {
           return (
             <div className="flex flex-wrap items-center gap-3">
-              <Text>{dayjs(value).format('DD/MMM/YYYY')}</Text>
+              <Text>{dayjs(value).format("DD/MMM/YYYY")}</Text>
 
-              <Text>{dayjs(value).format('h:mm A')}</Text>
+              <Text>{dayjs(value).format("h:mm A")}</Text>
             </div>
           );
         },
@@ -173,23 +172,29 @@ export function GetAppointmentDataTableColumn() {
               {/* view appointments */}
               <div
                 onClick={() => {
-                  router.push("/employee/dashboard/appointment/" + _id)
+                  router.push("/employee/dashboard/appointment/" + _id);
                 }}
                 style={{ color: "#1890ff" }}
                 className="cursor-pointer"
-              ><IoIosEye size={"22px"} title="View Appointments" /></div>
+              >
+                <IoIosEye size={"22px"} title="View Appointments" />
+              </div>
 
               {/* create workorder */}
-              {
-                status === appointmentStatus[0] && <div
+              {status === appointmentStatus[0] && (
+                <div
                   onClick={() => {
-                    router.push("/employee/dashboard/workorder/create?appointmentId=" + _id)
+                    router.push(
+                      "/employee/dashboard/workorder/create?appointmentId=" +
+                        _id,
+                    );
                   }}
                   style={{ color: "#24ae55" }}
                   className="cursor-pointer"
-                ><MdAddChart size={"22px"} title="Create WorkOrder" /></div>
-              }
-
+                >
+                  <MdAddChart size={"22px"} title="Create WorkOrder" />
+                </div>
+              )}
             </Flex>
           );
         },

@@ -6,7 +6,8 @@ import { apiOpenConnector } from "../../apiOpenConnector";
 import { authEndpoints } from "../../apis";
 import { getCustomerAuthInitData } from "./common";
 
-const { EMPLOYEE_LOGIN_API, GET_EMPLOYEE_DATA_API, GET_ALL_EMPLOYEES } = authEndpoints;
+const { EMPLOYEE_LOGIN_API, GET_EMPLOYEE_DATA_API, GET_ALL_EMPLOYEES } =
+  authEndpoints;
 
 export async function getEmployeeData(_id: string, dispatch: AppDispatch) {
   try {
@@ -24,7 +25,11 @@ export async function getEmployeeData(_id: string, dispatch: AppDispatch) {
   }
 }
 
-export async function employeeLogin(email: string, password: string, dispatch: AppDispatch) {
+export async function employeeLogin(
+  email: string,
+  password: string,
+  dispatch: AppDispatch,
+) {
   try {
     const authResult = await apiOpenConnector({
       method: "POST",

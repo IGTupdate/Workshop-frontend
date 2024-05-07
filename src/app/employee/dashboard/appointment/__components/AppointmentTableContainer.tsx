@@ -11,7 +11,6 @@ type Props = {
 };
 
 const AppointmentTableContainer = (props: Props) => {
-
   const [appointmentDataTable, setAppointMentDataTable] = useState<
     TAppointmentDataTable[]
   >([]);
@@ -19,15 +18,28 @@ const AppointmentTableContainer = (props: Props) => {
   useEffect(() => {
     setAppointMentDataTable(() => {
       return props.appointmentData.map((appointment) => {
-        const slotTime = (typeof appointment.calender_id !== "string") ?
-          getSlotTiming(appointment.calender_id, appointment.slot_id as string)?.start_time || ""
-          : "";
+        const slotTime =
+          typeof appointment.calender_id !== "string"
+            ? getSlotTiming(
+                appointment.calender_id,
+                appointment.slot_id as string,
+              )?.start_time || ""
+            : "";
         return {
           key: appointment._id,
           _id: appointment._id,
-          name: (typeof appointment.customer_id !== "string" ? appointment.customer_id && appointment.customer_id.fullName : "-"),
-          phone: (typeof appointment.customer_id !== "string" ? appointment.customer_id && appointment.customer_id.contactNumber : "-"),
-          registeration_number: (typeof appointment.vehicle_id !== "string" ? appointment.vehicle_id.registeration_number : ""),
+          name:
+            typeof appointment.customer_id !== "string"
+              ? appointment.customer_id && appointment.customer_id.fullName
+              : "-",
+          phone:
+            typeof appointment.customer_id !== "string"
+              ? appointment.customer_id && appointment.customer_id.contactNumber
+              : "-",
+          registeration_number:
+            typeof appointment.vehicle_id !== "string"
+              ? appointment.vehicle_id.registeration_number
+              : "",
           date_time: new Date(slotTime),
           status: appointment.status,
         };
@@ -41,7 +53,7 @@ const AppointmentTableContainer = (props: Props) => {
       pagination={false}
       columns={GetAppointmentDataTableColumn()}
       dataSource={appointmentDataTable}
-      scroll={{x:980}}
+      scroll={{ x: 980 }}
     />
   );
 };

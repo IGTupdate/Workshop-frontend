@@ -1,12 +1,12 @@
-'use client';
-import { Flex, Layout } from 'antd';
-import React, { useEffect, useRef } from 'react';
-import LandingNavbar from './__components/Navbar';
-import SlotSchedule from './__components/SlotSchedule';
-import SlotDetails from './__components/SlotDetails';
-import { useAppSelector } from '@/app/store/reduxHooks';
-import EmployeeLogin from './__components/EmployeeLogin';
-import AboutUsFooter from './__components/AboutUs';
+"use client";
+import { Flex, Layout } from "antd";
+import React, { useEffect, useRef } from "react";
+import LandingNavbar from "./__components/Navbar";
+import SlotSchedule from "./__components/SlotSchedule";
+import SlotDetails from "./__components/SlotDetails";
+import { useAppSelector } from "@/app/store/reduxHooks";
+import EmployeeLogin from "./__components/EmployeeLogin";
+import AboutUsFooter from "./__components/AboutUs";
 
 const { Header, Footer, Content } = Layout;
 
@@ -18,7 +18,7 @@ const App: React.FC = () => {
   // Function to scroll to SlotDetails component
   const scrollToSlotDetails = () => {
     if (slotDetailsRef.current) {
-      slotDetailsRef.current.scrollIntoView({ behavior: 'smooth' });
+      slotDetailsRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -30,16 +30,20 @@ const App: React.FC = () => {
       <Content>
         <Flex vertical>
           <SlotSchedule scrollToSlotDetails={scrollToSlotDetails} />
-          <div ref={slotDetailsRef} className={`${slotData ? "h-screen flex justify-center items-center flex-col" : " invisible"}`}>
-            {(<div>
-              <SlotDetails />
-            </div>)
+          <div
+            ref={slotDetailsRef}
+            className={`${slotData ? "h-screen flex justify-center items-center flex-col" : " invisible"}`}
+          >
+            {
+              <div>
+                <SlotDetails />
+              </div>
             }
           </div>
           <EmployeeLogin />
         </Flex>
       </Content>
-      <Footer className=' p-0 mt-[60px]'>
+      <Footer className=" p-0 mt-[60px]">
         <AboutUsFooter />
       </Footer>
     </Layout>
