@@ -39,15 +39,4 @@ export type TEmployeeTableDataType = {
 export type TRole = {
     _id: string,
     role: string,
-};
-
-export type TEmployeeDetails = {
-    _id: string,
-    contactNumber: string,
-    email: string,
-    firstName: string,
-    lastName: string,
-    role: string,
-    roleId: TRole | string,
-    address?: string,
-};
+}

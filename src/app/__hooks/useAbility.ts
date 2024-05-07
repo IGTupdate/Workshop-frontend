@@ -10,9 +10,7 @@ const useAbility = () => {
   const [ability, setAbility] = useState<MongoAbility<AbilityTuple, MongoQuery> | undefined>()
 
   useEffect(() => {
-    if (accessData.length !== 0) {
-      setAbility(AccessAbility.getAbility()); 
-    }
+    setAbility(AccessAbility.getAbility(accessData));
   }, [accessData]);
 
   return ability
