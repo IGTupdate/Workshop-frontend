@@ -20,10 +20,10 @@ export const getWorkOrderStatus = () => {
 };
 
 export const workOrderStatusText = {
-    Pending: <Tag color="orange">Pending</Tag>,
-    Processing: <Tag color="green">Processing</Tag>,
-    Completed: <Tag color="blue">Completed</Tag>,
-    Assigned: <Tag color="gray">Assigned</Tag>,
+    Pending: <Tag className="w-[82px] text-center" color="orange">Pending</Tag>,
+    Processing: <Tag className="w-[82px] text-center" color="green">Processing</Tag>,
+    Completed: <Tag className="w-[82px] text-center" color="blue">Completed</Tag>,
+    Assigned: <Tag className="w-[82px] text-center" color="gray">Assigned</Tag>,
 };
 // ["Pending", "Assigned", "Processing", "Completed"];
 
