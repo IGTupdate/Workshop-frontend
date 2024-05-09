@@ -1,6 +1,6 @@
 "use client";
 import { Provider } from "react-redux";
-import { store } from "./store/store";
+import { store } from "../store/store";
 import { ReactNode } from "react";
 import { Toaster } from "react-hot-toast";
 

@@ -1,10 +1,15 @@
+"use client";
 import { Button, Flex } from "antd";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from 'next-intl';
+
 
 type Props = {};
 
 const LandingNavbar = (props: Props) => {
+  const t = useTranslations('Index');
+
   return (
     <Flex
       align="center"
@@ -30,7 +35,8 @@ const LandingNavbar = (props: Props) => {
         </Button>
         <Link href="/login">
           <Button type="primary" size="large" className="font-semibold">
-            Login
+            {/* Login */}
+            {t('title')}
           </Button>
         </Link>
       </Flex>
