@@ -1,14 +1,27 @@
 "use client";
-import { Button, Flex } from "antd";
+import { Button, Flex, Select } from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 
 
 type Props = {};
 
 const LandingNavbar = (props: Props) => {
   const t = useTranslations('Index');
+
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const localeActive = useLocale();
+
+  const onChange = (value: string) => {
+    startTransition(() => {
+      router.replace(value);
+    });
+  };
+
 
   return (
     <Flex
@@ -33,12 +46,30 @@ const LandingNavbar = (props: Props) => {
             Book An Appointment
           </span>
         </Button>
-        <Link href="/login">
+        <Link href={`${localeActive}/login`}>
           <Button type="primary" size="large" className="font-semibold">
             {/* Login */}
             {t('title')}
           </Button>
         </Link>
+
+
+        <Select
+          defaultValue={localeActive}
+          placeholder="Select a person"
+          optionFilterProp="children"
+          onChange={onChange}
+          options={[
+            {
+              value: 'en',
+              label: 'English',
+            },
+            {
+              value: 'sp',
+              label: 'Spanish',
+            },
+          ]}
+        />
       </Flex>
     </Flex>
   );

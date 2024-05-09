@@ -17,8 +17,12 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  params: { locale }
 }: Readonly<{
   children: React.ReactNode;
+  params: {
+    locale: string;
+  };
 }>) {
 
   const messages = await getMessages();
@@ -26,19 +30,21 @@ export default async function RootLayout({
   const refreshToken = get_server_cookie("refresh_token");
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={kanit.className}>
-        <NextIntlClientProvider messages={messages}>
-          <AntdRegistry>
-            <ConfigProvider {...antdConfig}>
-              <StoreProvider>
+
+        <AntdRegistry>
+          <ConfigProvider {...antdConfig}>
+            <StoreProvider>
+              <NextIntlClientProvider messages={messages}>
                 <App refreshToken={refreshToken}>
                   {children}
                 </App>
-              </StoreProvider>
-            </ConfigProvider>
-          </AntdRegistry>
-        </NextIntlClientProvider>
+              </NextIntlClientProvider>
+            </StoreProvider>
+          </ConfigProvider>
+        </AntdRegistry>
+
       </body>
     </html>
   );
