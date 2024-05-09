@@ -1,4 +1,5 @@
-import LeftSection from "../components/Auth/LeftSection";
+import LeftSection from "../../components/Auth/LeftSection";
+// import RightSection from "./__components/RightSection";
 import RightSection from "./__components/RightSection";
 
 export default function Auth() {

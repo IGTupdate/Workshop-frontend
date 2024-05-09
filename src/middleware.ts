@@ -1,21 +1,24 @@
-// import { NextResponse, NextRequest } from "next/server";
-// import { cookies } from "next/headers";
+import { NextResponse, NextRequest } from "next/server";
+import { cookies } from "next/headers";
 
 
-// import createMiddleware from 'next-intl/middleware';
 
-// export default createMiddleware({
-//   // A list of all locales that are supported
-//   locales: ['en', 'id'],
+import createMiddleware from 'next-intl/middleware';
 
-//   // Used when no locale matches
-//   defaultLocale: 'en'
-// });
+export default createMiddleware({
+  // A list of all locales that are supported
+  locales: ['en', 'id'],
 
-// export const config = {
-//   // Match only internationalized pathnames
-//   matcher: ['/', '/(id|en)/:path*']
-// };
+  // Used when no locale matches
+  defaultLocale: 'en'
+});
+
+export const config = {
+  // Match only internationalized pathnames
+  matcher: ['/', '/(id|en)/:path*']
+};
+
+
 
 
 
@@ -83,37 +86,3 @@
 
 
 
-
-
-
-
-
-
-
-// import createIntlMiddleware from 'next-intl/middleware';
-// import { NextRequest } from 'next/server';
-
-// export default async function middleware(request: NextRequest) {
-//   const [, locale, ...segments] = request.nextUrl.pathname.split('/');
-//   console.log( request.nextUrl.pathname.split('/'));
-
-//   if (locale != null && segments.join('/') === 'profile') {
-//     const usesNewProfile =
-//       (request.cookies.get('NEW_PROFILE')?.value || 'false') === 'true';
-
-//     if (usesNewProfile) {
-//       request.nextUrl.pathname = `/${locale}/profile/new`;
-//     }
-//   }
-
-//   const handleI18nRouting = createIntlMiddleware({
-//     locales: ['en', 'id'],
-//     defaultLocale: 'en'
-//   });
-//   const response = handleI18nRouting(request);
-//   return response;
-// }
-
-// export const config = {
-//   matcher: ['/', '/(id|en)/:path*']
-// };
