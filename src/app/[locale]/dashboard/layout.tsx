@@ -3,8 +3,8 @@ import React from "react";
 import CustomerDashboardLayout from "./__components/__common/CustomerDashboardLayout";
 import useDeviceType from "./__hooks/useDeviceType";
 import { ChildrenProps } from "./__components/__utils/types";
-import { useAppSelector } from "../store/reduxHooks";
-import Loader from "../components/Loader";
+import { useAppSelector } from "@/app/store/reduxHooks";
+import Loader from "@/app/components/Loader";
 
 const RootLayout: React.FC<ChildrenProps> = ({ children }) => {
   useDeviceType();

@@ -1,6 +1,4 @@
 "use client";
-import VehicleCreateContainer from "@/app/employee/dashboard/appointment/book/__components/VehicleCreateContainer";
-import { NEW_VEHICLE } from "@/app/employee/dashboard/appointment/book/__utils/constant";
 import {
   deleteVehicle,
   getVehicleByCustomerId,
@@ -14,6 +12,8 @@ import VehicleDetails from "./VehicleDetails";
 import VehicleUpdateContainer from "./VehicleUpdateContainer";
 import { setVehicleLoading } from "@/app/store/slices/customerVehicleSlice";
 import Loader from "@/app/components/Loader";
+import { NEW_VEHICLE } from "@/app/[locale]/employee/dashboard/appointment/book/__utils/constant";
+import VehicleCreateContainer from "@/app/[locale]/employee/dashboard/appointment/book/__components/VehicleCreateContainer";
 
 const { Title } = Typography;
 

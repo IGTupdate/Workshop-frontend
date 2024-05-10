@@ -1,6 +1,4 @@
 "use client";
-import SlotAvailablityContainer from "@/app/employee/dashboard/appointment/book/__components/SlotAvailablityContainer";
-import { slot_booking_customer_step } from "@/app/employee/dashboard/appointment/book/__utils/slot-booking-step";
 import { useAppSelector } from "@/app/store/reduxHooks";
 import { TAppointmentBook } from "@/app/types/appointment";
 import { Steps } from "antd";
@@ -10,6 +8,8 @@ import ServicePlanSelection from "./ServicePlanSelection";
 import VehicleDetailContainer from "./VehicleDetailContainer";
 import { setQueryParams } from "@/app/utils/helper";
 import CustomerAppointmentBookingConfirmation from "./CustomerAppointmentBookingConfirmation";
+import { slot_booking_customer_step } from "@/app/[locale]/employee/dashboard/appointment/book/__utils/slot-booking-step";
+import SlotAvailablityContainer from "@/app/[locale]/employee/dashboard/appointment/book/__components/SlotAvailablityContainer";
 
 const BookAppointmentContainer: React.FC = () => {
   const searchParams = useSearchParams();

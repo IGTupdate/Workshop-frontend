@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import Fly from "../../../../../public/images/fly.webp";
+import Fly from "../../../../../../public/images/fly.webp";
 import { TAppointmentWorkOrderStatus } from "@/app/types/appointment";
 
 type Props = {

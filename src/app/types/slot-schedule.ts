@@ -1,4 +1,4 @@
-import { NEW_SLOT_SCHEDULE } from "../employee/dashboard/slot-management/slot-schedule/__utils/constant";
+import { NEW_SLOT_SCHEDULE } from "../[locale]/employee/dashboard/slot-management/slot-schedule/__utils/constant";
 
 export type TSlotTime = {
   hour: number;

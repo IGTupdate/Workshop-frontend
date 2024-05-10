@@ -1,7 +1,7 @@
 "use client";
 
+import ServicePlans from "@/app/[locale]/dashboard/appointment/book/__components/ServicePlans";
 import Watermark from "@/app/components/Text/WatermarkText";
-import ServicePlans from "@/app/dashboard/appointment/book/__components/ServicePlans";
 import { getAllServicePlans } from "@/app/services/operations/appointment/service-plans";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { TServicePlans } from "@/app/types/service";

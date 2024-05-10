@@ -1,10 +1,10 @@
 "use client";
-import { SIDEBAR_WIDTH } from "@/app/employee/dashboard/utils/variables";
 import { Layout } from "antd";
 import { ChildrenProps } from "../__utils/types";
 import HeaderContainer from "./HeaderContainer";
 import SideBar from "./SideBar";
 import { useEffect, useState } from "react";
+import { SIDEBAR_WIDTH } from "@/app/[locale]/employee/dashboard/utils/variables";
 
 const { Content } = Layout;
 

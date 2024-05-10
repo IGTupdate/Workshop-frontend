@@ -1,7 +1,7 @@
 import React from "react";
 import AddStarsToNumber from "../__utils/AddStarsToNumber";
 import Image from "next/image";
-import MasterCard from "../../../../../public/images/mastercard.webp";
+import MasterCard from "../../../../../../public/images/mastercard.webp";
 
 const SliderContent = () => {
   return (

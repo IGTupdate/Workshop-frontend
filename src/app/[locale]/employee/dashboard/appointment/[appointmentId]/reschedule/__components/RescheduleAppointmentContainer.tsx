@@ -6,7 +6,7 @@ import { slot_booking_customer_reschedule_step } from "../../../book/__utils/slo
 import SlotAvailablityContainer from "../../../book/__components/SlotAvailablityContainer";
 import { useSearchParams } from "next/navigation";
 import { TAppointment, TAppointmentBook } from "@/app/types/appointment";
-import AppointmentRescheduleConfirmation from "@/app/dashboard/appointment/reschedule/[appointmentId]/__components/AppointmentReschedulePreviewPage";
+import AppointmentRescheduleConfirmation from "@/app/[locale]/dashboard/appointment/reschedule/[appointmentId]/__components/AppointmentReschedulePreviewPage";
 
 type Props = {
   appointment: TAppointment | null;

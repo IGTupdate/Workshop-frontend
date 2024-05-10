@@ -1,4 +1,4 @@
-import { CustomerSideBarMenuItems } from "@/app/dashboard/__components/__desktopComponents/CustomerSideBarMenuItems";
+import { CustomerSideBarMenuItems } from "@/app/[locale]/dashboard/__components/__desktopComponents/CustomerSideBarMenuItems";
 import { AbilityTuple, MongoAbility, MongoQuery } from "@casl/ability";
 import { MenuProps } from "antd";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";

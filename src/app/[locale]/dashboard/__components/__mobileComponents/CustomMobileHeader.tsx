@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { IAuthData, setAuthLoading } from "@/app/store/slices/authSlice";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import Fly from "../../../../../public/images/fly.webp";
+import Fly from "../../../../../../public/images/fly.webp";
 import Link from "next/link";
 
 import { IoNotifications, IoSettingsOutline } from "react-icons/io5";

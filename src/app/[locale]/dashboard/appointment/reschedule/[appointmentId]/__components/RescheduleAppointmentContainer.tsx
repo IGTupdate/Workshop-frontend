@@ -1,12 +1,12 @@
 "use client";
 import AppointmentDetails from "@/app/components/Appointment/AppointmentDetails";
-import SlotAvailablityContainer from "@/app/employee/dashboard/appointment/book/__components/SlotAvailablityContainer";
-import { slot_booking_customer_reschedule_step } from "@/app/employee/dashboard/appointment/book/__utils/slot-booking-step";
 import { TAppointment, TAppointmentBook } from "@/app/types/appointment";
 import { Button, Steps, Typography } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import AppointmentRescheduleConfirmation from "./AppointmentReschedulePreviewPage";
+import { slot_booking_customer_reschedule_step } from "@/app/[locale]/employee/dashboard/appointment/book/__utils/slot-booking-step";
+import SlotAvailablityContainer from "@/app/[locale]/employee/dashboard/appointment/book/__components/SlotAvailablityContainer";
 
 const { Title } = Typography;
 

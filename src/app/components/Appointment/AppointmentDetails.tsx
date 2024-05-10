@@ -1,4 +1,4 @@
-import Notifications from "@/app/dashboard/notifications/__components/Notifications";
+import Notifications from "@/app/[locale]/dashboard/notifications/__components/Notifications";
 import { useAppSelector } from "@/app/store/reduxHooks";
 import {
   convertToLocaleDateAndWeekday,

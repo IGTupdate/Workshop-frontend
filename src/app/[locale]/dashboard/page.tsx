@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import AddImage from "../../../public/images/image-2.webp";
-import { getCustomerAppointmentInitData } from "../services/operations/appointment/appointment";
-import { useAppSelector } from "../store/reduxHooks";
+import AddImage from "../../../../public/images/image-2.webp";
 import AppointmentCard from "./__components/__common/AppointmentCard";
 import PaymentMethods from "./__components/__common/PaymentMethods";
 import Notifications from "./notifications/__components/Notifications";
-import { appointmentNotification } from "../services/operations/notification/appointment";
+import { useAppSelector } from "@/app/store/reduxHooks";
+import { getCustomerAppointmentInitData } from "@/app/services/operations/appointment/appointment";
+import { appointmentNotification } from "@/app/services/operations/notification/appointment";
 
 type Props = {};
 

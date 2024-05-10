@@ -1,5 +1,6 @@
 "use client";
-import { TsideBarMenuItems } from "@/app/employee/dashboard/utils/sideBarMenuItems";
+
+import { TsideBarMenuItems } from "@/app/[locale]/employee/dashboard/utils/sideBarMenuItems";
 
 export const CustomerSideBarMenuItems: TsideBarMenuItems[] = [
   {

@@ -1,4 +1,3 @@
-import { NEW_SLOT_SCHEDULE } from "@/app/employee/dashboard/slot-management/slot-schedule/__utils/constant";
 import { TActiveSlotSchedule, TSlotSchedule } from "@/app/types/slot-schedule";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 

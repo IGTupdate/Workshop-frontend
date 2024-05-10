@@ -1,6 +1,6 @@
 "use client";
+import { vehicleCreateInputFields } from "@/app/[locale]/employee/dashboard/appointment/book/__utils/vehicle-create-input";
 import InputField from "@/app/components/Input/InputField";
-import { vehicleCreateInputFields } from "@/app/employee/dashboard/appointment/book/__utils/vehicle-create-input";
 import { updateVehicle } from "@/app/services/operations/appointment/vehicle";
 import { useAppDispatch } from "@/app/store/reduxHooks";
 import { setVehicleLoading } from "@/app/store/slices/customerVehicleSlice";

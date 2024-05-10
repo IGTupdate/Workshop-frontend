@@ -2,10 +2,10 @@
 import { getAppointmentByAppointmentId } from "@/app/services/operations/appointment/appointment";
 import { TAppointment } from "@/app/types/appointment";
 import { useEffect, useState } from "react";
-import AppointmentDetails from "../../../components/Appointment/AppointmentDetails";
 import { useRouter } from "next/navigation";
 import { Button, Typography } from "antd";
 import { appointmentNotification } from "@/app/services/operations/notification/appointment";
+import AppointmentDetails from "@/app/components/Appointment/AppointmentDetails";
 
 interface Props {
   params: {
