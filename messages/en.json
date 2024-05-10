@@ -7,7 +7,7 @@
     "welcome": "Welcome to Appviser",
     "findButton": "Find Available Slots"
   },
-  "EmployeeLogin": {
+  "EmployeeLoginPage": {
     "heading": "Are you an employee?",
     "subHeading": "Login to access employee features.",
     "button": "Employee Login"

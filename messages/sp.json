@@ -7,7 +7,7 @@
     "welcome": "Bienvenido a Appviser",
     "findButton": "Encuentra espacios disponibles"
   },
-  "EmployeeLogin": {
+  "EmployeeLoginPage": {
     "heading": "¿Es usted un empleado?",
     "subHeading": "Inicie sesión para acceder a las funciones para empleados.",
     "button": "Inicio de sesión de empleado"

@@ -11,7 +11,7 @@ const LandingPage: React.FC = () => {
   const handleLoginClick = () => {
     router.push("/employee/login");
   };
-  const t = useTranslations("EmployeeLogin");
+  const t = useTranslations("EmployeeLoginPage");
 
   return (
     <div className="container mx-auto">
