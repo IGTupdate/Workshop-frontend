@@ -27,17 +27,21 @@ const CalenderUpdateStatus = (props: Props) => {
   );
 
   const getAppointmentScheduledData = async () => {
-    if (
-      updateStatusCalender &&
-      updateStatusCalender.status === calender_status.open
-    ) {
-      const appointment = await getAppointmentByCalenderId(
-        updateStatusCalender._id,
-        "status=Scheduled",
-      );
-      setAppointmentData(appointment);
-    } else {
-      setAppointmentData(0);
+    try {
+      if (
+        updateStatusCalender &&
+        updateStatusCalender.status === calender_status.open
+      ) {
+        const appointment = await getAppointmentByCalenderId(
+          updateStatusCalender._id,
+          "status=Scheduled",
+        );
+        setAppointmentData(appointment);
+      } else {
+        setAppointmentData(0);
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
