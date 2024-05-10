@@ -22,7 +22,7 @@ const RescheduleAppointmentContainer = (props: Props) => {
       customer_id: "",
       vehicle_id: "",
       service_plans: props.appointment?.service_plans || [],
-      service_description: props.appointment?.service_description || []
+      service_description: props.appointment?.service_description || [],
     });
 
   useEffect(() => {
@@ -87,7 +87,6 @@ const RescheduleAppointmentContainer = (props: Props) => {
             labelPlacement="vertical"
             direction="horizontal"
             items={slot_booking_customer_reschedule_step}
-
           />
 
           {currentStep === 0 && <SlotAvailablityContainer />}

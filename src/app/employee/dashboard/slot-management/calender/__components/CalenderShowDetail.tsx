@@ -21,7 +21,7 @@ const CalenderShowDetail = (props: Props) => {
 
   const openUpDateCalenderStatusModal = () => {
     dispatch(setUpdateStatusCalender(props.activeCalender));
-  }
+  };
 
   return (
     <div>
@@ -54,7 +54,7 @@ const CalenderShowDetail = (props: Props) => {
       </div>
       <Divider />
       {props.activeCalender &&
-        props.activeCalender.status === calender_status.open ? (
+      props.activeCalender.status === calender_status.open ? (
         <div>
           <Title level={5}>Slot Details</Title>
           <div>

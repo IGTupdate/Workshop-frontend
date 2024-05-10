@@ -9,26 +9,31 @@ import { getAllServicePlansCategoryWise } from "../../__utils/GetServicePlansSeg
 import { TSegregatedServiceData } from "@/app/types/service";
 
 type Props = {
-  appointmentBookingData: TAppointmentBook
-  setAppointmentBookingData: React.Dispatch<React.SetStateAction<TAppointmentBook>>;
+  appointmentBookingData: TAppointmentBook;
+  setAppointmentBookingData: React.Dispatch<
+    React.SetStateAction<TAppointmentBook>
+  >;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ServicePlanSelection: React.FC<Props> = (props) => {
-  const { servicePlansLoading, servicePlansData } = useAppSelector((state) => state.servicePlan);
+  const { servicePlansLoading, servicePlansData } = useAppSelector(
+    (state) => state.servicePlan,
+  );
   const dispatch = useAppDispatch();
-  const [servicePlansDataCategoryWise, setServicePlansDataCategoryWise] = useState<TSegregatedServiceData | null>(null)
+  const [servicePlansDataCategoryWise, setServicePlansDataCategoryWise] =
+    useState<TSegregatedServiceData | null>(null);
 
   useEffect(() => {
-    (async function (){
-      const result = await getAllServicePlansCategoryWise(servicePlansData)
-      setServicePlansDataCategoryWise(result)
-    }())
-    
-  },[servicePlansData])
+    (async function () {
+      const result = await getAllServicePlansCategoryWise(servicePlansData);
+      setServicePlansDataCategoryWise(result);
+    })();
+  }, [servicePlansData]);
 
   useEffect(() => {
-    if (localStorage.getItem('selectedPlans')) localStorage.removeItem('selectedPlans')
+    if (localStorage.getItem("selectedPlans"))
+      localStorage.removeItem("selectedPlans");
   }, []);
 
   useEffect(() => {
@@ -39,26 +44,30 @@ const ServicePlanSelection: React.FC<Props> = (props) => {
 
   const handleNext = () => {
     // localStorage.setItem('appointmentBookingData', JSON.stringify({...props.appointmentBookingData, showServicePlans: false}))
-    props.setAppointmentBookingData((prev) => ({ ...prev, showServicePlans: false }))
-  }
+    props.setAppointmentBookingData((prev) => ({
+      ...prev,
+      showServicePlans: false,
+    }));
+  };
 
   const addServicePlan = (planId: string) => {
-    if (props.appointmentBookingData?.service_plans?.includes(planId as never)) return;
+    if (props.appointmentBookingData?.service_plans?.includes(planId as never))
+      return;
     props.setAppointmentBookingData((prev) => {
       return {
         ...prev,
-        service_plans: [...(prev.service_plans || []), planId]
-      }
-    })
+        service_plans: [...(prev.service_plans || []), planId],
+      };
+    });
   };
 
   const removeServicePlan = (planId: string) => {
     props.setAppointmentBookingData((prev) => {
       return {
         ...prev,
-        service_plans: prev?.service_plans?.filter(id => id !== planId)
-      }
-    })
+        service_plans: prev?.service_plans?.filter((id) => id !== planId),
+      };
+    });
   };
 
   const handleBack = () => {
@@ -68,32 +77,36 @@ const ServicePlanSelection: React.FC<Props> = (props) => {
     }));
   };
 
-  const tabsItems = servicePlansDataCategoryWise ? Object.keys(servicePlansDataCategoryWise).map((categoryId, i) => ({
-    key: categoryId,
-    label: servicePlansDataCategoryWise ? servicePlansDataCategoryWise[categoryId].category.name : '',
-    children:
-    servicePlansDataCategoryWise[categoryId].plans.length > 0 ? (
-      servicePlansDataCategoryWise[categoryId].plans.map((plan, j) => (
-          <ServicePlans
-            key={j}
-            plan={plan}
-            addServicePlan={addServicePlan}
-            removeServicePlan={removeServicePlan}
-            selectedPlans={props.appointmentBookingData.service_plans || []}
-          />
-        ))
-      ) : (
-        <div className="text-center text-2xl font-bold mt-4">No Plans available</div>
-      ),
-  })) : [];
+  const tabsItems = servicePlansDataCategoryWise
+    ? Object.keys(servicePlansDataCategoryWise).map((categoryId, i) => ({
+        key: categoryId,
+        label: servicePlansDataCategoryWise
+          ? servicePlansDataCategoryWise[categoryId].category.name
+          : "",
+        children:
+          servicePlansDataCategoryWise[categoryId].plans.length > 0 ? (
+            servicePlansDataCategoryWise[categoryId].plans.map((plan, j) => (
+              <ServicePlans
+                key={j}
+                plan={plan}
+                addServicePlan={addServicePlan}
+                removeServicePlan={removeServicePlan}
+                selectedPlans={props.appointmentBookingData.service_plans || []}
+              />
+            ))
+          ) : (
+            <div className="text-center text-2xl font-bold mt-4">
+              No Plans available
+            </div>
+          ),
+      }))
+    : [];
 
   return (
     <div>
       <Tabs defaultActiveKey="0" tabPosition="top" items={tabsItems} />
       <div className="flex gap-4 items-center">
-        <Button onClick={() => handleBack()}>
-          Back
-        </Button>
+        <Button onClick={() => handleBack()}>Back</Button>
         <Button type="primary" onClick={() => handleNext()}>
           Review Details
         </Button>

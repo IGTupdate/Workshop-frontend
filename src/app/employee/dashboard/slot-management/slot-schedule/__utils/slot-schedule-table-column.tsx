@@ -15,9 +15,8 @@ const { Text, Title } = Typography;
 
 export const Get_slot_schedule_columns = (
   setOpenDrawer: (newDrawerData: TActiveSlotSchedule) => void,
-  handleSlotScheduleDeleteModal: (newDeleteModal: TSlotSchedule | null) => void
+  handleSlotScheduleDeleteModal: (newDeleteModal: TSlotSchedule | null) => void,
 ) => {
-
   const ability = useAbility();
 
   const slot_schedule_table_columns: TableProps<TSlotSchedule>["columns"] = [
@@ -25,7 +24,9 @@ export const Get_slot_schedule_columns = (
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text: string) => <p className="capitalize text-base font-semibold">{text}</p>,
+      render: (text: string) => (
+        <p className="capitalize text-base font-semibold">{text}</p>
+      ),
     },
     {
       title: "Limit",
@@ -36,9 +37,12 @@ export const Get_slot_schedule_columns = (
           return accumulator + currValue.slot_limit;
         }, 0);
 
-        return <p className="p-1 text-center rounded-md bg-green-300 ">{totalLimit}</p>;
+        return (
+          <p className="p-1 text-center rounded-md bg-green-300 ">
+            {totalLimit}
+          </p>
+        );
       },
-
     },
     {
       title: "Details",
@@ -48,16 +52,27 @@ export const Get_slot_schedule_columns = (
         <div style={{ maxWidth: 300 }} className="">
           {slot_details.map((slot, index) => {
             let color = slot.start_time.hour >= 12 ? "orange" : "geekblue";
-            return (<div key={index} className={`my-2 py-2  ${slot_details?.length === index + 1 ? "border-none" : "border-b"}`}>
-              <h4 className="p-2 py-1 font-semibold bg-yellow-100 border rounded-lg inline-block mb-2 ms-2">{`Slot : ${index + 1}`}</h4>
-              <div className="grid grid-cols-3 gap-2">
-                <p className="flex flex-col items-center"><span className="text-sm font-semibold">Start Time</span>  <span>{formatTime(slot.start_time)}</span></p>
-                <p className="flex flex-col items-center"><span className="text-sm font-semibold">End Time</span>  <span>{formatTime(slot.end_time)}</span></p>
-                <p className="flex flex-col items-center"><span className="text-sm font-semibold">Slot Limit</span>  <span>{slot.slot_limit}</span></p>
-
+            return (
+              <div
+                key={index}
+                className={`my-2 py-2  ${slot_details?.length === index + 1 ? "border-none" : "border-b"}`}
+              >
+                <h4 className="p-2 py-1 font-semibold bg-yellow-100 border rounded-lg inline-block mb-2 ms-2">{`Slot : ${index + 1}`}</h4>
+                <div className="grid grid-cols-3 gap-2">
+                  <p className="flex flex-col items-center">
+                    <span className="text-sm font-semibold">Start Time</span>{" "}
+                    <span>{formatTime(slot.start_time)}</span>
+                  </p>
+                  <p className="flex flex-col items-center">
+                    <span className="text-sm font-semibold">End Time</span>{" "}
+                    <span>{formatTime(slot.end_time)}</span>
+                  </p>
+                  <p className="flex flex-col items-center">
+                    <span className="text-sm font-semibold">Slot Limit</span>{" "}
+                    <span>{slot.slot_limit}</span>
+                  </p>
+                </div>
               </div>
-
-            </div>
               // <Tag color={color} key={index}>
               //   {`${slot.start_time.hour}:${slot.start_time.minute} - ${slot.end_time.hour}:${slot.end_time.minute} = ${slot.slot_limit}`}
               // </Tag>
@@ -71,22 +86,30 @@ export const Get_slot_schedule_columns = (
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          {ability && ability.can(casl_action.update, casl_subject.slot_schedule) && <Button
-            type="primary"
-            onClick={() => {
-              setOpenDrawer(record);
-            }}
-          >
-            Update
-          </Button>}
+          {ability &&
+            ability.can(casl_action.update, casl_subject.slot_schedule) && (
+              <Button
+                type="primary"
+                onClick={() => {
+                  setOpenDrawer(record);
+                }}
+              >
+                Update
+              </Button>
+            )}
 
-
-          {ability && ability.can(casl_action.delete, casl_subject.slot_schedule) && <Button onClick={() => {
-            handleSlotScheduleDeleteModal(record);
-          }}
-            type="primary"
-            danger
-          >Delete</Button>}
+          {ability &&
+            ability.can(casl_action.delete, casl_subject.slot_schedule) && (
+              <Button
+                onClick={() => {
+                  handleSlotScheduleDeleteModal(record);
+                }}
+                type="primary"
+                danger
+              >
+                Delete
+              </Button>
+            )}
         </Space>
       ),
     },

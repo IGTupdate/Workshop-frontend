@@ -53,7 +53,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
   const router = useRouter();
   const userRole = useAppSelector((state) => state.auth.authData.role);
   const { servicePlansLoading, servicePlansData } = useAppSelector(
-    (state) => state.servicePlan
+    (state) => state.servicePlan,
   );
 
   const dispatch = useAppDispatch();
@@ -94,7 +94,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
       (async function () {
         try {
           const responseData = await getAppointMentBookInitData(
-            props.appointmentBookingData
+            props.appointmentBookingData,
           );
           setAppointmentBookingConfirmationData((prev) => ({
             ...prev,
@@ -120,9 +120,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
     // console.log(servicePlansData);
     let plans: TServicePlans[] = [];
     plans = servicePlansData.filter((plan) =>
-      props.appointmentBookingData?.service_plans?.includes(
-        plan._id as never,
-      ),
+      props.appointmentBookingData?.service_plans?.includes(plan._id as never),
     );
     // console.log(plans)
 
@@ -192,7 +190,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
   const addRemarks = (remark: string) => {
     if (
       props.appointmentBookingData?.service_description?.includes(
-        remark as never
+        remark as never,
       )
     )
       return;
@@ -209,7 +207,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
       return {
         ...prev,
         service_description: prev?.service_description?.filter(
-          (ele) => ele !== remark
+          (ele) => ele !== remark,
         ),
       };
     });
@@ -228,8 +226,6 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
 
     setAmount(total);
   }, [appointmentBookingConfirmationData.servicePlans]);
-
-
 
   return (
     <>
@@ -261,7 +257,8 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
               <DescriptionItem
                 title="Phone"
                 content={
-                  appointmentBookingConfirmationData.customer?.contactNumber || "-"
+                  appointmentBookingConfirmationData.customer?.contactNumber ||
+                  "-"
                 }
               />
               <DescriptionItem
@@ -334,7 +331,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
             <div className="">
               {appointmentBookingConfirmationData.servicePlans?.length > 0 ? (
                 appointmentBookingConfirmationData.servicePlans.map(
-                  (plan, i) => <ServicePlans key={i} plan={plan} />
+                  (plan, i) => <ServicePlans key={i} plan={plan} />,
                 )
               ) : (
                 <div className="relative">
@@ -357,7 +354,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                             $ {plan.price}
                           </p>
                         </div>
-                      )
+                      ),
                     )}
                   <div className="border-t flex justify-between items-center mt-4">
                     <p className="font-bold">Service plans total</p>
@@ -383,8 +380,8 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                 content={
                   appointmentBookingConfirmationData.slot_details?.start_time
                     ? new Date(
-                      appointmentBookingConfirmationData.slot_details?.start_time
-                    ).toLocaleString("en-GB")
+                        appointmentBookingConfirmationData.slot_details?.start_time,
+                      ).toLocaleString("en-GB")
                     : "-"
                 }
               />
@@ -393,8 +390,8 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                 content={
                   appointmentBookingConfirmationData.slot_details?.end_time
                     ? new Date(
-                      appointmentBookingConfirmationData.slot_details?.end_time
-                    ).toLocaleString("en-GB")
+                        appointmentBookingConfirmationData.slot_details?.end_time,
+                      ).toLocaleString("en-GB")
                     : "-"
                 }
               />
@@ -414,9 +411,13 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                     >
                       {ele}
 
-                      <MdOutlineCancel onClick={() => removeRemarks(ele)} size={14} className="text-red-500" />
+                      <MdOutlineCancel
+                        onClick={() => removeRemarks(ele)}
+                        size={14}
+                        className="text-red-500"
+                      />
                     </p>
-                  )
+                  ),
                 )}
               </div>
               <div className="w-full sm:w-1/2">

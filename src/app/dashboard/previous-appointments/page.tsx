@@ -1,13 +1,10 @@
-'use client'
-import CustomShowAllAppointments from '../__components/__common/CustomShowAllAppointments'
+"use client";
+import CustomShowAllAppointments from "../__components/__common/CustomShowAllAppointments";
 
-type Props = {}
+type Props = {};
 
 const Page = (props: Props) => {
+  return <CustomShowAllAppointments pageType="previous" />;
+};
 
-  return (
-    <CustomShowAllAppointments pageType='previous'/>
-  )
-}
-
-export default Page
+export default Page;

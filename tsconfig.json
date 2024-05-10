@@ -21,6 +21,13 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/employee/dashboard/slot-management/calender/__utils", "src/app/dashboard/notifications/fackData.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/employee/dashboard/slot-management/calender/__utils",
+    "src/app/dashboard/notifications/fackData.js"
+  ],
   "exclude": ["node_modules"]
 }

@@ -47,7 +47,11 @@ const CustomerVerifyOtp = (props: Props) => {
       const response = await apiOpenConnector({
         method: "POST",
         url: VERIFY_OTP_API,
-        bodyData: { countryCode, contactNumber: props.customer.contactNumber, otp },
+        bodyData: {
+          countryCode,
+          contactNumber: props.customer.contactNumber,
+          otp,
+        },
       });
       props.setCustomer((prv) => {
         return {

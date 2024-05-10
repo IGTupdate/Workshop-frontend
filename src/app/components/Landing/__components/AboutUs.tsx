@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const AboutUsFooter: React.FC = () => {
   return (
@@ -8,24 +8,34 @@ const AboutUsFooter: React.FC = () => {
           <div className="md:w-1/2 mb-6 md:mb-0">
             <h2 className="text-2xl font-bold mb-4">About Us</h2>
             <p className="text-lg">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam, turpis sed
-              bibendum fermentum, elit quam euismod arcu, quis mattis eros quam quis lacus.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              aliquam, turpis sed bibendum fermentum, elit quam euismod arcu,
+              quis mattis eros quam quis lacus.
             </p>
           </div>
           <div className="md:w-1/2 flex justify-center md:justify-end">
             <ul className="flex space-x-6">
               <li>
-                <a href="#" className="hover:text-white transition-colors duration-300">
+                <a
+                  href="#"
+                  className="hover:text-white transition-colors duration-300"
+                >
                   About
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors duration-300">
+                <a
+                  href="#"
+                  className="hover:text-white transition-colors duration-300"
+                >
                   Services
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors duration-300">
+                <a
+                  href="#"
+                  className="hover:text-white transition-colors duration-300"
+                >
                   Contact
                 </a>
               </li>

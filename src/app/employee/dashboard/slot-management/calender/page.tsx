@@ -1,11 +1,9 @@
 import React from "react";
 import CalenderContainer from "./__components/CalenderContainer";
 
-
 type Props = {};
 
 const page = async (props: Props) => {
-
   return (
     <div className="">
       {/* heading */}

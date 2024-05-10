@@ -1,6 +1,6 @@
 export const get_date_only = (date: Date) => {
   return new Date(
-    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
   );
 };
 
@@ -11,7 +11,7 @@ export const isPastDate = (date: Date) => {
 export const setQueryParams = (
   url: string,
   name: string,
-  value: string
+  value: string,
 ): string => {
   const params = new URLSearchParams(url);
   params.set(name, value);
@@ -31,9 +31,7 @@ export const removeAllQueryParams = (url: string) => {
   });
 };
 
-
 export const minutesToHoursConverter = (minutes: number) => {
-
   if (minutes > 59) {
     return minutes / 60;
   }
@@ -41,9 +39,6 @@ export const minutesToHoursConverter = (minutes: number) => {
   return "0." + minutes;
 };
 
-
 export const PriceCalculator = (originalPrice: number) => {
   return Math.round(originalPrice * 1.3);
-
-}
-
+};

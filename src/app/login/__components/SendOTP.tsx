@@ -26,20 +26,16 @@ const SendOTP = (props: Tprops) => {
   const dispatch = useAppDispatch();
   // const contact = useAppSelector((state) => state.auth.authData.contactNumber);
   const { authLoading } = useAppSelector((state) => state.auth);
-  const [countryCode, setCountryCode] = useState('+52');
-  const [contactNumber, setContactNumber] = useState('');
+  const [countryCode, setCountryCode] = useState("+52");
+  const [contactNumber, setContactNumber] = useState("");
   const [contactNumberError, setContactNumberError] = useState("");
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-
-
     if (contactNumber.length === 0)
       setContactNumberError("Contact Number is Required");
     if (contactNumber.length !== 10) return;
 
-    let number = countryCode === '+52' ? 1 + contactNumber : contactNumber;
-
-
+    let number = countryCode === "+52" ? 1 + contactNumber : contactNumber;
 
     dispatch(setAuthLoading(true));
     try {
@@ -59,7 +55,6 @@ const SendOTP = (props: Tprops) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
-
     const reg = /^[0-9]*$/; // Regex to match only digits
 
     if (!reg.test(inputValue)) {
@@ -74,13 +69,9 @@ const SendOTP = (props: Tprops) => {
     setContactNumber(inputValue);
   };
 
-
   const handleSelect = (value: string) => {
     setCountryCode(value);
   };
-
-
-
 
   return (
     <div className="w-full">
@@ -102,8 +93,6 @@ const SendOTP = (props: Tprops) => {
           Phone
         </label>
         <div className="flex w-full justify-between items-center gap-2">
-
-
           <Select
             size="large"
             defaultValue="+52"
@@ -111,8 +100,8 @@ const SendOTP = (props: Tprops) => {
             className="w-[28%] h-[38px]"
             onChange={handleSelect}
             options={[
-              { value: '+52', label: '+52' },
-              { value: '+91', label: '+91' },
+              { value: "+52", label: "+52" },
+              { value: "+91", label: "+91" },
             ]}
           />
 
@@ -127,11 +116,9 @@ const SendOTP = (props: Tprops) => {
             value={contactNumber}
             onChange={handleChange}
             placeholder="Enter Your Contact Number"
-            maxLength={10} />
+            maxLength={10}
+          />
           {/* </Space.Compact> */}
-
-
-
         </div>
         {contactNumberError && <ErrorText text={contactNumberError} />}
         {/* </div> */}

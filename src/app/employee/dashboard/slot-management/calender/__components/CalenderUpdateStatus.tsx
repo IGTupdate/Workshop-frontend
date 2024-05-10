@@ -17,29 +17,33 @@ import { toogleCalenderStatus } from "../__utils/helper";
 
 const { Title, Text } = Typography;
 
-type Props = {
-
-};
+type Props = {};
 
 const CalenderUpdateStatus = (props: Props) => {
-
   const dispatch = useAppDispatch();
   const [appponitementData, setAppointmentData] = useState<null | number>(null);
-  const { updateCalenderLoading, updateStatusCalender } = useAppSelector((state) => state.calender)
+  const { updateCalenderLoading, updateStatusCalender } = useAppSelector(
+    (state) => state.calender,
+  );
 
   const getAppointmentScheduledData = async () => {
-    if (updateStatusCalender && updateStatusCalender.status === calender_status.open) {
-      const appointment = await getAppointmentByCalenderId(updateStatusCalender._id, "status=Scheduled");
-      setAppointmentData(appointment)
-    }
-    else {
+    if (
+      updateStatusCalender &&
+      updateStatusCalender.status === calender_status.open
+    ) {
+      const appointment = await getAppointmentByCalenderId(
+        updateStatusCalender._id,
+        "status=Scheduled",
+      );
+      setAppointmentData(appointment);
+    } else {
       setAppointmentData(0);
     }
-  }
+  };
 
   useEffect(() => {
     getAppointmentScheduledData();
-  }, [updateStatusCalender])
+  }, [updateStatusCalender]);
 
   const handleOk = () => {
     if (!updateStatusCalender) return;
@@ -47,7 +51,6 @@ const CalenderUpdateStatus = (props: Props) => {
     const changeStatusTo = toogleCalenderStatus(updateStatusCalender.status);
     dispatch(udpateCalenderStatus(updateStatusCalender._id, changeStatusTo));
     // props.setOpenUpdateStatusModal(null);
-
   };
 
   const handleCancel = () => {
@@ -55,7 +58,6 @@ const CalenderUpdateStatus = (props: Props) => {
       dispatch(setUpdateStatusCalender(null));
     }
   };
-
 
   return (
     <div>
@@ -91,21 +93,24 @@ const CalenderUpdateStatus = (props: Props) => {
               </Text>
               {updateStatusCalender.status === calender_status.open && (
                 <div>
-                  {
-                    (appponitementData && appponitementData > 0) ?
-                      <div>
-                        <Text type="danger" style={{ fontSize: "12px" }}>{appponitementData} Scheduled appointments will be cancelled</Text>
-                        <br />
-                        <Link
-                          href={`/employee/dashboard/appointment?calender_id=${updateStatusCalender._id}`}
-                          className="text-blue1 text-[12px] flex items-start"
-                        >
-                          View Appointments
-                          <MdOutlineKeyboardArrowRight className="w-6 h-6" />
-                        </Link>
-                      </div> : ""
-                  }
-
+                  {appponitementData && appponitementData > 0 ? (
+                    <div>
+                      <Text type="danger" style={{ fontSize: "12px" }}>
+                        {appponitementData} Scheduled appointments will be
+                        cancelled
+                      </Text>
+                      <br />
+                      <Link
+                        href={`/employee/dashboard/appointment?calender_id=${updateStatusCalender._id}`}
+                        className="text-blue1 text-[12px] flex items-start"
+                      >
+                        View Appointments
+                        <MdOutlineKeyboardArrowRight className="w-6 h-6" />
+                      </Link>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               )}
             </div>

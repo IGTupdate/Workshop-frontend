@@ -61,7 +61,7 @@ export const createCalender =
 export const udpateCalenderStatus =
   (
     calenderId: string,
-    status: string
+    status: string,
   ): ThunkAction<void, RootState, unknown, Action> =>
   async (dispatch, getState) => {
     try {
@@ -79,9 +79,9 @@ export const udpateCalenderStatus =
           setActiveCalender({
             ...currentActiveCalender,
             status: toogleCalenderStatus(
-              currentActiveCalender.status as TCalenderStatus
+              currentActiveCalender.status as TCalenderStatus,
             ),
-          })
+          }),
         );
 
         // update all calender
@@ -91,12 +91,12 @@ export const udpateCalenderStatus =
               return {
                 ...currentActiveCalender,
                 status: toogleCalenderStatus(
-                  currentActiveCalender.status as TCalenderStatus
+                  currentActiveCalender.status as TCalenderStatus,
                 ),
               };
             }
             return calender;
-          }
+          },
         );
 
         dispatch(setCalenderData(currentCalenderData));

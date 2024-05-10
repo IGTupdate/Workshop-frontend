@@ -33,7 +33,7 @@ function GetColumnTextSearchProps<T>(dataIndex: DataIndex): TableColumnType<T> {
         return removeQueryParams(searchParams.toString(), name);
       else return setQueryParams(searchParams.toString(), name, value);
     },
-    [searchParams]
+    [searchParams],
   );
 
   // update the router on search text
@@ -50,7 +50,7 @@ function GetColumnTextSearchProps<T>(dataIndex: DataIndex): TableColumnType<T> {
   const handleSearch = (
     selectedKeys: string[],
     confirm: FilterDropdownProps["confirm"],
-    dataIndex: DataIndex
+    dataIndex: DataIndex,
   ) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -63,7 +63,6 @@ function GetColumnTextSearchProps<T>(dataIndex: DataIndex): TableColumnType<T> {
     setSearchText("");
     clearFilters && clearFilters();
   };
-
 
   return {
     filterDropdown: ({

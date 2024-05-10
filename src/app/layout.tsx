@@ -18,18 +18,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const refreshToken = get_server_cookie('refreshToken')
+  const refreshToken = get_server_cookie("refreshToken");
   return (
     <html lang="en">
       <body className={kanit.className}>
         <AntdRegistry>
-            <ConfigProvider {...antdConfig}>
+          <ConfigProvider {...antdConfig}>
             <StoreProvider>
-              <App refreshToken={refreshToken}>
-                {children}
-              </App>
+              <App refreshToken={refreshToken}>{children}</App>
             </StoreProvider>
-            </ConfigProvider>
+          </ConfigProvider>
         </AntdRegistry>
       </body>
     </html>

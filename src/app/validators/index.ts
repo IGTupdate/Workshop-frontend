@@ -1,1 +1,1 @@
-export { default as contactNumberValidator } from './contact-number';
+export { default as contactNumberValidator } from "./contact-number";

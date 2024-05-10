@@ -63,7 +63,9 @@ const CreateWorkOrder: React.FC<Props> = (props) => {
           setWorkOrderCreateData={setWorkOrderCreateData}
         />
       ) : (
-        <CreateWorkOrderByDate setWorkOrderCreateData={setWorkOrderCreateData} />
+        <CreateWorkOrderByDate
+          setWorkOrderCreateData={setWorkOrderCreateData}
+        />
       )}
 
       <EmployementAvailabilityContainer

@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+# Source the Husky hook runner script
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run code formatting
+npm run pretty || exit 1
+
+# Run linting
+npm run lint || exit 1
+
+# Run building
+npm run build || exit 1
+
+# Add changes to the staging area
+git add .

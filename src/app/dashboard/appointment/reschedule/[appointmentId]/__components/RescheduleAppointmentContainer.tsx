@@ -23,14 +23,15 @@ const RescheduleAppointmentContainer = (props: Props) => {
   const [currentStep, setCurrentStep] = useState<number>(0);
   const router = useRouter();
 
-  const [appointmentRescheduleData, setAppointmentRescheduleData] = useState<TAppointmentBook>({
-    slot_id: "",
-    calender_id: "",
-    vehicle_id,
-    customer_id,
-    service_plans: props.appointmentData.service_plans || [],
-    service_description: props.appointmentData.service_description || []
-  });
+  const [appointmentRescheduleData, setAppointmentRescheduleData] =
+    useState<TAppointmentBook>({
+      slot_id: "",
+      calender_id: "",
+      vehicle_id,
+      customer_id,
+      service_plans: props.appointmentData.service_plans || [],
+      service_description: props.appointmentData.service_description || [],
+    });
 
   useEffect(() => {
     const slot_id = searchParams.get("slot_id");

@@ -15,7 +15,11 @@ type FormData = {
 };
 
 const LogIn: React.FC = () => {
-  const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
 
   const { authLoading } = useAppSelector((state) => state.auth);
 
@@ -45,14 +49,21 @@ const LogIn: React.FC = () => {
       />
 
       <form className="w-full md:mt-10 mt-8" onSubmit={handleSubmit(onSubmit)}>
-
         {/* Email input field */}
         <div className="md:mb-4 mb-3">
-          <label className="text-sm font-medium mb-1 block text-black1">Email</label>
+          <label className="text-sm font-medium mb-1 block text-black1">
+            Email
+          </label>
           <Controller
             name="email"
             control={control}
-            rules={{ required: "Email is required", pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" } }}
+            rules={{
+              required: "Email is required",
+              pattern: {
+                value: /^\S+@\S+$/i,
+                message: "Invalid email address",
+              },
+            }}
             render={({ field }) => (
               <Input
                 type="text"
@@ -63,33 +74,51 @@ const LogIn: React.FC = () => {
               />
             )}
           />
-          {errors.email && <span className="text-red-500">{errors.email.message}</span>}
+          {errors.email && (
+            <span className="text-red-500">{errors.email.message}</span>
+          )}
         </div>
 
         {/* Password input field */}
         <div className="md:mb-4 mb-3">
-          <label className="text-sm font-medium mb-1 block text-black1">Password</label>
+          <label className="text-sm font-medium mb-1 block text-black1">
+            Password
+          </label>
           <Controller
             name="password"
             control={control}
-            rules={{ required: "Password is required", pattern: { value: /^\S{8,16}$/, message: "Password must be 8 to 16 characters" } }}
+            rules={{
+              required: "Password is required",
+              pattern: {
+                value: /^\S{8,16}$/,
+                message: "Password must be 8 to 16 characters",
+              },
+            }}
             render={({ field }) => (
               <div className="relative">
                 <Input
-                  type={showPassword ? ("text") : ("password")}
+                  type={showPassword ? "text" : "password"}
                   size="large"
                   placeholder="Enter Password"
                   className="w-full text"
                   {...field}
                 />
-                <span className="absolute right-2 bottom-3 cursor-pointer"
-                  onClick={() => setShowPassword((prev) => !prev)}>
-                  {showPassword ? <FaEyeSlash fontSize={18} fill="#AFB2BF" /> : <FaEye fontSize={18} fill="#AFB2BF" />}
+                <span
+                  className="absolute right-2 bottom-3 cursor-pointer"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                >
+                  {showPassword ? (
+                    <FaEyeSlash fontSize={18} fill="#AFB2BF" />
+                  ) : (
+                    <FaEye fontSize={18} fill="#AFB2BF" />
+                  )}
                 </span>
               </div>
             )}
           />
-          {errors.password && <span className="text-red-500">{errors.password.message}</span>}
+          {errors.password && (
+            <span className="text-red-500">{errors.password.message}</span>
+          )}
         </div>
 
         <Button

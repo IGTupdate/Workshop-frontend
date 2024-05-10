@@ -17,8 +17,8 @@ const config: Config = {
     },
     extend: {
       boxShadow: {
-        'top': '0px -8px 30px #0000001f',
-        '3d': 'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px'
+        top: "0px -8px 30px #0000001f",
+        "3d": "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -36,7 +36,7 @@ const config: Config = {
         customLightGray: "#CDCDCE",
         customYellow: "#FFE200",
         customBrown: "#A49339",
-        antGreay: "#00000073"
+        antGreay: "#00000073",
       },
       fontFamily: {
         kanit: [
@@ -64,7 +64,7 @@ const config: Config = {
     },
   },
   plugins: [],
-  important: true
+  important: true,
 };
 
 export default config;

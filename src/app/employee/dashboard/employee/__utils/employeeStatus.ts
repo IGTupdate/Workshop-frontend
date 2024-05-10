@@ -1,5 +1,4 @@
 export const employeeStatus = {
-    Active: "Active",
-    InActive: "InActive"
+  Active: "Active",
+  InActive: "InActive",
 };
-

@@ -41,7 +41,7 @@ const SlotScheduleManageDrawer = (props: Props) => {
   // open drawer has of _id of the slot schedule which need to be edit and if it has new key word then the create new slot
 
   const { activeSlotSchedule, slotScheduleDrawerLoading } = useAppSelector(
-    (state) => state.slotSchedule
+    (state) => state.slotSchedule,
   );
 
   const dispatch = useAppDispatch();
@@ -74,16 +74,19 @@ const SlotScheduleManageDrawer = (props: Props) => {
   }, [activeSlotSchedule]);
 
   const onSubmit = (data: TSlotScheduleManage) => {
-
-    if(data?.slot_details?.length>0){
-      for(let i=0; i<data?.slot_details?.length; i++){
-        if(data?.slot_details[i]?.start_time?.hour > data?.slot_details[i]?.end_time?.hour){
-          toast.error(`The start time must be before the end time. Slot ${i + 1}`);
-          return
+    if (data?.slot_details?.length > 0) {
+      for (let i = 0; i < data?.slot_details?.length; i++) {
+        if (
+          data?.slot_details[i]?.start_time?.hour >
+          data?.slot_details[i]?.end_time?.hour
+        ) {
+          toast.error(
+            `The start time must be before the end time. Slot ${i + 1}`,
+          );
+          return;
         }
       }
     }
-
 
     if (!activeSlotSchedule) return;
     dispatch(setSlotScheduleDrawerLoading(true));

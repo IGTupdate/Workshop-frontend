@@ -11,7 +11,7 @@ type Props = {};
 
 const SlotScheduleDeleteModal = (props: Props) => {
   const { deleteSlotSchedule, deleteSlotScheduleLoading } = useAppSelector(
-    (state) => state.slotSchedule
+    (state) => state.slotSchedule,
   );
   const dispatch = useAppDispatch();
 

@@ -1,18 +1,22 @@
 // ability.ts
 import { store } from "@/app/store/store";
-import { defineAbility, AbilityTuple, MongoAbility, MongoQuery } from "@casl/ability";
+import {
+  defineAbility,
+  AbilityTuple,
+  MongoAbility,
+  MongoQuery,
+} from "@casl/ability";
 import { ICaslData } from "@/app/store/slices/accessSlice";
 
 class AccessAbility {
-  private static ability: MongoAbility<AbilityTuple, MongoQuery> | undefined = undefined;
+  private static ability: MongoAbility<AbilityTuple, MongoQuery> | undefined =
+    undefined;
 
-  private constructor() { }
+  private constructor() {}
 
   static getAbility(access: ICaslData[]) {
-
     // undefined in case of the no access
-    if (access.length === 0)
-      return AccessAbility.ability = undefined;
+    if (access.length === 0) return (AccessAbility.ability = undefined);
 
     AccessAbility.ability = defineAbility((can, cannot) => {
       access.forEach((ele: ICaslData) => {

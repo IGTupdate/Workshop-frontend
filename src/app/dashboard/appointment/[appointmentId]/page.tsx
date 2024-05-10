@@ -15,7 +15,7 @@ interface Props {
 
 const AppointmentPage: React.FC<Props> = ({ params }) => {
   const [appointmentData, setAppointmentData] = useState<TAppointment | null>(
-    null
+    null,
   );
   const [notificationData, setNotificationData] = useState({});
   const router = useRouter();
@@ -34,7 +34,7 @@ const AppointmentPage: React.FC<Props> = ({ params }) => {
       if (!params.appointmentId) return;
 
       const initNotificationData = await appointmentNotification(
-        params.appointmentId
+        params.appointmentId,
       );
       setNotificationData(initNotificationData);
     } catch (err) {}
@@ -42,11 +42,11 @@ const AppointmentPage: React.FC<Props> = ({ params }) => {
 
   useEffect(() => {
     if (!appointmentData) fetchAppointmentData();
-    
+
     const timeoutId = setTimeout(() => {
       initData();
     }, 2000);
-  
+
     return () => clearTimeout(timeoutId);
   }, [params.appointmentId]);
 

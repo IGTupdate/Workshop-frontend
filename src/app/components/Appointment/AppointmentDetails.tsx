@@ -22,7 +22,7 @@ const AppointmentDetails: React.FC<Props> = ({
 }) => {
   const { isSmallDevice } = useAppSelector((state) => state.device);
   const pathname = usePathname();
-  const role = useAppSelector(state=>state.auth.authData?.role)
+  const role = useAppSelector((state) => state.auth.authData?.role);
 
   return (
     <>
@@ -41,12 +41,12 @@ const AppointmentDetails: React.FC<Props> = ({
           </Descriptions.Item>
           <Descriptions.Item label="Start Time">
             {dayjs(appointmentData.calender_id.slots[0].start_time).format(
-              "hh:mm"
+              "hh:mm",
             )}
           </Descriptions.Item>
           <Descriptions.Item label="End Time">
             {dayjs(appointmentData.calender_id.slots[0].end_time).format(
-              "hh:mm"
+              "hh:mm",
             )}
           </Descriptions.Item>
           <Descriptions.Item label="Owner">
@@ -74,17 +74,21 @@ const AppointmentDetails: React.FC<Props> = ({
           </Descriptions.Item>
           <Descriptions.Item label="Remarks">
             <div>
-              {appointmentData.service_description.map((item: string, i: number) => (
-                <p key={i}>{item}</p>
-              ))}
+              {appointmentData.service_description.map(
+                (item: string, i: number) => (
+                  <p key={i}>{item}</p>
+                ),
+              )}
             </div>
           </Descriptions.Item>
         </Descriptions>
       </div>
 
-      {role==="customer"? pathname.split("/")[3] !== "reschedule" && (
-        <Notifications show={"all"} notificationData={notificationData} />
-      ):''}
+      {role === "customer"
+        ? pathname.split("/")[3] !== "reschedule" && (
+            <Notifications show={"all"} notificationData={notificationData} />
+          )
+        : ""}
     </>
   );
 };

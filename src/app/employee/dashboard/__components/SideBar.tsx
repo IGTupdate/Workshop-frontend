@@ -18,7 +18,6 @@ type Props = {
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const SideBar = (props: Props) => {
-
   const [user, setUser] = useState<IAuthData>();
   const { authData } = useAppSelector((state) => state.auth);
 
@@ -27,10 +26,6 @@ const SideBar = (props: Props) => {
       return authData;
     });
   }, [authData]);
-
-
-
- 
 
   return (
     <Sider
@@ -46,8 +41,19 @@ const SideBar = (props: Props) => {
         <Avatar size={"large"} icon={<UserOutlined />} />
         {!props?.collapsed && (
           <div>
-            <Title level={5} style={{ color: "white", textTransform: "capitalize", marginBottom: 0 }}>Hello {user?.fullName?.split(" ")[0]}</Title>
-            <Text className="capitalize" style={{ color: "#CDCDCE" }}>{user?.role || "-"}</Text>
+            <Title
+              level={5}
+              style={{
+                color: "white",
+                textTransform: "capitalize",
+                marginBottom: 0,
+              }}
+            >
+              Hello {user?.fullName?.split(" ")[0]}
+            </Title>
+            <Text className="capitalize" style={{ color: "#CDCDCE" }}>
+              {user?.role || "-"}
+            </Text>
           </div>
         )}
       </Space>

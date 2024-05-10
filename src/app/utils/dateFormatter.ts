@@ -1,31 +1,39 @@
 export function convertToLocaleDateAndWeekday(dateString: string | undefined) {
-    if (!dateString) return ''
-    // Convert string to Date object
-    const date = new Date(dateString);
+  if (!dateString) return "";
+  // Convert string to Date object
+  const date = new Date(dateString);
 
-    // Format date to "DD-MM-YYYY"
-    const formattedDate = new Intl.DateTimeFormat('en-GB', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    }).format(date);
+  // Format date to "DD-MM-YYYY"
+  const formattedDate = new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(date);
 
-    // Array of weekday names
-    const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  // Array of weekday names
+  const weekdays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
-    // Get weekday value (0 for Sunday, 1 for Monday, ..., 6 for Saturday)
-    const weekdayValue = date.getDay();
+  // Get weekday value (0 for Sunday, 1 for Monday, ..., 6 for Saturday)
+  const weekdayValue = date.getDay();
 
-    // Get weekday name
-    const weekdayName = weekdays[weekdayValue];
+  // Get weekday name
+  const weekdayName = weekdays[weekdayValue];
 
-    return formattedDate + ", " + weekdayName;
+  return formattedDate + ", " + weekdayName;
 }
 
 export function extractTimeFromDate(dateString: string): string {
-    return new Date(dateString).toLocaleTimeString();
+  return new Date(dateString).toLocaleTimeString();
 }
 
 export function formatDateAndTime(dateString: string) {
-    return new Date(dateString).toLocaleString('en-GB')
+  return new Date(dateString).toLocaleString("en-GB");
 }

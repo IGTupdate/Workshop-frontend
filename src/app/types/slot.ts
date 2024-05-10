@@ -5,12 +5,11 @@ export type TASlot = {
   end_time: string;
   available: number;
   _id: string;
-}
+};
 
 export type TAvailbleSlots = {
   date: string;
   calender_id: string;
   status: string;
   available_slots: TASlot[];
-}
-
+};

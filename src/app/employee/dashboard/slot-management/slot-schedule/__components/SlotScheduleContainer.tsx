@@ -25,7 +25,7 @@ const SlotScheduleContainer = (props: Props) => {
   const ability = useAbility();
   const dispatch = useAppDispatch();
   const { slotScheduleData, slotScheduleLoading } = useAppSelector(
-    (state) => state.slotSchedule
+    (state) => state.slotSchedule,
   );
 
   useEffect(() => {
@@ -39,24 +39,26 @@ const SlotScheduleContainer = (props: Props) => {
   };
 
   const handleSlotScheduleDeleteModal = (
-    newDeleteModal: TSlotSchedule | null
+    newDeleteModal: TSlotSchedule | null,
   ) => {
     dispatch(setDeleteSlotSchedule(newDeleteModal));
   };
-
 
   return (
     <div>
       <div className="flex justify-between items-center mb-8 p-4 bg-white rounded-md">
         <h2 className="text-xl font-semibold">Slot Schedule</h2>
-        {ability && ability.can(casl_action.create, casl_subject.slot_schedule) && <Button
-          onClick={() => {
-            handleSlotScheduleDrawer(NEW_SLOT_SCHEDULE);
-          }}
-          type="primary"
-        >
-          Add Schedule
-        </Button>}
+        {ability &&
+          ability.can(casl_action.create, casl_subject.slot_schedule) && (
+            <Button
+              onClick={() => {
+                handleSlotScheduleDrawer(NEW_SLOT_SCHEDULE);
+              }}
+              type="primary"
+            >
+              Add Schedule
+            </Button>
+          )}
       </div>
 
       {slotScheduleLoading ? (
@@ -76,7 +78,6 @@ const SlotScheduleContainer = (props: Props) => {
           />
         </div>
       )}
-
 
       <SlotScheduleManageDrawer />
       <SlotScheduleDeleteModal />

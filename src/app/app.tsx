@@ -1,25 +1,22 @@
-'use client'
-import React, { useEffect } from 'react';
-import { getCustomerAuthInitData } from './services/operations/auth/common';
-import { useAppDispatch } from './store/reduxHooks';
+"use client";
+import React, { useEffect } from "react";
+import { getCustomerAuthInitData } from "./services/operations/auth/common";
+import { useAppDispatch } from "./store/reduxHooks";
 
 const App = ({
   children,
-  refreshToken
+  refreshToken,
 }: Readonly<{
   children: React.ReactNode;
-  refreshToken: string | undefined
+  refreshToken: string | undefined;
 }>) => {
-
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (refreshToken) dispatch(getCustomerAuthInitData())
-  }, [])
+    if (refreshToken) dispatch(getCustomerAuthInitData());
+  }, []);
 
-  return (
-    <>{children}</>
-  )
-}
+  return <>{children}</>;
+};
 
-export default App
+export default App;

@@ -6,8 +6,8 @@ type TinitialState = {
   calenderLoading: boolean;
   activeCalender: Partial<TCalender> | null;
   calenderDrawerLoading: boolean;
-  updateCalenderLoading: boolean,
-  updateStatusCalender: TCalender | null,
+  updateCalenderLoading: boolean;
+  updateStatusCalender: TCalender | null;
 };
 
 const initialState: TinitialState = {
@@ -16,7 +16,7 @@ const initialState: TinitialState = {
   activeCalender: null,
   calenderDrawerLoading: false,
   updateCalenderLoading: false,
-  updateStatusCalender: null
+  updateStatusCalender: null,
 };
 
 export const calenderSlice = createSlice({
@@ -33,7 +33,7 @@ export const calenderSlice = createSlice({
     },
     setActiveCalender: (
       state,
-      action: PayloadAction<Partial<TCalender> | null>
+      action: PayloadAction<Partial<TCalender> | null>,
     ) => {
       state.activeCalender = action.payload;
       return state;
@@ -48,7 +48,7 @@ export const calenderSlice = createSlice({
     },
     setUpdateStatusCalender: (
       state,
-      action: PayloadAction<TCalender | null>
+      action: PayloadAction<TCalender | null>,
     ) => {
       state.updateStatusCalender = action.payload;
       return state;
@@ -66,6 +66,6 @@ export const {
   setCalenderDrawerLoading,
   resetCalender,
   setUpdateCalenderLoading,
-  setUpdateStatusCalender
+  setUpdateStatusCalender,
 } = calenderSlice.actions;
 export const calenderReducer = calenderSlice.reducer;

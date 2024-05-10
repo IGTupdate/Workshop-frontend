@@ -18,7 +18,6 @@ const EmployeeDashBoardLayOut = ({
 }>) => {
   useDeviceType();
 
-
   const { employeeSmallDevice } = useAppSelector((state) => state.device);
 
   const [collapsed, setCollapsed] = useState(false);
@@ -27,8 +26,7 @@ const EmployeeDashBoardLayOut = ({
     setCollapsed(employeeSmallDevice);
   }, [employeeSmallDevice]);
 
-
-  useEffect(() => { });
+  useEffect(() => {});
   return (
     <Suspense
       fallback={

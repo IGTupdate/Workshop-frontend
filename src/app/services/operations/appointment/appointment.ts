@@ -25,7 +25,7 @@ const {
   APPOINTMENT_CANCEL_API,
   APPOINTMENT_RESCHEDULE_API,
   GET_PAGE_APPOINTMENT,
-  GET_ALL_APPOINTMENT_STATUS
+  GET_ALL_APPOINTMENT_STATUS,
 } = appointmentEndpoints;
 
 export const getAppointmentByCalenderId = async (
@@ -62,7 +62,9 @@ export const getAppointmentByAppointmentId = async (
   }
 };
 
-export const getAllAppointment = async (query: string = ""): Promise<TAppointment[]> => {
+export const getAllAppointment = async (
+  query: string = "",
+): Promise<TAppointment[]> => {
   try {
     const response = await apiConnector({
       method: "GET",
@@ -72,7 +74,7 @@ export const getAllAppointment = async (query: string = ""): Promise<TAppointmen
     return response.data.data;
   } catch (err) {
     // console.log(err);
-    throw err
+    throw err;
   }
 };
 
@@ -136,24 +138,24 @@ export const bookAppointment = async (data: TAppointmentBook) => {
 
 export const getAllCustomerAppointment =
   (): ThunkAction<void, RootState, unknown, Action> =>
-    async (dispatch, getState) => {
-      try {
-        dispatch(setAppointmentLoading(true));
-        const _id = getState().auth.authData._id;
-        const response = await apiConnector({
-          method: "GET",
-          url: GET_ALL_CUSTOMER_APPOINTMENT + "/" + _id,
-        });
-        dispatch(setAppointmentData(response.data.data));
-        dispatch(setAppointmentLoading(false));
-        return response.data.data;
-      } catch (err) {
-        dispatch(setAppointmentLoading(false));
-        return null;
-      } finally {
-        dispatch(setAppointmentLoading(false));
-      }
-    };
+  async (dispatch, getState) => {
+    try {
+      dispatch(setAppointmentLoading(true));
+      const _id = getState().auth.authData._id;
+      const response = await apiConnector({
+        method: "GET",
+        url: GET_ALL_CUSTOMER_APPOINTMENT + "/" + _id,
+      });
+      dispatch(setAppointmentData(response.data.data));
+      dispatch(setAppointmentLoading(false));
+      return response.data.data;
+    } catch (err) {
+      dispatch(setAppointmentLoading(false));
+      return null;
+    } finally {
+      dispatch(setAppointmentLoading(false));
+    }
+  };
 
 export const cancelAppointment = async (appointmentId: string) => {
   try {
@@ -192,8 +194,6 @@ export const rescheduleAppointment = async (
     throw err;
   }
 };
-
-
 
 export const getAppointmentStatus = async (appointmentId: string) => {
   try {

@@ -121,8 +121,6 @@ const AppointmentBookingConfirmation = (props: Props) => {
     });
   };
 
-
-
   return loading ? (
     <div className="flex justify-center items-center h-full">
       <Loader />
@@ -132,25 +130,31 @@ const AppointmentBookingConfirmation = (props: Props) => {
       <div>
         <div className="grid grid-cols-2">
           <Title level={5}>Customer Details</Title>
-          {userRole === "customer" && <div className="flex justify-end">
-            <Button
-              type="link"
-              onClick={() => {
-                changeAppointmentBookingData("customer_id", "");
-              }}
-            >
-              <FiEdit />
-            </Button>
-          </div>}
+          {userRole === "customer" && (
+            <div className="flex justify-end">
+              <Button
+                type="link"
+                onClick={() => {
+                  changeAppointmentBookingData("customer_id", "");
+                }}
+              >
+                <FiEdit />
+              </Button>
+            </div>
+          )}
         </div>
         <div className="grid grid-cols-2 gap-2">
           <DescriptionItem
             title="Name"
-            content={appointmentBookingConfirmationData?.customer?.fullName || "-"}
+            content={
+              appointmentBookingConfirmationData?.customer?.fullName || "-"
+            }
           />
           <DescriptionItem
             title="Phone"
-            content={appointmentBookingConfirmationData?.customer?.contactNumber || "-"}
+            content={
+              appointmentBookingConfirmationData?.customer?.contactNumber || "-"
+            }
           />
           <DescriptionItem
             title="Email"
@@ -219,8 +223,8 @@ const AppointmentBookingConfirmation = (props: Props) => {
             content={
               appointmentBookingConfirmationData.slot_details?.start_time
                 ? new Date(
-                  appointmentBookingConfirmationData.slot_details?.start_time,
-                ).toLocaleString()
+                    appointmentBookingConfirmationData.slot_details?.start_time,
+                  ).toLocaleString()
                 : "-"
             }
           />
@@ -229,8 +233,8 @@ const AppointmentBookingConfirmation = (props: Props) => {
             content={
               appointmentBookingConfirmationData.slot_details?.end_time
                 ? new Date(
-                  appointmentBookingConfirmationData.slot_details?.end_time,
-                ).toLocaleString()
+                    appointmentBookingConfirmationData.slot_details?.end_time,
+                  ).toLocaleString()
                 : "-"
             }
           />

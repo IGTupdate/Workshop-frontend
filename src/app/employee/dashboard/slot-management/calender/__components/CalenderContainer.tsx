@@ -24,7 +24,7 @@ const CalenderContainer = (props: Props) => {
   calenderData, calenderLoading, active calender
   */
   const { calenderData, calenderLoading, activeCalender } = useAppSelector(
-    (state) => state.calender
+    (state) => state.calender,
   );
 
   // dispatch state action
@@ -40,7 +40,6 @@ const CalenderContainer = (props: Props) => {
         dispatch(getAllCalender());
       }
     }
-
   }, [calenderLoading, ability]);
 
   // calender button cell click schedule, view
@@ -49,7 +48,6 @@ const CalenderContainer = (props: Props) => {
   };
 
   // which cell to render monthly or daily
-
 
   const cellRender: CalendarProps<Dayjs>["cellRender"] = (current, info) => {
     if (info.type === "date")
@@ -66,21 +64,25 @@ const CalenderContainer = (props: Props) => {
 
   return (
     <div>
-      {
-        (ability && ability.can(casl_action.get, casl_subject.calender)) ? <div>
+      {ability && ability.can(casl_action.get, casl_subject.calender) ? (
+        <div>
           {calenderLoading ? (
-            <div style={{ height: "calc(100vh - 300px)" }} className="flex justify-center items-center w-full">
-            <Loader />
-          </div>
+            <div
+              style={{ height: "calc(100vh - 300px)" }}
+              className="flex justify-center items-center w-full"
+            >
+              <Loader />
+            </div>
           ) : (
             <div>
               <Calendar cellRender={cellRender} />
               <CalenderManageDrawer />
             </div>
           )}
-        </div> :  <UnAuthorized />
-      }
-
+        </div>
+      ) : (
+        <UnAuthorized />
+      )}
     </div>
   );
 };

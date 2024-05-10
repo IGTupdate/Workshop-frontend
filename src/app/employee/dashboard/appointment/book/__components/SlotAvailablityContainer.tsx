@@ -57,7 +57,7 @@ const SlotAvailablityContainer = (props: Props) => {
         optionArray.push({
           key: key,
           label: getFormattedDateForSlotAvailabilityFilter(
-            new Date(currentDate)
+            new Date(currentDate),
           ),
           children: <ShowSlotAvailableData availableSlot={foundCalender} />,
         });
