@@ -10,4 +10,5 @@ export const casl_subject = {
   appointment: "appointment",
   calender: "calender",
   slot_schedule: "slot_schedule",
+  workorder: "workorder",
 };

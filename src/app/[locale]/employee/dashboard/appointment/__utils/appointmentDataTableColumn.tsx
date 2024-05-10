@@ -28,11 +28,15 @@ import { IoIosEye } from "react-icons/io";
 
 import { MdAddChart } from "react-icons/md";
 import dayjs from "dayjs";
+import useAbility from "@/app/__hooks/useAbility";
+import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 
 const { Title, Text } = Typography;
 
 export function GetAppointmentDataTableColumn() {
   const router = useRouter();
+
+  const ability = useAbility();
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -181,20 +185,22 @@ export function GetAppointmentDataTableColumn() {
               </div>
 
               {/* create workorder */}
-              {status === appointmentStatus[0] && (
-                <div
-                  onClick={() => {
-                    router.push(
-                      "/employee/dashboard/workorder/create?appointmentId=" +
-                        _id,
-                    );
-                  }}
-                  style={{ color: "#24ae55" }}
-                  className="cursor-pointer"
-                >
-                  <MdAddChart size={"22px"} title="Create WorkOrder" />
-                </div>
-              )}
+              {ability &&
+                ability.can(casl_action.create, casl_subject.appointment) &&
+                status === appointmentStatus[0] && (
+                  <div
+                    onClick={() => {
+                      router.push(
+                        "/employee/dashboard/workorder/create?appointmentId=" +
+                          _id,
+                      );
+                    }}
+                    style={{ color: "#24ae55" }}
+                    className="cursor-pointer"
+                  >
+                    <MdAddChart size={"22px"} title="Create WorkOrder" />
+                  </div>
+                )}
             </Flex>
           );
         },

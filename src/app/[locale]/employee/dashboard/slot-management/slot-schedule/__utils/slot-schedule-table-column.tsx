@@ -1,6 +1,8 @@
 import { TActiveSlotSchedule, TSlotSchedule } from "@/app/types/slot-schedule";
 import { Button, Space, TableProps, Tag, Typography } from "antd";
 import { formatTime } from "../../../utils/helper";
+import useAbility from "@/app/__hooks/useAbility";
+import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 
 export interface ISlotSchedule {
   _id: string;
@@ -11,10 +13,12 @@ export interface ISlotSchedule {
 }
 const { Text, Title } = Typography;
 
-export const get_slot_schedule_columns = (
+export const Get_slot_schedule_columns = (
   setOpenDrawer: (newDrawerData: TActiveSlotSchedule) => void,
   handleSlotScheduleDeleteModal: (newDeleteModal: TSlotSchedule | null) => void,
 ) => {
+  const ability = useAbility();
+
   const slot_schedule_table_columns: TableProps<TSlotSchedule>["columns"] = [
     {
       title: "Name",
@@ -82,23 +86,30 @@ export const get_slot_schedule_columns = (
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button
-            type="primary"
-            onClick={() => {
-              setOpenDrawer(record);
-            }}
-          >
-            Update
-          </Button>
-          <Button
-            onClick={() => {
-              handleSlotScheduleDeleteModal(record);
-            }}
-            type="primary"
-            danger
-          >
-            Delete
-          </Button>
+          {ability &&
+            ability.can(casl_action.update, casl_subject.slot_schedule) && (
+              <Button
+                type="primary"
+                onClick={() => {
+                  setOpenDrawer(record);
+                }}
+              >
+                Update
+              </Button>
+            )}
+
+          {ability &&
+            ability.can(casl_action.delete, casl_subject.slot_schedule) && (
+              <Button
+                onClick={() => {
+                  handleSlotScheduleDeleteModal(record);
+                }}
+                type="primary"
+                danger
+              >
+                Delete
+              </Button>
+            )}
         </Space>
       ),
     },
