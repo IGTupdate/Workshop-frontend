@@ -10,7 +10,7 @@ import {
 } from "@/app/store/slices/authSlice";
 import { Button, Input, Select, Space } from "antd";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Logo from "../../../../public/images/logo-3.webp";
 import { log } from "console";
@@ -27,10 +27,20 @@ const SendOTP = (props: Tprops) => {
 
   const dispatch = useAppDispatch();
   // const contact = useAppSelector((state) => state.auth.authData.contactNumber);
-  const { authLoading } = useAppSelector((state) => state.auth);
+  const { authLoading, authData } = useAppSelector((state) => state.auth);
   const [countryCode, setCountryCode] = useState("+52");
   const [contactNumber, setContactNumber] = useState("");
   const [contactNumberError, setContactNumberError] = useState("");
+
+  useEffect(() => {
+    if (authData?.contactNumber) {
+      if (authData?.contactNumber.length === 11) {
+        setContactNumber(authData?.contactNumber.substring(1));
+      } else {
+        setContactNumber(authData?.contactNumber);
+      }
+    }
+  }, [authData?.contactNumber]);
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     if (contactNumber.length === 0) setContactNumberError(t("errorOne"));

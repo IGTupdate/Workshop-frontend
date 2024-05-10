@@ -31,24 +31,12 @@ const LandingNavbar = (props: Props) => {
 
       <div>
         {localeActive === "en" ? (
-          <p className="text-red-500">
-            Traducir a :{" "}
-            <span
-              className="cursor-pointer"
-              onClick={() => onChangeLocale("sp")}
-            >
-              española
-            </span>
+          <p className="text-red-500" onClick={() => onChangeLocale("sp")}>
+            Translate To : <span className="cursor-pointer">española</span>
           </p>
         ) : (
-          <p className="text-red-500">
-            Translate To :{" "}
-            <span
-              className="cursor-pointer"
-              onClick={() => onChangeLocale("en")}
-            >
-              English
-            </span>
+          <p className="text-red-500" onClick={() => onChangeLocale("en")}>
+            Translate To : <span className="cursor-pointer">English</span>
           </p>
         )}
 

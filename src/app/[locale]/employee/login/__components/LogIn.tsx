@@ -4,6 +4,7 @@ import { employeeLogin } from "@/app/services/operations/auth/employeeAuth";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { setAuthLoading } from "@/app/store/slices/authSlice";
 import { Button, Input } from "antd";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -22,6 +23,7 @@ const LogIn: React.FC = () => {
   } = useForm<FormData>();
 
   const { authLoading } = useAppSelector((state) => state.auth);
+  const t = useTranslations("EmployeeLogin");
 
   const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
@@ -43,7 +45,7 @@ const LogIn: React.FC = () => {
     <div className="w-full">
       <Heading
         type="heading1"
-        primary={"Employee Login"}
+        primary={t("heading")}
         secondary={""}
         primaryColor="text-black1"
       />
@@ -52,7 +54,7 @@ const LogIn: React.FC = () => {
         {/* Email input field */}
         <div className="md:mb-4 mb-3">
           <label className="text-sm font-medium mb-1 block text-black1">
-            Email
+            {t("emailLabel")}
           </label>
           <Controller
             name="email"
@@ -68,7 +70,7 @@ const LogIn: React.FC = () => {
               <Input
                 type="text"
                 size="large"
-                placeholder="Enter Email"
+                placeholder={t("emailPlaceholder")}
                 className="w-full text"
                 {...field}
               />
@@ -82,7 +84,7 @@ const LogIn: React.FC = () => {
         {/* Password input field */}
         <div className="md:mb-4 mb-3">
           <label className="text-sm font-medium mb-1 block text-black1">
-            Password
+            {t("passwordLabel")}
           </label>
           <Controller
             name="password"
@@ -99,7 +101,7 @@ const LogIn: React.FC = () => {
                 <Input
                   type={showPassword ? "text" : "password"}
                   size="large"
-                  placeholder="Enter Password"
+                  placeholder={t("passwordPlaceholder")}
                   className="w-full text"
                   {...field}
                 />
@@ -129,7 +131,7 @@ const LogIn: React.FC = () => {
           htmlType="submit"
           className="bg-black text-white1 font-semibold w-full border-none hover:shadow-xl"
         >
-          Login
+          {t("button")}
         </Button>
       </form>
     </div>

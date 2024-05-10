@@ -67,6 +67,7 @@ a:hover {
 
 .input-otp {
   justify-content: space-between !important;
+  gap: 0.5em !important;
 }
 
 :where(.css-dev-only-do-not-override-dg1m93).ant-descriptions

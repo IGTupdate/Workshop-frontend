@@ -58,5 +58,13 @@
     "namePlaceholder": "Ingrese su nombre",
     "emailPlaceholder": "Ingrese correo electrónico",
     "button": "Ahorrar"
+  },
+  "EmployeeLogin": {
+    "heading": "Inicio de sesión de empleado",
+    "emailLabel": "Correo electrónico",
+    "passwordLabel": "Contraseña",
+    "emailPlaceholder": "Ingrese correo electrónico",
+    "passwordPlaceholder": "Introducir la contraseña",
+    "button": "Acceso"
   }
 }
