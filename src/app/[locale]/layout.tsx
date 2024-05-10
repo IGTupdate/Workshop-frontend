@@ -26,7 +26,7 @@ export default async function RootLayout({
 }>) {
   const messages = await getMessages();
 
-  const refreshToken = get_server_cookie("refresh_token");
+  const refreshToken = get_server_cookie("refreshToken");
 
   return (
     <html lang={locale}>
