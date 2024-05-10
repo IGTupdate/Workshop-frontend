@@ -58,5 +58,13 @@
     "namePlaceholder": "Enter Name",
     "emailPlaceholder": "Enter Email",
     "button": "Save"
+  },
+  "EmployeeLogin": {
+    "heading": "Employee Login",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "emailPlaceholder": "Enter Email",
+    "passwordPlaceholder": "Enter Password",
+    "button": "Login"
   }
 }
