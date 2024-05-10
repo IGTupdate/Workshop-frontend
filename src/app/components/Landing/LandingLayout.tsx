@@ -8,11 +8,9 @@ import { useAppSelector } from "@/app/store/reduxHooks";
 import EmployeeLogin from "./__components/EmployeeLogin";
 import AboutUsFooter from "./__components/AboutUs";
 
-
 const { Header, Footer, Content } = Layout;
 
 const App: React.FC = () => {
-
   // Ref for the SlotDetails component
   const slotDetailsRef = useRef<HTMLDivElement>(null);
   const slotData = useAppSelector((state) => state.slot.slotData);

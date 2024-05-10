@@ -2,15 +2,14 @@
 import { Button, Flex, Select } from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import { useLocale, useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from "next-intl";
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-
 
 type Props = {};
 
 const LandingNavbar = (props: Props) => {
-  const t = useTranslations('Index');
+  const t = useTranslations("Index");
 
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
@@ -21,7 +20,6 @@ const LandingNavbar = (props: Props) => {
       router.replace(value);
     });
   };
-
 
   return (
     <Flex
@@ -49,10 +47,9 @@ const LandingNavbar = (props: Props) => {
         <Link href={`${localeActive}/login`}>
           <Button type="primary" size="large" className="font-semibold">
             {/* Login */}
-            {t('title')}
+            {t("title")}
           </Button>
         </Link>
-
 
         <Select
           defaultValue={localeActive}
@@ -61,12 +58,12 @@ const LandingNavbar = (props: Props) => {
           onChange={onChange}
           options={[
             {
-              value: 'en',
-              label: 'English',
+              value: "en",
+              label: "English",
             },
             {
-              value: 'sp',
-              label: 'Spanish',
+              value: "sp",
+              label: "Spanish",
             },
           ]}
         />

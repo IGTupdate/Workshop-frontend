@@ -1,15 +1,13 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const NotFound = (props: Props) => {
   return (
     <html>
-        <body>
-            NOT FOUND
-        </body>
+      <body>NOT FOUND</body>
     </html>
-  )
-}
+  );
+};
 
-export default NotFound
+export default NotFound;

@@ -7,7 +7,10 @@ import { RxDashboard } from "react-icons/rx";
 import { GrBook } from "react-icons/gr";
 import { IoNotifications } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
-import { getActiveSideBarMenu, getSideBarMenuItems } from "@/app/[locale]/employee/dashboard/utils/sideBarMenuItems";
+import {
+  getActiveSideBarMenu,
+  getSideBarMenuItems,
+} from "@/app/[locale]/employee/dashboard/utils/sideBarMenuItems";
 import { CustomerSideBarMenuItems } from "./CustomerSideBarMenuItems";
 
 const dashBoardIcons = {

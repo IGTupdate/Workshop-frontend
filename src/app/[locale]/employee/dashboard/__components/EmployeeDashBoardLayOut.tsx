@@ -26,7 +26,7 @@ const EmployeeDashBoardLayOut = ({
     setCollapsed(employeeSmallDevice);
   }, [employeeSmallDevice]);
 
-  useEffect(() => { });
+  useEffect(() => {});
   return (
     <Suspense
       fallback={
