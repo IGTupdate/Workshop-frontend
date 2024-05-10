@@ -107,7 +107,7 @@ export function getSideBarMenuItems(
     return can_perform_action !== undefined;
   });
 
-  return filteredSideBarMenus;
+  return ability !== undefined ? filteredSideBarMenus : sideBarMenus;
 }
 
 export const findRecursiveByPathName = (
