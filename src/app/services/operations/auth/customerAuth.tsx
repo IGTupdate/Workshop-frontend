@@ -2,6 +2,7 @@ import {
   logOut,
   setAuthData,
   setAuthLoading,
+  setAuthStep,
 } from "@/app/store/slices/authSlice";
 import { AppDispatch, RootState } from "@/app/store/store";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
@@ -106,6 +107,7 @@ export async function verifyOTP(
           dispatch(getCustomerAuthInitData());
           // await getCustomerData(authResult.data.data._id, dispatch);
           // await getAccess(dispatch)
+          dispatch(setAuthStep(0));
           toast.success("USER LOGGED IN SUCCESSFULLY");
         }
       } else {
