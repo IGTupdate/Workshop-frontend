@@ -139,6 +139,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
 
   const handleBookAppointment = async () => {
     try {
+      setVisible(false);
       setLoading(true);
       const {
         slot_id,

@@ -107,7 +107,7 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
               </div>
             </div>
           ) : (
-            <div className="relative py-8">
+            <div className="relative py-8 top-[50vh] md:top-0">
               <Watermark text={pageDetailsNotFound} />
             </div>
           )}
