@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { Table, Button, Typography } from "antd";
 import SlotScheduleManageDrawer from "./SlotScheduleManageDrawer";
-import { get_slot_schedule_columns } from "../__utils/slot-schedule-table-column";
+import { Get_slot_schedule_columns } from "../__utils/slot-schedule-table-column";
 import { NEW_SLOT_SCHEDULE } from "../__utils/constant";
 import {
   setActiveSlotSchedule,
@@ -14,12 +14,15 @@ import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import SlotScheduleDeleteModal from "./SlotScheduleDeleteModal";
 import { getAllSlotSchedule } from "@/app/services/operations/appointment/slotSchedule";
 import Loader from "@/app/components/Loader";
+import useAbility from "@/app/__hooks/useAbility";
+import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 
 const { Text } = Typography;
 
 type Props = {};
 
 const SlotScheduleContainer = (props: Props) => {
+  const ability = useAbility();
   const dispatch = useAppDispatch();
   const { slotScheduleData, slotScheduleLoading } = useAppSelector(
     (state) => state.slotSchedule
@@ -41,18 +44,19 @@ const SlotScheduleContainer = (props: Props) => {
     dispatch(setDeleteSlotSchedule(newDeleteModal));
   };
 
+
   return (
     <div>
       <div className="flex justify-between items-center mb-8 p-4 bg-white rounded-md">
         <h2 className="text-xl font-semibold">Slot Schedule</h2>
-        <Button
+        {ability && ability.can(casl_action.create, casl_subject.slot_schedule) && <Button
           onClick={() => {
             handleSlotScheduleDrawer(NEW_SLOT_SCHEDULE);
           }}
           type="primary"
         >
           Add Schedule
-        </Button>
+        </Button>}
       </div>
 
       {slotScheduleLoading ? (
@@ -65,9 +69,9 @@ const SlotScheduleContainer = (props: Props) => {
             scroll={{ x: 980 }}
             pagination={false}
             dataSource={slotScheduleData}
-            columns={get_slot_schedule_columns(
+            columns={Get_slot_schedule_columns(
               handleSlotScheduleDrawer,
-              handleSlotScheduleDeleteModal
+              handleSlotScheduleDeleteModal,
             )}
           />
         </div>

@@ -107,7 +107,7 @@ const SendOTP = (props: Tprops) => {
             size="large"
             defaultValue="+52"
             // style={{ width: '22%', height: 42 }}
-            className="w-[28%] sm:w-[25%] h-[42px]"
+            className="w-[28%] h-[38px]"
             onChange={handleSelect}
             options={[
               { value: '+52', label: '+52' },
@@ -115,20 +115,19 @@ const SendOTP = (props: Tprops) => {
             ]}
           />
 
-          <Space.Compact
+          {/* <Space.Compact
             // style={{ width: '78%', height: '42px' }}
             className="w-[72%] sm:w-[75%] h-[42px]"
-          >
-            {/* <Input style={{ width: '13%' }} defaultValue="1" /> */}
-            <Input
-              style={{ height: "100%" }}
-              addonBefore={countryCode === '+52' && '1'}
-              size="large"
-              value={contactNumber}
-              onChange={handleChange}
-              placeholder="Enter Your Contact Number"
-              maxLength={10} />
-          </Space.Compact>
+          > */}
+          {/* <Input style={{ width: '13%' }} defaultValue="1" /> */}
+          <Input
+            style={{ height: "100%" }}
+            size="large"
+            value={contactNumber}
+            onChange={handleChange}
+            placeholder="Enter Your Contact Number"
+            maxLength={10} />
+          {/* </Space.Compact> */}
 
 
 

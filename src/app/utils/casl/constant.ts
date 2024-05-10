@@ -4,11 +4,12 @@ export const casl_action = {
     update: "update",
     delete: "delete",
     book: "book",
+
 };
 
 export const casl_subject = {
     appointment: "appointment",
     calender: "calender",
     slot_schedule: "slot_schedule",
-
+    workorder: "workorder"
 };

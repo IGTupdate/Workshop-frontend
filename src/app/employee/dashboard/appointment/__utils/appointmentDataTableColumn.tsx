@@ -28,11 +28,15 @@ import { IoIosEye } from "react-icons/io";
 
 import { MdAddChart } from "react-icons/md";
 import dayjs from "dayjs";
+import useAbility from "@/app/__hooks/useAbility";
+import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 
 const { Title, Text } = Typography;
 
 export function GetAppointmentDataTableColumn() {
   const router = useRouter();
+
+  const ability = useAbility();
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -73,7 +77,7 @@ export function GetAppointmentDataTableColumn() {
         key: "name",
         ...GetColumnTextSearchProps<TAppointmentDataTable>("name"),
         render: (name) => {
-          return <p className="capitalize font-semibold">{name}</p>
+          return <p className="capitalize font-semibold">{name}</p>;
         }
 
       },
@@ -92,7 +96,7 @@ export function GetAppointmentDataTableColumn() {
         ),
 
         render: (register) => {
-          return <p className="uppercase">{register}</p>
+          return <p className="uppercase">{register}</p>;
         }
       },
       {
@@ -173,7 +177,7 @@ export function GetAppointmentDataTableColumn() {
               {/* view appointments */}
               <div
                 onClick={() => {
-                  router.push("/employee/dashboard/appointment/" + _id)
+                  router.push("/employee/dashboard/appointment/" + _id);
                 }}
                 style={{ color: "#1890ff" }}
                 className="cursor-pointer"
@@ -181,9 +185,9 @@ export function GetAppointmentDataTableColumn() {
 
               {/* create workorder */}
               {
-                status === appointmentStatus[0] && <div
+                ability && ability.can(casl_action.create, casl_subject.appointment) && status === appointmentStatus[0] && <div
                   onClick={() => {
-                    router.push("/employee/dashboard/workorder/create?appointmentId=" + _id)
+                    router.push("/employee/dashboard/workorder/create?appointmentId=" + _id);
                   }}
                   style={{ color: "#24ae55" }}
                   className="cursor-pointer"
