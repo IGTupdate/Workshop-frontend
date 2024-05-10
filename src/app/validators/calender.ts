@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { calender_status } from "../employee/dashboard/slot-management/calender/__utils/constant";
+import { calender_status } from "../[locale]/employee/dashboard/slot-management/calender/__utils/constant";
 
 export const calenderCreateSchema = Yup.object({
   slot_schedule_id: Yup.string().required("Slot Schedule is required"),

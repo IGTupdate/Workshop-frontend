@@ -1,9 +1,8 @@
-import LandingLayout from "./components/Landing/LandingLayout";
+import { defaultLocale } from "@/i18n";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <div>
-      <LandingLayout />
-    </div>
-  );
-}
+const RootPage = () => {
+  return redirect(`/${defaultLocale}`);
+};
+
+export default RootPage;

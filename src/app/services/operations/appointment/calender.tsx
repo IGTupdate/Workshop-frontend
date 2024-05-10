@@ -13,8 +13,8 @@ import { Action, ThunkAction } from "@reduxjs/toolkit";
 import { TCalenderCreate } from "@/app/validators/calender";
 import toast from "react-hot-toast";
 import { COMMON_ERROR } from "@/app/utils/constants/constant";
-import { toogleCalenderStatus } from "@/app/employee/dashboard/slot-management/calender/__utils/helper";
 import { TCalender, TCalenderStatus } from "@/app/types/calender";
+import { toogleCalenderStatus } from "@/app/[locale]/employee/dashboard/slot-management/calender/__utils/helper";
 
 const { GET_ALL_CALENDAR, CREATE_CALENDAR, UPDATE_CALENDAR_STATUS } =
   appointmentEndpoints;

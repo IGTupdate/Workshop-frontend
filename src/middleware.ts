@@ -1,9 +1,10 @@
-import { NextResponse, NextRequest } from "next/server";
+import createIntlMiddleware from "next-intl/middleware";
 import { cookies } from "next/headers";
+import { NextRequest } from "next/server";
+import { defaultLocale, locales } from "./i18n"; // Assuming you have a file exporting supported locales
 
-export async function middleware(request: NextRequest) {
-  // return NextResponse.next();
-
+// Define a custom middleware function
+function customMiddleware(request: NextRequest) {
   // Get cookies from the request
   const cookieStore = cookies();
 
@@ -11,54 +12,85 @@ export async function middleware(request: NextRequest) {
   const refreshToken = cookieStore.get("refreshToken")?.value;
   const isEmployee = cookieStore.get("isEmployee")?.value;
 
-  // console.log(cookieStore.get("accessToken")?.value);
-  // console.log(cookieStore.get("refreshToken")?.value);
-
-  // Extract pathname from the request's URL
   const pathname = request.nextUrl.pathname;
-
-  // Function to generate redirect URL
-  const redirectUrl = (location: string) => {
-    return NextResponse.redirect(new URL(location, request.url));
-  };
 
   // Middleware logic
   if (pathname.includes("/employee/dashboard")) {
     // Check access to /employee/dashboard route
     if (refreshToken && isEmployee) {
-      return NextResponse.next(); // Allow access
+      // Allow access for authenticated employees
+      request.nextUrl.pathname = pathname;
     } else if (refreshToken && !isEmployee) {
-      return redirectUrl("/dashboard"); // Redirect non-employee to /dashboard
+      // Redirect non-employee users to /dashboard
+      request.nextUrl.pathname = "/dashboard";
     } else {
-      return redirectUrl("/employee/login"); // Redirect unauthorized user to /employee/login
+      // Redirect unauthorized users to /employee/login
+      request.nextUrl.pathname = "/employee/login";
     }
   } else if (pathname.includes("/dashboard")) {
     // Check access to /dashboard route
     if (refreshToken && !isEmployee) {
-      return NextResponse.next(); // Allow access
+      // Allow access for authenticated non-employee users
+      request.nextUrl.pathname = pathname;
     } else if (refreshToken && isEmployee) {
-      return redirectUrl("/employee/dashboard");
+      // Redirect employee users to /employee/dashboard
+      request.nextUrl.pathname = "/employee/dashboard";
     } else {
-      return redirectUrl("/login"); // Redirect unauthorized user to /login
+      // Redirect unauthorized users to /login
+      request.nextUrl.pathname = "/login";
     }
   } else if (pathname.includes("/employee/login")) {
     // Check access to /employee/login route
     if (!refreshToken) {
-      return NextResponse.next(); // Allow access
+      // Allow access for unauthenticated users
+      request.nextUrl.pathname = pathname;
     } else {
-      if (isEmployee) redirectUrl("/employee/dashboard"); // Redirect authorized user to /employee/dashboard
-      return redirectUrl("/dashboard");
+      // Redirect authenticated employee users to /employee/dashboard
+      // Redirect authenticated non-employee users to /dashboard
+      request.nextUrl.pathname = isEmployee
+        ? "/employee/dashboard"
+        : "/dashboard";
     }
   } else if (pathname.includes("/login")) {
     // Check access to /login route
     if (!refreshToken) {
-      return NextResponse.next(); // Allow access
+      // Allow access for unauthenticated users
+      request.nextUrl.pathname = pathname;
     } else {
-      if (isEmployee) return redirectUrl("/employee/dashboard"); // Redirect authorized user to /dashboard
-      return redirectUrl("/dashboard");
+      // Redirect authenticated employee users to /employee/dashboard
+      // Redirect authenticated non-employee users to /dashboard
+      request.nextUrl.pathname = isEmployee
+        ? "/employee/dashboard"
+        : "/dashboard";
     }
   }
 
-  // Allow access to other routes
-  return NextResponse.next();
+  return request; // Return the modified request
 }
+
+// Define the main middleware function
+export default async function middleware(request: NextRequest) {
+  // Apply custom middleware logic
+  const modifiedRequest = customMiddleware(request);
+
+  // Initialize internationalization middleware with supported locales and default locale
+  const handleI18nRouting = createIntlMiddleware({
+    locales: locales,
+    defaultLocale: defaultLocale, // Assuming the first locale is the default one
+  });
+
+  // Apply internationalization middleware with the modified request
+  return handleI18nRouting(modifiedRequest);
+}
+
+// Export configuration for i18n middleware
+export const config = {
+  matcher: [
+    // Match all pathnames except for:
+    // - those starting with `/api`, `/_next`, or `/_vercel`
+    // - those containing a dot (e.g., `favicon.ico`)
+    "/((?!api|_next|_vercel|.*\\..*).*)",
+    // Match all pathnames within `/users`, optionally with a locale prefix
+    "/([\\w-]+)?/users/(.+)",
+  ],
+};

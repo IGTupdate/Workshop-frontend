@@ -1,4 +1,4 @@
-import { NEW_RAMP } from "../employee/dashboard/ramp/_utils/constants";
+import { NEW_RAMP } from "../[locale]/employee/dashboard/ramp/_utils/constants";
 import { TWorkOrder } from "./work-order";
 
 export type TRamp = {
