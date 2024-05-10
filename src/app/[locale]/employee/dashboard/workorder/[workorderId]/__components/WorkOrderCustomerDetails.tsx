@@ -17,7 +17,7 @@ const WorkOrderCustomerDetails = (props: Props) => {
       </div>
       <Descriptions column={2}>
         <Descriptions.Item label="Name">
-          {typeof props.customer !== "string" ? props.customer.fullName : "-"}
+          {typeof props.customer !== "string" ? props?.customer?.fullName : "-"}
         </Descriptions.Item>
         <Descriptions.Item label="Phone Number">
           {typeof props.customer !== "string"
@@ -25,7 +25,7 @@ const WorkOrderCustomerDetails = (props: Props) => {
             : "-"}
         </Descriptions.Item>
         <Descriptions.Item label="Email">
-          {typeof props.customer !== "string" ? props.customer.email : "-"}
+          {typeof props.customer !== "string" ? props?.customer?.email : "-"}
         </Descriptions.Item>
         <Descriptions.Item label="Vehicle Reg No">
           {typeof props.vehicle !== "string"
@@ -33,10 +33,12 @@ const WorkOrderCustomerDetails = (props: Props) => {
             : "-"}
         </Descriptions.Item>
         <Descriptions.Item label="VIN">
-          {typeof props.vehicle !== "string" ? props.vehicle.vin : "-"}
+          {typeof props.vehicle !== "string" ? props?.vehicle?.vin : "-"}
         </Descriptions.Item>
         <Descriptions.Item label="Make">
-          {typeof props.vehicle !== "string" ? props.vehicle.vehicle_make : "-"}
+          {typeof props.vehicle !== "string"
+            ? props?.vehicle?.vehicle_make
+            : "-"}
         </Descriptions.Item>
         <Descriptions.Item label="Model">
           {typeof props.vehicle !== "string"
