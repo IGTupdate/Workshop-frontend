@@ -1,5 +1,62 @@
 {
-  "Index": {
-    "title": "Login"
+  "Navbar": {
+    "bookAppointment": "Book An Appointment",
+    "login": "Login"
+  },
+  "SlotSchedule": {
+    "welcome": "Welcome to Appviser",
+    "findButton": "Find Available Slots"
+  },
+  "EmployeeLogin": {
+    "heading": "Are you an employee?",
+    "subHeading": "Login to access employee features.",
+    "button": "Employee Login"
+  },
+  "Footer": {
+    "heading": "About Us",
+    "subHeading": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam, turpis sed bibendum fermentum, elit quam euismod arcu, quis mattis eros quam quis lacus.",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact",
+    "copyRight": "2024 Company Name. All rights reserved."
+  },
+  "LeftSection": {
+    "heading": "Welcome To Workshop",
+    "subHeading": "We are here to assist you"
+  },
+  "SendOtp": {
+    "heading": "Authenticate",
+    "subHeading": "Give Your Identity",
+    "label": "Phone Number",
+    "phoneNumberPlaceholder": "Enter Your Contact Number",
+    "button": "Send Verification Code",
+    "errorOne": "Contact Number is Required",
+    "errorTwo": "Contact Number must be digits",
+    "errorThree": "Contact Number must have 10 digits",
+    "tostOne": "OTP RE-SENT SUCCESSFULLY",
+    "tostTwo": "OTP SENT SUCCESSFULLY",
+    "tostThree": "Failed to send OTP. Please try again later."
+  },
+  "VerifyOTP": {
+    "heading": "OTP Verification",
+    "subHeading": "Give Your Identity",
+    "hint": "Your Verification code has been sent to",
+    "button": "Send",
+    "text": "Didn't get the code?",
+    "resend": "Resend",
+    "errorOne": "OTP is required",
+    "errorTwo": "OTP must be of 6 digits",
+    "tostOne": "Invalid OTP",
+    "tostTwo": "OTP RE-SENT SUCCESSFULLY",
+    "tostThree": "Failed to send OTP. Please try again later."
+  },
+  "Register": {
+    "heading": "Share with us",
+    "subHeading": "Join Us: Log in for Seamless Integration",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "namePlaceholder": "Enter Name",
+    "emailPlaceholder": "Enter Email",
+    "button": "Save"
   }
 }

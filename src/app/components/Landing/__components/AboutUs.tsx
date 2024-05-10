@@ -1,17 +1,15 @@
 import React from "react";
+import { useTranslations } from "use-intl";
 
 const AboutUsFooter: React.FC = () => {
+  const t = useTranslations("Footer");
   return (
     <footer className=" bg-customGray text-customLightGray py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="md:w-1/2 mb-6 md:mb-0">
-            <h2 className="text-2xl font-bold mb-4">About Us</h2>
-            <p className="text-lg">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              aliquam, turpis sed bibendum fermentum, elit quam euismod arcu,
-              quis mattis eros quam quis lacus.
-            </p>
+            <h2 className="text-2xl font-bold mb-4">{t("heading")}</h2>
+            <p className="text-lg">{t("subHeading")}</p>
           </div>
           <div className="md:w-1/2 flex justify-center md:justify-end">
             <ul className="flex space-x-6">
@@ -20,7 +18,7 @@ const AboutUsFooter: React.FC = () => {
                   href="#"
                   className="hover:text-white transition-colors duration-300"
                 >
-                  About
+                  {t("about")}
                 </a>
               </li>
               <li>
@@ -28,7 +26,7 @@ const AboutUsFooter: React.FC = () => {
                   href="#"
                   className="hover:text-white transition-colors duration-300"
                 >
-                  Services
+                  {t("services")}
                 </a>
               </li>
               <li>
@@ -36,7 +34,7 @@ const AboutUsFooter: React.FC = () => {
                   href="#"
                   className="hover:text-white transition-colors duration-300"
                 >
-                  Contact
+                  {t("contact")}
                 </a>
               </li>
             </ul>
@@ -44,7 +42,7 @@ const AboutUsFooter: React.FC = () => {
         </div>
         <hr className="border-gray-600 my-6" />
         <div className="text-center">
-          <p>&copy; 2024 Company Name. All rights reserved.</p>
+          <p>&copy; {t("copyRight")}</p>
         </div>
       </div>
     </footer>

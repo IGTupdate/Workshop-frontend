@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Logo from "../../../../public/images/logo-3.webp";
 import { log } from "console";
+import { useTranslations } from "next-intl";
 
 interface FormInputs {
   contactNumber: string;
@@ -22,6 +23,7 @@ interface FormInputs {
 type Tprops = {};
 const SendOTP = (props: Tprops) => {
   const { handleSubmit } = useForm<FormInputs>();
+  const t = useTranslations("SendOtp");
 
   const dispatch = useAppDispatch();
   // const contact = useAppSelector((state) => state.auth.authData.contactNumber);
@@ -31,8 +33,7 @@ const SendOTP = (props: Tprops) => {
   const [contactNumberError, setContactNumberError] = useState("");
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    if (contactNumber.length === 0)
-      setContactNumberError("Contact Number is Required");
+    if (contactNumber.length === 0) setContactNumberError(t("errorOne"));
     if (contactNumber.length !== 10) return;
 
     let number = countryCode === "+52" ? 1 + contactNumber : contactNumber;
@@ -58,10 +59,10 @@ const SendOTP = (props: Tprops) => {
     const reg = /^[0-9]*$/; // Regex to match only digits
 
     if (!reg.test(inputValue)) {
-      setContactNumberError("Contact Number must be digits");
+      setContactNumberError(t("errorTwo"));
       return;
     } else if (inputValue.length !== 10) {
-      setContactNumberError("Contact Number must have 10 digits");
+      setContactNumberError(t("errorThree"));
     } else {
       setContactNumberError("");
     }
@@ -79,8 +80,8 @@ const SendOTP = (props: Tprops) => {
 
       <Heading
         type="heading1"
-        primary={"Authenticate"}
-        secondary={"Give Your Identity"}
+        primary={t("heading")}
+        secondary={t("subHeading")}
         primaryColor="text-black1"
       />
 
@@ -90,7 +91,7 @@ const SendOTP = (props: Tprops) => {
       >
         {/* <div className="mb-6 relative shadow-xl p-4 rounded-xl"> */}
         <label className="text-base font-medium mb-1 block text-black1">
-          Phone
+          {t("label")}
         </label>
         <div className="flex w-full justify-between items-center gap-2">
           <Select
@@ -115,7 +116,7 @@ const SendOTP = (props: Tprops) => {
             size="large"
             value={contactNumber}
             onChange={handleChange}
-            placeholder="Enter Your Contact Number"
+            placeholder={t("phoneNumberPlaceholder")}
             maxLength={10}
           />
           {/* </Space.Compact> */}
@@ -129,7 +130,7 @@ const SendOTP = (props: Tprops) => {
           htmlType="submit"
           className="bg-black text-white1 font-semibold w-full border-none hover:shadow-xl"
         >
-          Send Verification Code
+          {t("button")}
         </Button>
       </form>
     </div>

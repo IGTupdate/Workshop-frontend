@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import DatePicker from "./DatePicker";
 import ShowSlots from "./ShowSlots";
+import { useTranslations } from "next-intl";
 
 interface Props {
   scrollToSlotDetails: () => void;
@@ -10,6 +11,7 @@ interface Props {
 const SlotSchedule: React.FC<Props> = ({ scrollToSlotDetails }) => {
   // State for selected date
   const [selectedDate, setSelectedDate] = useState<string>("");
+  const t = useTranslations("SlotSchedule");
 
   return (
     <div className="relative h-[550px]">
@@ -23,11 +25,11 @@ const SlotSchedule: React.FC<Props> = ({ scrollToSlotDetails }) => {
       <div className="relative z-10 flex justify-center items-center h-full flex-col gap-14">
         {/* Title */}
         <h1 className="text-5xl font-extrabold text-customGray text-center">
-          Welcome to Appviser
+          {t("welcome")}
         </h1>
 
         {/* Date Picker and Slots Display */}
-        <div className="flex justify-center items-center flex-wrap gap-4 sm:gap-0 w-full md:w-[550px]">
+        <div className="flex justify-center items-center flex-wrap gap-4 sm:gap-0 w-full md:w-[606px]">
           <DatePicker
             setSelectedDate={setSelectedDate}
             customClasses="rounded-r-full rounded-l-full sm:rounded-r-[0px] text-3xl text-black p-4 px-12"

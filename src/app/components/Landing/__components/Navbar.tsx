@@ -9,13 +9,13 @@ import { useRouter } from "next/navigation";
 type Props = {};
 
 const LandingNavbar = (props: Props) => {
-  const t = useTranslations("Index");
+  const t = useTranslations("Navbar");
 
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const localeActive = useLocale();
 
-  const onChange = (value: string) => {
+  const onChangeLocale = (value: string) => {
     startTransition(() => {
       router.replace(value);
     });
@@ -28,30 +28,48 @@ const LandingNavbar = (props: Props) => {
       className="w-full flex-wrap bg-customGray p-4 justify-center sm:justify-between"
     >
       <Image src={"/images/logo-2.webp"} alt="Logo" height={55} width={150} />
-      <Flex
-        justify="space-between"
-        align="center"
-        className="flex-wrap"
-        gap="large"
-      >
-        <Button
-          size="large"
-          type="link"
-          href="/dashboard"
-          className="h-max p-0"
-        >
-          <span className="text-lg text-customYellow text-opacity-80 hover:text-opacity-70 duration-200 transition-all">
-            Book An Appointment
-          </span>
-        </Button>
-        <Link href={`${localeActive}/login`}>
-          <Button type="primary" size="large" className="font-semibold">
-            {/* Login */}
-            {t("title")}
-          </Button>
-        </Link>
 
-        <Select
+      <div>
+        {localeActive === "en" ? (
+          <p className="text-red-500">
+            Traducir a :{" "}
+            <span
+              className="cursor-pointer"
+              onClick={() => onChangeLocale("sp")}
+            >
+              española
+            </span>
+          </p>
+        ) : (
+          <p className="text-red-500">
+            Translate To :{" "}
+            <span
+              className="cursor-pointer"
+              onClick={() => onChangeLocale("en")}
+            >
+              English
+            </span>
+          </p>
+        )}
+
+        <div className="flex justify-between items-center gap-4">
+          <Button
+            size="large"
+            type="link"
+            href="/dashboard"
+            className="h-max p-0"
+          >
+            <span className="text-lg text-customYellow text-opacity-80 hover:text-opacity-70 duration-200 transition-all">
+              {t("bookAppointment")}
+            </span>
+          </Button>
+          <Link href={`${localeActive}/login`}>
+            <Button type="primary" size="large" className="font-semibold">
+              {t("login")}
+            </Button>
+          </Link>
+
+          {/* <Select
           defaultValue={localeActive}
           placeholder="Select a person"
           optionFilterProp="children"
@@ -66,8 +84,9 @@ const LandingNavbar = (props: Props) => {
               label: "Spanish",
             },
           ]}
-        />
-      </Flex>
+        /> */}
+        </div>
+      </div>
     </Flex>
   );
 };

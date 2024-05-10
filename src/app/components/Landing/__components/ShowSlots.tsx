@@ -3,6 +3,7 @@ import { getAvailableSlots } from "@/app/services/operations/appointment/slots";
 import { useAppDispatch } from "@/app/store/reduxHooks";
 import { setSlotData } from "@/app/store/slices/slotSlice";
 import { TAvailbleSlots } from "@/app/types/slot";
+import { useTranslations } from "next-intl";
 import React, { useRef } from "react";
 
 interface Props {
@@ -18,6 +19,7 @@ const ShowSlots: React.FC<Props> = ({
 }) => {
   const dispatch = useAppDispatch();
   const scrollToSlotDetailsRef = useRef(scrollToSlotDetails);
+  const t = useTranslations("SlotSchedule");
 
   const handleClick = async () => {
     try {
@@ -35,7 +37,7 @@ const ShowSlots: React.FC<Props> = ({
 
   return (
     <button onClick={handleClick} className={`${customClasses}`}>
-      Find Available Slots
+      {t("findButton")}
     </button>
   );
 };

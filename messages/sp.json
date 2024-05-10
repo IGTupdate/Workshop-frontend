@@ -1,5 +1,62 @@
 {
-  "Index": {
-    "title": "Acceso"
+  "Navbar": {
+    "bookAppointment": "Reservar una cita",
+    "login": "Acceso"
+  },
+  "SlotSchedule": {
+    "welcome": "Bienvenido a Appviser",
+    "findButton": "Encuentra espacios disponibles"
+  },
+  "EmployeeLogin": {
+    "heading": "¿Es usted un empleado?",
+    "subHeading": "Inicie sesión para acceder a las funciones para empleados.",
+    "button": "Inicio de sesión de empleado"
+  },
+  "Footer": {
+    "heading": "Sobre nosotras",
+    "subHeading": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam, turpis sed bibendum fermentum, elit quam euismod arcu, quis mattis eros quam quis lacus.",
+    "about": "Acerca de",
+    "services": "Servicios",
+    "contact": "Contacto",
+    "copyRight": "2024 Nombre de la empresa. Reservados todos los derechos."
+  },
+  "LeftSection": {
+    "heading": "Bienvenida al taller",
+    "subHeading": "Estamos aquí para ayudarte"
+  },
+  "SendOtp": {
+    "heading": "Autenticar",
+    "subHeading": "Da tu identidad",
+    "label": "Número de teléfono",
+    "phoneNumberPlaceholder": "Ingrese su número de contacto",
+    "button": "Envíe el código de verificación",
+    "errorOne": "El número de contacto es obligatorio",
+    "errorTwo": "El número de contacto debe tener dígitos",
+    "errorThree": "El número de contacto debe tener 10 dígitos",
+    "tostOne": "OTP REENVIADA EXITOSAMENTE",
+    "tostTwo": "OTP ENVIADA EXITOSAMENTE",
+    "tostThree": "No se pudo enviar OTP. Por favor, inténtelo de nuevo más tarde."
+  },
+  "VerifyOTP": {
+    "heading": "Verificación OTP",
+    "subHeading": "Da tu identidad",
+    "hint": "Su código de verificación ha sido enviado a",
+    "button": "Enviar",
+    "text": "¿No recibiste el código?",
+    "resend": "Reenviar",
+    "errorOne": "Se requiere OTP",
+    "errorTwo": "La OTP debe tener 6 dígitos.",
+    "tostOne": "OTP REENVIADA EXITOSAMENTE",
+    "tostTwo": "OTP ENVIADA EXITOSAMENTE",
+    "tostThree": "No se pudo enviar OTP. Por favor, inténtelo de nuevo más tarde."
+  },
+  "Register": {
+    "heading": "Comparte con nosotras",
+    "subHeading": "Únase a nosotros: inicie sesión para una integración perfecta",
+    "nameLabel": "Nombre",
+    "emailLabel": "Correo electrónico",
+    "namePlaceholder": "Ingrese su nombre",
+    "emailPlaceholder": "Ingrese correo electrónico",
+    "button": "Ahorrar"
   }
 }

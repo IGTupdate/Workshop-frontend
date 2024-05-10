@@ -15,11 +15,13 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaRegEdit } from "react-icons/fa";
 import Logo from "../../../../public/images/logo-3.webp";
+import { useTranslations } from "next-intl";
 
 const VerifyOTP = () => {
   const { authLoading, authData, countryCode } = useAppSelector(
     (state) => state.auth,
   );
+  const t = useTranslations("VerifyOTP");
 
   const { contactNumber } = authData;
   const router = useRouter();
@@ -30,11 +32,11 @@ const VerifyOTP = () => {
   const handleFinish = async () => {
     const otp = otpValues.join("");
     if (!otp || otp.trim() === "") {
-      setOTPErrors("OTP is required");
+      setOTPErrors(t("errorOne"));
       return;
     }
     if (otp.length !== 6) {
-      setOTPErrors("OTP must be of 6 digits");
+      setOTPErrors(t("errorTwo"));
       return;
     }
     if (otp.length === 6) {
@@ -81,14 +83,14 @@ const VerifyOTP = () => {
 
       <Heading
         type="heading1"
-        primary={"OTP Verification"}
-        secondary={"Give Your Identity"}
+        primary={t("heading")}
+        secondary={t("subHeading")}
         primaryColor="text-black1"
       />
 
       <div className=" flex flex-col gap-5">
         <div className=" flex gap-4 text-xs">
-          Your Verification code has been sent to ******
+          {t("hint")} ******
           {contactNumber.substring(6)}{" "}
           <FaRegEdit
             onClick={() => editContactNumber()}
@@ -111,15 +113,15 @@ const VerifyOTP = () => {
           className="bg-black text-white1 font-semibold w-full border-none hover:shadow-xl"
           onClick={handleFinish}
         >
-          Send
+          {t("button")}
         </Button>
         <p className=" text-xs">
-          Didn&apos;t get the code?{" "}
+          {t("text")}
           <span
             onClick={() => resendOTP()}
             className=" cursor-pointer font-semibold text-base text-blue-600"
           >
-            Resend
+            {t("resend")}
           </span>
         </p>
       </div>

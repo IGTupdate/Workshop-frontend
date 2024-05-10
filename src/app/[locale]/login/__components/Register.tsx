@@ -3,6 +3,7 @@ import { registerCustomer } from "@/app/services/operations/auth/customerAuth";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { setAuthLoading } from "@/app/store/slices/authSlice";
 import { Button, Input } from "antd";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -18,6 +19,8 @@ const Register: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
+
+  const t = useTranslations("Register");
 
   const { authLoading } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
@@ -42,16 +45,16 @@ const Register: React.FC = () => {
 
       <Heading
         type="heading1"
-        primary={"Share with us"}
-        secondary={"Join Us: Log in for Seamless Integration"}
+        primary={t("heading")}
+        secondary={t("subHeading")}
         primaryColor="text-black1"
       />
 
       <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
         {/* input field */}
         <div className="md:mb-4 mb-3">
-          <label className="text-sm font-medium mb-1 block text-black1">
-            Name
+          <label className="text-base font-medium mb-1 block text-black1">
+            {t("nameLabel")}
           </label>
           <Controller
             name="fullName"
@@ -61,7 +64,7 @@ const Register: React.FC = () => {
               <Input
                 type="text"
                 size="large"
-                placeholder="Enter Name"
+                placeholder={t("namePlaceholder")}
                 className="w-full text"
                 {...field}
               />
@@ -74,8 +77,8 @@ const Register: React.FC = () => {
 
         {/* input field */}
         <div className="md:mb-4 mb-3">
-          <label className="text-sm font-medium mb-1 block text-black1">
-            Email
+          <label className="text-base font-medium mb-1 block text-black1">
+            {t("emailLabel")}
           </label>
           <Controller
             name="email"
@@ -91,7 +94,7 @@ const Register: React.FC = () => {
               <Input
                 type="text"
                 size="large"
-                placeholder="Enter Email"
+                placeholder={t("emailPlaceholder")}
                 className="w-full text"
                 {...field}
               />
@@ -110,7 +113,7 @@ const Register: React.FC = () => {
           htmlType="submit"
           className="bg-black text-white1 font-semibold w-full border-none hover:shadow-xl"
         >
-          Save
+          {t("button")}
         </Button>
       </form>
     </div>
