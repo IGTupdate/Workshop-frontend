@@ -74,6 +74,7 @@ const SlotScheduleContainer = (props: Props) => {
             columns={Get_slot_schedule_columns(
               handleSlotScheduleDrawer,
               handleSlotScheduleDeleteModal,
+              ability,
             )}
           />
         </div>

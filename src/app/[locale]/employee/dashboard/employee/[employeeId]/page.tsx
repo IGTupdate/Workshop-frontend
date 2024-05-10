@@ -28,8 +28,13 @@ const Page = (props: Props) => {
       const result = await getEmployeeByEmployeeId(employeeId, "full");
 
       if (result?.success === true) {
-        setEmployee(result?.data);
-        setLoading(false);
+        setEmployee(() => {
+          return {
+            ...result?.data,
+            firstName: result?.data?.fullName?.split(" ")[0],
+            lastName: result?.data?.fullName?.split(" ")[1],
+          };
+        });
       }
     } catch (error) {
       console.log(error);
