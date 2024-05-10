@@ -3,6 +3,7 @@ import { Button, Space, TableProps, Tag, Typography } from "antd";
 import { formatTime } from "../../../utils/helper";
 import useAbility from "@/app/__hooks/useAbility";
 import { casl_action, casl_subject } from "@/app/utils/casl/constant";
+import { AbilityTuple, MongoAbility, MongoQuery } from "@casl/ability";
 
 export interface ISlotSchedule {
   _id: string;
@@ -16,9 +17,8 @@ const { Text, Title } = Typography;
 export const Get_slot_schedule_columns = (
   setOpenDrawer: (newDrawerData: TActiveSlotSchedule) => void,
   handleSlotScheduleDeleteModal: (newDeleteModal: TSlotSchedule | null) => void,
+  ability: MongoAbility<AbilityTuple, MongoQuery> | undefined,
 ) => {
-  const ability = useAbility();
-
   const slot_schedule_table_columns: TableProps<TSlotSchedule>["columns"] = [
     {
       title: "Name",
