@@ -381,8 +381,8 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                 content={
                   appointmentBookingConfirmationData.slot_details?.start_time
                     ? new Date(
-                        appointmentBookingConfirmationData.slot_details?.start_time,
-                      ).toLocaleString("en-GB")
+                      appointmentBookingConfirmationData.slot_details?.start_time,
+                    ).toLocaleString("en-GB")
                     : "-"
                 }
               />
@@ -391,8 +391,8 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                 content={
                   appointmentBookingConfirmationData.slot_details?.end_time
                     ? new Date(
-                        appointmentBookingConfirmationData.slot_details?.end_time,
-                      ).toLocaleString("en-GB")
+                      appointmentBookingConfirmationData.slot_details?.end_time,
+                    ).toLocaleString("en-GB")
                     : "-"
                 }
               />
@@ -462,7 +462,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
           </Button>,
         ]}
       >
-        <p>Confirm Appointment</p>
+        <p></p>
       </CustomModal>
     </>
   );
