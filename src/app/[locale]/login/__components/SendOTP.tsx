@@ -8,13 +8,10 @@ import {
   setAuthLoading,
   setAuthStep,
 } from "@/app/store/slices/authSlice";
-import { Button, Input, Select, Space } from "antd";
-import Image from "next/image";
+import { Button, Input, Select } from "antd";
+import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import Logo from "../../../../public/images/logo-3.webp";
-import { log } from "console";
-import { useTranslations } from "next-intl";
 
 interface FormInputs {
   contactNumber: string;
