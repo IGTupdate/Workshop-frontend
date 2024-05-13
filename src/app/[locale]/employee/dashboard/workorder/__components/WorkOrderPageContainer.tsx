@@ -9,6 +9,10 @@ import WorkOrderTableContainer from "./WorkOrderTableContainer";
 import { getPageWorkOrder } from "@/app/services/operations/workorder/workorder";
 import { Button, DatePicker } from "antd";
 import dayjs from "dayjs";
+import { useAppSelector } from "@/app/store/reduxHooks";
+import useAbility from "@/app/__hooks/useAbility";
+import { casl_action, casl_subject } from "@/app/utils/casl/constant";
+import { employeeRole } from "@/app/utils/constants/employee-roles";
 const { RangePicker } = DatePicker;
 
 type Props = {};
@@ -19,19 +23,30 @@ const WorkOrderPageContainer = (props: Props) => {
     workOrders: [],
     totalWorkOrders: 0,
   });
+  const { authData } = useAppSelector((state) => state.auth);
 
+  const ability = useAbility();
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    loadWorkOrders();
-  }, [searchParams, router]);
+    if (ability && ability.can(casl_action.get, casl_subject.workorder)) {
+      loadWorkOrders();
+    }
+  }, [searchParams, router, ability]);
 
   const loadWorkOrders = async () => {
     try {
       setWorkOrderLoading(true);
-      const workOrderData = await getPageWorkOrder(searchParams.toString());
+      let queryString = searchParams.toString();
+      if (
+        authData.role === employeeRole.advisor ||
+        authData.role === employeeRole.mechanic
+      ) {
+        queryString += `&userId=${authData._id}`;
+      }
+      const workOrderData = await getPageWorkOrder(queryString);
       if (workOrderData) {
         setWorkOrderData(workOrderData);
       }
