@@ -37,7 +37,7 @@ const SlotSchedule: React.FC<Props> = ({ scrollToSlotDetails }) => {
           <ShowSlots
             selectedDate={selectedDate}
             scrollToSlotDetails={scrollToSlotDetails}
-            customClasses="h-max sm:h-full bg-customGray hover:bg-opacity-90 transition-all duration-200 text-lg font-semibold text-red-400 hover:text-red-300  rounded-r-full rounded-l-full sm:rounded-l-[0px] p-4 px-12"
+            customClasses="h-max sm:h-full bg-customGray hover:bg-opacity-90 transition-all duration-200 text-base font-semibold text-red-400 hover:text-red-300  rounded-r-full rounded-l-full sm:rounded-l-[0px] p-4 px-12"
           />
         </div>
       </div>
