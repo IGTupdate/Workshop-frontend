@@ -6,23 +6,33 @@ import React from "react";
 import ManageMechanicDrawer from "./ManageMechanicDrawer";
 import { TWorkOrder } from "@/app/types/work-order";
 import Watermark from "@/app/components/Text/WatermarkText";
+import { useAppSelector } from "@/app/store/reduxHooks";
 
 const { Title, Text } = Typography;
 
 type Props = {
+  advisorId: string | TEmployee;
   assigned_mechanics: string[] | TEmployee[];
   handleUpdateWorkOrderData: (field: keyof TWorkOrder, fieldData: any) => void;
 };
 
 const WorkOrderMechanicDetailContainer = (props: Props) => {
+  const { authData } = useAppSelector((state) => state.auth);
   return (
     <div>
       <div className="flex justify-between">
         <Title level={5}>Mechanic Details</Title>
-        <ManageMechanicDrawer
-          handleUpdateWorkOrderData={props.handleUpdateWorkOrderData}
-          assigned_mechanics={props.assigned_mechanics}
-        />
+
+        {/* can only manage if it is advisor */}
+        {((typeof props.advisorId === "string" &&
+          props.advisorId === authData._id) ||
+          (typeof props.advisorId !== "string" &&
+            props.advisorId._id === authData._id)) && (
+          <ManageMechanicDrawer
+            handleUpdateWorkOrderData={props.handleUpdateWorkOrderData}
+            assigned_mechanics={props.assigned_mechanics}
+          />
+        )}
       </div>
       <div>
         {props.assigned_mechanics.length > 0 ? (
