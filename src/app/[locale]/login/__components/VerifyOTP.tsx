@@ -10,7 +10,7 @@ import { setAuthLoading, setAuthStep } from "@/app/store/slices/authSlice";
 import { Button } from "antd";
 import { InputOTP } from "antd-input-otp";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaRegEdit } from "react-icons/fa";
@@ -22,6 +22,8 @@ const VerifyOTP = () => {
     (state) => state.auth,
   );
   const t = useTranslations("VerifyOTP");
+
+  const searchParams = useSearchParams();
 
   const { contactNumber } = authData;
   const router = useRouter();
@@ -49,8 +51,10 @@ const VerifyOTP = () => {
     try {
       result = await verifyOTP(countryCode, contactNumber, otp, dispatch);
       if (result.data.success) {
-        if (result?.data?.data?.userExists) router.push("/dashboard");
-        else dispatch(setAuthStep(2));
+        if (result?.data?.data?.userExists) {
+          const redirectUrl = searchParams.get("redirectUrl");
+          router.push(redirectUrl || "/dashboard");
+        } else dispatch(setAuthStep(2));
       }
     } catch (error) {
       toast.error("Invalid OTP");

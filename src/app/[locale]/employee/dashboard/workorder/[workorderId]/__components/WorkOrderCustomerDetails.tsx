@@ -21,7 +21,7 @@ const WorkOrderCustomerDetails = (props: Props) => {
         </Descriptions.Item>
         <Descriptions.Item label="Phone Number">
           {typeof props.customer !== "string"
-            ? props.customer.contactNumber
+            ? props?.customer?.contactNumber
             : "-"}
         </Descriptions.Item>
         <Descriptions.Item label="Email">
@@ -42,7 +42,7 @@ const WorkOrderCustomerDetails = (props: Props) => {
         </Descriptions.Item>
         <Descriptions.Item label="Model">
           {typeof props.vehicle !== "string"
-            ? props.vehicle.vehicle_model
+            ? props?.vehicle?.vehicle_model
             : "-"}
         </Descriptions.Item>
       </Descriptions>

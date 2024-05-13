@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { setAuthLoading } from "@/app/store/slices/authSlice";
 import { Button, Input } from "antd";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -21,6 +21,7 @@ const Register: React.FC = () => {
   } = useForm<FormData>();
 
   const t = useTranslations("Register");
+  const searchParams = useSearchParams();
 
   const { authLoading } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
@@ -31,7 +32,8 @@ const Register: React.FC = () => {
     try {
       await registerCustomer(data.fullName, data.email, dispatch);
       // dispatch(resetAuthSlice())
-      router.push("/dashboard");
+      const redirectUrl = searchParams.get("redirectUrl");
+      router.push(redirectUrl || "/dashboard");
     } catch (err) {
       // console.log(error)
     } finally {
