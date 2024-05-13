@@ -66,5 +66,23 @@
     "emailPlaceholder": "Enter Email",
     "passwordPlaceholder": "Enter Password",
     "button": "Login"
+  },
+  "LogOut": {
+    "logout": "LogOut",
+    "title": "Confirm Logout",
+    "text": "Are you sure you want to log out?",
+    "cancel": "Cancel"
+  },
+  "CustomerSidebar": {
+    "heading": "Hello",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "appointment": "Appointment",
+    "book": "Book",
+    "reschedule": "Reschedule",
+    "cancel": "Cancel",
+    "previousBookings": "Previous Bookings",
+    "notifications": "Notifications",
+    "settings": "Settings"
   }
 }

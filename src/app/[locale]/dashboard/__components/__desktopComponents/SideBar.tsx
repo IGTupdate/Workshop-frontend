@@ -6,6 +6,7 @@ import { Avatar, Layout, Space } from "antd";
 import SideBarMenus from "./SideBarMenus";
 import { useEffect, useState } from "react";
 import { IAuthData } from "@/app/store/slices/authSlice";
+import { useTranslations } from "next-intl";
 
 const { Sider } = Layout;
 
@@ -16,6 +17,7 @@ interface SideBarProps {
 const SideBar = ({ sidebarWidth }: SideBarProps) => {
   const [user, setUser] = useState<IAuthData>();
   const authData = useAppSelector((state) => state.auth.authData);
+  const t = useTranslations("CustomerSidebar");
 
   useEffect(() => {
     setUser(authData);
@@ -41,7 +43,7 @@ const SideBar = ({ sidebarWidth }: SideBarProps) => {
         <Avatar size={"large"} icon={<UserOutlined />} />
         <div>
           <h2 className="text-white1 font-semibold text-xl capitalize">
-            Hello, {user?.fullName?.split(" ")[0]}
+            {t("heading")}, {user?.fullName?.split(" ")[0]}
           </h2>
           <p className="text-gray1 text-sm font-medium">Customer</p>
         </div>

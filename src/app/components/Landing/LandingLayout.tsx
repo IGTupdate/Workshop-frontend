@@ -32,10 +32,10 @@ const App: React.FC = () => {
           <SlotSchedule scrollToSlotDetails={scrollToSlotDetails} />
           <div
             ref={slotDetailsRef}
-            className={`${slotData ? "h-screen flex justify-center items-center flex-col" : " invisible"}`}
+            className={`${slotData ? "flex justify-center items-center flex-col" : " invisible"}`}
           >
             {
-              <div>
+              <div className="w-full my-12">
                 <SlotDetails />
               </div>
             }
