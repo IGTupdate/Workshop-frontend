@@ -15,8 +15,6 @@ const SlotDetails: React.FC = () => {
     ? convertToLocaleDateAndWeekday(slotData.date)
     : "";
 
-  console.log(slotData, "slotData");
-
   // @ts-ignore
   const availableItems =
     slotData?.available_slots?.map((slot) => {

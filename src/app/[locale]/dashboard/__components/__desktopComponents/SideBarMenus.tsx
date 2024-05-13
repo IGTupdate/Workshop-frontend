@@ -19,12 +19,12 @@ const SideBarMenus = () => {
   const t = useTranslations("CustomerSidebar");
 
   const dashBoardIcons = {
-    [t("dashboard")]: <RxDashboard size={22} />,
-    [t("profile")]: <CgProfile size={22} />,
-    [t("appointment")]: <MdOutlineDesktopWindows size={22} />,
-    [t("previousBookings")]: <GrBook size={22} />,
-    [t("notifications")]: <IoNotifications size={22} />,
-    [t("settings")]: <IoSettingsOutline size={22} />,
+    [t("dashboard")]: <RxDashboard size={20} />,
+    [t("profile")]: <CgProfile size={20} />,
+    [t("appointment")]: <MdOutlineDesktopWindows size={20} />,
+    [t("previousBookings")]: <GrBook size={20} />,
+    [t("notifications")]: <IoNotifications size={20} />,
+    [t("settings")]: <IoSettingsOutline size={20} />,
   };
 
   const CustomerSideBarMenuItems: TsideBarMenuItems[] = [

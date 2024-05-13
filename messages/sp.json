@@ -84,5 +84,20 @@
     "previousBookings": "Reservas Anteriores",
     "notifications": "Notificaciones",
     "settings": "Ajustes"
+  },
+  "AppointmentCard": {
+    "book": "Reserva tu cita",
+    "dont": "No tengo ninguna cita",
+    "button": "Reservar una cita"
+  },
+  "AppointmentContent": {
+    "scheduled": "Programada",
+    "assign": "Asignar",
+    "admission": "Admisión",
+    "time": "Tiempo"
+  },
+  "Notifications": {
+    "history": "Historia",
+    "empty": "No hay historial disponible"
   }
 }

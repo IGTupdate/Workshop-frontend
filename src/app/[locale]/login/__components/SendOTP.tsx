@@ -125,7 +125,7 @@ const SendOTP = (props: Tprops) => {
             onChange={handleChange}
             placeholder={t("phoneNumberPlaceholder")}
             maxLength={10}
-            type="number"
+            type="tel"
           />
           {/* </Space.Compact> */}
         </div>

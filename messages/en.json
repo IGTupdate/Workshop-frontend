@@ -84,5 +84,20 @@
     "previousBookings": "Previous Bookings",
     "notifications": "Notifications",
     "settings": "Settings"
+  },
+  "AppointmentCard": {
+    "book": "Book your appointment",
+    "dont": "Dont have any appointment",
+    "button": "Book Appointment"
+  },
+  "AppointmentContent": {
+    "scheduled": "Scheduled",
+    "assign": "Assign",
+    "admission": "Admission",
+    "time": "Time"
+  },
+  "Notifications": {
+    "history": "History",
+    "empty": "No History Available"
   }
 }

@@ -20,10 +20,10 @@ const SlotTabs: React.FC<AppointmentBookingProps> = ({
 
   const handleBookAppointment = () => {
     // Logic to book an appointment goes here
+    localStorage.removeItem("appointmentBookingData");
     router.push(
       `/dashboard/appointment/book?slot_id=${_id}&calender_id=${calenderData?.calender_id}`,
     );
-    console.log(`Slot ${_id} ${calenderData?.calender_id} booked!`);
   };
 
   return (
