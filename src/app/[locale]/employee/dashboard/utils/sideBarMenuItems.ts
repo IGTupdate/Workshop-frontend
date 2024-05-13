@@ -77,7 +77,7 @@ export function getSideBarMenuItems(
     return {
       ...item,
       children,
-      icon: dashBoardIcons[item.label.replace(/\s/g, "")],
+      icon: dashBoardIcons[item.label],
       onClick: () => {
         if (item.pathname) {
           router.push(item.pathname);
@@ -120,10 +120,10 @@ export const findRecursiveByPathName = (
       item.pathname &&
       (pathname === item.pathname ||
         pathname
-          .substring(pathname.split("/")[1] === "dashboard" ? 10 : 19)
+          .substring(pathname.split("/")[2] === "dashboard" ? 10 : 19)
           .includes(
             item.pathname.substring(
-              pathname.split("/")[1] === "dashboard" ? 10 : 19,
+              pathname.split("/")[2] === "dashboard" ? 10 : 19,
             ) || "-",
           ))
     ) {
@@ -141,12 +141,14 @@ export const findRecursiveByPathNameExact = (
   sideBarMenuItems: TsideBarMenuItems[],
   pathname: string,
 ): TsideBarMenuItems | null => {
+  let newPathname = pathname.replace(/^\/(sp|en)/, "");
+
   for (const item of sideBarMenuItems) {
     // console.log(pathname, item?.pathname?.substring(19), pathname.substring(19).includes(item?.pathname?.substring(19)|| "-" ))
-    if (item.pathname && pathname === item.pathname) {
+    if (item.pathname && newPathname === item.pathname) {
       return item;
     } else if (item.children) {
-      const required_item = findRecursiveByPathName(item.children, pathname);
+      const required_item = findRecursiveByPathName(item.children, newPathname);
       if (required_item) return required_item;
     }
   }
@@ -156,7 +158,7 @@ export const findRecursiveByPathNameExact = (
 
 export function getActiveSideBarMenu(pathname: string): string {
   const active_menu = findRecursiveByPathNameExact(
-    pathname.split("/")[1] === "dashboard"
+    pathname.split("/")[2] === "dashboard"
       ? CustomerSideBarMenuItems
       : sideBarMenuItems,
     pathname,

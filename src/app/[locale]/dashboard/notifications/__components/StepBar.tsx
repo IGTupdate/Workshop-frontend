@@ -16,7 +16,7 @@ const StepBar = ({ status }: Props) => {
     if (status?.appointmentStatus === "Scheduled") setStep(2);
     if (status?.appointmentStatus === "Cancelled") setStep(3);
     if (status?.appointmentStatus === "Completed") setStep(4);
-    if (status?.appointmentStatus === "Scheduled") setStep(5);
+    if (status?.appointmentStatus === "Pending") setStep(5);
     if (status?.appointmentStatus === "Missed") setStep(6);
   }, [status]);
   return (

@@ -63,15 +63,18 @@ const Page: React.FC = () => {
   return (
     <div className="h-screen sm:h-full pt-20 pb-32 px-4 md:py-0 overflow-auto">
       {/* step bar */}
-      <StepBar status={status} />
-
-      {/* notifications */}
       {loading ? (
         <div className="flex justify-center items-center h-full">
           <Loader />
         </div>
       ) : (
-        <Notifications show={"All"} notificationData={notificationData} />
+        <>
+          <StepBar status={status} />
+
+          {/* notifications */}
+
+          <Notifications show={"All"} notificationData={notificationData} />
+        </>
       )}
     </div>
   );

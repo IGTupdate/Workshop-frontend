@@ -6,6 +6,7 @@ import { useAppDispatch } from "@/app/store/reduxHooks";
 import { logout } from "@/app/services/operations/auth/customerAuth";
 import { useRouter } from "next/navigation";
 import { setAuthLoading } from "@/app/store/slices/authSlice";
+import { useTranslations } from "next-intl";
 
 type Props = {
   collapsed?: boolean;
@@ -15,6 +16,7 @@ const Logout = (props: Props) => {
   const [visible, setVisible] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const t = useTranslations("LogOut");
 
   const handleLogout = async () => {
     try {
@@ -53,23 +55,23 @@ const Logout = (props: Props) => {
         icon={<FiLogOut />}
         onClick={showModal}
       >
-        {!props.collapsed ? <span>LogOut</span> : ""}
+        {!props.collapsed ? <span>{t("logout")}</span> : ""}
       </Button>
       {/* Use the custom modal component */}
       <CustomModal
-        title="Confirm Logout"
+        title={t("title")}
         open={visible}
         onCancel={handleCancel}
         footer={[
           <Button key="cancel" onClick={() => handleCancel()}>
-            Cancel
+            {t("cancel")}
           </Button>,
           <Button type="primary" key="logout" onClick={() => handleLogout()}>
-            Logout
+            {t("logout")}
           </Button>,
         ]}
       >
-        <p>Are you sure you want to log out?</p>
+        <p>{t("text")}</p>
       </CustomModal>
     </>
   );

@@ -14,6 +14,8 @@ const SlotDetails: React.FC = () => {
     ? convertToLocaleDateAndWeekday(slotData.date)
     : "";
 
+  console.log(slotData?.calender_id, "slotData");
+
   // @ts-ignore
   const availableItems =
     slotData?.available_slots?.map((slot) => {
@@ -48,7 +50,7 @@ const SlotDetails: React.FC = () => {
       <div className=" h-[100%]">
         <Tabs
           defaultActiveKey="1"
-          tabPosition="left"
+          tabPosition="top"
           centered={true}
           // @ts-ignore
           items={availableItems.map((slot) => ({
