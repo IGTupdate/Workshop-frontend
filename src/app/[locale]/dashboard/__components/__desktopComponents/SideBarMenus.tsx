@@ -1,5 +1,4 @@
 "use client";
-import { DesktopOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 import { CgProfile } from "react-icons/cg";
@@ -13,18 +12,19 @@ import {
   TsideBarMenuItems,
 } from "@/app/[locale]/employee/dashboard/utils/sideBarMenuItems";
 import { useTranslations } from "next-intl";
+import { MdOutlineDesktopWindows } from "react-icons/md";
 // import { CustomerSideBarMenuItems } from "./CustomerSideBarMenuItems";
 
 const SideBarMenus = () => {
   const t = useTranslations("CustomerSidebar");
 
   const dashBoardIcons = {
-    [t("dashboard")]: <RxDashboard />,
-    [t("profile")]: <CgProfile />,
-    [t("appointment")]: <DesktopOutlined />,
-    [t("previousBookings")]: <GrBook />,
-    [t("notifications")]: <IoNotifications />,
-    [t("settings")]: <IoSettingsOutline />,
+    [t("dashboard")]: <RxDashboard size={22} />,
+    [t("profile")]: <CgProfile size={22} />,
+    [t("appointment")]: <MdOutlineDesktopWindows size={22} />,
+    [t("previousBookings")]: <GrBook size={22} />,
+    [t("notifications")]: <IoNotifications size={22} />,
+    [t("settings")]: <IoSettingsOutline size={22} />,
   };
 
   const CustomerSideBarMenuItems: TsideBarMenuItems[] = [

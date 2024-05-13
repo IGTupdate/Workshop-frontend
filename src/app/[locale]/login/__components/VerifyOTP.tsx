@@ -54,15 +54,16 @@ const VerifyOTP = () => {
         if (result?.data?.data?.userExists) {
           const redirectUrl = searchParams.get("redirectUrl");
           router.push(redirectUrl || "/dashboard");
+          dispatch(setAuthStep(1));
         } else dispatch(setAuthStep(2));
       }
     } catch (error) {
       toast.error("Invalid OTP");
       router.push("/login");
     } finally {
-      setTimeout(() => {
-        dispatch(setAuthLoading(false));
-      }, 1000);
+      // setTimeout(() => {
+      dispatch(setAuthLoading(false));
+      // }, 1000);
     }
   };
 

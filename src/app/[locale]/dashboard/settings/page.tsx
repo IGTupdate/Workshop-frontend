@@ -1,7 +1,9 @@
 "use client";
 import CustomModel from "@/app/components/Model/CustomModel";
 import { Button, Select } from "antd";
-import { useState } from "react";
+import { useLocale } from "next-intl";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 
 const { Option } = Select;
 
@@ -10,9 +12,22 @@ const Page = () => {
   const [visible, setVisible] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("");
 
-  const handleLanguageChange = (value: string) => {
-    setSelectedLanguage(value);
-    setVisible(true);
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const pathname = usePathname();
+  const localeActive = useLocale();
+
+  console.log(pathname, "router");
+
+  const onChangeLocale = (value: string) => {
+    var segments = pathname.split("/");
+    var spSegment = segments[1];
+
+    startTransition(() => {
+      // Replace the segment containing 'locale' with the new locale value
+      var newPathname = pathname.replace(`/${spSegment}/`, `/${value}/`);
+      router.replace(newPathname);
+    });
   };
 
   const handleOk = () => {
@@ -30,13 +45,21 @@ const Page = () => {
       <div className=" flex flex-wrap gap-4 bg-white p-4 items-center justify-between max-w-full sm:max-w-[80%] w-full mx-auto rounded-xl shadow-xl">
         <h1>Language Selection</h1>
         <Select
-          defaultValue={language}
-          style={{ width: 200 }}
-          onChange={handleLanguageChange}
-        >
-          <Option value="english">English</Option>
-          <Option value="spanish">Spanish</Option>
-        </Select>
+          defaultValue={localeActive}
+          placeholder="Select a person"
+          optionFilterProp="children"
+          onChange={onChangeLocale}
+          options={[
+            {
+              value: "en",
+              label: "English",
+            },
+            {
+              value: "sp",
+              label: "Spanish",
+            },
+          ]}
+        />
       </div>
       <CustomModel
         title="Change Language"

@@ -5,7 +5,7 @@ import CustomModal from "../Model/CustomModel";
 import { useAppDispatch } from "@/app/store/reduxHooks";
 import { logout } from "@/app/services/operations/auth/customerAuth";
 import { useRouter } from "next/navigation";
-import { setAuthLoading } from "@/app/store/slices/authSlice";
+import { setAuthLoading, setAuthStep } from "@/app/store/slices/authSlice";
 import { useTranslations } from "next-intl";
 
 type Props = {
@@ -24,6 +24,7 @@ const Logout = (props: Props) => {
       setVisible(false);
       router.push("/");
       dispatch(setAuthLoading(false));
+      dispatch(setAuthStep(0));
     } catch (err) {
       // console.error(err);
     } finally {
