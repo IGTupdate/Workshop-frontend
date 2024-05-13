@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Button, Divider, Tag, Typography } from "antd";
+import { Button, Divider, Typography } from "antd";
 import VehicleFuelDetailContainer from "./__components/VehicleFuelDetailContainer";
 import { TWorkOrder } from "@/app/types/work-order";
 import WorkOrderCustomerDetails from "./__components/WorkOrderCustomerDetails";
@@ -15,8 +15,10 @@ import WorkOrderMechanicDetailContainer from "./__components/WorkOrderMechanicDe
 import WorkOrderAdvisorDetails from "./__components/WorkOrderAdvisorDetails";
 import WorkOrderServiceDetailContainer from "./__components/WorkOrderServiceDetailContainer";
 import WorkOrderRampDetails from "./__components/WorkOrderRampDetails";
-import { appointmentStatusText } from "../../appointment/__utils/appointmentStatus";
 import { workOrderStatusText } from "../__utils/workOrderStatus";
+import useAbility from "@/app/__hooks/useAbility";
+import { casl_action, casl_subject } from "@/app/utils/casl/constant";
+import { useAppSelector } from "@/app/store/reduxHooks";
 
 const { Text, Title } = Typography;
 
@@ -30,27 +32,33 @@ const Page = (props: Props) => {
   const [loading, setLoading] = useState(true);
   const [workOrder, setWorkOrder] = useState<TWorkOrder | null>(null);
 
+  const ability = useAbility();
+
+  const { authData } = useAppSelector((state) => state.auth);
   const router = useRouter();
 
   // load work order
   useEffect(() => {
     // console.log("hello from work order", props.params.workorderId);
-    if (props.params.workorderId) {
-      (async function () {
-        try {
-          const required_workorder = await getWorkOrderById(
-            props.params.workorderId,
-            true,
-          );
-          setWorkOrder(required_workorder);
-        } catch (err) {
-          console.log(err);
-        } finally {
-          setLoading(false);
-        }
-      })();
+
+    if (ability && ability.can(casl_action.get, casl_subject.workorder)) {
+      if (props.params.workorderId) {
+        (async function () {
+          try {
+            const required_workorder = await getWorkOrderById(
+              props.params.workorderId,
+              true,
+            );
+            setWorkOrder(required_workorder);
+          } catch (err) {
+            console.log(err);
+          } finally {
+            setLoading(false);
+          }
+        })();
+      }
     }
-  }, [props.params.workorderId]);
+  }, [props.params.workorderId, ability]);
 
   const handleUpdateWorkOrderData = (
     field: keyof TWorkOrder,
@@ -100,11 +108,13 @@ const Page = (props: Props) => {
             <WorkOrderAdvisorDetails advisor={workOrder.advisorId} />
             <Divider />
             <WorkOrderMechanicDetailContainer
+              advisorId={workOrder.advisorId}
               assigned_mechanics={workOrder.mechanicId}
               handleUpdateWorkOrderData={handleUpdateWorkOrderData}
             />
             <Divider />
             <WorkOrderRampDetails
+              advisorId={workOrder.advisorId}
               ramp={workOrder.rampId}
               handleUpdateWorkOrderData={handleUpdateWorkOrderData}
             />
@@ -112,17 +122,24 @@ const Page = (props: Props) => {
 
             {workOrder.status === "Pending" ? (
               <div>
-                <Title level={5}>Prepare WorkOrder</Title>
-                <Button
-                  type="primary"
-                  onClick={() => {
-                    router.push(
-                      `/employee/dashboard/workorder/${props.params.workorderId}/prepare`,
-                    );
-                  }}
-                >
-                  Prepare
-                </Button>
+                {((typeof workOrder.advisorId === "string" &&
+                  workOrder.advisorId === authData._id) ||
+                  (typeof workOrder.advisorId !== "string" &&
+                    workOrder.advisorId._id === authData._id)) && (
+                  <div>
+                    <Title level={5}>Prepare WorkOrder</Title>
+                    <Button
+                      type="primary"
+                      onClick={() => {
+                        router.push(
+                          `/employee/dashboard/workorder/${props.params.workorderId}/prepare`,
+                        );
+                      }}
+                    >
+                      Prepare
+                    </Button>
+                  </div>
+                )}
               </div>
             ) : (
               <div>
