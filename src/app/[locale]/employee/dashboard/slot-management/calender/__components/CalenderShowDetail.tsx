@@ -10,6 +10,7 @@ import { calender_status } from "../__utils/constant";
 import CalenderUpdateStatus from "./CalenderUpdateStatus";
 import { useAppDispatch } from "@/app/store/reduxHooks";
 import { setUpdateStatusCalender } from "@/app/store/slices/calenderSlice";
+import { useTranslations } from "next-intl";
 const { Title, Text } = Typography;
 
 type Props = {
@@ -18,6 +19,8 @@ type Props = {
 
 const CalenderShowDetail = (props: Props) => {
   const dispatch = useAppDispatch();
+
+  const t = useTranslations("EmployeeDashboardCalenderPage");
 
   const openUpDateCalenderStatusModal = () => {
     dispatch(setUpdateStatusCalender(props.activeCalender));
@@ -30,7 +33,7 @@ const CalenderShowDetail = (props: Props) => {
           <div className="flex justify-start items-start gap-2">
             <CiCalendarDate className="w-6 h-6 m-0" />
             <Title level={5} className=" mb-0">
-              Date
+              {t("date")}
             </Title>
           </div>
           <Text className="text-md font-medium">
@@ -56,7 +59,7 @@ const CalenderShowDetail = (props: Props) => {
       {props.activeCalender &&
       props.activeCalender.status === calender_status.open ? (
         <div>
-          <Title level={5}>Slot Details</Title>
+          <Title level={5}>{t("slot_details")}</Title>
           <div>
             <ul className="list-disc">
               {props.activeCalender.slots.map((slot, index) => {
@@ -64,15 +67,15 @@ const CalenderShowDetail = (props: Props) => {
                   <li key={slot._id}>
                     <div className="grid grid-cols-2 gap-x-2 items-end">
                       <DescriptionItem
-                        title="Start Time"
+                        title={t("start_time")}
                         content={new Date(slot.start_time).toLocaleTimeString()}
                       />
                       <DescriptionItem
-                        title="End Time"
+                        title={t("start_time")}
                         content={new Date(slot.end_time).toLocaleTimeString()}
                       />
                       <DescriptionItem
-                        title="Slot Limit"
+                        title={t("slot_limit")}
                         content={slot.slot_limit}
                       />
                       <div>
@@ -89,7 +92,7 @@ const CalenderShowDetail = (props: Props) => {
           </div>
         </div>
       ) : (
-        <Text>Details Not Available for Close Calender</Text>
+        <Text>{t("details_not_available")}</Text>
       )}
 
       {/* modal delete  */}

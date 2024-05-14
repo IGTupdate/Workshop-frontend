@@ -28,6 +28,7 @@ import { appointmentStatusText } from "../../appointment/__utils/appointmentStat
 import { TAppointmentStatus } from "@/app/types/appointment";
 import dayjs from "dayjs";
 import { IoIosEye } from "react-icons/io";
+import { useTranslations } from "next-intl";
 
 const { Title, Text } = Typography;
 
@@ -36,6 +37,7 @@ export function GetWorkOrderTableColumn() {
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const t = useTranslations("EmployeeDashboardWorkOrderPage");
 
   const createQueryString = useCallback(
     (name: string, value?: string) => {
@@ -67,7 +69,7 @@ export function GetWorkOrderTableColumn() {
 
   const column_work_data_table: TableProps<TWorkOrderDataTable>["columns"] = [
     {
-      title: "Order Number",
+      title: t("order_number"),
       dataIndex: "orderNumber",
       key: "orderNumber",
       ...GetColumnTextSearchProps<TWorkOrderDataTable>("orderNumber"),
@@ -81,7 +83,7 @@ export function GetWorkOrderTableColumn() {
       },
     },
     {
-      title: "Vehicle Reg No.",
+      title: t("vehile_registeration_number"),
       dataIndex: "vehicle_registeration_number",
       key: "vehicle_registeration_number",
       ...GetColumnTextSearchProps<TWorkOrderDataTable>("registeration_number"),
@@ -90,7 +92,7 @@ export function GetWorkOrderTableColumn() {
       },
     },
     {
-      title: "Created At",
+      title: t("created_at"),
       dataIndex: "createdAt",
       key: "createdAt",
       defaultSortOrder: "descend",
@@ -106,7 +108,7 @@ export function GetWorkOrderTableColumn() {
       },
     },
     {
-      title: "Status",
+      title: t("status"),
       dataIndex: "status",
       key: "status",
       filters: getWorkOrderStatus(),
@@ -159,7 +161,7 @@ export function GetWorkOrderTableColumn() {
       },
     },
     {
-      title: "Actions",
+      title: t("action"),
       dataIndex: "action",
       key: "action",
       render: (_, { _id }) => {

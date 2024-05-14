@@ -68,7 +68,7 @@ export const appointmentEndpoints = {
   GET_ALL_CALENDAR: appointmentUrl(CALENDAR, "/get-all"),
   CREATE_CALENDAR: appointmentUrl(CALENDAR, "/create"),
   UPDATE_CALENDAR_STATUS: appointmentUrl(CALENDAR, "/update-status"),
-  GET_APPOINTMENT_BY_CALENDAR: appointmentUrl(APPOINTMENT, "/get-by-calendar"),
+  GET_APPOINTMENT_BY_CALENDAR: appointmentUrl(APPOINTMENT, "/get-by-calender"),
   GET_APPOINTMENT_BY_APPOINTMENT_ID: appointmentUrl(APPOINTMENT, "/get"),
   GET_ALL_APPOINTMENT: appointmentUrl(APPOINTMENT, "/get-all"),
   GET_ALL_APPOINTMENT_STATUS: appointmentUrl(APPOINTMENT, "/get-status"),

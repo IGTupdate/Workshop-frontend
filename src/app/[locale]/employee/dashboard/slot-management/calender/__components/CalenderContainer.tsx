@@ -15,6 +15,7 @@ import { getAllCalender } from "@/app/services/operations/appointment/calender";
 import useAbility from "@/app/__hooks/useAbility";
 import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 import UnAuthorized from "@/app/components/UnAuthorized/UnAuthorized";
+import { useTranslations } from "next-intl";
 
 type Props = {};
 
@@ -26,6 +27,8 @@ const CalenderContainer = (props: Props) => {
   const { calenderData, calenderLoading, activeCalender } = useAppSelector(
     (state) => state.calender,
   );
+
+  const t = useTranslations();
 
   // dispatch state action
   const dispatch = useAppDispatch();

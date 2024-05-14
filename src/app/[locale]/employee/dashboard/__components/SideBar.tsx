@@ -8,6 +8,7 @@ import SideBarMenus from "./SideBarMenus";
 import { useAppSelector } from "@/app/store/reduxHooks";
 import { IAuthData } from "@/app/store/slices/authSlice";
 import Logout from "@/app/components/Logout/Logout";
+import { useTranslations } from "next-intl";
 
 const { Text, Title } = Typography;
 
@@ -20,6 +21,7 @@ type Props = {
 const SideBar = (props: Props) => {
   const [user, setUser] = useState<IAuthData>();
   const { authData } = useAppSelector((state) => state.auth);
+  const t = useTranslations("EmployeeSideBar");
 
   useEffect(() => {
     setUser(() => {
@@ -49,7 +51,7 @@ const SideBar = (props: Props) => {
                 marginBottom: 0,
               }}
             >
-              Hello {user?.fullName?.split(" ")[0]}
+              {t("heading")} {user?.fullName?.split(" ")[0]}
             </Title>
             <Text className="capitalize" style={{ color: "#CDCDCE" }}>
               {user?.role || "-"}

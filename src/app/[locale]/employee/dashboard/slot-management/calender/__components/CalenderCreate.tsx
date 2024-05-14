@@ -13,6 +13,7 @@ import { calender_status } from "../__utils/constant";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { createCalender } from "@/app/services/operations/appointment/calender";
 import { getAllSlotSchedule } from "@/app/services/operations/appointment/slotSchedule";
+import { useTranslations } from "next-intl";
 
 const { Text } = Typography;
 
@@ -36,6 +37,8 @@ const CalenderCreate = (props: Props) => {
     (state) => state.slotSchedule,
   );
   const dispatch = useAppDispatch();
+
+  const t = useTranslations("EmployeeDashboardCalenderPage");
 
   useEffect(() => {
     if (slotScheduleLoading) {
@@ -87,7 +90,7 @@ const CalenderCreate = (props: Props) => {
         >
           <div className="md:mb-4 mb-3">
             <label className="text-sm font-medium mb-2 block text-black1">
-              Select Slot Schedule for the day
+              {t("select_slot_schedule")}
             </label>
             <Controller
               name="slot_schedule_id"
@@ -113,6 +116,7 @@ const CalenderCreate = (props: Props) => {
 
           <div>
             <label className="text-sm font-medium mb-2 block text-black1">
+              {t("calender_status")}
               Calender Status
             </label>
             <Controller
@@ -138,7 +142,7 @@ const CalenderCreate = (props: Props) => {
               htmlType="submit"
               type="primary"
             >
-              Create
+              {t("create")}
             </Button>
           </div>
         </Form>

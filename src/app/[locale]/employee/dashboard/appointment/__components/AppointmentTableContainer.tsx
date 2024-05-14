@@ -5,6 +5,7 @@ import { Table } from "antd";
 import { GetAppointmentDataTableColumn } from "../__utils/appointmentDataTableColumn";
 import { TAppointment, TAppointmentDataTable } from "@/app/types/appointment";
 import { getSlotTiming } from "@/app/utils/get-slot-timing";
+import { useTranslations } from "next-intl";
 
 type Props = {
   appointmentData: TAppointment[];
@@ -14,6 +15,8 @@ const AppointmentTableContainer = (props: Props) => {
   const [appointmentDataTable, setAppointMentDataTable] = useState<
     TAppointmentDataTable[]
   >([]);
+
+  const t = useTranslations("EmployeeDashboardAppointmentPage");
 
   useEffect(() => {
     setAppointMentDataTable(() => {
