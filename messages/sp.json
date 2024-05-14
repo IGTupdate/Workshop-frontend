@@ -66,5 +66,38 @@
     "emailPlaceholder": "Ingrese correo electrónico",
     "passwordPlaceholder": "Introducir la contraseña",
     "button": "Acceso"
+  },
+  "LogOut": {
+    "logout": "Cerrar sesión",
+    "title": "Confirmar cerrar sesión",
+    "text": "¿Estás segura de que quieres cerrar sesión?",
+    "cancel": "Cancelar"
+  },
+  "CustomerSidebar": {
+    "heading": "Hola",
+    "dashboard": "Panel",
+    "profile": "Perfil",
+    "appointment": "Cita",
+    "book": "Libro",
+    "reschedule": "Reprogramar",
+    "cancel": "Cancelar",
+    "previousBookings": "Reservas Anteriores",
+    "notifications": "Notificaciones",
+    "settings": "Ajustes"
+  },
+  "AppointmentCard": {
+    "book": "Reserva tu cita",
+    "dont": "No tengo ninguna cita",
+    "button": "Reservar una cita"
+  },
+  "AppointmentContent": {
+    "scheduled": "Programada",
+    "assign": "Asignar",
+    "admission": "Admisión",
+    "time": "Tiempo"
+  },
+  "Notifications": {
+    "history": "Historia",
+    "empty": "No hay historial disponible"
   }
 }

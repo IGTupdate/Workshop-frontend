@@ -1,5 +1,6 @@
 "use client";
 import Watermark from "@/app/components/Text/WatermarkText";
+import { useTranslations } from "next-intl";
 
 interface NotificationItem {
   title: string;
@@ -15,11 +16,13 @@ const Notifications: React.FC<NotificationsProps> = ({
   show,
   notificationData,
 }) => {
+  const t = useTranslations("Notifications");
+
   return (
     <>
       <div className="mt-4">
         <div className="heading relative  before:content-[''] before:absolute before:right-0 before:top-1/2 before:translate-y-[-50%] before:w-[77%] sm:before:w-[88%] before:h-2 before:bg-gradient-to-r before:from-[#FFE301] before:to-[#A79638]">
-          <h2 className="text-xl font-bold">History</h2>
+          <h2 className="text-xl font-bold">{t("history")}</h2>
         </div>
 
         {show === 2 ? (
@@ -37,7 +40,7 @@ const Notifications: React.FC<NotificationsProps> = ({
                 ))
             ) : (
               <div className="py-4 relative">
-                <Watermark text={"No History Available"} />
+                <Watermark text={t("empty")} />
               </div>
             )}
           </ul>

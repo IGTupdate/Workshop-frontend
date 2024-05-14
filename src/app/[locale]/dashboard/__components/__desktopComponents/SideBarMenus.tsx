@@ -1,5 +1,4 @@
 "use client";
-import { DesktopOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 import { CgProfile } from "react-icons/cg";
@@ -10,19 +9,73 @@ import { IoSettingsOutline } from "react-icons/io5";
 import {
   getActiveSideBarMenu,
   getSideBarMenuItems,
+  TsideBarMenuItems,
 } from "@/app/[locale]/employee/dashboard/utils/sideBarMenuItems";
-import { CustomerSideBarMenuItems } from "./CustomerSideBarMenuItems";
-
-const dashBoardIcons = {
-  Dashboard: <RxDashboard />,
-  Appointment: <DesktopOutlined />,
-  Profile: <CgProfile />,
-  PreviousBookings: <GrBook />,
-  Notifications: <IoNotifications />,
-  Settings: <IoSettingsOutline />,
-};
+import { useTranslations } from "next-intl";
+import { MdOutlineDesktopWindows } from "react-icons/md";
+// import { CustomerSideBarMenuItems } from "./CustomerSideBarMenuItems";
 
 const SideBarMenus = () => {
+  const t = useTranslations("CustomerSidebar");
+
+  const dashBoardIcons = {
+    [t("dashboard")]: <RxDashboard size={20} />,
+    [t("profile")]: <CgProfile size={20} />,
+    [t("appointment")]: <MdOutlineDesktopWindows size={20} />,
+    [t("previousBookings")]: <GrBook size={20} />,
+    [t("notifications")]: <IoNotifications size={20} />,
+    [t("settings")]: <IoSettingsOutline size={20} />,
+  };
+
+  const CustomerSideBarMenuItems: TsideBarMenuItems[] = [
+    {
+      key: "1",
+      label: `${t("dashboard")}`,
+      pathname: "/dashboard",
+    },
+    {
+      key: "2",
+      label: `${t("profile")}`,
+      pathname: "/dashboard/profile",
+    },
+    {
+      key: "3",
+      label: `${t("appointment")}`,
+      children: [
+        {
+          key: "4",
+          label: `${t("book")}`,
+          pathname: "/dashboard/appointment/book",
+        },
+        {
+          key: "5",
+          label: `${t("reschedule")}`,
+          pathname: "/dashboard/appointment/reschedule",
+        },
+        {
+          key: "6",
+          label: `${t("cancel")}`,
+          pathname: "/dashboard/appointment/cancel",
+        },
+      ],
+    },
+    {
+      key: "7",
+      label: `${t("previousBookings")}`,
+      pathname: "/dashboard/previous-appointments",
+    },
+    {
+      key: "8",
+      label: `${t("notifications")}`,
+      pathname: "/dashboard/notifications",
+    },
+    {
+      key: "9",
+      label: `${t("settings")}`,
+      pathname: "/dashboard/settings",
+    },
+  ];
+
   const router = useRouter();
   const pathname = usePathname();
 

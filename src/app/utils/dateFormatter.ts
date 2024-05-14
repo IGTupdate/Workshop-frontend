@@ -31,7 +31,12 @@ export function convertToLocaleDateAndWeekday(dateString: string | undefined) {
 }
 
 export function extractTimeFromDate(dateString: string): string {
-  return new Date(dateString).toLocaleTimeString();
+  // Get the current time as a string without seconds
+  return new Date(dateString).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
 }
 
 export function formatDateAndTime(dateString: string) {

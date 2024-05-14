@@ -66,5 +66,38 @@
     "emailPlaceholder": "Enter Email",
     "passwordPlaceholder": "Enter Password",
     "button": "Login"
+  },
+  "LogOut": {
+    "logout": "LogOut",
+    "title": "Confirm Logout",
+    "text": "Are you sure you want to log out?",
+    "cancel": "Cancel"
+  },
+  "CustomerSidebar": {
+    "heading": "Hello",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "appointment": "Appointment",
+    "book": "Book",
+    "reschedule": "Reschedule",
+    "cancel": "Cancel",
+    "previousBookings": "Previous Bookings",
+    "notifications": "Notifications",
+    "settings": "Settings"
+  },
+  "AppointmentCard": {
+    "book": "Book your appointment",
+    "dont": "Dont have any appointment",
+    "button": "Book Appointment"
+  },
+  "AppointmentContent": {
+    "scheduled": "Scheduled",
+    "assign": "Assign",
+    "admission": "Admission",
+    "time": "Time"
+  },
+  "Notifications": {
+    "history": "History",
+    "empty": "No History Available"
   }
 }

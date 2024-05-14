@@ -124,7 +124,7 @@ export const createWorkOrder = async (data: TworkOrderCreate) => {
   }
 };
 
-export const getPageWorkOrder = async (query: string) => {
+export const getPageWorkOrder = async (query: string = "") => {
   try {
     const respone = await apiConnector({
       method: "GET",

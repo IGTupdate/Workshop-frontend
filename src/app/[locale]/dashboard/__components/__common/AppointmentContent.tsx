@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import dayjs from "dayjs";
+import { useTranslations } from "next-intl";
 
 type Slot = {
   _id: string;
@@ -26,14 +27,18 @@ const AppointmentContent: React.FC<Props> = ({ item }) => {
     (slot) => slot._id === item.slot_id,
   );
 
+  const t = useTranslations("AppointmentContent");
+
   return (
     <>
       <div className="bg-gradient-to-r from-[#FFE301] to-[#D7C000] rounded-2xl p-4 min-h-[121px] shadow-3d">
         <div className="flex justify-between items-center">
           <div>
-            <h4 className="text-white text-2xl font-bold">{item.status}</h4>
+            <h4 className="text-white text-2xl font-bold">
+              {item.status === "Scheduled" ? t("scheduled") : t("assign")}
+            </h4>
             <h4 className="text-white text-xl font-semibold">
-              Admission:{" "}
+              {t("admission")}:{" "}
               <span className="text-base font-normal">
                 {data?.length > 0 &&
                   dayjs(data[0]?.start_time).format("MM/DD/YYYY")}
@@ -43,7 +48,7 @@ const AppointmentContent: React.FC<Props> = ({ item }) => {
 
           <div>
             <h4 className="text-white text-xl font-semibold text-center">
-              Time
+              {t("time")}
             </h4>
             <h4 className="text-white text-5xl font-bold">
               {data?.length > 0 && dayjs(data[0]?.start_time).format("HH:mm")}

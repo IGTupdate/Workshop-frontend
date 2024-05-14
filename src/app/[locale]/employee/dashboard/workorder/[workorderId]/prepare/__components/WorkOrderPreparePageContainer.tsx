@@ -7,6 +7,9 @@ import { TWorkOrder } from "@/app/types/work-order";
 import { getWorkOrderById } from "@/app/services/operations/workorder/workorder";
 import WorkOrderFormContainer from "./WorkOrderFormContainer";
 import Loader from "@/app/components/Loader";
+import useAbility from "@/app/__hooks/useAbility";
+import { casl_action, casl_subject } from "@/app/utils/casl/constant";
+import { useAppSelector } from "@/app/store/reduxHooks";
 
 const { Title, Text } = Typography;
 
@@ -18,25 +21,28 @@ const WorkOrderPreparePageContainer = (props: Props) => {
   const [loading, setLoading] = useState(true);
   const [workOrder, setWorkOrder] = useState<TWorkOrder | null>(null);
 
+  const ability = useAbility();
+  const { authData } = useAppSelector((state) => state.auth);
+
   // load work order
   useEffect(() => {
-    if (props.workOrderId) {
-      (async function () {
-        try {
-          const required_workorder = await getWorkOrderById(props.workOrderId);
-          setWorkOrder(required_workorder);
-        } catch (err) {
-          console.log(err);
-        } finally {
-          setLoading(false);
-        }
-      })();
+    if (ability && ability.can(casl_action.update, casl_subject.workorder)) {
+      if (props.workOrderId) {
+        (async function () {
+          try {
+            const required_workorder = await getWorkOrderById(
+              props.workOrderId,
+            );
+            setWorkOrder(required_workorder);
+          } catch (err) {
+            console.log(err);
+          } finally {
+            setLoading(false);
+          }
+        })();
+      }
     }
-  }, [props.workOrderId]);
-
-  useEffect(() => {
-    console.log(workOrder);
-  }, [workOrder]);
+  }, [props.workOrderId, ability]);
 
   return (
     <div>
@@ -51,7 +57,11 @@ const WorkOrderPreparePageContainer = (props: Props) => {
               <Title level={5} className="mb-8">
                 Work Order for #{workOrder.orderNumber}
               </Title>
-              <WorkOrderFormContainer workOrder={workOrder} />
+              {workOrder.advisorId === authData._id ? (
+                <WorkOrderFormContainer workOrder={workOrder} />
+              ) : (
+                <Text>Work Order is not assigned</Text>
+              )}
             </div>
           ) : (
             <Text>Work Order Not Found</Text>

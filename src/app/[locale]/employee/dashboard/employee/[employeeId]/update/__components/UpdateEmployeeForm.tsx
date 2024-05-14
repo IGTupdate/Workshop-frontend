@@ -43,8 +43,8 @@ const UpdateEmployeeForm = (props: Props) => {
   useEffect(() => {
     if (employee) {
       console.log(employee);
-      setValue("firstName", employee?.fullName.split(" ")[0]);
-      setValue("lastName", employee?.fullName.split(" ")[1]);
+      setValue("firstName", employee?.fullName?.split(" ")[0]);
+      setValue("lastName", employee?.fullName?.split(" ")[1]);
       setValue("email", employee?.email);
       setValue("contactNumber", employee?.contactNumber);
       setValue(
