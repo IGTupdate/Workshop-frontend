@@ -47,14 +47,14 @@ export const authEndpoints = {
   GENERATE_ACCESS_TOKEN_API: authUrl(AUTH, "/generateAccessToken"),
   EMPLOYEE_LOGIN_API: authUrl(EMPLOYEE, "/login"),
   GET_CUSTOMER_DATA_API: authUrl(CUSTOMER),
-  GET_EMPLOYEE_DATA_API: authUrl(EMPLOYEE),
+  GET_EMPLOYEE_DATA_API: authUrl(EMPLOYEE, "/get"),
   LOGOUT_API: authUrl(AUTH, "/logout"),
   CUSTOMER_UPDATE_API: authUrl(CUSTOMER, "/update"),
-  GET_ALL_EMPLOYEES: authUrl(EMPLOYEE, "/getAll"),
+  GET_ALL_EMPLOYEES: authUrl(EMPLOYEE, "/get-all"),
   GET_ACCESS: authUrl(AUTH, "/getAccess"),
   GET_CUSTOMER_AUTH_INIT: authUrl(AUTH, "/init"),
   EMPLOYEE_REGISTER: authUrl(EMPLOYEE, "/register"),
-  GET_ALL_EMPLOYEE_ROLE: authUrl(EMPLOYEE, "/role/getAll"),
+  GET_ALL_EMPLOYEE_ROLE: authUrl(EMPLOYEE, "/role/get-all"),
   UPDATE_EMPLOYEE_DETAILS: authUrl(EMPLOYEE, "/update"),
 };
 
