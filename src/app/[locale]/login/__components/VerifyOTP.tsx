@@ -61,9 +61,9 @@ const VerifyOTP = () => {
       toast.error("Invalid OTP");
       router.push("/login");
     } finally {
-      // setTimeout(() => {
-      dispatch(setAuthLoading(false));
-      // }, 1000);
+      setTimeout(() => {
+        dispatch(setAuthLoading(false));
+      }, 1000);
     }
   };
 

@@ -99,5 +99,23 @@
   "Notifications": {
     "history": "History",
     "empty": "No History Available"
+  },
+  "Profile": {
+    "name": "Full Name",
+    "email": "Email",
+    "contactNumber": "Contact Number"
+  },
+  "BookAppointment": {
+    "heading": "Book Appointment"
+  },
+  "SlotBookingCustomerStep": {
+    "slot": "Slot",
+    "selectTime": "Select Time",
+    "vehicle": "Vehicle",
+    "fillVehicleInfo": "Fill Vehicle Info",
+    "servicePlans": "Service Plans",
+    "selectServicePlans": "Select Service Plans",
+    "review": "Review",
+    "finaliseyourAppointment": "Finalise your Appointment"
   }
 }

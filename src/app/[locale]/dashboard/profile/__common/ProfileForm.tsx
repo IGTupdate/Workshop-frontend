@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { BsTelephone } from "react-icons/bs";
+import { useTranslations } from "next-intl";
 
 interface FormValues {
   fullName: string;
@@ -27,6 +28,7 @@ const ProfileForm = ({ edit, setEdit }: Props) => {
   const authData = useAppSelector((state) => state.auth.authData);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
+  const t = useTranslations("Profile");
 
   // Define Yup schema for form validation
   const profileSchema = Yup.object().shape({
@@ -80,9 +82,13 @@ const ProfileForm = ({ edit, setEdit }: Props) => {
           className="mx-auto flex flex-col gap-4 pt-8"
         >
           {[
-            { name: "fullName", label: "Full Name" },
-            { name: "contactNumber", label: "Contact Number", disabled: true },
-            { name: "email", label: "Email" },
+            { name: "fullName", label: `${t("name")}` },
+            {
+              name: "contactNumber",
+              label: `${t("contactNumber")}`,
+              disabled: true,
+            },
+            { name: "email", label: `${t("email")}` },
           ].map(({ name, label, disabled }) => (
             <FormComponent
               key={name}
@@ -111,7 +117,7 @@ const ProfileForm = ({ edit, setEdit }: Props) => {
             </div>
             <div className="flex flex-col">
               <label htmlFor="name" className="font-semibold">
-                Full Name
+                {t("name")}
               </label>
               <p className="font-medium capitalize text-lg">
                 {authData.fullName}
@@ -125,7 +131,7 @@ const ProfileForm = ({ edit, setEdit }: Props) => {
             </div>
             <div className="flex flex-col">
               <label htmlFor="name" className="font-semibold">
-                Contact Number
+                {t("contactNumber")}
               </label>
               <p className="font-medium text-lg">{authData.contactNumber}</p>
             </div>
@@ -137,9 +143,9 @@ const ProfileForm = ({ edit, setEdit }: Props) => {
             </div>
             <div className="flex flex-col">
               <label htmlFor="name" className="font-semibold">
-                Email
+                {t("email")}
               </label>
-              <p className="font-medium capitalize text-lg">{authData.email}</p>
+              <p className="font-medium text-lg">{authData.email}</p>
             </div>
           </div>
 

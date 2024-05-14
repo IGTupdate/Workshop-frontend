@@ -8,7 +8,7 @@ import ServicePlanSelection from "./ServicePlanSelection";
 import VehicleDetailContainer from "./VehicleDetailContainer";
 import { setQueryParams } from "@/app/utils/helper";
 import CustomerAppointmentBookingConfirmation from "./CustomerAppointmentBookingConfirmation";
-import { slot_booking_customer_step } from "@/app/[locale]/employee/dashboard/appointment/book/__utils/slot-booking-step";
+import { Slot_booking_customer_step } from "@/app/[locale]/employee/dashboard/appointment/book/__utils/slot-booking-step";
 import SlotAvailablityContainer from "@/app/[locale]/employee/dashboard/appointment/book/__components/SlotAvailablityContainer";
 
 const BookAppointmentContainer: React.FC = () => {
@@ -125,7 +125,7 @@ const BookAppointmentContainer: React.FC = () => {
         current={currentStep}
         labelPlacement="vertical"
         direction="horizontal"
-        items={slot_booking_customer_step}
+        items={Slot_booking_customer_step()}
       />
       {currentStep === 0 && <SlotAvailablityContainer />}
       {currentStep === 1 && (

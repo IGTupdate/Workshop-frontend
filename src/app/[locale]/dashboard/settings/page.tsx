@@ -17,8 +17,6 @@ const Page = () => {
   const pathname = usePathname();
   const localeActive = useLocale();
 
-  console.log(pathname, "router");
-
   const onChangeLocale = (value: string) => {
     var segments = pathname.split("/");
     var spSegment = segments[1];

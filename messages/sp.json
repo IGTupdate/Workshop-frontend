@@ -99,5 +99,23 @@
   "Notifications": {
     "history": "Historia",
     "empty": "No hay historial disponible"
+  },
+  "Profile": {
+    "name": "Nombre completo",
+    "email": "Correo electrónico",
+    "contactNumber": "Número de contacto"
+  },
+  "BookAppointment": {
+    "heading": "Reservar una cita"
+  },
+  "SlotBookingCustomerStep": {
+    "slot": "Ranura",
+    "selectTime": "Seleccionar hora",
+    "vehicle": "Vehículo",
+    "fillVehicleInfo": "Llenar información del vehículo",
+    "servicePlans": "Planes de servicio",
+    "selectServicePlans": "Seleccionar planes de servicio",
+    "review": "Revisar",
+    "finaliseyourAppointment": "Finaliza tu cita"
   }
 }
