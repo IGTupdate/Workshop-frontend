@@ -27,7 +27,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/employee/dashboard/slot-management/calender/__utils",
-    "src/app/dashboard/notifications/fackData.js"
+    "src/app/dashboard/notifications/fackData.js",
+    "public/svg.ts",
+    "public/svg"
   ],
   "exclude": ["node_modules"]
 }

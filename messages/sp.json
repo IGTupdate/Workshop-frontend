@@ -1,7 +1,28 @@
 {
   "Navbar": {
     "bookAppointment": "Reservar una cita",
-    "login": "Acceso"
+    "login": "Inicio de sesión",
+    "home": "Inicio",
+    "we": "Nosotros",
+    "services": "Servicios",
+    "contactUs": "Contacto"
+  },
+  "HeadingSection": {
+    "heading": "LA SOLUCIÓN INTEGRAL PARA",
+    "headingTwo": "AGENCIAS AUTOMOTRICES",
+    "subHeading": "¡Descubre cómo mejorar la gestión y control de tu agencia automotriz con Appviser!"
+  },
+  "Operating": {
+    "heading": "EFICIENCIA OPERATIVA",
+    "headingTwo": "DMS MUNDIAL",
+    "para": "¡Transforma tu agencia automotriz con Appviser! Simplifica tus procesos con citas automáticas, gestión de taller eficiente, control de inventario, finanzas impecables y un CRM integral para una atención al cliente excepcional. Con capacidad mundial, ¡potencia tu negocio hoy mismo con Appviser!",
+    "button": "Agenda una demostración"
+  },
+  "SliderItems": {
+    "car": "Vehículos nuevos y seminuevos",
+    "bag": "Postventa (servicio y refacciones)",
+    "slate": "Administración y contabilidad",
+    "user": "Gestión de recursos humanos"
   },
   "SlotSchedule": {
     "welcome": "Bienvenido a Appviser",

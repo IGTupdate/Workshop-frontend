@@ -22,61 +22,93 @@ const LandingNavbar = (props: Props) => {
   };
 
   return (
-    <Flex
-      align="center"
-      gap="large"
-      className="w-full flex-wrap bg-customGray p-4 justify-center sm:justify-between"
-    >
-      <Image src={"/images/logo-2.webp"} alt="Logo" height={55} width={150} />
+    <div className="container">
+      <Flex
+        align="center"
+        gap="large"
+        className="w-full flex-wrap bg-transparent pt-8 pb-4 justify-center sm:justify-between"
+      >
+        <Image src={"/images/logo-1.webp"} alt="Logo" height={55} width={150} />
 
-      <div>
-        {localeActive === "en" ? (
-          <p className="text-red-500" onClick={() => onChangeLocale("sp")}>
-            Translate To : <span className="cursor-pointer">española</span>
-          </p>
-        ) : (
-          <p className="text-red-500" onClick={() => onChangeLocale("en")}>
-            Translate To : <span className="cursor-pointer">English</span>
-          </p>
-        )}
+        <Flex justify="space-between" align="center" className="gap-12">
+          <Flex align="center" className="gap-8">
+            <Link
+              className="text-white text-xl font-normal font-Inter hover:text-customYellow"
+              href={"/dashboard"}
+            >
+              {t("home")}
+            </Link>
+            <Link
+              className="text-white text-xl font-normal font-Inter hover:text-customYellow"
+              href={"/dashboard"}
+            >
+              {t("we")}
+            </Link>
+            <Link
+              className="text-white text-xl font-normal font-Inter hover:text-customYellow"
+              href={"/dashboard"}
+            >
+              {t("services")}
+            </Link>
+            <Link
+              className="text-white text-xl font-normal font-Inter hover:text-customYellow"
+              href={"/dashboard"}
+            >
+              {t("contactUs")}
+            </Link>
+          </Flex>
 
-        <div className="flex justify-between items-center gap-4">
-          <Button
-            size="large"
-            type="link"
-            href="/dashboard"
-            className="h-max p-0"
+          <Link
+            href={`${localeActive}/login`}
+            className="bg-matalicYellow text-white text-xl font-normal font-Inter px-6 py-1 rounded-full hover:bg-customYellow"
           >
-            <span className="text-lg text-customYellow text-opacity-80 hover:text-opacity-70 duration-200 transition-all">
-              {t("bookAppointment")}
-            </span>
-          </Button>
-          <Link href={`${localeActive}/login`}>
-            <Button type="primary" size="large" className="font-semibold">
-              {t("login")}
-            </Button>
+            {t("login")}
           </Link>
-
-          {/* <Select
-          defaultValue={localeActive}
-          placeholder="Select a person"
-          optionFilterProp="children"
-          onChange={onChange}
-          options={[
-            {
-              value: "en",
-              label: "English",
-            },
-            {
-              value: "sp",
-              label: "Spanish",
-            },
-          ]}
-        /> */}
-        </div>
-      </div>
-    </Flex>
+        </Flex>
+      </Flex>
+    </div>
   );
 };
 
 export default LandingNavbar;
+
+{
+  /* <Flex
+align="center"
+gap="large"
+className="w-full flex-wrap bg-customGray p-4 justify-center sm:justify-between"
+>
+<Image src={"/images/logo-2.webp"} alt="Logo" height={55} width={150} />
+
+<div>
+  {localeActive === "en" ? (
+    <p className="text-red-500" onClick={() => onChangeLocale("sp")}>
+      Translate To : <span className="cursor-pointer">española</span>
+    </p>
+  ) : (
+    <p className="text-red-500" onClick={() => onChangeLocale("en")}>
+      Translate To : <span className="cursor-pointer">English</span>
+    </p>
+  )}
+
+  <div className="flex justify-between items-center gap-4">
+    <Button
+      size="large"
+      type="link"
+      href="/dashboard"
+      className="h-max p-0"
+    >
+      <span className="text-lg text-customYellow text-opacity-80 hover:text-opacity-70 duration-200 transition-all">
+        {t("bookAppointment")}
+      </span>
+    </Button>
+    <Link href={`${localeActive}/login`}>
+      <Button type="primary" size="large" className="font-semibold">
+        {t("login")}
+      </Button>
+    </Link>
+
+  </div>
+</div>
+</Flex> */
+}

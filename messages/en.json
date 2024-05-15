@@ -1,7 +1,28 @@
 {
   "Navbar": {
     "bookAppointment": "Book An Appointment",
-    "login": "Login"
+    "login": "Login of session",
+    "home": "Home",
+    "we": "We",
+    "services": "Services",
+    "contactUs": "Contact us"
+  },
+  "HeadingSection": {
+    "heading": "THE COMPREHENSIVE SOLUTION FOR ",
+    "headingTwo": "AUTOMOTIVE AGENCIES",
+    "subHeading": "Discover how to improve the management and control of your automotive agency with Appviser!"
+  },
+  "Operating": {
+    "heading": "OPERATING EFFICIENCY",
+    "headingTwo": "DMS WORLDWIDE",
+    "para": "Transform your automotive agency with Appviser! Simplify your processes with automated appointments, efficient shop management, inventory control, seamless finances, and a comprehensive CRM for exceptional customer service. With global capacity, boost your business today with Appviser!",
+    "button": "Schedule a demo"
+  },
+  "SliderItems": {
+    "car": "New and pre-owned vehicles",
+    "bag": "After-sales (service and spare parts)",
+    "slate": "Administration and accounting",
+    "user": "Human resources management"
   },
   "SlotSchedule": {
     "welcome": "Welcome to Appviser",

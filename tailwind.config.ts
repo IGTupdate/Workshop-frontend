@@ -7,6 +7,9 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+    },
     screens: {
       sm: "640px",
       md: "768px",
@@ -19,6 +22,7 @@ const config: Config = {
       boxShadow: {
         top: "0px -8px 30px #0000001f",
         "3d": "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+        topDiv: "inset 0px 15px 25px 0px #00000080",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -34,9 +38,11 @@ const config: Config = {
         green1: "#24ae55",
         customGray: "#2E3033",
         customLightGray: "#CDCDCE",
-        customYellow: "#FFE200",
+        customYellow: "#F9DC04",
         customBrown: "#A49339",
         antGreay: "#00000073",
+        matalicYellow: "#B5A22E",
+        customWhite: "rgba(255, 255, 255, 0.6)",
       },
       fontFamily: {
         kanit: [
@@ -60,6 +66,9 @@ const config: Config = {
           "Kanit-BlackItalic",
           "sans-serif",
         ],
+        Inter: ["Inter"],
+        RobotoFlex: ["Roboto Flex", "sans-serif"],
+        RobotoFlexThin: ["Roboto-Flex-Thin", "sans-serif"],
       },
     },
   },
