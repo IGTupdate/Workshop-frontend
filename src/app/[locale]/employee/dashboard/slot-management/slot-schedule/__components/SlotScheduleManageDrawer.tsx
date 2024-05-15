@@ -33,6 +33,7 @@ import {
   updateSlotSchedule,
 } from "@/app/services/operations/appointment/slotSchedule";
 import toast from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 const { Text } = Typography;
 type Props = {};
@@ -45,6 +46,8 @@ const SlotScheduleManageDrawer = (props: Props) => {
   );
 
   const dispatch = useAppDispatch();
+
+  const t = useTranslations("EmployeeDashboardSlotSchedulePage");
 
   const closeDrwer = () => {
     if (!slotScheduleDrawerLoading) {
@@ -101,8 +104,8 @@ const SlotScheduleManageDrawer = (props: Props) => {
     <Drawer
       title={
         activeSlotSchedule && activeSlotSchedule === NEW_SLOT_SCHEDULE
-          ? "Create a new Schedule"
-          : "Update Schedule"
+          ? t("create_new_schedule")
+          : t("update_schedule")
       }
       width={480}
       onClose={closeDrwer}
@@ -121,7 +124,7 @@ const SlotScheduleManageDrawer = (props: Props) => {
             onClick={handleSubmit(onSubmit)}
             type="primary"
           >
-            Save
+            {t("save")}
           </Button>
         </Space>
       }
@@ -129,7 +132,7 @@ const SlotScheduleManageDrawer = (props: Props) => {
       <Form className="w-full" layout="vertical">
         <Row className="w-full mb-4">
           <label className="font-medium mb-2 block text-black1" htmlFor="name">
-            Schedule Name
+            {t("schedule_name")}
           </label>
           <Controller
             name="name"

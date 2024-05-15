@@ -6,6 +6,7 @@ import { calender_status } from "../__utils/constant";
 import { calenderCellBgColorByStatus } from "../__utils/constant";
 import { getAllSlotOfCalender } from "../__utils/helper";
 import { CgCloseO } from "react-icons/cg";
+import { useTranslations } from "next-intl";
 
 const getRequiredCalenderByDate = (
   calenderData: TCalender[],
@@ -31,7 +32,7 @@ type TdateCellRender = {
   handleCalenderCellButtonClick: (data: Partial<TCalender> | null) => void;
 };
 
-const dateCellRender = (params: TdateCellRender) => {
+const DateCellRender = (params: TdateCellRender) => {
   const {
     calenderData,
     current: value,
@@ -41,6 +42,8 @@ const dateCellRender = (params: TdateCellRender) => {
 
   // required calender
   const required_calender = getRequiredCalenderByDate(calenderData, value);
+
+  const t = useTranslations("EmployeeDashboardCalenderPage");
 
   // on click if calender already exist then open manage drawer for the calender else open new calender form
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -61,7 +64,9 @@ const dateCellRender = (params: TdateCellRender) => {
         className={`group w-full h-full ${calenderCellBgColorByStatus["Default"]} flex flex-col items-center justify-center relative overflow-hidden h-full w-full bg-[#CDCDCE]`}
       >
         <MdBlockFlipped size={25} className="text-white" />
-        <p className="text-md font-normal text-center text-white">Not Opened</p>
+        <p className="text-md font-normal text-center text-white">
+          {t("not_opened")}
+        </p>
       </div>
     );
   }
@@ -81,13 +86,15 @@ const dateCellRender = (params: TdateCellRender) => {
             <h2 className="text-xl font-semibold text-center">
               {getAllSlotOfCalender(required_calender)}
             </h2>
-            <p className="text-md font-normal text-center">Slots Open</p>
+            <p className="text-md font-normal text-center">{t("slots_open")}</p>
           </div>
         )}
         {required_calender?.status === calender_status.close && (
           <div className="flex flex-col justify-center items-center bg-[#eba78a] w-full h-full">
             <CgCloseO size={25} className="text-white" />
-            <p className="text-md font-normal text-center text-white">Closed</p>
+            <p className="text-md font-normal text-center text-white">
+              {t("closed")}
+            </p>
           </div>
         )}
       </div>
@@ -95,10 +102,10 @@ const dateCellRender = (params: TdateCellRender) => {
         onClick={handleClick}
         className="absolute -bottom-20 group-hover:bottom-0 transition-all ease-in-out duration-200 w-full py-2 bg-black1 text-white1"
       >
-        {required_calender ? "View" : "Schedule"}
+        {required_calender ? t("view") : t("schedule")}
       </button>
     </div>
   );
 };
 
-export default dateCellRender;
+export default DateCellRender;

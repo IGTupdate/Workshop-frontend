@@ -30,6 +30,7 @@ import { MdAddChart } from "react-icons/md";
 import dayjs from "dayjs";
 import useAbility from "@/app/__hooks/useAbility";
 import { casl_action, casl_subject } from "@/app/utils/casl/constant";
+import { useTranslations } from "next-intl";
 
 const { Title, Text } = Typography;
 
@@ -37,6 +38,8 @@ export function GetAppointmentDataTableColumn() {
   const router = useRouter();
 
   const ability = useAbility();
+
+  const t = useTranslations("EmployeeDashboardAppointmentPage");
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -72,7 +75,7 @@ export function GetAppointmentDataTableColumn() {
   const column_appointment_data_table: TableProps<TAppointmentDataTable>["columns"] =
     [
       {
-        title: "Name",
+        title: t("name"),
         dataIndex: "name",
         key: "name",
         ...GetColumnTextSearchProps<TAppointmentDataTable>("name"),
@@ -81,13 +84,13 @@ export function GetAppointmentDataTableColumn() {
         },
       },
       {
-        title: "Phone",
+        title: t("phone"),
         dataIndex: "phone",
         key: "phone",
         ...GetColumnTextSearchProps<TAppointmentDataTable>("phone"),
       },
       {
-        title: "Vehicle Reg No.",
+        title: t("vehile_registeration_number"),
         dataIndex: "registeration_number",
         key: "registeration_number",
         ...GetColumnTextSearchProps<TAppointmentDataTable>(
@@ -99,7 +102,7 @@ export function GetAppointmentDataTableColumn() {
         },
       },
       {
-        title: "Date & Time",
+        title: t("date_time"),
         dataIndex: "date_time",
         key: "date_time",
         defaultSortOrder: "descend",
@@ -115,7 +118,7 @@ export function GetAppointmentDataTableColumn() {
         },
       },
       {
-        title: "Status",
+        title: t("status"),
         dataIndex: "status",
         key: "status",
         filters: getAppointMentStatus(),
@@ -167,7 +170,7 @@ export function GetAppointmentDataTableColumn() {
         },
       },
       {
-        title: "Actions",
+        title: t("action"),
         dataIndex: "action",
         key: "action",
         render: (_, { _id, status }) => {

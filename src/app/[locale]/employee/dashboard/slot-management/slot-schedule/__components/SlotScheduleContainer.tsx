@@ -16,6 +16,7 @@ import { getAllSlotSchedule } from "@/app/services/operations/appointment/slotSc
 import Loader from "@/app/components/Loader";
 import useAbility from "@/app/__hooks/useAbility";
 import { casl_action, casl_subject } from "@/app/utils/casl/constant";
+import { useTranslations } from "next-intl";
 
 const { Text } = Typography;
 
@@ -27,6 +28,8 @@ const SlotScheduleContainer = (props: Props) => {
   const { slotScheduleData, slotScheduleLoading } = useAppSelector(
     (state) => state.slotSchedule,
   );
+
+  const t = useTranslations("EmployeeDashboardSlotSchedulePage");
 
   useEffect(() => {
     if (slotScheduleLoading) {
@@ -47,7 +50,7 @@ const SlotScheduleContainer = (props: Props) => {
   return (
     <div>
       <div className="flex justify-between items-center mb-8 p-4 bg-white rounded-md">
-        <h2 className="text-xl font-semibold">Slot Schedule</h2>
+        <h2 className="text-xl font-semibold">{t("slot_schedule")}</h2>
         {ability &&
           ability.can(casl_action.create, casl_subject.slot_schedule) && (
             <Button
@@ -56,7 +59,7 @@ const SlotScheduleContainer = (props: Props) => {
               }}
               type="primary"
             >
-              Add Schedule
+              {t("add_schedule")}
             </Button>
           )}
       </div>
@@ -75,6 +78,7 @@ const SlotScheduleContainer = (props: Props) => {
               handleSlotScheduleDrawer,
               handleSlotScheduleDeleteModal,
               ability,
+              t,
             )}
           />
         </div>

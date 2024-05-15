@@ -12,6 +12,7 @@ import AppointmentTableContainer from "./AppointmentTableContainer";
 import dayjs from "dayjs";
 import useAbility from "@/app/__hooks/useAbility";
 import { casl_action, casl_subject } from "@/app/utils/casl/constant";
+import { useTranslations } from "next-intl";
 const { RangePicker } = DatePicker;
 
 type Props = {};
@@ -28,6 +29,8 @@ const AppointmentpageContainer = (props: Props) => {
     appointments: [],
     totalAppointments: 0,
   });
+
+  const t = useTranslations("EmployeeDashboardAppointmentPage");
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -109,6 +112,7 @@ const AppointmentpageContainer = (props: Props) => {
           <div className="mb-4 flex justify-between">
             {searchParams.get("startDate") && searchParams.get("endDate") ? (
               <RangePicker
+                placeholder={["puneet", "dwivedi"]}
                 onChange={handleRangeSelect}
                 defaultValue={[
                   dayjs(searchParams.get("startDate")),
@@ -120,7 +124,7 @@ const AppointmentpageContainer = (props: Props) => {
             )}
             <div>
               <Button type="primary" onClick={handleClearFilter}>
-                Clear Filter
+                {t("clear_filter")}
               </Button>
             </div>
           </div>

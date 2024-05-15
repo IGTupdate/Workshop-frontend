@@ -13,6 +13,7 @@ import { useAppSelector } from "@/app/store/reduxHooks";
 import useAbility from "@/app/__hooks/useAbility";
 import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 import { employeeRole } from "@/app/utils/constants/employee-roles";
+import { useTranslations } from "next-intl";
 const { RangePicker } = DatePicker;
 
 type Props = {};
@@ -24,6 +25,8 @@ const WorkOrderPageContainer = (props: Props) => {
     totalWorkOrders: 0,
   });
   const { authData } = useAppSelector((state) => state.auth);
+
+  const t = useTranslations("EmployeeDashboardWorkOrderPage");
 
   const ability = useAbility();
   const searchParams = useSearchParams();
@@ -125,7 +128,7 @@ const WorkOrderPageContainer = (props: Props) => {
             )}
             <div>
               <Button type="primary" onClick={handleClearFilter}>
-                Clear Filter
+                {t("clear_filter")}
               </Button>
             </div>
           </div>

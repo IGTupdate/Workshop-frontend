@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { setActiveCalender } from "@/app/store/slices/calenderSlice";
 import { TCalender } from "@/app/types/calender";
 import CalenderCreate from "./CalenderCreate";
+import { useTranslations } from "next-intl";
 
 const { Text } = Typography;
 
@@ -15,6 +16,8 @@ type Props = {};
 const CalenderManageDrawer = (props: Props) => {
   // dispatch event
   const dispatch = useAppDispatch();
+
+  const t = useTranslations("EmployeeDashboardCalenderPage");
 
   // calender state
   const { activeCalender, calenderDrawerLoading } = useAppSelector((state) => {
@@ -32,7 +35,7 @@ const CalenderManageDrawer = (props: Props) => {
       <Drawer
         title={
           <Text>
-            Manage Date :{" "}
+            {t("manage_date")} :{" "}
             {activeCalender?.date
               ? new Date(activeCalender?.date).toDateString()
               : "-"}{" "}
@@ -58,7 +61,7 @@ const CalenderManageDrawer = (props: Props) => {
             )}
           </div>
         ) : (
-          <Text>No Date Selected</Text>
+          <Text>{t("no_date_selected")}</Text>
         )}
       </Drawer>
     </div>

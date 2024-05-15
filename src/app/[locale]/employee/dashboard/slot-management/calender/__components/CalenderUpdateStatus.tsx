@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { getAppointmentByCalenderId } from "@/app/services/operations/appointment/appointment";
 import { udpateCalenderStatus } from "@/app/services/operations/appointment/calender";
 import { toogleCalenderStatus } from "../__utils/helper";
+import { useTranslations } from "next-intl";
 
 const { Title, Text } = Typography;
 
@@ -25,6 +26,8 @@ const CalenderUpdateStatus = (props: Props) => {
   const { updateCalenderLoading, updateStatusCalender } = useAppSelector(
     (state) => state.calender,
   );
+
+  const t = useTranslations("EmployeeDashboardCalenderPage");
 
   const getAppointmentScheduledData = async () => {
     try {
@@ -67,7 +70,7 @@ const CalenderUpdateStatus = (props: Props) => {
     <div>
       <Modal
         open={updateStatusCalender !== null}
-        title={<Title level={4}>Confirm</Title>}
+        title={<Title level={4}>{t("confirm")}</Title>}
         onCancel={handleCancel}
         footer={(_, { CancelBtn }) => (
           <>
@@ -77,7 +80,7 @@ const CalenderUpdateStatus = (props: Props) => {
               onClick={handleOk}
               className="bg-blue1 text-white1 font-medium text-md"
             >
-              Confirm
+              {t("confirm")}
             </Button>
           </>
         )}
@@ -86,13 +89,13 @@ const CalenderUpdateStatus = (props: Props) => {
           {updateStatusCalender ? (
             <div>
               <Text className="text-md mb-1">
-                Are You Sure Want to
+                {t("are_you_sure")}
                 <span className="font-semibold">
                   {updateStatusCalender.status === calender_status.open
                     ? " Close"
                     : " Open"}
                 </span>{" "}
-                Slots for
+                {t("slots_for")}
                 {new Date(updateStatusCalender.date).toDateString()} ?
               </Text>
               {updateStatusCalender.status === calender_status.open && (
@@ -100,15 +103,15 @@ const CalenderUpdateStatus = (props: Props) => {
                   {appponitementData && appponitementData > 0 ? (
                     <div>
                       <Text type="danger" style={{ fontSize: "12px" }}>
-                        {appponitementData} Scheduled appointments will be
-                        cancelled
+                        {appponitementData}{" "}
+                        {t("scheduled_appointment_will_be_cancelled")}
                       </Text>
                       <br />
                       <Link
                         href={`/employee/dashboard/appointment?calender_id=${updateStatusCalender._id}`}
                         className="text-blue1 text-[12px] flex items-start"
                       >
-                        View Appointments
+                        {t("view_appointments")}
                         <MdOutlineKeyboardArrowRight className="w-6 h-6" />
                       </Link>
                     </div>
@@ -119,7 +122,7 @@ const CalenderUpdateStatus = (props: Props) => {
               )}
             </div>
           ) : (
-            <Text>No Calender Selected</Text>
+            <Text>{t("no_calender_selected")}</Text>
           )}
         </Spin>
       </Modal>
