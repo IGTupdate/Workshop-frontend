@@ -3,14 +3,16 @@ import { Button, Flex, Select } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { useTransition } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 type Props = {};
 
 const LandingNavbar = (props: Props) => {
+  const [toggle, setToggle] = useState(false);
   const t = useTranslations("Navbar");
-
+  const pathName = usePathname();
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const localeActive = useLocale();
@@ -21,42 +23,50 @@ const LandingNavbar = (props: Props) => {
     });
   };
 
+  // console.log(pathName);
+
   return (
     <div className="container">
       <Flex
         align="center"
-        gap="large"
-        className="w-full flex-wrap bg-transparent pt-8 pb-4 justify-center sm:justify-between"
+        className="w-full flex-wrap bg-transparent pt-4 sm:pt-8 pb-4 justify-between"
       >
         <Image src={"/images/logo-1.webp"} alt="Logo" height={55} width={150} />
 
-        <Flex justify="space-between" align="center" className="gap-12">
-          <Flex align="center" className="gap-8">
+        <div
+          className={`flex flex-col p-4 gap-4 fixed ${toggle ? "left-[0]" : "left-[-200%]"} transition-all top-0 h-screen w-[315px] bg-matalicYellow xmd:static xmd:justify-between xmd:items-center xmd:flex-row xmd:p-0 xmd:gap-8 xmd:bg-transparent xmd:h-max xmd:w-max`}
+        >
+          <div
+            className={`flex flex-col p-4 gap-4 transition-all xmd:justify-between xmd:items-center xmd:flex-row xmd:p-0 xmd:gap-8 xmd:bg-transparent xmd:h-max xmd:w-max`}
+          >
             <Link
-              className="text-white text-xl font-normal font-Inter hover:text-customYellow"
+              className="text-xl font-normal font-Inter hover:text-customYellow bg-black xmd:bg-transparent p-2 rounded-xl"
               href={"/dashboard"}
+              style={{
+                color: `/${localeActive}` === pathName ? "yellow" : "white",
+              }}
             >
               {t("home")}
             </Link>
             <Link
-              className="text-white text-xl font-normal font-Inter hover:text-customYellow"
+              className="text-white text-xl font-normal font-Inter hover:text-customYellow p-2 rounded-xl"
               href={"/dashboard"}
             >
               {t("we")}
             </Link>
             <Link
-              className="text-white text-xl font-normal font-Inter hover:text-customYellow"
+              className="text-white text-xl font-normal font-Inter hover:text-customYellow p-2 rounded-xl"
               href={"/dashboard"}
             >
               {t("services")}
             </Link>
             <Link
-              className="text-white text-xl font-normal font-Inter hover:text-customYellow"
+              className="text-white text-xl font-normal font-Inter hover:text-customYellow p-2 rounded-xl"
               href={"/dashboard"}
             >
               {t("contactUs")}
             </Link>
-          </Flex>
+          </div>
 
           <Link
             href={`${localeActive}/login`}
@@ -64,7 +74,12 @@ const LandingNavbar = (props: Props) => {
           >
             {t("login")}
           </Link>
-        </Flex>
+        </div>
+        <RxHamburgerMenu
+          onClick={() => setToggle(!toggle)}
+          size={25}
+          className="text-customYellow block xmd:hidden"
+        />
       </Flex>
     </div>
   );

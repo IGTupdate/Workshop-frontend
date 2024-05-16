@@ -9,6 +9,9 @@ const config: Config = {
   theme: {
     container: {
       center: true,
+      padding: {
+        DEFAULT: "1rem",
+      },
     },
     screens: {
       sm: "640px",
@@ -22,7 +25,9 @@ const config: Config = {
       boxShadow: {
         top: "0px -8px 30px #0000001f",
         "3d": "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
-        topDiv: "inset 0px 15px 25px 0px #00000080",
+        topDivSmall: "inset -1px -5px 40px 0px rgba(0, 0, 0, 0.5)",
+        topDiv: "inset -1px -30px 74px 30px rgba(0, 0, 0, 0.5)",
+        bottom: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

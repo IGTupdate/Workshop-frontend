@@ -10,6 +10,12 @@ import AboutUsFooter from "./__components/AboutUs";
 import HeadingSection from "./__components/HeadingSection";
 import Operating from "./__components/Operating";
 import Modules from "./__components/Modules";
+import Image from "next/image";
+import LineTwo from "../../../../public/images/line2.webp";
+import LineThree from "../../../../public/images/line3.webp";
+import BgCar from "../../../../public/images/bgcar.webp";
+import Proactive from "./__components/Proactive";
+import NewEmpolyeeLogin from "./__components/NewEmpolyeeLogin";
 
 const { Header, Footer, Content } = Layout;
 
@@ -28,7 +34,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 0) {
         setScrolling(true);
       } else {
         setScrolling(false);
@@ -47,7 +53,7 @@ const App: React.FC = () => {
           background: scrolling ? "#000000ad" : "transparent",
           boxShadow: scrolling ? "5px 5px 15px #ffffff5e" : "none",
         }}
-        className=" fixed top-0 left-1/2 translate-x-[-50%] z-10 w-full"
+        className="fixed top-0 left-1/2 translate-x-[-50%] z-20 w-full"
       >
         <LandingNavbar />
       </div>
@@ -60,8 +66,30 @@ const App: React.FC = () => {
             <Operating />
           </div>
 
-          <div className="bg-[#2E2E2E] shadow-topDiv py-4">
+          <div className="relative overflow-hidden bg-[#2E2E2E] shadow-topDivSmall sm:shadow-topDiv py-4 z-10 md:py-12">
+            <Image
+              src={LineTwo}
+              alt="line"
+              className="absolute top-20 sm:top-[-50px] xmd:top-[-350px] left-0 w-full z-[-1]"
+            />
             <Modules />
+          </div>
+
+          <div className="bg-[#2E2E2E]">
+            <Proactive />
+          </div>
+
+          <div className="bg-[#2E2E2E] relative overflow-hidden">
+            <Image
+              src={LineThree}
+              alt="line"
+              className="absolute bottom-0 xmd:bottom-[-60px] left-0 w-full z-[1]"
+            />
+            <div>
+              <Image src={BgCar} alt="BgCar" className="w-full" />
+            </div>
+
+            <NewEmpolyeeLogin />
           </div>
 
           {/* <SlotSchedule scrollToSlotDetails={scrollToSlotDetails} /> */}

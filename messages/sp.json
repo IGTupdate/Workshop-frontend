@@ -24,6 +24,19 @@
     "slate": "Administración y contabilidad",
     "user": "Gestión de recursos humanos"
   },
+  "Modules": {
+    "heading": "MÓDULOS"
+  },
+  "Proactive": {
+    "heading": "RECEPCIÓN PROACTIVA CON IA",
+    "subHeading": "¡Da un paso adelante en la experiencia del cliente con nuestra tecnología de vanguardia! Con nuestras cámaras de inteligencia artificial, recibes a cada cliente con precisión y anticipación, mostrando un servicio excepcional desde el primer instante. Agiliza el proceso de admisión y asegura una experiencia impecable desde el primer contacto. Con esta solución innovadora, tu agencia automotriz marca la diferencia desde el primer momento, dejando una impresión duradera en tus clientes y elevando tu reputación empresarial."
+  },
+  "NewEmployeeLogin": {
+    "heading": "Inicio de sesión (empleado)",
+    "emailPlaceholder": "Correo electrónico",
+    "passwordPlaceholder": "Contraseña",
+    "button": "Iniciar sesión"
+  },
   "SlotSchedule": {
     "welcome": "Bienvenido a Appviser",
     "findButton": "Encuentra espacios disponibles"

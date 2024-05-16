@@ -1,27 +1,27 @@
 import { useTranslations } from "next-intl";
-import { FaCar } from "react-icons/fa";
-import { PiToolboxFill } from "react-icons/pi";
-import { FaClipboard } from "react-icons/fa";
-import { FaUsersCog } from "react-icons/fa";
+import Car from "../../../public/Images/car.webp";
+import Bag from "../../../public/Images/bag.webp";
+import Board from "../../../public/Images/board.webp";
+import Users from "../../../public/Images/users.webp";
 
 const SliderItmes = () => {
   const t = useTranslations("SliderItems");
   return [
     {
       text: `${t("car")}`,
-      Icon: FaCar,
+      Image: Car,
     },
     {
       text: `${t("bag")}`,
-      Icon: PiToolboxFill,
+      Image: Bag,
     },
     {
       text: `${t("slate")}`,
-      Icon: FaClipboard,
+      Image: Board,
     },
     {
       text: `${t("user")}`,
-      Icon: FaUsersCog,
+      Image: Users,
     },
   ];
 };

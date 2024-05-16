@@ -24,6 +24,19 @@
     "slate": "Administration and accounting",
     "user": "Human resources management"
   },
+  "Modules": {
+    "heading": "MODULES"
+  },
+  "Proactive": {
+    "heading": "PROACTIVE RECEPTION WITH AI",
+    "subHeading": "Take a step forward in customer experience with our cutting-edge technology! With our artificial intelligence cameras, you receive each client with precision and anticipation, showing exceptional service from the first moment. Streamlines the admission process and ensures an impeccable experience from the first contact. With this innovative solution, your automotive agency makes a difference from the first moment, leaving a lasting impression on your clients and elevating your business reputation."
+  },
+  "NewEmployeeLogin": {
+    "heading": "Login (employee)",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "button": "Log in"
+  },
   "SlotSchedule": {
     "welcome": "Welcome to Appviser",
     "findButton": "Find Available Slots"
