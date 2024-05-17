@@ -5,43 +5,47 @@ import { FaTruckRampBox } from "react-icons/fa6";
 import { RxDashboard } from "react-icons/rx";
 import { IoIosApps } from "react-icons/io";
 import { FaRegCalendarAlt } from "react-icons/fa";
-import { MdSchedule } from "react-icons/md";
+import { MdOutlineDesktopWindows, MdSchedule } from "react-icons/md";
 import { FaHouseUser } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa";
 import { DesktopOutlined } from "@ant-design/icons";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu } from "antd";
+import { Menu, Skeleton } from "antd";
 import {
   getActiveSideBarMenu,
   getSideBarMenuItems,
-  sideBarMenuItems,
+  SideBarMenuItems,
 } from "../utils/sideBarMenuItems";
 import useAbility from "@/app/__hooks/useAbility";
 import { useAppSelector } from "@/app/store/reduxHooks";
 import { ItemType } from "antd/es/menu/hooks/useItems";
-
-const dashBoardIcons = {
-  // label: iconsreact
-  Dashboard: <RxDashboard />,
-  Appointment: <DesktopOutlined />,
-  SlotManagement: <IoIosApps />,
-  Calender: <FaRegCalendarAlt />,
-  SlotSchedule: <MdSchedule />,
-  WorkOrder: <FaHouseUser />,
-  Employee: <FaRegUser />,
-  Ramp: <FaTruckRampBox />,
-};
+import { useTranslations } from "next-intl";
+import { IoSettingsOutline } from "react-icons/io5";
 
 type Props = {};
 
 const SideBarMenus = (props: Props) => {
+  const t = useTranslations("EmployeeSideBar");
+  const dashBoardIcons = {
+    // label: iconsreact
+    [t("dashboard")]: <RxDashboard size={20} />,
+    [t("appointment")]: <MdOutlineDesktopWindows size={20} />,
+    [t("slotManagement")]: <IoIosApps size={20} />,
+    [t("calender")]: <FaRegCalendarAlt />,
+    [t("slotSchedule")]: <MdSchedule size={20} />,
+    [t("workOrder")]: <FaHouseUser size={20} />,
+    [t("employee")]: <FaRegUser size={20} />,
+    [t("ramp")]: <FaTruckRampBox size={20} />,
+    [t("settings")]: <IoSettingsOutline size={20} />,
+  };
+
   const router = useRouter();
   const pathname = usePathname();
   const ability = useAbility();
 
   const sideBarMenus = getSideBarMenuItems(
     router,
-    sideBarMenuItems,
+    SideBarMenuItems(),
     dashBoardIcons,
     ability,
   );
@@ -49,14 +53,31 @@ const SideBarMenus = (props: Props) => {
   const activeDashboardKey = getActiveSideBarMenu(pathname);
 
   return (
-    <Menu
-      mode="inline"
-      defaultSelectedKeys={[activeDashboardKey]}
-      // theme='dark'
-      defaultOpenKeys={["sub1"]}
-      items={sideBarMenus}
-    />
+    <>
+      {ability !== undefined ? (
+        <Menu
+          mode="inline"
+          defaultSelectedKeys={[activeDashboardKey]}
+          // theme='dark'
+          defaultOpenKeys={["sub1"]}
+          items={sideBarMenus}
+        />
+      ) : (
+        <MenusItmes />
+      )}
+    </>
   );
 };
 
 export default SideBarMenus;
+
+const MenusItmes = () => {
+  return (
+    <div className="flex flex-col items-center">
+      {SideBarMenuItems()?.map((menu, index) => (
+        // eslint-disable-next-line react/jsx-key
+        <Skeleton.Input active={true} size={"large"} className="mt-2" />
+      ))}
+    </div>
+  );
+};

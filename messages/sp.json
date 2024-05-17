@@ -186,7 +186,15 @@
   },
   "EmployeeSideBar": {
     "heading": "Hola",
-    "dashboard": "Dashboard"
+    "dashboard": "Panel",
+    "appointment": "Cita",
+    "workOrder": "Orden de trabajo",
+    "slotManagement": "Gestión de tragamonedas",
+    "calender": "Calendario",
+    "slotSchedule": "Horario de tragamonedas",
+    "employee": "Empleada",
+    "ramp": "Rampa",
+    "settings": "Ajustes"
   },
   "EmployeeDashboardAppointmentPage": {
     "manage_appointment": "Gestionar citas",

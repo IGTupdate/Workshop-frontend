@@ -186,7 +186,15 @@
   },
   "EmployeeSideBar": {
     "heading": "Hello",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "appointment": "Appointment",
+    "workOrder": "Work Order",
+    "slotManagement": "Slot Management",
+    "calender": "Calender",
+    "slotSchedule": "Slot Schedule",
+    "employee": "Employee",
+    "ramp": "Ramp",
+    "settings": "Settings"
   },
   "EmployeeDashboardAppointmentPage": {
     "manage_appointment": "Manage Appointments",

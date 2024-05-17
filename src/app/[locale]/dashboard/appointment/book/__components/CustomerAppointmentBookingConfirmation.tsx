@@ -13,7 +13,7 @@ import { TSlot } from "@/app/types/calender";
 import { TServicePlans } from "@/app/types/service";
 import { TVehicle } from "@/app/types/vehicle";
 import { COMMON_ERROR } from "@/app/utils/constants/constant";
-import { removeQueryParams } from "@/app/utils/helper";
+import { PriceCalculator, removeQueryParams } from "@/app/utils/helper";
 import { Button, Divider, Typography } from "antd";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -24,6 +24,8 @@ import { setAppointmentLoading } from "@/app/store/slices/customerAppointmentSli
 import Watermark from "@/app/components/Text/WatermarkText";
 import CustomModal from "@/app/components/Model/CustomModel";
 import { MdOutlineCancel } from "react-icons/md";
+import { disconnect } from "process";
+import { formatDateAndTime } from "@/app/utils/dateFormatter";
 
 const { Title } = Typography;
 
@@ -48,7 +50,9 @@ type TappointmentBookingConfirmationData = {
 };
 
 const CustomerAppointmentBookingConfirmation = (props: Props) => {
+  const [discountPrice, setDiscountPrice] = useState(0);
   const [amount, setAmount] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const userRole = useAppSelector((state) => state.auth.authData.role);
@@ -213,7 +217,9 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
       };
     });
   };
+
   let total = 0;
+  let tax = 18;
 
   useEffect(() => {
     for (
@@ -225,8 +231,16 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
         total + appointmentBookingConfirmationData?.servicePlans[i]?.price;
     }
 
+    const totalRate = total * 1.3;
+
+    setDiscountPrice(totalRate - total);
     setAmount(total);
+    setTotalAmount(total + total * (tax / 100));
   }, [appointmentBookingConfirmationData.servicePlans]);
+
+  function parseFloat(discountPrice: number) {
+    throw new Error("Function not implemented.");
+  }
 
   return (
     <>
@@ -330,7 +344,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
               </div>
             </div>
             <div className="">
-              {appointmentBookingConfirmationData.servicePlans?.length > 0 ? (
+              {/* {appointmentBookingConfirmationData.servicePlans?.length > 0 ? (
                 appointmentBookingConfirmationData.servicePlans.map(
                   (plan, i) => <ServicePlans key={i} plan={plan} />,
                 )
@@ -338,9 +352,9 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                 <div className="relative">
                   <Watermark text="No Plans Selected" />
                 </div>
-              )}
+              )} */}
 
-              {appointmentBookingConfirmationData.servicePlans?.length > 0 && (
+              {appointmentBookingConfirmationData.servicePlans?.length > 0 ? (
                 <div className=" bg-white p-4 my-4">
                   {appointmentBookingConfirmationData.servicePlans?.length >
                     0 &&
@@ -348,19 +362,42 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                       (plan, i) => (
                         <div
                           key={i}
-                          className="flex justify-between items-center"
+                          className="flex justify-between items-center mb-4"
                         >
-                          <p className="font-semibold">{plan.name}</p>
-                          <p className="text-lg font-semibold">
-                            $ {plan.price}
+                          <p className="font-bold">{plan.name}</p>
+                          <p className="text-lg font-bold">
+                            $ {PriceCalculator(plan.price)}
                           </p>
                         </div>
                       ),
                     )}
-                  <div className="border-t flex justify-between items-center mt-4">
-                    <p className="font-bold">Service plans total</p>
-                    <p className="text-lg font-bold">$ {amount}</p>
+
+                  <div className="border-t py-4">
+                    <div className=" flex justify-between items-center">
+                      <p className="font-bold">Discount</p>
+                      <p className="text-lg font-bold">
+                        - $ {discountPrice.toFixed(2)}
+                      </p>
+                    </div>
+                    <div className=" flex justify-between items-center">
+                      <p className="font-bold">Discount Price</p>
+                      <p className="text-lg font-bold"> $ {amount}</p>
+                    </div>
+                    <div className=" flex justify-between items-center">
+                      <p className="font-bold">Tax</p>
+                      <p className="text-lg font-bold">{tax} %</p>
+                    </div>
                   </div>
+                  <div className="border-t flex justify-between items-center pt-4">
+                    <p className="font-bold">Service plans total</p>
+                    <p className="text-lg font-bold">
+                      $ {totalAmount.toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="relative">
+                  <Watermark text="No Plans Selected" />
                 </div>
               )}
             </div>
@@ -400,10 +437,18 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
           </div>
           <Divider />
           <div>
-            <div className="flex flex-wrap justify-between items-start gap-2 sm:gap-0 flex-col-reverse sm:flex-row">
-              <div className="w-full sm:w-1/2">
-                <Title level={5}>Remarks</Title>
+            <div className="flex flex-col flex-wrap justify-between items-start gap-2 sm:gap-0">
+              <div className="w-full">
+                <InputFieldWithButton
+                  name="desc"
+                  label="Remarks"
+                  placeholder="Add Description"
+                  type="text"
+                  handleButtonClick={addRemarks}
+                />
+              </div>
 
+              <div className="w-full mt-4">
                 {props?.appointmentBookingData?.service_description?.map(
                   (ele, i) => (
                     <p
@@ -420,15 +465,6 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                     </p>
                   ),
                 )}
-              </div>
-              <div className="w-full sm:w-1/2">
-                <InputFieldWithButton
-                  name="desc"
-                  label="Add Description"
-                  placeholder="Add Description"
-                  type="text"
-                  handleButtonClick={addRemarks}
-                />
               </div>
             </div>
           </div>
@@ -462,7 +498,47 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
           </Button>,
         ]}
       >
-        <p></p>
+        <div>
+          <div className="flex justify-between items">
+            <p className="font-medium text-base">
+              Appointment of your vehicle{" "}
+            </p>
+            <p>
+              {
+                appointmentBookingConfirmationData?.vehicle
+                  ?.registeration_number
+              }
+            </p>
+          </div>
+          <div className="flex justify-between items mt-2">
+            <p className="font-medium text-base">Slot Time</p>
+            {appointmentBookingConfirmationData?.slot_details?.start_time && (
+              <p>
+                {formatDateAndTime(
+                  appointmentBookingConfirmationData.slot_details.start_time,
+                )}
+              </p>
+            )}
+          </div>
+
+          <div className="my-4">
+            <h2 className="font-medium text-base">Selected Service Plans</h2>
+
+            <div className="flex flex-wrap items-center gap-4">
+              {appointmentBookingConfirmationData?.servicePlans?.map(
+                (plan, index) => (
+                  // eslint-disable-next-line react/jsx-key
+                  <h3 className="font-medium text-nowrap">{plan.name}</h3>
+                ),
+              )}
+            </div>
+          </div>
+
+          <div className="flex justify-between items">
+            <p className="font-medium text-base">Total Amount</p>
+            <p className="font-bold">$ {totalAmount}</p>
+          </div>
+        </div>
       </CustomModal>
     </>
   );

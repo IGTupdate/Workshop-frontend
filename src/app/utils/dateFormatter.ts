@@ -40,5 +40,5 @@ export function extractTimeFromDate(dateString: string): string {
 }
 
 export function formatDateAndTime(dateString: string) {
-  return new Date(dateString).toLocaleString("en-GB");
+  return new Date(dateString).toLocaleString("en-GB", { hour12: true });
 }

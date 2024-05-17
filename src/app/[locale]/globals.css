@@ -134,3 +134,23 @@ input[type="number"]::-webkit-outer-spin-button {
   .ant-modal-header {
   background: transparent !important;
 }
+
+@keyframes scallion-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.scallion-loader {
+  width: 1rem;
+  height: 1rem;
+  border: 0.125rem solid transparent;
+  border-top: 0.125rem solid #4fd1c5;
+  border-right: 0.125rem solid #4fd1c5;
+  border-radius: 50%;
+  animation: scallion-spin 1s linear infinite;
+}

@@ -40,22 +40,25 @@ const ServicePlans: React.FC<Props> = ({
 
         {/* heading */}
         <div className="heading">
-          <h3 className="font-bold text-2xl">{plan.name}</h3>
-          <p className="font-semibold text-lg">{plan.description}</p>
+          <h3 className="font-bold text-xl">{plan.name}</h3>
+          <p className="font-semibold text-base">{plan.description}</p>
         </div>
 
         {/* tasks */}
         {plan.tasks && plan.tasks.length > 0 && (
-          <div className="flex gap-4 flex-wrap justify-between items-center mt-4 overflow-hidden">
+          <div className="flex gap-2 flex-wrap justify-between items-center mt-4 overflow-hidden">
             {plan?.tasks
               ?.slice(0, view ? plan?.tasks?.length : 5)
               ?.map((task, i) => (
                 // show tasks
-                <p className="w-[48%] flex items-center gap-2" key={i}>
-                  <span className="flex justify-center items-center h-[20px] w-[20px] rounded-full bg-green-200">
-                    <IoIosCheckmark className="text-green-400 text-xl" />
+                <p
+                  className="w-full sm:w-[48%] flex flex-none items-center gap-2"
+                  key={i}
+                >
+                  <span className="flex justify-center items-center h-[16px] w-[16px] rounded-full bg-green-200">
+                    <IoIosCheckmark className="text-green-400 text-base" />
                   </span>
-                  <span className="text-base font-medium text-nowrap">
+                  <span className="text-base font-normal text-nowrap">
                     {task.name}
                   </span>
                 </p>
@@ -80,7 +83,7 @@ const ServicePlans: React.FC<Props> = ({
             <span className="line-through text-base font-semibold text-antGreay leading-[25px]">
               $ {PriceCalculator(plan.price)}
             </span>
-            <span className="text-xl font-semibold">$ {plan.price}</span>
+            <span className="text-lg font-semibold">$ {plan.price}</span>
           </p>
 
           <div className="flex gap-4 items-center">

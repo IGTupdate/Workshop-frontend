@@ -61,7 +61,7 @@ const Page: React.FC = () => {
   };
 
   return (
-    <div className="h-screen sm:h-full pt-20 pb-32 px-4 md:py-0 overflow-auto">
+    <div className="h-screen sm:h-full pt-24 pb-32 px-4 md:py-0 overflow-auto">
       {/* step bar */}
       {loading ? (
         <div className="flex justify-center items-center h-full">

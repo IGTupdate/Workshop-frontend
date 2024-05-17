@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import {
   findRecursiveByPathNameExact,
-  sideBarMenuItems,
+  SideBarMenuItems,
 } from "../utils/sideBarMenuItems";
 
 type Props = {};
@@ -32,7 +32,7 @@ const BreadCrumbContainer = (props: Props) => {
         const currentPath = path.substring(0, index);
         // console.log(currentPath);
         const requiredSubMenuItem = findRecursiveByPathNameExact(
-          sideBarMenuItems,
+          Array.isArray(SideBarMenuItems) ? SideBarMenuItems : [],
           currentPath,
         );
         if (requiredSubMenuItem) {

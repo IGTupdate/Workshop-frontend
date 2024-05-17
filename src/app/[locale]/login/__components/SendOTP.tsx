@@ -24,8 +24,12 @@ const SendOTP = (props: Tprops) => {
 
   const dispatch = useAppDispatch();
   // const contact = useAppSelector((state) => state.auth.authData.contactNumber);
-  const { authLoading, authData } = useAppSelector((state) => state.auth);
-  const [countryCode, setCountryCode] = useState("+52");
+  const {
+    authLoading,
+    authData,
+    countryCode: code,
+  } = useAppSelector((state) => state.auth);
+  const [countryCode, setCountryCode] = useState(code ? code : "+52");
   const [contactNumber, setContactNumber] = useState("");
   const [contactNumberError, setContactNumberError] = useState("");
 
@@ -103,7 +107,7 @@ const SendOTP = (props: Tprops) => {
         <div className="flex w-full justify-between items-center gap-2">
           <Select
             size="large"
-            defaultValue="+52"
+            defaultValue={countryCode}
             // style={{ width: '22%', height: 42 }}
             className="w-[28%] h-[38px]"
             onChange={handleSelect}

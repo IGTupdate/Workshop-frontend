@@ -10,6 +10,7 @@ const { Option } = Select;
 const Page = () => {
   const [language, setLanguage] = useState("english");
   const [visible, setVisible] = useState(false);
+  const [value, setValue] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("");
 
   const [isPending, startTransition] = useTransition();
@@ -17,7 +18,13 @@ const Page = () => {
   const pathname = usePathname();
   const localeActive = useLocale();
 
-  const onChangeLocale = (value: string) => {
+  const onChangeLAnguage = (value: string) => {
+    setVisible(true);
+    setValue(value);
+  };
+
+  const onChangeLocale = () => {
+    setVisible(false);
     var segments = pathname.split("/");
     var spSegment = segments[1];
 
@@ -26,11 +33,6 @@ const Page = () => {
       var newPathname = pathname.replace(`/${spSegment}/`, `/${value}/`);
       router.replace(newPathname);
     });
-  };
-
-  const handleOk = () => {
-    setLanguage(selectedLanguage);
-    setVisible(false);
   };
 
   const handleCancel = () => {
@@ -46,7 +48,7 @@ const Page = () => {
           defaultValue={localeActive}
           placeholder="Select a person"
           optionFilterProp="children"
-          onChange={onChangeLocale}
+          onChange={onChangeLAnguage}
           options={[
             {
               value: "en",
@@ -64,14 +66,16 @@ const Page = () => {
         open={visible}
         onCancel={handleCancel}
         footer={[
-          <Button key="changeLanguage" onClick={() => handleOk()}>
+          <Button key="changeLanguage" onClick={() => onChangeLocale()}>
             Change Language
           </Button>,
         ]}
       >
         <p>
           Are you sure you want to change the language to{" "}
-          {selectedLanguage.toUpperCase()}?
+          <span className="text-lg font-semibold">
+            {value === "en" ? "English" : "Spanish"} ?
+          </span>
         </p>
       </CustomModel>
     </div>

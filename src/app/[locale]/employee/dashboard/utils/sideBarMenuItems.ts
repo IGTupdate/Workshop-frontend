@@ -1,6 +1,7 @@
 import { CustomerSideBarMenuItems } from "@/app/[locale]/dashboard/__components/__desktopComponents/CustomerSideBarMenuItems";
 import { AbilityTuple, MongoAbility, MongoQuery } from "@casl/ability";
 import { MenuProps } from "antd";
+import { useTranslations } from "next-intl";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export type TsideBarMenuItems = {
@@ -11,56 +12,65 @@ export type TsideBarMenuItems = {
   resourcetype?: string;
 };
 
-export const sideBarMenuItems: TsideBarMenuItems[] = [
-  {
-    key: "1",
-    label: "Dashboard",
-    pathname: "/employee/dashboard",
-    resourcetype: "dashboard",
-  },
-  {
-    key: "2",
-    label: "Appointment",
-    pathname: "/employee/dashboard/appointment",
-    resourcetype: "appointment",
-  },
-  {
-    key: "3",
-    label: "Work Order",
-    pathname: "/employee/dashboard/workorder",
-    resourcetype: "workorder",
-  },
-  {
-    key: "4",
-    label: "Ramp",
-    pathname: "/employee/dashboard/ramp",
-    resourcetype: "ramp",
-  },
-  {
-    key: "6",
-    label: "Slot Management",
-    children: [
-      {
-        key: "7",
-        label: "Calender",
-        pathname: "/employee/dashboard/slot-management/calender",
-        resourcetype: "calender",
-      },
-      {
-        key: "8",
-        label: "Slot Schedule",
-        pathname: "/employee/dashboard/slot-management/slot-schedule",
-        resourcetype: "slot_schedule",
-      },
-    ],
-  },
-  {
-    key: "9",
-    label: "Employee",
-    pathname: "/employee/dashboard/employee",
-    resourcetype: "employee",
-  },
-];
+export const SideBarMenuItems: () => TsideBarMenuItems[] = () => {
+  const t = useTranslations("EmployeeSideBar");
+  return [
+    {
+      key: "1",
+      label: t("dashboard"),
+      pathname: "/employee/dashboard",
+      resourcetype: "dashboard",
+    },
+    {
+      key: "2",
+      label: t("appointment"),
+      pathname: "/employee/dashboard/appointment",
+      resourcetype: "appointment",
+    },
+    {
+      key: "3",
+      label: t("workOrder"),
+      pathname: "/employee/dashboard/workorder",
+      resourcetype: "workorder",
+    },
+    {
+      key: "4",
+      label: t("ramp"),
+      pathname: "/employee/dashboard/ramp",
+      resourcetype: "ramp",
+    },
+    {
+      key: "6",
+      label: t("slotManagement"),
+      children: [
+        {
+          key: "7",
+          label: t("calender"),
+          pathname: "/employee/dashboard/slot-management/calender",
+          resourcetype: "calender",
+        },
+        {
+          key: "8",
+          label: t("slotSchedule"),
+          pathname: "/employee/dashboard/slot-management/slot-schedule",
+          resourcetype: "slot_schedule",
+        },
+      ],
+    },
+    {
+      key: "9",
+      label: t("employee"),
+      pathname: "/employee/dashboard/employee",
+      resourcetype: "employee",
+    },
+    {
+      key: "10",
+      label: t("settings"),
+      pathname: "/employee/dashboard/settings",
+      resourcetype: "settings",
+    },
+  ];
+};
 
 export const commonResources = ["profile", "dashboard"];
 
@@ -143,13 +153,19 @@ export const findRecursiveByPathNameExact = (
 ): TsideBarMenuItems | null => {
   let newPathname = pathname.replace(/^\/(sp|en)/, "");
 
-  for (const item of sideBarMenuItems) {
-    // console.log(pathname, item?.pathname?.substring(19), pathname.substring(19).includes(item?.pathname?.substring(19)|| "-" ))
-    if (item.pathname && newPathname === item.pathname) {
-      return item;
-    } else if (item.children) {
-      const required_item = findRecursiveByPathName(item.children, newPathname);
-      if (required_item) return required_item;
+  if (Array.isArray(sideBarMenuItems)) {
+    for (const item of sideBarMenuItems) {
+      // Ensure item has a pathname property and compare it with newPathname
+      if (item.pathname && newPathname === item.pathname) {
+        return item;
+      } else if (item.children) {
+        // Recursively search in children
+        const required_item = findRecursiveByPathNameExact(
+          item.children,
+          newPathname,
+        );
+        if (required_item) return required_item;
+      }
     }
   }
 
@@ -160,7 +176,7 @@ export function getActiveSideBarMenu(pathname: string): string {
   const active_menu = findRecursiveByPathNameExact(
     pathname.split("/")[2] === "dashboard"
       ? CustomerSideBarMenuItems()
-      : sideBarMenuItems,
+      : SideBarMenuItems(),
     pathname,
   );
   if (!active_menu) return "1";
