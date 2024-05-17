@@ -1,12 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "antd";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 import InputField from "@/app/components/Input/InputField";
 import SelectField from "@/app/components/Input/SelectField";
 import TextAreaField from "@/app/components/Input/TextArea";
+import Loader from "@/app/components/Loader";
 import {
   getAllEmployeeRole,
   getEmployeeByEmployeeId,
@@ -17,14 +18,13 @@ import {
   TUpdateEmployee,
   updateEmployeeYupSchema,
 } from "@/app/validators/employee";
-import { useParams, useRouter } from "next/navigation";
-import Loader from "@/app/components/Loader";
+import { useRouter } from "next/navigation";
 
 type Props = {
   employeeId: string;
 };
 
-const UpdateEmployeeForm = (props: Props) => {
+const UpdateEmployeeForm: React.FC<Props> = ({ employeeId }) => {
   const [employee, setEmployee] = useState<TEmployeeDetails | null>(null);
   const [loading, setLoading] = useState(false);
   const [employeeRoleOption, setEmployeeRoleOption] = useState<
@@ -42,20 +42,14 @@ const UpdateEmployeeForm = (props: Props) => {
 
   useEffect(() => {
     if (employee) {
-      console.log(employee);
-      setValue("firstName", employee?.fullName?.split(" ")[0]);
-      setValue("lastName", employee?.fullName?.split(" ")[1]);
+      setValue("firstName", employee?.firstName || "");
+      setValue("lastName", employee?.lastName || "");
       setValue("email", employee?.email);
       setValue("contactNumber", employee?.contactNumber);
-      setValue(
-        "roleId",
-        typeof employee?.roleId === "string"
-          ? employee.roleId
-          : employee.roleId._id,
-      );
+      setValue("roleId", employee.roleId._id);
       setValue("address", employee?.address || "");
     }
-  }, [employee]);
+  }, [employee, setValue]);
 
   useEffect(() => {
     (async function () {
@@ -63,47 +57,60 @@ const UpdateEmployeeForm = (props: Props) => {
         const response = await getAllEmployeeRole();
         const employeeRoles = response.data as TRole[];
         setEmployeeRoleOption(() => {
-          return employeeRoles.map((el) => {
-            return {
-              value: el._id,
-              label: el.role,
-            };
-          });
+          return employeeRoles.map((el) => ({
+            value: el._id,
+            label: el.role.split("_").join(" ").toUpperCase(),
+          }));
         });
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     })();
   }, []);
 
   useEffect(() => {
-    if (props.employeeId) {
-      getEmployeeData(props.employeeId);
+    if (employeeId) {
+      getEmployeeData(employeeId);
     }
-  }, [props.employeeId]);
+  }, [employeeId]);
 
-  const getEmployeeData = async (employeeId: string) => {
+  const getEmployeeData = async (id: string) => {
     try {
       setLoading(true);
-      const result = await getEmployeeByEmployeeId(employeeId, "full");
+      const result = await getEmployeeByEmployeeId(id, "full");
 
-      if (result?.success === true) {
-        setEmployee(result?.data);
+      if (result?.success) {
+        setEmployee(result.data.employeeDetails);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
   };
 
-  const employee_update_fields = [
+  const onSubmit = async (data: TUpdateEmployee) => {
+    try {
+      setLoading(true);
+      const result = await updateEmployeeDetails(employeeId, data);
+
+      if (result) {
+        router.push(`/employee/dashboard/employee/`);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const employeeUpdateFields = [
     {
       name: "firstName",
       error: errors?.firstName?.message || "",
       label: "First Name",
       type: "text",
-      control: control,
+      control,
       placeholder: "John",
     },
     {
@@ -111,7 +118,7 @@ const UpdateEmployeeForm = (props: Props) => {
       error: errors?.lastName?.message || "",
       label: "Last Name",
       type: "text",
-      control: control,
+      control,
       placeholder: "Doe",
     },
     {
@@ -119,7 +126,7 @@ const UpdateEmployeeForm = (props: Props) => {
       error: errors?.email?.message || "",
       label: "Email",
       type: "email",
-      control: control,
+      control,
       placeholder: "example@example.com",
     },
     {
@@ -127,7 +134,7 @@ const UpdateEmployeeForm = (props: Props) => {
       error: errors?.contactNumber?.message || "",
       label: "Contact Number",
       type: "text",
-      control: control,
+      control,
       placeholder: "123-456-7890",
     },
     {
@@ -135,7 +142,7 @@ const UpdateEmployeeForm = (props: Props) => {
       error: errors?.roleId?.message || "",
       label: "Role",
       type: "select",
-      control: control,
+      control,
       placeholder: "Role",
     },
     {
@@ -143,33 +150,17 @@ const UpdateEmployeeForm = (props: Props) => {
       error: errors?.address?.message || "",
       label: "Address",
       type: "textarea",
-      control: control,
+      control,
       placeholder: "Address",
     },
   ];
-
-  const onSubmit = async (data: TUpdateEmployee) => {
-    try {
-      setLoading(true);
-      const result = await updateEmployeeDetails(props?.employeeId, data);
-
-      if (result) {
-        setLoading(false);
-        router.push(`/employee/dashboard/employee/`);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div>
       {employee ? (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-2 gap-3">
-            {employee_update_fields.map((field, index) => {
+            {employeeUpdateFields.map((field, index) => {
               switch (field.type) {
                 case "select":
                   return (
@@ -179,11 +170,7 @@ const UpdateEmployeeForm = (props: Props) => {
                       mode="single"
                       options={employeeRoleOption}
                       setValue={setValue}
-                      defaultValue={
-                        typeof employee?.roleId === "string"
-                          ? employee.roleId
-                          : employee.roleId._id
-                      }
+                      defaultValue={employee.roleId._id}
                     />
                   );
                 case "textarea":
@@ -193,7 +180,6 @@ const UpdateEmployeeForm = (props: Props) => {
               }
             })}
           </div>
-
           <div className="flex justify-end mt-8">
             <Button
               loading={loading}

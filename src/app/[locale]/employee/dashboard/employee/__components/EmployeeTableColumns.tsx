@@ -197,7 +197,7 @@ export function EmployeeTableColumns() {
                 style={{ color: "#1890ff" }}
                 className="cursor-pointer"
               >
-                <IoIosEye size={"22px"} title="View Appointments" />
+                <IoIosEye size={"22px"} title="Employee Details" />
               </div>
 
               <div
@@ -209,7 +209,7 @@ export function EmployeeTableColumns() {
                 style={{ color: "#1890ff" }}
                 className="cursor-pointer"
               >
-                <FaUserPen size={"22px"} />
+                <FaUserPen size={"22px"} title="Update Employee" />
               </div>
             </Flex>
           );

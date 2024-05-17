@@ -1,11 +1,10 @@
 "use client";
 
-import { TEmployee, TEmployeeTableDataType } from "@/app/types/employee";
-import React, { useEffect, useState } from "react";
 import Loader from "@/app/components/Loader";
 import { getAllEmployees } from "@/app/services/operations/auth/employeeAuth";
+import { TEmployee, TEmployeeTableDataType } from "@/app/types/employee";
+import { useEffect, useState } from "react";
 import EmployeeTableContainer from "./EmployeeTableContainer";
-import { calc } from "antd/es/theme/internal";
 
 type Props = {};
 
@@ -20,12 +19,16 @@ const EmployeesViewPageContainer = (props: Props) => {
 
         return setEmployees(() => {
           return response.map((el) => {
+            let role =
+              typeof el.roleId === "object" ? el.roleId.role : el.roleId;
+
             return {
-              fullName: el.fullName,
+              key: el._id,
+              fullName: `${el.firstName} ${el.lastName}`,
               _id: el._id,
               status: el.status || "",
               email: el.email,
-              role: el.role || "",
+              role: role.split("_").join(" "),
               contactNumber: el.contactNumber || "",
             };
           });

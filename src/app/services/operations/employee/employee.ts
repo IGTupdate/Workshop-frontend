@@ -1,6 +1,7 @@
 import { TCreateEmployee, TUpdateEmployee } from "@/app/validators/employee";
 import { apiConnector } from "../../apiConnector";
 import { authEndpoints } from "../../apis";
+import toast from "react-hot-toast";
 
 const {
   GET_ALL_EMPLOYEES,
@@ -76,8 +77,12 @@ export const updateEmployeeDetails = async (
       url: UPDATE_EMPLOYEE_DETAILS + "/" + employeeId,
       bodyData: data,
     });
+    if (response.data.success) {
+      toast.success("Employee Updation Successfull");
+    }
     return response?.data;
   } catch (err) {
+    toast.error("Employee Updation Failed");
     throw err;
   }
 };
