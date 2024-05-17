@@ -1,9 +1,8 @@
 import React from "react";
-// import Loader from "../components/Loader";
-import Loader from "../../components/Loader";
 import Image from "next/image";
 import Car from "../../../../public/images/image-1.webp";
 import Logo from "../../../../public/images/logo-1.webp";
+import Loader from "@/app/components/Loader";
 
 type Props = {};
 

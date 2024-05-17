@@ -5,7 +5,7 @@
     "home": "Home",
     "we": "We",
     "services": "Services",
-    "contactUs": "Contact us"
+    "contactUs": "Contact Us"
   },
   "HeadingSection": {
     "heading": "THE COMPREHENSIVE SOLUTION FOR ",
@@ -16,7 +16,8 @@
     "heading": "OPERATING EFFICIENCY",
     "headingTwo": "DMS WORLDWIDE",
     "para": "Transform your automotive agency with Appviser! Simplify your processes with automated appointments, efficient shop management, inventory control, seamless finances, and a comprehensive CRM for exceptional customer service. With global capacity, boost your business today with Appviser!",
-    "button": "Schedule a demo"
+    "button": "Schedule a demo",
+    "modelTitle": "Book Your Appointment"
   },
   "SliderItems": {
     "car": "New and pre-owned vehicles",
@@ -39,7 +40,38 @@
   },
   "SlotSchedule": {
     "welcome": "Welcome to Appviser",
-    "findButton": "Find Available Slots"
+    "findButton": "Find Available Slots",
+    "heading": "Select Your Date"
+  },
+  "SlotDetails": {
+    "heading": "Displaying Slot Details For Date",
+    "watermark": "No Slots Available"
+  },
+  "SlotTabs": {
+    "heading": "Hello",
+    "headingTwo": "You picked a great slot for booking",
+    "timings": "Slot Timings",
+    "availability": "Slot Availability",
+    "button": "Book Appointment"
+  },
+  "CarDashboard": {
+    "heading": "Innovative solutions",
+    "headingTwo": "for the automotive industry",
+    "headingThree": "LATIN AMERICAN"
+  },
+  "Committed": {
+    "para": "With more than 20 years of experience in the Mexican automotive industry, at AppViser we are proud to offer advanced solutions in Dealer Management Systems (DMS) for the Latin American automotive market. Since our founding, we have been committed to excellence and innovation, combining our deep experience in the sector with the latest technologies to provide comprehensive solutions to our clients.",
+    "heading": "COMMITTED",
+    "headingTwo": "TO EXCELLENCE",
+    "headingThree": " AND INNOVATION"
+  },
+  "CustomCards": {
+    "mission": "MISSION",
+    "vision": "VISION",
+    "philosophy": "PHILOSOPHY",
+    "missionText": "Offer advanced solutions in Dealer Management Systems (DMS) for the Latin American automotive industry, simplifying processes and increasing efficiency in dealership management.",
+    "visionText": "To be recognized leaders in the automotive industry, providing products and services that anticipate and satisfy the needs of our customers in a constantly changing market.",
+    "philosophyText": "Guided by quality, innovation and customer satisfaction, we combine experience and technology to offer comprehensive solutions that exceed expectations and promote mutual success."
   },
   "EmployeeLoginPage": {
     "heading": "Are you an employee?",

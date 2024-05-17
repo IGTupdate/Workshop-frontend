@@ -23,6 +23,8 @@ const LandingNavbar = (props: Props) => {
     });
   };
 
+  // console.log(pathName);
+
   return (
     <div className="container">
       <Flex
@@ -39,7 +41,7 @@ const LandingNavbar = (props: Props) => {
           >
             <Link
               className="text-xl font-normal font-Inter hover:text-customYellow bg-black xmd:bg-transparent p-2 rounded-xl"
-              href={"/"}
+              href={"/dashboard"}
               style={{
                 color: `/${localeActive}` === pathName ? "yellow" : "white",
               }}
@@ -47,33 +49,20 @@ const LandingNavbar = (props: Props) => {
               {t("home")}
             </Link>
             <Link
-              className="text-xl font-normal font-Inter hover:text-customYellow p-2 rounded-xl"
+              className="text-white text-xl font-normal font-Inter hover:text-customYellow p-2 rounded-xl"
               href={"/we"}
-              style={{
-                color: `/${localeActive}/we` === pathName ? "yellow" : "white",
-              }}
             >
               {t("we")}
             </Link>
             <Link
-              className="text-xl font-normal font-Inter hover:text-customYellow p-2 rounded-xl"
+              className="text-white text-xl font-normal font-Inter hover:text-customYellow p-2 rounded-xl"
               href={"/services"}
-              style={{
-                color:
-                  `/${localeActive}/services` === pathName ? "yellow" : "white",
-              }}
             >
               {t("services")}
             </Link>
             <Link
-              className="text-xl font-normal font-Inter hover:text-customYellow p-2 rounded-xl"
+              className="text-white text-xl font-normal font-Inter hover:text-customYellow p-2 rounded-xl"
               href={"/contactUs"}
-              style={{
-                color:
-                  `/${localeActive}/contactUs` === pathName
-                    ? "yellow"
-                    : "white",
-              }}
             >
               {t("contactUs")}
             </Link>

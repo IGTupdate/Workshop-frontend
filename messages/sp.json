@@ -16,7 +16,8 @@
     "heading": "EFICIENCIA OPERATIVA",
     "headingTwo": "DMS MUNDIAL",
     "para": "¡Transforma tu agencia automotriz con Appviser! Simplifica tus procesos con citas automáticas, gestión de taller eficiente, control de inventario, finanzas impecables y un CRM integral para una atención al cliente excepcional. Con capacidad mundial, ¡potencia tu negocio hoy mismo con Appviser!",
-    "button": "Agenda una demostración"
+    "button": "Agenda una demostración",
+    "modelTitle": "Reserve su cita"
   },
   "SliderItems": {
     "car": "Vehículos nuevos y seminuevos",
@@ -39,7 +40,38 @@
   },
   "SlotSchedule": {
     "welcome": "Bienvenido a Appviser",
-    "findButton": "Encuentra espacios disponibles"
+    "findButton": "Encuentra espacios disponibles",
+    "heading": "Selecciona tu fecha"
+  },
+  "SlotDetails": {
+    "heading": "Visualización de detalles de ranura para fecha",
+    "watermark": "No hay espacios disponibles"
+  },
+  "SlotTabs": {
+    "heading": "Hola",
+    "headingTwo": "Elegiste un excelente horario para reservar",
+    "timings": "Horarios de las tragamonedas",
+    "availability": "Disponibilidad de espacios",
+    "button": "Reservar una cita"
+  },
+  "CarDashboard": {
+    "heading": "Soluciones innovadoras",
+    "headingTwo": "para la industria automotriz",
+    "headingThree": "LATINOAMERICANA"
+  },
+  "Committed": {
+    "para": "Con más de 20 años de experiencia en la industria automotriz mexicana, en AppViser nos enorgullece ofrecer soluciones avanzadas en Dealer Management Systems (DMS) para el mercado automotor latinoamericano. Desde nuestra fundación, hemos estado comprometidos con la excelencia y la innovación, combinando nuestra profunda experiencia en el sector con las últimas tecnologías para brindar soluciones integrales a nuestros clientes.",
+    "heading": "COMPROMETIDOS",
+    "headingTwo": "CON LA EXCELENCIA",
+    "headingThree": "Y LA INNOVACIÓN"
+  },
+  "CustomCards": {
+    "mission": "MISIÓN",
+    "vision": "VISIÓN",
+    "philosophy": "FILOSOFÍA",
+    "missionText": "Ofrecer soluciones avanzadas en Dealer Management Systems (DMS) para la industria automotriz latinoamericana, simplificando procesos y aumentando la eficiencia en la gestión de concesionarios.",
+    "visionText": "Ser líderes reconocidos en la industria automotriz, proporcionando productos y servicios que anticipen y satisfagan las necesidades de nuestros clientes en un mercado en constante cambio.",
+    "philosophyText": "Guiados por la calidad, la innovación y la satisfacción del cliente, combinamos experiencia y tecnología para ofrecer soluciones integrales que superen las expectativas y promuevan el éxito mutuo."
   },
   "EmployeeLoginPage": {
     "heading": "¿Es usted un empleado?",

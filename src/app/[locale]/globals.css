@@ -128,3 +128,9 @@ input[type="number"]::-webkit-outer-spin-button {
 .slick-list {
   margin: 0 -10px !important;
 }
+
+.custom-model
+  :where(.css-dev-only-do-not-override-1jh2zmy).ant-modal
+  .ant-modal-header {
+  background: transparent !important;
+}

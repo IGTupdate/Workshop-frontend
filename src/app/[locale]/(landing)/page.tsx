@@ -16,10 +16,9 @@ import LineThree from "../../../../public/images/line3.webp";
 import BgCar from "../../../../public/images/bgcar.webp";
 import Proactive from "./__components/Proactive";
 import NewEmpolyeeLogin from "./__components/NewEmpolyeeLogin";
-
 const { Header, Footer, Content } = Layout;
 
-const App: React.FC = () => {
+const Home = () => {
   // Ref for the SlotDetails component
   const slotDetailsRef = useRef<HTMLDivElement>(null);
   const slotData = useAppSelector((state) => state.slot.slotData);
@@ -32,46 +31,47 @@ const App: React.FC = () => {
   };
 
   return (
-    <Layout>
-      {/* <Header className='flex items-center justify-center w-full bg-customGray mb-0'> */}
+    <div>
+      <Layout>
+        {/* <Header className='flex items-center justify-center w-full bg-customGray mb-0'> */}
 
-      {/* </Header> */}
-      <Content>
-        <Flex vertical>
-          <HeadingSection />
+        {/* </Header> */}
+        <Content>
+          <Flex vertical>
+            <HeadingSection />
 
-          <div className="bg-[#2E2E2E]">
-            <Operating />
-          </div>
-
-          <div className="relative overflow-hidden bg-[#2E2E2E] shadow-topDivSmall sm:shadow-topDiv py-4 z-10 md:py-12">
-            <Image
-              src={LineTwo}
-              alt="line"
-              className="absolute top-20 sm:top-[-50px] xmd:top-[-350px] left-0 w-full z-[-1]"
-            />
-            <Modules />
-          </div>
-
-          <div className="bg-[#2E2E2E]">
-            <Proactive />
-          </div>
-
-          <div className="bg-[#2E2E2E] relative overflow-hidden">
-            <Image
-              src={LineThree}
-              alt="line"
-              className="absolute bottom-0 xmd:bottom-[-60px] left-0 w-full z-[1]"
-            />
-            <div>
-              <Image src={BgCar} alt="BgCar" className="w-full" />
+            <div className="bg-[#2E2E2E]">
+              <Operating />
             </div>
 
-            <NewEmpolyeeLogin />
-          </div>
+            <div className="relative overflow-hidden bg-[#2E2E2E] shadow-topDivSmall sm:shadow-topDiv py-4 z-10 md:py-12">
+              <Image
+                src={LineTwo}
+                alt="line"
+                className="absolute top-20 sm:top-[-50px] xmd:top-[-350px] left-0 w-full z-[-1]"
+              />
+              <Modules />
+            </div>
 
-          {/* <SlotSchedule scrollToSlotDetails={scrollToSlotDetails} /> */}
-          {/* <div
+            <div className="bg-[#2E2E2E]">
+              <Proactive />
+            </div>
+
+            <div className="bg-[#2E2E2E] relative overflow-hidden">
+              <Image
+                src={LineThree}
+                alt="line"
+                className="absolute bottom-0 xmd:bottom-[-60px] left-0 w-full z-[1]"
+              />
+              <div>
+                <Image src={BgCar} alt="BgCar" className="w-full" />
+              </div>
+
+              <NewEmpolyeeLogin />
+            </div>
+
+            {/* <SlotSchedule scrollToSlotDetails={scrollToSlotDetails} /> */}
+            {/* <div
             ref={slotDetailsRef}
             className={`${slotData ? "flex justify-center items-center flex-col" : " invisible"}`}
           >
@@ -82,13 +82,14 @@ const App: React.FC = () => {
             }
           </div>
           <EmployeeLogin /> */}
-        </Flex>
-      </Content>
-      {/* <Footer className=" p-0 mt-[60px]">
+          </Flex>
+        </Content>
+        {/* <Footer className=" p-0 mt-[60px]">
         <AboutUsFooter />
       </Footer> */}
-    </Layout>
+      </Layout>
+    </div>
   );
 };
 
-export default App;
+export default Home;
