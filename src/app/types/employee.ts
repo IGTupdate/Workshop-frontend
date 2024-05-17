@@ -9,8 +9,10 @@ export type TEmployee = {
   email: string;
   status?: string;
   role?: string;
-  roleId: string;
+  roleId: string | TRole;
   contactNumber?: string;
+  firstName?: string;
+  lastName?: string;
 };
 
 export type TEmployeeWorkStatus = {
@@ -51,4 +53,5 @@ export type TEmployeeDetails = {
   status: string;
   roleId: TRole;
   address?: string;
+  additionalDetails?: any;
 };

@@ -30,9 +30,7 @@ const Page = (props: Props) => {
       if (result?.success === true) {
         setEmployee(() => {
           return {
-            ...result?.data,
-            firstName: result?.data?.fullName?.split(" ")[0],
-            lastName: result?.data?.fullName?.split(" ")[1],
+            ...result?.data.employeeDetails,
           };
         });
       }
