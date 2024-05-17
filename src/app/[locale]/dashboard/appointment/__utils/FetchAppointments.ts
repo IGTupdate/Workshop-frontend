@@ -21,20 +21,22 @@ export interface AppointmentData {
 
 export const fetchAppointments = (
   data: ICustomerAppointmentData[],
-  status?: string,
+  status?: string[],
 ): AppointmentData[] => {
   // Make a copy of the data array
   let filteredAppointments = [...data];
 
   // Sort the appointments based on their creation date
-  filteredAppointments.sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-  );
+  filteredAppointments.sort((a, b) => {
+    const dateA = new Date(a.updatedAt || a.createdAt).getTime();
+    const dateB = new Date(b.updatedAt || b.createdAt).getTime();
+    return dateB - dateA;
+  });
 
   // Filter appointments by status if provided
   if (status) {
-    filteredAppointments = filteredAppointments.filter(
-      (appointment) => appointment.status === status,
+    filteredAppointments = filteredAppointments.filter((appointment) =>
+      status.includes(appointment.status),
     );
   }
 
