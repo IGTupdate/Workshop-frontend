@@ -26,7 +26,7 @@ type Props = {
 
 const UpdateEmployeeForm: React.FC<Props> = ({ employeeId }) => {
   const [employee, setEmployee] = useState<TEmployeeDetails | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [employeeRoleOption, setEmployeeRoleOption] = useState<
     { value: string; label: string }[]
   >([]);
@@ -47,7 +47,7 @@ const UpdateEmployeeForm: React.FC<Props> = ({ employeeId }) => {
       setValue("email", employee?.email);
       setValue("contactNumber", employee?.contactNumber);
       setValue("roleId", employee.roleId._id);
-      setValue("address", employee?.address || "");
+      setValue("address", employee?.additionalDetails?.address || "");
     }
   }, [employee, setValue]);
 
@@ -80,7 +80,8 @@ const UpdateEmployeeForm: React.FC<Props> = ({ employeeId }) => {
       const result = await getEmployeeByEmployeeId(id, "full");
 
       if (result?.success) {
-        setEmployee(result.data.employeeDetails);
+        console.log(result);
+        setEmployee(result.data);
       }
     } catch (error) {
       console.error(error);
@@ -157,40 +158,44 @@ const UpdateEmployeeForm: React.FC<Props> = ({ employeeId }) => {
 
   return (
     <div>
-      {employee ? (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-2 gap-3">
-            {employeeUpdateFields.map((field, i) => {
-              switch (field.type) {
-                case "select":
-                  return (
-                    <SelectField
-                      key={i}
-                      {...field}
-                      mode="single"
-                      options={employeeRoleOption}
-                      setValue={setValue}
-                      defaultValue={employee.roleId._id}
-                    />
-                  );
-                case "textarea":
-                  return <TextAreaField key={i} {...field} />;
-                default:
-                  return <InputField key={i} {...field} />;
-              }
-            })}
-          </div>
-          <div className="flex justify-end mt-8">
-            <Button
-              loading={loading}
-              disabled={loading}
-              htmlType="submit"
-              type="primary"
-            >
-              Update
-            </Button>
-          </div>
-        </form>
+      {!loading ? (
+        employee ? (
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid grid-cols-2 gap-3">
+              {employeeUpdateFields.map((field, i) => {
+                switch (field.type) {
+                  case "select":
+                    return (
+                      <SelectField
+                        key={i}
+                        {...field}
+                        mode="single"
+                        options={employeeRoleOption}
+                        setValue={setValue}
+                        defaultValue={employee.roleId._id}
+                      />
+                    );
+                  case "textarea":
+                    return <TextAreaField key={i} {...field} />;
+                  default:
+                    return <InputField key={i} {...field} />;
+                }
+              })}
+            </div>
+            <div className="flex justify-end mt-8">
+              <Button
+                loading={loading}
+                disabled={loading}
+                htmlType="submit"
+                type="primary"
+              >
+                Update
+              </Button>
+            </div>
+          </form>
+        ) : (
+          <>No Record Found</>
+        )
       ) : (
         <div
           style={{ height: "calc(100vh - 200px)" }}
