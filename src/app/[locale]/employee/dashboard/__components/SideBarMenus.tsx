@@ -76,7 +76,12 @@ const MenusItmes = () => {
     <div className="flex flex-col items-center">
       {SideBarMenuItems()?.map((menu, index) => (
         // eslint-disable-next-line react/jsx-key
-        <Skeleton.Input active={true} size={"large"} className="mt-2" />
+        <Skeleton.Input
+          active={true}
+          size={"large"}
+          key={index}
+          className="mt-2"
+        />
       ))}
     </div>
   );

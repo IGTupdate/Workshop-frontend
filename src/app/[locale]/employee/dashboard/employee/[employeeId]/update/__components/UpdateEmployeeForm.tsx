@@ -160,12 +160,12 @@ const UpdateEmployeeForm: React.FC<Props> = ({ employeeId }) => {
       {employee ? (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-2 gap-3">
-            {employeeUpdateFields.map((field, index) => {
+            {employeeUpdateFields.map((field, i) => {
               switch (field.type) {
                 case "select":
                   return (
                     <SelectField
-                      key={index}
+                      key={i}
                       {...field}
                       mode="single"
                       options={employeeRoleOption}
@@ -174,9 +174,9 @@ const UpdateEmployeeForm: React.FC<Props> = ({ employeeId }) => {
                     />
                   );
                 case "textarea":
-                  return <TextAreaField key={index} {...field} />;
+                  return <TextAreaField key={i} {...field} />;
                 default:
-                  return <InputField key={index} {...field} />;
+                  return <InputField key={i} {...field} />;
               }
             })}
           </div>
