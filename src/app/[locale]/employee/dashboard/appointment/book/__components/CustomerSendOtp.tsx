@@ -2,10 +2,11 @@
 
 import ErrorText from "@/app/components/Text/ErrorText";
 import { sendOTP } from "@/app/services/operations/auth/customerAuth";
-import { useAppDispatch } from "@/app/store/reduxHooks";
+import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { setAuthCountryCode } from "@/app/store/slices/authSlice";
 import { TCustomer } from "@/app/types/customer";
 import { Button, Input, Select, Space } from "antd";
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -20,13 +21,15 @@ type Tprops = {
 const CustomerSendOtp = (props: Tprops) => {
   const { handleSubmit } = useForm<FormInputs>();
 
+  const { countryCode: code } = useAppSelector((state) => state.auth);
+
   const [loading, setLoading] = useState(false);
-  const [countryCode, setCountryCode] = useState("+91");
+  const [countryCode, setCountryCode] = useState(code);
   const [contactNumber, setContactNumber] = useState("");
   const [contactNumberError, setContactNumberError] = useState("");
 
   const dispatch = useAppDispatch();
-
+  const t = useTranslations("SendOtp");
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     if (contactNumber.length === 0)
       setContactNumberError("Contact Number is Required");
@@ -86,31 +89,25 @@ const CustomerSendOtp = (props: Tprops) => {
           <div className="flex w-full justify-between items-center gap-2">
             <Select
               size="large"
-              defaultValue="+91"
+              defaultValue={code}
               // style={{ width: '22%', height: 42 }}
               className="w-[28%] sm:w-[22%] h-[42px]"
               onChange={handleSelect}
               options={[
-                { value: "+91", label: "+91" },
                 { value: "+52", label: "+52" },
+                { value: "+91", label: "+91" },
               ]}
             />
 
-            <Space.Compact
-              // style={{ width: '78%', height: '42px' }}
-              className="w-[72%] sm:w-[78%] h-[42px]"
-            >
-              {/* <Input style={{ width: '13%' }} defaultValue="1" /> */}
-              <Input
-                style={{ height: "100%" }}
-                addonBefore={countryCode === "+52" && "1"}
-                size="large"
-                value={contactNumber}
-                onChange={handleChange}
-                placeholder="Enter Your Contact Number"
-                maxLength={10}
-              />
-            </Space.Compact>
+            <Input
+              style={{ height: "100%" }}
+              size="large"
+              value={contactNumber}
+              onChange={handleChange}
+              placeholder={t("phoneNumberPlaceholder")}
+              maxLength={10}
+              type="tel"
+            />
           </div>
           {contactNumberError && <ErrorText text={contactNumberError} />}
         </div>
