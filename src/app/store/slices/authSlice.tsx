@@ -31,7 +31,7 @@ const initialState: IAuthState = {
   authStep: 0,
   authData: initialAuthDataState,
   authLoading: false,
-  countryCode: "",
+  countryCode: "+52",
 };
 
 export const authSlice = createSlice({

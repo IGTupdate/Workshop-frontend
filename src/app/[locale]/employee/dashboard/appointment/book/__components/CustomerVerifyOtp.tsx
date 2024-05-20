@@ -10,6 +10,10 @@ import { TCustomer } from "@/app/types/customer";
 import { authEndpoints } from "@/app/services/apis";
 import { apiOpenConnector } from "@/app/services/apiOpenConnector";
 import { useAppSelector } from "@/app/store/reduxHooks";
+import { useTranslations } from "next-intl";
+import { setAuthLoading } from "@/app/store/slices/authSlice";
+import { sendOTP } from "@/app/services/operations/auth/customerAuth";
+import { useDispatch } from "react-redux";
 
 const { VERIFY_OTP_API } = authEndpoints;
 
@@ -25,6 +29,8 @@ const CustomerVerifyOtp = (props: Props) => {
   const [otpValues, setOtpValues] = useState<string[]>([]);
   const [otpErrors, setOTPErrors] = useState("");
   const [retryCount, setRetryCount] = useState(0);
+  const t = useTranslations("VerifyOTP");
+  const dispatch = useDispatch();
 
   const handleFinish = async () => {
     const otp = otpValues.join("");
@@ -74,6 +80,17 @@ const CustomerVerifyOtp = (props: Props) => {
     }
   };
 
+  const resendOTP = async () => {
+    dispatch(setAuthLoading(true));
+    try {
+      await sendOTP(countryCode, props.customer.contactNumber, true);
+    } catch (error) {
+      // console.error("Error sending OTP:", error);
+    } finally {
+      dispatch(setAuthLoading(false));
+    }
+  };
+
   return (
     <div className="w-full">
       <Heading
@@ -103,6 +120,16 @@ const CustomerVerifyOtp = (props: Props) => {
         >
           Send
         </Button>
+
+        <p className=" text-xs">
+          {t("text")}
+          <span
+            onClick={() => resendOTP()}
+            className=" cursor-pointer font-semibold text-base text-blue-600"
+          >
+            {t("resend")}
+          </span>
+        </p>
       </div>
     </div>
   );
