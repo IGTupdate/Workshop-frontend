@@ -26,7 +26,7 @@ function EmployeeViewpageContainer({ employee }: Props) {
       <DescriptionItem title="Email" content={email} />
       <DescriptionItem title="Phone" content={contactNumber} />
       {/* <DescriptionItem title='Password' content='Puneet' /> */}
-      <DescriptionItem title="Role" content={roleId.role} />
+      <DescriptionItem title="Role" content={roleId?.role} />
       <DescriptionItem title="Address" content="Indore MP" />
     </div>
   );

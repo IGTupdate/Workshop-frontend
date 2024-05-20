@@ -82,7 +82,7 @@ export function EmployeeTableColumns() {
         title: "Name",
         dataIndex: "fullName",
         key: "fullName",
-        // ...GetColumnTextSearchProps<TEmployeeTableDataType>("name"),
+        ...GetColumnTextSearchProps<TEmployeeTableDataType>("name"),
         render: (fullName) => {
           return <div className="font-semibold">{fullName}</div>;
         },

@@ -67,7 +67,13 @@ const AppointmentDetails: React.FC<Props> = ({
 
           <Descriptions.Item label="Status">
             <Tag
-              color={appointmentData.status === "Cancelled" ? "red" : "green"}
+              color={
+                appointmentData.status === "Cancelled"
+                  ? "red"
+                  : appointmentData.status === "Missed"
+                    ? "orange"
+                    : "green"
+              }
             >
               {appointmentData.status}
             </Tag>
