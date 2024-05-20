@@ -44,7 +44,10 @@ const VehicleDetailContainer = (props: Props) => {
           customer_id={props.appointmentBookingData.customer_id}
         />
       ) : (
-        <VehicleSearchCompoent setVehicleId={setVehicleId} />
+        <VehicleSearchCompoent
+          setAppointmentBookingData={props.setAppointmentBookingData}
+          setVehicleId={setVehicleId}
+        />
       )}
 
       <div></div>

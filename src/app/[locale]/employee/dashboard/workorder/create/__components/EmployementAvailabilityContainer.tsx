@@ -31,6 +31,7 @@ const EmployementAvailabilityContainer = (props: Props) => {
     setLoading(true);
     try {
       const response = await getEmployeeWorkingStatus(props.role);
+      console.log(response);
       setAdvisors(response);
     } catch (err) {
       console.log(err);

@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import { setAuthLoading } from "@/app/store/slices/authSlice";
 import { Button, Input } from "antd";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
@@ -28,12 +28,15 @@ const LogIn: React.FC = () => {
   const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const onSubmit = async (data: FormData) => {
     dispatch(setAuthLoading(true));
     try {
       await employeeLogin(data.email, data.password, dispatch);
-      router.push("/employee/dashboard");
+      // router.push("/employee/dashboard");
+      const redirectUrl = searchParams.get("redirectUrl");
+      router.push(redirectUrl || "/employee/dashboard");
     } catch (err) {
       // console.log(error)
     } finally {

@@ -25,7 +25,11 @@ function customMiddleware(request: NextRequest) {
       request.nextUrl.pathname = "/dashboard";
     } else {
       // Redirect unauthorized users to /employee/login
+      const redirectUrl =
+        pathname + "?" + request.nextUrl.searchParams.toString();
+
       request.nextUrl.pathname = "/employee/login";
+      request.nextUrl.searchParams.append("redirectUrl", redirectUrl);
     }
   } else if (pathname.includes("/dashboard")) {
     // Check access to /dashboard route
