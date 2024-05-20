@@ -150,11 +150,13 @@ const Page = (props: Props) => {
                   tasks={workOrder.tasks}
                 />
                 <Divider />
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid items-center grid-cols-2 gap-4">
                   <WorkOrderObservations
                     observations={workOrder.observations}
                   />
-                  <VehicleFuelDetailContainer />
+                  <VehicleFuelDetailContainer
+                    fuelQuantity={workOrder.fuelQuantity}
+                  />
                 </div>
                 <Divider />
                 <InventoryOrderContainer parts={workOrder.partsRequested} />

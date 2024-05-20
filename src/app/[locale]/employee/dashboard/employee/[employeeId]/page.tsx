@@ -30,7 +30,7 @@ const Page = (props: Props) => {
       if (result?.success === true) {
         setEmployee(() => {
           return {
-            ...result?.data.employeeDetails,
+            ...result?.data,
           };
         });
       }

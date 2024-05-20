@@ -29,6 +29,8 @@ const AllAppointments: React.FC<Props> = ({
     setVisible(false);
   };
 
+  console.log(appointment.status, "appointment.status");
+
   return (
     <>
       <div className="shadow-xl rounded-xl overflow-hidden">
@@ -66,7 +68,15 @@ const AllAppointments: React.FC<Props> = ({
             {appointment.vehicleReg}
           </Descriptions.Item>
           <Descriptions.Item label="Status">
-            <Tag color={appointment.status === "Cancelled" ? "red" : "green"}>
+            <Tag
+              color={
+                appointment.status === "Cancelled"
+                  ? "red"
+                  : appointment.status === "Missed"
+                    ? "orange"
+                    : "green"
+              }
+            >
               {appointment.status}
             </Tag>
           </Descriptions.Item>

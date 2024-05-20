@@ -36,6 +36,8 @@ const VehicleUpdateContainer = (props: Props) => {
   });
 
   const onSubmit = async (data: TvehicleCreateSchema) => {
+    console.log(data, "data");
+
     setLoading(true);
     try {
       await updateVehicle(props.updateVehicleId, data);
@@ -64,6 +66,7 @@ const VehicleUpdateContainer = (props: Props) => {
               type={field.type}
               placeholder={field.placeholder}
               control={control}
+              upperCase={true}
               error={
                 errors[field.name as keyof TvehicleCreateSchema]
                   ? errors[field.name as keyof TvehicleCreateSchema]?.message ||

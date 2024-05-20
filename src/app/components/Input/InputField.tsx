@@ -11,6 +11,7 @@ export type InputField = {
   type: string; //"text" | "number" | "email"; // Adjust as needed,
   error: string | undefined;
   control: any;
+  upperCase?: boolean;
 };
 
 type Props = InputField & {};
@@ -30,7 +31,7 @@ const InputField = (props: Props) => {
               type={props.type}
               {...field}
               placeholder={props.placeholder}
-              // className="uppercase"
+              className={`${props.upperCase ? "uppercase" : ""}`}
             />
           );
         }}
