@@ -5,9 +5,13 @@ import { TVehicle } from "@/app/types/vehicle";
 import { Button, Select } from "antd";
 import React, { useEffect, useState } from "react";
 import { NEW_VEHICLE } from "../__utils/constant";
+import { TAppointmentBook } from "@/app/types/appointment";
 
 type Props = {
   setVehicleId: React.Dispatch<React.SetStateAction<string>>;
+  setAppointmentBookingData: React.Dispatch<
+    React.SetStateAction<TAppointmentBook>
+  >;
 };
 
 const VehicleSearchCompoent = (props: Props) => {
@@ -57,6 +61,12 @@ const VehicleSearchCompoent = (props: Props) => {
 
   const handleBack = () => {
     props.setVehicleId("");
+    props.setAppointmentBookingData((prv) => {
+      return {
+        ...prv,
+        customer_id: "",
+      };
+    });
   };
 
   return (
