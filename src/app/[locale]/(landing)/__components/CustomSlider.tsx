@@ -53,10 +53,10 @@ const CustomSlider: React.FC<Props> = ({ SliderItems }) => {
           // <SwiperSlide key={index}>
           <div
             key={index}
-            className="rounded-3xl p-8 shadow-sm transbox h-[220px] sm:h-[292px]"
+            className="group rounded-3xl p-8 shadow-sm transbox h-[220px] sm:h-[292px] hover:bg-matalicYellow transition-all"
           >
             <div className="h-full flex flex-col justify-between">
-              <h3 className="text-customWhite font-bold font-RobotoFlex text-xl sm:text-2xl md:text-3xl pe-10">
+              <h3 className="text-customWhite font-bold font-RobotoFlex text-xl sm:text-2xl md:text-3xl pe-10 group-hover:text-white">
                 {item.text}
               </h3>
               <p className="text-customWhite flex justify-end">

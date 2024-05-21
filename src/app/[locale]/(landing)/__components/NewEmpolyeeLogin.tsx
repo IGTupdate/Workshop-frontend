@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useTranslations } from "use-intl";
 import { Controller, useForm } from "react-hook-form";
@@ -46,11 +46,35 @@ const NewEmpolyeeLogin: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    const inputs = document.querySelectorAll<HTMLInputElement>("input");
+
+    const handleInput = (event: Event) => {
+      const input = event.target as HTMLInputElement;
+      if (input.value) {
+        input.classList.add("has-value");
+      } else {
+        input.classList.remove("has-value");
+      }
+    };
+
+    inputs.forEach((input) => {
+      input.addEventListener("input", handleInput);
+    });
+
+    // Cleanup event listeners on component unmount
+    return () => {
+      inputs.forEach((input) => {
+        input.removeEventListener("input", handleInput);
+      });
+    };
+  }, []);
+
   return (
     <div className="relative z-10">
       <div className="container pt-10 pb-12">
         <div className="flex justify-center xmd:justify-end">
-          <div className="border-0 sm:border-[11px] rounded-2xl border-customYellow p-0 sm:p-8 w-full md:w-max">
+          <div className="border-0 sm:border-[10px] rounded-2xl border-customYellow p-0 sm:p-8 w-full md:w-max">
             <h2 className="font-RobotoFlex text-customYellow font-bold text-2xl md:text-[42px] md:leading-[58.59px] text-center">
               {t("heading")}
             </h2>
@@ -70,7 +94,7 @@ const NewEmpolyeeLogin: React.FC = () => {
                       },
                     })}
                     placeholder={t("emailPlaceholder")}
-                    className="w-full outline-0 border-b-2 py-2 bg-transparent text-2xl text-white"
+                    className="input w-full outline-0 border-b-2 py-2 bg-transparent text-2xl text-white focus:rounded-lg focus:px-4"
                     required
                   />
                   {errors.email && (
@@ -91,7 +115,7 @@ const NewEmpolyeeLogin: React.FC = () => {
                         },
                       })}
                       placeholder={t("passwordPlaceholder")}
-                      className="w-full outline-0 border-b-2 py-2 bg-transparent text-2xl text-white"
+                      className="input w-full outline-0 border-b-2 py-2 bg-transparent text-2xl text-white focus:rounded-lg focus:px-4"
                       required
                     />
                     <span

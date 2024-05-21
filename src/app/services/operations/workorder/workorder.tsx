@@ -23,6 +23,7 @@ const {
   REMOVE_MECHANIC_WORKORDER,
   GET_PAGE_WORK_ORDER,
   WORK_ORDER_RAMP_ASSIGN,
+  GET_DASHBOARD_DATA,
 } = workOrderEndpoints;
 
 export const getEmployeeWorkingStatus = async (employeeRole: string) => {
@@ -195,11 +196,23 @@ export const removeMechanicWorkOrder = async (
   data: TWorkOrderAssign,
 ) => {
   try {
-    console.log(data, workOrderId);
     const response = await apiConnector({
       method: "POST",
       url: REMOVE_MECHANIC_WORKORDER + "/" + workOrderId,
       bodyData: data,
+    });
+
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getDahsboardKanbanData = async () => {
+  try {
+    const response = await apiConnector({
+      method: "GET",
+      url: GET_DASHBOARD_DATA,
     });
 
     return response.data;

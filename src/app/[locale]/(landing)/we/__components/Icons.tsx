@@ -25,9 +25,9 @@ const Icons = () => {
               height: "364px",
               width: "270px",
             }}
-            className="py-8 rounded-xl flex justify-center items-center"
+            className="py-12 rounded-xl flex justify-center items-center hover:shadow-top hover:scale-110 transition-all p-2 h-[200px] w-[150px] md:h-[364px] md:w-[270px]"
           >
-            <Image src={item.Icon} alt="Icon" />
+            <Image src={item.Icon} alt="Icon" className="w-full h-full" />
           </div>
         ))}
       </div>

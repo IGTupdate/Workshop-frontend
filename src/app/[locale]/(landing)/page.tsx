@@ -48,7 +48,7 @@ const Home = () => {
               <Image
                 src={LineTwo}
                 alt="line"
-                className="absolute top-20 sm:top-[-50px] xmd:top-[-350px] left-0 w-full z-[-1]"
+                className="absolute top-0 md:top-[-97px] xmd:top-[-125px] lg:top-[-138px] xl:top-[-217px] 2xl:top-[-350px] left-0 w-full z-[-1]"
               />
               <Modules />
             </div>
@@ -61,7 +61,7 @@ const Home = () => {
               <Image
                 src={LineThree}
                 alt="line"
-                className="absolute bottom-0 xmd:bottom-[-60px] left-0 w-full z-[1]"
+                className="absolute bottom-0 2xl:bottom-[-60px] left-0 w-full z-[1]"
               />
               <div>
                 <Image src={BgCar} alt="BgCar" className="w-full" />

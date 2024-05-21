@@ -1,6 +1,8 @@
 import { TAppointment } from "./appointment";
+import { TCustomer } from "./customer";
 import { TEmployee } from "./employee";
 import { TServicePlans } from "./service";
+import { TVehicle } from "./vehicle";
 
 export type TWorkOrderStatus =
   | "Pending"
@@ -99,3 +101,30 @@ export type TAdditonalWorkRequest = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type TAppointmentKanbanData = {
+  appointmentId: string;
+  status: string;
+  vehicle_id: TVehicle;
+  customer_id: TCustomer;
+};
+
+export type TWorkOrderKanbanData = {
+  workOrderId: string;
+  vehicle_id: TVehicle;
+  customer_id: TCustomer;
+  createdAt: string;
+};
+
+export type TkanbanValue = TCustomer &
+  TVehicle & {
+    appointmentId?: string;
+    workorderId?: string | undefined;
+    status: string;
+    appointmentDate: string;
+    createdAt: string;
+  };
+export type TDashboardKanbanDataResponse = Record<
+  string,
+  (TAppointmentKanbanData | TWorkOrderKanbanData)[]
+>;

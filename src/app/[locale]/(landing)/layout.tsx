@@ -1,10 +1,11 @@
 "use client";
-import LandingNavbar from "@/app/components/Landing/__components/Navbar";
 import { ChildrenProps } from "../dashboard/__components/__utils/types";
 import { useEffect, useState } from "react";
+import LandingNavbar from "./__components/Navbar";
 
 const RootLayout: React.FC<ChildrenProps> = ({ children }) => {
   const [scrolling, setScrolling] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +22,13 @@ const RootLayout: React.FC<ChildrenProps> = ({ children }) => {
   return (
     <>
       <main>
+        {toggle && (
+          <div
+            className="overlay block xmd:hidden fixed top-0 left-0 h-screen w-full bg-[#000000ab] z-20"
+            onClick={() => setToggle(false)}
+          ></div>
+        )}
+
         <div
           style={{
             background: scrolling ? "#000000ad" : "transparent",
@@ -28,7 +36,7 @@ const RootLayout: React.FC<ChildrenProps> = ({ children }) => {
           }}
           className="fixed top-0 left-1/2 translate-x-[-50%] z-20 w-full"
         >
-          <LandingNavbar />
+          <LandingNavbar toggle={toggle} setToggle={setToggle} />
         </div>
         <div> {children}</div>
       </main>

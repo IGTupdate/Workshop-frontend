@@ -154,3 +154,17 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 50%;
   animation: scallion-spin 1s linear infinite;
 }
+
+.has-value {
+  border-radius: 8px;
+  padding: 0 1rem;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #d2d3d3;
+  border-radius: 10px;
+}
