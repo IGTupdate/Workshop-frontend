@@ -1,5 +1,8 @@
 "use client";
-import { vehicleCreateInputFields } from "@/app/[locale]/employee/dashboard/appointment/book/__utils/vehicle-create-input";
+import {
+  VehicleCreateInputFields,
+  vehicleCreateInputFields,
+} from "@/app/[locale]/employee/dashboard/appointment/book/__utils/vehicle-create-input";
 import InputField from "@/app/components/Input/InputField";
 import { updateVehicle } from "@/app/services/operations/appointment/vehicle";
 import { useAppDispatch } from "@/app/store/reduxHooks";
@@ -11,6 +14,7 @@ import {
 } from "@/app/validators/vehicle";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "antd";
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -24,6 +28,7 @@ type Props = {
 const VehicleUpdateContainer = (props: Props) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
+  const t = useTranslations("VehicleCreateInputFields");
 
   const {
     control,
@@ -57,7 +62,7 @@ const VehicleUpdateContainer = (props: Props) => {
   return (
     <div className="w-full">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
-        {vehicleCreateInputFields.map((field, index) => {
+        {VehicleCreateInputFields(t).map((field, index) => {
           return (
             <InputField
               key={index}

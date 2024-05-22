@@ -24,7 +24,10 @@ import { setVehicleLoading } from "@/app/store/slices/customerVehicleSlice";
 import { usePathname, useRouter } from "next/navigation";
 import SearchVehicale from "./SearchVehicale";
 import { useTranslations } from "next-intl";
-import { vehicleCreateInputFields } from "../__utils/vehicle-create-input";
+import {
+  VehicleCreateInputFields,
+  vehicleCreateInputFields,
+} from "../__utils/vehicle-create-input";
 
 const { Text } = Typography;
 
@@ -42,7 +45,7 @@ const VehicleCreateContainer = (props: Props) => {
 
   const router = useRouter();
   const pathname = usePathname();
-  const t = useTranslations("VehicleCreateContainer");
+  const t = useTranslations("VehicleCreateInputFields");
 
   const {
     control,
@@ -123,7 +126,7 @@ const VehicleCreateContainer = (props: Props) => {
       ) : (
         <div className="w-full">
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
-            {vehicleCreateInputFields.map((field, index) => {
+            {VehicleCreateInputFields(t).map((field, index) => {
               return (
                 <InputField
                   key={index}
