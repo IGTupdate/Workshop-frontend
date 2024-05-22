@@ -6,17 +6,25 @@ export const vehicleCreateSchema = Yup.object({
     .matches(
       /^[A-Za-z]{2}\d{2}[A-Za-z]{2}\d{4}$/,
       "Vehicle number must be in the format: MP09MH2560",
-    ),
+    )
+    .transform((value) => (value ? value.toUpperCase() : value)),
   vin: Yup.string()
-    .required()
+    .required("VIN is required")
+    .transform((value) => (value ? value.toUpperCase() : value))
     .matches(
-      /^[A-HJ-NPR-Z0-9]{17}$/i,
+      /^(?=.*[0-9])(?=.*[A-z])[0-9A-z-]{17}$/g,
       "VIN must be exactly 17 characters long and should not include I, O, or Q",
     ),
   owner: Yup.string().required(),
-  vehicle_make: Yup.string().required(),
-  vehicle_model: Yup.string().required(),
-  customer_id: Yup.string().optional(),
+  vehicle_make: Yup.string()
+    .required()
+    .transform((value) => (value ? value.toUpperCase() : value)),
+  vehicle_model: Yup.string()
+    .required()
+    .transform((value) => (value ? value.toUpperCase() : value)),
+  customer_id: Yup.string()
+    .optional()
+    .transform((value) => (value ? value.toUpperCase() : value)),
 });
 
 export const vehicleSearchSchema = Yup.object({

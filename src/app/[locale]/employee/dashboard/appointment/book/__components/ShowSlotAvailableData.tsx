@@ -5,6 +5,7 @@ import { TASlot, TAvailbleSlots } from "@/app/types/slot";
 import { TSlotDetail } from "@/app/types/slot-schedule";
 import { setQueryParams } from "@/app/utils/helper";
 import { Button, Space, Table, TableProps, Tag, Typography } from "antd";
+import { useTranslations } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 const { Title, Text } = Typography;
@@ -17,6 +18,7 @@ const ShowSlotAvailableData = (props: Props) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const t = useTranslations("ShowSlotAvailableData");
 
   const [talbeRows, setTableRows] = useState<any>([]);
   useEffect(() => {
@@ -42,7 +44,7 @@ const ShowSlotAvailableData = (props: Props) => {
 
   const columns: TableProps<TASlot>["columns"] = [
     {
-      title: "Start Time",
+      title: t("startTime"),
       dataIndex: "start_time",
       key: "start_time",
       render: (text) => {
@@ -50,7 +52,7 @@ const ShowSlotAvailableData = (props: Props) => {
       },
     },
     {
-      title: "End Time",
+      title: t("endTime"),
       dataIndex: "end_time",
       key: "end_time",
       render: (text) => {
@@ -58,7 +60,7 @@ const ShowSlotAvailableData = (props: Props) => {
       },
     },
     {
-      title: "Available",
+      title: t("available"),
       key: "slot_limit",
       dataIndex: "slot_limit",
       render: (_, { available }) => (
@@ -73,7 +75,7 @@ const ShowSlotAvailableData = (props: Props) => {
       ),
     },
     {
-      title: "Action",
+      title: t("action"),
       key: "action",
       render: (_, record) => (
         <Space size="middle">
@@ -88,8 +90,7 @@ const ShowSlotAvailableData = (props: Props) => {
             }}
             type="primary"
           >
-            {" "}
-            Procced
+            {t("button")}
           </Button>
         </Space>
       ),
@@ -99,7 +100,7 @@ const ShowSlotAvailableData = (props: Props) => {
   return props.availableSlot ? (
     <div>
       <Text strong>
-        Date : {new Date(props.availableSlot.date).toDateString()}
+        {t("date")} : {new Date(props.availableSlot.date).toDateString()}
       </Text>
       <Table
         scroll={{ x: 500 }}

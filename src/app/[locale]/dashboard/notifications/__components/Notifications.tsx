@@ -58,7 +58,7 @@ const Notifications: React.FC<NotificationsProps> = ({
                 </li>
               ))
             ) : (
-              <div className="py-4 relative h-[50vh]">
+              <div className="py-4 relative h-[43vh]">
                 <Watermark text={"No History Available"} />
               </div>
             )}

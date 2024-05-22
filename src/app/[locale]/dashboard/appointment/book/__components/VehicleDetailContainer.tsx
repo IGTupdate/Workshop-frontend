@@ -14,6 +14,7 @@ import { setVehicleLoading } from "@/app/store/slices/customerVehicleSlice";
 import Loader from "@/app/components/Loader";
 import { NEW_VEHICLE } from "@/app/[locale]/employee/dashboard/appointment/book/__utils/constant";
 import VehicleCreateContainer from "@/app/[locale]/employee/dashboard/appointment/book/__components/VehicleCreateContainer";
+import { useTranslations } from "next-intl";
 
 const { Title } = Typography;
 
@@ -34,6 +35,8 @@ const VehicleDetailContainer = (props: Props) => {
   const customerId = useAppSelector((state) => state.auth.authData._id);
 
   const dispatch = useAppDispatch();
+
+  const t = useTranslations("VehicleDetailContainer");
 
   useEffect(() => {
     if (vehicleLoading) {
@@ -81,13 +84,16 @@ const VehicleDetailContainer = (props: Props) => {
   return (
     <>
       {vehicleLoading ? (
-        <div className="flex justify-center items-center w-full h-full">
+        <div
+          style={{ height: "calc(100vh - 400px)" }}
+          className="flex justify-center items-center w-full"
+        >
           <Loader />
         </div>
       ) : (
         <div>
           <div className="mb-5">
-            <Title level={5}>Fill Vehicle Details</Title>
+            <Title level={5}>{t("heading")}</Title>
           </div>
 
           {vehicleData?.length === 0 || vehicleId === NEW_VEHICLE.value ? (
@@ -131,9 +137,11 @@ const VehicleDetailContainer = (props: Props) => {
                       onClick={() => handleAddNewVehicle()}
                       className=" bg-black border-none hover:shadow-xl w-fit text-white"
                     >
-                      Add New Vehicle
+                      {t("addNewButton")}
                     </Button>
-                    <Button onClick={() => handleBack()}>Back</Button>
+                    <Button onClick={() => handleBack()}>
+                      {t("backButton")}
+                    </Button>
                   </div>
                 </div>
               )}

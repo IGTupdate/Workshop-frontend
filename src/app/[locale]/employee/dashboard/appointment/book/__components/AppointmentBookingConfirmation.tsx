@@ -98,8 +98,11 @@ const AppointmentBookingConfirmation = (props: Props) => {
       userRole === "customer"
         ? router.push(`/dashboard/appointment/${response.data._id}`)
         : router.push(`/employee/dashboard/appointment/${response.data._id}`);
+
+      setLoading(false);
     } catch (err: any) {
       toast.error(err?.response?.data?.message || COMMON_ERROR);
+      setLoading(false);
     } finally {
       setLoading(false);
     }
@@ -122,7 +125,10 @@ const AppointmentBookingConfirmation = (props: Props) => {
   };
 
   return loading ? (
-    <div className="flex justify-center items-center h-full">
+    <div
+      style={{ height: "calc(100vh - 350px)" }}
+      className="flex justify-center items-center"
+    >
       <Loader />
     </div>
   ) : (

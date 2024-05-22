@@ -10,10 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Typography } from "antd";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  vehicleCreateInputFields,
-  vehicleNumberInputFields,
-} from "../__utils/vehicle-create-input";
+
 import InputField from "@/app/components/Input/InputField";
 import toast from "react-hot-toast";
 import { COMMON_ERROR } from "@/app/utils/constants/constant";
@@ -26,6 +23,8 @@ import { useAppDispatch } from "@/app/store/reduxHooks";
 import { setVehicleLoading } from "@/app/store/slices/customerVehicleSlice";
 import { usePathname, useRouter } from "next/navigation";
 import SearchVehicale from "./SearchVehicale";
+import { useTranslations } from "next-intl";
+import { vehicleCreateInputFields } from "../__utils/vehicle-create-input";
 
 const { Text } = Typography;
 
@@ -43,6 +42,7 @@ const VehicleCreateContainer = (props: Props) => {
 
   const router = useRouter();
   const pathname = usePathname();
+  const t = useTranslations("VehicleCreateContainer");
 
   const {
     control,
@@ -145,14 +145,14 @@ const VehicleCreateContainer = (props: Props) => {
           </div>
           <div className="mt-4 flex justify-start gap-4">
             <Button disabled={loading} onClick={handleBack}>
-              Back
+              {t("backButton")}
             </Button>
             <Button
               type="primary"
               disabled={loading}
               onClick={handleSubmit(onSubmit)}
             >
-              Save
+              {t("saveButton")}
             </Button>
           </div>
         </div>

@@ -184,6 +184,55 @@
     "review": "Review",
     "finaliseyourAppointment": "Finalise your Appointment"
   },
+  "ShowSlotAvailableData": {
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "available": "Available",
+    "action": "Action",
+    "button": "Proceed",
+    "date": "Date"
+  },
+  "VehicleDetailContainer": {
+    "heading": "Fill Vehicle Details",
+    "addNewButton": "Add New Vehicle",
+    "backButton": "Back"
+  },
+  "VehicleCreateContainer": {
+    "backButton": "Back",
+    "saveButton": "Save"
+  },
+  "SearchVehicale": {
+    "backButton": "Back",
+    "saveButton": "Save"
+  },
+  "VehicleNumberInputFields": {
+    "label": "Registration number"
+  },
+  "VehicleCreateInputFields": {
+    "registrationLabel": "Registration number",
+    "vinLabel": "VIN",
+    "vinPlaceholder": "Enter VIN",
+    "vehicleLabel": "Vehicle Model",
+    "vehiclePlaceholder": "Enter vehicle model",
+    "vehicleMakeLabel": "Vehicle Make",
+    "vehicleMakePlaceholder": "Enter vehicle make",
+    "ownerLabel": "Owner",
+    "ownerPlaceholder": "Enter owner name"
+  },
+  "VehicleDetails": {
+    "vehicleMakeLabel": "VEHICLE MAKE",
+    "vehicleLabel": "VEHICLE MODEL",
+    "vinLabel": "VIN",
+    "registrationLabel": "REGISTRATION NUMBER",
+    "ownerLabel": "OWNER",
+    "createdAtLabel": "CREATED AT",
+    "selectButton": "Select Vehicle",
+    "updateButton": "Update Vehicle",
+    "deleteButton": "Delete Vehicle",
+    "modalTitle": "Delete Vehicle",
+    "modalText": "Are you sure you want to delete your vehicle?",
+    "modalButton": "Confirm"
+  },
   "EmployeeSideBar": {
     "heading": "Hello",
     "dashboard": "Dashboard",
@@ -206,6 +255,12 @@
     "date_time": "Date & Time",
     "status": "Status",
     "action": "Action"
+  },
+  "ServicePlanSelection": {
+    "watermark": "No Plans available",
+    "selectedPlans": "Selected Service Plans",
+    "backButton": "Back",
+    "reviewButton": "Review Details"
   },
   "EmployeeDashboardWorkOrderPage": {
     "manage_workorders": "Manage Work Orders",

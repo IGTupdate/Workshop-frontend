@@ -10,6 +10,9 @@ import { TSegregatedServiceData, TServicePlans } from "@/app/types/service";
 import { getAppointMentBookInitData } from "@/app/services/operations/appointment/appointment";
 import { TVehicle } from "@/app/types/vehicle";
 import { TSlot } from "@/app/types/calender";
+import Loader from "@/app/components/Loader";
+import Watermark from "@/app/components/Text/WatermarkText";
+import { useTranslations } from "next-intl";
 
 type Props = {
   appointmentBookingData: TAppointmentBook;
@@ -20,17 +23,25 @@ type Props = {
 };
 
 const ServicePlanSelection: React.FC<Props> = (props) => {
+  const [loader, setLoader] = useState(false);
   const { servicePlansLoading, servicePlansData } = useAppSelector(
     (state) => state.servicePlan,
   );
+  const t = useTranslations("ServicePlanSelection");
   const dispatch = useAppDispatch();
   const [servicePlansDataCategoryWise, setServicePlansDataCategoryWise] =
     useState<TSegregatedServiceData | null>(null);
 
   useEffect(() => {
     (async function () {
-      const result = await getAllServicePlansCategoryWise(servicePlansData);
-      setServicePlansDataCategoryWise(result);
+      setLoader(true);
+      try {
+        const result = await getAllServicePlansCategoryWise(servicePlansData);
+        setServicePlansDataCategoryWise(result);
+        setLoader(false);
+      } catch (error) {
+        setLoader(false);
+      }
     })();
   }, [servicePlansData]);
 
@@ -142,38 +153,50 @@ const ServicePlanSelection: React.FC<Props> = (props) => {
               />
             ))
           ) : (
-            <div className="text-center text-2xl font-bold mt-4">
-              No Plans available
+            <div className="relative h-20">
+              <Watermark text={t("watermark")} />
             </div>
           ),
       }))
     : [];
 
   return (
-    <div>
-      {appointmentBookingConfirmationData?.servicePlans?.length > 0 && (
-        <div className="my-8">
-          <h2 className="font-bold text-xl">Selected Service Plans</h2>
+    <>
+      {loader ? (
+        <div
+          style={{ height: "calc(100vh - 400px)" }}
+          className="flex justify-center items-center w-full"
+        >
+          <Loader />
+        </div>
+      ) : (
+        <div>
+          {appointmentBookingConfirmationData?.servicePlans?.length > 0 && (
+            <div className="my-8">
+              <h2 className="font-bold text-xl">{t("selectedPlans")}</h2>
 
-          <div className="flex flex-wrap items-center gap-4">
-            {appointmentBookingConfirmationData?.servicePlans?.map(
-              (plan, index) => (
-                // eslint-disable-next-line react/jsx-key
-                <h3 className="font-medium text-nowrap">{plan.name}</h3>
-              ),
-            )}
+              <div className="flex flex-wrap items-center gap-4">
+                {appointmentBookingConfirmationData?.servicePlans?.map(
+                  (plan, index) => (
+                    <h3 key={index} className="font-medium text-nowrap">
+                      {plan.name}
+                    </h3>
+                  ),
+                )}
+              </div>
+            </div>
+          )}
+
+          <Tabs defaultActiveKey="0" tabPosition="top" items={tabsItems} />
+          <div className="flex gap-4 items-center">
+            <Button onClick={() => handleBack()}>{t("backButton")}</Button>
+            <Button type="primary" onClick={() => handleNext()}>
+              {t("reviewButton")}
+            </Button>
           </div>
         </div>
       )}
-
-      <Tabs defaultActiveKey="0" tabPosition="top" items={tabsItems} />
-      <div className="flex gap-4 items-center">
-        <Button onClick={() => handleBack()}>Back</Button>
-        <Button type="primary" onClick={() => handleNext()}>
-          Review Details
-        </Button>
-      </div>
-    </div>
+    </>
   );
 };
 

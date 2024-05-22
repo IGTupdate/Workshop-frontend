@@ -184,6 +184,61 @@
     "review": "Revisar",
     "finaliseyourAppointment": "Finaliza tu cita"
   },
+  "ShowSlotAvailableData": {
+    "startTime": "Hora de inicio",
+    "endTime": "Hora de finalización",
+    "available": "Disponible",
+    "action": "Acción",
+    "button": "Proceder",
+    "date": "Fecha"
+  },
+  "VehicleDetailContainer": {
+    "heading": "Complete los detalles del vehículo",
+    "addNewButton": "Agregar nuevo vehículo",
+    "backButton": "Atrás"
+  },
+  "VehicleCreateContainer": {
+    "backButton": "Atrás",
+    "saveButton": "Ahorrar"
+  },
+  "SearchVehicale": {
+    "backButton": "Atrás",
+    "saveButton": "Ahorrar"
+  },
+  "VehicleNumberInputFields": {
+    "label": "Número de registro"
+  },
+  "VehicleCreateInputFields": {
+    "registrationLabel": "Número de registro",
+    "vinLabel": "Número de bastidor",
+    "vinPlaceholder": "Ingrese el número de bastidor",
+    "vehicleLabel": "Modelo de vehículo",
+    "vehiclePlaceholder": "Introduzca el modelo de vehículo",
+    "vehicleMakeLabel": "Marca del vehículo",
+    "vehicleMakePlaceholder": "Introduzca la marca del vehículo",
+    "ownerLabel": "Dueño",
+    "ownerPlaceholder": "Introduce el nombre del propietario"
+  },
+  "VehicleDetails": {
+    "vehicleMakeLabel": "MARCA DEL VEHÍCULO",
+    "vehicleLabel": "MODELO DE VEHÍCULO",
+    "vinLabel": "Número de bastidor",
+    "registrationLabel": "NÚMERO DE REGISTRO",
+    "ownerLabel": "DUEÑO",
+    "createdAtLabel": "CREADO EN",
+    "selectButton": "Seleccionar Vehículo",
+    "updateButton": "Actualizar Vehículo",
+    "deleteButton": "Eliminar Vehículo",
+    "modalTitle": "Eliminar vehículo",
+    "modalText": "¿Estás seguro de que quieres eliminar tu vehículo?",
+    "modalButton": "Confirmar"
+  },
+  "ServicePlanSelection": {
+    "watermark": "No hay planes disponibles",
+    "selectedPlans": "Planes de servicio seleccionados",
+    "backButton": "Atrás",
+    "reviewButton": "Detalles de la revisión"
+  },
   "EmployeeSideBar": {
     "heading": "Hola",
     "dashboard": "Panel",

@@ -10,6 +10,7 @@ import { AiFillHome } from "react-icons/ai";
 import { PiUsersThreeFill } from "react-icons/pi";
 import { MdOutlineMiscellaneousServices } from "react-icons/md";
 import { RiContactsBook2Fill } from "react-icons/ri";
+import { IoClose } from "react-icons/io5";
 
 type Props = {
   toggle: boolean;
@@ -118,11 +119,19 @@ const LandingNavbar = (props: Props) => {
               {t("login")}
             </Link>
           </div>
-          <RxHamburgerMenu
-            onClick={() => props.setToggle(!props.toggle)}
-            size={25}
-            className="text-customYellow block xmd:hidden"
-          />
+          {!props.toggle ? (
+            <RxHamburgerMenu
+              onClick={() => props.setToggle(!props.toggle)}
+              size={25}
+              className="text-customYellow block xmd:hidden"
+            />
+          ) : (
+            <IoClose
+              onClick={() => props.setToggle(!props.toggle)}
+              size={30}
+              className="text-customYellow block xmd:hidden"
+            />
+          )}
         </Flex>
       </div>
     </>

@@ -2,6 +2,7 @@ import CustomModal from "@/app/components/Model/CustomModel";
 import { TVehicle } from "@/app/types/vehicle";
 import { formatDateAndTime } from "@/app/utils/dateFormatter";
 import { Button, Descriptions } from "antd";
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 type Props = {
@@ -15,6 +16,8 @@ const VehicleDetails = (props: Props) => {
   const { vehicleDetails, setVehicleId, setUpdateVehicleId } = props;
 
   const [visible, setVisible] = useState(false);
+
+  const t = useTranslations("VehicleDetails");
 
   const showModal = () => {
     setVisible(true);
@@ -32,34 +35,37 @@ const VehicleDetails = (props: Props) => {
           className="p-4 pb-0 bg-white rounded-xl shadow-xl"
         >
           <Descriptions.Item
-            label="Vehicle Make"
+            label={t("vehicleMakeLabel")}
             className="font-semibold text-nowrap uppercase"
           >
             {vehicleDetails.vehicle_make}
           </Descriptions.Item>
           <Descriptions.Item
-            label="Vehicle Model"
+            label={t("vehicleLabel")}
             className="font-semibold text-nowrap uppercase"
           >
             {vehicleDetails.vehicle_model}
           </Descriptions.Item>
           <Descriptions.Item
-            label="VIN"
+            label={t("vinLabel")}
             className="font-semibold text-nowrap uppercase"
           >
             {vehicleDetails.vin}
           </Descriptions.Item>
           <Descriptions.Item
-            label="Registration Number"
+            label={t("registrationLabel")}
             className="font-semibold text-nowrap uppercase"
           >
             {vehicleDetails.registeration_number}
           </Descriptions.Item>
-          <Descriptions.Item label="Owner" className="font-semibold uppercase">
+          <Descriptions.Item
+            label={t("ownerLabel")}
+            className="font-semibold uppercase"
+          >
             {vehicleDetails.owner}
           </Descriptions.Item>
           <Descriptions.Item
-            label="Created At"
+            label={t("createdAtLabel")}
             className="font-semibold text-nowrap uppercase"
           >
             {formatDateAndTime(vehicleDetails.createdAt)}
@@ -77,16 +83,16 @@ const VehicleDetails = (props: Props) => {
               type="primary"
               onClick={() => setVehicleId(vehicleDetails._id)}
             >
-              Select Vehicle
+              {t("selectButton")}
             </Button>
             <Button
               type="primary"
               onClick={() => setUpdateVehicleId(vehicleDetails._id)}
             >
-              Update Vehicle
+              {t("updateButton")}
             </Button>
             <Button type="primary" onClick={() => setVisible(true)}>
-              Delete Vehicle
+              {t("deleteButton")}
             </Button>
           </Descriptions.Item>
         </Descriptions>
@@ -96,13 +102,13 @@ const VehicleDetails = (props: Props) => {
         <div className="p-4 bg-white rounded-xl shadow-xl">
           <div className="flex items-center justify-between flex-wrap gap-4 pb-4">
             <div className="flex items-center gap-2">
-              <p className="text-antGreay">Vehicle Make:</p>{" "}
+              <p className="text-antGreay">{t("vehicleMakeLabel")}</p>{" "}
               <p className="font-semibold text-nowrap">
                 {vehicleDetails.vehicle_make}
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <p className="text-antGreay">Vehicle Model:</p>{" "}
+              <p className="text-antGreay">{t("vehicleLabel")}</p>{" "}
               <p className="font-semibold text-nowrap">
                 {vehicleDetails.vehicle_model}
               </p>
@@ -111,11 +117,11 @@ const VehicleDetails = (props: Props) => {
 
           <div className="flex items-center justify-between flex-wrap gap-4 pb-4">
             <div className="flex items-center gap-2">
-              <p className="text-antGreay">VIN:</p>{" "}
+              <p className="text-antGreay">{t("vinLabel")}</p>{" "}
               <p className="font-semibold text-nowrap">{vehicleDetails.vin}</p>
             </div>
             <div className="flex items-center gap-2">
-              <p className="text-antGreay">Created At:</p>{" "}
+              <p className="text-antGreay">{t("createdAtLabel")}</p>{" "}
               <p className="font-semibold text-nowrap">
                 {vehicleDetails.registeration_number}
               </p>
@@ -124,13 +130,13 @@ const VehicleDetails = (props: Props) => {
 
           <div className="flex items-center justify-between flex-wrap gap-4 pb-4">
             <div className="flex items-center gap-2">
-              <p className="text-antGreay">Owner:</p>{" "}
+              <p className="text-antGreay">{t("ownerLabel")}</p>{" "}
               <p className="font-semibold text-nowrap">
                 {vehicleDetails.owner}
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <p className="text-antGreay">Registration Number:</p>{" "}
+              <p className="text-antGreay">{t("registrationLabel")}</p>{" "}
               <p className="font-semibold text-nowrap">
                 {vehicleDetails.createdAt}
               </p>
@@ -142,23 +148,23 @@ const VehicleDetails = (props: Props) => {
               type="primary"
               onClick={() => setVehicleId(vehicleDetails._id)}
             >
-              Select
+              {t("selectButton")}
             </Button>
             <Button
               type="primary"
               onClick={() => setUpdateVehicleId(vehicleDetails._id)}
             >
-              Update
+              {t("updateButton")}
             </Button>
             <Button type="primary" onClick={() => setVisible(true)}>
-              Delete
+              {t("deleteButton")}
             </Button>
           </div>
         </div>
       </div>
 
       <CustomModal
-        title="Delete Vehicle"
+        title={t("modalTitle")}
         open={visible}
         onCancel={handleCancel}
         footer={[
@@ -173,11 +179,11 @@ const VehicleDetails = (props: Props) => {
               setVisible(false);
             }}
           >
-            Confirm
+            {t("modalButton")}
           </Button>,
         ]}
       >
-        <p>Are you sure you want to delete your vehicle</p>
+        <p>{t("modalText")}</p>
       </CustomModal>
     </>
   );

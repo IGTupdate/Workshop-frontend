@@ -1,3 +1,6 @@
+"use client";
+import { useTranslations } from "next-intl";
+
 export const vehicleCreateInputFields = [
   {
     name: "registeration_number",
@@ -31,11 +34,15 @@ export const vehicleCreateInputFields = [
   },
 ];
 
-export const vehicleNumberInputFields = [
-  {
-    name: "registeration_number",
-    label: "Registration number",
-    placeholder: "MP 09 PD 4567",
-    type: "text",
-  },
-];
+export const VehicleNumberInputFields = () => {
+  const t = useTranslations("vehicleNumberInputFields");
+
+  return [
+    {
+      name: "registeration_number",
+      label: t("label"),
+      placeholder: "MP 09 PD 4567",
+      type: "text",
+    },
+  ];
+};

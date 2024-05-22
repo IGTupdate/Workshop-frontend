@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { vehicleNumberInputFields } from "../__utils/vehicle-create-input";
 import InputField from "@/app/components/Input/InputField";
 import {
   TvehicleCreateSchema,
@@ -9,6 +8,8 @@ import {
 import { Button } from "antd";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useTranslations } from "next-intl";
+import { VehicleNumberInputFields } from "../__utils/vehicle-create-input";
 
 type props = {
   handleBack: () => void;
@@ -17,6 +18,7 @@ type props = {
 
 const SearchVehicale = ({ handleBack, handleCheckVehicle }: props) => {
   const [loading, setLoading] = useState(false);
+  const t = useTranslations("SearchVehicale");
 
   const {
     control,
@@ -30,7 +32,7 @@ const SearchVehicale = ({ handleBack, handleCheckVehicle }: props) => {
 
   return (
     <div className="w-full sm:w-1/2">
-      {vehicleNumberInputFields.map((field, index) => {
+      {VehicleNumberInputFields()?.map((field, index) => {
         return (
           <InputField
             key={index}
@@ -52,14 +54,14 @@ const SearchVehicale = ({ handleBack, handleCheckVehicle }: props) => {
 
       <div className="mt-4 flex justify-start gap-4">
         <Button disabled={loading} onClick={handleBack}>
-          Back
+          {t("backButton")}
         </Button>
         <Button
           type="primary"
           disabled={loading}
           onClick={handleSubmit(handleCheckVehicle)}
         >
-          Save
+          {t("saveButton")}
         </Button>
       </div>
     </div>

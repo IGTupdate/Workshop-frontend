@@ -54,9 +54,11 @@ export const updateServicePlans = async (
 
 export const getAllServicePlans =
   (): ThunkAction<void, RootState, unknown, Action> => async (dispatch) => {
+    dispatch(setServicePlansLoading(true));
     try {
       const servicePlansData = await getServicePlans();
       dispatch(setServicePlansData(servicePlansData));
+      dispatch(setServicePlansLoading(false));
     } catch (err) {
     } finally {
       dispatch(setServicePlansLoading(false));
