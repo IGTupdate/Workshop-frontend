@@ -217,7 +217,9 @@
     "vehicleMakeLabel": "Marca del vehículo",
     "vehicleMakePlaceholder": "Introduzca la marca del vehículo",
     "ownerLabel": "Dueño",
-    "ownerPlaceholder": "Introduce el nombre del propietario"
+    "ownerPlaceholder": "Introduce el nombre del propietario",
+    "backButton": "Atrás",
+    "saveButton": "Ahorrar"
   },
   "VehicleDetails": {
     "vehicleMakeLabel": "MARCA DEL VEHÍCULO",

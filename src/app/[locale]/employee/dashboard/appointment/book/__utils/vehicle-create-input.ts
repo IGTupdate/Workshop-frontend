@@ -34,8 +34,46 @@ export const vehicleCreateInputFields = [
   },
 ];
 
+export const VehicleCreateInputFields = (t: any) => {
+  // const t = useTranslations("VehicleCreateInputFields");
+
+  return [
+    {
+      name: "registeration_number",
+      label: t("registrationLabel"),
+      // label: "registeration_number",
+      placeholder: "MP09PD4567",
+      type: "text",
+    },
+    {
+      name: "vin",
+      label: t("vinLabel"),
+      placeholder: t("vinPlaceholder"),
+      type: "text",
+    },
+    {
+      name: "vehicle_model",
+      label: t("vehicleLabel"),
+      placeholder: t("vehiclePlaceholder"),
+      type: "text",
+    },
+    {
+      name: "vehicle_make",
+      label: t("vehicleMakeLabel"),
+      placeholder: t("vehicleMakePlaceholder"),
+      type: "text",
+    },
+    {
+      name: "owner",
+      label: t("ownerLabel"),
+      placeholder: t("ownerPlaceholder"),
+      type: "text",
+    },
+  ];
+};
+
 export const VehicleNumberInputFields = () => {
-  const t = useTranslations("vehicleNumberInputFields");
+  const t = useTranslations("VehicleNumberInputFields");
 
   return [
     {

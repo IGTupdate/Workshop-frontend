@@ -217,7 +217,9 @@
     "vehicleMakeLabel": "Vehicle Make",
     "vehicleMakePlaceholder": "Enter vehicle make",
     "ownerLabel": "Owner",
-    "ownerPlaceholder": "Enter owner name"
+    "ownerPlaceholder": "Enter owner name",
+    "backButton": "Back",
+    "saveButton": "Save"
   },
   "VehicleDetails": {
     "vehicleMakeLabel": "VEHICLE MAKE",
