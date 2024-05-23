@@ -2,9 +2,7 @@
 
 import DescriptionItem from "@/app/components/DescriptionItem.tsx";
 import { TEmployeeDetails } from "@/app/types/employee";
-import { Button } from "antd";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 type Props = {
   employee: TEmployeeDetails;
@@ -21,13 +19,8 @@ function EmployeeViewpageContainer({ employee }: Props) {
     additionalDetails,
   } = employee;
 
-  const router = useRouter();
-
   return (
     <>
-      <Button onClick={() => router.push(`${employee._id}/update`)}>
-        Update
-      </Button>
       <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
         <DescriptionItem title="FirstName" content={firstName} />
         <DescriptionItem title="LastName" content={lastName} />

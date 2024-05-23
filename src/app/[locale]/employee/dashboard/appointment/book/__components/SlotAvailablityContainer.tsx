@@ -77,7 +77,10 @@ const SlotAvailablityContainer = (props: Props) => {
   };
 
   return loading ? (
-    <div className="flex justify-center items-center">
+    <div
+      style={{ height: "calc(100vh - 400px)" }}
+      className="flex justify-center items-center"
+    >
       <Loader />
     </div>
   ) : (
@@ -90,7 +93,9 @@ const SlotAvailablityContainer = (props: Props) => {
           items={availableSlotsOptions}
         />
       ) : (
-        <Watermark text="No Slots Available" />
+        <div style={{ height: "calc(100vh - 400px)" }} className="relative">
+          <Watermark text="No Slots Available" />
+        </div>
       )}
     </div>
   );

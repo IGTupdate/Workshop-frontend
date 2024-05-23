@@ -80,7 +80,6 @@ const UpdateEmployeeForm: React.FC<Props> = ({ employeeId }) => {
       const result = await getEmployeeByEmployeeId(id, "full");
 
       if (result?.success) {
-        console.log(result);
         setEmployee(result.data);
       }
     } catch (error) {

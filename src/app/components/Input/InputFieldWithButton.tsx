@@ -1,6 +1,7 @@
 "use client";
 
 import { Button, Input, Space, Typography } from "antd";
+import { useTranslations } from "next-intl";
 import React, { useRef, useState } from "react";
 import { Controller } from "react-hook-form";
 
@@ -19,6 +20,7 @@ type Props = InputField & {};
 const InputFieldWithButton = (props: Props) => {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<any>();
+  const t = useTranslations("CustomerAppointmentBookingConfirmation");
 
   const handleButtonClick = () => {
     if (inputValue.trim() !== "") {
@@ -41,7 +43,7 @@ const InputFieldWithButton = (props: Props) => {
           onChange={(e) => setInputValue(e.target.value)}
         />
         <Button onClick={handleButtonClick} type="primary">
-          Submit
+          {t("submitButton")}
         </Button>
       </Space.Compact>
     </div>

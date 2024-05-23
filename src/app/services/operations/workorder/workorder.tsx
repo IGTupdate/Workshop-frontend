@@ -24,6 +24,7 @@ const {
   GET_PAGE_WORK_ORDER,
   WORK_ORDER_RAMP_ASSIGN,
   GET_DASHBOARD_DATA,
+  GET_WORKORDER_BY_APPOINTMENT_ID,
 } = workOrderEndpoints;
 
 export const getEmployeeWorkingStatus = async (employeeRole: string) => {
@@ -116,8 +117,6 @@ export const createWorkOrder = async (data: TworkOrderCreate) => {
       url: CREATE_WORK_ORDER,
       bodyData: data,
     });
-
-    console.log(response);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -131,11 +130,22 @@ export const getPageWorkOrder = async (query: string = "") => {
       method: "GET",
       url: GET_PAGE_WORK_ORDER + "?" + query,
     });
-    console.log(respone);
     return respone.data.data;
   } catch (err) {
     console.log(err);
     throw err;
+  }
+};
+
+export const getWorkOrderByAppointmentId = async (id: string) => {
+  try {
+    const respone = await apiConnector({
+      method: "GET",
+      url: GET_WORKORDER_BY_APPOINTMENT_ID + "/" + id + "?populate=true",
+    });
+    return respone.data.data;
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -148,7 +158,6 @@ export const getWorkOrderById = async (
       method: "GET",
       url: GET_WORK_ORDER_BY_ID + "/" + workOrderId + "?populate=" + populate,
     });
-    console.log(respone);
     return respone.data.data;
   } catch (err) {
     console.log(err);
@@ -178,7 +187,6 @@ export const assignMechanicWorkorder = async (
   data: TWorkOrderAssign,
 ) => {
   try {
-    console.log(data, workOrderId);
     const response = await apiConnector({
       method: "POST",
       url: ASSIGN_MECHANIC_WORKORDER + "/" + workOrderId,

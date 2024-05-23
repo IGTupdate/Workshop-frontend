@@ -57,12 +57,21 @@ const AppointmentPage: React.FC<Props> = ({ params }) => {
       </Button>
       {appointmentData ? (
         <>
-          <Typography.Title
-            level={2}
-            className="text-lg font-bold bg-white p-4 rounded-xl"
-          >
-            Appointment Details
-          </Typography.Title>
+          <div className="flex justify-between items-center bg-white p-4 rounded-xl mb-8">
+            <Typography.Title level={2} className="text-lg font-bold">
+              Appointment Details
+            </Typography.Title>
+
+            <Button
+              onClick={() =>
+                router.push(
+                  `/dashboard/appointment/${params?.appointmentId}/workorder`,
+                )
+              }
+            >
+              Work Orders
+            </Button>
+          </div>
           <AppointmentDetails
             appointmentData={appointmentData}
             notificationData={notificationData}

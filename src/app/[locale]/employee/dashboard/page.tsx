@@ -24,6 +24,12 @@ const Page = (props: Props) => {
       cards: TkanbanValue[];
     }[]
   >([]);
+  const [filteredData, setFilteredData] = useState<
+    {
+      heading: string;
+      cards: TkanbanValue[];
+    }[]
+  >([]);
 
   const [loader, setLoader] = useState(false);
 
@@ -35,8 +41,6 @@ const Page = (props: Props) => {
     setLoader(true);
     try {
       const result = await getDahsboardKanbanData();
-
-      console.log(result);
 
       if (result.success === true) {
         const Data = result?.data as TDashboardKanbanDataResponse;
@@ -58,8 +62,6 @@ const Page = (props: Props) => {
         setFilterData(arr);
         setLoader(false);
       }
-      console.log(result, "rsult");
-      console.log("hello", "rsult");
     } catch (error) {
       console.log(error);
     } finally {
@@ -69,6 +71,11 @@ const Page = (props: Props) => {
 
   const handelChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
+
+    if (!value || value == " ") {
+      setFilteredData([]);
+      return;
+    }
     const lowerCaseValue = value.toLowerCase();
 
     const filter = kanbanData?.map((item) => {
@@ -85,7 +92,7 @@ const Page = (props: Props) => {
       };
     });
 
-    setFilterData(filter);
+    setFilteredData(filter);
   };
 
   return (
@@ -106,10 +113,10 @@ const Page = (props: Props) => {
               </div>
 
               <div className="flex gap-4 flex-nowrap justify-between w-full overflow-auto">
-                {filterData?.map((item, index) => (
+                {kanbanData?.map((item, i) => (
                   <div
-                    key={index}
-                    className="bg-slate-100 min-w-72 2xl:min-w-80 rounded-xl mb-4"
+                    key={i}
+                    className="bg-slate-100 min-w-80 rounded-xl mb-4"
                   >
                     <div className="flex justify-between items-center mb-3 sticky top-0 w-full left-0 bg-slate-200 p-4 rounded-xl">
                       <h3 className="font-semibold text-xl text-nowrap">
@@ -122,19 +129,109 @@ const Page = (props: Props) => {
 
                     <div className="overflow-auto h-[60vh] scrollbar-thin">
                       {item.cards.length > 0 ? (
-                        item.cards.map((item, index) => (
-                          <div
-                            key={index}
-                            className="rounded-lg mb-3 p-4 bg-white mx-3"
-                          >
-                            <h3 className="font-normal text-lg">
-                              {item.fullName}
-                            </h3>
-                            <p className="mt-2">
-                              Created : {item.registeration_number}
-                            </p>
-                          </div>
-                        ))
+                        [...item.cards]
+                          .sort((a, b) => {
+                            const aMatch =
+                              filteredData[
+                                i
+                              ]?.cards[0]?.registeration_number.toLowerCase() ===
+                              a.registeration_number.toLowerCase();
+                            const bMatch =
+                              filteredData[
+                                i
+                              ]?.cards[0]?.registeration_number.toLowerCase() ===
+                              b.registeration_number.toLowerCase();
+                            if (aMatch) return -1;
+                            else return 1;
+                            // return bMatch - aMatch;
+                          })
+                          .map((item, index) => (
+                            <div
+                              key={index}
+                              className="rounded-lg mb-3 p-4 mx-3"
+                              style={{
+                                background:
+                                  filteredData[
+                                    i
+                                  ]?.cards[0]?.registeration_number.toLowerCase() ===
+                                  item.registeration_number.toLowerCase()
+                                    ? "#B5A22E"
+                                    : "white",
+                              }}
+                            >
+                              <h3
+                                className="font-bold capitalize text-lg"
+                                style={{
+                                  color:
+                                    filteredData[
+                                      i
+                                    ]?.cards[0]?.registeration_number.toLowerCase() ===
+                                    item.registeration_number.toLowerCase()
+                                      ? "white"
+                                      : "black",
+                                }}
+                              >
+                                {item.fullName}
+                              </h3>
+                              <p
+                                className="mt-2 flex justify-between items-center"
+                                style={{
+                                  color:
+                                    filteredData[
+                                      i
+                                    ]?.cards[0]?.registeration_number.toLowerCase() ===
+                                    item.registeration_number.toLowerCase()
+                                      ? "white"
+                                      : "black",
+                                }}
+                              >
+                                <span className="font-semibold text-base">
+                                  Vehicle number :
+                                </span>
+                                <span className="mt-[3px] uppercase">
+                                  {item.registeration_number}
+                                </span>
+                              </p>
+                              <p
+                                className="mt-2 flex justify-between items-center"
+                                style={{
+                                  color:
+                                    filteredData[
+                                      i
+                                    ]?.cards[0]?.registeration_number.toLowerCase() ===
+                                    item.registeration_number.toLowerCase()
+                                      ? "white"
+                                      : "black",
+                                }}
+                              >
+                                <span className="font-semibold text-base">
+                                  Vehicle Model :
+                                </span>
+                                <span className="mt-[3px] uppercase">
+                                  {item.vehicle_model}
+                                </span>
+                              </p>
+                              <p
+                                className="mt-2 flex justify-between items-center"
+                                style={{
+                                  color:
+                                    filteredData[
+                                      i
+                                    ]?.cards[0]?.registeration_number.toLowerCase() ===
+                                    item.registeration_number.toLowerCase()
+                                      ? "white"
+                                      : "black",
+                                }}
+                              >
+                                <span className="font-semibold text-base">
+                                  Contact number :
+                                </span>
+                                <span className="mt-[3px]">
+                                  {item.contactNumber}
+                                </span>
+                              </p>
+                            </div>
+                          ))
                       ) : (
                         <div className="relative h-24">
                           <Watermark text="No Data Found" />

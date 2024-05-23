@@ -18,7 +18,7 @@ const WorkOrderAdvisorDetails = (props: Props) => {
       <div>
         <h3 className="font-semibold">Name</h3>
         <p>
-          {typeof props.advisor === "string" ? "-" : props.advisor.fullName}
+          {typeof props?.advisor === "string" ? "-" : props?.advisor?.fullName}
         </p>
         {/* <DescriptionItem title='Name' content={(typeof props.advisor === "string" ? "-" : props.advisor.fullName)}/> */}
       </div>
