@@ -78,7 +78,7 @@ export function GetAppointmentDataTableColumn() {
         title: t("name"),
         dataIndex: "name",
         key: "name",
-        ...GetColumnTextSearchProps<TAppointmentDataTable>("name"),
+        // ...GetColumnTextSearchProps<TAppointmentDataTable>("name"),
         render: (name) => {
           return <p className="capitalize font-semibold">{name}</p>;
         },

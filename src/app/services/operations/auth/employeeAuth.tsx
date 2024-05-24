@@ -51,11 +51,11 @@ export async function employeeLogin(
   }
 }
 
-export const getAllEmployees = async (role?: string) => {
+export const getAllEmployees = async (query: string = "") => {
   try {
     const response = await apiConnector({
       method: "GET",
-      url: role ? GET_ALL_EMPLOYEES + "?role=" + role : GET_ALL_EMPLOYEES,
+      url: GET_ALL_EMPLOYEES + "?" + query,
     });
 
     return response.data.data;
