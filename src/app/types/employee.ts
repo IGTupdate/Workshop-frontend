@@ -55,3 +55,12 @@ export type TEmployeeDetails = {
   address?: string;
   additionalDetails?: any;
 };
+
+export type TEmployeeProfile = {
+  contactNumber: string | undefined;
+  email: string | undefined;
+  fullName: string | undefined;
+  role: string | undefined;
+  roleId: string | undefined;
+  _id: string | undefined;
+};

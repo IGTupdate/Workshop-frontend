@@ -29,8 +29,6 @@ const AllAppointments: React.FC<Props> = ({
     setVisible(false);
   };
 
-  console.log(appointment.status, "appointment.status");
-
   return (
     <>
       <div className="shadow-xl rounded-xl overflow-hidden">

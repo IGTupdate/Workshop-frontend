@@ -2,9 +2,7 @@
 
 import DescriptionItem from "@/app/components/DescriptionItem.tsx";
 import { TEmployeeDetails } from "@/app/types/employee";
-import { Button } from "antd";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 type Props = {
   employee: TEmployeeDetails;
@@ -21,8 +19,6 @@ function EmployeeViewpageContainer({ employee }: Props) {
     status,
     additionalDetails,
   } = employee;
-
-  const router = useRouter();
 
   return (
     <>

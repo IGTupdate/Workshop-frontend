@@ -117,6 +117,10 @@ export const workOrderEndpoints = {
   GET_ADDITIONAL_WORK: workOrderUrl(WORKORDER, "/additional_work_request/get"),
   WORK_ORDER_RAMP_ASSIGN: workOrderUrl(WORKORDER, "/assign_ramp"),
   GET_DASHBOARD_DATA: workOrderUrl("/dashboard-kanban-data"),
+  GET_WORKORDER_BY_APPOINTMENT_ID: workOrderUrl(
+    WORKORDER,
+    "/get-by-appointmentId",
+  ),
 };
 
 export const notificationEndpoints = {
