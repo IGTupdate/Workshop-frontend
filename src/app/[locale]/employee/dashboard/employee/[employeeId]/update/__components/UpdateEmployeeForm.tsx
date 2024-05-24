@@ -42,8 +42,8 @@ const UpdateEmployeeForm: React.FC<Props> = ({ employeeId }) => {
 
   useEffect(() => {
     if (employee) {
-      setValue("firstName", employee?.firstName || "");
-      setValue("lastName", employee?.lastName || "");
+      setValue("fullName", employee?.fullName || "");
+      // setValue("lastName", employee?.lastName || "");
       setValue("email", employee?.email);
       setValue("contactNumber", employee?.contactNumber);
       setValue("roleId", employee.roleId._id);
@@ -107,21 +107,21 @@ const UpdateEmployeeForm: React.FC<Props> = ({ employeeId }) => {
 
   const employeeUpdateFields = [
     {
-      name: "firstName",
-      error: errors?.firstName?.message || "",
+      name: "fullName",
+      error: errors?.fullName?.message || "",
       label: "First Name",
       type: "text",
       control,
       placeholder: "John",
     },
-    {
-      name: "lastName",
-      error: errors?.lastName?.message || "",
-      label: "Last Name",
-      type: "text",
-      control,
-      placeholder: "Doe",
-    },
+    // {
+    //   name: "lastName",
+    //   error: errors?.lastName?.message || "",
+    //   label: "Last Name",
+    //   type: "text",
+    //   control,
+    //   placeholder: "Doe",
+    // },
     {
       name: "email",
       error: errors?.email?.message || "",

@@ -1,7 +1,15 @@
 "use client";
 import React, { useCallback, useEffect, useState } from "react";
 import GetColumnTextSearchProps from "@/app/components/TableSearch/GetColumnTextSearchProps";
-import { Flex, RadioChangeEvent, TableProps, Typography } from "antd";
+import {
+  Button,
+  Flex,
+  Radio,
+  RadioChangeEvent,
+  Space,
+  TableProps,
+  Typography,
+} from "antd";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FilterDropdownProps } from "antd/es/table/interface";
@@ -63,7 +71,7 @@ export function EmployeeTableColumns() {
     props: FilterDropdownProps,
   ) => {
     const queryParmas = createQueryString(
-      e.target.name || "status",
+      e.target.name || "role",
       e.target.value,
     );
     router.push(`${pathname}?${queryParmas}`);
@@ -72,7 +80,7 @@ export function EmployeeTableColumns() {
 
   // reset status
   const handleStatusReset = () => {
-    const queryParmas = createQueryString("status");
+    const queryParmas = createQueryString("role");
     router.push(`${pathname}?${queryParmas}`);
   };
 
@@ -111,11 +119,44 @@ export function EmployeeTableColumns() {
         key: "role",
         defaultSortOrder: "descend",
         filters: employeeRoleOption,
-
-        onFilter: (value, record) => {
-          console.log(record, "record");
-
-          return record.role === value;
+        filterDropdown: (props) => {
+          return (
+            <div className="p-4">
+              <Radio.Group
+                defaultValue={searchParams.get("role")}
+                onChange={(e) => {
+                  handleStatusSelect(e, props);
+                }}
+              >
+                <Space direction="vertical">
+                  {props.filters &&
+                    props.filters.map((el, index) => {
+                      return (
+                        <Radio
+                          key={index}
+                          name={"role"}
+                          value={el.value}
+                          onChange={(e) => {
+                            handleStatusSelect(e, props);
+                          }}
+                        >
+                          {el.text}
+                        </Radio>
+                      );
+                    })}
+                </Space>
+              </Radio.Group>
+              <div>
+                <Button
+                  onClick={() => props && handleStatusReset()}
+                  size="small"
+                  style={{ width: 90, marginTop: "10px" }}
+                >
+                  Reset
+                </Button>
+              </div>
+            </div>
+          );
         },
         render: (value) => {
           return <p className="uppercase">{value}</p>;
@@ -130,59 +171,6 @@ export function EmployeeTableColumns() {
           return employeeStatusText[value as TEmployeeStatus];
         },
       },
-      // {
-      //     title: "Status",
-      //     dataIndex: "status",
-      //     key: "status",
-      //     filters: getWorkOrderStatus(),
-      //     filterDropdown: (props) => {
-      //         return (
-      //             <div className="p-4">
-      //                 <Radio.Group
-      //                     defaultValue={searchParams.get("status")}
-      //                     onChange={(e) => {
-      //                         handleStatusSelect(e, props);
-      //                     }}
-      //                 >
-      //                     <Space direction="vertical">
-      //                         {props.filters &&
-      //                             props.filters.map((el, index) => {
-      //                                 return (
-      //                                     <Radio
-      //                                         key={index}
-      //                                         name={"status"}
-      //                                         value={el.value}
-      //                                         onChange={(e) => {
-      //                                             handleStatusSelect(e, props);
-      //                                         }}
-      //                                     >
-      //                                         {el.text}
-      //                                     </Radio>
-      //                                 );
-      //                             })}
-      //                     </Space>
-      //                 </Radio.Group>
-      //                 <div>
-      //                     <Button
-      //                         onClick={() => props && handleStatusReset()}
-      //                         size="small"
-      //                         style={{ width: 90, marginTop: "10px" }}
-      //                     >
-      //                         Reset
-      //                     </Button>
-      //                 </div>
-      //             </div>
-      //         );
-      //     },
-      //     render: (text: TAppointmentStatus) => {
-      //         return (
-      //             <div className="text-md font-semibold">
-      //                 {/* {workOrderStatusText[text]} */}
-      //                 {appointmentStatusText[text]}
-      //             </div>
-      //         );
-      //     },
-      // },
       {
         title: "Actions",
         dataIndex: "action",

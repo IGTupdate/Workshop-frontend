@@ -11,8 +11,8 @@ export type TEmployee = {
   role?: string;
   roleId: string | TRole;
   contactNumber?: string;
-  firstName?: string;
-  lastName?: string;
+  // firstName?: string;
+  // lastName?: string;
 };
 
 export type TEmployeeWorkStatus = {
@@ -45,8 +45,8 @@ export type TRole = {
 
 export type TEmployeeDetails = {
   _id: string;
-  firstName?: string;
-  lastName?: string;
+  // firstName?: string;
+  // lastName?: string;
   fullName: string;
   contactNumber: string;
   email: string;
