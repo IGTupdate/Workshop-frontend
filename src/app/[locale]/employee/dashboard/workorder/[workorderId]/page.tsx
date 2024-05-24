@@ -11,8 +11,9 @@ import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 import { Tabs, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { workOrderStatusText } from "../__utils/workOrderStatus";
+import Watermark from "@/app/components/Text/WatermarkText";
 
-const { Text, Title } = Typography;
+const { Text } = Typography;
 
 type Props = {
   params: {
@@ -83,7 +84,10 @@ const Page = (props: Props) => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen w-full">
+        <div
+          style={{ height: "calc(100vh - 200px)" }}
+          className="flex justify-center items-center w-full"
+        >
           <Loader />
         </div>
       ) : workOrder ? (
@@ -109,7 +113,9 @@ const Page = (props: Props) => {
           />
         </div>
       ) : (
-        <Text>Work Order not found</Text>
+        <div style={{ height: "calc(100vh - 200px)" }} className="relative">
+          <Watermark text="Work Order not found" />
+        </div>
       )}
     </>
   );

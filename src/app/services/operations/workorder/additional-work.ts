@@ -17,7 +17,6 @@ export const requestAdditionalWork = async (
       url: REQUEST_ADDITIONAL_WORK,
       bodyData: data,
     });
-    console.log(respone);
     return respone.data;
   } catch (err) {
     console.log(err);
@@ -31,7 +30,6 @@ export const getAdditionalWokrRequest = async (query: string = "") => {
       method: "GET",
       url: GET_ADDITIONAL_WORK + "?" + query,
     });
-    console.log(respone);
     return respone.data;
   } catch (err) {
     console.log(err);
@@ -46,7 +44,6 @@ export const additionalWorkApprove = async (additionalId: string, data: []) => {
       url: UPDATE_ADDITIONAL_WORKS + "/" + additionalId + "approve",
       bodyData: data,
     });
-    console.log(respone);
     return respone.data;
   } catch (err) {
     console.log(err);
