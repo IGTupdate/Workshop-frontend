@@ -2,6 +2,8 @@
 
 import DescriptionItem from "@/app/components/DescriptionItem.tsx";
 import { TEmployeeDetails } from "@/app/types/employee";
+import { Button } from "antd";
+import { useRouter } from "next/router";
 import React from "react";
 
 type Props = {
@@ -20,6 +22,7 @@ function EmployeeViewpageContainer({ employee }: Props) {
     additionalDetails,
   } = employee;
 
+  const router = useRouter();
   return (
     <>
       <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
