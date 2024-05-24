@@ -1,27 +1,16 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Button, Divider, Tabs, Typography } from "antd";
-import VehicleFuelDetailContainer from "./__components/VehicleFuelDetailContainer";
-import { TWorkOrder } from "@/app/types/work-order";
-import WorkOrderCustomerDetails from "./__components/WorkOrderCustomerDetails";
-import WorkOrderObservations from "./__components/WorkOrderObservations";
-import WorkOrdersPlansWorkContainer from "./__components/WorkOrdersPlansWorkContainer";
-import { getWorkOrderById } from "@/app/services/operations/workorder/workorder";
-import Loader from "@/app/components/Loader";
-import InventoryOrderContainer from "./__components/InventoryOrderContainer";
-import { useRouter } from "next/navigation";
-import WorkOrderMechanicDetailContainer from "./__components/WorkOrderMechanicDetailContainer";
-import WorkOrderAdvisorDetails from "./__components/WorkOrderAdvisorDetails";
-import WorkOrderServiceDetailContainer from "./__components/WorkOrderServiceDetailContainer";
-import WorkOrderRampDetails from "./__components/WorkOrderRampDetails";
-import { workOrderStatusText } from "../__utils/workOrderStatus";
-import useAbility from "@/app/__hooks/useAbility";
-import { casl_action, casl_subject } from "@/app/utils/casl/constant";
-import { useAppSelector } from "@/app/store/reduxHooks";
-import VehicleDetails from "@/app/[locale]/dashboard/appointment/[appointmentId]/workorder/__componets/VehicleDetails";
 import ServicePlans from "@/app/[locale]/dashboard/appointment/[appointmentId]/workorder/__componets/ServicePlans";
 import StaffAndRamps from "@/app/[locale]/dashboard/appointment/[appointmentId]/workorder/__componets/StaffAndRamps";
+import VehicleDetails from "@/app/[locale]/dashboard/appointment/[appointmentId]/workorder/__componets/VehicleDetails";
+import useAbility from "@/app/__hooks/useAbility";
+import Loader from "@/app/components/Loader";
+import { getWorkOrderById } from "@/app/services/operations/workorder/workorder";
+import { TWorkOrder } from "@/app/types/work-order";
+import { casl_action, casl_subject } from "@/app/utils/casl/constant";
+import { Tabs, Typography } from "antd";
+import { useEffect, useState } from "react";
+import { workOrderStatusText } from "../__utils/workOrderStatus";
 
 const { Text, Title } = Typography;
 

@@ -35,21 +35,7 @@ const WorkOrderServiceDetailContainer = (props: Props) => {
               <h3 className="font-semibold">Estimated Service Cost</h3>
               <p>$ {props.workOrder.estimatedCost}</p>
             </div>
-
-            {/* <DescriptionItem title='Odometer Reading' content={props.workOrder.odometerReading} />
-                <DescriptionItem title='Fuel Quantity' content={props.workOrder.fuelQuantity} />
-                <DescriptionItem title='Estimated Deliver Time' content={`
-                ${new Date(props.workOrder.estimatedTimeOfCompletion || "").toDateString()} 
-                ${new Date(props.workOrder.estimatedTimeOfCompletion || "").toLocaleTimeString()}
-                `} />
-                <DescriptionItem title='Estimated Service Cost' content={props.workOrder.estimatedCost} /> */}
           </div>
-
-          <div>
-            <h3 className="font-bold">Notes</h3>
-            <p>{props.workOrder.notes}</p>
-          </div>
-          {/* <DescriptionItem title='Notes' content={props.workOrder.notes} /> */}
         </div>
       )}
     </>

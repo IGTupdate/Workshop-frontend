@@ -6,9 +6,11 @@ import { TVehicle } from "./vehicle";
 
 export type TWorkOrderStatus =
   | "Pending"
-  | "Processing"
-  | "Completed"
-  | "Assigned";
+  | "Prepared"
+  | "InProgress"
+  | "Washing"
+  | "Billing"
+  | "Completed";
 
 export type TTask = {
   title: string;

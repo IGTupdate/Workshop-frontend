@@ -13,6 +13,7 @@ type Props = {
   tasks: TTask[];
   showAdditionalWorks?: boolean;
   workOrderId?: string;
+  notes: string;
 };
 
 const WorkOrdersPlansWorkContainer = (props: Props) => {
@@ -25,6 +26,11 @@ const WorkOrdersPlansWorkContainer = (props: Props) => {
       <div>
         {/* service plans opted */}
         <div className="mt-4">
+          <div>
+            <h3 className="font-bold">Notes</h3>
+            <p>{props.notes}</p>
+          </div>
+
           <div className="flex justify-between items-center">
             <Title level={5}>Service Plan Opted</Title>
 
