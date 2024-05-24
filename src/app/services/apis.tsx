@@ -121,6 +121,7 @@ export const workOrderEndpoints = {
     WORKORDER,
     "/get-by-appointmentId",
   ),
+  UPDATE_ADDITIONAL_WORKS: workOrderUrl(WORKORDER, "/additional_work_request"),
 };
 
 export const notificationEndpoints = {

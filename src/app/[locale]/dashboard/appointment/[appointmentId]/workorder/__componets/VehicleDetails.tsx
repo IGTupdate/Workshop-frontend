@@ -1,4 +1,6 @@
+import VehicleFuelDetailContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/VehicleFuelDetailContainer";
 import WorkOrderCustomerDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderCustomerDetails";
+import WorkOrderObservations from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderObservations";
 import WorkOrderServiceDetailContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderServiceDetailContainer";
 import { TWorkOrder } from "@/app/types/work-order";
 import React from "react";
@@ -9,7 +11,7 @@ type Props = {
 
 const VehicleDetails = ({ workOrderData }: Props) => {
   return (
-    <div>
+    <div className="bg-white p-4 rounded-xl shadow-xl">
       <WorkOrderCustomerDetails
         key="customer-details"
         vehicle={
@@ -27,6 +29,20 @@ const VehicleDetails = ({ workOrderData }: Props) => {
       />
 
       <WorkOrderServiceDetailContainer workOrder={workOrderData} />
+
+      <div className="grid items-center grid-flow-col-1 md:grid-cols-2 gap-4">
+        <WorkOrderObservations
+          observations={
+            workOrderData?.observations &&
+            typeof workOrderData?.observations !== "string"
+              ? workOrderData?.observations
+              : []
+          }
+        />
+        <VehicleFuelDetailContainer
+          fuelQuantity={workOrderData?.fuelQuantity}
+        />
+      </div>
     </div>
   );
 };

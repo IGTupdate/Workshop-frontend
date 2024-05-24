@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Button, Divider, Typography } from "antd";
+import { Button, Divider, Tabs, Typography } from "antd";
 import VehicleFuelDetailContainer from "./__components/VehicleFuelDetailContainer";
 import { TWorkOrder } from "@/app/types/work-order";
 import WorkOrderCustomerDetails from "./__components/WorkOrderCustomerDetails";
@@ -19,6 +19,9 @@ import { workOrderStatusText } from "../__utils/workOrderStatus";
 import useAbility from "@/app/__hooks/useAbility";
 import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 import { useAppSelector } from "@/app/store/reduxHooks";
+import VehicleDetails from "@/app/[locale]/dashboard/appointment/[appointmentId]/workorder/__componets/VehicleDetails";
+import ServicePlans from "@/app/[locale]/dashboard/appointment/[appointmentId]/workorder/__componets/ServicePlans";
+import StaffAndRamps from "@/app/[locale]/dashboard/appointment/[appointmentId]/workorder/__componets/StaffAndRamps";
 
 const { Text, Title } = Typography;
 
@@ -33,9 +36,6 @@ const Page = (props: Props) => {
   const [workOrder, setWorkOrder] = useState<TWorkOrder | null>(null);
 
   const ability = useAbility();
-
-  const { authData } = useAppSelector((state) => state.auth);
-  const router = useRouter();
 
   // load work order
   useEffect(() => {
@@ -72,104 +72,143 @@ const Page = (props: Props) => {
     });
   };
 
+  const labels = ["Vehicle Details", "Service Plans", "Staff & Ramps"];
+
+  const components = [
+    <VehicleDetails key="vehicle details" workOrderData={workOrder} />,
+
+    <ServicePlans
+      key={"Service Plan"}
+      workOrderData={workOrder}
+      showAdditionalWorks={true}
+    />,
+
+    <StaffAndRamps
+      key={"Staff & Ramps"}
+      workOrderData={workOrder}
+      handleUpdateWorkOrderData={handleUpdateWorkOrderData}
+      params={props.params}
+    />,
+  ];
+
   return (
-    <div className="p-4 bg-white rounded-md">
+    <>
       {loading ? (
         <div className="flex justify-center items-center h-screen w-full">
           <Loader />
         </div>
       ) : workOrder ? (
         <div>
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">
-              Work Order - #{workOrder.orderNumber}
+          <div className="flex justify-between items-center bg-white rounded-xl p-4 mb-4">
+            <h2 className="text-lg font-bold">
+              Work Order - #{workOrder?.orderNumber}
             </h2>
-            <div>
-              {workOrderStatusText[workOrder.status]}
-
-              {/* <Tag> {workOrder.status}</Tag> */}
-            </div>
+            {workOrderStatusText[workOrder.status]}
           </div>
 
-          <div>
-            <WorkOrderCustomerDetails
-              vehicle={
-                typeof workOrder.appointmentId !== "string"
-                  ? workOrder.appointmentId.vehicle_id
-                  : ""
-              }
-              customer={
-                typeof workOrder.appointmentId !== "string"
-                  ? workOrder.appointmentId.customer_id
-                  : ""
-              }
-            />
-            <Divider />
-            <WorkOrderAdvisorDetails advisor={workOrder.advisorId} />
-            <Divider />
-            <WorkOrderMechanicDetailContainer
-              advisorId={workOrder.advisorId}
-              assigned_mechanics={workOrder.mechanicId}
-              handleUpdateWorkOrderData={handleUpdateWorkOrderData}
-            />
-            <Divider />
-            <WorkOrderRampDetails
-              advisorId={workOrder.advisorId}
-              ramp={workOrder.rampId}
-              handleUpdateWorkOrderData={handleUpdateWorkOrderData}
-            />
-            <Divider />
-
-            {workOrder.status === "Pending" ? (
-              <div>
-                {((typeof workOrder.advisorId === "string" &&
-                  workOrder.advisorId === authData._id) ||
-                  (typeof workOrder.advisorId !== "string" &&
-                    workOrder.advisorId._id === authData._id)) && (
-                  <div>
-                    <Title level={5}>Prepare WorkOrder</Title>
-                    <Button
-                      type="primary"
-                      onClick={() => {
-                        router.push(
-                          `/employee/dashboard/workorder/${props.params.workorderId}/prepare`,
-                        );
-                      }}
-                    >
-                      Prepare
-                    </Button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div>
-                <WorkOrderServiceDetailContainer workOrder={workOrder} />
-                <Divider />
-                <WorkOrdersPlansWorkContainer
-                  servicePlanId={workOrder.servicePlanId || []}
-                  tasks={workOrder.tasks}
-                />
-                <Divider />
-                <div className="grid items-center grid-cols-2 gap-4">
-                  <WorkOrderObservations
-                    observations={workOrder.observations}
-                  />
-                  <VehicleFuelDetailContainer
-                    fuelQuantity={workOrder.fuelQuantity}
-                  />
-                </div>
-                <Divider />
-                <InventoryOrderContainer parts={workOrder.partsRequested} />
-              </div>
-            )}
-            {/* <VehicleInspectionImagesContainer /> */}
-          </div>
+          <Tabs
+            defaultActiveKey="0"
+            tabPosition="top"
+            size="large"
+            centered
+            style={{ height: "100%" }}
+            items={labels.map((label, i) => ({
+              label: label,
+              key: String(i),
+              children: components[i],
+            }))}
+          />
         </div>
       ) : (
         <Text>Work Order not found</Text>
       )}
-    </div>
+    </>
   );
 };
 
 export default Page;
+
+//  <div>
+// <div className="flex justify-between items-center mb-4">
+//   <h2 className="text-xl font-semibold">
+//     Work Order - #{workOrder.orderNumber}
+//   </h2>
+//   <div>
+//     {workOrderStatusText[workOrder.status]}
+
+//   </div >
+// </div >
+
+//   <div>
+//     <WorkOrderCustomerDetails
+//       vehicle={
+//         typeof workOrder.appointmentId !== "string"
+//           ? workOrder.appointmentId.vehicle_id
+//           : ""
+//       }
+//       customer={
+//         typeof workOrder.appointmentId !== "string"
+//           ? workOrder.appointmentId.customer_id
+//           : ""
+//       }
+//     />
+//     <Divider />
+//     <WorkOrderAdvisorDetails advisor={workOrder.advisorId} />
+//     <Divider />
+//     <WorkOrderMechanicDetailContainer
+//       advisorId={workOrder.advisorId}
+//       assigned_mechanics={workOrder.mechanicId}
+//       handleUpdateWorkOrderData={handleUpdateWorkOrderData}
+//     />
+//     <Divider />
+//     <WorkOrderRampDetails
+//       advisorId={workOrder.advisorId}
+//       ramp={workOrder.rampId}
+//       handleUpdateWorkOrderData={handleUpdateWorkOrderData}
+//     />
+//     <Divider />
+
+//     {workOrder.status === "Pending" ? (
+//       <div>
+//         {((typeof workOrder.advisorId === "string" &&
+//           workOrder.advisorId === authData._id) ||
+//           (typeof workOrder.advisorId !== "string" &&
+//             workOrder.advisorId._id === authData._id)) && (
+//             <div>
+//               <Title level={5}>Prepare WorkOrder</Title>
+//               <Button
+//                 type="primary"
+//                 onClick={() => {
+//                   router.push(
+//                     `/employee/dashboard/workorder/${props.params.workorderId}/prepare`,
+//                   );
+//                 }}
+//               >
+//                 Prepare
+//               </Button>
+//             </div>
+//           )}
+//       </div>
+//     ) : (
+//       <div>
+//         <WorkOrderServiceDetailContainer workOrder={workOrder} />
+//         <Divider />
+//         <WorkOrdersPlansWorkContainer
+//           servicePlanId={workOrder.servicePlanId || []}
+//           tasks={workOrder.tasks} showAdditionalWorks={true} />
+//         <Divider />
+//         <div className="grid items-center grid-cols-2 gap-4">
+//           <WorkOrderObservations
+//             observations={workOrder.observations}
+//           />
+//           <VehicleFuelDetailContainer
+//             fuelQuantity={workOrder.fuelQuantity}
+//           />
+//         </div>
+//         <Divider />
+//         <InventoryOrderContainer parts={workOrder.partsRequested} />
+//       </div>
+//     )}
+//     {/* <VehicleInspectionImagesContainer /> */}
+//   </div>
+// </div >

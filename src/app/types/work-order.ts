@@ -92,6 +92,7 @@ export type TAddionalTaskRequest = {
 };
 
 export type TAdditonalWorkRequest = {
+  _id: string;
   workOrderId: string;
   description?: string;
   tasks: TAddionalTaskRequest[];

@@ -3,12 +3,10 @@ import { getWorkOrderByAppointmentId } from "@/app/services/operations/workorder
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Tabs } from "antd";
-import WorkOrderAdvisorDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderAdvisorDetails";
-import WorkOrderCustomerDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderCustomerDetails";
 import { TWorkOrder } from "@/app/types/work-order";
 import Watermark from "@/app/components/Text/WatermarkText";
-import WorkOrderMechanicDetailContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderMechanicDetailContainer";
 import VehicleDetails from "./__componets/VehicleDetails";
+import ServicePlans from "./__componets/ServicePlans";
 
 const Page = () => {
   const [workOrderData, setWorkOrderData] = useState<TWorkOrder | null>(null);
@@ -28,33 +26,30 @@ const Page = () => {
     }
   };
 
-  const labels = ["Vehicle Details"];
+  const labels = ["Vehicle Details", "Service Plans"];
 
   const components = [
     <VehicleDetails key="vehicle details" workOrderData={workOrderData} />,
 
-    // <WorkOrderAdvisorDetails
-    //     key="advisor-details"
-    //     advisor={workOrderData && typeof workOrderData.advisorId !== "string" ? workOrderData?.advisorId : ""}
-    // />,
-
-    // <WorkOrderMechanicDetailContainer
-    //     key="mechanic-details"
-    //     advisorId={workOrderData?.advisorId || ""}
-    //     assigned_mechanics={workOrderData?.mechanicId || []}
-    //     handleUpdateWorkOrderData={() => { console.log("Not working"); }}
-    // />,
+    <ServicePlans
+      key={"Service Plan"}
+      workOrderData={workOrderData}
+      showAdditionalWorks={false}
+    />,
   ];
-
-  console.log(workOrderData, "workOrderData");
 
   return (
     <div>
       {workOrderData ? (
-        <div>
+        <div className="pt-28 pb-36 md:py-0">
+          <h2 className="mb-4 text-lg font-bold bg-white rounded-xl p-4">
+            Work Order - #{workOrderData?.orderNumber}
+          </h2>
+
           <Tabs
             defaultActiveKey="0"
             tabPosition="top"
+            size="large"
             centered
             style={{ height: "100%" }}
             items={labels.map((label, i) => ({
