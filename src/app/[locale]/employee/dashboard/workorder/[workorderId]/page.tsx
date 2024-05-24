@@ -1,29 +1,19 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Button, Divider, Tabs, Typography } from "antd";
-import VehicleFuelDetailContainer from "./__components/VehicleFuelDetailContainer";
+import { Tabs, Typography } from "antd";
 import { TWorkOrder } from "@/app/types/work-order";
-import WorkOrderCustomerDetails from "./__components/WorkOrderCustomerDetails";
-import WorkOrderObservations from "./__components/WorkOrderObservations";
-import WorkOrdersPlansWorkContainer from "./__components/WorkOrdersPlansWorkContainer";
 import { getWorkOrderById } from "@/app/services/operations/workorder/workorder";
 import Loader from "@/app/components/Loader";
-import InventoryOrderContainer from "./__components/InventoryOrderContainer";
-import { useRouter } from "next/navigation";
-import WorkOrderMechanicDetailContainer from "./__components/WorkOrderMechanicDetailContainer";
-import WorkOrderAdvisorDetails from "./__components/WorkOrderAdvisorDetails";
-import WorkOrderServiceDetailContainer from "./__components/WorkOrderServiceDetailContainer";
-import WorkOrderRampDetails from "./__components/WorkOrderRampDetails";
 import { workOrderStatusText } from "../__utils/workOrderStatus";
 import useAbility from "@/app/__hooks/useAbility";
 import { casl_action, casl_subject } from "@/app/utils/casl/constant";
-import { useAppSelector } from "@/app/store/reduxHooks";
 import VehicleDetails from "@/app/[locale]/dashboard/appointment/[appointmentId]/workorder/__componets/VehicleDetails";
 import ServicePlans from "@/app/[locale]/dashboard/appointment/[appointmentId]/workorder/__componets/ServicePlans";
 import StaffAndRamps from "@/app/[locale]/dashboard/appointment/[appointmentId]/workorder/__componets/StaffAndRamps";
+import Watermark from "@/app/components/Text/WatermarkText";
 
-const { Text, Title } = Typography;
+const { Text } = Typography;
 
 type Props = {
   params: {
@@ -94,7 +84,10 @@ const Page = (props: Props) => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen w-full">
+        <div
+          style={{ height: "calc(100vh - 200px)" }}
+          className="flex justify-center items-center w-full"
+        >
           <Loader />
         </div>
       ) : workOrder ? (
@@ -120,7 +113,9 @@ const Page = (props: Props) => {
           />
         </div>
       ) : (
-        <Text>Work Order not found</Text>
+        <div style={{ height: "calc(100vh - 200px)" }} className="relative">
+          <Watermark text="Work Order not found" />
+        </div>
       )}
     </>
   );

@@ -1,12 +1,8 @@
 "use client";
 import InventoryOrderContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/InventoryOrderContainer";
-import VehicleFuelDetailContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/VehicleFuelDetailContainer";
 import WorkOrderAdvisorDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderAdvisorDetails";
 import WorkOrderMechanicDetailContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderMechanicDetailContainer";
-import WorkOrderObservations from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderObservations";
 import WorkOrderRampDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderRampDetails";
-import WorkOrderServiceDetailContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderServiceDetailContainer";
-import WorkOrdersPlansWorkContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrdersPlansWorkContainer";
 import { useAppSelector } from "@/app/store/reduxHooks";
 import { TWorkOrder } from "@/app/types/work-order";
 import { Button } from "antd";
@@ -28,7 +24,7 @@ const StaffAndRamps = ({
   const { authData } = useAppSelector((state) => state.auth);
   const router = useRouter();
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 bg-white p-4 rounded-xl shadow-xl">
       <WorkOrderAdvisorDetails
         advisor={
           workOrderData?.advisorId &&
@@ -73,7 +69,7 @@ const StaffAndRamps = ({
         </div>
       ) : (
         <div>
-          <WorkOrderServiceDetailContainer workOrder={workOrderData} />
+          {/* <WorkOrderServiceDetailContainer workOrder={workOrderData} /> */}
 
           <InventoryOrderContainer
             parts={workOrderData?.partsRequested || []}
