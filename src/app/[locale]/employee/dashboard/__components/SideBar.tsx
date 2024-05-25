@@ -9,6 +9,7 @@ import { useAppSelector } from "@/app/store/reduxHooks";
 import { IAuthData } from "@/app/store/slices/authSlice";
 import Logout from "@/app/components/Logout/Logout";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 const { Text, Title } = Typography;
 
@@ -39,26 +40,28 @@ const SideBar = (props: Props) => {
       collapsed={props?.collapsed}
       style={{ height: "100vh", position: "fixed", top: 0, overflow: "hidden" }}
     >
-      <Space className={`w-full p-4`}>
-        <Avatar size={"large"} icon={<UserOutlined />} />
-        {!props?.collapsed && (
-          <div>
-            <Title
-              level={5}
-              style={{
-                color: "white",
-                textTransform: "capitalize",
-                marginBottom: 0,
-              }}
-            >
-              {t("heading")} {user?.fullName?.split(" ")[0]}
-            </Title>
-            <Text className="capitalize" style={{ color: "#CDCDCE" }}>
-              {user?.role || "-"}
-            </Text>
-          </div>
-        )}
-      </Space>
+      <Link href={"/employee/dashboard/employeeProfile"}>
+        <Space className={`w-full p-4`}>
+          <Avatar size={"large"} icon={<UserOutlined />} />
+          {!props?.collapsed && (
+            <div>
+              <Title
+                level={5}
+                style={{
+                  color: "white",
+                  textTransform: "capitalize",
+                  marginBottom: 0,
+                }}
+              >
+                {t("heading")} {user?.fullName?.split(" ")[0]}
+              </Title>
+              <Text className="capitalize" style={{ color: "#CDCDCE" }}>
+                {user?.role || "-"}
+              </Text>
+            </div>
+          )}
+        </Space>
+      </Link>
 
       <div className="h-[500px] overflow-auto">
         <SideBarMenus />

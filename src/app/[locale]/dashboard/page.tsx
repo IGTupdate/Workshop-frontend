@@ -35,7 +35,7 @@ const Page = (props: Props) => {
   }, [customerId]);
 
   return (
-    <div className="h-screen sm:h-max overflow-auto py-32 px-4 md:py-0">
+    <div className="h-max overflow-auto py-32 px-4 md:py-0">
       {/* CARD COMPONENT */}
       <AppointmentCard appointmentData={appointmentData} />
       {/* NOTIFICATION COMPONENT */}

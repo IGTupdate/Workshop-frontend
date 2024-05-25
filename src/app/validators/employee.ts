@@ -1,8 +1,8 @@
 import * as Yup from "yup";
 
 export const createEmployeeYupSchema = Yup.object({
-  firstName: Yup.string().required("FirstName is required"),
-  lastName: Yup.string().default(""),
+  fullName: Yup.string().required("FullName is required"),
+  // lastName: Yup.string().default(""),
   email: Yup.string().required("Email is Required"),
   contactNumber: Yup.string().required("Contact Number is required"),
   roleId: Yup.string().required("Role is required"),
@@ -10,12 +10,13 @@ export const createEmployeeYupSchema = Yup.object({
 });
 
 export const updateEmployeeYupSchema = Yup.object({
-  firstName: Yup.string().required("FirstName is required"),
-  lastName: Yup.string().default(""),
+  fullName: Yup.string().required("FullName is required"),
+  // lastName: Yup.string().default(""),
   email: Yup.string().required("Email is Required"),
   contactNumber: Yup.string().required("Contact Number is required"),
   roleId: Yup.string().required("Role is required"),
-  address: Yup.string().required("Address is required"),
+  // address: Yup.string().required("Address is required"),
+  address: Yup.string().optional(),
 });
 
 export type TCreateEmployee = Yup.InferType<typeof createEmployeeYupSchema>;

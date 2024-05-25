@@ -6,9 +6,11 @@ import { TVehicle } from "./vehicle";
 
 export type TWorkOrderStatus =
   | "Pending"
-  | "Processing"
-  | "Completed"
-  | "Assigned";
+  | "Prepared"
+  | "InProgress"
+  | "Washing"
+  | "Billing"
+  | "Completed";
 
 export type TTask = {
   title: string;
@@ -92,6 +94,7 @@ export type TAddionalTaskRequest = {
 };
 
 export type TAdditonalWorkRequest = {
+  _id: string;
   workOrderId: string;
   description?: string;
   tasks: TAddionalTaskRequest[];

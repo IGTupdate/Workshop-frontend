@@ -29,7 +29,9 @@
     "src/app/employee/dashboard/slot-management/calender/__utils",
     "src/app/dashboard/notifications/fackData.js",
     "public/svg.ts",
-    "public/svg"
+    "public/svg",
+    "src/app/[locale]/dashboard/appointment/[appointmentId]/workorder/additionalWorks.tsx",
+    "src/app/[locale]/dashboard/appointment/[appointmentId]/workorder/[workOrderId]"
   ],
   "exclude": ["node_modules"]
 }

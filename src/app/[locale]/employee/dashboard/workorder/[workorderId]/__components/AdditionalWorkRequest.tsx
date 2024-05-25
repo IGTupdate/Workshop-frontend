@@ -21,10 +21,10 @@ const AdditionalWorkRequest = (props: Props) => {
   useEffect(() => {
     (async function () {
       try {
+        setLoading(true);
         const querystring = `workOrderId=${params.workorderId}`;
         const response = await getAdditionalWokrRequest(querystring);
 
-        console.log(response);
         setWorkRequests(response.data as TAdditonalWorkRequest[]);
       } catch (err) {
         console.log(err);
@@ -33,6 +33,7 @@ const AdditionalWorkRequest = (props: Props) => {
       }
     })();
   }, []);
+
   return (
     <div>
       <div className="flex justify-between items-center">

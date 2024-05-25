@@ -15,7 +15,7 @@ const WorkOrderCustomerDetails = (props: Props) => {
       <div>
         <Title level={5}>Customer Details</Title>
       </div>
-      <Descriptions column={2}>
+      <Descriptions column={{ sm: 1, md: 2 }}>
         <Descriptions.Item label="Name">
           {typeof props.customer !== "string" ? props?.customer?.fullName : "-"}
         </Descriptions.Item>

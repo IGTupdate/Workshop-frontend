@@ -11,11 +11,11 @@ const {
   UPDATE_EMPLOYEE_DETAILS,
 } = authEndpoints;
 
-export const getAllEmployees = async () => {
+export const getAllEmployees = async (query: string) => {
   try {
     const response = await apiConnector({
       method: "GET",
-      url: GET_ALL_EMPLOYEES,
+      url: GET_ALL_EMPLOYEES + "?" + query,
     });
 
     return response.data;

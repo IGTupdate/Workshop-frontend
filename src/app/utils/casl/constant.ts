@@ -6,9 +6,9 @@ export const casl_action = {
   book: "book",
 };
 
-export const casl_subject = {
-  appointment: "appointment",
-  calender: "calender",
-  slot_schedule: "slot_schedule",
-  workorder: "workorder",
-};
+export enum casl_subject {
+  appointment = "appointment",
+  calender = "calender",
+  slot_schedule = "slot_schedule",
+  workorder = "workorder",
+}

@@ -26,6 +26,7 @@ import CustomModal from "@/app/components/Model/CustomModel";
 import { MdOutlineCancel } from "react-icons/md";
 import { disconnect } from "process";
 import { formatDateAndTime } from "@/app/utils/dateFormatter";
+import { useTranslations } from "next-intl";
 
 const { Title } = Typography;
 
@@ -60,6 +61,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
     (state) => state.servicePlan,
   );
 
+  const t = useTranslations("CustomerAppointmentBookingConfirmation");
   const dispatch = useAppDispatch();
 
   const pathname = usePathname();
@@ -245,14 +247,17 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen w-full">
+        <div
+          style={{ height: "calc(100vh - 400px)" }}
+          className="flex justify-center items-center w-full"
+        >
           <Loader />
         </div>
       ) : (
         <div className="bg-white p-4 rounded-xl shadow-lg">
           <div>
             <div className="grid grid-cols-2">
-              <Title level={5}>Customer Details</Title>
+              <Title level={5}>{t("customerHeading")}</Title>
               <div className="flex justify-end">
                 <Button
                   type="link"
@@ -264,20 +269,20 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
             </div>
             <div className="grid grid-cols-2 gap-2">
               <DescriptionItem
-                title="Name"
+                title={t("name")}
                 content={
                   appointmentBookingConfirmationData.customer?.fullName || "-"
                 }
               />
               <DescriptionItem
-                title="Phone"
+                title={t("phone")}
                 content={
                   appointmentBookingConfirmationData.customer?.contactNumber ||
                   "-"
                 }
               />
               <DescriptionItem
-                title="Email"
+                title={t("email")}
                 content={
                   appointmentBookingConfirmationData.customer?.email || "-"
                 }
@@ -287,7 +292,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
           <Divider />
           <div>
             <div className="grid grid-cols-2">
-              <Title level={5}>Vehicle Details</Title>
+              <Title level={5}>{t("vehicleHeading")}</Title>
               <div className="flex justify-end">
                 <Button
                   type="link"
@@ -301,32 +306,32 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
             </div>
             <div className="grid grid-cols-2 gap-2">
               <DescriptionItem
-                title="Registeration Number"
+                title={t("registrationLabel")}
                 content={
                   appointmentBookingConfirmationData.vehicle
                     ?.registeration_number || "-"
                 }
               />
               <DescriptionItem
-                title="Vin"
+                title={t("vinLabel")}
                 content={appointmentBookingConfirmationData.vehicle?.vin || "-"}
               />
               <DescriptionItem
-                title="Make"
+                title={t("makeLabel")}
                 content={
                   appointmentBookingConfirmationData.vehicle?.vehicle_make ||
                   "-"
                 }
               />
               <DescriptionItem
-                title="Model"
+                title={t("modelLabel")}
                 content={
                   appointmentBookingConfirmationData.vehicle?.vehicle_model ||
                   "-"
                 }
               />
               <DescriptionItem
-                title="Owner"
+                title={t("ownerLabel")}
                 content={
                   appointmentBookingConfirmationData.vehicle?.owner || "-"
                 }
@@ -336,7 +341,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
           <Divider />
           <div>
             <div className="grid grid-cols-2">
-              <Title level={5}>Service Plan Details</Title>
+              <Title level={5}>{t("serviceHeading")}</Title>
               <div className="flex justify-end">
                 <Button type="link" onClick={() => handleBack()}>
                   <LiaEdit className="text-xl font-bold cursor-pointer" />
@@ -374,22 +379,22 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
 
                   <div className="border-t py-4">
                     <div className=" flex justify-between items-center">
-                      <p className="font-bold">Discount</p>
+                      <p className="font-bold">{t("discount")}</p>
                       <p className="text-lg font-bold">
                         - $ {discountPrice.toFixed(2)}
                       </p>
                     </div>
                     <div className=" flex justify-between items-center">
-                      <p className="font-bold">Discount Price</p>
+                      <p className="font-bold">{t("discountPrice")}</p>
                       <p className="text-lg font-bold"> $ {amount}</p>
                     </div>
                     <div className=" flex justify-between items-center">
-                      <p className="font-bold">Tax</p>
+                      <p className="font-bold">{t("tax")}</p>
                       <p className="text-lg font-bold">{tax} %</p>
                     </div>
                   </div>
                   <div className="border-t flex justify-between items-center pt-4">
-                    <p className="font-bold">Service plans total</p>
+                    <p className="font-bold">{t("plansTotal")}</p>
                     <p className="text-lg font-bold">
                       $ {totalAmount.toFixed(2)}
                     </p>
@@ -397,7 +402,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                 </div>
               ) : (
                 <div className="relative">
-                  <Watermark text="No Plans Selected" />
+                  <Watermark text={t("watermark")} />
                 </div>
               )}
             </div>
@@ -405,7 +410,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
           <Divider />
           <div>
             <div className="grid grid-cols-2">
-              <Title level={5}>Slot Details</Title>
+              <Title level={5}>{t("slotHeading")}</Title>
               <div className="flex justify-end">
                 <Button type="link" onClick={changeSlotDetails}>
                   <LiaEdit className="text-xl font-bold cursor-pointer" />
@@ -414,7 +419,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
             </div>
             <div className="grid grid-cols-2">
               <DescriptionItem
-                title="Start"
+                title={t("start")}
                 content={
                   appointmentBookingConfirmationData.slot_details?.start_time
                     ? new Date(
@@ -424,7 +429,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                 }
               />
               <DescriptionItem
-                title="End"
+                title={t("end")}
                 content={
                   appointmentBookingConfirmationData.slot_details?.end_time
                     ? new Date(
@@ -441,8 +446,8 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
               <div className="w-full">
                 <InputFieldWithButton
                   name="desc"
-                  label="Remarks"
-                  placeholder="Add Description"
+                  label={t("remarks")}
+                  placeholder={t("description")}
                   type="text"
                   handleButtonClick={addRemarks}
                 />
@@ -470,19 +475,19 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
           </div>
 
           <div className="mt-6 flex gap-4">
-            <Button onClick={() => handleBack()}>Back </Button>
+            <Button onClick={() => handleBack()}>{t("backButton")} </Button>
             <Button
               onClick={() => setVisible(true)}
               className="bg-black border-none hover:shadow-lg text-white"
             >
-              Book
+              {t("bookButton")}
             </Button>
           </div>
         </div>
       )}
 
       <CustomModal
-        title="Confirm Appointment"
+        title={t("modalText")}
         open={visible}
         onCancel={handleCancel}
         footer={[
@@ -494,15 +499,13 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
             key="confirm"
             onClick={() => handleBookAppointment()}
           >
-            Confirm
+            {t("confirm")}
           </Button>,
         ]}
       >
         <div>
           <div className="flex justify-between items">
-            <p className="font-medium text-base">
-              Appointment of your vehicle{" "}
-            </p>
+            <p className="font-medium text-base">{t("modalHeading")}</p>
             <p>
               {
                 appointmentBookingConfirmationData?.vehicle
@@ -511,7 +514,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
             </p>
           </div>
           <div className="flex justify-between items mt-2">
-            <p className="font-medium text-base">Slot Time</p>
+            <p className="font-medium text-base">{t("slotTime")}</p>
             {appointmentBookingConfirmationData?.slot_details?.start_time && (
               <p>
                 {formatDateAndTime(
@@ -522,7 +525,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
           </div>
 
           <div className="my-4">
-            <h2 className="font-medium text-base">Selected Service Plans</h2>
+            <h2 className="font-medium text-base">{t("selectedPlans")}</h2>
 
             <div className="flex flex-wrap items-center gap-4">
               {appointmentBookingConfirmationData?.servicePlans?.map(
@@ -535,7 +538,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
           </div>
 
           <div className="flex justify-between items">
-            <p className="font-medium text-base">Total Amount</p>
+            <p className="font-medium text-base">{t("total")}</p>
             <p className="font-bold">$ {totalAmount}</p>
           </div>
         </div>

@@ -34,8 +34,9 @@ const RemoveMechanicDrawerContainer = (props: Props) => {
       (async function () {
         setLoading(true);
         try {
+          const query = "role=" + employeeRole.mechanic;
           const response_mechanics = (await getAllEmployees(
-            employeeRole.mechanic,
+            query,
           )) as TEmployee[];
           // console.log(response_mechanics);
           setMechanics(() => {

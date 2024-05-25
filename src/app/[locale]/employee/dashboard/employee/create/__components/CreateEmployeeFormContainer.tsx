@@ -29,21 +29,21 @@ const CreateEmployeeFormContainer = (props: Props) => {
 
   const employee_create_fields: TEmployeeCreateField[] = [
     {
-      name: "firstName",
-      error: props.errors?.firstName?.message || "",
+      name: "fullName",
+      error: props.errors?.fullName?.message || "",
       label: "First Name",
       type: "text",
       control: props.control,
       placeholder: "John",
     },
-    {
-      name: "lastName",
-      error: props.errors?.firstName?.message || "",
-      label: "Last Name",
-      type: "text",
-      control: props.control,
-      placeholder: "Doe",
-    },
+    // {
+    //   name: "lastName",
+    //   error: props.errors?.firstName?.message || "",
+    //   label: "Last Name",
+    //   type: "text",
+    //   control: props.control,
+    //   placeholder: "Doe",
+    // },
     {
       name: "contactNumber",
       error: props.errors?.contactNumber?.message || "",

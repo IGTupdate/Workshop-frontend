@@ -4,7 +4,7 @@ import {
   convertToLocaleDateAndWeekday,
   formatDateAndTime,
 } from "@/app/utils/dateFormatter";
-import { Descriptions, Tag, Typography } from "antd";
+import { Descriptions, Tag } from "antd";
 import dayjs from "dayjs";
 import { usePathname } from "next/navigation";
 import React from "react";
