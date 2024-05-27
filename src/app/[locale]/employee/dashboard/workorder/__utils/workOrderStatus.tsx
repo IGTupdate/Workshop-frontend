@@ -22,6 +22,11 @@ export const workOrderStatusText = {
       Pending
     </Tag>
   ),
+  Prepared: (
+    <Tag className="w-[82px] text-center" color="#ffc06b">
+      Prepared
+    </Tag>
+  ),
   Processing: (
     <Tag className="w-[82px] text-center" color="green">
       Processing

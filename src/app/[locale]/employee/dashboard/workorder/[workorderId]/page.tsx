@@ -12,6 +12,7 @@ import VehicleDetails from "@/app/[locale]/dashboard/appointment/[appointmentId]
 import ServicePlans from "@/app/[locale]/dashboard/appointment/[appointmentId]/workorder/__componets/ServicePlans";
 import StaffAndRamps from "@/app/[locale]/dashboard/appointment/[appointmentId]/workorder/__componets/StaffAndRamps";
 import Watermark from "@/app/components/Text/WatermarkText";
+import WorkOrderHistory from "../__components/WorkOrderHistory";
 
 const { Text } = Typography;
 
@@ -62,7 +63,12 @@ const Page = (props: Props) => {
     });
   };
 
-  const labels = ["Vehicle Details", "Service Plans", "Staff & Ramps"];
+  const labels = [
+    "Vehicle Details",
+    "Service Plans",
+    "Staff & Ramps",
+    "History",
+  ];
 
   const components = [
     <VehicleDetails key="vehicle details" workOrderData={workOrder} />,
@@ -79,6 +85,8 @@ const Page = (props: Props) => {
       handleUpdateWorkOrderData={handleUpdateWorkOrderData}
       params={props.params}
     />,
+
+    <WorkOrderHistory key={"History"} />,
   ];
 
   return (
@@ -96,7 +104,7 @@ const Page = (props: Props) => {
             <h2 className="text-lg font-bold">
               Work Order - #{workOrder?.orderNumber}
             </h2>
-            {workOrderStatusText[workOrder.status]}
+            {workOrderStatusText[workOrder?.status]}
           </div>
 
           <Tabs

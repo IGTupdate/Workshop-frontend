@@ -37,13 +37,19 @@ export const getAdditionalWokrRequest = async (query: string = "") => {
   }
 };
 
-export const additionalWorkApprove = async (additionalId: string, data: []) => {
+export const additionalWorkApprove = async (
+  additionalId: string,
+  selectedTasks: string[],
+) => {
   try {
     const respone = await apiConnector({
       method: "POST",
-      url: UPDATE_ADDITIONAL_WORKS + "/" + additionalId + "approve",
-      bodyData: data,
+      url: UPDATE_ADDITIONAL_WORKS + "/" + additionalId + "/" + "approve",
+      bodyData: { approved_task: selectedTasks },
     });
+
+    console.log(respone, "response");
+
     return respone.data;
   } catch (err) {
     console.log(err);

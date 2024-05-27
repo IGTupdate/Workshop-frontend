@@ -10,7 +10,7 @@ type Props = {
 const TaskComponent = ({ item, ApprovedAdditionalWorks }: Props) => {
   return (
     <>
-      {item.tasks.map((task) => (
+      {item.tasks.slice(0, 1).map((task) => (
         <div
           key={task._id}
           className={`bg-gray-100 p-3 rounded-md shadow-md my-2 w-full`}
@@ -38,12 +38,12 @@ const TaskComponent = ({ item, ApprovedAdditionalWorks }: Props) => {
             ))}
           </div>
 
-          <Button
+          {/* <Button
             onClick={() => ApprovedAdditionalWorks(item._id)}
             className="mt-2"
           >
             Approve
-          </Button>
+          </Button> */}
         </div>
       ))}
     </>

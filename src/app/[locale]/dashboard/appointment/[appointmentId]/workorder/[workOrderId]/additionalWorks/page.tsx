@@ -9,6 +9,8 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import TaskComponent from "../__component/TaskComponent";
 import { TAdditonalWorkRequest } from "@/app/types/work-order";
+import AdditionalWorksDrawer from "../__component/AdditionalWorksDrawer";
+import toast from "react-hot-toast";
 
 const Page = () => {
   const [additionalData, setAdditionalData] = useState<TAdditonalWorkRequest[]>(
@@ -16,6 +18,12 @@ const Page = () => {
   );
   const [loader, setLoader] = useState(true);
   const [toggle, setToggle] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+  const [selectedAdditionalTasks, setSelectedAdditionalTasks] = useState<
+    TAdditonalWorkRequest[]
+  >([]);
+  const [selectedTasks, setSelectedTasks] = useState([]);
+
   const pathname = usePathname();
   const id = pathname.split("/").slice(-2)[0];
 
@@ -47,12 +55,32 @@ const Page = () => {
   const ApprovedAdditionalWorks = async (additionalId: string) => {
     try {
       console.log(additionalId, "additionalId");
-      // const result = await additionalWorkApprove(additionalId, []);
+
+      if (selectedTasks?.length > 0) {
+        const result = await additionalWorkApprove(additionalId, selectedTasks);
+      } else {
+        toast.error("Please Select Tasks");
+      }
       // additionalWorksData(id);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const showDrawer = (id: string) => {
+    const selectedData = additionalData?.filter((item) => item._id === id);
+
+    setSelectedAdditionalTasks(selectedData);
+
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+    setSelectedTasks([]);
+  };
+
+  console.log(selectedTasks);
 
   return (
     <>
@@ -68,7 +96,11 @@ const Page = () => {
           <div className="flex flex-wrap justify-between gap-4 items-start">
             {additionalData?.length > 0 ? (
               additionalData.map((item, index) => (
-                <div className="card w-full md:w-[48%]" key={index}>
+                <div
+                  className="card w-full md:w-[48%] cursor-pointer"
+                  key={index}
+                  onClick={() => showDrawer(item._id)}
+                >
                   <div className="bg-white p-4 rounded-xl shadow-xl mb-4">
                     <p>
                       <strong>Description:</strong> {item.description}
@@ -82,17 +114,21 @@ const Page = () => {
                     <div className="mt-4">
                       <div className="flex justify-between items-center">
                         <h3 className="text-lg font-semibold">Tasks</h3>
-                        {item.tasks.length > 1 && (
-                          <p
-                            className="cursor-pointer text-blue-500"
-                            onClick={() => handleToggle(item._id)}
-                          >
-                            {toggle === item._id ? "Show Less" : "Show All"}
+                        {item.tasks.length > 0 && (
+                          <p className="min-w-6 h-6 flex justify-center items-center p-1 rounded-md bg-black text-white">
+                            {item.tasks.length}
                           </p>
+                          // <p
+                          //   className="cursor-pointer text-blue-500"
+                          //   onClick={() => handleToggle(item._id)}
+                          // >
+                          //   {toggle === item._id ? "Show Less" : "Show All"}
+                          // </p>
                         )}
                       </div>
                       <div
-                        className={`flex justify-between items-start flex-wrap gap-4 ${toggle ? "h-max" : "h-[225px]"} overflow-hidden`}
+                        className={`flex justify-between items-start flex-wrap gap-4 `}
+                        // ${toggle ? "h-max" : "h-[225px]"} overflow-hidden
                       >
                         {/* {item.tasks.map(task => ( */}
                         <TaskComponent
@@ -116,6 +152,15 @@ const Page = () => {
           </div>
         </div>
       )}
+
+      <AdditionalWorksDrawer
+        onClose={onClose}
+        open={open}
+        selectedAdditionalTasks={selectedAdditionalTasks || []}
+        selectedTasks={selectedTasks}
+        setSelectedTasks={setSelectedTasks}
+        ApprovedAdditionalWorks={ApprovedAdditionalWorks}
+      />
     </>
   );
 };
