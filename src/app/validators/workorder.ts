@@ -36,10 +36,20 @@ export const workorderPrepareYupSchema = Yup.object({
       function (value) {
         if (!value) return false;
         console.log(value);
-        const currentTime = new Date().getTime();
-        const inputValue = new Date(value).getTime();
-        console.log(currentTime, inputValue);
-        return inputValue > currentTime;
+        const currentTime = new Date();
+        const inputValue = new Date(value);
+        const newInputValue = new Date(
+          currentTime.getFullYear(),
+          currentTime.getMonth(),
+          currentTime.getDate(),
+          inputValue.getHours(),
+          inputValue.getMinutes(),
+          inputValue.getSeconds(),
+          inputValue.getMilliseconds(),
+        );
+
+        console.log(currentTime, newInputValue);
+        return newInputValue.getTime() > currentTime.getTime();
       },
     )
     .required(),

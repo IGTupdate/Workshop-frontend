@@ -29,6 +29,7 @@ const Logout = (props: Props) => {
       // console.error(err);
     } finally {
       dispatch(setAuthLoading(false));
+      router.refresh();
     }
   };
 

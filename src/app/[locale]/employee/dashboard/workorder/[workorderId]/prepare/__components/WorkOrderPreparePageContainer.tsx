@@ -2,7 +2,6 @@
 
 import { Typography } from "antd";
 import React, { useEffect, useState } from "react";
-
 import { TWorkOrder } from "@/app/types/work-order";
 import { getWorkOrderById } from "@/app/services/operations/workorder/workorder";
 import WorkOrderFormContainer from "./WorkOrderFormContainer";
@@ -24,25 +23,31 @@ const WorkOrderPreparePageContainer = (props: Props) => {
   const ability = useAbility();
   const { authData } = useAppSelector((state) => state.auth);
 
+  const { accessData } = useAppSelector((state) => state.access);
+
   // load work order
   useEffect(() => {
+    console.log(accessData);
     if (ability && ability.can(casl_action.update, casl_subject.workorder)) {
       if (props.workOrderId) {
-        (async function () {
-          try {
-            const required_workorder = await getWorkOrderById(
-              props.workOrderId,
-            );
-            setWorkOrder(required_workorder);
-          } catch (err) {
-            console.log(err);
-          } finally {
-            setLoading(false);
-          }
-        })();
+        loadWorkorder(props.workOrderId);
       }
     }
   }, [props.workOrderId, ability]);
+
+  const loadWorkorder = async (workOrderId: string) => {
+    try {
+      const required_workorder = await getWorkOrderById(workOrderId);
+      setWorkOrder(required_workorder);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  console.log(ability?.can(casl_action.update, casl_subject.workorder));
+  console.log(workOrder);
 
   return (
     <div>
@@ -57,11 +62,7 @@ const WorkOrderPreparePageContainer = (props: Props) => {
               <Title level={5} className="mb-8">
                 Work Order for #{workOrder.orderNumber}
               </Title>
-              {workOrder.advisorId === authData._id ? (
-                <WorkOrderFormContainer workOrder={workOrder} />
-              ) : (
-                <Text>Work Order is not assigned</Text>
-              )}
+              <WorkOrderFormContainer workOrder={workOrder} />
             </div>
           ) : (
             <Text>Work Order Not Found</Text>

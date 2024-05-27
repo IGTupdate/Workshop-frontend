@@ -6,7 +6,11 @@ import {
   verifyOTP,
 } from "@/app/services/operations/auth/customerAuth";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
-import { setAuthLoading, setAuthStep } from "@/app/store/slices/authSlice";
+import {
+  resetAuthSlice,
+  setAuthLoading,
+  setAuthStep,
+} from "@/app/store/slices/authSlice";
 import { Button } from "antd";
 import { InputOTP } from "antd-input-otp";
 import Image from "next/image";
@@ -16,8 +20,11 @@ import toast from "react-hot-toast";
 import { FaRegEdit } from "react-icons/fa";
 import Logo from "../../../../public/images/logo-3.webp";
 import { useTranslations } from "next-intl";
+import { get_client_cookie } from "@/app/utils/get_client_cookie";
 
 const VerifyOTP = () => {
+  const router = useRouter();
+
   const { authLoading, authData, countryCode } = useAppSelector(
     (state) => state.auth,
   );
@@ -26,7 +33,6 @@ const VerifyOTP = () => {
   const searchParams = useSearchParams();
 
   const { contactNumber } = authData;
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const [otpValues, setOtpValues] = useState<string[]>([]);
   const [otpErrors, setOTPErrors] = useState("");
@@ -68,13 +74,18 @@ const VerifyOTP = () => {
   };
 
   const resendOTP = async () => {
-    dispatch(setAuthLoading(true));
-    try {
-      await sendOTP(countryCode, contactNumber, true);
-    } catch (error) {
-      // console.error("Error sending OTP:", error);
-    } finally {
-      dispatch(setAuthLoading(false));
+    const sessionToken = get_client_cookie("sessionToken");
+    if (!sessionToken) {
+      router.push("/");
+    } else {
+      dispatch(setAuthLoading(true));
+      try {
+        await sendOTP(countryCode, contactNumber, true);
+      } catch (error) {
+        // console.error("Error sending OTP:", error);
+      } finally {
+        dispatch(setAuthLoading(false));
+      }
     }
   };
 
