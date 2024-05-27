@@ -101,9 +101,9 @@ const SendOTP = (props: Tprops) => {
         className="w-full flex flex-col gap-3"
       >
         {/* <div className="mb-6 relative shadow-xl p-4 rounded-xl"> */}
-        <label className="text-base font-medium mb-1 block text-black1">
+        {/* <label className="text-base font-medium mb-1 block text-black1">
           {t("label")}
-        </label>
+        </label> */}
         <div className="flex w-full justify-between items-center gap-2">
           <Select
             size="large"
