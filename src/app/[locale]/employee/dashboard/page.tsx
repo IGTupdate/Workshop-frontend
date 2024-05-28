@@ -134,13 +134,13 @@ const Page = (props: Props) => {
                             const aMatch =
                               filteredData[
                                 i
-                              ]?.cards[0]?.registeration_number.toLowerCase() ===
-                              a.registeration_number.toLowerCase();
+                              ]?.cards[0]?.registeration_number?.toLowerCase() ===
+                              a.registeration_number?.toLowerCase();
                             const bMatch =
                               filteredData[
                                 i
-                              ]?.cards[0]?.registeration_number.toLowerCase() ===
-                              b.registeration_number.toLowerCase();
+                              ]?.cards[0]?.registeration_number?.toLowerCase() ===
+                              b.registeration_number?.toLowerCase();
                             if (aMatch) return -1;
                             else return 1;
                             // return bMatch - aMatch;
@@ -153,8 +153,8 @@ const Page = (props: Props) => {
                                 background:
                                   filteredData[
                                     i
-                                  ]?.cards[0]?.registeration_number.toLowerCase() ===
-                                  item.registeration_number.toLowerCase()
+                                  ]?.cards[0]?.registeration_number?.toLowerCase() ===
+                                  item.registeration_number?.toLowerCase()
                                     ? "#B5A22E"
                                     : "white",
                               }}
@@ -165,8 +165,8 @@ const Page = (props: Props) => {
                                   color:
                                     filteredData[
                                       i
-                                    ]?.cards[0]?.registeration_number.toLowerCase() ===
-                                    item.registeration_number.toLowerCase()
+                                    ]?.cards[0]?.registeration_number?.toLowerCase() ===
+                                    item.registeration_number?.toLowerCase()
                                       ? "white"
                                       : "black",
                                 }}
@@ -179,8 +179,8 @@ const Page = (props: Props) => {
                                   color:
                                     filteredData[
                                       i
-                                    ]?.cards[0]?.registeration_number.toLowerCase() ===
-                                    item.registeration_number.toLowerCase()
+                                    ]?.cards[0]?.registeration_number?.toLowerCase() ===
+                                    item.registeration_number?.toLowerCase()
                                       ? "white"
                                       : "black",
                                 }}
@@ -198,8 +198,8 @@ const Page = (props: Props) => {
                                   color:
                                     filteredData[
                                       i
-                                    ]?.cards[0]?.registeration_number.toLowerCase() ===
-                                    item.registeration_number.toLowerCase()
+                                    ]?.cards[0]?.registeration_number?.toLowerCase() ===
+                                    item.registeration_number?.toLowerCase()
                                       ? "white"
                                       : "black",
                                 }}
@@ -217,8 +217,8 @@ const Page = (props: Props) => {
                                   color:
                                     filteredData[
                                       i
-                                    ]?.cards[0]?.registeration_number.toLowerCase() ===
-                                    item.registeration_number.toLowerCase()
+                                    ]?.cards[0]?.registeration_number?.toLowerCase() ===
+                                    item.registeration_number?.toLowerCase()
                                       ? "white"
                                       : "black",
                                 }}

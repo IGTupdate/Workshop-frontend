@@ -9,7 +9,7 @@ type Props = {
 const WorkOrderObservations = (props: Props) => {
   return (
     <div className="my-4">
-      <Title level={5}>Observations</Title>
+      <Title level={4}>Observations</Title>
       {props.observations.length > 0 ? (
         <ul>
           {props.observations.map((el, index) => {

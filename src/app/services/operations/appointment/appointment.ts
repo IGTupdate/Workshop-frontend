@@ -122,6 +122,24 @@ export const getCustomerAppointmentInitData = async (customerId: string) => {
   }
 };
 
+export const getCustomerAppointmentInitProposalData = async (
+  customerId: string,
+) => {
+  try {
+    const response = await apiConnector({
+      method: "GET",
+      url: GET_CUSTOMER_INIT_DATA + `/${customerId}`,
+    });
+
+    if (response.data.success) {
+      return response.data.data.appointmentProposalData[0];
+    }
+    return {};
+  } catch (err) {
+    throw err;
+  }
+};
+
 export const bookAppointment = async (data: TAppointmentBook) => {
   try {
     const response = await apiConnector({

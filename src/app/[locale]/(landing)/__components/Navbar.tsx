@@ -84,12 +84,10 @@ const LandingNavbar = (props: Props) => {
               </Link>
               <Link
                 className={`text-xl font-normal font-Inter hover:text-customYellow ${"/" + localeActive + "/services" === pathName ? "bg-black" : ""} hover:bg-black hover:xmd:bg-none xmd:bg-transparent p-2 rounded-xl flex items-center gap-2`}
-                href={"/services"}
+                href={"/we"}
                 style={{
                   color:
-                    `/${localeActive}/services` === pathName
-                      ? "yellow"
-                      : "white",
+                    `/${localeActive}/we` === pathName ? "yellow" : "white",
                 }}
                 onClick={() => props.setToggle(false)}
               >
@@ -98,12 +96,10 @@ const LandingNavbar = (props: Props) => {
               </Link>
               <Link
                 className={`text-xl font-normal font-Inter hover:text-customYellow ${"/" + localeActive + "/contactUs" === pathName ? "bg-black" : ""} hover:bg-black hover:xmd:bg-none xmd:bg-transparent p-2 rounded-xl flex items-center gap-2`}
-                href={"/contactUs"}
+                href={"/we"}
                 style={{
                   color:
-                    `/${localeActive}/contactUs` === pathName
-                      ? "yellow"
-                      : "white",
+                    `/${localeActive}/we` === pathName ? "yellow" : "white",
                 }}
                 onClick={() => props.setToggle(false)}
               >

@@ -48,9 +48,6 @@ const VehicleDetails = ({ workOrderData }: Props) => {
                       : []
                   }
                 />
-                <VehicleFuelDetailContainer
-                  fuelQuantity={workOrderData?.fuelQuantity}
-                />
               </div>
             </div>
           )}

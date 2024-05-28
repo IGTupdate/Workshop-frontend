@@ -6,28 +6,45 @@ import AppointmentCard from "./__components/__common/AppointmentCard";
 import PaymentMethods from "./__components/__common/PaymentMethods";
 import Notifications from "./notifications/__components/Notifications";
 import { useAppSelector } from "@/app/store/reduxHooks";
-import { getCustomerAppointmentInitData } from "@/app/services/operations/appointment/appointment";
+import {
+  getCustomerAppointmentInitData,
+  getCustomerAppointmentInitProposalData,
+} from "@/app/services/operations/appointment/appointment";
 import { appointmentNotification } from "@/app/services/operations/notification/appointment";
+import Proposal from "./__components/__common/Proposal";
+import { AppointmentProposalData } from "@/app/types/work-order";
 
 type Props = {};
 
 const Page = (props: Props) => {
   const [appointmentData, setAppointmentData] = useState({});
   const [notificationData, setNotificationData] = useState({});
+  const [appointmentProposalData, setAppointmentProposalData] =
+    useState<AppointmentProposalData | null>(null);
 
   const customerId = useAppSelector((state) => state.auth.authData._id);
 
   const initData = async () => {
+    if (!customerId) return;
+
     try {
-      if (!customerId) return;
-      const initAppointmentData =
-        await getCustomerAppointmentInitData(customerId);
-      const initNotificationData = await appointmentNotification(
-        initAppointmentData._id,
-      );
+      const [proposalData, initAppointmentData] = await Promise.all([
+        getCustomerAppointmentInitProposalData(customerId),
+        getCustomerAppointmentInitData(customerId),
+      ]);
+
+      setAppointmentProposalData(proposalData);
       setAppointmentData(initAppointmentData);
+
+      const initNotificationData = await appointmentNotification(
+        initAppointmentData?._id,
+      );
+
+      // Update state after all data has been successfully fetched
       setNotificationData(initNotificationData);
-    } catch (err) {}
+    } catch (err) {
+      console.error("Failed to initialize data:", err);
+    }
   };
 
   useEffect(() => {
@@ -46,6 +63,9 @@ const Page = (props: Props) => {
         <Image src={AddImage} alt="AddImage" className="w-full" />
       </div>
       {/* PAYMENT COMPONENT */}
+
+      <Proposal appointmentProposalData={appointmentProposalData} />
+
       <PaymentMethods />
     </div>
   );
