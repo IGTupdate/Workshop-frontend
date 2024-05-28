@@ -3,6 +3,7 @@ import VehicleFuelDetailContainer from "@/app/[locale]/employee/dashboard/workor
 import WorkOrderCustomerDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderCustomerDetails";
 import WorkOrderObservations from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderObservations";
 import WorkOrderServiceDetailContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderServiceDetailContainer";
+import WorkOrderVehicleDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderVehicleDetails";
 import { TWorkOrder } from "@/app/types/work-order";
 import React from "react";
 
@@ -17,16 +18,26 @@ const VehicleDetails = ({ workOrderData }: Props) => {
         <div className="bg-white p-4 rounded-xl shadow-xl">
           <WorkOrderCustomerDetails
             key="customer-details"
-            vehicle={
-              workOrderData?.appointmentId &&
-              typeof workOrderData.appointmentId !== "string"
-                ? workOrderData.appointmentId.vehicle_id
-                : ""
-            }
+            // vehicle={
+            //   workOrderData?.appointmentId &&
+            //   typeof workOrderData.appointmentId !== "string"
+            //     ? workOrderData.appointmentId.vehicle_id
+            //     : ""
+            // }
             customer={
               workOrderData?.appointmentId &&
               typeof workOrderData.appointmentId !== "string"
                 ? workOrderData.appointmentId.customer_id
+                : ""
+            }
+          />
+
+          <WorkOrderVehicleDetails
+            key="vehicle-details"
+            vehicle={
+              workOrderData?.appointmentId &&
+              typeof workOrderData.appointmentId !== "string"
+                ? workOrderData.appointmentId.vehicle_id
                 : ""
             }
           />

@@ -1,10 +1,13 @@
 "use client";
 
+import {
+  TWorkOrder,
+  TWorkOrderDataTable,
+  TWorkOrderStatus,
+} from "@/app/types/work-order";
 import { Table } from "antd";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { GetWorkOrderTableColumn } from "./GetWorkOrderTableColumn";
-import { Tag } from "antd";
-import { TWorkOrder, TWorkOrderDataTable } from "@/app/types/work-order";
 
 type Props = {
   workOrderData: TWorkOrder[];
@@ -27,7 +30,7 @@ const WorkOrderTableContainer = (props: Props) => {
                 ? el.appointmentId.vehicle_id.registeration_number
                 : ""
               : "") || "",
-          status: el.status,
+          status: el.status as TWorkOrderStatus,
           _id: el._id,
           createdAt: new Date(el.createdAt),
         };

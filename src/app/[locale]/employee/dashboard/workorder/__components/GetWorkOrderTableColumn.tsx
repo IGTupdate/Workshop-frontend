@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 // import GetColumnTextSearchProps from "@/app/components/TableSearch/getColumnTextSearchProps";
 import GetColumnTextSearchProps from "@/app/components/TableSearch/GetColumnTextSearchProps";
 import {
@@ -13,22 +13,17 @@ import {
 } from "antd";
 // import { workOrderStatusText } from "../__utils/workOrderStatus";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { FilterDropdownProps } from "antd/es/table/interface";
+import { TWorkOrderDataTable, TWorkOrderStatus } from "@/app/types/work-order";
 import { removeQueryParams, setQueryParams } from "@/app/utils/helper";
-import { FaEye } from "react-icons/fa";
-import { MdAddChart } from "react-icons/md";
-import {
-  TWorkOrder,
-  TWorkOrderDataTable,
-  TWorkOrderStatus,
-} from "@/app/types/work-order";
-import { getWorkOrderStatus } from "../__utils/workOrderStatus";
-import { appointmentStatusText } from "../../appointment/__utils/appointmentStatus";
-import { TAppointmentStatus } from "@/app/types/appointment";
+import { FilterDropdownProps } from "antd/es/table/interface";
 import dayjs from "dayjs";
-import { IoIosEye } from "react-icons/io";
 import { useTranslations } from "next-intl";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { IoIosEye } from "react-icons/io";
+import {
+  getWorkOrderStatus,
+  workOrderStatusText,
+} from "../__utils/workOrderStatus";
 
 const { Title, Text } = Typography;
 
@@ -151,11 +146,11 @@ export function GetWorkOrderTableColumn() {
           </div>
         );
       },
-      render: (text: TAppointmentStatus) => {
+      render: (text: TWorkOrderStatus) => {
         return (
           <div className="text-md font-semibold">
             {/* {workOrderStatusText[text]} */}
-            {appointmentStatusText[text]}
+            {workOrderStatusText[text]}
           </div>
         );
       },

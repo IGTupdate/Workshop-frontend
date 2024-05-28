@@ -46,7 +46,7 @@ const StaffAndRamps = ({
         handleUpdateWorkOrderData={handleUpdateWorkOrderData}
       />
 
-      {workOrderData?.status === "Pending" ? (
+      {/* {workOrderData?.status === "Pending" ? (
         <div>
           {((typeof workOrderData.advisorId === "string" &&
             workOrderData.advisorId === authData._id) ||
@@ -69,13 +69,11 @@ const StaffAndRamps = ({
         </div>
       ) : (
         <div>
-          {/* <WorkOrderServiceDetailContainer workOrder={workOrderData} /> */}
-
           <InventoryOrderContainer
             parts={workOrderData?.partsRequested || []}
           />
         </div>
-      )}
+      )} */}
       {/* <VehicleInspectionImagesContainer /> */}
     </div>
   );
