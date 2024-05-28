@@ -39,7 +39,7 @@ const AdditionalWorksDrawer = ({
   return (
     <div>
       <Drawer
-        title="Basic Drawer"
+        title="Select Additional Works"
         onClose={onClose}
         open={open}
         extra={

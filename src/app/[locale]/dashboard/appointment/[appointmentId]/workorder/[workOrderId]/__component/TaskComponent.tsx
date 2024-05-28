@@ -10,7 +10,7 @@ type Props = {
 const TaskComponent = ({ item, ApprovedAdditionalWorks }: Props) => {
   return (
     <>
-      {item.tasks.slice(0, 1).map((task) => (
+      {item.tasks.map((task) => (
         <div
           key={task._id}
           className={`bg-gray-100 p-3 rounded-md shadow-md my-2 w-full`}

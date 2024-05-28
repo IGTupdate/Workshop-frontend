@@ -24,28 +24,28 @@ const ServicePlans: React.FC<Props> = ({
     <div>
       {/* category */}
       <p className="mb-4 text-3xl font-bold">
-        {typeof plan.category === "string" ? "" : plan.category.name}
+        {typeof plan?.category === "string" ? "" : plan?.category.name}
       </p>
 
       <div className="bg-white p-4 pt-8 sm:pt-4 rounded-xl shadow-lg mb-4 relative">
         {/* bag */}
-        {plan.duration && (
+        {plan?.duration && (
           <div className="flex items-center gap-2 absolute right-0 top-0 sm:top-5 p-2 py-1 bg-slate-400 text-white">
             <IoMdTime className="text-lg" />
             <p className="text-base">
-              {minutesToHoursConverter(plan.duration)} Hrs Taken
+              {minutesToHoursConverter(plan?.duration)} Hrs Taken
             </p>
           </div>
         )}
 
         {/* heading */}
         <div className="heading">
-          <h3 className="font-bold text-xl">{plan.name}</h3>
-          <p className="font-semibold text-base">{plan.description}</p>
+          <h3 className="font-bold text-xl">{plan?.name}</h3>
+          <p className="font-semibold text-base">{plan?.description}</p>
         </div>
 
         {/* tasks */}
-        {plan.tasks && plan.tasks.length > 0 && (
+        {plan?.tasks && plan?.tasks?.length > 0 && (
           <div className="flex gap-2 flex-wrap justify-between items-center mt-4 overflow-hidden">
             {plan?.tasks
               ?.slice(0, view ? plan?.tasks?.length : 5)
@@ -59,7 +59,7 @@ const ServicePlans: React.FC<Props> = ({
                     <IoIosCheckmark className="text-green-400 text-base" />
                   </span>
                   <span className="text-base font-normal text-nowrap">
-                    {task.name}
+                    {task?.name}
                   </span>
                 </p>
               ))}
@@ -70,7 +70,7 @@ const ServicePlans: React.FC<Props> = ({
                 onClick={() => setView(!view)}
               >
                 {view ? "" : "+"}
-                {!view && plan?.tasks?.slice(5, plan.tasks.length)?.length}
+                {!view && plan?.tasks?.slice(5, plan?.tasks?.length)?.length}
                 {view ? "View Less" : "View More"}
               </div>
             )}
@@ -81,23 +81,23 @@ const ServicePlans: React.FC<Props> = ({
         <div className="flex flex-wrap gap-4 justify-between items-center mt-4">
           <p className="flex items-center gap-2">
             <span className="line-through text-base font-semibold text-antGreay leading-[25px]">
-              $ {PriceCalculator(plan.price)}
+              $ {PriceCalculator(plan?.price)}
             </span>
-            <span className="text-lg font-semibold">$ {plan.price}</span>
+            <span className="text-lg font-semibold">$ {plan?.price}</span>
           </p>
 
           <div className="flex gap-4 items-center">
-            {selectedPlans && selectedPlans.includes(plan._id)
+            {selectedPlans && selectedPlans?.includes(plan?._id)
               ? removeServicePlan && (
                   <Button
                     type="primary"
-                    onClick={() => removeServicePlan(plan._id)}
+                    onClick={() => removeServicePlan(plan?._id)}
                   >
                     Remove from cart
                   </Button>
                 )
               : addServicePlan && (
-                  <Button onClick={() => addServicePlan(plan._id)}>
+                  <Button onClick={() => addServicePlan(plan?._id)}>
                     Add to cart
                   </Button>
                 )}

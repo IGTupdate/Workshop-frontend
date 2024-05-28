@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Button, Typography } from "antd";
 import { appointmentNotification } from "@/app/services/operations/notification/appointment";
 import AppointmentDetails from "@/app/components/Appointment/AppointmentDetails";
+import Loader from "@/app/components/Loader";
 
 interface Props {
   params: {
@@ -62,15 +63,17 @@ const AppointmentPage: React.FC<Props> = ({ params }) => {
               Appointment Details
             </Typography.Title>
 
-            <Button
-              onClick={() =>
-                router.push(
-                  `/dashboard/appointment/${params?.appointmentId}/workorder`,
-                )
-              }
-            >
-              Work Orders
-            </Button>
+            {appointmentData?.status === "Assigned" && (
+              <Button
+                onClick={() =>
+                  router.push(
+                    `/dashboard/appointment/${params?.appointmentId}/workorder`,
+                  )
+                }
+              >
+                Work Orders
+              </Button>
+            )}
           </div>
           <AppointmentDetails
             appointmentData={appointmentData}
@@ -79,7 +82,12 @@ const AppointmentPage: React.FC<Props> = ({ params }) => {
           />
         </>
       ) : (
-        <div>Loading</div>
+        <div
+          style={{ height: "calc(100vh - 300px)" }}
+          className="flex justify-center items-center w-full"
+        >
+          <Loader />
+        </div>
       )}
     </div>
   );

@@ -131,3 +131,14 @@ export type TDashboardKanbanDataResponse = Record<
   string,
   (TAppointmentKanbanData | TWorkOrderKanbanData)[]
 >;
+
+export interface AppointmentProposalData {
+  vehicle_id: string;
+  customer_id: string;
+  additional_tasks: string[];
+  notifications: number;
+  servicePlans: string[];
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}

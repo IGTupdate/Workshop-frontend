@@ -79,3 +79,19 @@ export const getServicePlans = async () => {
     console.error(err);
   }
 };
+
+export const getSingleServicePlans = async (id: string | string[]) => {
+  try {
+    const response = await apiConnector({
+      method: "POST",
+      url: GET_SERVICE_PLAN,
+      bodyData: { data: id },
+    });
+
+    if (response.data.success) {
+      return response.data.data;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};

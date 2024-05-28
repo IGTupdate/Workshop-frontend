@@ -12,7 +12,7 @@ const VehicleFuelDetailContainer = (props: Props) => {
         nrOfLevels={420}
         arcsLength={[0.1, 0.4, 0.5]}
         colors={["#EA4228", "#F5CD19", "#5BE12C"]}
-        percent={props.fuelQuantity ? props.fuelQuantity / 100 : 0}
+        percent={props.fuelQuantity ? props.fuelQuantity / 50 : 0}
         arcPadding={0.02}
         style={{ width: "50%" }}
         textColor={"black"}

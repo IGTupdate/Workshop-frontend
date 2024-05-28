@@ -99,7 +99,6 @@ const Page = () => {
                 <div
                   className="card w-full md:w-[48%] cursor-pointer"
                   key={index}
-                  onClick={() => showDrawer(item._id)}
                 >
                   <div className="bg-white p-4 rounded-xl shadow-xl mb-4">
                     <p>
@@ -115,20 +114,25 @@ const Page = () => {
                       <div className="flex justify-between items-center">
                         <h3 className="text-lg font-semibold">Tasks</h3>
                         {item.tasks.length > 0 && (
-                          <p className="min-w-6 h-6 flex justify-center items-center p-1 rounded-md bg-black text-white">
-                            {item.tasks.length}
-                          </p>
-                          // <p
-                          //   className="cursor-pointer text-blue-500"
-                          //   onClick={() => handleToggle(item._id)}
-                          // >
-                          //   {toggle === item._id ? "Show Less" : "Show All"}
-                          // </p>
+                          <div className="flex gap-2 items-center">
+                            {item.tasks.length > 1 && (
+                              <p
+                                className="cursor-pointer text-customYellow"
+                                onClick={() => handleToggle(item._id)}
+                              >
+                                {toggle === item._id ? "Show Less" : "Show All"}
+                              </p>
+                            )}
+
+                            <p className="min-w-6 h-6 flex justify-center items-center p-1 rounded-md bg-black text-white">
+                              {item.tasks.length}
+                            </p>
+                          </div>
                         )}
                       </div>
                       <div
-                        className={`flex justify-between items-start flex-wrap gap-4 `}
-                        // ${toggle ? "h-max" : "h-[225px]"} overflow-hidden
+                        className={`flex justify-between items-start flex-wrap gap-4 cursor-pointer ${toggle ? "h-max" : "h-[179px]"} overflow-hidden`}
+                        onClick={() => showDrawer(item._id)}
                       >
                         {/* {item.tasks.map(task => ( */}
                         <TaskComponent
