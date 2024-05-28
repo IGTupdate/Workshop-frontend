@@ -1,3 +1,4 @@
+import DescriptionItem from "@/app/components/DescriptionItem.tsx";
 import { TCustomer } from "@/app/types/customer";
 import { TVehicle } from "@/app/types/vehicle";
 import { Descriptions, Typography } from "antd";
@@ -15,6 +16,7 @@ const WorkOrderCustomerDetails = (props: Props) => {
         <Title level={5}>Customer Details</Title>
       </div>
       <Descriptions column={{ sm: 1, md: 2 }}>
+        {/* <DescriptionItem title="Name" content={typeof props.customer !== "string" ? props?.customer?.fullName : "-"}/> */}
         <Descriptions.Item label="Name">
           {typeof props.customer !== "string" ? props?.customer?.fullName : "-"}
         </Descriptions.Item>

@@ -5,8 +5,9 @@ import React, { useEffect, useState } from "react";
 import { Tabs } from "antd";
 import { TWorkOrder } from "@/app/types/work-order";
 import Watermark from "@/app/components/Text/WatermarkText";
-import VehicleDetails from "./__componets/VehicleDetails";
-import ServicePlans from "./__componets/ServicePlans";
+
+import ServicePlans from "../../../../../components/WorkOrder/ServicePlans";
+import CusotmerVehicleDetails from "@/app/components/WorkOrder/CusotmerVehicleDetails";
 
 const Page = () => {
   const [workOrderData, setWorkOrderData] = useState<TWorkOrder | null>(null);
@@ -29,7 +30,10 @@ const Page = () => {
   const labels = ["Vehicle Details", "Service Plans"];
 
   const components = [
-    <VehicleDetails key="vehicle details" workOrderData={workOrderData} />,
+    <CusotmerVehicleDetails
+      key="vehicle details"
+      workOrderData={workOrderData}
+    />,
 
     <ServicePlans
       key={"Service Plan"}

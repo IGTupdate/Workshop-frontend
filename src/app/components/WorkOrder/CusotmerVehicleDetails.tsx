@@ -11,7 +11,7 @@ type Props = {
   workOrderData: TWorkOrder | null;
 };
 
-const VehicleDetails = ({ workOrderData }: Props) => {
+const CusotmerVehicleDetails = ({ workOrderData }: Props) => {
   return (
     <div>
       {workOrderData ? (
@@ -70,4 +70,4 @@ const VehicleDetails = ({ workOrderData }: Props) => {
   );
 };
 
-export default VehicleDetails;
+export default CusotmerVehicleDetails;
