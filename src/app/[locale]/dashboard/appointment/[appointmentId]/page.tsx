@@ -63,7 +63,7 @@ const AppointmentPage: React.FC<Props> = ({ params }) => {
               Appointment Details
             </Typography.Title>
 
-            {appointmentData?.status === "Assigned" && (
+            {appointmentData?.status === "Completed" && (
               <Button
                 onClick={() =>
                   router.push(

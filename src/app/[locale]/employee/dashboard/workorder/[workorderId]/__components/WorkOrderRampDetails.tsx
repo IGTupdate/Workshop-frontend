@@ -1,12 +1,13 @@
-import DescriptionItem from "@/app/components/DescriptionItem.tsx";
-import { TRamp } from "@/app/types/ramp";
-import { Typography } from "antd";
-import React from "react";
-import WorkOrderManageRampDrawer from "./WorkOrderManageRampDrawer";
-import { TWorkOrder } from "@/app/types/work-order";
+"use client";
 import Watermark from "@/app/components/Text/WatermarkText";
-import { TEmployee } from "@/app/types/employee";
 import { useAppSelector } from "@/app/store/reduxHooks";
+import { TEmployee } from "@/app/types/employee";
+import { TRamp } from "@/app/types/ramp";
+import { TWorkOrder } from "@/app/types/work-order";
+import { Typography } from "antd";
+import WorkOrderManageRampDrawer from "./WorkOrderManageRampDrawer";
+import useAbility from "@/app/__hooks/useAbility";
+import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 
 const { Title, Text } = Typography;
 
@@ -18,20 +19,20 @@ type Props = {
 
 const WorkOrderRampDetails = (props: Props) => {
   const { authData } = useAppSelector((state) => state.auth);
+
+  const ability = useAbility();
   return (
     <div className="w-full">
       <div className="flex justify-between">
         <Title level={5}>Ramp Details</Title>
 
-        {((typeof props.advisorId === "string" &&
-          props.advisorId === authData._id) ||
-          (typeof props.advisorId !== "string" &&
-            props.advisorId._id === authData._id)) && (
-          <WorkOrderManageRampDrawer
-            ramp={props.ramp}
-            handleUpdateWorkOrderData={props.handleUpdateWorkOrderData}
-          />
-        )}
+        {ability &&
+          ability.can(casl_action.update, casl_subject.workorder, "rampId") && (
+            <WorkOrderManageRampDrawer
+              ramp={props.ramp}
+              handleUpdateWorkOrderData={props.handleUpdateWorkOrderData}
+            />
+          )}
       </div>
       {props.ramp ? (
         <div className="flex flex-wrap justify-between items-center">

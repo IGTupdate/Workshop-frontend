@@ -1,3 +1,4 @@
+import DescriptionItem from "@/app/components/DescriptionItem.tsx";
 import { TCustomer } from "@/app/types/customer";
 import { TVehicle } from "@/app/types/vehicle";
 import { Descriptions, Typography } from "antd";
@@ -5,7 +6,6 @@ import React from "react";
 const { Title } = Typography;
 
 type Props = {
-  vehicle: string | TVehicle;
   customer: string | TCustomer;
 };
 
@@ -16,6 +16,7 @@ const WorkOrderCustomerDetails = (props: Props) => {
         <Title level={5}>Customer Details</Title>
       </div>
       <Descriptions column={{ sm: 1, md: 2 }}>
+        {/* <DescriptionItem title="Name" content={typeof props.customer !== "string" ? props?.customer?.fullName : "-"}/> */}
         <Descriptions.Item label="Name">
           {typeof props.customer !== "string" ? props?.customer?.fullName : "-"}
         </Descriptions.Item>
@@ -27,7 +28,7 @@ const WorkOrderCustomerDetails = (props: Props) => {
         <Descriptions.Item label="Email">
           {typeof props.customer !== "string" ? props?.customer?.email : "-"}
         </Descriptions.Item>
-        <Descriptions.Item label="Vehicle Reg No">
+        {/* <Descriptions.Item label="Vehicle Reg No">
           {typeof props.vehicle !== "string"
             ? props.vehicle.registeration_number
             : "-"}
@@ -44,7 +45,7 @@ const WorkOrderCustomerDetails = (props: Props) => {
           {typeof props.vehicle !== "string"
             ? props?.vehicle?.vehicle_model
             : "-"}
-        </Descriptions.Item>
+        </Descriptions.Item> */}
       </Descriptions>
     </div>
   );
