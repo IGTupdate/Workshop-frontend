@@ -46,33 +46,59 @@ const AppointmentCard: React.FC<AppointmentProps> = ({ appointmentData }) => {
           spaceBetween: 20,
         },
         980: {
-          slidesPerView: Object.keys(appointmentData).length > 0 ? 2 : 1,
+          slidesPerView:
+            appointmentData != undefined &&
+            appointmentData != null &&
+            Object.keys(appointmentData)?.length > 0
+              ? 2
+              : 1,
           spaceBetween: 20,
         },
         1024: {
-          slidesPerView: Object.keys(appointmentData).length > 0 ? 2 : 1,
+          slidesPerView:
+            appointmentData != undefined &&
+            appointmentData != null &&
+            Object.keys(appointmentData)?.length > 0
+              ? 2
+              : 1,
           spaceBetween: 20,
         },
         1280: {
-          slidesPerView: Object.keys(appointmentData).length > 0 ? 2 : 1,
+          slidesPerView:
+            appointmentData != undefined &&
+            appointmentData != null &&
+            Object.keys(appointmentData)?.length > 0
+              ? 2
+              : 1,
           spaceBetween: 20,
         },
         1400: {
-          slidesPerView: Object.keys(appointmentData).length > 0 ? 2 : 1,
+          slidesPerView:
+            appointmentData != undefined &&
+            appointmentData != null &&
+            Object.keys(appointmentData)?.length > 0
+              ? 2
+              : 1,
           spaceBetween: 20,
         },
       }}
     >
-      {Object.keys(appointmentData).length > 0 && (
-        <SwiperSlide>
-          <AppointmentContent item={appointmentData} />
-        </SwiperSlide>
-      )}
+      {appointmentData != undefined &&
+        appointmentData != null &&
+        Object.keys(appointmentData)?.length > 0 && (
+          <SwiperSlide>
+            <AppointmentContent item={appointmentData} />
+          </SwiperSlide>
+        )}
 
       <SwiperSlide>
         <div className="bg-gradient-to-r from-[#FFE301] to-[#D7C000] rounded-2xl p-4  min-h-[121px] shadow-3d">
           <h3 className="font-bold text-2xl text-white text-center">
-            {Object.keys(appointmentData).length > 0 ? t("book") : t("dont")}
+            {appointmentData != undefined &&
+            appointmentData != null &&
+            Object?.keys(appointmentData)?.length > 0
+              ? t("book")
+              : t("dont")}
           </h3>
           <div className="flex justify-center items-center mt-4">
             <Link href={"/dashboard/appointment/book"}>

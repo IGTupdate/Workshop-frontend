@@ -61,11 +61,6 @@ const Proposal = ({ appointmentProposalData }: Props) => {
     router.push("/dashboard/appointment/book");
   };
 
-  console.log(
-    appointmentProposalData?.additional_tasks,
-    "appointmentProposalData",
-  );
-
   return (
     <>
       {proposalData?.length > 0 ? (

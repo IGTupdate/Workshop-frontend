@@ -36,12 +36,16 @@ const Page = (props: Props) => {
       setAppointmentProposalData(proposalData);
       setAppointmentData(initAppointmentData);
 
-      const initNotificationData = await appointmentNotification(
-        initAppointmentData?._id,
-      );
+      console.log(initAppointmentData, "initAppointmentData");
 
-      // Update state after all data has been successfully fetched
-      setNotificationData(initNotificationData);
+      if (initAppointmentData?._id) {
+        const initNotificationData = await appointmentNotification(
+          initAppointmentData?._id,
+        );
+
+        // Update state after all data has been successfully fetched
+        setNotificationData(initNotificationData);
+      }
     } catch (err) {
       console.error("Failed to initialize data:", err);
     }
