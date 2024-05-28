@@ -9,6 +9,7 @@ import Loader from "@/app/components/Loader";
 import useAbility from "@/app/__hooks/useAbility";
 import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 import { useAppSelector } from "@/app/store/reduxHooks";
+import WorkOrderPrepareStepContainer from "./WorkOrderPrepareStepContainer";
 
 const { Title, Text } = Typography;
 
@@ -62,7 +63,8 @@ const WorkOrderPreparePageContainer = (props: Props) => {
               <Title level={5} className="mb-8">
                 Work Order for #{workOrder.orderNumber}
               </Title>
-              <WorkOrderFormContainer workOrder={workOrder} />
+              {/* <WorkOrderFormContainer workOrder={workOrder} /> */}
+              <WorkOrderPrepareStepContainer />
             </div>
           ) : (
             <Text>Work Order Not Found</Text>
