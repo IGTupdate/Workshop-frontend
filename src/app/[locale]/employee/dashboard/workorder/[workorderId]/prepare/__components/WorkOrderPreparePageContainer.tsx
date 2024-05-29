@@ -53,16 +53,17 @@ const WorkOrderPreparePageContainer = (props: Props) => {
   return (
     <div>
       {loading ? (
-        <div className="flex justify-center items-center h-screen w-full">
+        <div
+          style={{ height: "calc(100vh - 200px)" }}
+          className="flex justify-center items-center w-full"
+        >
           <Loader />
         </div>
       ) : (
         <div>
           {workOrder ? (
             <div>
-              <Title level={5} className="mb-8">
-                Work Order for #{workOrder.orderNumber}
-              </Title>
+              <Title level={5}>Work Order for #{workOrder.orderNumber}</Title>
               {/* <WorkOrderFormContainer workOrder={workOrder} /> */}
               <WorkOrderPrepareStepContainer />
             </div>
