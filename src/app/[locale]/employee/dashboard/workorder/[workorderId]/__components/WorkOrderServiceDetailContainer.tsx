@@ -20,7 +20,7 @@ const WorkOrderServiceDetailContainer = (props: Props) => {
             <div className="flex flex-col gap-4">
               <div>
                 <h3 className="text-lg font-semibold">Fuel Quantity</h3>
-                <p>{props.workOrder.fuelQuantity} L</p>
+                <p>{props.workOrder.fuelQuantity?.value} L</p>
               </div>
 
               <div>
@@ -61,7 +61,7 @@ const WorkOrderServiceDetailContainer = (props: Props) => {
 
               <div>
                 <VehicleFuelDetailContainer
-                  fuelQuantity={props.workOrder?.fuelQuantity}
+                  fuelQuantity={props.workOrder?.fuelQuantity?.value}
                 />
               </div>
             </div>

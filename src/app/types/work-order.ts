@@ -43,6 +43,22 @@ export type TPartRequested = {
   _id: string;
 };
 
+export type TWorkOrderObservation = {
+  images: string[];
+  details?: string;
+  category: string;
+};
+
+export type TWorkOrderOdometerReading = {
+  image: string;
+  value: number;
+};
+
+export type TWorkOrderFuelQuantity = {
+  image: string;
+  value: number;
+};
+
 export type TWorkOrder = {
   _id: string;
   orderNumber: string;
@@ -60,9 +76,9 @@ export type TWorkOrder = {
   partsRequiredInvoice: string[];
   current_location: string;
   servicePlanId?: string[] | TServicePlans[];
-  odometerReading?: number;
-  fuelQuantity?: number;
-  observations: string[];
+  odometerReading?: TWorkOrderOdometerReading;
+  fuelQuantity?: TWorkOrderFuelQuantity;
+  observations: TWorkOrderObservation[];
   createdAt: string;
   updatedAt: string;
 };

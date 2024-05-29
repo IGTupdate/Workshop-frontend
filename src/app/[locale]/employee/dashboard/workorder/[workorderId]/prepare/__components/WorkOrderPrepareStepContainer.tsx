@@ -1,6 +1,10 @@
-import React from "react";
+"use client";
 
-type Props = {};
+import { TWorkOrder } from "@/app/types/work-order";
+
+type Props = {
+  workOrder: TWorkOrder | null;
+};
 
 const WorkOrderPrepareStepContainer = (props: Props) => {
   return <div></div>;
