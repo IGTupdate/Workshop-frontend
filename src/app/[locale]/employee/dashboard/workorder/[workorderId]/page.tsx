@@ -86,7 +86,7 @@ const Page = (props: Props) => {
       params={props.params}
     />,
 
-    <WorkOrderHistory key={"History"} />,
+    <WorkOrderHistory key={"History"} workOrderId={workOrder?._id || ""} />,
   ];
 
   return (

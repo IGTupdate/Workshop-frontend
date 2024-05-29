@@ -25,6 +25,7 @@ const {
   WORK_ORDER_RAMP_ASSIGN,
   GET_DASHBOARD_DATA,
   GET_WORKORDER_BY_APPOINTMENT_ID,
+  GET_WORKORDER_ACTIVITY,
 } = workOrderEndpoints;
 
 export const getEmployeeWorkingStatus = async (employeeRole: string) => {
@@ -224,6 +225,19 @@ export const getDahsboardKanbanData = async () => {
     });
 
     return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getWorkOrderActivity = async (workOrderId: string) => {
+  try {
+    const response = await apiConnector({
+      method: "GET",
+      url: GET_WORKORDER_ACTIVITY + "/" + workOrderId,
+    });
+
+    return response.data.data;
   } catch (err) {
     throw err;
   }
