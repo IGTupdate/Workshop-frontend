@@ -13,6 +13,7 @@ import Watermark from "@/app/components/Text/WatermarkText";
 import WorkOrderHistory from "../__components/WorkOrderHistory";
 import CusotmerVehicleDetails from "@/app/components/WorkOrder/CusotmerVehicleDetails";
 import StaffAndRamps from "@/app/components/WorkOrder/StaffAndRamps";
+import VehicleInspectionViewRecord from "@/app/components/WorkOrder/VehicleInspectionViewRecord";
 
 const { Text } = Typography;
 
@@ -66,6 +67,7 @@ const Page = (props: Props) => {
   const labels = [
     "Vehicle Details",
     "Service Plans",
+    "Vehicle Inspection Record",
     "Staff & Ramps",
     "History",
   ];
@@ -78,7 +80,7 @@ const Page = (props: Props) => {
       workOrderData={workOrder}
       showAdditionalWorks={true}
     />,
-
+    <VehicleInspectionViewRecord key={"Vehicle Inspection"} />,
     <StaffAndRamps
       key={"Staff & Ramps"}
       workOrderData={workOrder}
