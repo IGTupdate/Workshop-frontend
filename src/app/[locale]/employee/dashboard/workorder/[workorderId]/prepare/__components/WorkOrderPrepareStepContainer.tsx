@@ -4,6 +4,7 @@ import React from "react";
 import CarDashboardAndFule from "../../__components/CarDashboardAndFule";
 
 import { TWorkOrder } from "@/app/types/work-order";
+import InspectVehicle from "../../__components/InspectVehicle";
 
 type Props = {
   workOrder: TWorkOrder | null;
@@ -18,8 +19,8 @@ const WorkOrderPrepareStepContainer = (props: Props) => {
     },
     {
       key: "2",
-      label: "Tab 2",
-      children: "Content of Tab Pane 2",
+      label: "Inspect Vehicle",
+      children: <InspectVehicle />,
     },
     {
       key: "3",
