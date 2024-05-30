@@ -3,7 +3,11 @@ import { Tabs, TabsProps } from "antd";
 import React from "react";
 import CarDashboardAndFule from "../../__components/CarDashboardAndFule";
 
-type Props = {};
+import { TWorkOrder } from "@/app/types/work-order";
+
+type Props = {
+  workOrder: TWorkOrder | null;
+};
 
 const WorkOrderPrepareStepContainer = (props: Props) => {
   const items: TabsProps["items"] = [

@@ -48,17 +48,17 @@ const CusotmerVehicleDetails = ({ workOrderData }: Props) => {
             />
           ) : (
             <div>
-              <WorkOrderServiceDetailContainer workOrder={workOrderData} />
+              {/* <WorkOrderServiceDetailContainer workOrder={workOrderData} /> */}
 
               <div className="grid items-center grid-flow-col-1 md:grid-cols-2 gap-4">
-                <WorkOrderObservations
+                {/* <WorkOrderObservations
                   observations={
                     workOrderData?.observations &&
                     typeof workOrderData?.observations !== "string"
                       ? workOrderData?.observations
                       : []
                   }
-                />
+                /> */}
               </div>
             </div>
           )}

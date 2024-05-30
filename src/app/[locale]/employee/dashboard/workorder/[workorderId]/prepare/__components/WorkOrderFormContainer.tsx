@@ -38,14 +38,14 @@ const WorkOrderFormContainer = (props: Props) => {
   } = useForm<TworkorderPrepare>({
     defaultValues: {
       estimatedCost: props.workOrder.estimatedCost,
-      fuelQuantity: props.workOrder.fuelQuantity,
+      fuelQuantity: props.workOrder.fuelQuantity?.value,
       notes: props.workOrder.notes,
       servicePlanId: (props.workOrder.servicePlanId as string[]) || [],
-      observations: props.workOrder.observations || [],
+      observations: [] || props.workOrder.observations,
       estimatedTimeOfCompletion: props.workOrder.estimatedTimeOfCompletion,
       partsRequested: props.workOrder.partsRequested,
       tasks: props.workOrder.tasks || [],
-      odometerReading: props.workOrder.odometerReading,
+      odometerReading: props.workOrder.odometerReading?.value,
     },
     resolver: yupResolver(workorderPrepareYupSchema),
   });

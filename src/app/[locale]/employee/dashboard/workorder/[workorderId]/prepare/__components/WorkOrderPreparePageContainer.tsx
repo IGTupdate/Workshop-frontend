@@ -65,7 +65,7 @@ const WorkOrderPreparePageContainer = (props: Props) => {
             <div>
               <Title level={5}>Work Order for #{workOrder.orderNumber}</Title>
               {/* <WorkOrderFormContainer workOrder={workOrder} /> */}
-              <WorkOrderPrepareStepContainer />
+              <WorkOrderPrepareStepContainer workOrder={workOrder} />
             </div>
           ) : (
             <Text>Work Order Not Found</Text>
