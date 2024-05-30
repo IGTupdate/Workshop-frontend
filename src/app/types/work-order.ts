@@ -158,3 +158,11 @@ export interface AppointmentProposalData {
   createdAt: string;
   updatedAt: string;
 }
+
+export type TWorkOrderActivtyLog = {
+  activities: {
+    message: string;
+    actionTime: string;
+  }[];
+  workOrderId: string;
+};

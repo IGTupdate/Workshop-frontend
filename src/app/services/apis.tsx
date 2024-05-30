@@ -25,6 +25,7 @@ const APPOINTMENT = "/appointment";
 const VEHICLE = "/vehicle";
 const CANCEL = "/cancel";
 const RAMP = "/ramp";
+const WORKORDER_ACTIVITY = "/workorder-activity";
 const SERVICE_CATEGORY = "/service_category";
 const SERVICE_TASKS = "/service_tasks";
 const SERVICE_PLANS = "/service_plans";
@@ -122,6 +123,7 @@ export const workOrderEndpoints = {
     "/get-by-appointmentId",
   ),
   UPDATE_ADDITIONAL_WORKS: workOrderUrl(WORKORDER, "/additional_work_request"),
+  GET_WORKORDER_ACTIVITY: workOrderUrl(WORKORDER_ACTIVITY, "/get"),
 };
 
 export const notificationEndpoints = {
