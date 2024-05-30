@@ -26,6 +26,7 @@ const {
   GET_DASHBOARD_DATA,
   GET_WORKORDER_BY_APPOINTMENT_ID,
   GET_WORKORDER_ACTIVITY,
+  UPDATE_WORKORDER,
 } = workOrderEndpoints;
 
 export const getEmployeeWorkingStatus = async (employeeRole: string) => {
@@ -192,6 +193,23 @@ export const assignMechanicWorkorder = async (
       method: "POST",
       url: ASSIGN_MECHANIC_WORKORDER + "/" + workOrderId,
       bodyData: data,
+    });
+
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const updateWorkOrder = async (
+  workOrderId: string,
+  update_data: Partial<TWorkOrder>,
+) => {
+  try {
+    const response = await apiConnector({
+      method: "POST",
+      url: UPDATE_WORKORDER + "/" + workOrderId,
+      bodyData: update_data,
     });
 
     return response.data;
