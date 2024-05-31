@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import CarDashboards from "../../../../../../public/images/cardashboard.webp";
+// import CarDashboards from "../../../../../../public/images/cardashboard.webp";
 import { useTranslations } from "next-intl";
-import Line from "../../../../../../public/images/line4.webp";
+// import Line from "../../../../../../public/images/line4.webp";
 
 const CarDashboard = () => {
   const t = useTranslations("CarDashboard");

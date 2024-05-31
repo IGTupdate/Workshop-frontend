@@ -1,27 +1,27 @@
 import { useTranslations } from "next-intl";
-import Car from "../../../public/Images/car.webp";
-import Bag from "../../../public/Images/bag.webp";
-import Board from "../../../public/Images/board.webp";
-import Users from "../../../public/Images/users.webp";
+// import Car from "../../../public/Images/car.webp";
+// import Bag from "../../../public/Images/bag.webp";
+// import Board from "../../../public/Images/board.webp";
+// import Users from "../../../public/Images/users.webp";
 
 const SliderItmes = () => {
   const t = useTranslations("SliderItems");
   return [
     {
       text: `${t("car")}`,
-      Image: Car,
+      Image: "/Images/car.webp",
     },
     {
       text: `${t("bag")}`,
-      Image: Bag,
+      Image: "/Images/bag.webp",
     },
     {
       text: `${t("slate")}`,
-      Image: Board,
+      Image: "/Images/board.webp",
     },
     {
       text: `${t("user")}`,
-      Image: Users,
+      Image: "/Images/users.webp",
     },
   ];
 };
