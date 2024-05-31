@@ -5,6 +5,8 @@ import CarDashboardAndFule from "../../__components/CarDashboardAndFule";
 
 import { TWorkOrder } from "@/app/types/work-order";
 import InspectVehicle from "../../__components/InspectVehicle";
+import SelectServicePlans from "../../__components/SelectServicePlans";
+import EstimateTimeAndCosts from "../../__components/EstimateTimeAndCosts";
 
 type Props = {
   workOrder: TWorkOrder | null;
@@ -24,8 +26,13 @@ const WorkOrderPrepareStepContainer = (props: Props) => {
     },
     {
       key: "3",
-      label: "Tab 3",
-      children: "Content of Tab Pane 3",
+      label: "Service Plans",
+      children: <SelectServicePlans />,
+    },
+    {
+      key: "4",
+      label: "Estimate Time & Costs",
+      children: <EstimateTimeAndCosts />,
     },
   ];
 

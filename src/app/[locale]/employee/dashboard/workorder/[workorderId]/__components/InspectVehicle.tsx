@@ -17,8 +17,8 @@ type CapturedImages = {
 };
 
 const carParts: CarPart[] = [
-  { id: "front", icon: <FaCarSide size={50} />, label: "Front" },
-  { id: "side", icon: <FaCarAlt size={50} />, label: "Side" },
+  { id: "front", icon: <FaCarAlt size={50} />, label: "Front" },
+  { id: "side", icon: <FaCarSide size={50} />, label: "Side" },
   { id: "back", icon: <FaCarCrash size={50} />, label: "Back" },
   { id: "engine", icon: <FaCarBattery size={50} />, label: "Engine" },
 ];

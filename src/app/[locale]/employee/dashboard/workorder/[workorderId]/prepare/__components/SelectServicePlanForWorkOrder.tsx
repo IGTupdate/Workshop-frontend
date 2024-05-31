@@ -11,7 +11,7 @@ import { getAllServicePlans } from "@/app/services/operations/appointment/servic
 type Props = {
   errors: any;
   setValue: any;
-  watch: UseFormWatch<TworkorderPrepare>;
+  watch: UseFormWatch<any>;
 };
 
 const SelectServicePlanForWorkOrder = (props: Props) => {
@@ -21,8 +21,6 @@ const SelectServicePlanForWorkOrder = (props: Props) => {
   >([]);
 
   const dispatch = useAppDispatch();
-
-  console.log(servicePlansStore.servicePlansData);
 
   useEffect(() => {
     if (servicePlansStore.servicePlansLoading) {
@@ -65,7 +63,7 @@ const SelectServicePlanForWorkOrder = (props: Props) => {
         />
       </div>
       <div className="flex flex-col flex-wrap">
-        {props.watch("servicePlanId").map((planId) => {
+        {props?.watch("servicePlanId")?.map((planId: any) => {
           return (
             <ServicePlanDetailContainer key={planId} servicePlan={planId} />
           );

@@ -92,3 +92,55 @@ export type TworkorderPrepare = Yup.InferType<typeof workorderPrepareYupSchema>;
 export type TworkOrderAdditionalWorkCreateRequest = Yup.InferType<
   typeof workOrderAdditionalWorkCreateRequest
 >;
+
+export const WorkorderServicePlansPrepareScema = Yup.object({
+  servicePlanId: Yup.array(Yup.string().required()).default([]),
+  tasks: Yup.array(
+    Yup.object({
+      title: Yup.string().required(),
+    }),
+  )
+    .required()
+    .default([]),
+  partsRequested: Yup.array(
+    Yup.object({
+      partId: Yup.string().nullable().optional(),
+      partName: Yup.string(),
+    }),
+  ),
+});
+
+export type TWorkorderServicePlansPrepareScema = Yup.InferType<
+  typeof WorkorderServicePlansPrepareScema
+>;
+
+export const WorkorderEstimateTimeAndCostsScema = Yup.object({
+  estimatedCost: Yup.number().required(),
+  estimatedTimeOfCompletion: Yup.string()
+    .test(
+      "is-greater-than-current-time",
+      "Time must be greater than the current time",
+      function (value) {
+        if (!value) return false;
+        const currentTime = new Date();
+        const inputValue = new Date(value);
+        const newInputValue = new Date(
+          currentTime.getFullYear(),
+          currentTime.getMonth(),
+          currentTime.getDate(),
+          inputValue.getHours(),
+          inputValue.getMinutes(),
+          inputValue.getSeconds(),
+          inputValue.getMilliseconds(),
+        );
+
+        console.log(currentTime, newInputValue);
+        return newInputValue.getTime() > currentTime.getTime();
+      },
+    )
+    .required(),
+});
+
+export type TWorkorderEstimateTimeAndCostsScema = Yup.InferType<
+  typeof WorkorderEstimateTimeAndCostsScema
+>;

@@ -32,7 +32,7 @@ const CarDashboardAndFule: React.FC = () => {
       setValue(inputValue);
       setInputError("");
     } else {
-      setInputError("Value must be a number");
+      setInputError("Must be a number");
     }
   };
 
@@ -169,11 +169,10 @@ const CarDashboardAndFule: React.FC = () => {
                   style={{ width: 160, textAlign: "start" }}
                   onChange={handleSelect}
                   options={[
-                    { value: "0-20", label: "0 To 20 %" },
-                    { value: "20-40", label: "20 To 40 %" },
-                    { value: "40-60", label: "40 To 60%" },
-                    { value: "60-80", label: "60 To 80 %" },
-                    { value: "80-100", label: "80 To 100 %" },
+                    { value: "0-25", label: "0 To 25 %" },
+                    { value: "25-50", label: "25 To 50 %" },
+                    { value: "50-75", label: "50 To 75 %" },
+                    { value: "75-100", label: "75 To 100 %" },
                   ]}
                 />
               </div>

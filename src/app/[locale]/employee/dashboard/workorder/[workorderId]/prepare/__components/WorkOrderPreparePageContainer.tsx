@@ -47,9 +47,6 @@ const WorkOrderPreparePageContainer = (props: Props) => {
     }
   };
 
-  console.log(ability?.can(casl_action.update, casl_subject.workorder));
-  console.log(workOrder);
-
   return (
     <div>
       {loading ? (
