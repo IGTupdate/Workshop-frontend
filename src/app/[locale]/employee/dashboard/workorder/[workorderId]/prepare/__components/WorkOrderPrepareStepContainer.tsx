@@ -1,12 +1,12 @@
 "use client";
 import { Tabs, TabsProps } from "antd";
 import React from "react";
-import CarDashboardAndFule from "../../__components/CarDashboardAndFule";
 
 import { TWorkOrder } from "@/app/types/work-order";
 import InspectVehicle from "../../__components/InspectVehicle";
 import SelectServicePlans from "../../__components/SelectServicePlans";
 import EstimateTimeAndCosts from "../../__components/EstimateTimeAndCosts";
+import OdometerAndFuel from "./OdometerAndFuel";
 
 type Props = {
   workOrder: TWorkOrder | null;
@@ -17,7 +17,8 @@ const WorkOrderPrepareStepContainer = (props: Props) => {
     {
       key: "1",
       label: "Check Odometer & Fuel",
-      children: <CarDashboardAndFule />,
+      // children: <CarDashboardAndFule />,
+      children: <OdometerAndFuel />,
     },
     {
       key: "2",
