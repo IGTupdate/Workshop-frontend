@@ -28,7 +28,6 @@ const WorkOrderPreparePageContainer = (props: Props) => {
 
   // load work order
   useEffect(() => {
-    console.log(accessData);
     if (ability && ability.can(casl_action.update, casl_subject.workorder)) {
       if (props.workOrderId) {
         loadWorkorder(props.workOrderId);

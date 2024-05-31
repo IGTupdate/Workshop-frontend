@@ -83,11 +83,12 @@ export const workOrderAdditionalWorkCreateRequest = Yup.object({
 
 export const workOrderOdometerAndFuelCreateSchema = Yup.object({
   odometerReading: Yup.object({
-    image: Yup.string().required(),
+    image: Yup.array().required().default([]),
     value: Yup.number().optional(),
   }),
+  odometerInputReading: Yup.number(),
   fuelQuantity: Yup.object({
-    image: Yup.string().required(),
+    image: Yup.array().required().default([]),
     value: Yup.number().optional(),
   }),
 });

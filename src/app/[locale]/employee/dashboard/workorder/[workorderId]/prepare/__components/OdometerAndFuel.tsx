@@ -14,7 +14,9 @@ import { Button, Input, Typography } from "antd";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-type Props = {};
+type Props = {
+  setSteps: React.Dispatch<React.SetStateAction<string>>;
+};
 
 const OdometerAndFuel = (props: Props) => {
   const [odometerAndFuelData, setOdoMeterAndFuelData] = useState<{
@@ -22,23 +24,31 @@ const OdometerAndFuel = (props: Props) => {
     fuelQuantity: TWorkOrderFuelQuantity;
   }>({
     odometerReading: {
-      image: "",
+      image: [],
     },
     fuelQuantity: {
-      image: "",
+      image: [],
     },
   });
 
   const {
+    handleSubmit,
     control,
     setError,
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm<TWorkOrderOdometerAndFuelCreateSchema>({
     resolver: yupResolver(workOrderOdometerAndFuelCreateSchema),
   });
 
+  const onSubmit = async (data: TWorkOrderOdometerAndFuelCreateSchema) => {
+    console.log(data, "data");
+    props.setSteps("1");
+  };
+
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <div>
           <h3 className="text-lg font-bold">Odometer Reading</h3>
@@ -46,16 +56,18 @@ const OdometerAndFuel = (props: Props) => {
         </div>
         <div className="flex gap-4 items-end my-4">
           <CameraInputField
-            addImage={(url: string) => {
-              console.log(url);
-              setOdoMeterAndFuelData((prv) => {
-                return {
-                  ...prv,
-                  odometerReading: {
-                    image: url,
-                  },
-                };
-              });
+            addImage={(imgUrl: string) => {
+              console.log(imgUrl);
+              const oldImages = getValues("odometerReading.image");
+              setValue("odometerReading.image", [...oldImages, imgUrl]);
+              // setValue((prev: any) => {
+              //   return {
+              //     ...prev,
+              //     odometerAndFuelData: {
+              //       image: [...(prev.odometerAndFuelData?.image || []), url],
+              //     },
+              //   };
+              // });
             }}
           />
 
@@ -96,17 +108,20 @@ const OdometerAndFuel = (props: Props) => {
         </div>
         <div className="flex gap-4 items-end my-4">
           <CameraInputField
-            addImage={(url: string) => {
-              console.log(url);
+            addImage={(imgUrl: string) => {
+              const oldImages = getValues("fuelQuantity.image");
+              setValue("fuelQuantity.image", [...oldImages, imgUrl]);
             }}
           />
         </div>
       </div>
 
-      <div className="flex justify-end mt-4">
-        <Button type="primary">Save</Button>
+      <div className="flex justify-end items-center gap-4 mt-4">
+        <Button htmlType="submit" type="primary">
+          Save & Continue
+        </Button>
       </div>
-    </div>
+    </form>
   );
 };
 

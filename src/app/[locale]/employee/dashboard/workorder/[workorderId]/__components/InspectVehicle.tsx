@@ -23,7 +23,11 @@ const carParts: CarPart[] = [
   { id: "engine", icon: <FaCarBattery size={50} />, label: "Engine" },
 ];
 
-const InspectVehicle: React.FC = () => {
+type Props = {
+  setSteps: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const InspectVehicle = ({ setSteps }: Props) => {
   const [selectedPart, setSelectedPart] = useState<string | null>(null);
   const [capturedImages, setCapturedImages] = useState<CapturedImages>({});
   const [showModal, setShowModal] = useState<string | null>(null);
@@ -33,35 +37,51 @@ const InspectVehicle: React.FC = () => {
     setShowModal(part);
   };
 
+  const onSubmit = async () => {
+    setSteps("2");
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center py-6">
-      <main className="flex flex-col items-center justify-center w-full flex-1 text-center">
-        <div>
-          <h3 className="text-lg font-bold">Car Inspection</h3>
-          <p>Click on the car parts to capture images</p>
-        </div>
+    <>
+      <div className="flex flex-col items-center justify-center py-6">
+        <main className="flex flex-col items-center justify-center w-full flex-1 text-center">
+          <div>
+            <h3 className="text-lg font-bold">Car Inspection</h3>
+            <p>Click on the car parts to capture images</p>
+          </div>
 
-        <div className="flex gap-4 my-4">
-          {carParts.map((part) => (
-            <div key={part.id} className="relative flex flex-col items-center">
-              <Button onClick={() => handleIconClick(part.id)}>
-                {part.icon}
-                <div>{part.label}</div>
-              </Button>
-            </div>
-          ))}
-        </div>
+          <div className="flex gap-4 my-4">
+            {carParts.map((part) => (
+              <div
+                key={part.id}
+                className="relative flex flex-col items-center"
+              >
+                <Button onClick={() => handleIconClick(part.id)}>
+                  {part.icon}
+                  <div>{part.label}</div>
+                </Button>
+              </div>
+            ))}
+          </div>
 
-        {selectedPart && showModal && (
-          <CarPartModal
-            part={selectedPart}
-            showModal={showModal}
-            setShowModal={setShowModal}
-            capturedImages={capturedImages[selectedPart] || []}
-          />
-        )}
-      </main>
-    </div>
+          {selectedPart && showModal && (
+            <CarPartModal
+              part={selectedPart}
+              showModal={showModal}
+              setShowModal={setShowModal}
+              capturedImages={capturedImages[selectedPart] || []}
+            />
+          )}
+        </main>
+      </div>
+
+      <div className="flex justify-end items-center gap-4 mt-4">
+        <Button onClick={() => setSteps("0")}>Back</Button>
+        <Button onClick={onSubmit} htmlType="submit" type="primary">
+          Save & Continue
+        </Button>
+      </div>
+    </>
   );
 };
 

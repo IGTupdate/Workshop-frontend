@@ -124,7 +124,7 @@ export const workOrderEndpoints = {
   ),
   UPDATE_ADDITIONAL_WORKS: workOrderUrl(WORKORDER, "/additional_work_request"),
   GET_WORKORDER_ACTIVITY: workOrderUrl(WORKORDER_ACTIVITY, "/get"),
-  UPDATE_WORKORDER: workOrderUrl(WORKORDER_ACTIVITY, "/update"),
+  UPDATE_WORKORDER: workOrderUrl(WORKORDER, "/update"),
 };
 
 export const notificationEndpoints = {

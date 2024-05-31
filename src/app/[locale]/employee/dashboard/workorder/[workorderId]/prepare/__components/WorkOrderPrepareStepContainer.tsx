@@ -1,7 +1,6 @@
 "use client";
 import { Tabs, TabsProps } from "antd";
-import React from "react";
-
+import React, { useState } from "react";
 import { TWorkOrder } from "@/app/types/work-order";
 import InspectVehicle from "../../__components/InspectVehicle";
 import SelectServicePlans from "../../__components/SelectServicePlans";
@@ -13,27 +12,33 @@ type Props = {
 };
 
 const WorkOrderPrepareStepContainer = (props: Props) => {
+  const [steps, setSteps] = useState("0");
+
   const items: TabsProps["items"] = [
     {
-      key: "1",
+      key: "0",
       label: "Check Odometer & Fuel",
       // children: <CarDashboardAndFule />,
-      children: <OdometerAndFuel />,
+      children: <OdometerAndFuel setSteps={setSteps} />,
+    },
+    {
+      key: "1",
+      label: "Inspect Vehicle",
+      children: <InspectVehicle setSteps={setSteps} />,
     },
     {
       key: "2",
-      label: "Inspect Vehicle",
-      children: <InspectVehicle />,
+      label: "Service Plans",
+      children: (
+        <SelectServicePlans id={props.workOrder?._id} setSteps={setSteps} />
+      ),
     },
     {
       key: "3",
-      label: "Service Plans",
-      children: <SelectServicePlans />,
-    },
-    {
-      key: "4",
       label: "Estimate Time & Costs",
-      children: <EstimateTimeAndCosts />,
+      children: (
+        <EstimateTimeAndCosts id={props.workOrder?._id} setSteps={setSteps} />
+      ),
     },
   ];
 
@@ -43,7 +48,13 @@ const WorkOrderPrepareStepContainer = (props: Props) => {
 
   return (
     <div>
-      <Tabs defaultActiveKey="0" items={items} centered onChange={onChange} />
+      <Tabs
+        defaultActiveKey={"0"}
+        activeKey={steps}
+        items={items}
+        centered
+        onChange={onChange}
+      />
     </div>
   );
 };
