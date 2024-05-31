@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import Services from "../../../../../../public/images/services.webp";
-import Calender from "../../../../../../public/images/calander.webp";
+// import Services from "../../../../../../public/images/services.webp";
+// import Calender from "../../../../../../public/images/calander.webp";
 import { FaHistory } from "react-icons/fa";
 import { FaCreditCard } from "react-icons/fa";
 import { MdHeadsetMic } from "react-icons/md";
@@ -42,7 +42,7 @@ const CustomerMobileFooter = () => {
           <Typography.Link>
             <Space className="flex-col gap-0 m-0">
               <Image
-                src={Services}
+                src={"/images/services.webp"}
                 alt="Services"
                 className="h-[25px] w-[25px]"
               />
@@ -59,7 +59,11 @@ const CustomerMobileFooter = () => {
       </Link>
       <Link href={"/dashboard/appointment/book"}>
         <div className="flex flex-col items-center justify-center h-[70px] w-[70px] rounded-full bg-gradient-to-r from-[#FFE301] to-[#D7C000] relative top-[-35px] cursor-pointer">
-          <Image src={Calender} alt="Calender" className="h-[50px] w-[50px]" />
+          <Image
+            src={"/images/calander.webp"}
+            alt="Calender"
+            className="h-[50px] w-[50px]"
+          />
         </div>
       </Link>
       <div className="flex flex-col items-center justify-center cursor-pointer">

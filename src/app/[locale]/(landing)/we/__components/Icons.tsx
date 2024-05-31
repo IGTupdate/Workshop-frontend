@@ -1,16 +1,16 @@
 import React from "react";
-import Robot from "../../../../../../public/images/robot.webp";
-import Scaner from "../../../../../../public/images/scaner.webp";
-import Code from "../../../../../../public/images/code.webp";
-import Users from "../../../../../../public/images/usersIcon.webp";
+// import Robot from "../../../../../../public/images/robot.webp";
+// import Scaner from "../../../../../../public/images/scaner.webp";
+// import Code from "../../../../../../public/images/code.webp";
+// import Users from "../../../../../../public/images/usersIcon.webp";
 import Image from "next/image";
 
 const Icons = () => {
   const data = [
-    { Icon: Robot },
-    { Icon: Scaner },
-    { Icon: Code },
-    { Icon: Users },
+    { Icon: "/images/robot.webp" },
+    { Icon: "/images/scaner.webp" },
+    { Icon: "/images/code.webp" },
+    { Icon: "/images/usersIcon.webp" },
   ];
 
   return (

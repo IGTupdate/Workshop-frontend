@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React from "react";
-import Left from "../../../../../public/images/left.webp";
-import Right from "../../../../../public/images/right.webp";
+// import Left from "../../../../../public/images/left.webp";
+// import Right from "../../../../../public/images/right.webp";
 
 const Proactive = () => {
   const t = useTranslations("Proactive");
@@ -15,12 +15,12 @@ const Proactive = () => {
   return (
     <div className="container relative py-16 md:pt-32 xmd:pt-44 xl:py-24 pb-16">
       <Image
-        src={Left}
-        alt="left"
+        src={"/images/left.webp"}
+        alt="/images/right.webp"
         className="absolute top-0 left-0 w-16 h-16 md:w-[100.77px] md:h-[125.56px] xmd:w-[140.77px] xmd:h-[165.56px]"
       />
       <Image
-        src={Right}
+        src={"/images/right.webp"}
         alt="left"
         className="absolute top-0 right-0 w-16 h-16 md:w-[100.77px] md:h-[125.56px] xmd:w-[140.77px] xmd:h-[165.56px]"
       />

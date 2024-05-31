@@ -11,9 +11,9 @@ import HeadingSection from "./__components/HeadingSection";
 import Operating from "./__components/Operating";
 import Modules from "./__components/Modules";
 import Image from "next/image";
-import LineTwo from "../../../../public/images/line2.webp";
-import LineThree from "../../../../public/images/line3.webp";
-import BgCar from "../../../../public/images/bgcar.webp";
+// import LineTwo from "../../../../public/images/line2.webp";
+// import LineThree from "../../../../public/images/line3.webp";
+// import BgCar from "../../../../public/images/bgcar.webp";
 import Proactive from "./__components/Proactive";
 import NewEmpolyeeLogin from "./__components/NewEmpolyeeLogin";
 
@@ -46,7 +46,7 @@ const App: React.FC = () => {
 
           <div className="relative overflow-hidden bg-[#2E2E2E] shadow-topDivSmall sm:shadow-topDiv py-4 z-10 md:py-12">
             <Image
-              src={LineTwo}
+              src={"/images/line2.webp"}
               alt="line"
               className="absolute top-20 sm:top-[-50px] xmd:top-[-350px] left-0 w-full z-[-1]"
             />
@@ -59,12 +59,16 @@ const App: React.FC = () => {
 
           <div className="bg-[#2E2E2E] relative overflow-hidden">
             <Image
-              src={LineThree}
+              src={"/images/line3.webp"}
               alt="line"
               className="absolute bottom-0 xmd:bottom-[-60px] left-0 w-full z-[1]"
             />
             <div>
-              <Image src={BgCar} alt="BgCar" className="w-full" />
+              <Image
+                src={"/images/bgcar.webp"}
+                alt="BgCar"
+                className="w-full"
+              />
             </div>
 
             <NewEmpolyeeLogin />

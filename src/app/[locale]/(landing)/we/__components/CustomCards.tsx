@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import React from "react";
-import LineFive from "../../../../../../public/images/line5.webp";
-import LineSix from "../../../../../../public/images/line6.webp";
+// import LineFive from "../../../../../../public/images/line5.webp";
+// import LineSix from "../../../../../../public/images/line6.webp";
 import Image from "next/image";
 
 const CustomCards = () => {
@@ -24,12 +24,12 @@ const CustomCards = () => {
   return (
     <>
       <Image
-        src={LineFive}
+        src={"/images/line5.webp"}
         alt="line"
         className="absolute right-0 top-0 xl:top-[-143px] z-[1]"
       />
       <Image
-        src={LineSix}
+        src={"/images/line6.webp"}
         alt="line"
         className="absolute left-0 bottom-0 xl:bottom-[-248px] z-[1]"
       />

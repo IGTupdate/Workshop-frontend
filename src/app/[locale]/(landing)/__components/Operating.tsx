@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import Map from "../../../../../public/images/map.webp";
+// import Map from "../../../../../public/images/map.webp";
 import { useTranslations } from "next-intl";
 import { Button, Modal } from "antd";
 import SlotDetails from "./SlotDetails";
@@ -24,7 +24,11 @@ const Operating = () => {
   return (
     <>
       <div className="container relative h-[300px] md:h-[350px] xmd:h-[500px]">
-        <Image src={Map} alt="map" className="w-full xmd:w-[80%] h-full" />
+        <Image
+          src={"/images/map.webp"}
+          alt="map"
+          className="w-full xmd:w-[80%] h-full"
+        />
         <div className="absolute px-4 xmd:px-0 right-0 xmd:right-16 top-1/2 translate-y-[-50%] w-full xmd:w-[37rem]">
           <h2 className="text-customWhite font-normal text-xl sm:text-2xl md:text-3xl xmd:text-[40px] xmd:leading-[46.88px]">
             {t("heading")}

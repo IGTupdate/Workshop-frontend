@@ -18,7 +18,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaRegEdit } from "react-icons/fa";
-import Logo from "../../../../public/images/logo-3.webp";
+// import Logo from "../../../../public/images/logo-3.webp";
 import { useTranslations } from "next-intl";
 import { get_client_cookie } from "@/app/utils/get_client_cookie";
 

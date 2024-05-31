@@ -1,6 +1,6 @@
 import React from "react";
-import Bg from "../../../../../public/images/Rectangle-2.webp";
-import Line from "../../../../../public/svg/line1.svg";
+// import Bg from "../../../../../public/images/Rectangle-2.webp";
+// import Line from "../../../../../public/svg/line1.svg";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
@@ -17,10 +17,10 @@ const HeadingSection = () => {
       ></div>
 
       <div className="absolute right-0 top-0 h-full overflow-hidden">
-        <Image src={Line} alt="Line" />
+        <Image src={"/images/Rectangle-2.webp"} alt="Line" />
       </div>
       <Image
-        src={Bg}
+        src={"/images/Rectangle-2.webp"}
         alt="Bg"
         className="h-[270px] sm:h-[350px] md:h-[400px] xmd:h-[655px] w-full"
       />

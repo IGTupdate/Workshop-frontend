@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Heading from "@/app/components/Heading";
-import Logo from "../../../../public/images/logo-1.webp";
+// import Logo from "../../../../public/images/logo-1.webp";
 
 type Props = {
   primaryText: string;
@@ -19,7 +19,11 @@ const LeftSection = (props: Props) => {
       />
       <div className="w-full h-full absolute z-[1] bg-[rgba(0,0,0,0.7)]">
         <div className="w-full h-full flex flex-col justify-center items-center">
-          <Image src={Logo} alt="Logo" className="mb-4 w-[200px]" />
+          <Image
+            src={"/images/logo-1.webp"}
+            alt="Logo"
+            className="mb-4 w-[200px]"
+          />
 
           <div>
             <Heading

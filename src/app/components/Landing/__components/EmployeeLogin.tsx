@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
-import Employ from "../../../../../public/images/mechanic-working.webp";
+// import Employ from "../../../../../public/images/mechanic-working.webp";
 import { useTranslations } from "next-intl";
 
 const LandingPage: React.FC = () => {
@@ -17,7 +17,11 @@ const LandingPage: React.FC = () => {
     <div className="container mx-auto">
       <div className="gap-6 lg:gap-10 flex flex-wrap justify-center items-center">
         <div>
-          <Image src={Employ} alt="Employ" className="w-[450px]" />
+          <Image
+            src={"images/mechanic-working.webp"}
+            alt="Employ"
+            className="w-[450px]"
+          />
         </div>
 
         <div>
