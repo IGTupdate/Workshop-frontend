@@ -5,6 +5,7 @@ import CarDashboardAndFule from "../../__components/CarDashboardAndFule";
 
 import { TWorkOrder } from "@/app/types/work-order";
 import InspectVehicle from "../../__components/InspectVehicle";
+import OdometerAndFuel from "./OdometerAndFuel";
 
 type Props = {
   workOrder: TWorkOrder | null;
@@ -15,7 +16,8 @@ const WorkOrderPrepareStepContainer = (props: Props) => {
     {
       key: "1",
       label: "Check Odometer & Fuel",
-      children: <CarDashboardAndFule />,
+      // children: <CarDashboardAndFule />,
+      children: <OdometerAndFuel />,
     },
     {
       key: "2",

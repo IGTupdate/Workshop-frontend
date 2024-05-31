@@ -81,6 +81,17 @@ export const workOrderAdditionalWorkCreateRequest = Yup.object({
     .min(0, "Cost should be greater than 0"),
 });
 
+export const workOrderOdometerAndFuelCreateSchema = Yup.object({
+  odometerReading: Yup.object({
+    image: Yup.string().required(),
+    value: Yup.number().optional(),
+  }),
+  fuelQuantity: Yup.object({
+    image: Yup.string().required(),
+    value: Yup.number().optional(),
+  }),
+});
+
 export type TWorkOrderAssign = Yup.InferType<
   typeof workOrderAssignMechanicsYupSchema
 >;
@@ -91,4 +102,8 @@ export type TworkorderPrepare = Yup.InferType<typeof workorderPrepareYupSchema>;
 
 export type TworkOrderAdditionalWorkCreateRequest = Yup.InferType<
   typeof workOrderAdditionalWorkCreateRequest
+>;
+
+export type TWorkOrderOdometerAndFuelCreateSchema = Yup.InferType<
+  typeof workOrderOdometerAndFuelCreateSchema
 >;

@@ -51,12 +51,12 @@ export type TWorkOrderObservation = {
 
 export type TWorkOrderOdometerReading = {
   image: string;
-  value: number;
+  value?: number;
 };
 
 export type TWorkOrderFuelQuantity = {
   image: string;
-  value: number;
+  value?: number;
 };
 
 export type TWorkOrder = {
