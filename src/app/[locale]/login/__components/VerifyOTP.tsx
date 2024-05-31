@@ -7,6 +7,7 @@ import {
 } from "@/app/services/operations/auth/customerAuth";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import {
+  resetAuthData,
   resetAuthSlice,
   setAuthLoading,
   setAuthStep,
@@ -24,6 +25,7 @@ import { get_client_cookie } from "@/app/utils/get_client_cookie";
 
 const VerifyOTP = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const { authLoading, authData, countryCode } = useAppSelector(
     (state) => state.auth,
@@ -33,7 +35,6 @@ const VerifyOTP = () => {
   const searchParams = useSearchParams();
 
   const { contactNumber } = authData;
-  const dispatch = useAppDispatch();
   const [otpValues, setOtpValues] = useState<string[]>([]);
   const [otpErrors, setOTPErrors] = useState("");
 
@@ -76,6 +77,8 @@ const VerifyOTP = () => {
   const resendOTP = async () => {
     const sessionToken = get_client_cookie("sessionToken");
     if (!sessionToken) {
+      dispatch(resetAuthSlice());
+      dispatch(resetAuthData());
       router.push("/");
     } else {
       dispatch(setAuthLoading(true));

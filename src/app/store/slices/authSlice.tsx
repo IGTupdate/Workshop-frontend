@@ -54,6 +54,9 @@ export const authSlice = createSlice({
       state.authStep = initialState.authStep;
       state.authLoading = initialState.authLoading;
     },
+    resetAuthData: (state) => {
+      state.authData = initialState.authData;
+    },
     logOut: (state) => {
       window.localStorage.clear();
       state.authData = initialState.authData;
@@ -68,6 +71,7 @@ export const {
   setAuthCountryCode,
   setAuthLoading,
   resetAuthSlice,
+  resetAuthData,
   logOut,
 } = authSlice.actions;
 export const authReducer = authSlice.reducer;
