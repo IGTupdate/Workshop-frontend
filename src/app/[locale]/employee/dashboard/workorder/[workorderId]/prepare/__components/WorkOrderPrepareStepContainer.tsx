@@ -19,7 +19,12 @@ const WorkOrderPrepareStepContainer = (props: Props) => {
       key: "0",
       label: "Check Odometer & Fuel",
       // children: <CarDashboardAndFule />,
-      children: <OdometerAndFuel setSteps={setSteps} />,
+      children: (
+        <OdometerAndFuel
+          setSteps={setSteps}
+          workOrder={props.workOrder || {}}
+        />
+      ),
     },
     {
       key: "1",
@@ -30,7 +35,10 @@ const WorkOrderPrepareStepContainer = (props: Props) => {
       key: "2",
       label: "Service Plans",
       children: (
-        <SelectServicePlans id={props.workOrder?._id} setSteps={setSteps} />
+        <SelectServicePlans
+          workOrderId={props.workOrder?._id}
+          setSteps={setSteps}
+        />
       ),
     },
     {

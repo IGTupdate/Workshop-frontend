@@ -39,6 +39,8 @@ const workOrderUrl = (...paths: string[]) =>
   createUrl(WORK_ORDER_SERVICE_BASE_URL, ...paths);
 const notificationUrl = (...paths: string[]) =>
   createUrl(CONSUMER_SERVICE_BASE_URL, ...paths);
+const uploadFilesUrl = (...paths: string[]) =>
+  createUrl(WORK_ORDER_SERVICE_BASE_URL, ...paths);
 
 // Define endpoint objects
 export const authEndpoints = {
@@ -129,4 +131,9 @@ export const workOrderEndpoints = {
 
 export const notificationEndpoints = {
   GET_ALL_NOTIFICATIONS: notificationUrl("/notification/get-all"),
+};
+
+export const uploadFilesEndPoint = {
+  DELETE_SINGLE_OBJECT: uploadFilesUrl("/files/delete/single-object"),
+  UPLOAD_SINGLE_OBJECT: uploadFilesUrl("/files/upload/single-object"),
 };

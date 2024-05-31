@@ -8,6 +8,11 @@ import { MdCameraAlt, MdCameraswitch, MdFileUpload } from "react-icons/md";
 import { FaImage } from "react-icons/fa6";
 import Camera from "react-html5-camera-photo";
 import Image from "next/image";
+import {
+  uploadImages,
+  uploadSingleObject,
+  uploadToTheServer,
+} from "@/app/services/operations/upload/upload";
 
 type Props = {
   addImage: (url: string) => void;
@@ -66,13 +71,20 @@ const CameraInputField = (props: Props) => {
     });
   };
 
-  const saveImage = (index: number) => {
+  const saveImage = async (index: number) => {
     // save to the server by calling api
     // currentImage[index]
+    try {
+      // save image to the server
+      const savedImageUrl = await uploadImages(currentImage[index]);
 
-    const savedImageUrl = "url of the iamge";
-    props.addImage(savedImageUrl);
-    removeCurrentImage(index);
+      props.addImage(savedImageUrl);
+      removeCurrentImage(index);
+    } catch (err) {
+      // show error
+      alert("Can't Upload Image");
+      console.log(err);
+    }
   };
 
   console.log(currentImage);
@@ -82,6 +94,7 @@ const CameraInputField = (props: Props) => {
       {/* Button to start the camera */}
       <div className="flex justify-center items-center gap-4">
         <button
+          type="button"
           onClick={handleStartCamera}
           className="flex justify-center items-center gap-2 h-12 w-12 bg-green-600 text-white rounded-full shadow-md hover:bg-green-700 transition"
         >

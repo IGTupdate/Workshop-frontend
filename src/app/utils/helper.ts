@@ -42,3 +42,14 @@ export const minutesToHoursConverter = (minutes: number) => {
 export const PriceCalculator = (originalPrice: number) => {
   return Math.round(originalPrice * 1.3);
 };
+
+export function removeQueryParameters(url: string) {
+  try {
+    const parsedUrl = new URL(url);
+    parsedUrl.search = "";
+    return parsedUrl.toString();
+  } catch (error) {
+    console.error("Invalid URL:", error);
+    throw error;
+  }
+}

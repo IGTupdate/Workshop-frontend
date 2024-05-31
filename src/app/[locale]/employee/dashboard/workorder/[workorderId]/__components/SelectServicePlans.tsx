@@ -19,11 +19,11 @@ import toast from "react-hot-toast";
 import Loader from "@/app/components/Loader";
 
 type Props = {
-  id: string | undefined;
+  workOrderId: string | undefined;
   setSteps: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const SelectServicePlans = ({ id, setSteps }: Props) => {
+const SelectServicePlans = ({ workOrderId, setSteps }: Props) => {
   const [loading, setLoading] = useState(false);
   const { servicePlansLoading, servicePlansData } = useAppSelector(
     (state) => state.servicePlan,
@@ -53,10 +53,13 @@ const SelectServicePlans = ({ id, setSteps }: Props) => {
   }, [dispatch, servicePlansData.length]);
 
   const onSubmit = async (data: TWorkorderServicePlansPrepareScema) => {
-    if (id && data.servicePlanId?.length > 0) {
+    if (workOrderId && data.servicePlanId?.length > 0) {
       setLoading(true);
       try {
-        const result = await updateWorkOrder(id, data as Partial<TWorkOrder>);
+        const result = await updateWorkOrder(
+          workOrderId,
+          data as Partial<TWorkOrder>,
+        );
         if (result?.success === true) {
           toast.success("Plans Selected Successfully");
           setLoading(false);

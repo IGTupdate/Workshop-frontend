@@ -1,50 +1,85 @@
 import CameraInputField from "@/app/components/Input/CameraInputField";
 import InputField from "@/app/components/Input/InputField";
+import { updateWorkOrder } from "@/app/services/operations/workorder/workorder";
 import {
+  TWorkOrder,
   TWorkOrderFuelQuantity,
   TWorkOrderOdometerReading,
 } from "@/app/types/work-order";
+import { COMMON_ERROR } from "@/app/utils/constants/constant";
 import {
   TWorkOrderOdometerAndFuelCreateSchema,
   TworkorderPrepare,
   workOrderOdometerAndFuelCreateSchema,
 } from "@/app/validators/workorder";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Input, Typography } from "antd";
-import React, { useState } from "react";
+import { Button, Image, Input, Typography } from "antd";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 type Props = {
   setSteps: React.Dispatch<React.SetStateAction<string>>;
+  // workOrderId : string
+  workOrder: Partial<TWorkOrder>;
 };
 
 const OdometerAndFuel = (props: Props) => {
-  const [odometerAndFuelData, setOdoMeterAndFuelData] = useState<{
-    odometerReading: TWorkOrderOdometerReading;
-    fuelQuantity: TWorkOrderFuelQuantity;
-  }>({
-    odometerReading: {
-      image: [],
-    },
-    fuelQuantity: {
-      image: [],
-    },
-  });
+  const [loading, setLoading] = useState(false);
 
   const {
     handleSubmit,
     control,
-    setError,
+    watch,
     setValue,
     getValues,
     formState: { errors },
   } = useForm<TWorkOrderOdometerAndFuelCreateSchema>({
+    defaultValues: {
+      odometerReading: {
+        images: [],
+        value: 0,
+      },
+      fuelQuantity: {
+        images: [],
+      },
+    },
     resolver: yupResolver(workOrderOdometerAndFuelCreateSchema),
   });
 
+  useEffect(() => {
+    console.log("hello chagned");
+    if (props.workOrder.fuelQuantity) {
+      setValue("fuelQuantity.images", props.workOrder.fuelQuantity.images);
+      setValue("fuelQuantity.value", props.workOrder.fuelQuantity.value);
+    }
+    if (props.workOrder.odometerReading) {
+      setValue(
+        "odometerReading.images",
+        props.workOrder.odometerReading.images,
+      );
+      setValue("odometerReading.value", props.workOrder.odometerReading.value);
+    }
+  }, [props.workOrder]);
+
   const onSubmit = async (data: TWorkOrderOdometerAndFuelCreateSchema) => {
     console.log(data, "data");
-    props.setSteps("1");
+    setLoading(true);
+    try {
+      const result = await updateWorkOrder(
+        props.workOrder?._id || "",
+        data as Partial<TWorkOrder>,
+      );
+      if (result?.success === true) {
+        toast.success("Plans Selected Successfully");
+        props.setSteps("1");
+      }
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error?.response?.data?.message || COMMON_ERROR);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -58,16 +93,8 @@ const OdometerAndFuel = (props: Props) => {
           <CameraInputField
             addImage={(imgUrl: string) => {
               console.log(imgUrl);
-              const oldImages = getValues("odometerReading.image");
-              setValue("odometerReading.image", [...oldImages, imgUrl]);
-              // setValue((prev: any) => {
-              //   return {
-              //     ...prev,
-              //     odometerAndFuelData: {
-              //       image: [...(prev.odometerAndFuelData?.image || []), url],
-              //     },
-              //   };
-              // });
+              const oldImages = getValues("odometerReading.images");
+              setValue("odometerReading.images", [...oldImages, imgUrl]);
             }}
           />
 
@@ -75,33 +102,23 @@ const OdometerAndFuel = (props: Props) => {
             control={control}
             error=""
             label="Enter Odometer Reading"
-            name="odometerReading"
+            name="odometerReading.value"
             placeholder="Odometer Reading"
             type="text"
           />
-
-          {/* <div className="flex justify-start flex-col relative">
-                        <Typography.Title className="text-start" level={5}>
-                            Odometer Reading
-                        </Typography.Title>
-                        <Input
-                            maxLength={7}
-                            placeholder="Enter Odometer Reading"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={value}
-                            style={{ width: 160 }}
-                        />
-                        {inputError && (
-                            <p className="absolute bottom-[-25px] left-0 text-red-500">
-                                {inputError}
-                            </p>
-                        )}
-                    </div> */}
+        </div>
+        <div>
+          <div className="flex flex-wrap gap-4">
+            {watch("odometerReading.images")?.map((el, index) => {
+              return (
+                <Image key={index} src={el} alt="odomterreading" width={200} />
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      <div>
+      <div className="mt-6">
         <div>
           <h3 className="text-lg font-bold">Odometer Reading</h3>
           <p>Please Enter Current Meter Reading</p>
@@ -109,15 +126,24 @@ const OdometerAndFuel = (props: Props) => {
         <div className="flex gap-4 items-end my-4">
           <CameraInputField
             addImage={(imgUrl: string) => {
-              const oldImages = getValues("fuelQuantity.image");
-              setValue("fuelQuantity.image", [...oldImages, imgUrl]);
+              const oldImages = getValues("fuelQuantity.images");
+              setValue("fuelQuantity.images", [...oldImages, imgUrl]);
             }}
           />
+        </div>
+        <div>
+          <div className="flex flex-wrap gap-4">
+            {watch("fuelQuantity.images")?.map((el, index) => {
+              return (
+                <Image key={index} src={el} alt="odomterreading" width={200} />
+              );
+            })}
+          </div>
         </div>
       </div>
 
       <div className="flex justify-end items-center gap-4 mt-4">
-        <Button htmlType="submit" type="primary">
+        <Button disabled={loading} htmlType="submit" type="primary">
           Save & Continue
         </Button>
       </div>
