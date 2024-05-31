@@ -1,14 +1,15 @@
 "use client";
 
-import { TEmployee } from "@/app/types/employee";
-import { Typography } from "antd";
-import React from "react";
-import ManageMechanicDrawer from "./ManageMechanicDrawer";
-import { TWorkOrder } from "@/app/types/work-order";
+import useAbility from "@/app/__hooks/useAbility";
 import Watermark from "@/app/components/Text/WatermarkText";
 import { useAppSelector } from "@/app/store/reduxHooks";
+import { TEmployee } from "@/app/types/employee";
+import { TWorkOrder } from "@/app/types/work-order";
+import { Typography } from "antd";
+import ManageMechanicDrawer from "./ManageMechanicDrawer";
+import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 type Props = {
   advisorId: string | TEmployee;
@@ -18,21 +19,24 @@ type Props = {
 
 const WorkOrderMechanicDetailContainer = (props: Props) => {
   const { authData } = useAppSelector((state) => state.auth);
+  const ability = useAbility();
   return (
     <div>
       <div className="flex justify-between">
         <Title level={5}>Mechanic Details</Title>
 
-        {/* can only manage if it is advisor */}
-        {((typeof props.advisorId === "string" &&
-          props.advisorId === authData._id) ||
-          (typeof props.advisorId !== "string" &&
-            props.advisorId._id === authData._id)) && (
-          <ManageMechanicDrawer
-            handleUpdateWorkOrderData={props.handleUpdateWorkOrderData}
-            assigned_mechanics={props.assigned_mechanics}
-          />
-        )}
+        {/* can only manage if it has access */}
+        {ability &&
+          ability.can(
+            casl_action.update,
+            casl_subject.workorder,
+            "mechanicId",
+          ) && (
+            <ManageMechanicDrawer
+              handleUpdateWorkOrderData={props.handleUpdateWorkOrderData}
+              assigned_mechanics={props.assigned_mechanics}
+            />
+          )}
       </div>
       <div>
         {props.assigned_mechanics.length > 0 ? (

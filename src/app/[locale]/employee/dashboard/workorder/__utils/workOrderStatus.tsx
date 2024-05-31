@@ -3,11 +3,11 @@ import { Tag } from "antd";
 
 export const workOrderStatus: TWorkOrderStatus[] = [
   "Pending",
-  "InProgress",
-  "Completed",
   "Prepared",
-  "Billing",
+  "InProgress",
   "Washing",
+  "Billing",
+  "Completed",
 ] as const;
 
 export const getWorkOrderStatus = () => {
@@ -21,18 +21,8 @@ export const getWorkOrderStatus = () => {
 
 export const workOrderStatusText = {
   Pending: (
-    <Tag className="w-[82px] text-center" color="orange">
+    <Tag className="w-[82px] text-center" color="red">
       Pending
-    </Tag>
-  ),
-  InProgress: (
-    <Tag className="w-[82px] text-center" color="green">
-      InProgress
-    </Tag>
-  ),
-  Completed: (
-    <Tag className="w-[82px] text-center" color="blue">
-      Completed
     </Tag>
   ),
   Prepared: (
@@ -40,15 +30,24 @@ export const workOrderStatusText = {
       Prepared
     </Tag>
   ),
-  Billing: (
-    <Tag className="w-[82px] text-center" color="blue">
-      Billing
+  InProgress: (
+    <Tag className="w-[82px] text-center" color="orange">
+      InProgress
     </Tag>
   ),
   Washing: (
-    <Tag className="w-[82px] text-center" color="blue">
+    <Tag className="w-[82px] text-center" color="lightblue">
       Washing
     </Tag>
   ),
+  Billing: (
+    <Tag className="w-[82px] text-center" color="yellow">
+      Billing
+    </Tag>
+  ),
+  Completed: (
+    <Tag className="w-[82px] text-center" color="green">
+      Completed
+    </Tag>
+  ),
 };
-// ["Pending", "Assigned", "Processing", "Completed"];
