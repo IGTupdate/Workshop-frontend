@@ -52,7 +52,9 @@ const AppointmentPageContiner = (props: Props) => {
           <AppointmentDetails appointmentData={appointment} />
 
           <div className="flex justify-end items-center  gap-3  mt-8">
-            {appointment.status === "Scheduled" && (
+            {(appointment.status === "Scheduled" ||
+              appointment.status === "Missed" ||
+              appointment.status === "Rescheduled") && (
               <Button
                 onClick={() => {
                   router.push(
@@ -61,10 +63,11 @@ const AppointmentPageContiner = (props: Props) => {
                 }}
                 type="primary"
               >
-                ReSchedule
+                Reschedule
               </Button>
             )}
-            {appointment.status !== "Cancelled" && (
+            {(appointment.status === "Scheduled" ||
+              appointment.status === "Rescheduled") && (
               <AppointmentCancel
                 appointmentId={props.appointmentId}
                 setAppointmentLoading={setAppointmentLoading}
