@@ -1,6 +1,6 @@
 import React from "react";
 import CustomSlider from "./CustomSlider";
-import SliderItmes from "@/app/utils/SliderItmes";
+import SliderItems from "@/app/utils/SliderItmes";
 import { useTranslations } from "next-intl";
 
 const Modules = () => {
@@ -10,7 +10,7 @@ const Modules = () => {
       <h2 className="font-RobotoFlex font-bold text-2xl sm:text-3xl md:text-4xl xmd:text-[61px] xmd:leading-[71.48px] text-center text-white mb-8">
         {t("heading")}
       </h2>
-      {/* <CustomSlider SliderItems={SliderItmes} /> */}
+      <CustomSlider SliderItems={SliderItems} />
     </div>
   );
 };

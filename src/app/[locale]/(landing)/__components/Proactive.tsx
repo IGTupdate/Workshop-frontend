@@ -13,18 +13,18 @@ const Proactive = () => {
   fullWord.pop();
   const newWord = fullWord.join(" ");
   return (
-    <div className="container relative py-16 md:pt-32 xmd:pt-44 xl:py-24 pb-16">
+    <div className="container w-full relative py-16 md:pt-32 xmd:pt-44 xl:py-24 pb-16">
       <Image
         fill
         src={"/images/left.webp"}
-        alt="/images/right.webp"
+        alt="left"
         className="absolute top-0 left-0 w-16 h-16 md:w-[100.77px] md:h-[125.56px] xmd:w-[140.77px] xmd:h-[165.56px]"
       />
       <Image
-        fill
+        fill={true}
         src={"/images/right.webp"}
-        alt="left"
-        className="absolute top-0 right-0 w-16 h-16 md:w-[100.77px] md:h-[125.56px] xmd:w-[140.77px] xmd:h-[165.56px]"
+        alt="right"
+        className="absolute top-0 left-auto !right-0 w-16 h-16 md:w-[100.77px] md:h-[125.56px] xmd:w-[140.77px] xmd:h-[165.56px]"
       />
       <div>
         <h2 className="font-RobotoFlex font-bold text-white text-2xl sm:text-3xl md:text-4xl xmd:text-[60px] xmd:leading-[70.31px] text-center">

@@ -45,7 +45,7 @@ const Home = () => {
                 src={"/images/line2.webp"}
                 fill
                 alt="line"
-                className="absolute top-0 md:top-[-97px] xmd:top-[-125px] lg:top-[-138px] xl:top-[-217px] 2xl:top-[-350px] left-0 w-full z-[-1]"
+                className="absolute h-max top-0 md:top-[-97px] xmd:top-[-125px] lg:top-[-138px] xl:top-[-217px] 2xl:top-[-350px] left-0 w-full z-[-1]"
               />
               <Modules />
             </div>
@@ -55,18 +55,20 @@ const Home = () => {
             </div>
 
             <div className="bg-[#2E2E2E] relative overflow-hidden">
-              <Image
-                fill
-                src={"/images/line3.webp"}
-                alt="line"
-                className="absolute bottom-0 2xl:bottom-[-60px] left-0 w-full z-[1]"
-              />
+              <div className="absolute bottom-0 left-0 w-full h-[760px] z-[1]">
+                <Image
+                  fill
+                  src={"/images/line3.webp"}
+                  alt="line"
+                  className="absolute h-full bottom-0 top-0 right-0 left-0 w-full z-[1]"
+                />
+              </div>
               <div>
                 <Image
                   fill
                   src={"/images/bgcar.webp"}
                   alt="BgCar"
-                  className="w-full"
+                  className="w-full relative h-max"
                 />
               </div>
 

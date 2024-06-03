@@ -15,7 +15,7 @@ const LeftSection = (props: Props) => {
         src={"/images/auth-side-img.webp"}
         alt="auth-side-img"
         fill={true}
-        className="object-cover absolute z-[0]"
+        className="object-cover absolute z-[0] h-full"
       />
       <div className="w-full h-full absolute z-[1] bg-[rgba(0,0,0,0.7)]">
         <div className="w-full h-full flex flex-col justify-center items-center">
@@ -23,7 +23,7 @@ const LeftSection = (props: Props) => {
             fill
             src={"/images/logo-1.webp"}
             alt="Logo"
-            className="mb-4 w-[200px]"
+            className="mb-4 w-[200px] relative h-max"
           />
 
           <div>

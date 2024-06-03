@@ -9,7 +9,12 @@ const SliderContent = () => {
       <p className="text-white">{AddStarsToNumber(1234567895532458)}</p>
       <div className="flex justify-between items-center">
         <p className="text-white">Enrique H.</p>
-        <Image fill src={"/images/mastercard.webp"} alt="MasterCard" />
+        <Image
+          fill
+          src={"/images/mastercard.webp"}
+          alt="MasterCard"
+          className="relative h-max w-max"
+        />
       </div>
     </div>
   );

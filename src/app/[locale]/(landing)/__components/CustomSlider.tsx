@@ -9,7 +9,7 @@ import Image, { StaticImageData } from "next/image";
 // Define a type for each slider item
 type SliderItem = {
   text: string;
-  Image: StaticImageData;
+  Image: StaticImageData | string;
 };
 
 type Props = {
@@ -61,7 +61,13 @@ const CustomSlider: React.FC<Props> = ({ SliderItems }) => {
               </h3>
               <p className="text-customWhite flex justify-end">
                 {/* <item.Icon size={100} /> */}
-                <Image src={item.Image} fill alt="image" />
+                <Image
+                  src={item.Image}
+                  fill
+                  alt="image"
+                  className="static h-max w-max"
+                  sizes="10"
+                />
               </p>{" "}
               {/* Render the icon */}
             </div>

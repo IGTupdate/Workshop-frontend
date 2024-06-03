@@ -28,7 +28,7 @@ const Operating = () => {
           fill
           src={"/images/map.webp"}
           alt="map"
-          className="w-full xmd:w-[80%] h-full"
+          className="w-full xmd:w-[80%] h-full static"
         />
         <div className="absolute px-4 xmd:px-0 right-0 xmd:right-16 top-1/2 translate-y-[-50%] w-full xmd:w-[37rem]">
           <h2 className="text-customWhite font-normal text-xl sm:text-2xl md:text-3xl xmd:text-[40px] xmd:leading-[46.88px]">

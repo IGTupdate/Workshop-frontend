@@ -27,6 +27,7 @@ const CameraInputField = (props: Props) => {
   >("environment");
   // State to store the current image being captured
   const [currentImage, setCurrentImage] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Function to start the camera
   const handleStartCamera = () => {
@@ -74,20 +75,21 @@ const CameraInputField = (props: Props) => {
   const saveImage = async (index: number) => {
     // save to the server by calling api
     // currentImage[index]
+    setLoading(true);
     try {
       // save image to the server
       const savedImageUrl = await uploadImages(currentImage[index]);
 
       props.addImage(savedImageUrl);
       removeCurrentImage(index);
+      setLoading(false);
     } catch (err) {
       // show error
       alert("Can't Upload Image");
       console.log(err);
+      setLoading(false);
     }
   };
-
-  console.log(currentImage);
 
   return (
     <div>
@@ -169,7 +171,7 @@ const CameraInputField = (props: Props) => {
                   {/* Buttons to add image to gallery or discard it */}
                   <div className="absolute bottom-10 left-1/2 translate-x-[-50%] flex justify-center items-center gap-4 z-10">
                     <div
-                      className="h-20 w-20 flex justify-center items-center rounded-full shadow-md bg-[#00000054]"
+                      className={`h-20 w-20 flex justify-center items-center rounded-full shadow-md ${loading ? "bg-[#59595954]" : "bg-[#00000054]"} cursor-pointer`}
                       onClick={() => saveImage(index)} // abcd is url
                     >
                       <FiCheck
@@ -180,7 +182,7 @@ const CameraInputField = (props: Props) => {
                     </div>
 
                     <div
-                      className="h-20 w-20 flex justify-center items-center rounded-full shadow-md bg-[#00000054]"
+                      className="h-20 w-20 flex justify-center items-center rounded-full shadow-md bg-[#00000054] cursor-pointer"
                       onClick={() => removeCurrentImage(index)}
                     >
                       <IoMdClose

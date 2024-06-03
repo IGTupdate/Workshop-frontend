@@ -48,7 +48,6 @@ const OdometerAndFuel = (props: Props) => {
   });
 
   useEffect(() => {
-    console.log("hello chagned");
     if (props.workOrder.fuelQuantity) {
       setValue("fuelQuantity.images", props.workOrder.fuelQuantity.images);
       setValue("fuelQuantity.value", props.workOrder.fuelQuantity.value);
@@ -63,7 +62,6 @@ const OdometerAndFuel = (props: Props) => {
   }, [props.workOrder]);
 
   const onSubmit = async (data: TWorkOrderOdometerAndFuelCreateSchema) => {
-    console.log(data, "data");
     setLoading(true);
     try {
       const result = await updateWorkOrder(
@@ -71,7 +69,7 @@ const OdometerAndFuel = (props: Props) => {
         data as Partial<TWorkOrder>,
       );
       if (result?.success === true) {
-        toast.success("Plans Selected Successfully");
+        toast.success("Images Upload Successfully");
         props.setSteps("1");
       }
     } catch (error: any) {
@@ -87,7 +85,7 @@ const OdometerAndFuel = (props: Props) => {
       <div>
         <div>
           <h3 className="text-lg font-bold">Odometer Reading</h3>
-          <p>Please Enter Current Meter Reading</p>
+          <p>Please Enter Or Upload Current Meter Reading</p>
         </div>
         <div className="flex gap-4 items-end my-4">
           <CameraInputField
@@ -120,8 +118,8 @@ const OdometerAndFuel = (props: Props) => {
 
       <div className="mt-6">
         <div>
-          <h3 className="text-lg font-bold">Odometer Reading</h3>
-          <p>Please Enter Current Meter Reading</p>
+          <h3 className="text-lg font-bold">Fuel Reading</h3>
+          <p>Please Upload Current Fuel Reading</p>
         </div>
         <div className="flex gap-4 items-end my-4">
           <CameraInputField

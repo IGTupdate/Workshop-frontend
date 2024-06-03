@@ -9,19 +9,19 @@ const SliderItmes = () => {
   return [
     {
       text: `${t("car")}`,
-      Image: "/Images/car.webp",
+      Image: "/images/car.webp",
     },
     {
       text: `${t("bag")}`,
-      Image: "/Images/bag.webp",
+      Image: "/images/bag.webp",
     },
     {
       text: `${t("slate")}`,
-      Image: "/Images/board.webp",
+      Image: "/images/board.webp",
     },
     {
       text: `${t("user")}`,
-      Image: "/Images/users.webp",
+      Image: "/images/users.webp",
     },
   ];
 };
