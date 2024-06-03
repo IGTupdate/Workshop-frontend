@@ -24,6 +24,7 @@ const CarDashboard = () => {
       ></div>
 
       <Image
+        fill
         src={"/images/cardashboard.webp"}
         alt="car dashboard"
         className="w-full"
@@ -44,7 +45,7 @@ const CarDashboard = () => {
       </div>
 
       <div className="absolute left-0 bottom-[-80px] sm:bottom-[28px] md:bottom-[30px] xmd:bottom-[40px] xl:bottom-[58px] 2xl:bottom-[78px] h-full w-full">
-        <Image src={"/images/line4.webp"} alt="Line" className="w-full" />
+        <Image fill src={"/images/line4.webp"} alt="Line" className="w-full" />
       </div>
     </div>
   );

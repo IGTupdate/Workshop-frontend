@@ -14,13 +14,14 @@ const Loading = (props: Props) => {
       </div>
       <div className="relative w-full h-full md:hidden">
         <Image
+          fill
           src={"/images/image-1.webp"}
           alt="Car"
           className="w-full h-full bg-center bg-cover md:hidden"
         />
         <div className="absolute bottom-6 left-1/2 translate-x-[-50%] w-4/5">
           <div className="relative">
-            <Image src={"/images/logo-1.webp"} alt="Logo" />
+            <Image fill src={"/images/logo-1.webp"} alt="Logo" />
             <div className="absolute top-[20px] left-[50px] text-white text-lg">
               Welcome To
             </div>

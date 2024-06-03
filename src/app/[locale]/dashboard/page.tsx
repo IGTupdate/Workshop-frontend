@@ -64,7 +64,7 @@ const Page = (props: Props) => {
       <Notifications show={2} notificationData={notificationData} />
 
       <div className="image my-4 w-full">
-        <Image src={AddImage} alt="AddImage" className="w-full" />
+        <Image fill src={AddImage} alt="AddImage" className="w-full" />
       </div>
       {/* PAYMENT COMPONENT */}
 

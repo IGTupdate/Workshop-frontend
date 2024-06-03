@@ -24,11 +24,13 @@ const CustomCards = () => {
   return (
     <>
       <Image
+        fill
         src={"/images/line5.webp"}
         alt="line"
         className="absolute right-0 top-0 xl:top-[-143px] z-[1]"
       />
       <Image
+        fill
         src={"/images/line6.webp"}
         alt="line"
         className="absolute left-0 bottom-0 xl:bottom-[-248px] z-[1]"

@@ -20,6 +20,7 @@ const LeftSection = (props: Props) => {
       <div className="w-full h-full absolute z-[1] bg-[rgba(0,0,0,0.7)]">
         <div className="w-full h-full flex flex-col justify-center items-center">
           <Image
+            fill
             src={"/images/logo-1.webp"}
             alt="Logo"
             className="mb-4 w-[200px]"

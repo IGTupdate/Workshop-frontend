@@ -93,6 +93,7 @@ const CustomMobileHeader = () => {
                 {user?.fullName?.split(" ")[0]}
               </h1>
               <Image
+                fill
                 src={"/images/fly.webp"}
                 alt="Fly"
                 className="absolute top-[10px] right-[-24px]"

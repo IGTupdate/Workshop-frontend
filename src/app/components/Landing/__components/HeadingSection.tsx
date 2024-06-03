@@ -17,9 +17,10 @@ const HeadingSection = () => {
       ></div>
 
       <div className="absolute right-0 top-0 h-full overflow-hidden">
-        <Image src={"/images/Rectangle-2.webp"} alt="Line" />
+        <Image fill src={"/images/Rectangle-2.webp"} alt="Line" />
       </div>
       <Image
+        fill
         src={"/images/Rectangle-2.webp"}
         alt="Bg"
         className="h-[270px] sm:h-[350px] md:h-[400px] xmd:h-[655px] w-full"

@@ -42,6 +42,7 @@ const CustomerMobileFooter = () => {
           <Typography.Link>
             <Space className="flex-col gap-0 m-0">
               <Image
+                fill
                 src={"/images/services.webp"}
                 alt="Services"
                 className="h-[25px] w-[25px]"
@@ -60,6 +61,7 @@ const CustomerMobileFooter = () => {
       <Link href={"/dashboard/appointment/book"}>
         <div className="flex flex-col items-center justify-center h-[70px] w-[70px] rounded-full bg-gradient-to-r from-[#FFE301] to-[#D7C000] relative top-[-35px] cursor-pointer">
           <Image
+            fill
             src={"/images/calander.webp"}
             alt="Calender"
             className="h-[50px] w-[50px]"

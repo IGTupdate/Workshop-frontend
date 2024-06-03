@@ -46,6 +46,7 @@ const App: React.FC = () => {
 
           <div className="relative overflow-hidden bg-[#2E2E2E] shadow-topDivSmall sm:shadow-topDiv py-4 z-10 md:py-12">
             <Image
+              fill
               src={"/images/line2.webp"}
               alt="line"
               className="absolute top-20 sm:top-[-50px] xmd:top-[-350px] left-0 w-full z-[-1]"
@@ -59,12 +60,14 @@ const App: React.FC = () => {
 
           <div className="bg-[#2E2E2E] relative overflow-hidden">
             <Image
+              fill
               src={"/images/line3.webp"}
               alt="line"
               className="absolute bottom-0 xmd:bottom-[-60px] left-0 w-full z-[1]"
             />
             <div>
               <Image
+                fill
                 src={"/images/bgcar.webp"}
                 alt="BgCar"
                 className="w-full"

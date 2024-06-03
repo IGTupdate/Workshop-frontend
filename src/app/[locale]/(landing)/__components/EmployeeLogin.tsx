@@ -19,6 +19,7 @@ const LandingPage: React.FC = () => {
         <div>
           <Image
             src={"/images/mechanic-working.webp"}
+            fill
             alt="Employ"
             className="w-[450px]"
           />

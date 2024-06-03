@@ -17,12 +17,18 @@ const HeadingSection = () => {
       ></div>
 
       <div className="absolute right-0 top-0 h-full overflow-hidden">
-        <Image src={"/svg/line1.svg"} alt="Line" />
+        <Image
+          fill={true}
+          src={"/svg/line1.svg"}
+          alt="Line"
+          className="h-max static"
+        />
       </div>
       <Image
         src={"/images/Rectangle-2.webp"}
         alt="Bg"
-        className="h-[270px] sm:h-[350px] md:h-[400px] xmd:h-[655px] w-full"
+        fill
+        className="static h-[270px] sm:h-[350px] md:h-[400px] xmd:h-[655px] w-full"
       />
 
       <div className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-25%] w-full z-[6] px-4">

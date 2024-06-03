@@ -15,11 +15,13 @@ const Proactive = () => {
   return (
     <div className="container relative py-44 md:py-24 pb-16">
       <Image
+        fill
         src={"/images/left.webp"}
         alt="left"
         className="absolute top-0 left-0"
       />
       <Image
+        fill
         src={"/images/right.webp"}
         alt="left"
         className="absolute top-0 right-0"

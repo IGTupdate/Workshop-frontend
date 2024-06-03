@@ -18,6 +18,7 @@ const LandingPage: React.FC = () => {
       <div className="gap-6 lg:gap-10 flex flex-wrap justify-center items-center">
         <div>
           <Image
+            fill
             src={"images/mechanic-working.webp"}
             alt="Employ"
             className="w-[450px]"
