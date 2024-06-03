@@ -42,25 +42,11 @@ const WorkOrderPrepareStepContainer = (props: Props) => {
     },
   ];
 
-  const onChange = (key: string) => {
-    console.log(key);
-  };
-
   return (
     <div>
-      <Tabs
-        defaultActiveKey={"0"}
-        activeKey={steps}
-        items={items}
-        centered
-        onChange={onChange}
-      />
+      <Tabs defaultActiveKey={"0"} activeKey={steps} items={items} centered />
     </div>
   );
 };
 
 export default WorkOrderPrepareStepContainer;
-
-/*
-1. list screen
-*/

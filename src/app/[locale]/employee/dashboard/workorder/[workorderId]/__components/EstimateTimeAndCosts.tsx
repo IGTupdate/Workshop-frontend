@@ -94,7 +94,7 @@ const EstimateTimeAndCosts = ({ id, setSteps }: Props) => {
             </div>
           </div>
 
-          <div className="flex justify-end items-center gap-4 mt-4">
+          <div className="flex justify-end items-center gap-4">
             <Button onClick={() => setSteps("2")}>Back</Button>
             <Button htmlType="submit" type="primary">
               Save & Confirm
