@@ -9,7 +9,8 @@ export type TAppointmentStatus =
   | "Assigned"
   | "Completed"
   | "Cancelled"
-  | "Pending";
+  | "Pending"
+  | "Rescheduled";
 
 export type TAppointment = {
   _id: string;

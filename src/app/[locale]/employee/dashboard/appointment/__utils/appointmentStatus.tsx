@@ -51,4 +51,9 @@ export const appointmentStatusText: Record<TAppointmentStatus, ReactNode> = {
       Pending
     </Tag>
   ),
+  Rescheduled: (
+    <Tag className="w-[76px] text-center" color="green">
+      Rescheduled
+    </Tag>
+  ),
 };
