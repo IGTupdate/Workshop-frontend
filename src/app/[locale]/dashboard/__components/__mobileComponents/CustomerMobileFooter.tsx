@@ -45,7 +45,7 @@ const CustomerMobileFooter = () => {
                 fill
                 src={"/images/services.webp"}
                 alt="Services"
-                className="h-[25px] w-[25px]"
+                className="h-[25px] w-[25px] relative"
               />
               <p className="mt-[1px] text-black mb-0 text-nowrap">Services</p>
             </Space>
@@ -64,7 +64,7 @@ const CustomerMobileFooter = () => {
             fill
             src={"/images/calander.webp"}
             alt="Calender"
-            className="h-[50px] w-[50px]"
+            className="h-[50px] w-[50px] relative"
           />
         </div>
       </Link>

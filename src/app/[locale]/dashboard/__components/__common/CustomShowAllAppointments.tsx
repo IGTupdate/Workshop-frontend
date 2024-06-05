@@ -6,7 +6,7 @@ import {
 } from "@/app/services/operations/appointment/appointment";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   AppointmentData,
   fetchAppointments,
@@ -27,6 +27,7 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
   );
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const pathname = usePathname();
   const pageTitle =
     pageType === "cancelled"
       ? "Cancel Appointment"
@@ -56,7 +57,11 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
   }, [appointmentData, pageType]);
 
   const handleRescheduleAppointment = (appointmentId: string) => {
-    router.push("reschedule/" + appointmentId);
+    const path = pathname.split("/").slice(-1)[0];
+
+    if (path === "previous-appointments")
+      router.push("appointment/reschedule/" + appointmentId);
+    else router.push("reschedule/" + appointmentId);
   };
 
   const handleShowAppointmentDetails = (appointmentId: string) => {
@@ -90,7 +95,9 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
                     key={appointment.appointmentId}
                     appointment={appointment}
                     onRescheduleAppointment={
-                      pageType === "reschedule" || pageType === "cancelled"
+                      pageType === "reschedule" ||
+                      pageType === "cancelled" ||
+                      appointment.status === "Missed"
                         ? handleRescheduleAppointment
                         : undefined
                     }

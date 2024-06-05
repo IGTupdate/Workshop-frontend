@@ -117,6 +117,7 @@ const VehicleDetailContainer = (props: Props) => {
                       vin: "",
                       owner: "",
                       vehicle_make: "",
+                      vehicle_type: "",
                       vehicle_model: "",
                     }
                   }

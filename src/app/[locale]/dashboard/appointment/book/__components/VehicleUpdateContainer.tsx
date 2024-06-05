@@ -4,6 +4,7 @@ import {
   vehicleCreateInputFields,
 } from "@/app/[locale]/employee/dashboard/appointment/book/__utils/vehicle-create-input";
 import InputField from "@/app/components/Input/InputField";
+import SelectField from "@/app/components/Input/SelectField";
 import { updateVehicle } from "@/app/services/operations/appointment/vehicle";
 import { useAppDispatch } from "@/app/store/reduxHooks";
 import { setVehicleLoading } from "@/app/store/slices/customerVehicleSlice";
@@ -46,8 +47,8 @@ const VehicleUpdateContainer = (props: Props) => {
     setLoading(true);
     try {
       await updateVehicle(props.updateVehicleId, data);
+      toast.success("Vehicle updated successfully");
     } catch (err: any) {
-      // console.log(err);
       toast.error(err?.response?.data?.message || COMMON_ERROR);
     } finally {
       setLoading(false);
@@ -59,28 +60,48 @@ const VehicleUpdateContainer = (props: Props) => {
   const handleBack = () => {
     props.setUpdateVehicleId("");
   };
+
   return (
     <div className="w-full">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
-        {VehicleCreateInputFields(t).map((field, index) => {
-          return (
-            <InputField
-              key={index}
-              name={field.name}
-              label={field.label}
-              type={field.type}
-              placeholder={field.placeholder}
-              control={control}
-              upperCase={true}
-              error={
-                errors[field.name as keyof TvehicleCreateSchema]
-                  ? errors[field.name as keyof TvehicleCreateSchema]?.message ||
-                    ""
-                  : ""
-              }
-            />
-          );
-        })}
+        {VehicleCreateInputFields(t).map((field, index) => (
+          <React.Fragment key={index}>
+            {field.name !== "vehicle_type" ? (
+              <InputField
+                name={field.name}
+                label={field.label}
+                type={field.type}
+                placeholder={field.placeholder}
+                control={control}
+                upperCase={true}
+                error={
+                  errors[field.name as keyof TvehicleCreateSchema]
+                    ? errors[field.name as keyof TvehicleCreateSchema]
+                        ?.message || ""
+                    : ""
+                }
+              />
+            ) : (
+              <SelectField
+                mode={"single"}
+                name={field.name}
+                label={field.label}
+                placeholder={field.placeholder}
+                error={
+                  errors[field.name as keyof TvehicleCreateSchema]
+                    ? errors[field.name as keyof TvehicleCreateSchema]
+                        ?.message || ""
+                    : ""
+                }
+                setValue={setValue}
+                options={[
+                  { label: "Car", value: "car" },
+                  { label: "Truck", value: "truck" },
+                ]}
+              />
+            )}
+          </React.Fragment>
+        ))}
       </div>
       <div className="mt-4 flex justify-start gap-4">
         <Button disabled={loading} onClick={handleBack}>

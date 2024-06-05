@@ -12,12 +12,15 @@ import Operating from "./__components/Operating";
 // import BgCar from "../../../../public/images/bgcar.webp";
 import NewEmpolyeeLogin from "./__components/NewEmpolyeeLogin";
 import Proactive from "./__components/Proactive";
+import { useTranslations } from "next-intl";
 const { Header, Footer, Content } = Layout;
 
 const Home = () => {
   // Ref for the SlotDetails component
   const slotDetailsRef = useRef<HTMLDivElement>(null);
   const slotData = useAppSelector((state) => state.slot.slotData);
+  const t = useTranslations("HeadingSection");
+  const e = useTranslations("Proactive");
 
   // Function to scroll to SlotDetails component
   const scrollToSlotDetails = () => {
@@ -34,7 +37,12 @@ const Home = () => {
         {/* </Header> */}
         <Content>
           <Flex vertical>
-            <HeadingSection />
+            <HeadingSection
+              height={"default"}
+              heading={t("heading")}
+              headingTwo={t("headingTwo")}
+              subheading={t("subHeading")}
+            />
 
             <div className="bg-[#2E2E2E]">
               <Operating />
@@ -51,7 +59,7 @@ const Home = () => {
             </div>
 
             <div className="bg-[#2E2E2E]">
-              <Proactive />
+              <Proactive border={false} para={e("subHeading")} />
             </div>
 
             <div className="bg-[#2E2E2E] relative overflow-hidden">
@@ -60,7 +68,7 @@ const Home = () => {
                   fill
                   src={"/images/line3.webp"}
                   alt="line"
-                  className="absolute h-full bottom-0 top-0 right-0 left-0 w-full z-[1]"
+                  className="absolute h-max bottom-0 top-auto right-auto left-0 w-full z-[1]"
                 />
               </div>
               <div>
