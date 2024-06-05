@@ -36,7 +36,7 @@ const Page = (props: Props) => {
       setAppointmentProposalData(proposalData);
       setAppointmentData(initAppointmentData);
 
-      console.log(initAppointmentData, "initAppointmentData");
+      // console.log(initAppointmentData, "initAppointmentData");
 
       if (initAppointmentData?._id) {
         const initNotificationData = await appointmentNotification(
@@ -67,6 +67,7 @@ const Page = (props: Props) => {
         <Image
           fill
           src={AddImage}
+          priority
           alt="AddImage"
           className="w-full relative h-max"
         />

@@ -130,7 +130,11 @@ export const workOrderEndpoints = {
 };
 
 export const notificationEndpoints = {
-  GET_ALL_NOTIFICATIONS: notificationUrl("/notification/get-all"),
+  GET_ALL_APPOINTMENT_NOTIFICATIONS: notificationUrl(
+    "/appointment-notification/get-all",
+  ),
+  GET_ALL_USER_NOTIFICATIONS: notificationUrl("/user-notification/get-all"),
+  GET_INIT_NOTIFICATIONS: notificationUrl("/notification/init"),
 };
 
 export const uploadFilesEndPoint = {
