@@ -531,7 +531,9 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
               {appointmentBookingConfirmationData?.servicePlans?.map(
                 (plan, index) => (
                   // eslint-disable-next-line react/jsx-key
-                  <h3 className="font-medium text-nowrap">{plan.name}</h3>
+                  <h3 className="font-medium text-nowrap" key={index}>
+                    {plan.name}
+                  </h3>
                 ),
               )}
             </div>
