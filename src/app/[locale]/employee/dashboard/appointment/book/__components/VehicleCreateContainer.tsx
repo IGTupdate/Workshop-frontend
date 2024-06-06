@@ -131,10 +131,9 @@ const VehicleCreateContainer = (props: Props) => {
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
             {VehicleCreateInputFields(t).map((field, index) => {
               return (
-                <>
+                <div key={index}>
                   {field.name !== "vehicle_type" ? (
                     <InputField
-                      key={index}
                       name={field.name}
                       label={field.label}
                       type={field.type}
@@ -150,7 +149,6 @@ const VehicleCreateContainer = (props: Props) => {
                     />
                   ) : (
                     <SelectField
-                      key={index}
                       mode={"single"}
                       name={field.name}
                       label={field.label}
@@ -166,10 +164,10 @@ const VehicleCreateContainer = (props: Props) => {
                         { label: "Car", value: "car" },
                         { label: "Truck", value: "truck" },
                       ]}
-                      control={undefined}
+                      control={control}
                     />
                   )}
-                </>
+                </div>
               );
             })}
           </div>
