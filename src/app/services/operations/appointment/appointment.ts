@@ -114,25 +114,7 @@ export const getCustomerAppointmentInitData = async (customerId: string) => {
     });
 
     if (response.data.success) {
-      return response.data.data.appointmentData[0];
-    }
-    return {};
-  } catch (err) {
-    throw err;
-  }
-};
-
-export const getCustomerAppointmentInitProposalData = async (
-  customerId: string,
-) => {
-  try {
-    const response = await apiConnector({
-      method: "GET",
-      url: GET_CUSTOMER_INIT_DATA + `/${customerId}`,
-    });
-
-    if (response.data.success) {
-      return response.data.data.appointmentProposalData[0];
+      return response.data.data;
     }
     return {};
   } catch (err) {
