@@ -42,12 +42,9 @@ const VehicleUpdateContainer = (props: Props) => {
   });
 
   const onSubmit = async (data: TvehicleCreateSchema) => {
-    console.log(data, "data");
-
     setLoading(true);
     try {
       await updateVehicle(props.updateVehicleId, data);
-      toast.success("Vehicle updated successfully");
     } catch (err: any) {
       toast.error(err?.response?.data?.message || COMMON_ERROR);
     } finally {
@@ -93,6 +90,7 @@ const VehicleUpdateContainer = (props: Props) => {
                         ?.message || ""
                     : ""
                 }
+                control={control}
                 setValue={setValue}
                 options={[
                   { label: "Car", value: "car" },

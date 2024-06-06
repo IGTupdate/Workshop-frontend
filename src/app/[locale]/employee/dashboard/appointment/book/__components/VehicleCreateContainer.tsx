@@ -150,6 +150,7 @@ const VehicleCreateContainer = (props: Props) => {
                     />
                   ) : (
                     <SelectField
+                      key={index}
                       mode={"single"}
                       name={field.name}
                       label={field.label}
@@ -165,6 +166,7 @@ const VehicleCreateContainer = (props: Props) => {
                         { label: "Car", value: "car" },
                         { label: "Truck", value: "truck" },
                       ]}
+                      control={undefined}
                     />
                   )}
                 </>

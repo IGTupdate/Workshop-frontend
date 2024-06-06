@@ -7,13 +7,14 @@ import Image, { StaticImageData } from "next/image";
 // Assuming FaCar is imported from react-icons/fa
 
 // Define a type for each slider item
+
 type SliderItem = {
   text: string;
-  Image: StaticImageData;
+  Image: string | StaticImageData;
 };
 
 type Props = {
-  SliderItems: () => SliderItem[]; // Define the type for SliderItems prop
+  SliderItems: () => SliderItem[];
 };
 
 const CustomSlider: React.FC<Props> = ({ SliderItems }) => {
@@ -61,8 +62,15 @@ const CustomSlider: React.FC<Props> = ({ SliderItems }) => {
               </h3>
               <p className="text-customWhite flex justify-end">
                 {/* <item.Icon size={100} /> */}
-                <Image fill src={item.Image} alt="image" />
-              </p>{" "}
+                <Image
+                  src={item.Image}
+                  alt="image"
+                  height={50}
+                  width={50}
+                  className="relative"
+                  style={{ height: "auto", width: "auto" }}
+                />
+              </p>
               {/* Render the icon */}
             </div>
           </div>

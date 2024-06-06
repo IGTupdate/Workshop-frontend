@@ -10,7 +10,7 @@ const Modules = () => {
       <h2 className="font-RobotoFlex font-bold text-2xl sm:text-3xl md:text-4xl xmd:text-[61px] xmd:leading-[71.48px] text-center text-white mb-8">
         {t("heading")}
       </h2>
-      {/* <CustomSlider SliderItems={SliderItmes} /> */}
+      <CustomSlider SliderItems={SliderItmes} />
     </div>
   );
 };

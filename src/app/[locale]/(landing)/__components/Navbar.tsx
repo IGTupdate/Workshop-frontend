@@ -46,12 +46,14 @@ const LandingNavbar = (props: Props) => {
               alt="Logo"
               height={55}
               width={150}
+              fill
             />
 
             <div
               className={`flex flex-col z-40 p-4 gap-4 fixed ${props.toggle ? "left-[0]" : "left-[-200%]"} transition-all top-0 h-screen w-[280px] bg-matalicYellow rounded-r-[50px] xmd:static xmd:justify-between xmd:items-center xmd:flex-row xmd:p-0 xmd:gap-8 xmd:bg-transparent xmd:h-max xmd:w-max`}
             >
               <Image
+                fill
                 src={"/images/logo-1.webp"}
                 alt="Logo"
                 height={55}

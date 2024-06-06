@@ -64,12 +64,17 @@ const Page: React.FC = () => {
     <div className="h-screen sm:h-full pt-24 pb-32 px-4 md:py-0 overflow-auto">
       {/* step bar */}
       {loading ? (
-        <div className="flex justify-center items-center h-full">
+        <div
+          style={{ height: "calc(100vh - 200px)" }}
+          className="flex justify-center items-center w-full"
+        >
           <Loader />
         </div>
       ) : (
         <>
-          <StepBar status={status} />
+          {status !== null && Object.keys(status).length > 0 && (
+            <StepBar status={status} />
+          )}
 
           {/* notifications */}
 

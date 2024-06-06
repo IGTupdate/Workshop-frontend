@@ -2,10 +2,12 @@ export interface IServiceCategory {
   _id: string;
   name: string;
   isActive?: boolean;
+  vehicle_type: string;
 }
 export interface IServiceTask {
   _id: string;
   name: string;
+  vehicle_type: string;
 }
 export type TParts = {
   _id: string;
@@ -26,6 +28,7 @@ export type TServicePlans = {
   remarks?: string;
   createdAt: Date;
   updatedAt: Date;
+  vehicle_type: string;
 };
 
 export interface TSegregatedServiceData {

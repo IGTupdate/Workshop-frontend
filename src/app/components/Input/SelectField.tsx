@@ -1,5 +1,6 @@
 import { Select, Typography } from "antd";
 import React from "react";
+import { Controller } from "react-hook-form";
 
 const { Text } = Typography;
 
@@ -11,6 +12,7 @@ type Props = {
   error: string;
   setValue: any;
   defaultValue?: string[] | string;
+  control: any; // ensure this prop is passed to use with Controller
   options: {
     value: any;
     label: string;
@@ -28,34 +30,29 @@ const SelectField = (props: Props) => {
       <label className="font-medium mb-2 block text-black1" htmlFor="name">
         {props.label}
       </label>
-      {props.mode === "single" ? (
-        <Select
-          allowClear
-          showSearch
-          className="w-full"
-          placeholder={props?.placeholder}
-          filterOption={filterOption}
-          defaultValue={props.defaultValue || ""}
-          options={props.options}
-          onChange={(value) => {
-            props.setValue(props.name, value);
-          }}
-        />
-      ) : (
-        <Select
-          mode="multiple"
-          placeholder={props.placeholder}
-          allowClear
-          defaultValue={props.defaultValue || []}
-          showSearch
-          className="w-full"
-          filterOption={filterOption}
-          options={props.options}
-          onChange={(value) => {
-            props.setValue(props.name, value);
-          }}
-        />
-      )}
+      <Controller
+        name={props.name}
+        control={props.control}
+        defaultValue={
+          props.defaultValue || (props.mode === "multiple" ? [] : "")
+        }
+        render={({ field }) => (
+          <Select
+            {...field}
+            mode={props.mode === "single" ? undefined : props.mode}
+            allowClear
+            showSearch
+            className="w-full"
+            placeholder={props.placeholder}
+            filterOption={filterOption}
+            options={props.options}
+            onChange={(value) => {
+              field.onChange(value);
+              props.setValue(props.name, value);
+            }}
+          />
+        )}
+      />
       {props.error && <Text type="danger"> {props.error}</Text>}
     </div>
   );

@@ -95,6 +95,7 @@ const RequestAdditionalWorkFormContainer = (props: Props) => {
                       label: "No",
                     },
                   ]}
+                  control={undefined}
                 />
 
                 <div className="col-span-2">

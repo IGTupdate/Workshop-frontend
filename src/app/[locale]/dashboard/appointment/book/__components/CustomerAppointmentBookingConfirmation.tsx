@@ -121,7 +121,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
 
   useEffect(() => {
     if (servicePlansLoading) {
-      dispatch(getAllServicePlans());
+      dispatch(getAllServicePlans(props.appointmentBookingData.vehicle_id));
     }
     // console.log(servicePlansData);
     let plans: TServicePlans[] = [];

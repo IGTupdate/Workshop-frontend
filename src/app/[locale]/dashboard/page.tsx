@@ -61,7 +61,9 @@ const Page = (props: Props) => {
       <AppointmentCard appointmentData={appointmentData} />
       {/* NOTIFICATION COMPONENT */}
 
-      <Notifications show={2} notificationData={notificationData} />
+      {notificationData && Object.keys(notificationData).length > 0 && (
+        <Notifications show={2} notificationData={notificationData} />
+      )}
 
       <div className="image my-4 w-full">
         <Image
