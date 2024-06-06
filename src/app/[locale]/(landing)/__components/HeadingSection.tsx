@@ -48,12 +48,15 @@ const HeadingSection = ({
       <div className="absolute top-0 left-0 flex flex-col justify-end sm:justify-center items-center w-full h-full z-[6] px-4">
         <div className="flex justify-center items-center w-full mb-4">
           {Logo && (
-            <Image
-              src={Logo}
-              fill
-              alt="Logo"
-              className="w-max h-max relative"
-            />
+            <div className="relative">
+              <Image
+                src={Logo}
+                fill
+                alt="Logo"
+                className="w-max h-max relative"
+                sizes="10"
+              />
+            </div>
           )}
         </div>
 

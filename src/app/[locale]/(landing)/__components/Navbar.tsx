@@ -44,21 +44,22 @@ const LandingNavbar = (props: Props) => {
             <Image
               src={"/images/logo-1.webp"}
               alt="Logo"
-              height={55}
-              width={150}
-              fill
+              height={30}
+              width={100}
+              className="relative"
+              style={{ height: "auto", width: "auto" }}
             />
 
             <div
               className={`flex flex-col z-40 p-4 gap-4 fixed ${props.toggle ? "left-[0]" : "left-[-200%]"} transition-all top-0 h-screen w-[280px] bg-matalicYellow rounded-r-[50px] xmd:static xmd:justify-between xmd:items-center xmd:flex-row xmd:p-0 xmd:gap-8 xmd:bg-transparent xmd:h-max xmd:w-max`}
             >
               <Image
-                fill
                 src={"/images/logo-1.webp"}
                 alt="Logo"
-                height={55}
-                width={150}
-                className="block xmd:hidden pt-4"
+                height={30}
+                width={100}
+                className="relative block xmd:hidden pt-4"
+                style={{ height: "auto", width: "auto" }}
               />
               <div
                 className={`flex flex-col py-4 gap-4 transition-all xmd:justify-between xmd:items-center xmd:flex-row xmd:p-0 xmd:gap-8 xmd:bg-transparent xmd:h-max xmd:w-max`}

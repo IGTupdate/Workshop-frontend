@@ -65,12 +65,12 @@ const App: React.FC = () => {
               alt="line"
               className="absolute bottom-0 xmd:bottom-[-60px] left-0 w-full z-[1]"
             />
-            <div>
+            <div className="relative">
               <Image
                 fill
                 src={"/images/bgcar.webp"}
                 alt="BgCar"
-                className="w-full"
+                className="relative w-full h-max"
               />
             </div>
 

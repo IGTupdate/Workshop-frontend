@@ -78,7 +78,7 @@ const Proposal: React.FC<Props> = ({ appointmentProposalData }) => {
 
   return (
     <>
-      {proposalData.length > 0 ? (
+      {proposalData?.length > 0 && (
         <div>
           <h3 className="font-bold text-xl">Recommended Service Plans</h3>
           <div className="cursor-pointer" onClick={handleClick}>
@@ -89,8 +89,6 @@ const Proposal: React.FC<Props> = ({ appointmentProposalData }) => {
             ))}
           </div>
         </div>
-      ) : (
-        <p>No service plans available.</p>
       )}
     </>
   );

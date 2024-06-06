@@ -14,13 +14,7 @@ const Page = () => {
       <CarDashboard card={true} />
 
       <div className="bg-[#1F1F1F]">
-        <Committed
-          reverse={false}
-          para={t("para")}
-          heading={t("heading")}
-          headingTwo={t("headingTwo")}
-          headingThree={t("headingThree")}
-        />
+        <Committed reverse={false} para={t("para")} heading={t("heading")} />
       </div>
 
       <div className="bg-black relative overflow-hidden">

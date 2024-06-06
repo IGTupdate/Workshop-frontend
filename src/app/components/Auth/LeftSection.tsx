@@ -21,9 +21,10 @@ const LeftSection = (props: Props) => {
         <div className="w-full h-full flex flex-col justify-center items-center">
           <Image
             fill
+            style={{ width: "auto", height: "auto" }}
             src={"/images/logo-1.webp"}
             alt="Logo"
-            className="mb-4 w-[200px] relative h-max"
+            className="mb-4 w-[200px] relative h-max w-max"
           />
 
           <div>

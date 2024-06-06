@@ -62,14 +62,16 @@ const CustomSlider: React.FC<Props> = ({ SliderItems }) => {
               </h3>
               <p className="text-customWhite flex justify-end">
                 {/* <item.Icon size={100} /> */}
-                <Image
-                  src={item.Image}
-                  alt="image"
-                  height={50}
-                  width={50}
-                  className="relative"
-                  style={{ height: "auto", width: "auto" }}
-                />
+
+                <div className="relative h-screen w-screen">
+                  <Image
+                    src={item.Image}
+                    alt="image"
+                    height={0}
+                    width={0}
+                    fill
+                  />
+                </div>
               </p>
               {/* Render the icon */}
             </div>

@@ -27,12 +27,15 @@ const Icons = () => {
             }}
             className="py-12 rounded-xl flex justify-center items-center hover:shadow-top hover:scale-110 transition-all p-2 h-[200px] w-[150px] md:h-[364px] md:w-[270px]"
           >
-            <Image
-              fill
-              src={item.Icon}
-              alt="Icon"
-              className="w-full h-full relative"
-            />
+            <div className="relative">
+              <Image
+                fill
+                src={item.Icon}
+                alt="Icon"
+                className="w-full h-full relative"
+                sizes="10"
+              />
+            </div>
           </div>
         ))}
       </div>

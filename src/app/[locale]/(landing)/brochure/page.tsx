@@ -32,13 +32,7 @@ const Page = () => {
       />
 
       <div className="bg-[#1F1F1F]">
-        <Committed
-          reverse={true}
-          para={c("paraTwo")}
-          heading={c("heading1")}
-          headingTwo={c("heading2")}
-          headingThree={c("heading3")}
-        />
+        <Committed reverse={true} para={c("paraTwo")} heading={c("heading1")} />
       </div>
 
       <div className="bg-[#1F1F1F] shadow-topDivSmall relative z-[2] overflow-hidden">
@@ -90,6 +84,7 @@ const Page = () => {
           fill
           alt="users"
           className="absolute w-max h-max left-0 top-1/2 translate-y-[-50%]"
+          sizes="50"
         />
         <Image
           src={"/images/storage.webp"}

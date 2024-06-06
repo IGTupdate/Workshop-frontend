@@ -71,7 +71,7 @@ const Home = () => {
                   className="absolute h-max bottom-0 top-auto right-auto left-0 w-full z-[1]"
                 />
               </div>
-              <div>
+              <div className="relative">
                 <Image
                   fill
                   src={"/images/bgcar.webp"}

@@ -40,7 +40,8 @@ const Characteristics = ({
             <Image
               src={Img}
               alt="icon"
-              fill
+              height={150}
+              width={250}
               className="relative w-[170px] h-max xmd:w-[850px] xmd:h-[170px]"
             />
           )}

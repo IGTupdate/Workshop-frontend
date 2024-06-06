@@ -24,12 +24,14 @@ const Proactive = ({ border, para }: props) => {
         src={"/images/left.webp"}
         alt="left"
         className={`absolute top-0 left-0 w-16 ${border ? "h-16 md:w-[100.77px] md:h-[125.56px] opacity-50" : "h-16 md:w-[100.77px] md:h-[125.56px] xmd:w-[140.77px] xmd:h-[165.56px]"}`}
+        sizes="10"
       />
       <Image
         fill={true}
         src={"/images/right.webp"}
         alt="right"
         className={`absolute top-0 left-auto !right-0 w-16 ${border ? "h-16 md:w-[100.77px] md:h-[125.56px] opacity-50" : "h-16 md:w-[100.77px] md:h-[125.56px] xmd:w-[140.77px] xmd:h-[165.56px]"}`}
+        sizes="10"
       />
       <div>
         <div className="flex justify-center items-center">

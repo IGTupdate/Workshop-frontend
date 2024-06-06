@@ -30,8 +30,10 @@ const CardComponent = ({ CardComponentData }: props) => {
             <Image
               src={item.image}
               alt="icon"
-              fill
-              className="right-0 top-1/2 translate-y-[-50%] left-auto bottom-auto w-[303px] h-full z-[-1]"
+              className="absolute right-0 top-1/2 translate-y-[-50%] left-auto bottom-auto w-[303px] h-full z-[-1]"
+              style={{ height: "auto", width: "auto" }}
+              height={150}
+              width={150}
             />
           </div>
         ))}
