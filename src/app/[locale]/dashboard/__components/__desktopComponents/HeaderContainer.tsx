@@ -29,7 +29,14 @@ const HeaderContainer = (props: Props) => {
         }}
       />
       <div className=" mr-4">
-        <Image src={"/images/logo-3.webp"} alt="Logo" height={40} width={120} />
+        <Image
+          src={"/images/logo-3.webp"}
+          style={{ width: "auto", height: "auto" }}
+          className="relative"
+          alt="Logo"
+          height={40}
+          width={120}
+        />
       </div>
     </Header>
   );

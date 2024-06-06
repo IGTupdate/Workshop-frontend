@@ -22,7 +22,7 @@ export const getAllServicePlansCategoryWise = async (
     });
 
     // Organize service plans under their respective categories
-    servicePlanData.forEach((plan: TServicePlans) => {
+    servicePlanData?.forEach((plan: TServicePlans) => {
       const _id = typeof plan.category === "string" ? plan.category : "";
       segregatedData[_id].plans.push(plan);
     });

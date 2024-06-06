@@ -37,6 +37,7 @@ const ServicePlanSelection: React.FC<Props> = (props) => {
       setLoader(true);
       try {
         const result = await getAllServicePlansCategoryWise(servicePlansData);
+
         setServicePlansDataCategoryWise(result);
         setLoader(false);
       } catch (error) {
@@ -52,7 +53,7 @@ const ServicePlanSelection: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (servicePlansLoading) {
-      dispatch(getAllServicePlans());
+      dispatch(getAllServicePlans(props.appointmentBookingData.vehicle_id));
     }
   }, [servicePlansLoading]);
 
@@ -116,11 +117,11 @@ const ServicePlanSelection: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (servicePlansLoading) {
-      dispatch(getAllServicePlans());
+      dispatch(getAllServicePlans(props.appointmentBookingData.vehicle_id));
     }
     // console.log(servicePlansData);
     let plans: TServicePlans[] = [];
-    plans = servicePlansData.filter((plan) =>
+    plans = servicePlansData?.filter((plan) =>
       props.appointmentBookingData?.service_plans?.includes(plan._id as never),
     );
     // console.log(plans)

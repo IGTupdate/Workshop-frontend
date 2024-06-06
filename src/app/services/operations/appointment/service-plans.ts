@@ -53,10 +53,11 @@ export const updateServicePlans = async (
 };
 
 export const getAllServicePlans =
-  (): ThunkAction<void, RootState, unknown, Action> => async (dispatch) => {
+  (vehicle_id?: string): ThunkAction<void, RootState, unknown, Action> =>
+  async (dispatch) => {
     dispatch(setServicePlansLoading(true));
     try {
-      const servicePlansData = await getServicePlans();
+      const servicePlansData = await getServicePlans(vehicle_id);
       dispatch(setServicePlansData(servicePlansData));
       dispatch(setServicePlansLoading(false));
     } catch (err) {
@@ -65,11 +66,12 @@ export const getAllServicePlans =
     }
   };
 
-export const getServicePlans = async () => {
+export const getServicePlans = async (vehicle_id?: string) => {
   try {
     const response = await apiOpenConnector({
       method: "POST",
       url: GET_SERVICE_PLAN,
+      bodyData: { vehicle_id },
     });
 
     if (response.data.success) {

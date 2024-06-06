@@ -64,6 +64,12 @@ export const VehicleCreateInputFields = (t: any) => {
       type: "text",
     },
     {
+      name: "vehicle_type",
+      label: t("vehicleTypeLabel"),
+      placeholder: t("vehicleTypePlaceholder"),
+      type: "text",
+    },
+    {
       name: "owner",
       label: t("ownerLabel"),
       placeholder: t("ownerPlaceholder"),

@@ -28,6 +28,7 @@ import {
   VehicleCreateInputFields,
   vehicleCreateInputFields,
 } from "../__utils/vehicle-create-input";
+import SelectField from "@/app/components/Input/SelectField";
 
 const { Text } = Typography;
 
@@ -58,6 +59,8 @@ const VehicleCreateContainer = (props: Props) => {
   });
 
   const onSubmit = async (data: TvehicleCreateSchema) => {
+    console.log(data, "vehicle data");
+
     if (props.customer_id) {
       data.customer_id = props.customer_id;
     }
@@ -128,21 +131,45 @@ const VehicleCreateContainer = (props: Props) => {
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
             {VehicleCreateInputFields(t).map((field, index) => {
               return (
-                <InputField
-                  key={index}
-                  name={field.name}
-                  label={field.label}
-                  type={field.type}
-                  placeholder={field.placeholder}
-                  control={control}
-                  upperCase={true}
-                  error={
-                    errors[field.name as keyof TvehicleCreateSchema]
-                      ? errors[field.name as keyof TvehicleCreateSchema]
-                          ?.message || ""
-                      : ""
-                  }
-                />
+                <>
+                  {field.name !== "vehicle_type" ? (
+                    <InputField
+                      key={index}
+                      name={field.name}
+                      label={field.label}
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      control={control}
+                      upperCase={true}
+                      error={
+                        errors[field.name as keyof TvehicleCreateSchema]
+                          ? errors[field.name as keyof TvehicleCreateSchema]
+                              ?.message || ""
+                          : ""
+                      }
+                    />
+                  ) : (
+                    <SelectField
+                      key={index}
+                      mode={"single"}
+                      name={field.name}
+                      label={field.label}
+                      placeholder={field.placeholder}
+                      error={
+                        errors[field.name as keyof TvehicleCreateSchema]
+                          ? errors[field.name as keyof TvehicleCreateSchema]
+                              ?.message || ""
+                          : ""
+                      }
+                      setValue={setValue}
+                      options={[
+                        { label: "Car", value: "car" },
+                        { label: "Truck", value: "truck" },
+                      ]}
+                      control={undefined}
+                    />
+                  )}
+                </>
               );
             })}
           </div>

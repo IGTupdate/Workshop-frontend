@@ -82,7 +82,7 @@ const RescheduleAppointmentContainer = (props: Props) => {
         )}
       </div>
       <Steps
-        className="m-4 mt-0 w-[80%] mx-auto"
+        className="m-4 mt-4 w-[80%] mx-auto"
         current={currentStep}
         items={slot_booking_customer_reschedule_step}
       />

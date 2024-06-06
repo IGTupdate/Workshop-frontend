@@ -5,12 +5,14 @@
     "home": "Inicio",
     "we": "Nosotros",
     "services": "Servicios",
-    "contactUs": "Contacto"
+    "contactUs": "Contacto",
+    "brochure": "Folleto"
   },
   "HeadingSection": {
     "heading": "LA SOLUCIÓN INTEGRAL PARA",
     "headingTwo": "AGENCIAS AUTOMOTRICES",
-    "subHeading": "¡Descubre cómo mejorar la gestión y control de tu agencia automotriz con Appviser!"
+    "subHeading": "¡Descubre cómo mejorar la gestión y control de tu agencia automotriz con Appviser!",
+    "subHeadingTwo": "LA SOLUCIÓN INTEGRAL PARA AGENCIAS AUTOMOTRICES"
   },
   "Operating": {
     "heading": "EFICIENCIA OPERATIVA",
@@ -30,7 +32,8 @@
   },
   "Proactive": {
     "heading": "RECEPCIÓN PROACTIVA CON IA",
-    "subHeading": "¡Da un paso adelante en la experiencia del cliente con nuestra tecnología de vanguardia! Con nuestras cámaras de inteligencia artificial, recibes a cada cliente con precisión y anticipación, mostrando un servicio excepcional desde el primer instante. Agiliza el proceso de admisión y asegura una experiencia impecable desde el primer contacto. Con esta solución innovadora, tu agencia automotriz marca la diferencia desde el primer momento, dejando una impresión duradera en tus clientes y elevando tu reputación empresarial."
+    "subHeading": "¡Da un paso adelante en la experiencia del cliente con nuestra tecnología de vanguardia! Con nuestras cámaras de inteligencia artificial, recibes a cada cliente con precisión y anticipación, mostrando un servicio excepcional desde el primer instante. Agiliza el proceso de admisión y asegura una experiencia impecable desde el primer contacto. Con esta solución innovadora, tu agencia automotriz marca la diferencia desde el primer momento, dejando una impresión duradera en tus clientes y elevando tu reputación empresarial.",
+    "subHeadingTwo": "Nuestra innovadora tecnología utiliza cámaras de inteligencia artificial para identificar automáticamente los vehículos que ingresan a tu agencia. Esto permite prellenar las órdenes de servicio con información relevante, agilizando el proceso de admisión y reduciendo los tiempos de espera."
   },
   "NewEmployeeLogin": {
     "heading": "Inicio de sesión (empleado)",
@@ -57,13 +60,15 @@
   "CarDashboard": {
     "heading": "Soluciones innovadoras",
     "headingTwo": "para la industria automotriz",
-    "headingThree": "LATINOAMERICANA"
+    "headingThree": "LATINOAMERICANA",
+    "newHeading": "AUTOMATIZACIÓN DE PROCESOS FINANCIEROS",
+    "para": "Optimiza tus procesos financieros con nuestra automatización avanzada. Desde la emisión de facturas hasta la conciliación bancaria y la programación de pagos, nuestro sistema automatiza tareas repetitivas y tediosas, permitiéndote centrarte en actividades más estratégicas para tu negocio."
   },
   "Committed": {
     "para": "Con más de 20 años de experiencia en la industria automotriz mexicana, en AppViser nos enorgullece ofrecer soluciones avanzadas en Dealer Management Systems (DMS) para el mercado automotor latinoamericano. Desde nuestra fundación, hemos estado comprometidos con la excelencia y la innovación, combinando nuestra profunda experiencia en el sector con las últimas tecnologías para brindar soluciones integrales a nuestros clientes.",
-    "heading": "COMPROMETIDOS",
-    "headingTwo": "CON LA EXCELENCIA",
-    "headingThree": "Y LA INNOVACIÓN"
+    "paraTwo": "Con más de 25 años de experiencia en la industria automotriz. Especializada en ofrecer soluciones avanzadas en gestión de agencias automotrices, vehículos comerciales y motocicletas, AppViser se diseño para optimizar y transformar la gestión de concesionarios en el mercado automotor mediante el uso de las últimas tecnologías y un compromiso firme con la innovación y la excelencia.",
+    "heading": "COMPROMETIDOS CON LA EXCELENCIA Y LA INNOVACIÓN",
+    "heading1": "DMS DE CALIDAD MUNDIAL"
   },
   "CustomCards": {
     "mission": "MISIÓN",
@@ -72,6 +77,47 @@
     "missionText": "Ofrecer soluciones avanzadas en Dealer Management Systems (DMS) para la industria automotriz latinoamericana, simplificando procesos y aumentando la eficiencia en la gestión de concesionarios.",
     "visionText": "Ser líderes reconocidos en la industria automotriz, proporcionando productos y servicios que anticipen y satisfagan las necesidades de nuestros clientes en un mercado en constante cambio.",
     "philosophyText": "Guiados por la calidad, la innovación y la satisfacción del cliente, combinamos experiencia y tecnología para ofrecer soluciones integrales que superen las expectativas y promuevan el éxito mutuo."
+  },
+  "Characteristics": {
+    "heading": "CARACTERÍSTICAS",
+    "subHeading": "MÓDULO DE CITAS AUTOMÁTICO",
+    "para": "Simplifica la programación de citas para tus clientes y optimiza la agenda de tu taller con nuestro sistema de citas automatizado. Ahorra tiempo y mejora la experiencia del cliente al permitirles programar citas de manera rápida y conveniente.",
+    "subHeadingTwo": "GESTIÓN DE ESPACIOS EN TALLER",
+    "paraTwo": "Brinda herramientas poderosas para gestionar eficientemente los espacios de tu taller. Con funciones de seguimiento del desempeño de mecánicos y herramientas, puedes optimizar la distribución de recursos y mejorar la productividad de tu equipo.",
+    "headingThree": "GESTIÓN CONTABLE INTEGRAL",
+    "paraThree": "Simplifica el proceso de contabilidad con nuestras funciones avanzadas de registro, seguimiento y análisis de transacciones. Con características como la conciliación bancaria automática y la generación de informes financieros personalizables, puedes mantener tus libros contables actualizados y precisos en todo momento."
+  },
+  "Inventory": {
+    "heading": "AUTOMATIZACIÓN DE INVENTARIOS Y",
+    "headingTwo": "SEGUIMIENTO NO INVASIVO A CLIENTES",
+    "para": "Simplifica la gestión de inventarios con nuestra automatización avanzada, respaldada por algoritmos de big data y análisis de comportamiento. Además, nuestro sistema ofrece un seguimiento no invasivo a tus clientes, proporcionándote información valiosa para ofrecer un servicio personalizado y de alta calidad."
+  },
+  "BillingAndPayment": {
+    "heading": "GESTIÓN DE FACTURACIÓN Y PAGOS",
+    "para": "Simplifica el proceso de facturación y gestiona tus pagos de manera eficiente con nuestra herramienta integrada. Desde la creación y envío de facturas hasta el seguimiento de pagos y recordatorios de cobro, nuestro sistema te permite gestionar tus transacciones financieras de manera rápida y sencilla."
+  },
+  "Comprehensive": {
+    "heading": "GESTIÓN INTEGRAL DE CLIENTES",
+    "para": "El CRM automotriz permite almacenar y gestionar información detallada sobre cada cliente, incluyendo datos personales, historial de compras, preferencias, y cualquier otra información relevante. Esto permite a los vendedores y agentes de servicio al cliente ofrecer un servicio personalizado y adaptado a las necesidades individuales de cada cliente."
+  },
+  "CardComponent": {
+    "heading": "AUTOMATIZACIÓN DE TAREAS",
+    "para": "Automatiza tareas repetitivas y procesos de seguimiento. Esto ayuda a aumentar la eficiencia y a garantizar que ningún cliente se pierda en el proceso.",
+    "headingTwo": "SEGUIMIENTO DE INTERACCIONES",
+    "paraTwo": "Registra todas las interacciones con los clientes, por cualquier medio de comunicación. Esto garantiza que se pueda dar un seguimiento efectivo.",
+    "headingThree": "INTEGRACIÓN CON APLICACIONES",
+    "paraThree": "Se integra fácilmente con cualquier software de la industria automotriz, para proporcionar una vista completa e integrada de todas las operaciones.",
+    "headingFour": "SEGURIDAD DE DATOS DE CLIENTES",
+    "paraFour": "Garantiza la seguridad de los datos del cliente y cumple con todas las regulaciones de privacidad y protección de datos aplicables."
+  },
+  "Marketing": {
+    "heading": "GESTIÓN DE CAMPAÑAS DE MARKETING",
+    "para": "Permite crear y gestionar campañas de marketing dirigidas a segmentos específicos de clientes, utilizando datos del CRM para personalizar mensajes y ofertas.",
+    "headingTwo": "ANÁLISIS DE DATOS",
+    "paraTwo": "Proporciona análisis y reportes detallados sobre el desempeño de las ventas, la satisfacción del cliente, el rendimiento de las campañas de marketing, y más. Estos insights ayudan a tomar decisiones informadas y a identificar oportunidades de mejora."
+  },
+  "BrochureFooter": {
+    "heading": "CONTÁCTANOS"
   },
   "EmployeeLoginPage": {
     "heading": "¿Es usted un empleado?",
@@ -216,6 +262,8 @@
     "vehiclePlaceholder": "Introduzca el modelo de vehículo",
     "vehicleMakeLabel": "Marca del vehículo",
     "vehicleMakePlaceholder": "Introduzca la marca del vehículo",
+    "vehicleTypeLabel": "Tipo de vehiculo",
+    "vehicleTypePlaceholder": "Seleccione tipo de vehículo",
     "ownerLabel": "Dueño",
     "ownerPlaceholder": "Introduce el nombre del propietario",
     "backButton": "Atrás",

@@ -23,7 +23,7 @@ const Operating = () => {
 
   return (
     <>
-      <div className="container relative h-[300px] md:h-[350px] xmd:h-[500px]">
+      <div className="container relative h-[350px] xmd:h-[500px]">
         <Image
           fill
           src={"/images/map.webp"}

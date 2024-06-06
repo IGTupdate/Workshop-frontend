@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 
 export const appointmentStatus: TAppointmentStatus[] = [
   "Scheduled",
+  "Rescheduled",
   "Assigned",
   "Completed",
   "Pending",
@@ -22,37 +23,37 @@ export const getAppointMentStatus = () => {
 
 export const appointmentStatusText: Record<TAppointmentStatus, ReactNode> = {
   Missed: (
-    <Tag className="w-[76px] text-center" color="orange">
+    <Tag className="w-[83px] text-center" color="orange">
       Missed
     </Tag>
   ),
   Scheduled: (
-    <Tag className="w-[76px] text-center" color="green">
+    <Tag className="w-[83px] text-center" color="green">
       Scheduled
     </Tag>
   ),
   Assigned: (
-    <Tag className="w-[76px] text-center" color="blue">
+    <Tag className="w-[83px] text-center" color="blue">
       Assigned
     </Tag>
   ),
   Completed: (
-    <Tag className="w-[76px] text-center" color="gray">
+    <Tag className="w-[83px] text-center" color="gray">
       Completed
     </Tag>
   ),
   Cancelled: (
-    <Tag className="w-[76px] text-center" color="red">
+    <Tag className="w-[83px] text-center" color="red">
       Cancelled
     </Tag>
   ),
   Pending: (
-    <Tag className="w-[76px] text-center" color="yellow">
+    <Tag className="w-[83px] text-center" color="yellow">
       Pending
     </Tag>
   ),
   Rescheduled: (
-    <Tag className="w-[76px] text-center" color="green">
+    <Tag className="w-[83px] text-center" color="green">
       Rescheduled
     </Tag>
   ),
