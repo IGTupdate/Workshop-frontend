@@ -1,18 +1,15 @@
 "use client";
+import { getCustomerAppointmentInitData } from "@/app/services/operations/appointment/appointment";
+import { initNotification } from "@/app/services/operations/notification/appointment";
+import { useAppSelector } from "@/app/store/reduxHooks";
+import { AppointmentProposalData } from "@/app/types/work-order";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import AddImage from "../../../../public/images/image-2.webp";
 import AppointmentCard from "./__components/__common/AppointmentCard";
 import PaymentMethods from "./__components/__common/PaymentMethods";
-import Notifications from "./notifications/__components/Notifications";
-import { useAppSelector } from "@/app/store/reduxHooks";
-import {
-  getCustomerAppointmentInitData,
-  getCustomerAppointmentInitProposalData,
-} from "@/app/services/operations/appointment/appointment";
-import { appointmentNotification } from "@/app/services/operations/notification/appointment";
 import Proposal from "./__components/__common/Proposal";
-import { AppointmentProposalData } from "@/app/types/work-order";
+import Notifications from "./notifications/__components/Notifications";
 
 type Props = {};
 
@@ -28,19 +25,18 @@ const Page = (props: Props) => {
     if (!customerId) return;
 
     try {
-      const [proposalData, initAppointmentData] = await Promise.all([
-        getCustomerAppointmentInitProposalData(customerId),
-        getCustomerAppointmentInitData(customerId),
-      ]);
+      const proposalData = await getCustomerAppointmentInitData(customerId);
 
-      setAppointmentProposalData(proposalData);
-      setAppointmentData(initAppointmentData);
+      setAppointmentProposalData(proposalData.appointmentProposalData);
+      setAppointmentData(proposalData.appointmentData);
 
       // console.log(initAppointmentData, "initAppointmentData");
 
-      if (initAppointmentData?._id) {
-        const initNotificationData = await appointmentNotification(
-          initAppointmentData?._id,
+      if (proposalData.appointmentData?._id) {
+        const initNotificationData = await initNotification(
+          customerId,
+          proposalData.appointmentData?._id,
+          5,
         );
 
         // Update state after all data has been successfully fetched
