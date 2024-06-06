@@ -22,9 +22,9 @@ const Loading = (props: Props) => {
         <div className="absolute bottom-6 left-1/2 translate-x-[-50%] w-4/5">
           <div className="relative">
             <Image
-              fill
               src={"/images/logo-1.webp"}
-              style={{ height: "auto", width: "auto" }}
+              height={100}
+              width={100}
               className="relative"
               alt="Logo"
             />

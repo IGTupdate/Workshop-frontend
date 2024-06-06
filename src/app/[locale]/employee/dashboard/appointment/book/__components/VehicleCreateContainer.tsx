@@ -59,8 +59,6 @@ const VehicleCreateContainer = (props: Props) => {
   });
 
   const onSubmit = async (data: TvehicleCreateSchema) => {
-    console.log(data, "vehicle data");
-
     if (props.customer_id) {
       data.customer_id = props.customer_id;
     }
@@ -68,7 +66,9 @@ const VehicleCreateContainer = (props: Props) => {
     try {
       const response = (await createVehicle(data)) as TVehicle;
       // console.log(response);
-      props.setVehicleId(response._id);
+      if (response) {
+        props.setVehicleId(response?._id);
+      }
     } catch (err: any) {
       // console.log(err);
       toast.error(err?.response?.data?.message || COMMON_ERROR);
@@ -108,6 +108,7 @@ const VehicleCreateContainer = (props: Props) => {
         }
 
         const response = (await createVehicle(vehicleData[0])) as TVehicle;
+
         props.setVehicleId(response._id);
 
         dispatch(getVehicleByCustomerId());
@@ -118,6 +119,8 @@ const VehicleCreateContainer = (props: Props) => {
       console.log(error);
     }
   };
+
+  console.log(modal, "modal");
 
   return (
     <>
@@ -162,11 +165,12 @@ const VehicleCreateContainer = (props: Props) => {
                           : ""
                       }
                       setValue={setValue}
+                      defaultValue={"car"}
                       options={[
-                        { label: "Car", value: "car" },
-                        { label: "Truck", value: "truck" },
+                        { label: "CAR", value: "car" },
+                        { label: "TRUCK", value: "truck" },
                       ]}
-                      control={undefined}
+                      control={control}
                     />
                   )}
                 </>

@@ -12,7 +12,7 @@ type Props = {
   error: string;
   setValue: any;
   defaultValue?: string[] | string;
-  control: any; // ensure this prop is passed to use with Controller
+  control?: any; // ensure this prop is passed to use with Controller
   options: {
     value: any;
     label: string;

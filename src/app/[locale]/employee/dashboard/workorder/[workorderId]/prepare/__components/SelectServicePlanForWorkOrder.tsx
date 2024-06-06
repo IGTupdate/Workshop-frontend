@@ -60,7 +60,6 @@ const SelectServicePlanForWorkOrder = (props: Props) => {
           setValue={props.setValue}
           options={servicePlanOptions}
           defaultValue={props.watch("servicePlanId")}
-          control={undefined}
         />
       </div>
       <div className="flex flex-col flex-wrap">
