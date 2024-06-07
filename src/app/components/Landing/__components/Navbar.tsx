@@ -29,7 +29,13 @@ const LandingNavbar = (props: Props) => {
         align="center"
         className="w-full flex-wrap bg-transparent pt-4 sm:pt-8 pb-4 justify-between"
       >
-        <Image src={"/images/logo-1.webp"} alt="Logo" height={55} width={150} />
+        <Image
+          src={"/images/logo-1.webp"}
+          className="relative"
+          alt="Logo"
+          height={55}
+          width={150}
+        />
 
         <div
           className={`flex flex-col p-4 gap-4 fixed ${toggle ? "left-[0]" : "left-[-200%]"} transition-all top-0 h-screen w-[315px] bg-matalicYellow xmd:static xmd:justify-between xmd:items-center xmd:flex-row xmd:p-0 xmd:gap-8 xmd:bg-transparent xmd:h-max xmd:w-max`}

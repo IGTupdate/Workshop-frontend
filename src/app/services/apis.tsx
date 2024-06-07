@@ -83,6 +83,7 @@ export const appointmentEndpoints = {
   APPOINTMENT_RESCHEDULE_API: appointmentUrl(APPOINTMENT, "/reschedule"),
   GET_ALL_CUSTOMER_APPOINTMENT: appointmentUrl(APPOINTMENT, "/get-by-customer"),
   GET_VEHICLE: appointmentUrl(VEHICLE, "/get"),
+  ADD_VEHICLE_INTO_CUSTOMER: appointmentUrl(VEHICLE, "/add-customer"),
   CREATE_VEHICLE: appointmentUrl(VEHICLE, "/create"),
   GET_VEHICLE_BY_CUSTOMER_ID: appointmentUrl(VEHICLE, "/get-by-customer"),
   UPDATE_VEHICLE_BY_CUSTOMER_ID: appointmentUrl(VEHICLE, "/update"),
@@ -130,7 +131,11 @@ export const workOrderEndpoints = {
 };
 
 export const notificationEndpoints = {
-  GET_ALL_NOTIFICATIONS: notificationUrl("/notification/get-all"),
+  GET_ALL_APPOINTMENT_NOTIFICATIONS: notificationUrl(
+    "/appointment-notification/get-all",
+  ),
+  GET_ALL_USER_NOTIFICATIONS: notificationUrl("/user-notification/get-all"),
+  GET_INIT_NOTIFICATIONS: notificationUrl("/notification/init"),
 };
 
 export const uploadFilesEndPoint = {

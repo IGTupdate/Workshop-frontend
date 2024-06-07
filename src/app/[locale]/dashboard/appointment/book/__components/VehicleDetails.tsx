@@ -123,7 +123,7 @@ const VehicleDetails = (props: Props) => {
             <div className="flex items-center gap-2">
               <p className="text-antGreay">{t("createdAtLabel")}</p>{" "}
               <p className="font-semibold text-nowrap">
-                {vehicleDetails.registeration_number}
+                {formatDateAndTime(vehicleDetails.createdAt)}
               </p>
             </div>
           </div>
@@ -138,7 +138,7 @@ const VehicleDetails = (props: Props) => {
             <div className="flex items-center gap-2">
               <p className="text-antGreay">{t("registrationLabel")}</p>{" "}
               <p className="font-semibold text-nowrap">
-                {vehicleDetails.createdAt}
+                {vehicleDetails.registeration_number}
               </p>
             </div>
           </div>

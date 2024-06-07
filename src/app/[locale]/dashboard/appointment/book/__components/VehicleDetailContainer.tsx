@@ -39,10 +39,10 @@ const VehicleDetailContainer = (props: Props) => {
   const t = useTranslations("VehicleDetailContainer");
 
   useEffect(() => {
-    if (vehicleLoading) {
+    if (vehicleLoading && customerId) {
       dispatch(getVehicleByCustomerId());
     }
-  }, [vehicleLoading, vehicleId]);
+  }, [vehicleLoading, vehicleId, customerId]);
 
   useEffect(() => {
     if (vehicleId !== NEW_VEHICLE.value) {
@@ -117,6 +117,7 @@ const VehicleDetailContainer = (props: Props) => {
                       vin: "",
                       owner: "",
                       vehicle_make: "",
+                      vehicle_type: "",
                       vehicle_model: "",
                     }
                   }

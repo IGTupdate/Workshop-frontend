@@ -28,6 +28,7 @@ import {
   VehicleCreateInputFields,
   vehicleCreateInputFields,
 } from "../__utils/vehicle-create-input";
+import SelectField from "@/app/components/Input/SelectField";
 
 const { Text } = Typography;
 
@@ -65,7 +66,9 @@ const VehicleCreateContainer = (props: Props) => {
     try {
       const response = (await createVehicle(data)) as TVehicle;
       // console.log(response);
-      props.setVehicleId(response._id);
+      if (response) {
+        props.setVehicleId(response?._id);
+      }
     } catch (err: any) {
       // console.log(err);
       toast.error(err?.response?.data?.message || COMMON_ERROR);
@@ -105,6 +108,7 @@ const VehicleCreateContainer = (props: Props) => {
         }
 
         const response = (await createVehicle(vehicleData[0])) as TVehicle;
+
         props.setVehicleId(response._id);
 
         dispatch(getVehicleByCustomerId());
@@ -115,6 +119,8 @@ const VehicleCreateContainer = (props: Props) => {
       console.log(error);
     }
   };
+
+  console.log(modal, "modal");
 
   return (
     <>
@@ -128,21 +134,44 @@ const VehicleCreateContainer = (props: Props) => {
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
             {VehicleCreateInputFields(t).map((field, index) => {
               return (
-                <InputField
-                  key={index}
-                  name={field.name}
-                  label={field.label}
-                  type={field.type}
-                  placeholder={field.placeholder}
-                  control={control}
-                  upperCase={true}
-                  error={
-                    errors[field.name as keyof TvehicleCreateSchema]
-                      ? errors[field.name as keyof TvehicleCreateSchema]
-                          ?.message || ""
-                      : ""
-                  }
-                />
+                <div key={index}>
+                  {field.name !== "vehicle_type" ? (
+                    <InputField
+                      name={field.name}
+                      label={field.label}
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      control={control}
+                      upperCase={true}
+                      error={
+                        errors[field.name as keyof TvehicleCreateSchema]
+                          ? errors[field.name as keyof TvehicleCreateSchema]
+                              ?.message || ""
+                          : ""
+                      }
+                    />
+                  ) : (
+                    <SelectField
+                      mode={"single"}
+                      name={field.name}
+                      label={field.label}
+                      placeholder={field.placeholder}
+                      error={
+                        errors[field.name as keyof TvehicleCreateSchema]
+                          ? errors[field.name as keyof TvehicleCreateSchema]
+                              ?.message || ""
+                          : ""
+                      }
+                      setValue={setValue}
+                      defaultValue={"car"}
+                      options={[
+                        { label: "CAR", value: "car" },
+                        { label: "TRUCK", value: "truck" },
+                      ]}
+                      control={control}
+                    />
+                  )}
+                </div>
               );
             })}
           </div>

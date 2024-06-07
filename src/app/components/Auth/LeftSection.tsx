@@ -16,14 +16,16 @@ const LeftSection = (props: Props) => {
         alt="auth-side-img"
         fill={true}
         className="object-cover absolute z-[0] h-full"
+        sizes="50"
       />
       <div className="w-full h-full absolute z-[1] bg-[rgba(0,0,0,0.7)]">
         <div className="w-full h-full flex flex-col justify-center items-center">
           <Image
-            fill
+            width={100}
+            height={100}
             src={"/images/logo-1.webp"}
             alt="Logo"
-            className="mb-4 w-[200px] relative h-max"
+            className="mb-4 relative h-max w-max"
           />
 
           <div>

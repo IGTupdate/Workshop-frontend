@@ -63,10 +63,10 @@ const CustomSlider: React.FC<Props> = ({ SliderItems }) => {
                 {/* <item.Icon size={100} /> */}
                 <Image
                   src={item.Image}
-                  fill
                   alt="image"
-                  className="static h-max w-max"
-                  sizes="10"
+                  height={250}
+                  width={250}
+                  className="relative h-max w-max"
                 />
               </p>{" "}
               {/* Render the icon */}

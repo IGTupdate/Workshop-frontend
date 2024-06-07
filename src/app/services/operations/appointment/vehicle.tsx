@@ -16,7 +16,9 @@ const {
   GET_VEHICLE_BY_CUSTOMER_ID,
   UPDATE_VEHICLE_BY_CUSTOMER_ID,
   DELETE_VEHICLE_BY_CUSTOMER_ID,
+  ADD_VEHICLE_INTO_CUSTOMER,
 } = appointmentEndpoints;
+
 export const getVehicles = async (query: string = "") => {
   try {
     const response = await apiOpenConnector({
@@ -24,6 +26,25 @@ export const getVehicles = async (query: string = "") => {
       url: GET_VEHICLE + "?" + query,
     });
 
+    return response.data.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const addCustomerIntoVehicle = async (
+  vehicle_id: string,
+  customer_id: string,
+) => {
+  try {
+    const response = await apiOpenConnector({
+      method: "POST",
+      url: ADD_VEHICLE_INTO_CUSTOMER,
+      bodyData: {
+        vehicle_id,
+        customer_id,
+      },
+    });
     return response.data.data;
   } catch (err) {
     throw err;

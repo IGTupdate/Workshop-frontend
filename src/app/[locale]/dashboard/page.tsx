@@ -1,18 +1,18 @@
 "use client";
+import { getCustomerAppointmentInitData } from "@/app/services/operations/appointment/appointment";
+import {
+  appointmentNotification,
+  initNotification,
+} from "@/app/services/operations/notification/appointment";
+import { useAppSelector } from "@/app/store/reduxHooks";
+import { AppointmentProposalData } from "@/app/types/work-order";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import AddImage from "../../../../public/images/image-2.webp";
 import AppointmentCard from "./__components/__common/AppointmentCard";
 import PaymentMethods from "./__components/__common/PaymentMethods";
-import Notifications from "./notifications/__components/Notifications";
-import { useAppSelector } from "@/app/store/reduxHooks";
-import {
-  getCustomerAppointmentInitData,
-  getCustomerAppointmentInitProposalData,
-} from "@/app/services/operations/appointment/appointment";
-import { appointmentNotification } from "@/app/services/operations/notification/appointment";
 import Proposal from "./__components/__common/Proposal";
-import { AppointmentProposalData } from "@/app/types/work-order";
+import Notifications from "./notifications/__components/Notifications";
 
 type Props = {};
 
@@ -28,23 +28,26 @@ const Page = (props: Props) => {
     if (!customerId) return;
 
     try {
-      const [proposalData, initAppointmentData] = await Promise.all([
-        getCustomerAppointmentInitProposalData(customerId),
-        getCustomerAppointmentInitData(customerId),
-      ]);
+      const proposalData = await getCustomerAppointmentInitData(customerId);
 
-      setAppointmentProposalData(proposalData);
-      setAppointmentData(initAppointmentData);
+      if (proposalData) {
+        const { appointmentProposalData, appointmentData } = proposalData;
+        setAppointmentProposalData(appointmentProposalData);
 
-      console.log(initAppointmentData, "initAppointmentData");
+        if (Array.isArray(appointmentData) && appointmentData.length > 0) {
+          setAppointmentData(appointmentData[0]);
 
-      if (initAppointmentData?._id) {
-        const initNotificationData = await appointmentNotification(
-          initAppointmentData?._id,
-        );
+          if (appointmentData[0]._id) {
+            const notifications = await initNotification(
+              appointmentData[0].customer_id._id,
+              appointmentData[0]._id,
+              2,
+            );
+            console.log(notifications, "initNotifications");
 
-        // Update state after all data has been successfully fetched
-        setNotificationData(initNotificationData);
+            setNotificationData(notifications);
+          }
+        }
       }
     } catch (err) {
       console.error("Failed to initialize data:", err);
@@ -61,12 +64,15 @@ const Page = (props: Props) => {
       <AppointmentCard appointmentData={appointmentData} />
       {/* NOTIFICATION COMPONENT */}
 
-      <Notifications show={2} notificationData={notificationData} />
+      {notificationData && Object.keys(notificationData).length > 0 && (
+        <Notifications show={2} notificationData={notificationData} />
+      )}
 
       <div className="image my-4 w-full">
         <Image
           fill
           src={AddImage}
+          priority
           alt="AddImage"
           className="w-full relative h-max"
         />

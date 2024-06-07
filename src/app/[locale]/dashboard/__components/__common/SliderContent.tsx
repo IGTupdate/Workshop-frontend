@@ -10,10 +10,12 @@ const SliderContent = () => {
       <div className="flex justify-between items-center">
         <p className="text-white">Enrique H.</p>
         <Image
-          fill
+          height={0}
+          width={0}
           src={"/images/mastercard.webp"}
           alt="MasterCard"
           className="relative h-max w-max"
+          style={{ width: "auto", height: "auto" }}
         />
       </div>
     </div>

@@ -5,12 +5,14 @@
     "home": "Home",
     "we": "We",
     "services": "Services",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "brochure": "Brochure"
   },
   "HeadingSection": {
     "heading": "THE COMPREHENSIVE SOLUTION FOR ",
     "headingTwo": "AUTOMOTIVE AGENCIES",
-    "subHeading": "Discover how to improve the management and control of your automotive agency with Appviser!"
+    "subHeading": "Discover how to improve the management and control of your automotive agency with Appviser!",
+    "subHeadingTwo": "THE COMPREHENSIVE SOLUTION FOR AUTOMOTIVE AGENCIES"
   },
   "Operating": {
     "heading": "OPERATING EFFICIENCY",
@@ -30,7 +32,17 @@
   },
   "Proactive": {
     "heading": "PROACTIVE RECEPTION WITH AI",
-    "subHeading": "Take a step forward in customer experience with our cutting-edge technology! With our artificial intelligence cameras, you receive each client with precision and anticipation, showing exceptional service from the first moment. Streamlines the admission process and ensures an impeccable experience from the first contact. With this innovative solution, your automotive agency makes a difference from the first moment, leaving a lasting impression on your clients and elevating your business reputation."
+    "subHeading": "Take a step forward in customer experience with our cutting-edge technology! With our artificial intelligence cameras, you receive each client with precision and anticipation, showing exceptional service from the first moment. Streamlines the admission process and ensures an impeccable experience from the first contact. With this innovative solution, your automotive agency makes a difference from the first moment, leaving a lasting impression on your clients and elevating your business reputation.",
+    "subHeadingTwo": "Our innovative technology uses artificial intelligence cameras to automatically identify vehicles entering your agency. This allows service orders to be pre-filled with relevant information, streamlining the admission process and reducing waiting times."
+  },
+  "Inventory": {
+    "heading": "INVENTORY AUTOMATION AND",
+    "headingTwo": "NON-INVASIVE CUSTOMER MONITORING",
+    "para": "Simplify inventory management with our advanced automation, backed by big data algorithms and behavioral analytics. In addition, our system offers non-invasive monitoring to your clients, providing you with valuable information to offer a personalized and high-quality service."
+  },
+  "BillingAndPayment": {
+    "heading": "BILLING AND PAYMENT MANAGEMENT",
+    "para": "Simplify the billing process and manage your payments efficiently with our integrated tool. From creating and sending invoices to tracking payments and collection reminders, our system allows you to manage your financial transactions quickly and easily."
   },
   "NewEmployeeLogin": {
     "heading": "Login (employee)",
@@ -57,13 +69,15 @@
   "CarDashboard": {
     "heading": "Innovative solutions",
     "headingTwo": "for the automotive industry",
-    "headingThree": "LATIN AMERICAN"
+    "headingThree": "LATIN AMERICAN",
+    "newHeading": "AUTOMATION OF FINANCIAL PROCESSES",
+    "para": "Optimize your financial processes with our advanced automation. From issuing invoices to bank reconciliation and payment scheduling, our system automates repetitive and tedious tasks, allowing you to focus on more strategic activities for your business."
   },
   "Committed": {
     "para": "With more than 20 years of experience in the Mexican automotive industry, at AppViser we are proud to offer advanced solutions in Dealer Management Systems (DMS) for the Latin American automotive market. Since our founding, we have been committed to excellence and innovation, combining our deep experience in the sector with the latest technologies to provide comprehensive solutions to our clients.",
-    "heading": "COMMITTED",
-    "headingTwo": "TO EXCELLENCE",
-    "headingThree": " AND INNOVATION"
+    "paraTwo": "With more than 25 years of experience in the automotive industry. Specialized in offering advanced solutions in automotive, commercial vehicle and motorcycle dealership management, AppViser was designed to optimize and transform dealership management in the automotive market through the use of the latest technologies and a firm commitment to innovation and excellence.",
+    "heading": "COMMITTED TO EXCELLENCE AND INNOVATION",
+    "heading1": "WORLDWIDE QUALITY DMS"
   },
   "CustomCards": {
     "mission": "MISSION",
@@ -72,6 +86,38 @@
     "missionText": "Offer advanced solutions in Dealer Management Systems (DMS) for the Latin American automotive industry, simplifying processes and increasing efficiency in dealership management.",
     "visionText": "To be recognized leaders in the automotive industry, providing products and services that anticipate and satisfy the needs of our customers in a constantly changing market.",
     "philosophyText": "Guided by quality, innovation and customer satisfaction, we combine experience and technology to offer comprehensive solutions that exceed expectations and promote mutual success."
+  },
+  "Characteristics": {
+    "heading": "CHARACTERISTICS",
+    "subHeading": "AUTOMATIC APPOINTMENT MODULE",
+    "para": "Simplify scheduling appointments for your clients and optimize your workshop agenda with our automated appointment system. Save time and improve customer experience by allowing customers to schedule appointments quickly and conveniently.",
+    "subHeadingTwo": "WORKSHOP SPACES MANAGEMENT",
+    "paraTwo": "Provides powerful tools to efficiently manage your workshop spaces. With performance tracking features for mechanics and tools, you can optimize resource allocation and improve your team's productivity.",
+    "headingThree": "COMPREHENSIVE ACCOUNTING MANAGEMENT",
+    "paraThree": "Simplify the accounting process with our advanced transaction recording, tracking and analysis features. With features like automatic bank reconciliation and customizable financial reporting, you can keep your books up to date and accurate at all times."
+  },
+  "Comprehensive": {
+    "heading": "COMPREHENSIVE CUSTOMER MANAGEMENT",
+    "para": "Automotive CRM allows you to store and manage detailed information about each customer, including personal data, purchase history, preferences, and any other relevant information. This allows salespeople and customer service agents to offer personalized service tailored to each customer's individual needs."
+  },
+  "CardComponent": {
+    "heading": "TASK AUTOMATION",
+    "para": "Automate repetitive tasks and follow-up processes. This helps increase efficiency and ensure that no customers are lost in the process.",
+    "headingTwo": "INTERACTION TRACKING",
+    "paraTwo": "Record all interactions with customers, by any means of communication. This ensures that effective follow-up can be provided.",
+    "headingThree": "INTEGRATION WITH APPS",
+    "paraThree": "Easily integrates with any automotive industry software to provide a complete, integrated view of all operations.",
+    "headingFour": "CUSTOMER DATA SECURITY",
+    "paraFour": "Ensures the security of customer data and complies with all applicable data protection and privacy regulations."
+  },
+  "Marketing": {
+    "heading": "MARKETING CAMPAIGN MANAGEMENT",
+    "para": "It allows you to create and manage marketing campaigns aimed at specific customer segments, using CRM data to personalize messages and offers.",
+    "headingTwo": "ANALYSIS OF DATA",
+    "paraTwo": "Provides detailed analysis and reporting on sales performance, customer satisfaction, marketing campaign performance, and more. These insights help you make informed decisions and identify opportunities for improvement."
+  },
+  "BrochureFooter": {
+    "heading": "CONTACT US"
   },
   "EmployeeLoginPage": {
     "heading": "Are you an employee?",
@@ -216,6 +262,8 @@
     "vehiclePlaceholder": "Enter vehicle model",
     "vehicleMakeLabel": "Vehicle Make",
     "vehicleMakePlaceholder": "Enter vehicle make",
+    "vehicleTypeLabel": "Vehicle Type",
+    "vehicleTypePlaceholder": "Select vehicle type",
     "ownerLabel": "Owner",
     "ownerPlaceholder": "Enter owner name",
     "backButton": "Back",
@@ -228,9 +276,9 @@
     "registrationLabel": "REGISTRATION NUMBER",
     "ownerLabel": "OWNER",
     "createdAtLabel": "CREATED AT",
-    "selectButton": "Select Vehicle",
-    "updateButton": "Update Vehicle",
-    "deleteButton": "Delete Vehicle",
+    "selectButton": "Select",
+    "updateButton": "Update",
+    "deleteButton": "Delete",
     "modalTitle": "Delete Vehicle",
     "modalText": "Are you sure you want to delete your vehicle?",
     "modalButton": "Confirm"

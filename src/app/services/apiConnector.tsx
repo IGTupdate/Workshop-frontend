@@ -1,8 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { jwtDecode } from "jwt-decode";
-import { generateAccessToken, logout } from "./operations/auth/customerAuth";
-import { get_client_cookie } from "../utils/get_client_cookie";
 import { redirect } from "next/navigation";
+import { get_client_cookie } from "../utils/get_client_cookie";
+import { generateAccessToken, logout } from "./operations/auth/customerAuth";
 
 const axiosInstance = axios.create({
   withCredentials: true,
@@ -33,7 +33,6 @@ axiosInstance.interceptors.request.use(
     if (!accessToken) {
       logout();
       redirect("/");
-      throw Error;
     }
 
     // Set the authorization header with the new access token
@@ -70,6 +69,7 @@ export const apiConnector = async ({
       data: bodyData ? bodyData : null,
       headers,
       params,
+      // timeout: 5000,
     });
     return response;
   } catch (error) {

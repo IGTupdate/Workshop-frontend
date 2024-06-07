@@ -2,31 +2,30 @@
 import DescriptionItem from "@/app/components/DescriptionItem.tsx";
 import InputFieldWithButton from "@/app/components/Input/InputFieldWithButton";
 import Loader from "@/app/components/Loader";
+import CustomModal from "@/app/components/Model/CustomModel";
+import Watermark from "@/app/components/Text/WatermarkText";
 import {
   bookAppointment,
   getAppointMentBookInitData,
 } from "@/app/services/operations/appointment/appointment";
 import { getAllServicePlans } from "@/app/services/operations/appointment/service-plans";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
+import { setAppointmentLoading } from "@/app/store/slices/customerAppointmentSlice";
 import { TAppointmentBook } from "@/app/types/appointment";
 import { TSlot } from "@/app/types/calender";
 import { TServicePlans } from "@/app/types/service";
 import { TVehicle } from "@/app/types/vehicle";
 import { COMMON_ERROR } from "@/app/utils/constants/constant";
+import { convertToLocaleDateAndWeekday } from "@/app/utils/dateFormatter";
 import { PriceCalculator, removeQueryParams } from "@/app/utils/helper";
 import { Button, Divider, Typography } from "antd";
+import dayjs from "dayjs";
+import { useTranslations } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import ServicePlans from "./ServicePlans";
 import { LiaEdit } from "react-icons/lia";
-import { setAppointmentLoading } from "@/app/store/slices/customerAppointmentSlice";
-import Watermark from "@/app/components/Text/WatermarkText";
-import CustomModal from "@/app/components/Model/CustomModel";
 import { MdOutlineCancel } from "react-icons/md";
-import { disconnect } from "process";
-import { formatDateAndTime } from "@/app/utils/dateFormatter";
-import { useTranslations } from "next-intl";
 
 const { Title } = Typography;
 
@@ -121,7 +120,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
 
   useEffect(() => {
     if (servicePlansLoading) {
-      dispatch(getAllServicePlans());
+      dispatch(getAllServicePlans(props.appointmentBookingData.vehicle_id));
     }
     // console.log(servicePlansData);
     let plans: TServicePlans[] = [];
@@ -422,9 +421,10 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                 title={t("start")}
                 content={
                   appointmentBookingConfirmationData.slot_details?.start_time
-                    ? new Date(
-                        appointmentBookingConfirmationData.slot_details?.start_time,
-                      ).toLocaleString("en-GB")
+                    ? dayjs(
+                        appointmentBookingConfirmationData.slot_details
+                          ?.start_time,
+                      ).format("dddd, MMMM D, YYYY h:mm A")
                     : "-"
                 }
               />
@@ -432,9 +432,10 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                 title={t("end")}
                 content={
                   appointmentBookingConfirmationData.slot_details?.end_time
-                    ? new Date(
-                        appointmentBookingConfirmationData.slot_details?.end_time,
-                      ).toLocaleString("en-GB")
+                    ? dayjs(
+                        appointmentBookingConfirmationData.slot_details
+                          ?.end_time,
+                      ).format("dddd, MMMM D, YYYY h:mm A")
                     : "-"
                 }
               />
@@ -460,13 +461,15 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                       key={i}
                       className="flex justify-between items-center capitalize gap-3 pe-4"
                     >
-                      {ele}
+                      <p style={{ width: "calc(100vw - 20px)" }}>{ele}</p>
 
-                      <MdOutlineCancel
-                        onClick={() => removeRemarks(ele)}
-                        size={14}
-                        className="text-red-500"
-                      />
+                      <span className="w-5 h-5">
+                        <MdOutlineCancel
+                          onClick={() => removeRemarks(ele)}
+                          size={14}
+                          className="text-red-500"
+                        />
+                      </span>
                     </p>
                   ),
                 )}
@@ -517,9 +520,9 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
             <p className="font-medium text-base">{t("slotTime")}</p>
             {appointmentBookingConfirmationData?.slot_details?.start_time && (
               <p>
-                {formatDateAndTime(
+                {dayjs(
                   appointmentBookingConfirmationData.slot_details.start_time,
-                )}
+                ).format("dddd, MMMM D, YYYY h:mm A")}
               </p>
             )}
           </div>
@@ -531,7 +534,9 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
               {appointmentBookingConfirmationData?.servicePlans?.map(
                 (plan, index) => (
                   // eslint-disable-next-line react/jsx-key
-                  <h3 className="font-medium text-nowrap">{plan.name}</h3>
+                  <h3 className="font-medium text-nowrap" key={index}>
+                    {plan.name}
+                  </h3>
                 ),
               )}
             </div>
@@ -539,7 +544,7 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
 
           <div className="flex justify-between items">
             <p className="font-medium text-base">{t("total")}</p>
-            <p className="font-bold">$ {totalAmount}</p>
+            <p className="font-bold">$ {PriceCalculator(totalAmount)}</p>
           </div>
         </div>
       </CustomModal>

@@ -1,10 +1,24 @@
 import React from "react";
 // import Bg from "../../../../../public/images/Rectangle-2.webp";
 // import Line from "../../../../../public/svg/line1.svg";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useTranslations } from "next-intl";
 
-const HeadingSection = () => {
+type props = {
+  height?: string | undefined;
+  heading?: string | undefined;
+  headingTwo?: string | undefined;
+  subheading?: string | undefined;
+  Logo?: string | undefined;
+};
+
+const HeadingSection = ({
+  height,
+  heading,
+  headingTwo,
+  subheading,
+  Logo,
+}: props) => {
   const t = useTranslations("HeadingSection");
   return (
     <div className="relative overflow-hidden">
@@ -28,19 +42,47 @@ const HeadingSection = () => {
         src={"/images/Rectangle-2.webp"}
         alt="Bg"
         fill
-        className="static h-[270px] sm:h-[350px] md:h-[400px] xmd:h-[655px] w-full"
+        className={`static h-[265px] sm:h-[350px] md:h-[400px]  ${height === "default" ? "xmd:h-[655px]" : "xmd:h-[710px]"} w-full`}
       />
 
-      <div className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-25%] w-full z-[6] px-4">
-        <h1 className="text-white font-RobotoFlex font-bold text-center text-2xl sm:text-3xl md:text-4xl xmd:text-7xl xmd:leading-[85px]">
-          {t("heading")}
-        </h1>
-        <h1 className="text-white font-RobotoFlex font-bold text-center text-2xl sm:text-3xl md:text-4xl xmd:text-7xl xmd:leading-[85px]">
-          {t("headingTwo")}
-        </h1>
-        <p className="text-white font-RobotoFlex font-normal text-center text-base md:text-xl">
-          {t("subHeading")}
-        </p>
+      <div className="absolute top-0 left-0 flex flex-col justify-end sm:justify-center items-center w-full h-full z-[6] px-4">
+        <div className="flex justify-center items-center w-full mb-4">
+          {Logo && (
+            <div className="relative">
+              <Image
+                src={Logo}
+                fill
+                alt="Logo"
+                className="w-max h-max relative"
+                sizes="10"
+              />
+            </div>
+          )}
+        </div>
+
+        <div>
+          {heading && (
+            <h1 className="text-white font-RobotoFlex font-bold text-center text-xl sm:text-3xl md:text-4xl xmd:text-7xl xmd:leading-[85px]">
+              {heading}
+            </h1>
+          )}
+        </div>
+
+        <div>
+          {headingTwo && (
+            <h1 className="text-white font-RobotoFlex font-bold text-center text-xl sm:text-3xl md:text-4xl xmd:text-7xl xmd:leading-[85px]">
+              {headingTwo}
+            </h1>
+          )}
+        </div>
+
+        <div>
+          {subheading && (
+            <p className="text-white font-RobotoFlex font-normal text-center text-base md:text-xl mb-4 sm:mb-0">
+              {subheading}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

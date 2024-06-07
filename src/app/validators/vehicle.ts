@@ -19,6 +19,7 @@ export const vehicleCreateSchema = Yup.object({
   vehicle_make: Yup.string()
     .required()
     .transform((value) => (value ? value.toUpperCase() : value)),
+  vehicle_type: Yup.string().required("Please select vehicle type"),
   vehicle_model: Yup.string()
     .required()
     .transform((value) => (value ? value.toUpperCase() : value)),
