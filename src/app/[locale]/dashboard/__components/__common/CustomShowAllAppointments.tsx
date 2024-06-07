@@ -46,13 +46,19 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
     }
   }, [appointmentLoading]);
 
+  console.log(appointmentData);
+
   useEffect(() => {
     const filteredAppointments: AppointmentData[] =
       pageType === "previous"
         ? fetchAppointments(appointmentData)
         : pageType === "cancelled"
-          ? fetchAppointments(appointmentData, ["Scheduled"])
-          : fetchAppointments(appointmentData, ["Scheduled", "Missed"]);
+          ? fetchAppointments(appointmentData, ["Scheduled", "Rescheduled"])
+          : fetchAppointments(appointmentData, [
+              "Scheduled",
+              "Missed",
+              "Rescheduled",
+            ]);
     setProcessedAppointmentData(filteredAppointments);
   }, [appointmentData, pageType]);
 

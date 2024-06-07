@@ -11,7 +11,8 @@ export async function appointmentNotification(appointmentId: string) {
   try {
     const notifications = await apiConnector({
       method: "GET",
-      url: GET_ALL_APPOINTMENT_NOTIFICATIONS + "?appointmentId" + appointmentId,
+      url:
+        GET_ALL_APPOINTMENT_NOTIFICATIONS + "?appointmentId=" + appointmentId,
     });
 
     if (notifications?.data?.success) {
@@ -66,6 +67,7 @@ export async function initNotification(
   } catch (err) {
     // Log and handle errors
     console.error("Error fetching notifications:", err);
-    throw err; // Rethrow the error for the caller to handle
+    // throw err; // Rethrow the error for the caller to handle
+    return null;
   }
 }

@@ -61,7 +61,7 @@ const CustomMobileHeader = () => {
           href="/dashboard/settings"
           className="flex items-center gap-2 w-32"
         >
-          <IoSettingsOutline /> Setting
+          <IoSettingsOutline /> Settings
         </Link>
       ),
     },
