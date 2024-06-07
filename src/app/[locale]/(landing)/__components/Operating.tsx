@@ -6,6 +6,8 @@ import { useTranslations } from "next-intl";
 import { Button, Modal } from "antd";
 import SlotDetails from "./SlotDetails";
 import SlotSchedule from "./SlotSchedule";
+import { IoClose } from "react-icons/io5";
+
 const Operating = () => {
   const t = useTranslations("Operating");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,10 +53,10 @@ const Operating = () => {
 
       <Modal
         className="w-max custom-model transbox rounded-3xl shadow-2xl"
-        okButtonProps={{ style: { backgroundColor: "red" } }}
         styles={{
           content: { backgroundColor: "transparent" }, // turns the Modal red
         }}
+        closeIcon={<IoClose size={20} color="white" />}
         centered
         footer={null}
         open={isModalOpen}

@@ -31,7 +31,7 @@ const StepBar = ({ status }: Props) => {
       )}
       {step === 2 ? (
         <div className="z-20 flex flex-col items-center pt-4">
-          <Image fill src={"/images/fly.webp"} alt="Fly" />
+          <Image height={50} width={50} src={"/images/fly.webp"} alt="Fly" />
           <p className="font-semibold">Under Process</p>
         </div>
       ) : (

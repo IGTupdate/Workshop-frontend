@@ -1,6 +1,9 @@
 "use client";
 import { getCustomerAppointmentInitData } from "@/app/services/operations/appointment/appointment";
-import { initNotification } from "@/app/services/operations/notification/appointment";
+import {
+  appointmentNotification,
+  initNotification,
+} from "@/app/services/operations/notification/appointment";
 import { useAppSelector } from "@/app/store/reduxHooks";
 import { AppointmentProposalData } from "@/app/types/work-order";
 import Image from "next/image";
@@ -27,20 +30,24 @@ const Page = (props: Props) => {
     try {
       const proposalData = await getCustomerAppointmentInitData(customerId);
 
-      setAppointmentProposalData(proposalData.appointmentProposalData);
-      setAppointmentData(proposalData.appointmentData);
+      if (proposalData) {
+        const { appointmentProposalData, appointmentData } = proposalData;
+        setAppointmentProposalData(appointmentProposalData);
 
-      // console.log(initAppointmentData, "initAppointmentData");
+        if (Array.isArray(appointmentData) && appointmentData.length > 0) {
+          setAppointmentData(appointmentData[0]);
 
-      if (proposalData.appointmentData?._id) {
-        const initNotificationData = await initNotification(
-          customerId,
-          proposalData.appointmentData?._id,
-          5,
-        );
+          if (appointmentData[0]._id) {
+            const notifications = await initNotification(
+              appointmentData[0].customer_id._id,
+              appointmentData[0]._id,
+              2,
+            );
+            console.log(notifications, "initNotifications");
 
-        // Update state after all data has been successfully fetched
-        setNotificationData(initNotificationData);
+            setNotificationData(notifications);
+          }
+        }
       }
     } catch (err) {
       console.error("Failed to initialize data:", err);

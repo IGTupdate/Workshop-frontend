@@ -276,9 +276,9 @@
     "registrationLabel": "NÚMERO DE REGISTRO",
     "ownerLabel": "DUEÑO",
     "createdAtLabel": "CREADO EN",
-    "selectButton": "Seleccionar Vehículo",
-    "updateButton": "Actualizar Vehículo",
-    "deleteButton": "Eliminar Vehículo",
+    "selectButton": "Seleccionar",
+    "updateButton": "Actualizar",
+    "deleteButton": "Eliminar",
     "modalTitle": "Eliminar vehículo",
     "modalText": "¿Estás seguro de que quieres eliminar tu vehículo?",
     "modalButton": "Confirmar"
