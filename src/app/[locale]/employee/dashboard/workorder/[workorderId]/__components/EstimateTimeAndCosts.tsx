@@ -61,7 +61,7 @@ const EstimateTimeAndCosts = ({ setSteps, workOrder }: Props) => {
           router.push(`/employee/dashboard/workorder/${workOrder._id}`);
         }
 
-        console.log(result, "result");
+        // console.log(result, "result");
       } catch (error) {
         toast.success("Work Order Not Updated Please Try Again Later");
       } finally {

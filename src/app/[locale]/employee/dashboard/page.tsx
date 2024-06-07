@@ -46,7 +46,7 @@ const Page = (props: Props) => {
         const Data = result?.data as TDashboardKanbanDataResponse;
         const arr: { heading: string; cards: TkanbanValue[] }[] = [];
         Object.keys(Data)?.forEach((item) => {
-          console.log(item, "item");
+          // console.log(item, "item");
           arr.push({
             heading: item,
             cards: Data[item].map((item) => {

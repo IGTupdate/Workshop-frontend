@@ -24,7 +24,7 @@ const VehicleSearchCompoent = (props: Props) => {
   ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
   const onSearch = (value: string) => {
-    console.log(value);
+    // console.log(value);
   };
 
   const onChange = (value: string) => {

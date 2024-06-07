@@ -169,7 +169,7 @@ export function GetWorkOrderTableColumn() {
               style={{ color: "#1890ff" }}
               className="cursor-pointer"
             >
-              <IoIosEye size={"22px"} title="View Appointments" />
+              <IoIosEye size={"22px"} title="View Work Order" />
             </div>
             {/* view appointments */}
             {/* <Button
