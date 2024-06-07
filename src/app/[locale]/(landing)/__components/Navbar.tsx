@@ -124,7 +124,9 @@ const LandingNavbar = (props: Props) => {
                   href={"/we"}
                   style={{
                     color:
-                      `/${localeActive}/we` === pathName ? "yellow" : "white",
+                      `/${localeActive}/services` === pathName
+                        ? "yellow"
+                        : "white",
                   }}
                   onClick={() => props.setToggle(false)}
                 >
@@ -140,7 +142,9 @@ const LandingNavbar = (props: Props) => {
                   href={"/we"}
                   style={{
                     color:
-                      `/${localeActive}/we` === pathName ? "yellow" : "white",
+                      `/${localeActive}/contactUs` === pathName
+                        ? "yellow"
+                        : "white",
                   }}
                   onClick={() => props.setToggle(false)}
                 >

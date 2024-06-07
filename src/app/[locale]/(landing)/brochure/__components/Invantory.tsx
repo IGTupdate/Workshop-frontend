@@ -6,10 +6,10 @@ const Inventory = () => {
   return (
     <div className="container py-8 sm:py-16 px-4 xl:px-36">
       <div className="flex justify-center items-center w-full flex-col">
-        <h2 className="font-bold font-RobotoFlex text-lg sm:text-xl md:text-3xl xmd:text-[40px] leading-5 sm:leading-[52px] text-white">
+        <h2 className="font-bold font-RobotoFlex text-lg sm:text-xl md:text-3xl xmd:text-[40px] leading-5 sm:leading-[52px] text-white text-center">
           {t("heading")}
         </h2>
-        <h2 className="font-bold font-RobotoFlex text-lg sm:text-xl md:text-3xl xmd:text-[40px] leading-5 sm:leading-[52px] text-white">
+        <h2 className="font-bold font-RobotoFlex text-lg sm:text-xl md:text-3xl xmd:text-[40px] leading-5 sm:leading-[52px] text-white text-center">
           {t("headingTwo")}
         </h2>
 

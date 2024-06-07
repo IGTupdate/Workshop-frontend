@@ -23,7 +23,7 @@ const CardComponent = ({ CardComponentData }: props) => {
             >
               {item.heading}
             </h3>
-            <p className="text-white font-RobotoFlex font-normal text-base md:text-[22px] md:leading-[25.78px] mt-8">
+            <p className="text-white font-RobotoFlex font-normal text-base md:text-[22px] md:leading-[25.78px] mt-4 xmd:mt-8">
               {item.para}
             </p>
 
