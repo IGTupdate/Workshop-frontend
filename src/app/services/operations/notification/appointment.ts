@@ -67,6 +67,7 @@ export async function initNotification(
   } catch (err) {
     // Log and handle errors
     console.error("Error fetching notifications:", err);
-    throw err; // Rethrow the error for the caller to handle
+    // throw err; // Rethrow the error for the caller to handle
+    return null;
   }
 }

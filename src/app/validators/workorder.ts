@@ -92,6 +92,10 @@ export const workOrderOdometerAndFuelCreateSchema = Yup.object({
   }),
 });
 
+export const workOrderVehicleInspectionAddMoreCategory = Yup.object({
+  category: Yup.string().required(),
+});
+
 export type TWorkOrderAssign = Yup.InferType<
   typeof workOrderAssignMechanicsYupSchema
 >;
@@ -158,4 +162,8 @@ export type TWorkorderEstimateTimeAndCostsScema = Yup.InferType<
 
 export type TWorkOrderOdometerAndFuelCreateSchema = Yup.InferType<
   typeof workOrderOdometerAndFuelCreateSchema
+>;
+
+export type TworkOrderVehicleInspectionAddMoreCategory = Yup.InferType<
+  typeof workOrderVehicleInspectionAddMoreCategory
 >;

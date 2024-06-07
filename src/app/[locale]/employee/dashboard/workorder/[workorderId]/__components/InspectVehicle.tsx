@@ -1,10 +1,16 @@
 "use client";
-import { useState } from "react";
-import { Modal, Button, Image } from "antd";
-import { FaCarSide, FaCarAlt, FaCarCrash, FaCarBattery } from "react-icons/fa";
+import { updateWorkOrder } from "@/app/services/operations/workorder/workorder";
+import { TWorkOrder, TWorkOrderObservation } from "@/app/types/work-order";
+import { COMMON_ERROR } from "@/app/utils/constants/constant";
+import { Button, Image, Modal, Tooltip } from "antd";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { FaCarAlt, FaCarBattery, FaCarCrash, FaCarSide } from "react-icons/fa";
+import CarPartImageModel from "../prepare/__components/CarPartImageModel";
+import AddMoreInspectionCategory from "../prepare/__components/AddMoreInspectionCategory";
+import { IoSettingsSharp } from "react-icons/io5";
 import CustomCamera from "@/app/components/Camera/Camera";
-import { MdCameraAlt } from "react-icons/md";
-import { IoClose } from "react-icons/io5";
+import { FaCheck } from "react-icons/fa6";
 
 type CarPart = {
   id: string;
@@ -17,28 +23,121 @@ type CapturedImages = {
 };
 
 const carParts: CarPart[] = [
-  { id: "front", icon: <FaCarAlt size={50} />, label: "Front" },
-  { id: "side", icon: <FaCarSide size={50} />, label: "Side" },
-  { id: "back", icon: <FaCarCrash size={50} />, label: "Back" },
-  { id: "engine", icon: <FaCarBattery size={50} />, label: "Engine" },
+  { id: "Front", icon: <FaCarAlt size={50} />, label: "Front" },
+  { id: "Side", icon: <FaCarSide size={50} />, label: "Side" },
+  { id: "Back", icon: <FaCarCrash size={50} />, label: "Back" },
+  { id: "Engine", icon: <FaCarBattery size={50} />, label: "Engine" },
 ];
 
+const getCategoryIcon = (category: string) => {
+  const result = carParts.find((el) => {
+    return el.id === category;
+  });
+  if (result) return result.icon;
+  return <IoSettingsSharp size={50} />;
+};
 type Props = {
   setSteps: React.Dispatch<React.SetStateAction<string>>;
+  workOrder: Partial<TWorkOrder>;
 };
 
-const InspectVehicle = ({ setSteps }: Props) => {
-  const [selectedPart, setSelectedPart] = useState<string | null>(null);
-  const [capturedImages, setCapturedImages] = useState<CapturedImages>({});
-  const [showModal, setShowModal] = useState<string | null>(null);
+const InspectVehicle = ({ setSteps, workOrder }: Props) => {
+  // const [selectedPart, setSelectedPart] = useState<string | null>(null);
+  // const [capturedImages, setCapturedImages] = useState<CapturedImages>({});
 
-  const handleIconClick = (part: string) => {
-    setSelectedPart(part);
-    setShowModal(part);
+  const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState<string | null>(null);
+  const [observations, setObservations] = useState<TWorkOrderObservation[]>([]);
+
+  useEffect(() => {
+    setObservations(() => {
+      return carParts.map((itm) => {
+        return {
+          category: itm.id,
+          images: [],
+          details: "",
+        };
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    if (workOrder.observations) {
+      // filling
+      let newObservations = [...workOrder.observations];
+      const filteredKnownObservationDoesNotSaved = observations.filter(
+        (obs) => {
+          const isExist = newObservations.find((el) => {
+            return obs.category === el.category;
+          });
+
+          return !isExist;
+        },
+      );
+
+      newObservations = [
+        ...newObservations,
+        ...filteredKnownObservationDoesNotSaved,
+      ];
+      setObservations(newObservations);
+    }
+  }, [workOrder]);
+
+  const handleOpenModal = (category: string) => {
+    setShowModal(category);
   };
 
-  const onSubmit = async () => {
-    setSteps("2");
+  const handleCloseModal = () => {
+    setShowModal(null);
+  };
+
+  const getPreSavedCategoryData = (category: string) => {
+    console.log(category);
+    const data = observations?.find((obs) => {
+      return obs.category === category;
+    });
+    console.log(data);
+    return data || { category, images: [] as string[] };
+  };
+
+  const handleSaveAndContinue = async () => {
+    try {
+      setLoading(true);
+      const response = await updateWorkOrder(workOrder._id || "", {
+        observations: observations,
+      });
+      toast.success("Updated Successfully");
+      setSteps("2");
+    } catch (err: any) {
+      console.log(err);
+      toast.error(err?.response?.data?.message || COMMON_ERROR);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSaveObservation = (data: TWorkOrderObservation) => {
+    console.log(data);
+    setObservations((prv) => {
+      return prv.map((el) => {
+        if (el.category === data.category) return data;
+        else return el;
+      });
+    });
+    handleCloseModal();
+  };
+
+  const addObservation = (toAddObs: TWorkOrderObservation) => {
+    const foundObs = observations.find(
+      (obs) => obs.category === toAddObs.category,
+    );
+    if (foundObs) {
+      return false;
+    }
+    setObservations((prv) => {
+      return [...prv, toAddObs];
+    });
+    return true;
   };
 
   return (
@@ -51,33 +150,68 @@ const InspectVehicle = ({ setSteps }: Props) => {
           </div>
 
           <div className="flex gap-4 my-4">
-            {carParts.map((part) => (
-              <div
-                key={part.id}
-                className="relative flex flex-col items-center"
-              >
-                <Button onClick={() => handleIconClick(part.id)}>
-                  {part.icon}
-                  <div>{part.label}</div>
+            {observations.map((obs, index) => (
+              <div key={index} className="relative flex flex-col items-center">
+                <Button onClick={() => handleOpenModal(obs.category)}>
+                  {obs.images.length > 0 ? (
+                    <FaCheck size={50} />
+                  ) : (
+                    getCategoryIcon(obs.category)
+                  )}
+                  <div>{obs.category}</div>
                 </Button>
               </div>
             ))}
           </div>
 
-          {selectedPart && showModal && (
+          <div className="mt-10 text-white1">
+            <AddMoreInspectionCategory
+              onAddCategory={(data: string) => {
+                return addObservation({
+                  category: data,
+                  images: [],
+                  details: "",
+                });
+              }}
+            />
+          </div>
+
+          <CarPartImageModel
+            workOrderId={workOrder._id || ""}
+            openModal={showModal !== null}
+            handleCloseModal={handleCloseModal}
+            handleSaveObservation={handleSaveObservation}
+            observation={
+              showModal
+                ? getPreSavedCategoryData(showModal)
+                : { category: "", images: [] as string[] }
+            }
+          />
+
+          {/* {selectedPart && showModal && (
             <CarPartModal
               part={selectedPart}
               showModal={showModal}
               setShowModal={setShowModal}
               capturedImages={capturedImages[selectedPart] || []}
             />
-          )}
+          )} */}
         </main>
       </div>
 
       <div className="flex justify-end items-center gap-4 mt-4">
-        <Button onClick={() => setSteps("0")}>Back</Button>
-        <Button onClick={onSubmit} htmlType="submit" type="primary">
+        <Button
+          disabled={loading}
+          onClick={() => setSteps("0")}
+          loading={loading}
+        >
+          Back
+        </Button>
+        <Button
+          onClick={handleSaveAndContinue}
+          htmlType="submit"
+          type="primary"
+        >
           Save & Continue
         </Button>
       </div>
@@ -184,11 +318,11 @@ const CarPartModal = ({ part, showModal, setShowModal }: CarPartModalProps) => {
                 alt={`Gallery Image ${index + 1}`}
               />
               <div className="absolute right-[-12px] top-[-12px] h-12 w-12 flex justify-center items-center rounded-full shadow-topDivSmall cursor-pointer">
-                <IoClose
+                {/* <IoClose
                   onClick={() => removeImage(index)}
                   size={25}
                   color="white"
-                />
+                /> */}
               </div>
             </div>
           ))}

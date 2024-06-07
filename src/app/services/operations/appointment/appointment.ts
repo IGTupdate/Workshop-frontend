@@ -142,6 +142,7 @@ export const getAllCustomerAppointment =
     try {
       dispatch(setAppointmentLoading(true));
       const _id = getState().auth.authData._id;
+      console.log(_id);
       const response = await apiConnector({
         method: "GET",
         url: GET_ALL_CUSTOMER_APPOINTMENT + "/" + _id,

@@ -69,7 +69,7 @@ export const apiConnector = async ({
       data: bodyData ? bodyData : null,
       headers,
       params,
-      timeout: 5000,
+      // timeout: 5000,
     });
     return response;
   } catch (error) {
