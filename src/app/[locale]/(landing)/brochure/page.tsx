@@ -83,14 +83,14 @@ const Page = () => {
           src={"/images/UsersIcons.webp"}
           fill
           alt="users"
-          className="absolute w-max h-max left-0 top-1/2 translate-y-[-50%]"
+          className="absolute w-16 h-28 xmd:w-max xmd:h-max left-0 top-1/2 translate-y-[-50%]"
           sizes="50"
         />
         <Image
           src={"/images/storage.webp"}
           fill
           alt="users"
-          className="absolute w-max h-max left-auto right-0 top-1/2 translate-y-[-50%]"
+          className="absolute w-16 h-28 xmd:w-max xmd:h-max left-auto right-0 top-1/2 translate-y-[-50%]"
         />
         <Inventory />
       </div>
@@ -115,7 +115,7 @@ const Page = () => {
           src={"/images/file.webp"}
           fill
           alt="users"
-          className="absolute w-max h-max left-auto right-0 top-1/2 translate-y-[-50%]"
+          className="absolute w-16 h-28 xmd:w-max xmd:h-max left-auto right-0 top-1/2 translate-y-[-50%]"
         />
         <BillingAndPayment />
       </div>

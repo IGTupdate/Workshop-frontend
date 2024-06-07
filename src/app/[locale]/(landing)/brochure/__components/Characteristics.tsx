@@ -19,7 +19,7 @@ const Characteristics = ({
   blur = true,
 }: props) => {
   return (
-    <div className="container pt-0 pb-8 sm:pt-8 sm:pb-16">
+    <div className="container pt-0 pb-0 xmd:pb-8 sm:pt-8 sm:pb-16">
       {heading && (
         <h2 className="text-center md:text-end font-bold font-RobotoFlex mt-4 sm:mt-0 text-xl sm:text-2xl md:text-3xl xmd:text-[61px] text-white ">
           {heading}
@@ -27,7 +27,7 @@ const Characteristics = ({
       )}
 
       <div
-        className={`flex ${Img ? "flex-row xmd:flex-row-reverse" : "flex-row"} flex-wrap xmd:flex-nowrap justify-between items-center gap-4 xmd:gap-16 w-full rounded-3xl ${blur ? "transbox" : ""} py-4 px-4 xmd:px-8 xmd:py-8 mt-8`}
+        className={`flex ${Img ? "flex-row xmd:flex-row-reverse" : "flex-row"} flex-wrap xmd:flex-nowrap justify-between items-center gap-4 xmd:gap-16 w-full rounded-3xl ${blur ? "transbox" : ""} py-4 px-4 xmd:px-8 xmd:py-8 mb-8 xmd:mb-0 mt-8`}
       >
         <div>
           {Icon && (

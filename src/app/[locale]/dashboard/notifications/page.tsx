@@ -3,7 +3,10 @@ import React, { useEffect, useState } from "react";
 import StepBar from "./__components/StepBar";
 import Notifications from "./__components/Notifications";
 import { useAppSelector } from "@/app/store/reduxHooks";
-import { appointmentNotification } from "@/app/services/operations/notification/appointment";
+import {
+  appointmentNotification,
+  initNotification,
+} from "@/app/services/operations/notification/appointment";
 import {
   getAppointmentStatus,
   getCustomerAppointmentInitData,
@@ -40,9 +43,17 @@ const Page: React.FC = () => {
       setLoading(true);
       const initAppointmentData =
         await getCustomerAppointmentInitData(customerId);
-      if (initAppointmentData?._id) {
-        await getAllNotificationsData(initAppointmentData._id);
-        await getAppointmentStatusData(initAppointmentData._id);
+
+      console.log(initAppointmentData, "initAppointmentData");
+
+      if (initAppointmentData?.appointmentData[0]?._id) {
+        await getAllNotificationsData(
+          customerId,
+          initAppointmentData?.appointmentData[0]?._id,
+        );
+        await getAppointmentStatusData(
+          initAppointmentData?.appointmentData[0]?._id,
+        );
       }
       setLoading(false);
     } catch (err) {
@@ -50,8 +61,14 @@ const Page: React.FC = () => {
     }
   };
 
-  const getAllNotificationsData = async (id: string) => {
-    const initNotificationData = await appointmentNotification(id);
+  const getAllNotificationsData = async (
+    customerId: string,
+    appointmentId: string,
+  ) => {
+    const initNotificationData = await initNotification(
+      customerId,
+      appointmentId,
+    );
     setNotificationData(initNotificationData);
   };
 
@@ -61,7 +78,7 @@ const Page: React.FC = () => {
   };
 
   return (
-    <div className="h-screen sm:h-full pt-24 pb-32 px-4 md:py-0 overflow-auto">
+    <div className="h-screen md:h-full pt-24 pb-32 px-4 md:py-0 overflow-auto">
       {/* step bar */}
       {loading ? (
         <div

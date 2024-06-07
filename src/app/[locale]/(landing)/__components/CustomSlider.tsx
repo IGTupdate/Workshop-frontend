@@ -64,8 +64,8 @@ const CustomSlider: React.FC<Props> = ({ SliderItems }) => {
                 <Image
                   src={item.Image}
                   alt="image"
-                  height={150}
-                  width={150}
+                  height={250}
+                  width={250}
                   className="relative h-max w-max"
                 />
               </p>{" "}

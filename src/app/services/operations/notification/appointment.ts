@@ -54,7 +54,7 @@ export async function initNotification(
     if (limit) queryParams.append("limit", limit.toString());
 
     const url =
-      GET_ALL_USER_NOTIFICATIONS +
+      GET_INIT_NOTIFICATIONS +
       (queryParams.toString() ? "?" + queryParams.toString() : "");
     const notifications = await apiConnector({
       method: "GET",

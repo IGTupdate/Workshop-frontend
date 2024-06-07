@@ -81,9 +81,8 @@ const LandingNavbar = (props: Props) => {
                 src={"/images/logo-1.webp"}
                 alt="Logo"
                 height={30}
-                width={100}
+                width={150}
                 className="relative block xmd:hidden pt-4"
-                style={{ height: "auto", width: "auto" }}
               />
               <div
                 className={`flex flex-col py-4 gap-4 transition-all xmd:justify-between xmd:items-center xmd:flex-row xmd:p-0 xmd:gap-8 xmd:bg-transparent xmd:h-max xmd:w-max`}
@@ -124,7 +123,9 @@ const LandingNavbar = (props: Props) => {
                   href={"/we"}
                   style={{
                     color:
-                      `/${localeActive}/we` === pathName ? "yellow" : "white",
+                      `/${localeActive}/services` === pathName
+                        ? "yellow"
+                        : "white",
                   }}
                   onClick={() => props.setToggle(false)}
                 >
@@ -140,7 +141,9 @@ const LandingNavbar = (props: Props) => {
                   href={"/we"}
                   style={{
                     color:
-                      `/${localeActive}/we` === pathName ? "yellow" : "white",
+                      `/${localeActive}/contactUs` === pathName
+                        ? "yellow"
+                        : "white",
                   }}
                   onClick={() => props.setToggle(false)}
                 >

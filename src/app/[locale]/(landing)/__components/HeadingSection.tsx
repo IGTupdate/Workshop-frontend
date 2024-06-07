@@ -42,7 +42,7 @@ const HeadingSection = ({
         src={"/images/Rectangle-2.webp"}
         alt="Bg"
         fill
-        className={`static h-[200px] sm:h-[350px] md:h-[400px]  ${height === "default" ? "xmd:h-[655px]" : "xmd:h-[710px]"} w-full`}
+        className={`static h-[265px] sm:h-[350px] md:h-[400px]  ${height === "default" ? "xmd:h-[655px]" : "xmd:h-[710px]"} w-full`}
       />
 
       <div className="absolute top-0 left-0 flex flex-col justify-end sm:justify-center items-center w-full h-full z-[6] px-4">
