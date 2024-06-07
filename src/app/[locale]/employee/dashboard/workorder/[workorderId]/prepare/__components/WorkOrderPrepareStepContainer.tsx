@@ -29,7 +29,9 @@ const WorkOrderPrepareStepContainer = (props: Props) => {
     {
       key: "1",
       label: "Inspect Vehicle",
-      children: <InspectVehicle setSteps={setSteps} />,
+      children: (
+        <InspectVehicle setSteps={setSteps} workOrder={props.workOrder || {}} />
+      ),
     },
     {
       key: "2",

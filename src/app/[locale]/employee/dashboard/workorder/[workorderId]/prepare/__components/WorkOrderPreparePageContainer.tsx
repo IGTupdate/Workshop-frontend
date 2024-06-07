@@ -3,7 +3,10 @@
 import { Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { TWorkOrder } from "@/app/types/work-order";
-import { getWorkOrderById } from "@/app/services/operations/workorder/workorder";
+import {
+  getWorkOrderById,
+  updateWorkOrder,
+} from "@/app/services/operations/workorder/workorder";
 import WorkOrderFormContainer from "./WorkOrderFormContainer";
 import Loader from "@/app/components/Loader";
 import useAbility from "@/app/__hooks/useAbility";

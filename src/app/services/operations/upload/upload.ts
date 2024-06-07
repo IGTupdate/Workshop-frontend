@@ -84,3 +84,17 @@ export const uploadImages = async (image: string) => {
     throw err;
   }
 };
+
+export const deleteImageFromServer = async (url: string) => {
+  try {
+    const url_ob = new URL(url);
+    const filePath = url_ob.pathname;
+
+    const response = await deleteSingleObject(filePath);
+
+    return true;
+  } catch (err) {
+    return false;
+    console.log(err);
+  }
+};

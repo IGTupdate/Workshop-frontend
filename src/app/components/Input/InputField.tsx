@@ -11,10 +11,11 @@ export type InputField = {
   type: string; //"text" | "number" | "email"; // Adjust as needed,
   error: string | undefined;
   control: any;
-  upperCase?: boolean;
 };
 
-type Props = InputField & {};
+type Props = InputField & {
+  upperCase?: boolean;
+};
 
 const InputField = (props: Props) => {
   return (

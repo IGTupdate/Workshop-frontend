@@ -1,18 +1,15 @@
 "use client";
 
+import { uploadImages } from "@/app/services/operations/upload/upload";
 import { Modal } from "antd";
+import Image from "next/image";
 import React, { useState } from "react";
+import Camera from "react-html5-camera-photo";
+import { FaImage } from "react-icons/fa6";
 import { FiCheck } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
-import { MdCameraAlt, MdCameraswitch, MdFileUpload } from "react-icons/md";
-import { FaImage } from "react-icons/fa6";
-import Camera from "react-html5-camera-photo";
-import Image from "next/image";
-import {
-  uploadImages,
-  uploadSingleObject,
-  uploadToTheServer,
-} from "@/app/services/operations/upload/upload";
+import { MdCameraAlt, MdCameraswitch } from "react-icons/md";
+import Loader from "../Loader";
 
 type Props = {
   addImage: (url: string) => void;
@@ -82,11 +79,11 @@ const CameraInputField = (props: Props) => {
 
       props.addImage(savedImageUrl);
       removeCurrentImage(index);
-      setLoading(false);
     } catch (err) {
       // show error
       alert("Can't Upload Image");
       console.log(err);
+    } finally {
       setLoading(false);
     }
   };
@@ -167,6 +164,12 @@ const CameraInputField = (props: Props) => {
                     alt="image"
                     className="absolute bg-white left-0 top-0 mb-4 w-full h-full mx-auto rounded-lg shadow-md object-cover object-center z-10"
                   />
+
+                  {loading && (
+                    <div className="absolute top-1/2 left-1/2 translate-x-[-50%] flex justify-center items-center gap-4 z-30">
+                      <Loader />
+                    </div>
+                  )}
 
                   {/* Buttons to add image to gallery or discard it */}
                   <div className="absolute bottom-10 left-1/2 translate-x-[-50%] flex justify-center items-center gap-4 z-10">
