@@ -119,6 +119,7 @@ const WorkOrderFormContainer = (props: Props) => {
         </div>
 
         <SelectServicePlanForWorkOrder
+          control={control}
           errors={errors}
           setValue={setValue}
           watch={watch}

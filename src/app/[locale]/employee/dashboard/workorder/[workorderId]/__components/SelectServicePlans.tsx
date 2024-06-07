@@ -28,6 +28,7 @@ const SelectServicePlans = ({ workOrderId, setSteps }: Props) => {
   const { servicePlansLoading, servicePlansData } = useAppSelector(
     (state) => state.servicePlan,
   );
+  console.log(servicePlansData);
   const dispatch = useAppDispatch();
 
   const {
@@ -86,6 +87,7 @@ const SelectServicePlans = ({ workOrderId, setSteps }: Props) => {
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <SelectServicePlanForWorkOrder
+            control={control}
             errors={errors}
             setValue={setValue}
             watch={watch}
