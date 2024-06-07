@@ -37,17 +37,14 @@ const WorkOrderPrepareStepContainer = (props: Props) => {
       key: "2",
       label: "Service Plans",
       children: (
-        <SelectServicePlans
-          workOrderId={props.workOrder?._id}
-          setSteps={setSteps}
-        />
+        <SelectServicePlans workOrder={props.workOrder} setSteps={setSteps} />
       ),
     },
     {
       key: "3",
       label: "Estimate Time & Costs",
       children: (
-        <EstimateTimeAndCosts id={props.workOrder?._id} setSteps={setSteps} />
+        <EstimateTimeAndCosts workOrder={props.workOrder} setSteps={setSteps} />
       ),
     },
   ];

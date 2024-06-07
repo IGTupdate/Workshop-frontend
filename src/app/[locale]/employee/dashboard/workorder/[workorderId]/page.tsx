@@ -80,7 +80,10 @@ const Page = (props: Props) => {
       workOrderData={workOrder}
       showAdditionalWorks={true}
     />,
-    <VehicleInspectionViewRecord key={"Vehicle Inspection"} />,
+    <VehicleInspectionViewRecord
+      key={"Vehicle Inspection"}
+      observations={workOrder?.observations || []}
+    />,
     <StaffAndRamps
       key={"Staff & Ramps"}
       workOrderData={workOrder}

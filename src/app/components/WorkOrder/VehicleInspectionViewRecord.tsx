@@ -5,14 +5,15 @@ import React, { useState } from "react";
 import ImageViewerInModal from "@/app/components/ImageViewer/ImageViewerInModal";
 import { GiTyre } from "react-icons/gi";
 import VehiclePartsInspectionDetail from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/VehiclePartsInspectionDetail";
+import { TWorkOrderObservation } from "@/app/types/work-order";
 
 const { Title, Text } = Typography;
 
-type Props = {};
+type Props = {
+  observations: TWorkOrderObservation[];
+};
 
 const VehicleInspectionViewRecord = (props: Props) => {
-  const [openGallery, setOpenGaller] = useState(-1);
-
   const inspection = [
     {
       category: "Front Wheel",
@@ -30,6 +31,7 @@ const VehicleInspectionViewRecord = (props: Props) => {
       ],
     },
   ];
+
   return (
     <div className="flex flex-col gap-6 bg-white p-4 rounded-xl shadow-xl">
       <div>
@@ -56,7 +58,7 @@ const VehicleInspectionViewRecord = (props: Props) => {
           }
         </div> */}
 
-        <VehiclePartsInspectionDetail observations={inspection} />
+        <VehiclePartsInspectionDetail observations={props.observations} />
       </div>
     </div>
   );

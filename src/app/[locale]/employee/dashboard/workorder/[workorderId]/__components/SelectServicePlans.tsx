@@ -19,11 +19,11 @@ import toast from "react-hot-toast";
 import Loader from "@/app/components/Loader";
 
 type Props = {
-  workOrderId: string | undefined;
+  workOrder: TWorkOrder | null;
   setSteps: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const SelectServicePlans = ({ workOrderId, setSteps }: Props) => {
+const SelectServicePlans = ({ setSteps, workOrder }: Props) => {
   const [loading, setLoading] = useState(false);
   const { servicePlansLoading, servicePlansData } = useAppSelector(
     (state) => state.servicePlan,
@@ -48,17 +48,28 @@ const SelectServicePlans = ({ workOrderId, setSteps }: Props) => {
   });
 
   useEffect(() => {
+    if (workOrder?.servicePlanId) {
+      const selectedPlans = workOrder.servicePlanId.map((el) => {
+        if (typeof el === "string") return el;
+        return el._id;
+      });
+      setValue("servicePlanId", selectedPlans);
+    }
+  }, [workOrder, servicePlansData]);
+
+  useEffect(() => {
     if (!servicePlansData.length) {
       dispatch(getAllServicePlans());
     }
   }, [dispatch, servicePlansData.length]);
 
   const onSubmit = async (data: TWorkorderServicePlansPrepareScema) => {
-    if (workOrderId && data.servicePlanId?.length > 0) {
+    console.log(data);
+    if (workOrder?._id && data.servicePlanId?.length > 0) {
       setLoading(true);
       try {
         const result = await updateWorkOrder(
-          workOrderId,
+          workOrder._id,
           data as Partial<TWorkOrder>,
         );
         if (result?.success === true) {
