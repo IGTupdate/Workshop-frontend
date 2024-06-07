@@ -31,6 +31,7 @@ import dayjs from "dayjs";
 import useAbility from "@/app/__hooks/useAbility";
 import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 import { useTranslations } from "next-intl";
+import { BsClipboardData } from "react-icons/bs";
 
 const { Title, Text } = Typography;
 
@@ -190,7 +191,8 @@ export function GetAppointmentDataTableColumn() {
               {/* create workorder */}
               {ability &&
                 ability.can(casl_action.create, casl_subject.appointment) &&
-                status === appointmentStatus[0] && (
+                (status === appointmentStatus[0] ||
+                  status === appointmentStatus[1]) && (
                   <div
                     onClick={() => {
                       router.push(
@@ -204,6 +206,20 @@ export function GetAppointmentDataTableColumn() {
                     <MdAddChart size={"22px"} title="Create WorkOrder" />
                   </div>
                 )}
+
+              {status === appointmentStatus[3] && (
+                <div
+                  onClick={() => {
+                    router.push(
+                      "/employee/dashboard/workorder?appointmentId=" + _id,
+                    );
+                  }}
+                  style={{ color: "yellow" }}
+                  className="cursor-pointer"
+                >
+                  <BsClipboardData size={18} title="Create WorkOrder" />
+                </div>
+              )}
             </Flex>
           );
         },
