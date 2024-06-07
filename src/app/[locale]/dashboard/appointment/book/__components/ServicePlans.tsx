@@ -32,9 +32,7 @@ const ServicePlans: React.FC<Props> = ({
         {plan?.duration && (
           <div className="flex items-center gap-2 absolute right-0 top-0 sm:top-5 p-2 py-1 bg-slate-400 text-white">
             <IoMdTime className="text-lg" />
-            <p className="text-base">
-              {minutesToHoursConverter(plan?.duration)} Hrs Taken
-            </p>
+            <p className="text-base">{plan?.duration} Hrs Taken</p>
           </div>
         )}
 

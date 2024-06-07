@@ -458,11 +458,11 @@ const CustomerAppointmentBookingConfirmation = (props: Props) => {
                   (ele, i) => (
                     <p
                       key={i}
-                      className="flex justify-between items-center capitalize gap-3 pe-4"
+                      className="flex justify-between items-start capitalize gap-3 pe-4"
                     >
                       <p style={{ width: "calc(100vw - 20px)" }}>{ele}</p>
 
-                      <span className="w-5 h-5">
+                      <span className="w-5 h-5 mt-1">
                         <MdOutlineCancel
                           onClick={() => removeRemarks(ele)}
                           size={14}

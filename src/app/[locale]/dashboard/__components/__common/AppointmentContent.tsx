@@ -34,11 +34,9 @@ const AppointmentContent: React.FC<Props> = ({ item }) => {
       <div className="bg-gradient-to-r from-[#FFE301] to-[#D7C000] rounded-2xl p-4 min-h-[121px] shadow-3d">
         <div className="flex justify-between items-center">
           <div>
-            <h4 className="text-white text-2xl font-bold">
-              {item.status === "Scheduled" ? t("scheduled") : t("assign")}
-            </h4>
+            <h4 className="text-white text-2xl font-bold">{item.status}</h4>
             <h4 className="text-white text-xl font-semibold">
-              {t("admission")}:{" "}
+              {t("admission")}:
               <span className="text-base font-normal">
                 {data?.length > 0 &&
                   dayjs(data[0]?.start_time).format("MM/DD/YYYY")}

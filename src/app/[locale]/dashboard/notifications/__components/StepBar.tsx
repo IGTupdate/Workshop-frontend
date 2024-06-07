@@ -12,8 +12,8 @@ const StepBar = ({ status }: Props) => {
   const [step, setStep] = useState<number>(0);
 
   useEffect(() => {
-    if (status?.appointmentStatus === "Assigned") setStep(1);
-    if (status?.appointmentStatus === "Scheduled") setStep(2);
+    if (status?.appointmentStatus === "Scheduled") setStep(1);
+    if (status?.appointmentStatus === "Assigned") setStep(2);
     if (status?.appointmentStatus === "Cancelled") setStep(3);
     if (status?.appointmentStatus === "Completed") setStep(4);
     if (status?.appointmentStatus === "Pending") setStep(5);
@@ -23,8 +23,8 @@ const StepBar = ({ status }: Props) => {
     <div className='flex justify-between items-center relative before:content-[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:w-full before:h-2 before:bg-gradient-to-r before:from-[#FFE301] before:to-[#A79638]'>
       {step === 1 ? (
         <div className="z-20 flex flex-col items-center pt-4">
-          <Image fill src={"/images/fly.webp"} alt="Fly" />
-          <p className="font-semibold">Assigned</p>
+          <Image height={50} width={50} src={"/images/fly.webp"} alt="Fly" />
+          <p className="font-semibold">Scheduled</p>
         </div>
       ) : (
         <div className="h-[22px] w-[22px] rounded-full bg-[#FBE005] z-10"></div>
@@ -39,7 +39,7 @@ const StepBar = ({ status }: Props) => {
       )}
       {step === 3 ? (
         <div className="z-20 flex flex-col items-center pt-4">
-          <Image fill src={"/images/fly.webp"} alt="Fly" />
+          <Image height={50} width={50} src={"/images/fly.webp"} alt="Fly" />
           <p className="font-semibold">Repairing</p>
         </div>
       ) : (
@@ -47,7 +47,7 @@ const StepBar = ({ status }: Props) => {
       )}
       {step === 4 ? (
         <div className="z-20 flex flex-col items-center pt-4">
-          <Image fill src={"/images/fly.webp"} alt="Fly" />
+          <Image height={50} width={50} src={"/images/fly.webp"} alt="Fly" />
           <p className="font-semibold">Washing</p>
         </div>
       ) : (
@@ -55,7 +55,7 @@ const StepBar = ({ status }: Props) => {
       )}
       {step === 5 ? (
         <div className="z-20 flex flex-col items-center pt-4">
-          <Image fill src={"/images/fly.webp"} alt="Fly" />
+          <Image height={50} width={50} src={"/images/fly.webp"} alt="Fly" />
           <p className="font-semibold">Payment</p>
         </div>
       ) : (
@@ -63,7 +63,7 @@ const StepBar = ({ status }: Props) => {
       )}
       {step === 6 ? (
         <div className="z-20 flex flex-col pt-4">
-          <Image fill src={"/images/fly.webp"} alt="Fly" />
+          <Image height={50} width={50} src={"/images/fly.webp"} alt="Fly" />
           <p className="font-semibold">Delivery</p>
         </div>
       ) : (
