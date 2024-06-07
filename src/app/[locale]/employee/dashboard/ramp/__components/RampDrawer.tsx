@@ -66,10 +66,10 @@ const RampDrawer = ({ drawerData, setDrawerData, setRampLoading }: Props) => {
     if (!drawerData || drawerData.type === "workorder") return;
     if (drawerData.type === "newramp") {
       const res = await rampCreateApi(data);
-      console.log(res);
+      // console.log(res);
     } else {
       const res = await rampUpdateApi({ ...data, _id: drawerData.value._id });
-      console.log(res);
+      // console.log(res);
     }
     setRampLoading(true);
     closeDrawer();

@@ -44,7 +44,7 @@ const Page: React.FC = () => {
       const initAppointmentData =
         await getCustomerAppointmentInitData(customerId);
 
-      console.log(initAppointmentData, "initAppointmentData");
+      // console.log(initAppointmentData, "initAppointmentData");
 
       if (initAppointmentData?.appointmentData[0]?._id) {
         await getAllNotificationsData(

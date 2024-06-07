@@ -41,7 +41,7 @@ const Page = () => {
         setAdditionalData(result?.data);
         setLoader(false);
       }
-      console.log(result, "result");
+      // console.log(result, "result");
     } catch (error) {
       console.log(error);
       setLoader(false);
@@ -54,7 +54,7 @@ const Page = () => {
 
   const ApprovedAdditionalWorks = async (additionalId: string) => {
     try {
-      console.log(additionalId, "additionalId");
+      // console.log(additionalId, "additionalId");
 
       if (selectedTasks?.length > 0) {
         const result = await additionalWorkApprove(additionalId, selectedTasks);
@@ -80,7 +80,7 @@ const Page = () => {
     setSelectedTasks([]);
   };
 
-  console.log(selectedTasks);
+  // console.log(selectedTasks);
 
   return (
     <>
