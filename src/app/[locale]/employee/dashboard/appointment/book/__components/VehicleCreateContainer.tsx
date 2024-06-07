@@ -120,7 +120,7 @@ const VehicleCreateContainer = (props: Props) => {
     }
   };
 
-  console.log(modal, "modal");
+  // console.log(modal, "modal");
 
   return (
     <>

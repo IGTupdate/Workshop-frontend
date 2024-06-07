@@ -31,7 +31,7 @@ const CreateEmployeeContainer = (props: Props) => {
 
   const handleOnSubmit = async (data: TCreateEmployee) => {
     try {
-      console.log(data);
+      // console.log(data);
       setLoading(true);
       const response = await createEmployee(data);
       toast.success(response?.message || "-");

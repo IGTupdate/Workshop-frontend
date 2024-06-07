@@ -88,7 +88,7 @@ const CarDashboardAndFule: React.FC = () => {
   };
 
   const handleSelect = (value: string) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   };
 
   return (

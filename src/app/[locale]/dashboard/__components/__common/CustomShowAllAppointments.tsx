@@ -46,7 +46,7 @@ const CustomShowAllAppointments: React.FC<Props> = ({ pageType }) => {
     }
   }, [appointmentLoading]);
 
-  console.log(appointmentData);
+  // console.log(appointmentData);
 
   useEffect(() => {
     const filteredAppointments: AppointmentData[] =

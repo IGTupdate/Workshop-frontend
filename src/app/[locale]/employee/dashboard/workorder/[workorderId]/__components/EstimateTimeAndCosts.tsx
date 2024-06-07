@@ -48,7 +48,7 @@ const EstimateTimeAndCosts = ({ id, setSteps }: Props) => {
           router.push(`/employee/dashboard/workorder/${id}`);
         }
 
-        console.log(result, "result");
+        // console.log(result, "result");
       } catch (error) {
         toast.success("Work Order Not Created Please Try Again Later");
         setLoading(false);

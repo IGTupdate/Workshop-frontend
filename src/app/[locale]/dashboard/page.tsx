@@ -43,7 +43,7 @@ const Page = (props: Props) => {
               appointmentData[0]._id,
               2,
             );
-            console.log(notifications, "initNotifications");
+            // console.log(notifications, "initNotifications");
 
             setNotificationData(notifications);
           }
