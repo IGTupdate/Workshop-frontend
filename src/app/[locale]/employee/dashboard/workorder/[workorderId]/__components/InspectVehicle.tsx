@@ -208,6 +208,8 @@ const InspectVehicle = ({ setSteps, workOrder }: Props) => {
           Back
         </Button>
         <Button
+          loading={loading}
+          disabled={loading}
           onClick={handleSaveAndContinue}
           htmlType="submit"
           type="primary"

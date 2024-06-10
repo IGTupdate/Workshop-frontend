@@ -12,7 +12,7 @@ type Props = {
 };
 
 const VehiclePartsInspectionDetail = (props: Props) => {
-  const [openGallery, setOpenGaller] = useState(-1);
+  const [openGallery, setOpenGallery] = useState(-1);
   return (
     <div>
       <Title level={4} className="mb-8">
@@ -25,7 +25,7 @@ const VehiclePartsInspectionDetail = (props: Props) => {
               <div className="border  rounded-full overflow-hidden w-40 h-40">
                 <button
                   className="w-full h-full p-10 relative"
-                  onClick={() => setOpenGaller(index)}
+                  onClick={() => setOpenGallery(index)}
                 >
                   <Image
                     fill={true}
@@ -42,7 +42,7 @@ const VehiclePartsInspectionDetail = (props: Props) => {
               </div>
               <ImageViewerInModal
                 images={item.images}
-                onClose={() => setOpenGaller(-1)}
+                onClose={() => setOpenGallery(-1)}
                 open={index === openGallery}
                 title={item.category}
               />

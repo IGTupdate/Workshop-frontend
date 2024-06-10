@@ -1,4 +1,9 @@
 import * as Yup from "yup";
+import {
+  workOrderStatus,
+  workOrderStatusEnum,
+  workOrderStatusText,
+} from "../[locale]/employee/dashboard/workorder/__utils/workOrderStatus";
 
 export const workOrderCreateYupSchema = Yup.object({
   appointmentId: Yup.string().required(),
@@ -154,6 +159,9 @@ export const WorkorderEstimateTimeAndCostsScema = Yup.object({
       },
     )
     .required(),
+  status: Yup.string()
+    .default(workOrderStatusEnum.Prepared)
+    .oneOf(Object.values(workOrderStatusEnum)),
 });
 
 export type TWorkorderEstimateTimeAndCostsScema = Yup.InferType<

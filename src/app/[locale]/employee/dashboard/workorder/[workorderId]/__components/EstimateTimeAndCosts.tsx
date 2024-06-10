@@ -2,6 +2,7 @@ import InputField from "@/app/components/Input/InputField";
 import TimeField from "@/app/components/Input/TimeField";
 import Loader from "@/app/components/Loader";
 import { updateWorkOrder } from "@/app/services/operations/workorder/workorder";
+import { TWorkOrder } from "@/app/types/work-order";
 import {
   TWorkorderEstimateTimeAndCostsScema,
   WorkorderEstimateTimeAndCostsScema,
@@ -9,16 +10,16 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "antd";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 type Props = {
-  id: string | undefined;
   setSteps: React.Dispatch<React.SetStateAction<string>>;
+  workOrder: TWorkOrder | null;
 };
 
-const EstimateTimeAndCosts = ({ id, setSteps }: Props) => {
+const EstimateTimeAndCosts = ({ setSteps, workOrder }: Props) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const {
@@ -36,21 +37,34 @@ const EstimateTimeAndCosts = ({ id, setSteps }: Props) => {
     },
   });
 
+  useEffect(() => {
+    if (workOrder?.estimatedCost) {
+      setValue("estimatedCost", workOrder.estimatedCost);
+    }
+    if (workOrder?.estimatedTimeOfCompletion) {
+      setValue(
+        "estimatedTimeOfCompletion",
+        workOrder.estimatedTimeOfCompletion,
+      );
+    }
+  }, [workOrder]);
+
   const onSubmit = async (data: TWorkorderEstimateTimeAndCostsScema) => {
-    if (Object.keys(data).length > 0 && id) {
+    console.log(data);
+    if (Object.keys(data).length > 0 && workOrder?._id) {
       setLoading(true);
       try {
-        const result = await updateWorkOrder(id, data);
+        const result = await updateWorkOrder(workOrder._id, data);
 
         if (result.success === true) {
-          toast.success("Work Order Created Successfully");
-          setLoading(false);
-          router.push(`/employee/dashboard/workorder/${id}`);
+          toast.success("Work Order Updated Successfully");
+          router.push(`/employee/dashboard/workorder/${workOrder._id}`);
         }
 
         // console.log(result, "result");
       } catch (error) {
-        toast.success("Work Order Not Created Please Try Again Later");
+        toast.success("Work Order Not Updated Please Try Again Later");
+      } finally {
         setLoading(false);
       }
     }
@@ -96,7 +110,12 @@ const EstimateTimeAndCosts = ({ id, setSteps }: Props) => {
 
           <div className="flex justify-end items-center gap-4 mt-4">
             <Button onClick={() => setSteps("2")}>Back</Button>
-            <Button htmlType="submit" type="primary">
+            <Button
+              loading={loading}
+              disabled={loading}
+              htmlType="submit"
+              type="primary"
+            >
               Save & Confirm
             </Button>
           </div>

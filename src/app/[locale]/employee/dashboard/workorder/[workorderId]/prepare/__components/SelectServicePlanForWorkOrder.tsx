@@ -12,10 +12,13 @@ type Props = {
   errors: any;
   setValue: any;
   watch: UseFormWatch<any>;
+  control: any;
 };
 
 const SelectServicePlanForWorkOrder = (props: Props) => {
-  const servicePlansStore = useAppSelector((state) => state.servicePlan);
+  const { servicePlansData, servicePlansLoading } = useAppSelector(
+    (state) => state.servicePlan,
+  );
   const [servicePlanOptions, setServicePlanOptions] = useState<
     { value: string; label: string }[]
   >([]);
@@ -23,15 +26,15 @@ const SelectServicePlanForWorkOrder = (props: Props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (servicePlansStore.servicePlansLoading) {
+    if (servicePlansLoading) {
       dispatch(getAllServicePlans());
     }
-  }, [servicePlansStore.servicePlansLoading]);
+  }, [servicePlansLoading]);
 
   useEffect(() => {
-    console.log(servicePlansStore.servicePlansData);
+    console.log(servicePlansData);
     setServicePlanOptions((prv) => {
-      return servicePlansStore.servicePlansData.map((plan) => {
+      return servicePlansData.map((plan) => {
         const label =
           typeof plan.category === "string"
             ? plan.name
@@ -42,7 +45,7 @@ const SelectServicePlanForWorkOrder = (props: Props) => {
         };
       });
     });
-  }, [servicePlansStore.servicePlansData]);
+  }, [servicePlansData]);
 
   return (
     <div>
@@ -56,6 +59,7 @@ const SelectServicePlanForWorkOrder = (props: Props) => {
               ? props.errors["servicePlanId"]?.message || ""
               : ""
           }
+          control={props.control}
           label={"Service Plan"}
           setValue={props.setValue}
           options={servicePlanOptions}

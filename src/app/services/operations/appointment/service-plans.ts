@@ -71,7 +71,7 @@ export const getServicePlans = async (vehicle_id?: string) => {
     const response = await apiOpenConnector({
       method: "POST",
       url: GET_SERVICE_PLAN,
-      bodyData: { vehicle_id },
+      bodyData: vehicle_id ? { vehicle_id } : {},
     });
 
     if (response.data.success) {
