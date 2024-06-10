@@ -115,10 +115,11 @@ const VerifyOTP = () => {
         </div>
         <div className="relative">
           <InputOTP
-            inputType="custom"
-            inputRegex="[0-9]"
+            inputType="numeric"
             onChange={(value) => setOtpValues(value)}
             value={otpValues}
+            isPreserveFocus
+            autoFocus
           />
           {otpErrors && <ErrorText text={otpErrors} />}
         </div>

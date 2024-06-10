@@ -12,23 +12,23 @@ import {
   getCustomerAppointmentInitData,
 } from "@/app/services/operations/appointment/appointment";
 import Loader from "@/app/components/Loader";
-import { getCustomerAuthInitData } from "@/app/services/operations/auth/common";
-import { TAppointmentWorkOrderStatus } from "@/app/types/appointment";
+// import { getCustomerAuthInitData } from "@/app/services/operations/auth/common";
+// import { TAppointmentWorkOrderStatus } from "@/app/types/appointment";
 
 interface NotificationData {
   // Define the structure of your notification data here
 }
 
-interface AppointmentStatus {
-  // Define the structure of your appointment status here
-}
+// interface AppointmentStatus {
+//   // Define the structure of your appointment status here
+// }
 
 const Page: React.FC = () => {
   const [notificationData, setNotificationData] =
     useState<NotificationData | null>(null);
-  const [status, setStatus] = useState<TAppointmentWorkOrderStatus | null>(
-    null,
-  );
+  // const [status, setStatus] = useState<TAppointmentWorkOrderStatus | null>(
+  //   null,
+  // );
   const [loading, setLoading] = useState<boolean>(false);
 
   const customerId = useAppSelector((state) => state.auth.authData?._id);
@@ -51,9 +51,9 @@ const Page: React.FC = () => {
           customerId,
           initAppointmentData?.appointmentData[0]?._id,
         );
-        await getAppointmentStatusData(
-          initAppointmentData?.appointmentData[0]?._id,
-        );
+        // await getAppointmentStatusData(
+        //   initAppointmentData?.appointmentData[0]?._id,
+        // );
       }
       setLoading(false);
     } catch (err) {
@@ -72,10 +72,10 @@ const Page: React.FC = () => {
     setNotificationData(initNotificationData);
   };
 
-  const getAppointmentStatusData = async (id: string) => {
-    const initAppointmentStatus = await getAppointmentStatus(id);
-    setStatus(initAppointmentStatus);
-  };
+  // const getAppointmentStatusData = async (id: string) => {
+  //   const initAppointmentStatus = await getAppointmentStatus(id);
+  //   setStatus(initAppointmentStatus);
+  // };
 
   return (
     <div className="h-screen md:h-full pt-24 pb-32 px-4 md:py-0 overflow-auto">
@@ -89,9 +89,9 @@ const Page: React.FC = () => {
         </div>
       ) : (
         <>
-          {status !== null && Object.keys(status).length > 0 && (
+          {/* {status !== null && Object.keys(status).length > 0 && (
             <StepBar status={status} />
-          )}
+          )} */}
 
           {/* notifications */}
 

@@ -1,6 +1,12 @@
 "use client";
-import { getAppointmentByAppointmentId } from "@/app/services/operations/appointment/appointment";
-import { TAppointment } from "@/app/types/appointment";
+import {
+  getAppointmentByAppointmentId,
+  getAppointmentStatus,
+} from "@/app/services/operations/appointment/appointment";
+import {
+  TAppointment,
+  TAppointmentWorkOrderStatus,
+} from "@/app/types/appointment";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button, Typography } from "antd";
@@ -18,8 +24,16 @@ const AppointmentPage: React.FC<Props> = ({ params }) => {
   const [appointmentData, setAppointmentData] = useState<TAppointment | null>(
     null,
   );
+  const [status, setStatus] = useState<TAppointmentWorkOrderStatus | null>(
+    null,
+  );
   const [notificationData, setNotificationData] = useState({});
   const router = useRouter();
+
+  const getAppointmentStatusData = async (id: string) => {
+    const initAppointmentStatus = await getAppointmentStatus(id);
+    setStatus(initAppointmentStatus);
+  };
 
   const fetchAppointmentData = async () => {
     try {
@@ -37,6 +51,7 @@ const AppointmentPage: React.FC<Props> = ({ params }) => {
       const initNotificationData = await appointmentNotification(
         params.appointmentId,
       );
+      await getAppointmentStatusData(params.appointmentId);
       setNotificationData(initNotificationData);
     } catch (err) {}
   };
@@ -78,6 +93,7 @@ const AppointmentPage: React.FC<Props> = ({ params }) => {
           <AppointmentDetails
             appointmentData={appointmentData}
             notificationData={notificationData}
+            status={status}
             bordered
           />
         </>

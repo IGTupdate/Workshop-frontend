@@ -22,7 +22,8 @@ const Notifications: React.FC<NotificationsProps> = ({
     <>
       <div className="mt-4">
         <div className="heading relative  before:content-[''] before:absolute before:right-0 before:top-1/2 before:translate-y-[-50%] before:w-[77%] sm:before:w-[88%] before:h-2 before:bg-gradient-to-r before:from-[#FFE301] before:to-[#A79638]">
-          <h2 className="text-xl font-bold">{t("history")}</h2>
+          {/* <h2 className="text-xl font-bold">{t("history")}</h2> */}
+          <h2 className="text-xl font-bold">Notifications</h2>
         </div>
 
         {show === 2 ? (
