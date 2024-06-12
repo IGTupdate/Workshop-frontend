@@ -2,7 +2,7 @@
 import { Tabs, TabsProps } from "antd";
 import React, { useState } from "react";
 import { TWorkOrder } from "@/app/types/work-order";
-import InspectVehicle from "../../__components/InspectVehicle";
+import InspectVehicle from "./InspectVehicle";
 import SelectServicePlans from "../../__components/SelectServicePlans";
 import EstimateTimeAndCosts from "../../__components/EstimateTimeAndCosts";
 import OdometerAndFuel from "./OdometerAndFuel";
@@ -49,7 +49,7 @@ const WorkOrderPrepareStepContainer = (props: Props) => {
     },
   ];
 
-  const onChange = (key: string) => {
+  const onTabChange = (key: string) => {
     console.log(key);
   };
 
@@ -60,7 +60,7 @@ const WorkOrderPrepareStepContainer = (props: Props) => {
         activeKey={steps}
         items={items}
         centered
-        onChange={onChange}
+        onChange={onTabChange}
       />
     </div>
   );

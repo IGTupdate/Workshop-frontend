@@ -130,42 +130,6 @@ const WorkOrderFormContainer = (props: Props) => {
             <InputFieldWithButton
               handleButtonClick={(value: string) => {
                 if (value) {
-                  appendValueInArrayField("tasks", { title: value });
-                }
-              }}
-              name={"tasks"}
-              label={"Tasks"}
-              type={"text"}
-              placeholder={"Check the headlight"}
-            />
-
-            <ul className="mt-2 flex flex-wrap justify-between items-center">
-              {watch("tasks")?.map((task, index) => {
-                return (
-                  <li
-                    key={index}
-                    className='relative mb-2 flex justify-between items-center gap-4 ps-6 before:content=[""] before:absolute before:left-0 before:top-1/2 before:translate-y-[-50%] before:h-[10px] before:w-[10px] before:rounded-full before:bg-yellow-300 w-1/2 pe-2'
-                  >
-                    <p>{task.title}</p>
-                    <button
-                      onClick={() => {
-                        removeValueInArrayField("tasks", index);
-                      }}
-                    >
-                      <MdOutlineCancel size={16} className="text-red-500" />
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-
-        <div>
-          <div className="mb-4 w-full">
-            <InputFieldWithButton
-              handleButtonClick={(value: string) => {
-                if (value) {
                   appendValueInArrayField("partsRequested", {
                     partName: value,
                   });

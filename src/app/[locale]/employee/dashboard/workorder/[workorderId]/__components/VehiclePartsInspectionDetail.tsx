@@ -1,9 +1,10 @@
 import { TWorkOrderObservation } from "@/app/types/work-order";
-import { Typography } from "antd";
+import { Button, Typography } from "antd";
 import ImageViewerInModal from "@/app/components/ImageViewer/ImageViewerInModal";
 import { GiTyre } from "react-icons/gi";
 import { useState } from "react";
 import Image from "next/image";
+import { getCategoryIcon } from "../__utils/car_parts_icon";
 
 const { Title } = Typography;
 
@@ -22,21 +23,13 @@ const VehiclePartsInspectionDetail = (props: Props) => {
         {props.observations.map((item, index) => {
           return (
             <div key={index}>
-              <div className="border  rounded-full overflow-hidden w-40 h-40">
-                <button
-                  className="w-full h-full p-10 relative"
-                  onClick={() => setOpenGallery(index)}
-                >
-                  <Image
-                    fill={true}
-                    src={"/images/logo-2.webp"}
-                    objectFit="content"
-                    alt={item.category}
-                  />
-                </button>
+              <div className="relative flex flex-col items-center">
+                <Button htmlType="button" onClick={() => setOpenGallery(index)}>
+                  {getCategoryIcon(item.category)}
+                </Button>
               </div>
               <div>
-                <h2 className="text-md font-semibold text-center mt-2">
+                <h2 className="text-md font-semibold text-center mt-4">
                   {item.category}
                 </h2>
               </div>

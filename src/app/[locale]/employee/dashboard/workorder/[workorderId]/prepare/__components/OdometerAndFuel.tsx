@@ -1,5 +1,6 @@
 import CameraInputField from "@/app/components/Input/CameraInputField";
 import InputField from "@/app/components/Input/InputField";
+import ErrorText from "@/app/components/Text/ErrorText";
 import { updateWorkOrder } from "@/app/services/operations/workorder/workorder";
 import {
   TWorkOrder,
@@ -17,6 +18,7 @@ import { Button, Image, Input, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { IoClose } from "react-icons/io5";
 
 type Props = {
   setSteps: React.Dispatch<React.SetStateAction<string>>;
@@ -79,7 +81,6 @@ const OdometerAndFuel = (props: Props) => {
       setLoading(false);
     }
   };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
@@ -90,7 +91,6 @@ const OdometerAndFuel = (props: Props) => {
         <div className="flex gap-4 items-end my-4">
           <CameraInputField
             addImage={(imgUrl: string) => {
-              console.log(imgUrl);
               const oldImages = getValues("odometerReading.images");
               setValue("odometerReading.images", [...oldImages, imgUrl]);
             }}
@@ -102,18 +102,43 @@ const OdometerAndFuel = (props: Props) => {
             label="Enter Odometer Reading"
             name="odometerReading.value"
             placeholder="Odometer Reading"
-            type="text"
+            type="number"
           />
         </div>
         <div>
           <div className="flex flex-wrap gap-4">
             {watch("odometerReading.images")?.map((el, index) => {
               return (
-                <Image key={index} src={el} alt="odomterreading" width={200} />
+                <div key={index} className="relative">
+                  <Image src={el} alt="odomterreading" width={200} />
+                  <div className="absolute right-[-12px] top-[-12px] h-12 w-12 flex justify-center items-center rounded-full shadow-topDivSmall cursor-pointer">
+                    <IoClose
+                      onClick={() => {
+                        const oldImages = getValues(
+                          "odometerReading.images",
+                        ).filter((_, ind) => {
+                          return ind !== index;
+                        });
+                        setValue("odometerReading.images", oldImages);
+                      }}
+                      size={25}
+                      color="white"
+                    />
+                  </div>
+                </div>
               );
             })}
           </div>
         </div>
+
+        {/* error */}
+        <ErrorText
+          text={
+            errors.odometerReading?.root?.message ||
+            errors.odometerReading?.message ||
+            ""
+          }
+        />
       </div>
 
       <div className="mt-6">
@@ -133,11 +158,34 @@ const OdometerAndFuel = (props: Props) => {
           <div className="flex flex-wrap gap-4">
             {watch("fuelQuantity.images")?.map((el, index) => {
               return (
-                <Image key={index} src={el} alt="odomterreading" width={200} />
+                <div key={index} className="relative">
+                  <Image src={el} alt="fuelQuantity" width={200} />
+                  <div className="absolute right-[-12px] top-[-12px] h-12 w-12 flex justify-center items-center rounded-full shadow-topDivSmall cursor-pointer">
+                    <IoClose
+                      onClick={() => {
+                        const oldImages = getValues(
+                          "fuelQuantity.images",
+                        ).filter((_, ind) => {
+                          return ind !== index;
+                        });
+                        setValue("fuelQuantity.images", oldImages);
+                      }}
+                      size={25}
+                      color="white"
+                    />
+                  </div>
+                </div>
               );
             })}
           </div>
         </div>
+        <ErrorText
+          text={
+            errors.fuelQuantity?.root?.message ||
+            errors.fuelQuantity?.message ||
+            ""
+          }
+        />
       </div>
 
       <div className="flex justify-end items-center gap-4 mt-4">
