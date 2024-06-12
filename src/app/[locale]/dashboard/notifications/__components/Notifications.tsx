@@ -21,7 +21,7 @@ const Notifications: React.FC<NotificationsProps> = ({
   return (
     <>
       <div className="mt-4">
-        <div className="heading relative  before:content-[''] before:absolute before:right-0 before:top-1/2 before:translate-y-[-50%] before:w-[60%] sm:before:w-[88%] before:h-2 before:bg-gradient-to-r before:from-[#FFE301] before:to-[#A79638]">
+        <div className="heading relative  before:content-[''] before:absolute before:right-0 before:top-1/2 before:translate-y-[-50%] before:w-[66%] sm:before:w-[77%] before:h-2 before:bg-gradient-to-r before:from-[#FFE301] before:to-[#A79638]">
           {/* <h2 className="text-xl font-bold">{t("history")}</h2> */}
           <h2 className="text-xl font-bold">Notifications</h2>
         </div>
@@ -47,7 +47,7 @@ const Notifications: React.FC<NotificationsProps> = ({
           </ul>
         ) : (
           <ul
-            className={`relative ${notificationData?.length > 3 && 'before:content-[""] before:h-16'} before:absolute before:right-0 before:bottom-0 before:w-full before:bg-gradient-to-t before:from-[#f5f5f5] before:to-transparent`}
+            className={`relative ${notificationData?.length > 3 && 'before:content-[""] before:h-16'} before:absolute before:right-0 before:bottom-0 before:w-full `}
           >
             {notificationData?.length > 0 ? (
               notificationData?.map((item: NotificationItem, index: number) => (
