@@ -14,6 +14,8 @@ type Props = {
   setValue: any;
 };
 
+const format = "HH:mm";
+
 const TimeField = (props: Props) => {
   return (
     <div>
@@ -21,7 +23,8 @@ const TimeField = (props: Props) => {
         {props.label}
       </label>
       <TimePicker
-        defaultValue={dayjs(props.defaultValue)}
+        defaultValue={dayjs(props.defaultValue, format)}
+        format={format}
         onChange={(value) => {
           if (value) {
             props.setValue(props.name, value.toISOString());

@@ -217,7 +217,7 @@ export function GetAppointmentDataTableColumn() {
                   style={{ color: "yellow" }}
                   className="cursor-pointer"
                 >
-                  <BsClipboardData size={18} title="Create WorkOrder" />
+                  <BsClipboardData size={18} title="View WorkOrder" />
                 </div>
               )}
             </Flex>

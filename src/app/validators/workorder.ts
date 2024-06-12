@@ -142,20 +142,7 @@ export const WorkorderEstimateTimeAndCostsScema = Yup.object({
       "Time must be greater than the current time",
       function (value) {
         if (!value) return false;
-        const currentTime = new Date();
-        const inputValue = new Date(value);
-        const newInputValue = new Date(
-          currentTime.getFullYear(),
-          currentTime.getMonth(),
-          currentTime.getDate(),
-          inputValue.getHours(),
-          inputValue.getMinutes(),
-          inputValue.getSeconds(),
-          inputValue.getMilliseconds(),
-        );
-
-        console.log(currentTime, newInputValue);
-        return newInputValue.getTime() > currentTime.getTime();
+        return new Date(value) > new Date();
       },
     )
     .required(),
