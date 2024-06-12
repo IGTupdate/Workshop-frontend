@@ -1,5 +1,7 @@
 import Notifications from "@/app/[locale]/dashboard/notifications/__components/Notifications";
+import StepBar from "@/app/[locale]/dashboard/notifications/__components/StepBar";
 import { useAppSelector } from "@/app/store/reduxHooks";
+import { TAppointmentWorkOrderStatus } from "@/app/types/appointment";
 import {
   convertToLocaleDateAndWeekday,
   formatDateAndTime,
@@ -13,11 +15,13 @@ interface Props {
   appointmentData: any;
   bordered?: boolean;
   notificationData?: any;
+  status?: TAppointmentWorkOrderStatus | null;
 }
 
 const AppointmentDetails: React.FC<Props> = ({
   appointmentData,
   notificationData,
+  status,
   bordered,
 }) => {
   const { isSmallDevice } = useAppSelector((state) => state.device);
@@ -90,6 +94,8 @@ const AppointmentDetails: React.FC<Props> = ({
           </Descriptions.Item>
         </Descriptions>
       </div>
+
+      {status && Object.keys(status).length > 0 && <StepBar status={status} />}
 
       {role === "customer" && path !== "reschedule"
         ? pathname.split("/")[3] !== "reschedule" && (
