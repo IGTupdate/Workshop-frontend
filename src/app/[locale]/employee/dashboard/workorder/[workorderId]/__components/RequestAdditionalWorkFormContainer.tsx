@@ -75,6 +75,7 @@ const RequestAdditionalWorkFormContainer = (props: Props) => {
                 />
 
                 <SelectField
+                  control={control}
                   name={`tasks.${index}.critical`}
                   error={
                     errors.tasks && errors.tasks[index]?.critical?.message
@@ -222,7 +223,7 @@ const PartsRequiredInTask = (props: TPropsPartsRequired) => {
                 label=""
                 error={""}
                 placeholder="price"
-                type="text"
+                type="number"
               />
               <button
                 onClick={() => {

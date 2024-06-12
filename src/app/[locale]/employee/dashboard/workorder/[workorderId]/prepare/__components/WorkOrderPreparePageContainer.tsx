@@ -13,6 +13,12 @@ import useAbility from "@/app/__hooks/useAbility";
 import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 import { useAppSelector } from "@/app/store/reduxHooks";
 import WorkOrderPrepareStepContainer from "./WorkOrderPrepareStepContainer";
+import {
+  workOrderStatus,
+  workOrderStatusEnum,
+} from "../../../__utils/workOrderStatus";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const { Title, Text } = Typography;
 
@@ -23,6 +29,8 @@ type Props = {
 const WorkOrderPreparePageContainer = (props: Props) => {
   const [loading, setLoading] = useState(true);
   const [workOrder, setWorkOrder] = useState<TWorkOrder | null>(null);
+
+  const router = useRouter();
 
   const ability = useAbility();
   const { authData } = useAppSelector((state) => state.auth);
@@ -42,7 +50,12 @@ const WorkOrderPreparePageContainer = (props: Props) => {
     try {
       setLoading(true);
       const required_workorder = await getWorkOrderById(workOrderId);
-      setWorkOrder(required_workorder);
+      if (required_workorder?.status === workOrderStatusEnum.Pending) {
+        setWorkOrder(required_workorder);
+      } else {
+        toast("WorkOrder Already Prepared.");
+        router.push(`/admin/dashboard/${workOrderId}`);
+      }
     } catch (err) {
       console.log(err);
     } finally {

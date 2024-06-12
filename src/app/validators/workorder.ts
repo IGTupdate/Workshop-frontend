@@ -90,11 +90,25 @@ export const workOrderOdometerAndFuelCreateSchema = Yup.object({
   odometerReading: Yup.object({
     images: Yup.array().required().default([]),
     value: Yup.number().optional(),
-  }),
+  }).test(
+    "images-or-value",
+    "Either images or value must be provided",
+    function (value) {
+      const { images, value: numValue } = value;
+      return images.length > 0 || (numValue !== undefined && numValue > 0);
+    },
+  ),
   fuelQuantity: Yup.object({
     images: Yup.array().required().default([]),
     value: Yup.number().optional(),
-  }),
+  }).test(
+    "images-or-value",
+    "Either images or value must be provided",
+    function (value) {
+      const { images, value: numValue } = value;
+      return images.length > 0 || (numValue !== undefined && numValue > 0);
+    },
+  ),
 });
 
 export const workOrderVehicleInspectionAddMoreCategory = Yup.object({

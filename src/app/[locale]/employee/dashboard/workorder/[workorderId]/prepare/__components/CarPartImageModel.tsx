@@ -9,6 +9,7 @@ import { Button, Image, Modal } from "antd";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { IoClose } from "react-icons/io5";
+import ObservationCategoryModal from "./ObservationCategoryDeleteModal";
 
 type Props = {
   observation: TWorkOrderObservation;
@@ -16,6 +17,7 @@ type Props = {
   handleCloseModal: any;
   workOrderId: string;
   handleSaveObservation: (data: TWorkOrderObservation) => void;
+  // handleDeleteObservation: (category: TWorkOrderObservation) => void;
 };
 
 const CarPartImageModel = (props: Props) => {
