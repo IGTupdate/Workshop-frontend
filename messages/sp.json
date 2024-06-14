@@ -332,7 +332,9 @@
     "slotSchedule": "Horario de tragamonedas",
     "employee": "Empleada",
     "ramp": "Rampa",
-    "settings": "Ajustes"
+    "settings": "Ajustes",
+    "vehicleManagement": "Gestión de vehículos",
+    "vehicleManagementCheckList": "Lista de Verificación"
   },
   "EmployeeDashboardAppointmentPage": {
     "manage_appointment": "Gestionar citas",

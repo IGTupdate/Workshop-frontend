@@ -326,7 +326,9 @@
     "slotSchedule": "Slot Schedule",
     "employee": "Employee",
     "ramp": "Ramp",
-    "settings": "Settings"
+    "settings": "Settings",
+    "vehicleManagement": "Vehicle Management",
+    "vehicleManagementCheckList": "CheckList"
   },
   "EmployeeDashboardAppointmentPage": {
     "manage_appointment": "Manage Appointments",

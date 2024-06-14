@@ -35,6 +35,18 @@ export const SideBarMenuItems: () => TsideBarMenuItems[] = () => {
     },
     {
       key: "4",
+      label: t("vehicleManagement"),
+      children: [
+        {
+          key: "4.1",
+          label: t("vehicleManagementCheckList"),
+          resourcetype: "vehicle-checklist",
+          pathname: "/employee/dashboard/vehicle/checklist",
+        },
+      ],
+    },
+    {
+      key: "5",
       label: t("ramp"),
       pathname: "/employee/dashboard/ramp",
       resourcetype: "ramp",
@@ -44,13 +56,13 @@ export const SideBarMenuItems: () => TsideBarMenuItems[] = () => {
       label: t("slotManagement"),
       children: [
         {
-          key: "7",
+          key: "6.1",
           label: t("calender"),
           pathname: "/employee/dashboard/slot-management/calender",
           resourcetype: "calender",
         },
         {
-          key: "8",
+          key: "6.2",
           label: t("slotSchedule"),
           pathname: "/employee/dashboard/slot-management/slot-schedule",
           resourcetype: "slot_schedule",
@@ -72,7 +84,7 @@ export const SideBarMenuItems: () => TsideBarMenuItems[] = () => {
   ];
 };
 
-export const commonResources = ["profile", "dashboard"];
+export const commonResources = ["profile", "dashboard", "vehicle-checklist"];
 
 export function getSideBarMenuItems(
   router: AppRouterInstance,

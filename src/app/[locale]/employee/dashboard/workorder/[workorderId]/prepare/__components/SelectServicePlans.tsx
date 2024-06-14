@@ -3,7 +3,7 @@ import SelectField from "@/app/components/Input/SelectField";
 import { getAllServicePlans } from "@/app/services/operations/appointment/service-plans";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
 import React, { useEffect, useState } from "react";
-import SelectServicePlanForWorkOrder from "../prepare/__components/SelectServicePlanForWorkOrder";
+import SelectServicePlanForWorkOrder from "./SelectServicePlanForWorkOrder";
 import {
   TworkorderPrepare,
   TWorkorderServicePlansPrepareScema,
@@ -19,7 +19,7 @@ import toast from "react-hot-toast";
 import Loader from "@/app/components/Loader";
 import { MdOutlineCancel } from "react-icons/md";
 import InputFieldWithButton from "@/app/components/Input/InputFieldWithButton";
-import { suggestion_task } from "../__utils/task_suggestion";
+import { suggestion_task } from "../../__utils/task_suggestion";
 
 type Props = {
   workOrder: TWorkOrder | null;

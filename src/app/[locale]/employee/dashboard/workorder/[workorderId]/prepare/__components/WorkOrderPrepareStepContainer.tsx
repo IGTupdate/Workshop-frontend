@@ -3,8 +3,8 @@ import { Tabs, TabsProps } from "antd";
 import React, { useState } from "react";
 import { TWorkOrder } from "@/app/types/work-order";
 import InspectVehicle from "./InspectVehicle";
-import SelectServicePlans from "../../__components/SelectServicePlans";
-import EstimateTimeAndCosts from "../../__components/EstimateTimeAndCosts";
+import SelectServicePlans from "./SelectServicePlans";
+import EstimateTimeAndCosts from "./EstimateTimeAndCosts";
 import OdometerAndFuel from "./OdometerAndFuel";
 
 type Props = {
