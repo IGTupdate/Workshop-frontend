@@ -21,6 +21,8 @@ import { useAppSelector } from "@/app/store/reduxHooks";
 import { ItemType } from "antd/es/menu/hooks/useItems";
 import { useTranslations } from "next-intl";
 import { IoSettingsOutline } from "react-icons/io5";
+import { FaCar } from "react-icons/fa";
+import { GoChecklist } from "react-icons/go";
 
 type Props = {};
 
@@ -37,6 +39,8 @@ const SideBarMenus = (props: Props) => {
     [t("employee")]: <FaRegUser size={20} />,
     [t("ramp")]: <FaTruckRampBox size={20} />,
     [t("settings")]: <IoSettingsOutline size={20} />,
+    [t("vehicleManagement")]: <FaCar size={20} />,
+    [t("vehicleManagementCheckList")]: <GoChecklist size={20} />,
   };
 
   const router = useRouter();

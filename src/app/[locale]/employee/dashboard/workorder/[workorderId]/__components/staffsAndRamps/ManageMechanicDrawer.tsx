@@ -4,7 +4,7 @@ import { TEmployee } from "@/app/types/employee";
 import { Button, Drawer, Tabs, Typography } from "antd";
 import React, { useState } from "react";
 import type { TabsProps } from "antd";
-import AssignMechanicDrawerContainer from "./AssignMechanicDrawerContainer";
+import AssignMechanicDrawerContainer from "../AssignMechanicDrawerContainer";
 import RemoveMechanicDrawerContainer from "./RemoveMechanicDrawerContainer";
 import { TWorkOrder } from "@/app/types/work-order";
 

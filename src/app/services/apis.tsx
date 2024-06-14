@@ -142,3 +142,10 @@ export const uploadFilesEndPoint = {
   DELETE_SINGLE_OBJECT: uploadFilesUrl("/files/delete/single-object"),
   UPLOAD_SINGLE_OBJECT: uploadFilesUrl("/files/upload/single-object"),
 };
+
+export const vehicleCheckListEndPoint = {
+  CREATE_VEHICLE_CHECKLIST: workOrderUrl("/vehicle-checklist/create"),
+  UPDATE_VEHICLE_CHECKLIST: workOrderUrl("/vehicle-checklist/update"),
+  DELETE_VEHICLE_CHECKLIST: workOrderUrl("/vehicle-checklist/delete"),
+  GET_ALL_VEHICLE_CHECKLIST: workOrderUrl("/vehicle-checklist/get"),
+};

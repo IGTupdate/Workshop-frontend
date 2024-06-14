@@ -3,7 +3,7 @@
 import DescriptionItem from "@/app/components/DescriptionItem.tsx";
 import { TEmployeeDetails } from "@/app/types/employee";
 import { Button } from "antd";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 type Props = {

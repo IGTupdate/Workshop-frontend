@@ -5,7 +5,7 @@ import { TEmployee } from "@/app/types/employee";
 import { TRamp } from "@/app/types/ramp";
 import { TWorkOrder } from "@/app/types/work-order";
 import { Typography } from "antd";
-import WorkOrderManageRampDrawer from "./WorkOrderManageRampDrawer";
+import WorkOrderManageRampDrawer from "../WorkOrderManageRampDrawer";
 import useAbility from "@/app/__hooks/useAbility";
 import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 

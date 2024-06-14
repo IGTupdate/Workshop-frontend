@@ -1,9 +1,9 @@
 import PrepareWorkOrderButtonContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/PrepareWorkOrderButtonContainer";
 import VehicleFuelDetailContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/VehicleFuelDetailContainer";
-import WorkOrderCustomerDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderCustomerDetails";
+import WorkOrderCustomerDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/vehicle_details/WorkOrderCustomerDetails";
 import WorkOrderObservations from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderObservations";
 import WorkOrderServiceDetailContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderServiceDetailContainer";
-import WorkOrderVehicleDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderVehicleDetails";
+import WorkOrderVehicleDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/vehicle_details/WorkOrderVehicleDetails";
 import { TWorkOrder } from "@/app/types/work-order";
 import React from "react";
 
@@ -42,25 +42,10 @@ const CusotmerVehicleDetails = ({ workOrderData }: Props) => {
             }
           />
 
-          {workOrderData.status === "Pending" ? (
+          {workOrderData.status === "Pending" && (
             <PrepareWorkOrderButtonContainer
               workOrderId={workOrderData._id || ""}
             />
-          ) : (
-            <div>
-              {/* <WorkOrderServiceDetailContainer workOrder={workOrderData} /> */}
-
-              <div className="grid items-center grid-flow-col-1 md:grid-cols-2 gap-4">
-                {/* <WorkOrderObservations
-                  observations={
-                    workOrderData?.observations &&
-                    typeof workOrderData?.observations !== "string"
-                      ? workOrderData?.observations
-                      : []
-                  }
-                /> */}
-              </div>
-            </div>
           )}
         </div>
       ) : (
