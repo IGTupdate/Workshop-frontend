@@ -5,6 +5,7 @@ import { TAppointment } from "@/app/types/appointment";
 import { TworkOrderCreate } from "@/app/validators/workorder";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { appointmentStatusEnum } from "../../../appointment/__utils/appointmentStatus";
 
 type Props = {
   appointmentId: string | undefined;
@@ -27,7 +28,10 @@ const WorkOrderAppointmentContiner = (props: Props) => {
           const required_appointment = await getAppointmentByAppointmentId(
             props.appointmentId ? props.appointmentId : "",
           );
-          if (required_appointment.status === "Scheduled") {
+          if (
+            required_appointment.status === appointmentStatusEnum.SCHEDULED ||
+            required_appointment.status === appointmentStatusEnum.RESCHEDULED
+          ) {
             setAppointment(required_appointment);
           } else if (required_appointment.status === "Completed") {
             router.push(

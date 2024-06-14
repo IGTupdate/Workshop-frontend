@@ -12,6 +12,16 @@ export const appointmentStatus: TAppointmentStatus[] = [
   "Missed",
 ] as const;
 
+export enum appointmentStatusEnum {
+  SCHEDULED = "Scheduled",
+  RESCHEDULED = "Rescheduled",
+  ASSIGNED = "Assigned",
+  COMPLETED = "Completed",
+  PENDING = "Pending",
+  CANCELLED = "Cancelled",
+  MISSED = "Missed",
+}
+
 export const getAppointMentStatus = () => {
   return appointmentStatus.map((status) => {
     return {
