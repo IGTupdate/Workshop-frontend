@@ -83,7 +83,7 @@ const getData = async (vehicleType: string| undefined) => {
 
 //  todo want to fix price type become a number
 // duration type become a number
-// descriptions type become string
+// descriptions type become array of string
 
  const newData = {
   ...data,
