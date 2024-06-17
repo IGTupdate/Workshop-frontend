@@ -38,21 +38,20 @@ export interface TSegregatedServiceData {
   };
 }
 
-
-
-
 export type TServicePlansCreate = {
   duration?: number | undefined;
-  parts?: {
-      part_id: string;
-      part_name: string;
-  }[] | undefined;
+  parts?:
+    | {
+        part_id: string;
+        part_name: string;
+      }[]
+    | undefined;
   isActive?: boolean | undefined;
-    remarks?: string | undefined;
-    category: string;
-    tasks: (string | undefined)[];
-    name: string;
-    description: string[];
-    price: number;
-    vehicle_type: string;
+  remarks?: string | undefined;
+  category: string;
+  tasks: (string | undefined)[];
+  name: string;
+  description: string[];
+  price: number;
+  vehicle_type: string;
 };

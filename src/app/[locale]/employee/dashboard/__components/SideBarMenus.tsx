@@ -53,7 +53,7 @@ const SideBarMenus = (props: Props) => {
     router,
     SideBarMenuItems(),
     dashBoardIcons,
-    ability
+    ability,
   );
 
   const activeDashboardKey = getActiveSideBarMenu(pathname);

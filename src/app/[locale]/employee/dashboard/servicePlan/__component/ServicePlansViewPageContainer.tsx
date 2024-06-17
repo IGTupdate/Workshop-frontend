@@ -1,13 +1,13 @@
-import { Table } from 'antd'
-import React from 'react'
-import { ServicePlansTableContainer } from './ServicePlansTabelColumns'
-import { TServicePlans } from '@/app/types/service'
+import { Table } from "antd";
+import React from "react";
+import { ServicePlansTableContainer } from "./ServicePlansTabelColumns";
+import { TServicePlans } from "@/app/types/service";
 
 type props = {
-    servicePlans:TServicePlans[]
-}
+  servicePlans: TServicePlans[];
+};
 
-const ServicePlansViewPageContainer = ({servicePlans}:props) => {
+const ServicePlansViewPageContainer = ({ servicePlans }: props) => {
   return (
     <div className="overflow-hidden rounded-xl shadow-xl">
       <Table
@@ -17,7 +17,7 @@ const ServicePlansViewPageContainer = ({servicePlans}:props) => {
         columns={ServicePlansTableContainer()}
       />
     </div>
-  )
-}
+  );
+};
 
-export default ServicePlansViewPageContainer
+export default ServicePlansViewPageContainer;

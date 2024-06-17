@@ -70,7 +70,6 @@ export const getServiceTasks = async (serviceTaskIds?: string[]) => {
   }
 };
 
-
 export const getServiceTasksByVehicle = async (vehicle_type?: string) => {
   try {
     const requestOptions: ApiConnectorParams = {
@@ -89,9 +88,6 @@ export const getServiceTasksByVehicle = async (vehicle_type?: string) => {
     console.error(err);
   }
 };
-
-
-
 
 export const deleteServiceTask = async (taskId: string[]) => {
   try {

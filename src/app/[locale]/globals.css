@@ -183,7 +183,6 @@ input[type="number"]::-webkit-outer-spin-button {
   box-shadow: none;
 }
 
-
-input[type="checkbox"]{
+input[type="checkbox"] {
   width: max-content;
 }
