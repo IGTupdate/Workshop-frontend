@@ -47,7 +47,6 @@ const InputFieldWithButton = (props: Props) => {
             .includes(inputValue.toLocaleLowerCase());
         });
       });
-      console.log("fetched");
     };
     // Set a timeout to fetch data after 500ms
     const handler = setTimeout(() => {
@@ -110,7 +109,7 @@ const InputFieldWithButton = (props: Props) => {
           }}
           type="primary"
         >
-          {t("submitButton")}
+          {t("addButton")}
         </Button>
       </Space.Compact>
     </div>

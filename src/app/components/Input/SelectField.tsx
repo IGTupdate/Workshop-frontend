@@ -8,15 +8,15 @@ type Props = {
   mode: "multiple" | "single" | "tags";
   name: string;
   label: string;
-  placeholder: string;
-  error: string;
+  placeholder: string |undefined;
+  error: string | undefined;
   setValue: any;
   defaultValue?: string[] | string;
   control?: any; // ensure this prop is passed to use with Controller
   options: {
     value: any;
     label: string;
-  }[];
+  }[]|undefined;
 };
 
 const SelectField = (props: Props) => {

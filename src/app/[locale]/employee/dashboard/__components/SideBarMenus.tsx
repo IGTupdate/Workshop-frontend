@@ -21,6 +21,7 @@ import { useAppSelector } from "@/app/store/reduxHooks";
 import { ItemType } from "antd/es/menu/hooks/useItems";
 import { useTranslations } from "next-intl";
 import { IoSettingsOutline } from "react-icons/io5";
+import { MdMiscellaneousServices } from "react-icons/md";
 
 type Props = {};
 
@@ -35,6 +36,7 @@ const SideBarMenus = (props: Props) => {
     [t("slotSchedule")]: <MdSchedule size={20} />,
     [t("workOrder")]: <FaHouseUser size={20} />,
     [t("employee")]: <FaRegUser size={20} />,
+    [t("servicePlans")]: <MdMiscellaneousServices size={20} />,
     [t("ramp")]: <FaTruckRampBox size={20} />,
     [t("settings")]: <IoSettingsOutline size={20} />,
   };
@@ -47,7 +49,7 @@ const SideBarMenus = (props: Props) => {
     router,
     SideBarMenuItems(),
     dashBoardIcons,
-    ability,
+    ability
   );
 
   const activeDashboardKey = getActiveSideBarMenu(pathname);
