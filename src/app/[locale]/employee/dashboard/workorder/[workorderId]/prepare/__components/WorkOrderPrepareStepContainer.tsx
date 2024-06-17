@@ -67,7 +67,3 @@ const WorkOrderPrepareStepContainer = (props: Props) => {
 };
 
 export default WorkOrderPrepareStepContainer;
-
-/*
-1. list screen
-*/

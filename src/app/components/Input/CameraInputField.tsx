@@ -2,14 +2,13 @@
 
 import { uploadImages } from "@/app/services/operations/upload/upload";
 import { Modal } from "antd";
-import Image from "next/image";
-import React, { useState } from "react";
-import Camera from "react-html5-camera-photo";
-import "react-html5-camera-photo/build/css/index.css"; // Import CSS
-import { FaImage } from "react-icons/fa6";
+import React, { useEffect, useRef, useState } from "react";
 import { FiCheck } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
-import { MdCameraAlt, MdCameraswitch } from "react-icons/md";
+import { MdCameraAlt, MdCameraswitch, MdFileUpload } from "react-icons/md";
+import { FaImage } from "react-icons/fa6";
+import Camera, { FACING_MODES, IMAGE_TYPES } from "react-html5-camera-photo";
+import Image from "next/image";
 import Loader from "../Loader";
 
 type Props = {
@@ -27,14 +26,45 @@ const CameraInputField = (props: Props) => {
   const [currentImage, setCurrentImage] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
+  const laptopVideoStreamRef = useRef<MediaStream | null>(null);
+  const deviceVideoStreamRef = useRef<MediaStream | null>(null);
+
   // Function to start the camera
   const handleStartCamera = () => {
-    setOnCamera(true);
-    // setOpen(true);
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+      devices.forEach((device) => {
+        if (device.kind === "videoinput") {
+          navigator.mediaDevices
+            .getUserMedia({
+              video: { deviceId: device.deviceId },
+            })
+            .then((stream) => {
+              console.log("Camera started:", device.label);
+              if (device.label.includes("laptop")) {
+                laptopVideoStreamRef.current = stream;
+              } else {
+                deviceVideoStreamRef.current = stream;
+              }
+              setOnCamera(true);
+            })
+            .catch((err) => {
+              console.error("Error accessing the camera: ", err);
+            });
+        }
+      });
+    });
   };
 
   // close camer
   const closeCamera = () => {
+    if (laptopVideoStreamRef.current) {
+      laptopVideoStreamRef.current.getTracks().forEach((track) => track.stop());
+      laptopVideoStreamRef.current = null;
+    }
+    if (deviceVideoStreamRef.current) {
+      deviceVideoStreamRef.current.getTracks().forEach((track) => track.stop());
+      deviceVideoStreamRef.current = null;
+    }
     setOnCamera(false);
     setCurrentImage([]);
   };
@@ -165,9 +195,8 @@ const CameraInputField = (props: Props) => {
             onTakePhoto={handleCapture}
             idealFacingMode={switchCamera} // Use the environment (rear) camera
             isMaxResolution={true}
-            isImageMirror={true}
             isFullscreen={true}
-            imageType={"png"}
+            isImageMirror={true}
           />
 
           {/* Close camera button */}
