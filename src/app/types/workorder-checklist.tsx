@@ -28,7 +28,7 @@ export interface IWorkorderChecklistVehicle {
   year?: number;
 }
 export interface IWorkorderChecklist {
-  vehicle: IWorkorderChecklistVehicle;
+  vehicle: IWorkorderChecklistVehicle; // todo - remove this
   checklist: IWorkorderChecklistChecklist[];
   remarks?: string[];
 }

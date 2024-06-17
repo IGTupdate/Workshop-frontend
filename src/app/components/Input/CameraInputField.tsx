@@ -5,6 +5,7 @@ import { Modal } from "antd";
 import Image from "next/image";
 import React, { useState } from "react";
 import Camera from "react-html5-camera-photo";
+import "react-html5-camera-photo/build/css/index.css"; // Import CSS
 import { FaImage } from "react-icons/fa6";
 import { FiCheck } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";

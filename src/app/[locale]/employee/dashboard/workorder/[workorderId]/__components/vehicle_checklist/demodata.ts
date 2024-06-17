@@ -16,10 +16,18 @@ export const demodata: IWorkorderChecklist = {
             {
               name: "Tyre Status",
               status: vehicleChecklistStatusEnum.NOT_AVAILABLE,
+              description: {
+                text: "",
+                images: [],
+              },
             },
             {
               name: "Tyre Back",
               status: vehicleChecklistStatusEnum.NOT_AVAILABLE,
+              description: {
+                text: "",
+                images: [],
+              },
             },
           ],
         },
@@ -29,10 +37,18 @@ export const demodata: IWorkorderChecklist = {
             {
               name: "Head Light",
               status: vehicleChecklistStatusEnum.NOT_AVAILABLE,
+              description: {
+                text: "",
+                images: [],
+              },
             },
             {
               name: "Back Light",
               status: vehicleChecklistStatusEnum.NOT_AVAILABLE,
+              description: {
+                text: "",
+                images: [],
+              },
             },
           ],
         },
@@ -42,6 +58,10 @@ export const demodata: IWorkorderChecklist = {
             {
               name: "Carborator",
               status: vehicleChecklistStatusEnum.NOT_AVAILABLE,
+              description: {
+                text: "",
+                images: [],
+              },
             },
           ],
         },
@@ -56,10 +76,18 @@ export const demodata: IWorkorderChecklist = {
             {
               name: "Tyre Status",
               status: vehicleChecklistStatusEnum.NOT_AVAILABLE,
+              description: {
+                text: "",
+                images: [],
+              },
             },
             {
               name: "Tyre Back",
               status: vehicleChecklistStatusEnum.NOT_AVAILABLE,
+              description: {
+                text: "",
+                images: [],
+              },
             },
           ],
         },
@@ -69,10 +97,18 @@ export const demodata: IWorkorderChecklist = {
             {
               name: "Head Light",
               status: vehicleChecklistStatusEnum.NOT_AVAILABLE,
+              description: {
+                text: "",
+                images: [],
+              },
             },
             {
               name: "Back Light",
               status: vehicleChecklistStatusEnum.NOT_AVAILABLE,
+              description: {
+                text: "",
+                images: [],
+              },
             },
           ],
         },
@@ -82,6 +118,10 @@ export const demodata: IWorkorderChecklist = {
             {
               name: "Carborator",
               status: vehicleChecklistStatusEnum.NOT_AVAILABLE,
+              description: {
+                text: "",
+                images: [],
+              },
             },
           ],
         },

@@ -16,6 +16,7 @@ import StaffAndRamps from "@/app/components/WorkOrder/StaffAndRamps";
 import VehicleInspectionViewRecord from "@/app/components/WorkOrder/VehicleInspectionViewRecord";
 import VehicleCheckList from "@/app/components/WorkOrder/VehicleCheckList";
 import { useSearchParams } from "next/navigation";
+import { TVehicle } from "@/app/types/vehicle";
 
 const { Text } = Typography;
 
@@ -95,7 +96,14 @@ const Page = (props: Props) => {
       handleUpdateWorkOrderData={handleUpdateWorkOrderData}
       params={props.params}
     />,
-    <VehicleCheckList key={"vehicle checklist"} />,
+    <VehicleCheckList
+      key={"vehicle checklist"}
+      workOrderVehicle={
+        typeof workOrder?.appointmentId === "string"
+          ? null
+          : (workOrder?.appointmentId.vehicle_id as TVehicle)
+      }
+    />,
     <WorkOrderHistory key={"History"} workOrderId={workOrder?._id || ""} />,
   ];
 
