@@ -36,14 +36,6 @@ const CreateEmployeeFormContainer = (props: Props) => {
       control: props.control,
       placeholder: "John",
     },
-    // {
-    //   name: "lastName",
-    //   error: props.errors?.firstName?.message || "",
-    //   label: "Last Name",
-    //   type: "text",
-    //   control: props.control,
-    //   placeholder: "Doe",
-    // },
     {
       name: "contactNumber",
       error: props.errors?.contactNumber?.message || "",

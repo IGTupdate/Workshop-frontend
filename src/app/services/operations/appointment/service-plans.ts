@@ -3,29 +3,29 @@ import {
   setServicePlansLoading,
 } from "@/app/store/slices/servicePlanSlice";
 import { RootState } from "@/app/store/store";
-import { TServicePlans } from "@/app/types/service";
+import { TServicePlans, TServicePlansCreate } from "@/app/types/service";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import { apiConnector } from "../../apiConnector";
 import { apiOpenConnector } from "../../apiOpenConnector";
 import { appointmentEndpoints } from "../../apis";
+import { TServicePlanValidatorSchema } from "@/app/validators/service-plans";
 
 const { CREATE_SERVICE_PLAN, UPDATE_SERVICE_PLAN, GET_SERVICE_PLAN } =
   appointmentEndpoints;
 
 export const createServicePlans = async (
-  data: TServicePlans,
-): Promise<void> => {
+  data: TServicePlanValidatorSchema,
+) => {
   try {
     const response = await apiConnector({
       method: "POST",
       url: CREATE_SERVICE_PLAN,
-      bodyData: {
-        data,
-      },
+      bodyData: data
     });
     if (response?.data?.success) {
       toast.success(response.data.message);
+      return response
     }
   } catch (err: any) {
     toast.error(err?.response?.data?.message || "Something went wrong1");

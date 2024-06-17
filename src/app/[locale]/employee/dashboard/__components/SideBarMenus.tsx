@@ -23,6 +23,7 @@ import { useTranslations } from "next-intl";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaCar } from "react-icons/fa";
 import { GoChecklist } from "react-icons/go";
+import { MdMiscellaneousServices } from "react-icons/md";
 
 type Props = {};
 
@@ -37,6 +38,7 @@ const SideBarMenus = (props: Props) => {
     [t("slotSchedule")]: <MdSchedule size={20} />,
     [t("workOrder")]: <FaHouseUser size={20} />,
     [t("employee")]: <FaRegUser size={20} />,
+    [t("servicePlans")]: <MdMiscellaneousServices size={20} />,
     [t("ramp")]: <FaTruckRampBox size={20} />,
     [t("settings")]: <IoSettingsOutline size={20} />,
     [t("vehicleManagement")]: <FaCar size={20} />,
@@ -51,7 +53,7 @@ const SideBarMenus = (props: Props) => {
     router,
     SideBarMenuItems(),
     dashBoardIcons,
-    ability,
+    ability
   );
 
   const activeDashboardKey = getActiveSideBarMenu(pathname);
