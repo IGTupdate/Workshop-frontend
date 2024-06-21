@@ -3,6 +3,7 @@ import { TCustomer } from "./customer";
 import { TEmployee } from "./employee";
 import { TServicePlans } from "./service";
 import { TVehicle } from "./vehicle";
+import { IWorkorderChecklist } from "./workorder-checklist";
 
 export type TWorkOrderStatus =
   | "Pending"
@@ -81,6 +82,7 @@ export type TWorkOrder = {
   observations: TWorkOrderObservation[];
   createdAt: string;
   updatedAt: string;
+  checklist: string | IWorkorderChecklist;
 };
 
 export type TWorkOrderData = {

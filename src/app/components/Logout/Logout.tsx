@@ -53,7 +53,7 @@ const Logout = (props: Props) => {
           border: "none",
           color: "white",
         }}
-        className={`${!props.collapsed ? "bg-[#063146]" : "bg-transparent"} w-full hover:bg-[#063142] shadow-xl`}
+        className={`border border-red-500 ${!props.collapsed ? "bg-[#063146]" : "bg-transparent"} w-full hover:bg-[#063142] shadow-xl`}
         icon={<FiLogOut />}
         onClick={showModal}
       >

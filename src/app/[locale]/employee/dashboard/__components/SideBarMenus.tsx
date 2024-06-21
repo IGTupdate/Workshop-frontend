@@ -65,6 +65,7 @@ const SideBarMenus = (props: Props) => {
           // theme='dark'
           defaultOpenKeys={["sub1"]}
           items={sideBarMenus}
+          className="w-full"
         />
       ) : (
         <MenusItmes />

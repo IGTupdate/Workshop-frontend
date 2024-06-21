@@ -1,6 +1,7 @@
 import CameraInputField from "@/app/components/Input/CameraInputField";
 import InputField from "@/app/components/Input/InputField";
 import ErrorText from "@/app/components/Text/ErrorText";
+import { deleteImageFromServer } from "@/app/services/operations/upload/upload";
 import { updateWorkOrder } from "@/app/services/operations/workorder/workorder";
 import {
   TWorkOrder,
@@ -117,7 +118,10 @@ const OdometerAndFuel = (props: Props) => {
                         const oldImages = getValues(
                           "odometerReading.images",
                         ).filter((_, ind) => {
-                          return ind !== index;
+                          if (ind !== index) {
+                            deleteImageFromServer(_ as string);
+                            return true;
+                          }
                         });
                         setValue("odometerReading.images", oldImages);
                       }}
@@ -168,6 +172,7 @@ const OdometerAndFuel = (props: Props) => {
                         ).filter((_, ind) => {
                           return ind !== index;
                         });
+
                         setValue("fuelQuantity.images", oldImages);
                       }}
                       size={25}

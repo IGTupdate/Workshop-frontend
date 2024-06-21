@@ -25,6 +25,8 @@ import {
 } from "@/app/services/operations/workorder/workorder";
 import dayjs from "dayjs";
 import Watermark from "@/app/components/Text/WatermarkText";
+import useAbility from "@/app/__hooks/useAbility";
+import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 
 const { Text } = Typography;
 
@@ -38,6 +40,8 @@ const RampDrawer = ({ drawerData, setDrawerData, setRampLoading }: Props) => {
   const closeDrawer = () => {
     setDrawerData(null);
   };
+
+  const ability = useAbility();
 
   const {
     control,
@@ -75,6 +79,8 @@ const RampDrawer = ({ drawerData, setDrawerData, setRampLoading }: Props) => {
     closeDrawer();
   };
 
+  console.log(ability && ability.can(casl_action.update, casl_subject.ramp));
+
   return (
     <Drawer
       title={
@@ -97,11 +103,14 @@ const RampDrawer = ({ drawerData, setDrawerData, setRampLoading }: Props) => {
           {drawerData && drawerData.type !== "workorder" && (
             <Button onClick={closeDrawer}>Cancel</Button>
           )}
-          {drawerData && drawerData.type !== "workorder" && (
-            <Button type="primary" onClick={handleSubmit(onSubmit)}>
-              Save
-            </Button>
-          )}
+          {ability &&
+            ability.can(casl_action.update, casl_subject.ramp) &&
+            drawerData &&
+            drawerData.type !== "workorder" && (
+              <Button type="primary" onClick={handleSubmit(onSubmit)}>
+                Save
+              </Button>
+            )}
         </Space>
       }
     >

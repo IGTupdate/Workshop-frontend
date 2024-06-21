@@ -1,20 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import CheckListContainer from "./CheckListContainer";
-import { demodata } from "../../../__components/vehicle_checklist/demodata";
-import { IVehicleChecklist } from "@/app/types/checklist";
-import { Typography } from "antd";
-import {
-  IWorkorderChecklist,
-  IWorkorderChecklistTask,
-} from "@/app/types/workorder-checklist";
 import { getAllVehicleCheckList } from "@/app/services/operations/workorder/vehicle-checklist";
-import { useParams } from "next/navigation";
+import { IVehicleChecklist } from "@/app/types/checklist";
 import {
   vehicleChecklistStatusEnum,
   vehicleTypeEnum,
 } from "@/app/utils/constants/checklistenum";
+import { TworkOrderCheckListYupSchema } from "@/app/validators/vehicle-checklist";
+import { Typography } from "antd";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import CheckListContainer from "./CheckListContainer";
 import Loader from "@/app/components/Loader";
 
 const { Title } = Typography;
@@ -24,7 +20,7 @@ type Props = {};
 const VehicleCheckListContainer: React.FC<Props> = (props) => {
   const [loading, setLoading] = useState(true);
   const [mechanicCheckList, setMechanicCheckList] =
-    useState<IWorkorderChecklist | null>(null);
+    useState<TworkOrderCheckListYupSchema | null>(null);
 
   const params = useParams();
 
@@ -33,7 +29,7 @@ const VehicleCheckListContainer: React.FC<Props> = (props) => {
   }, []);
 
   const loadMechanicCheckList = async () => {
-    setMechanicCheckList(demodata);
+    // setMechanicCheckList(demodata);
     try {
       console.log(params);
       const response = await getAllVehicleCheckList(
@@ -58,7 +54,7 @@ const VehicleCheckListContainer: React.FC<Props> = (props) => {
                         images: [],
                         text: "",
                       },
-                    } as IWorkorderChecklistTask;
+                    };
                   }),
                 };
               }),
@@ -69,6 +65,7 @@ const VehicleCheckListContainer: React.FC<Props> = (props) => {
             brand: "",
             model: "",
           },
+          remarks: [],
         });
       }
 
@@ -80,26 +77,32 @@ const VehicleCheckListContainer: React.FC<Props> = (props) => {
     }
   };
 
+  console.log(mechanicCheckList);
+
   return (
     <div>
       {/* <CheckListContainer
                 mechanicCheckList={demodata}
             /> */}
 
-      {/* {
-        loading ? <Loader /> : */}
-      <div>
-        <div className="mb-4">
-          <Title level={4}>Perform Check on Vehicle</Title>
-        </div>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div>
+          <div className="mb-4">
+            <Title level={4}>Perform Check on Vehicle</Title>
+          </div>
 
-        {mechanicCheckList ? (
-          <CheckListContainer vehicleCheckList={mechanicCheckList} />
-        ) : (
-          <div>No Checklist found</div>
-        )}
-      </div>
-      {/* } */}
+          {mechanicCheckList ? (
+            <CheckListContainer
+              vehicleCheckList={mechanicCheckList}
+              workorderId={(params.workorderId as string) || ""}
+            />
+          ) : (
+            <div>No Checklist found</div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

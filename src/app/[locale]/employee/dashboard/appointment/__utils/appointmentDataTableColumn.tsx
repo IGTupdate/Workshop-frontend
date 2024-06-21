@@ -81,7 +81,11 @@ export function GetAppointmentDataTableColumn() {
         key: "name",
         // ...GetColumnTextSearchProps<TAppointmentDataTable>("name"),
         render: (name) => {
-          return <p className="capitalize font-semibold">{name}</p>;
+          return (
+            <p className="md:text-sm text-[12px] p-0 capitalize font-semibold">
+              {name}
+            </p>
+          );
         },
       },
       {
@@ -89,6 +93,11 @@ export function GetAppointmentDataTableColumn() {
         dataIndex: "phone",
         key: "phone",
         ...GetColumnTextSearchProps<TAppointmentDataTable>("phone"),
+        render: (phone) => {
+          return (
+            <p className="md:text-sm text-[12px] p-0 capitalize ">{phone}</p>
+          );
+        },
       },
       {
         title: t("vehile_registeration_number"),
@@ -99,7 +108,9 @@ export function GetAppointmentDataTableColumn() {
         ),
 
         render: (register) => {
-          return <p className="uppercase">{register}</p>;
+          return (
+            <p className="md:text-sm text-[12px] p-0 uppercase">{register}</p>
+          );
         },
       },
       {
@@ -110,10 +121,10 @@ export function GetAppointmentDataTableColumn() {
         // sorter: (a, b) => a.date_time.getTime() - b.date_time.getTime(),
         render: (value) => {
           return (
-            <div className="flex flex-wrap items-center gap-3">
-              <Text>{dayjs(value).format("DD/MMM/YYYY")}</Text>
+            <div className="md:text-sm text-[12px] flex flex-wrap items-center md:gap-3 gap-2">
+              <p>{dayjs(value).format("DD/MMM/YYYY")}</p>
 
-              <Text>{dayjs(value).format("h:mm A")}</Text>
+              <p>{dayjs(value).format("h:mm A")}</p>
             </div>
           );
         },
@@ -150,7 +161,7 @@ export function GetAppointmentDataTableColumn() {
                     })}
                 </Space>
               </Radio.Group>
-              <div>
+              <div className="">
                 <Button
                   onClick={() => props && handleStatusReset()}
                   size="small"
@@ -164,7 +175,7 @@ export function GetAppointmentDataTableColumn() {
         },
         render: (text: TAppointmentStatus) => {
           return (
-            <div className="text-md font-semibold">
+            <div className="md:text-sm text-[12px] font-semibold">
               {appointmentStatusText[text]}
             </div>
           );

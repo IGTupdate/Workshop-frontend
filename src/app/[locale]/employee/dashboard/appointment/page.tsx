@@ -15,16 +15,19 @@ const Page = (props: Props) => {
 
   return (
     <div className="relative">
-      <div className="flex justify-between items-center mb-8 p-4 bg-white rounded-xl">
-        <h2 className="text-xl font-semibold">{t("manage_appointment")}</h2>
+      <div className="flex justify-between items-center md:mb-8 mb-4 md:p-4 p-2 bg-white rounded-xl">
+        <h2 className="lg:text-xl md:text-lg text-md font-semibold">
+          {t("manage_appointment")}
+        </h2>
         <Link href={`/employee/dashboard/appointment/book`}>
           {ability &&
             ability.can(casl_action.create, casl_subject.appointment) && (
-              <Button type="primary">{t("book_appointment")}</Button>
+              <Button type="primary" className="text-sm">
+                {t("book_appointment")}
+              </Button>
             )}
         </Link>
       </div>
-
       <AppointmentpageContainer />
     </div>
   );

@@ -8,26 +8,53 @@ import React from "react";
 
 import { Controller, useForm } from "react-hook-form";
 import CheckListDetailContainer from "./CheckListDetailContainer";
+import toast from "react-hot-toast";
+import { COMMON_ERROR } from "@/app/utils/constants/constant";
+import { createCheckListForWorkOrder } from "@/app/services/operations/workorder/workorder";
+import { useRouter } from "next/navigation";
+import { TworkOrderCheckListYupSchema } from "@/app/validators/vehicle-checklist";
 
 const { Title } = Typography;
 
 type Props = {
-  vehicleCheckList: IWorkorderChecklist;
+  vehicleCheckList: TworkOrderCheckListYupSchema;
+  workorderId: string;
 };
 
 const CheckListContainer: React.FC<Props> = (props) => {
+  const router = useRouter();
+
   console.log(props.vehicleCheckList);
   const { control, watch, handleSubmit, setValue, getValues } =
-    useForm<IWorkorderChecklist>({
+    useForm<TworkOrderCheckListYupSchema>({
       defaultValues: {
         checklist: props.vehicleCheckList.checklist,
+        vehicle: props.vehicleCheckList.vehicle,
       },
     });
 
   const checkList = watch("checklist");
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: TworkOrderCheckListYupSchema) => {
     console.log(data);
+
+    try {
+      console.log(data);
+
+      const response = await createCheckListForWorkOrder(
+        props.workorderId,
+        data,
+      );
+      console.log(response);
+      if (response) {
+        toast.success("CheckList Saved");
+
+        router.push(`/employee/dashboard/workorder/${props.workorderId}`);
+      } else throw "";
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message || COMMON_ERROR);
+      console.log(err);
+    }
   };
 
   return (

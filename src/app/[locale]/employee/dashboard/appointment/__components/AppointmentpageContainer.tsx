@@ -109,7 +109,7 @@ const AppointmentpageContainer = (props: Props) => {
         </div>
       ) : (
         <div>
-          <div className="mb-4 flex justify-between">
+          <div className="md:mb-4 mb-4 flex justify-between">
             {searchParams.get("startDate") && searchParams.get("endDate") ? (
               <RangePicker
                 placeholder={["startDate", "endDate"]}
@@ -120,12 +120,14 @@ const AppointmentpageContainer = (props: Props) => {
                 ]}
               />
             ) : (
-              <RangePicker onChange={handleRangeSelect} />
+              <RangePicker
+                onChange={handleRangeSelect}
+                size="small"
+                className="w-1/3"
+              />
             )}
             <div>
-              <Button type="primary" onClick={handleClearFilter}>
-                {t("clear_filter")}
-              </Button>
+              <Button onClick={handleClearFilter}>{t("clear_filter")}</Button>
             </div>
           </div>
           <div className="shadow-xl rounded-xl">
@@ -133,7 +135,7 @@ const AppointmentpageContainer = (props: Props) => {
               appointmentData={appointmentData.appointments}
             />
           </div>
-          <div className="mt-10 mx-auto w-max">
+          <div className="md:mt-10 mt-6 mx-auto w-max">
             <Pagination
               defaultCurrent={getCurrentPage()}
               pageSize={APPOINTMENT_DATA_PAGE_SIZE}

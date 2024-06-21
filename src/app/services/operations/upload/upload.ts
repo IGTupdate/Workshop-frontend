@@ -97,10 +97,11 @@ export const deleteImageFromServer = async (url: string) => {
     const filePath = url_ob.pathname;
 
     const response = await deleteSingleObject(filePath);
+    console.log(response);
 
     return true;
   } catch (err) {
-    return false;
     console.log(err);
+    return false;
   }
 };

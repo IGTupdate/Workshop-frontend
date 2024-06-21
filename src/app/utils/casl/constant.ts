@@ -11,4 +11,6 @@ export enum casl_subject {
   calender = "calender",
   slot_schedule = "slot_schedule",
   workorder = "workorder",
+  ramp = "ramp",
+  employee = "employee",
 }

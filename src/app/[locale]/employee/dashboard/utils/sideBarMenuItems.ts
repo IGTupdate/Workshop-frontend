@@ -12,8 +12,95 @@ export type TsideBarMenuItems = {
   resourcetype?: string;
 };
 
-export const SideBarMenuItems: () => TsideBarMenuItems[] = () => {
+export const sideBarMenuItems: TsideBarMenuItems[] = [
+  {
+    key: "1",
+    label: "dashboard",
+    pathname: "/employee/dashboard",
+    resourcetype: "dashboard",
+  },
+  {
+    key: "2",
+    label: "appointment",
+    pathname: "/employee/dashboard/appointment",
+    resourcetype: "appointment",
+  },
+  {
+    key: "3",
+    label: "workOrder",
+    pathname: "/employee/dashboard/workorder",
+    resourcetype: "workorder",
+  },
+  {
+    key: "4",
+    label: "vehicleManagement",
+    children: [
+      {
+        key: "4.1",
+        label: "vehicleManagementCheckList",
+        resourcetype: "vehicle-checklist",
+        pathname: "/employee/dashboard/vehicle/checklist",
+      },
+    ],
+  },
+  {
+    key: "5",
+    label: "ramp",
+    pathname: "/employee/dashboard/ramp",
+    resourcetype: "ramp",
+  },
+  {
+    key: "6",
+    label: "slotManagement",
+    children: [
+      {
+        key: "6.1",
+        label: "calender",
+        pathname: "/employee/dashboard/slot-management/calender",
+        resourcetype: "calender",
+      },
+      {
+        key: "6.2",
+        label: "slotSchedule",
+        pathname: "/employee/dashboard/slot-management/slot-schedule",
+        resourcetype: "slot_schedule",
+      },
+    ],
+  },
+  {
+    key: "9",
+    label: "employee",
+    pathname: "/employee/dashboard/employee",
+    resourcetype: "employee",
+  },
+  {
+    key: "10",
+    label: "settings",
+    pathname: "/employee/dashboard/settings",
+    resourcetype: "settings",
+  },
+];
+
+export const SideBarMenuItems = (
+  sideBarMenus: TsideBarMenuItems[] = sideBarMenuItems,
+): TsideBarMenuItems[] => {
   const t = useTranslations("EmployeeSideBar");
+
+  return sideBarMenus.map((item) => {
+    if (item.children) {
+      return {
+        ...item,
+        label: t(item.label),
+        children: SideBarMenuItems(item.children),
+      };
+    }
+    return {
+      ...item,
+      label: t(item.label),
+    };
+  });
+
+  /*
   return [
     {
       key: "1",
@@ -82,6 +169,8 @@ export const SideBarMenuItems: () => TsideBarMenuItems[] = () => {
       resourcetype: "settings",
     },
   ];
+
+  */
 };
 
 export const commonResources = ["profile", "dashboard", "vehicle-checklist"];

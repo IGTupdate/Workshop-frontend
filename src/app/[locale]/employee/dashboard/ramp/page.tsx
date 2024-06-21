@@ -5,11 +5,15 @@ import { Button, Table } from "antd"; // Import Space from Ant Design
 import { useEffect, useState } from "react";
 import RampDrawer from "./__components/RampDrawer";
 import { ramp_table_columns } from "./_utils/ramp_table_columns";
+import useAbility from "@/app/__hooks/useAbility";
+import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 
 const Page = () => {
   const [rampData, setRampData] = useState([]);
   const [rampLoading, setRampLoading] = useState(true);
   const [drawerData, setDrawerData] = useState<TActiveRamp>(null);
+
+  const ability = useAbility();
 
   const allRampsData = async () => {
     try {
@@ -29,8 +33,6 @@ const Page = () => {
     if (rampLoading) allRampsData();
   }, [rampLoading]);
 
-  // console.log(rampData)
-
   const handleRampDrawer = (newDrawerData: TActiveRamp) => {
     setDrawerData(newDrawerData);
   };
@@ -39,17 +41,20 @@ const Page = () => {
     <div>
       <div className="flex justify-between items-center mb-8 p-4 bg-white rounded-xl">
         <h2 className="text-xl font-semibold">Ramp Details</h2>
-        <Button
-          onClick={() =>
-            handleRampDrawer({
-              type: "newramp",
-              value: "NEW_RAMP",
-            })
-          }
-          type="primary"
-        >
-          Add Ramp
-        </Button>
+
+        {ability && ability.can(casl_action.create, casl_subject.ramp) && (
+          <Button
+            onClick={() =>
+              handleRampDrawer({
+                type: "newramp",
+                value: "NEW_RAMP",
+              })
+            }
+            type="primary"
+          >
+            Add Ramp
+          </Button>
+        )}
       </div>
 
       <div className="shadow-xl overflow-hidden rounded-xl">

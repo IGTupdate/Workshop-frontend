@@ -8,6 +8,8 @@ import { workOrderEndpoints } from "../../apis";
 import { TWorkOrder } from "@/app/types/work-order";
 import { TRampDetails } from "@/app/types/ramp";
 import toast from "react-hot-toast";
+import { IWorkorderChecklist } from "@/app/types/workorder-checklist";
+import { TworkOrderCheckListYupSchema } from "@/app/validators/vehicle-checklist";
 
 const {
   GET_EMPLOYEE_WORK_STATUS,
@@ -27,6 +29,7 @@ const {
   GET_WORKORDER_BY_APPOINTMENT_ID,
   GET_WORKORDER_ACTIVITY,
   UPDATE_WORKORDER,
+  UPDATE_WORKORDER_CHECKLIST,
 } = workOrderEndpoints;
 
 export const getEmployeeWorkingStatus = async (employeeRole: string) => {
@@ -256,6 +259,26 @@ export const getWorkOrderActivity = async (workOrderId: string) => {
     });
 
     return response.data.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const createCheckListForWorkOrder = async (
+  workOrderId: string,
+  data: TworkOrderCheckListYupSchema,
+) => {
+  try {
+    const response = await apiConnector({
+      method: "POST",
+      url: UPDATE_WORKORDER_CHECKLIST,
+      bodyData: {
+        workOrderId,
+        data,
+      },
+    });
+
+    return response.data;
   } catch (err) {
     throw err;
   }

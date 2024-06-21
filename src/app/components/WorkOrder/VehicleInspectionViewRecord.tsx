@@ -22,13 +22,15 @@ const VehicleInspectionViewRecord = (props: Props) => {
   return (
     <div className="flex flex-col gap-6 bg-white p-4 rounded-xl shadow-xl">
       <div>
-        {/* odometerReading */}
-        <VehicleOdometerReadingContainer
-          odometerReading={props.odometerReading}
-        />
+        <div className="grid grid-cols-2">
+          {/* odometerReading */}
+          <VehicleOdometerReadingContainer
+            odometerReading={props.odometerReading}
+          />
 
-        {/* fuelQuantity */}
-        <VehicleFuelReadingContainer fuelQuantity={props.fuelQuantity} />
+          {/* fuelQuantity */}
+          <VehicleFuelReadingContainer fuelQuantity={props.fuelQuantity} />
+        </div>
 
         {/* observations */}
         <VehiclePartsInspectionDetail observations={props.observations} />

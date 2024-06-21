@@ -79,9 +79,9 @@ const CalenderShowDetail = (props: Props) => {
                         content={slot.slot_limit}
                       />
                       <div>
-                        <button className="p-2 border bg-gray-50 hover:bg-gray-100 rounded-full w-10 h-10">
+                        {/* <button className="p-2 border bg-gray-50 hover:bg-gray-100 rounded-full w-10 h-10">
                           <EditOutlined />
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                     <Divider />

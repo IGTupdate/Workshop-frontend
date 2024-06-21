@@ -8,7 +8,10 @@ import { TWorkOrder } from "@/app/types/work-order";
 import { casl_action, casl_subject } from "@/app/utils/casl/constant";
 import { Tabs, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { workOrderStatusText } from "../__utils/workOrderStatus";
+import {
+  workOrderStatusEnum,
+  workOrderStatusText,
+} from "../__utils/workOrderStatus";
 import Watermark from "@/app/components/Text/WatermarkText";
 import WorkOrderHistory from "../__components/WorkOrderHistory";
 import CusotmerVehicleDetails from "@/app/components/WorkOrder/CusotmerVehicleDetails";
@@ -17,6 +20,7 @@ import VehicleInspectionViewRecord from "@/app/components/WorkOrder/VehicleInspe
 import VehicleCheckList from "@/app/components/WorkOrder/VehicleCheckList";
 import { useSearchParams } from "next/navigation";
 import { TVehicle } from "@/app/types/vehicle";
+import { type } from "os";
 
 const { Text } = Typography;
 
@@ -98,11 +102,20 @@ const Page = (props: Props) => {
     />,
     <VehicleCheckList
       key={"vehicle checklist"}
+      workOrderCheckList={
+        workOrder?.checklist
+          ? typeof workOrder.checklist === "string"
+            ? null
+            : workOrder.checklist
+          : null
+      }
       workOrderVehicle={
         typeof workOrder?.appointmentId === "string"
           ? null
           : (workOrder?.appointmentId.vehicle_id as TVehicle)
       }
+      workOrderStatus={workOrder?.status || workOrderStatusEnum.Pending}
+      workorderId={workOrder?._id || ""}
     />,
     <WorkOrderHistory key={"History"} workOrderId={workOrder?._id || ""} />,
   ];

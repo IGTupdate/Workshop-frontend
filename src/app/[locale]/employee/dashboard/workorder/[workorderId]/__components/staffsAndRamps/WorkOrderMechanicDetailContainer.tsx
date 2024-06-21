@@ -20,6 +20,10 @@ type Props = {
 const WorkOrderMechanicDetailContainer = (props: Props) => {
   const { authData } = useAppSelector((state) => state.auth);
   const ability = useAbility();
+  console.log(
+    ability?.can(casl_action.update, casl_subject.workorder, "mechanicId"),
+  );
+
   return (
     <div>
       <div className="flex justify-between">

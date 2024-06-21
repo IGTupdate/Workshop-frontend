@@ -3,8 +3,9 @@
 import {
   assignRampInWorkOrder,
   getAllRampDetails,
+  getAllRampStatus,
 } from "@/app/services/operations/workorder/workorder";
-import { TRamp } from "@/app/types/ramp";
+import { TRamp, TRampDetails } from "@/app/types/ramp";
 import { TWorkOrder } from "@/app/types/work-order";
 import { COMMON_ERROR } from "@/app/utils/constants/constant";
 import {
@@ -29,7 +30,7 @@ type Props = {
 const WorkOrderManageRampDrawer = (props: Props) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [selectedRamp, setSelectedRamp] = useState<string>("");
-  const [allRamps, setAllRamps] = useState<TRamp[]>([]);
+  const [allRamps, setAllRamps] = useState<TRampDetails[]>([]);
 
   const params = useParams();
 
@@ -44,7 +45,8 @@ const WorkOrderManageRampDrawer = (props: Props) => {
   useEffect(() => {
     (async function () {
       try {
-        const response = await getAllRampDetails();
+        const response = await getAllRampStatus();
+
         setAllRamps(response);
       } catch (err) {
         console.log(err);
@@ -123,20 +125,42 @@ const WorkOrderManageRampDrawer = (props: Props) => {
         <div>
           <Title level={5}>Assign Ramp</Title>
 
-          <Radio.Group onChange={onChange} value={selectedRamp || ""}>
-            <Space direction="vertical">
-              {/* <Radio value={""}>Reset</Radio> */}
-              <div className="flex flex-wrap gap-4 justify-between items-center">
-                {allRamps.map((el, index) => {
-                  return (
-                    <Radio key={index} value={el._id}>
-                      {el.name}
-                    </Radio>
-                  );
-                })}
-              </div>
-            </Space>
-          </Radio.Group>
+          <ul>
+            {allRamps.map((el, index) => {
+              return (
+                <li key={index} className="w-4/5 flex justify-between py-1">
+                  <Radio
+                    onChange={onChange}
+                    checked={selectedRamp === el._id}
+                    value={el._id}
+                    disabled={(el?.assigned_workOrder?.length || 0) > 0}
+                  >
+                    {el.name}
+                  </Radio>
+                  <div>
+                    {el.assigned_workOrder &&
+                      el.assigned_workOrder.length > 0 &&
+                      el.assigned_workOrder[0].estimatedTimeOfCompletion &&
+                      new Date(
+                        el.assigned_workOrder[0].estimatedTimeOfCompletion,
+                      ).toLocaleString()}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* <Radio.Group onChange={onChange} value={selectedRamp || ""} style={{ width: "100%" }}>
+            <div className="w-full">
+              {allRamps.map((el, index) => {
+                return (
+                  <Radio key={index} value={el._id}>
+                    {el.name}
+                  </Radio>
+                );
+              })}
+            </div>
+          </Radio.Group> */}
         </div>
       </Drawer>
     </div>

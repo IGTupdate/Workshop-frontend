@@ -54,6 +54,7 @@ const AppointmentTableContainer = (props: Props) => {
     <Table
       sticky={true}
       pagination={false}
+      // size="small"
       columns={GetAppointmentDataTableColumn()}
       dataSource={appointmentDataTable}
       scroll={{ x: 980 }}

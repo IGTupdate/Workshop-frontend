@@ -55,7 +55,7 @@ const WorkOrderPreparePageContainer = (props: Props) => {
         setWorkOrder(required_workorder);
       } else {
         toast("WorkOrder Already Prepared.");
-        router.push(`/admin/dashboard/${workOrderId}`);
+        router.push(`/admin/dashboard/workorder/${workOrderId}`);
       }
     } catch (err) {
       console.log(err);

@@ -40,7 +40,7 @@ const workOrderUrl = (...paths: string[]) =>
 const notificationUrl = (...paths: string[]) =>
   createUrl(CONSUMER_SERVICE_BASE_URL, ...paths);
 const uploadFilesUrl = (...paths: string[]) =>
-  createUrl(WORK_ORDER_SERVICE_BASE_URL, ...paths);
+  createUrl(CONSUMER_SERVICE_BASE_URL, ...paths);
 
 // Define endpoint objects
 export const authEndpoints = {
@@ -128,6 +128,7 @@ export const workOrderEndpoints = {
   UPDATE_ADDITIONAL_WORKS: workOrderUrl(WORKORDER, "/additional_work_request"),
   GET_WORKORDER_ACTIVITY: workOrderUrl(WORKORDER_ACTIVITY, "/get"),
   UPDATE_WORKORDER: workOrderUrl(WORKORDER, "/update"),
+  UPDATE_WORKORDER_CHECKLIST: workOrderUrl("/workorder-checklist/create"),
 };
 
 export const notificationEndpoints = {
@@ -139,8 +140,8 @@ export const notificationEndpoints = {
 };
 
 export const uploadFilesEndPoint = {
-  DELETE_SINGLE_OBJECT: uploadFilesUrl("/files/delete/single-object"),
-  UPLOAD_SINGLE_OBJECT: uploadFilesUrl("/files/upload/single-object"),
+  DELETE_SINGLE_OBJECT: uploadFilesUrl("/files/delete/single"),
+  UPLOAD_SINGLE_OBJECT: uploadFilesUrl("/files/upload/single"),
 };
 
 export const vehicleCheckListEndPoint = {

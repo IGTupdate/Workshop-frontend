@@ -2,10 +2,10 @@
 
 import { Breadcrumb } from "antd";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   findRecursiveByPathNameExact,
-  SideBarMenuItems,
+  sideBarMenuItems,
 } from "../utils/sideBarMenuItems";
 
 type Props = {};
@@ -32,7 +32,7 @@ const BreadCrumbContainer = (props: Props) => {
         const currentPath = path.substring(0, index);
         // console.log(currentPath);
         const requiredSubMenuItem = findRecursiveByPathNameExact(
-          Array.isArray(SideBarMenuItems) ? SideBarMenuItems : [],
+          Array.isArray(sideBarMenuItems) ? sideBarMenuItems : [],
           currentPath,
         );
         if (requiredSubMenuItem) {
@@ -53,7 +53,7 @@ const BreadCrumbContainer = (props: Props) => {
     setBreadCrumItem(newBreadCrumItem);
   };
   return (
-    <div className="p-4">
+    <div className="px-4 md:py-4 py-2">
       <div>
         <Breadcrumb
           separator=">"

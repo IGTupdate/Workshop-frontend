@@ -1,5 +1,8 @@
 import { FaCarAlt, FaCarBattery, FaCarCrash, FaCarSide } from "react-icons/fa";
+import { FaWindowMaximize } from "react-icons/fa6";
 import { IoSettingsSharp } from "react-icons/io5";
+import { PiHeadlightsBold } from "react-icons/pi";
+import { VscMirror } from "react-icons/vsc";
 
 type TCarPart = {
   id: string;
@@ -11,6 +14,13 @@ const carParts: TCarPart[] = [
   { id: "Side", icon: <FaCarSide size={50} />, label: "Side" },
   { id: "Back", icon: <FaCarCrash size={50} />, label: "Back" },
   { id: "Engine", icon: <FaCarBattery size={50} />, label: "Engine" },
+  { id: "Headlight", icon: <PiHeadlightsBold size={50} />, label: "Headlight" },
+  {
+    id: "WindShield",
+    icon: <FaWindowMaximize size={50} />,
+    label: "WindShield",
+  },
+  { id: "Mirrors", icon: <VscMirror size={50} />, label: "Mirrors" },
 ];
 
 export const getCategoryIcon = (category: string) => {

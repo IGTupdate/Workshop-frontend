@@ -8,10 +8,20 @@ import {
   TkanbanValue,
 } from "@/app/types/work-order";
 import Loader from "@/app/components/Loader";
+import VehicleStatusDataBoard from "./__components/__pagecomponents/VehicleStatusDataBoard";
+import DashboradStats from "./__components/__pagecomponents/DashboradStats";
+import { useAppSelector } from "@/app/store/reduxHooks";
+import {
+  employeeRole,
+  employeeRoleEnum,
+} from "@/app/utils/constants/employee-roles";
 
 type Props = {};
 
 const Page = (props: Props) => {
+  const { authData } = useAppSelector((state) => {
+    return state.auth;
+  });
   const [kanbanData, setKanbanData] = useState<
     {
       heading: string;
@@ -108,11 +118,23 @@ const Page = (props: Props) => {
         <div>
           {kanbanData?.length > 0 ? (
             <div>
-              <div className="w-80 mb-8">
+              {/* <div className="w-80 mb-8">
                 <Input placeholder="Search" onChange={handelChange} />
+              </div> */}
+
+              <div>
+                {(authData.role === employeeRoleEnum.SHOP_OWNER ||
+                  authData.role === employeeRoleEnum.WORK_SHOP_MANAGER ||
+                  authData.role === employeeRoleEnum.RECEPTOINIST ||
+                  authData.role === employeeRoleEnum.ADVISOR) && (
+                  <VehicleStatusDataBoard kanbanData={kanbanData} />
+                )}
+
+                {/*  */}
+                {/* <DashboradStats /> */}
               </div>
 
-              <div className="flex gap-4 flex-nowrap justify-between w-full overflow-auto">
+              {/* <div className="flex gap-4 flex-nowrap justify-between w-full overflow-auto">
                 {kanbanData?.map((item, i) => (
                   <div
                     key={i}
@@ -240,7 +262,7 @@ const Page = (props: Props) => {
                     </div>
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
           ) : (
             <div style={{ height: "calc(100vh - 200px)" }} className="relative">
