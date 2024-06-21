@@ -202,7 +202,14 @@ const VehicleCheckListManageContainer = (props: Props) => {
                 type="button"
                 className="bg-yellow-400 text-white rounded-full"
                 onClick={() => {
-                  appendValueInArray("checklist", NEW_VEHICLE_CHECKLIST);
+                  const totalLevels = (getValues("checklist") || []).length + 1;
+
+                  const newData = {
+                    ...NEW_VEHICLE_CHECKLIST,
+                    level: totalLevels,
+                  };
+
+                  appendValueInArray("checklist", newData);
                 }}
               >
                 <CiCirclePlus className="w-6 h-6" />

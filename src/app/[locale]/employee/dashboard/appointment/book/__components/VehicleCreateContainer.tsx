@@ -97,24 +97,29 @@ const VehicleCreateContainer = (props: Props) => {
       const result = await getVehicles(
         "registeration_number" + "=" + data.registeration_number,
       );
-
-      if (result?.length > 0) {
-        let vehicleData = [...result];
-
-        if (props?.customer_id) {
-          vehicleData[0]["customer_id"] = props?.customer_id
-            ? props?.customer_id
-            : "";
-        }
-
-        const response = (await createVehicle(vehicleData[0])) as TVehicle;
-
-        props.setVehicleId(response._id);
-
-        dispatch(getVehicleByCustomerId());
-      } else {
-        setModal(false);
+      console.log(result);
+      if (result.length > 0) {
+        props.setVehicleId(result[0]._id);
       }
+      // if (result?.length === 0) {
+      //   let vehicleData = [...result];
+
+      //   if (props?.customer_id) {
+      //     vehicleData[0]["customer_id"] = props?.customer_id
+      //       ? props?.customer_id
+      //       : "";
+      //   }
+
+      //   const response = (await createVehicle(vehicleData[0])) as TVehicle;
+
+      //
+
+      //   dispatch(getVehicleByCustomerId());
+      // } else {
+      //   setModal(false);
+      // }
+
+      setModal(false);
     } catch (error) {
       console.log(error);
     }

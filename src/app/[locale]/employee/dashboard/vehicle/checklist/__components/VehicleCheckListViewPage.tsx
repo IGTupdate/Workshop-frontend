@@ -9,12 +9,13 @@ import {
   IVehicleChecklist,
   TVehicleCheckListDataTable,
 } from "@/app/types/checklist";
+import { setLocale } from "yup";
 
 type Props = {};
 
 const VehicleCheckListViewPage = (props: Props) => {
   const [vehicleCheckListsLoading, setVehicleCheckListsLoading] =
-    useState(false);
+    useState(true);
 
   const [vehicleCheckLists, setVehicleCheckLists] = useState<
     TVehicleCheckListDataTable[]
@@ -45,6 +46,8 @@ const VehicleCheckListViewPage = (props: Props) => {
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setVehicleCheckListsLoading(false);
     }
   };
   return (

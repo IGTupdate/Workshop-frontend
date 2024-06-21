@@ -15,6 +15,7 @@ import {
   employeeRole,
   employeeRoleEnum,
 } from "@/app/utils/constants/employee-roles";
+import WorkInProgress from "@/app/components/Common/WorkInProgress";
 
 type Props = {};
 
@@ -130,6 +131,13 @@ const Page = (props: Props) => {
                   <VehicleStatusDataBoard kanbanData={kanbanData} />
                 )}
 
+                {authData.role === employeeRoleEnum.MECHANIC && (
+                  <WorkInProgress
+                    text={
+                      "Write now we are Working on what to showwow no mechanic dashboard"
+                    }
+                  />
+                )}
                 {/*  */}
                 {/* <DashboradStats /> */}
               </div>

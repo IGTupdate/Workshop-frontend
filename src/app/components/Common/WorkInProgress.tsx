@@ -1,11 +1,13 @@
 import React from "react";
 
-type Props = {};
+type Props = {
+  text?: string;
+};
 
 const WorkInProgress = (props: Props) => {
   return (
     <div className="text-md mb-4">
-      Right Now these functionality is not configured.
+      {props.text || "Right Now these functionality is not configured."}
     </div>
   );
 };

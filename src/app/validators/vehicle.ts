@@ -10,11 +10,11 @@ export const vehicleCreateSchema = Yup.object({
     .transform((value) => (value ? value.toUpperCase() : value)),
   vin: Yup.string()
     .required("VIN is required")
-    .transform((value) => (value ? value.toUpperCase() : value))
-    .matches(
-      /^(?=.*[0-9])(?=.*[A-z])[0-9A-z-]{17}$/g,
-      "VIN must be exactly 17 characters long and should not include I, O, or Q",
-    ),
+    .transform((value) => (value ? value.toUpperCase() : value)),
+  // .matches(
+  //   /^(?=.*[0-9])(?=.*[A-z])[0-9A-z-]{17}$/g,
+  //   "VIN must be exactly 17 characters long and should not include I, O, or Q",
+  // )
   owner: Yup.string().required(),
   vehicle_make: Yup.string()
     .required()
