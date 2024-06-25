@@ -26,13 +26,13 @@ export const getAllEmployees = async (query: string) => {
 };
 
 export const getEmployeeByEmployeeId = async (
-  employeeId: string,
+  id: string,
   data: string = "",
 ) => {
   try {
     const response = await apiConnector({
       method: "GET",
-      url: GET_EMPLOYEE_DATA_API + "/" + employeeId + "?data=" + data,
+      url: GET_EMPLOYEE_DATA_API + "?_id=" + id,
     });
 
     return response.data;
@@ -58,7 +58,7 @@ export const createEmployee = async (data: TCreateEmployee) => {
 export const getAllEmployeeRole = async () => {
   try {
     const response = await apiConnector({
-      method: "GET",
+      method: "POST",
       url: GET_ALL_EMPLOYEE_ROLE,
     });
     return response.data;

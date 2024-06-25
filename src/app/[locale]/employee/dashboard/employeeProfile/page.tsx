@@ -14,22 +14,22 @@ import { MdOutlineMailOutline } from "react-icons/md";
 const Page = () => {
   const [employee, setEmployee] = useState<TEmployeeProfile | null>(null);
   const [loading, setLoading] = useState(true);
-  const { _id } = useAppSelector((state) => state.auth.authData);
+  const { _id, email } = useAppSelector((state) => state.auth.authData);
   const t = useTranslations("Profile");
 
   useEffect(() => {
-    if (_id) {
-      getEmployeeDataById(_id);
+    if (_id && email) {
+      getEmployeeDataById(_id, email);
     }
   }, [_id]);
 
-  const getEmployeeDataById = async (id: string) => {
+  const getEmployeeDataById = async (id: string, email: string) => {
     setLoading(true);
     try {
       // const result = await getEmployeeData(id, dispatch);
       const result = await getEmployeeByEmployeeId(id);
       if (result.success === true) {
-        setEmployee(result.data);
+        setEmployee(result.data[0]);
         setLoading(false);
       }
     } catch (error) {
@@ -51,7 +51,7 @@ const Page = () => {
       ) : (
         <div
           style={{ height: "calc(100vh - 200px)" }}
-          className="p-4 sm:p-0 flex flex-col justify-center items-center gap-4 relative"
+          className="p-4 pt-8 sm:p-0 flex flex-col justify-center items-center gap-4 relative"
         >
           {/* <div className='h-80 w-full'><Image src={BgCar} alt='bgcar' className='h-full w-full bg-cover bg-center' /></div> */}
           <div className="p-6 bg-white relative shadow-2xl rounded-xl w-full sm:w-[400px] h-[23rem]">

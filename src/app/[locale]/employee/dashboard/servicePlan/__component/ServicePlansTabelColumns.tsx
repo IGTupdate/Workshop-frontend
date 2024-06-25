@@ -24,6 +24,7 @@ import {
 import { FaUserPen } from "react-icons/fa6";
 import { getAllEmployeeRole } from "@/app/services/operations/employee/employee";
 import { TServicePlans } from "@/app/types/service";
+import { FaEdit } from "react-icons/fa";
 
 const { Title, Text } = Typography;
 
@@ -122,22 +123,24 @@ export function ServicePlansTableContainer() {
           <Flex align="center" wrap="wrap" gap="small">
             <div
               onClick={() => {
-                router.push("/employee/dashboard/employee/" + _id);
+                router.push("/employee/dashboard/servicePlan/" + _id);
               }}
               style={{ color: "#1890ff" }}
               className="cursor-pointer"
             >
-              <IoIosEye size={"22px"} title="Employee Details" />
+              <IoIosEye size={"22px"} title="Service Plan Details" />
             </div>
 
             <div
               onClick={() => {
-                router.push("/employee/dashboard/employee/" + _id + "/update");
+                router.push(
+                  "/employee/dashboard/servicePlan/" + _id + "/update",
+                );
               }}
               style={{ color: "#1890ff" }}
               className="cursor-pointer"
             >
-              <FaUserPen size={"22px"} title="Update Employee" />
+              <FaEdit size={"18px"} title="Update Service Plan" />
             </div>
           </Flex>
         );

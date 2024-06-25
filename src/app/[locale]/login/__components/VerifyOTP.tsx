@@ -55,7 +55,15 @@ const VerifyOTP = () => {
 
     let result;
     try {
-      result = await verifyOTP(countryCode, contactNumber, otp, dispatch);
+      let mobileNumber;
+      if (contactNumber.length > 10) {
+        mobileNumber =
+          countryCode.slice(1, countryCode.length) +
+          contactNumber.slice(1, contactNumber.length);
+      } else {
+        mobileNumber = countryCode.slice(1, countryCode.length) + contactNumber;
+      }
+      result = await verifyOTP(mobileNumber, otp, dispatch);
       if (result.data.success) {
         if (result?.data?.data?.userExists) {
           const redirectUrl = searchParams.get("redirectUrl");

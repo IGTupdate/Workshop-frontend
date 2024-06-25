@@ -56,7 +56,7 @@ const SideBar = (props: Props) => {
                 {t("heading")} {user?.fullName?.split(" ")[0]}
               </Title>
               <Text className="capitalize" style={{ color: "#CDCDCE" }}>
-                {user?.role || "-"}
+                {user?.roleId?.role || "-"}
               </Text>
             </div>
           )}

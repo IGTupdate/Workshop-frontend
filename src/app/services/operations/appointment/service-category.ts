@@ -11,6 +11,7 @@ const {
 export const createServiceCategory = async (
   name: string,
   isActive?: boolean,
+  vehicle_type?: string,
 ): Promise<void> => {
   try {
     const response = await apiConnector({
@@ -18,6 +19,7 @@ export const createServiceCategory = async (
       url: CREATE_SERVICE_CATEGORY,
       bodyData: {
         name,
+        vehicle_type,
         ...(isActive !== undefined && { isActive }),
       },
     });
@@ -33,6 +35,7 @@ export const updateServiceCategory = async (
   _id: string,
   name?: string,
   isActive?: boolean,
+  vehicle_type?: string,
 ): Promise<void> => {
   try {
     if (!name && !isActive) {
@@ -45,6 +48,7 @@ export const updateServiceCategory = async (
       bodyData: {
         ...(name !== undefined && { name }),
         ...(isActive !== undefined && { isActive }),
+        ...(vehicle_type !== undefined && { vehicle_type }),
       },
     });
     if (response?.data?.success) {

@@ -329,7 +329,9 @@
     "ramp": "Ramp",
     "settings": "Settings",
     "vehicleManagement": "Vehicle Management",
-    "vehicleManagementCheckList": "CheckList"
+    "vehicleManagementCheckList": "CheckList",
+    "category": "Category",
+    "tasks": "Tasks"
   },
   "EmployeeDashboardAppointmentPage": {
     "manage_appointment": "Manage Appointments",

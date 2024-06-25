@@ -6,21 +6,6 @@ import Link from "next/link";
 import { useEffect } from "react";
 import ServicePlansViewPageContainer from "./__component/ServicePlansViewPageContainer";
 
-// import * as yup from "yup";
-
-// export const ServiceCategoryValidatorSchema = yup.object({
-//   name: yup.string().required(),
-//   isActive: yup.boolean(),
-//   vehicle_type: yup.string(),
-// });
-
-// export const ServiceTaskValidatorSchema = yup.object({
-//   name: yup.string().min(1).max(100).required(),
-//   vehicle_type: yup.string(),
-//   duration: yup.number(),
-//   cost: yup.number(),
-// });
-
 const Page = () => {
   const dispatch = useAppDispatch();
   const { servicePlansLoading, servicePlansData } = useAppSelector(

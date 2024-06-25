@@ -335,7 +335,9 @@
     "ramp": "Rampa",
     "settings": "Ajustes",
     "vehicleManagement": "Gestión de vehículos",
-    "vehicleManagementCheckList": "Lista de Verificación"
+    "vehicleManagementCheckList": "Lista de Verificación",
+    "category": "Categoría",
+    "tasks": "Tareas"
   },
   "EmployeeDashboardAppointmentPage": {
     "manage_appointment": "Gestionar citas",

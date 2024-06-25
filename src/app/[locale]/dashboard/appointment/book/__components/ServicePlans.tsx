@@ -39,7 +39,7 @@ const ServicePlans: React.FC<Props> = ({
         {/* heading */}
         <div className="heading">
           <h3 className="font-bold text-xl">{plan?.name}</h3>
-          <p className="font-semibold text-base">{plan?.description}</p>
+          <p className="font-normal text-base mt-4">{plan?.description}</p>
         </div>
 
         {/* tasks */}
@@ -56,7 +56,7 @@ const ServicePlans: React.FC<Props> = ({
                   <span className="flex justify-center items-center h-[16px] w-[16px] rounded-full bg-green-200">
                     <IoIosCheckmark className="text-green-400 text-base" />
                   </span>
-                  <span className="text-base font-normal text-nowrap">
+                  <span className="text-sm font-normal text-nowrap">
                     {task?.name}
                   </span>
                 </p>

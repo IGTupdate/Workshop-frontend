@@ -31,8 +31,8 @@ export const createServicePlans = async (data: TServicePlanValidatorSchema) => {
 };
 
 export const updateServicePlans = async (
-  _id: string,
-  data: TServicePlans,
+  _id: string | string[],
+  data: TServicePlanValidatorSchema,
 ): Promise<void> => {
   try {
     const response = await apiConnector({
@@ -44,6 +44,7 @@ export const updateServicePlans = async (
     });
     if (response?.data?.success) {
       toast.success(response.data.message);
+      return response.data;
     }
   } catch (err: any) {
     toast.error(err?.response?.data?.message || "Something went wrong1");

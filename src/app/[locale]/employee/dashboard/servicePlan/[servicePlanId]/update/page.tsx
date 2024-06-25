@@ -1,14 +1,16 @@
 "use client";
 import InputField from "@/app/components/Input/InputField";
-import InputFieldWithButton from "@/app/components/Input/InputFieldWithButton";
-import SelectCreateField from "@/app/components/Input/SelectCreateField";
 import SelectField from "@/app/components/Input/SelectField";
-import TextAreaField from "@/app/components/Input/TextArea";
+import { useParams } from "next/navigation";
 import {
   getServiceCategory,
   getServiceCategoryByVehicle,
 } from "@/app/services/operations/appointment/service-category";
-import { createServicePlans } from "@/app/services/operations/appointment/service-plans";
+import {
+  createServicePlans,
+  getSingleServicePlans,
+  updateServicePlans,
+} from "@/app/services/operations/appointment/service-plans";
 import {
   getServiceTasks,
   getServiceTasksByVehicle,
@@ -32,6 +34,8 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { MdOutlineCancel } from "react-icons/md";
+import TextAreaField from "@/app/components/Input/TextArea";
+import { TServicePlans } from "@/app/types/service";
 
 const options = [
   { value: "car", label: "CAR" },
@@ -42,11 +46,16 @@ const parts = [
   { value: "break", label: "Break" },
 ];
 
-const CreateServicePlans: React.FC = () => {
+const Page = () => {
+  const [servicePlan, setServicePlan] = useState<TServicePlans | undefined>();
   const [category, setCategory] = useState<{ value: string; label: string }[]>(
     [],
   );
   const [tasks, setTasks] = useState<{ value: string; label: string }[]>([]);
+
+  const router = useRouter();
+  const params = useParams();
+
   const {
     register,
     control,
@@ -57,18 +66,48 @@ const CreateServicePlans: React.FC = () => {
     setValue,
   } = useForm<TServicePlanValidatorSchema>({
     resolver: yupResolver(ServicePlanValidatorSchema),
-    defaultValues: {
-      isActive: true, // Ensure the default value is set here
-    },
   });
 
-  const router = useRouter();
+  useEffect(() => {
+    if (servicePlan) {
+      const taskData = servicePlan.tasks?.map((task) => task._id) || [];
+
+      setValue("name", servicePlan?.name);
+      setValue("vehicle_type", servicePlan?.vehicle_type);
+      setValue("price", servicePlan?.price);
+      setValue("duration", servicePlan?.duration || 0);
+      setValue(
+        "category",
+        typeof servicePlan.category === "string"
+          ? servicePlan.category
+          : servicePlan.category?.name || "",
+      );
+      setValue("tasks", taskData);
+      setValue("remarks", servicePlan?.remarks || "");
+      setValue("description", servicePlan?.description);
+      setValue("isActive", servicePlan?.isActive || true);
+    }
+  }, [params.servicePlanId, servicePlan]);
+
   const vehicle_type = watch("vehicle_type");
 
   useEffect(() => {
+    const fetchServicePlans = async () => {
+      const result = await getSingleServicePlans(params?.servicePlanId);
+      if (result?.length > 0) {
+        const filterData = result.filter(
+          (item: { _id: string | string[] }) =>
+            item._id === params.servicePlanId,
+        );
+        setServicePlan(filterData[0]);
+      }
+    };
+
+    fetchServicePlans();
+  }, [params.servicePlanId]);
+
+  useEffect(() => {
     getData(vehicle_type);
-    setValue("category", "");
-    setValue("tasks", []);
   }, [vehicle_type]);
 
   const getData = async (vehicleType: string | undefined) => {
@@ -111,13 +150,13 @@ const CreateServicePlans: React.FC = () => {
       duration: Number(data.duration),
     };
 
-    const result = await createServicePlans(newData);
+    const result = await updateServicePlans(params.servicePlanId, newData);
+    console.log(result, "result");
 
-    if (result?.status === 201) {
-      router.push("/employee/dashboard/servicePlan");
-    }
+    // if (result?.status === 201) {
+    //     router.push("/employee/dashboard/servicePlan");
+    // }
   };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mb-4">
@@ -138,7 +177,6 @@ const CreateServicePlans: React.FC = () => {
           control={control}
           error={""}
           setValue={setValue}
-          defaultValue={options[0].value}
           options={options}
         />
       </div>
@@ -231,4 +269,4 @@ const CreateServicePlans: React.FC = () => {
   );
 };
 
-export default CreateServicePlans;
+export default Page;

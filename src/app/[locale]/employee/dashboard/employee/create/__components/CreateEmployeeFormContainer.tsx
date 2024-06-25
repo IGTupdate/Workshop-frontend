@@ -74,6 +74,7 @@ const CreateEmployeeFormContainer = (props: Props) => {
     (async function () {
       try {
         const response = await getAllEmployeeRole();
+        console.log(response, "response");
 
         const employeeRoles = response.data as TRole[];
         setEmployeeRoleOption(() => {

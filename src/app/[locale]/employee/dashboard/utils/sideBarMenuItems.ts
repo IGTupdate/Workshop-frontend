@@ -70,19 +70,37 @@ export const SideBarMenuItems: () => TsideBarMenuItems[] = () => {
       ],
     },
     {
-      key: "9",
+      key: "7",
       label: t("servicePlans"),
-      pathname: "/employee/dashboard/servicePlan",
-      resourcetype: "service_plans",
+      children: [
+        {
+          key: "7.1",
+          label: t("category"),
+          resourcetype: "category",
+          pathname: "/employee/dashboard/servicePlan/category",
+        },
+        {
+          key: "7.2",
+          label: t("tasks"),
+          resourcetype: "tasks",
+          pathname: "/employee/dashboard/servicePlan/category",
+        },
+      ],
     },
     {
-      key: "10",
+      key: "8",
       label: t("employee"),
       pathname: "/employee/dashboard/employee",
       resourcetype: "employee",
     },
     {
-      key: "11",
+      key: "9",
+      label: "Role Management",
+      pathname: "/employee/dashboard/employee",
+      resourcetype: "roleManagement",
+    },
+    {
+      key: "10",
       label: t("settings"),
       pathname: "/employee/dashboard/settings",
       resourcetype: "settings",
