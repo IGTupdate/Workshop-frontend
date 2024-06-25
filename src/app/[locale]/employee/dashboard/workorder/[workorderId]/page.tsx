@@ -21,6 +21,7 @@ import VehicleCheckList from "@/app/components/WorkOrder/VehicleCheckList";
 import { useSearchParams } from "next/navigation";
 import { TVehicle } from "@/app/types/vehicle";
 import { type } from "os";
+import WorkOrderStepsAction from "./__components/WorkOrderStepsAction";
 
 const { Text } = Typography;
 
@@ -73,6 +74,7 @@ const Page = (props: Props) => {
   };
 
   const labels = [
+    "WorkOrder Status",
     "Vehicle Details",
     "Service Plans",
     "Vehicle Inspection Record",
@@ -82,6 +84,7 @@ const Page = (props: Props) => {
   ];
 
   const components = [
+    <WorkOrderStepsAction key={"workorder status"} workOrder={workOrder} />,
     <CusotmerVehicleDetails key="vehicle details" workOrderData={workOrder} />,
     <ServicePlans
       key={"Service Plan"}
@@ -103,10 +106,10 @@ const Page = (props: Props) => {
     <VehicleCheckList
       key={"vehicle checklist"}
       workOrderCheckList={
-        workOrder?.checklist
-          ? typeof workOrder.checklist === "string"
+        workOrder?.checklist && workOrder.checklist["technical"]
+          ? typeof workOrder.checklist["technical"] === "string"
             ? null
-            : workOrder.checklist
+            : workOrder.checklist["technical"]
           : null
       }
       workOrderVehicle={

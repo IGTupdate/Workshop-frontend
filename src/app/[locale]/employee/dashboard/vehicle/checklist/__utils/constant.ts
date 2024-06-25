@@ -2,7 +2,7 @@ import {
   IChecklist,
   ICheckListCategory,
   ICheckListTask,
-} from "@/app/types/checklist";
+} from "@/app/types/vehicle-checklist";
 import { vehicleChecklistStatusEnum } from "@/app/utils/constants/checklistenum";
 
 export const NEW_VEHICLE_CHECKLIST_CATEGORY_TASK: ICheckListTask = {

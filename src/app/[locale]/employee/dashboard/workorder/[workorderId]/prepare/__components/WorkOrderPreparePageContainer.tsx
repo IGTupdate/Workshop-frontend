@@ -50,7 +50,7 @@ const WorkOrderPreparePageContainer = (props: Props) => {
   const loadWorkorder = async (workOrderId: string) => {
     try {
       setLoading(true);
-      const required_workorder = await getWorkOrderById(workOrderId);
+      const required_workorder = await getWorkOrderById(workOrderId, true);
       if (required_workorder?.status === workOrderStatusEnum.Pending) {
         setWorkOrder(required_workorder);
       } else {

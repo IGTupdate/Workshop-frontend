@@ -19,7 +19,6 @@ type Props = {
 };
 
 const CheckListDetailContainer = (props: Props) => {
-  console.log("hello abcd");
   const [openModal, setOpenModal] = useState(false);
 
   const {} = useForm();

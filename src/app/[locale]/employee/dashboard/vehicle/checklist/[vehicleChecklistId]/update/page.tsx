@@ -10,7 +10,7 @@ import {
 import { COMMON_ERROR } from "@/app/utils/constants/constant";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { IVehicleChecklist } from "@/app/types/checklist";
+import { IVehicleChecklist } from "@/app/types/vehicle-checklist";
 import Loader from "@/app/components/Loader";
 
 type Props = {

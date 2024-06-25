@@ -3,7 +3,8 @@
 import { Button } from "antd";
 import React, { useState } from "react";
 import VehicleCheckListBasedOnTypeContainer from "./VehicleCheckListBasedOnTypeContainer";
-import { IChecklist, IVehicleChecklist } from "@/app/types/checklist";
+import { IChecklist, IVehicleChecklist } from "@/app/types/vehicle-checklist";
+import { useParams, useRouter } from "next/navigation";
 
 type Props = {
   vehicleCheckLists: IVehicleChecklist[];
@@ -11,6 +12,8 @@ type Props = {
 
 const MoreVehicleChecklistListContainer = (props: Props) => {
   const [viewMore, setViewMore] = useState(false);
+  const router = useRouter();
+  const params = useParams();
   return (
     <div>
       {!viewMore && (
@@ -24,6 +27,11 @@ const MoreVehicleChecklistListContainer = (props: Props) => {
         <VehicleCheckListBasedOnTypeContainer
           heading="All Available Checks"
           checkListItem={props.vehicleCheckLists}
+          onCheckListSelect={(checkListId: string) => {
+            router.push(
+              `/employee/dashboard/workorder/${params.workorderId}/check/${checkListId}`,
+            );
+          }}
         />
       )}
     </div>

@@ -78,7 +78,7 @@ const InspectVehicle = ({ setSteps, workOrder }: Props) => {
         observations: observations,
       });
       toast.success("Updated Successfully");
-      setSteps("2");
+      setSteps("3");
     } catch (err: any) {
       console.log(err);
       toast.error(err?.response?.data?.message || COMMON_ERROR);
@@ -189,7 +189,7 @@ const InspectVehicle = ({ setSteps, workOrder }: Props) => {
       <div className="flex justify-end items-center gap-4 mt-4">
         <Button
           disabled={loading}
-          onClick={() => setSteps("0")}
+          onClick={() => setSteps("1")}
           loading={loading}
         >
           Back

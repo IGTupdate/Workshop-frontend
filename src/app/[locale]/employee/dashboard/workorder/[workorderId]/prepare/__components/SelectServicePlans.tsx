@@ -1,25 +1,22 @@
 "use client";
-import SelectField from "@/app/components/Input/SelectField";
+import InputFieldWithButton from "@/app/components/Input/InputFieldWithButton";
+import Loader from "@/app/components/Loader";
 import { getAllServicePlans } from "@/app/services/operations/appointment/service-plans";
+import { updateWorkOrder } from "@/app/services/operations/workorder/workorder";
 import { useAppDispatch, useAppSelector } from "@/app/store/reduxHooks";
-import React, { useEffect, useState } from "react";
-import SelectServicePlanForWorkOrder from "./SelectServicePlanForWorkOrder";
+import { TWorkOrder } from "@/app/types/work-order";
 import {
-  TworkorderPrepare,
   TWorkorderServicePlansPrepareScema,
-  workorderPrepareYupSchema,
   WorkorderServicePlansPrepareScema,
 } from "@/app/validators/workorder";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
 import { Button } from "antd";
-import { updateWorkOrder } from "@/app/services/operations/workorder/workorder";
-import { TWorkOrder } from "@/app/types/work-order";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import Loader from "@/app/components/Loader";
 import { MdOutlineCancel } from "react-icons/md";
-import InputFieldWithButton from "@/app/components/Input/InputFieldWithButton";
 import { suggestion_task } from "../../__utils/task_suggestion";
+import SelectServicePlanForWorkOrder from "./SelectServicePlanForWorkOrder";
 
 type Props = {
   workOrder: TWorkOrder | null;
@@ -104,7 +101,7 @@ const SelectServicePlans = ({ setSteps, workOrder }: Props) => {
         if (result?.success === true) {
           toast.success("Plans Selected Successfully");
           setLoading(false);
-          setSteps("3");
+          setSteps("4");
         }
       } catch (error) {
         toast.error("Something Went Wrong Please Try Again");
@@ -174,7 +171,7 @@ const SelectServicePlans = ({ setSteps, workOrder }: Props) => {
           </div>
 
           <div className="flex justify-end items-center gap-4 mt-4">
-            <Button onClick={() => setSteps("1")}>Back</Button>
+            <Button onClick={() => setSteps("2")}>Back</Button>
             <Button htmlType="submit" type="primary">
               Save & Continue
             </Button>

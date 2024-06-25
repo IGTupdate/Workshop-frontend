@@ -2,7 +2,7 @@
 
 import Loader from "@/app/components/Loader";
 import { getAllVehicleCheckList } from "@/app/services/operations/workorder/vehicle-checklist";
-import { IVehicleChecklist } from "@/app/types/checklist";
+import { IVehicleChecklist } from "@/app/types/vehicle-checklist";
 import { TVehicle } from "@/app/types/vehicle";
 import { Typography } from "antd";
 import { useEffect, useState } from "react";

@@ -1,6 +1,6 @@
 "use client";
 
-import { IVehicleChecklist } from "@/app/types/checklist";
+import { IVehicleChecklist } from "@/app/types/vehicle-checklist";
 import { Avatar, Typography } from "antd";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,6 +9,7 @@ import { FaCar, FaChevronRight } from "react-icons/fa6";
 type Props = {
   heading: string;
   checkListItem: IVehicleChecklist[];
+  onCheckListSelect?: (checkListId: string) => void;
 };
 
 const { Title } = Typography;
@@ -44,9 +45,16 @@ const VehicleCheckListBasedOnTypeContainer = (props: Props) => {
                     {item.checklist.length} Level Check
                   </div>
                   <div className="flex justify-end">
-                    <Link href={`${pathname}/check/${item._id}`}>
+                    <button
+                      onClick={() => {
+                        if (props.onCheckListSelect) {
+                          props.onCheckListSelect(item._id);
+                        }
+                      }}
+                    >
+                      {/* href={`${pathname.includes("check") ? pathname + "/" + item._id : pathname + "/check/" + item._id}`} */}
                       <FaChevronRight size={20} />
-                    </Link>
+                    </button>
                   </div>
                 </li>
               );

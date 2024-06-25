@@ -1,6 +1,6 @@
 "use client";
 
-import { IChecklist } from "@/app/types/checklist";
+import { IChecklist } from "@/app/types/vehicle-checklist";
 import { Collapse, CollapseProps } from "antd";
 import React, { useEffect, useState } from "react";
 import VehicleCheckListLevelViewContainer from "./VehicleCheckListLevelViewContainer";

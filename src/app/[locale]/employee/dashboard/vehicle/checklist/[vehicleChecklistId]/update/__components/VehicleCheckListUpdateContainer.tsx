@@ -1,6 +1,6 @@
 import { getAllVehicleCheckList } from "@/app/services/operations/workorder/vehicle-checklist";
 import { setAuthLoading } from "@/app/store/slices/authSlice";
-import { IVehicleChecklist } from "@/app/types/checklist";
+import { IVehicleChecklist } from "@/app/types/vehicle-checklist";
 import { COMMON_ERROR } from "@/app/utils/constants/constant";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";

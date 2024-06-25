@@ -20,7 +20,7 @@ import { COMMON_ERROR } from "@/app/utils/constants/constant";
 import { createVehicleCheckList } from "@/app/services/operations/workorder/vehicle-checklist";
 import { useRouter } from "next/navigation";
 import VehicleCheckListLevelContainer from "../../create/__components/VehicleCheckListLevelContainer";
-import { IVehicleChecklist } from "@/app/types/checklist";
+import { IVehicleChecklist } from "@/app/types/vehicle-checklist";
 
 const { Title } = Typography;
 
@@ -51,6 +51,7 @@ const VehicleCheckListManageContainer = (props: Props) => {
         model: "",
         type: "",
       },
+      type: "",
     },
     resolver: yupResolver(vehicleCheckListCreateYupSchema),
   });
@@ -66,6 +67,9 @@ const VehicleCheckListManageContainer = (props: Props) => {
     }
     if (props.defaultData?.vehicle) {
       setValue("vehicle", props.defaultData.vehicle);
+    }
+    if (props.defaultData?.type) {
+      setValue("type", props.defaultData.type);
     }
   }, [props.defaultData]);
 
@@ -190,6 +194,20 @@ const VehicleCheckListManageContainer = (props: Props) => {
                 type="number"
               />
             </div>
+          </div>
+        </div>
+
+        <div className="mb-4 grid grid-cols-2">
+          <div>
+            <Title level={5}>CheckList Type: </Title>
+            <InputField
+              name="type"
+              control={control}
+              error={errors.type?.message || ""}
+              label=""
+              placeholder="initial"
+              type="text"
+            />
           </div>
         </div>
 

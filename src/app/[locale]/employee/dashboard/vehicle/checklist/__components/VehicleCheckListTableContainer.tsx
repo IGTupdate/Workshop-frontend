@@ -1,7 +1,7 @@
 import { Table } from "antd";
 import React, { useState } from "react";
 import GetChecklistDataTableColumn from "./GetChecklistDataTableColumn";
-import { TVehicleCheckListDataTable } from "@/app/types/checklist";
+import { TVehicleCheckListDataTable } from "@/app/types/vehicle-checklist";
 import VehicleCheckListDeleteModal from "./VehicleCheckListDeleteModal";
 
 type Props = {

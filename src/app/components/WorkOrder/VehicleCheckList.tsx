@@ -29,6 +29,8 @@ const VehicleCheckList = (props: Props) => {
 
   const ability = useAbility();
 
+  console.log(props.workOrderCheckList);
+
   return (
     <div className="bg-white p-4 rounded-xl shadow-xl">
       {props.workOrderStatus !== workOrderStatusEnum.Pending ? (

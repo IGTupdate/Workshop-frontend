@@ -1,7 +1,4 @@
-import {
-  vehicleChecklistStatusEnum,
-  vehicleTypeEnum,
-} from "../utils/constants/checklistenum";
+import { vehicleTypeEnum } from "../utils/constants/checklistenum";
 
 export interface ICheckListTask {
   name: string;
@@ -26,6 +23,7 @@ export interface IVehicleChecklist {
   vehicle: ICheckListVehicle;
   checklist: IChecklist[];
   remarks?: string[];
+  type: string;
 }
 
 export type TVehicleCheckListDataTable = {

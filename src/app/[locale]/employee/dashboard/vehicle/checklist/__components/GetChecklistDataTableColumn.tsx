@@ -10,7 +10,7 @@ import {
   TableProps,
   Typography,
 } from "antd";
-import { TVehicleCheckListDataTable } from "@/app/types/checklist";
+import { TVehicleCheckListDataTable } from "@/app/types/vehicle-checklist";
 import { FaEye } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";

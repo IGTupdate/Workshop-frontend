@@ -4,7 +4,7 @@ import DescriptionItem from "@/app/components/DescriptionItem.tsx";
 import Loader from "@/app/components/Loader";
 import NotFound from "@/app/not-found";
 import { getAllVehicleCheckList } from "@/app/services/operations/workorder/vehicle-checklist";
-import { IVehicleChecklist } from "@/app/types/checklist";
+import { IVehicleChecklist } from "@/app/types/vehicle-checklist";
 import { COMMON_ERROR } from "@/app/utils/constants/constant";
 import { Typography, Watermark } from "antd";
 import React, { useEffect, useState } from "react";

@@ -1,3 +1,4 @@
+import { workOrderStatusEnum } from "../[locale]/employee/dashboard/workorder/__utils/workOrderStatus";
 import { TAppointment } from "./appointment";
 import { TCustomer } from "./customer";
 import { TEmployee } from "./employee";
@@ -66,7 +67,7 @@ export type TWorkOrder = {
   appointmentId: string | TAppointment;
   advisorId: string | TEmployee;
   mechanicId: string[] | TEmployee[];
-  status: TWorkOrderStatus;
+  status: workOrderStatusEnum;
   estimatedCost?: number;
   estimatedTimeOfCompletion?: string;
   serviceType?: string;
@@ -82,7 +83,7 @@ export type TWorkOrder = {
   observations: TWorkOrderObservation[];
   createdAt: string;
   updatedAt: string;
-  checklist: string | IWorkorderChecklist;
+  checklist: Record<string, string | IWorkorderChecklist>;
 };
 
 export type TWorkOrderData = {

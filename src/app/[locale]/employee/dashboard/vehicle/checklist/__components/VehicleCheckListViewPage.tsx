@@ -8,7 +8,7 @@ import { getAllVehicleCheckList } from "@/app/services/operations/workorder/vehi
 import {
   IVehicleChecklist,
   TVehicleCheckListDataTable,
-} from "@/app/types/checklist";
+} from "@/app/types/vehicle-checklist";
 import { setLocale } from "yup";
 
 type Props = {};

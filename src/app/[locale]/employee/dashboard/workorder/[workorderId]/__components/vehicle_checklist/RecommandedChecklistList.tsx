@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import VehicleCheckListBasedOnTypeContainer from "./VehicleCheckListBasedOnTypeContainer";
-import { IVehicleChecklist } from "@/app/types/checklist";
+import { IVehicleChecklist } from "@/app/types/vehicle-checklist";
 import { TVehicle } from "@/app/types/vehicle";
 
 type Props = {

@@ -19,42 +19,43 @@ const { Title } = Typography;
 type Props = {
   vehicleCheckList: TworkOrderCheckListYupSchema;
   workorderId: string;
+  handleOnCheckListSave: (data: TworkOrderCheckListYupSchema) => Promise<void>;
 };
 
 const CheckListContainer: React.FC<Props> = (props) => {
-  const router = useRouter();
-
   console.log(props.vehicleCheckList);
   const { control, watch, handleSubmit, setValue, getValues } =
     useForm<TworkOrderCheckListYupSchema>({
       defaultValues: {
-        checklist: props.vehicleCheckList.checklist,
-        vehicle: props.vehicleCheckList.vehicle,
+        checklist: {
+          checklist: props.vehicleCheckList.checklist.checklist,
+          vehicle: props.vehicleCheckList.checklist.vehicle,
+        },
+        type: props.vehicleCheckList.type,
       },
     });
 
-  const checkList = watch("checklist");
+  const checkList = watch("checklist.checklist");
 
   const onSubmit = async (data: TworkOrderCheckListYupSchema) => {
-    console.log(data);
+    props.handleOnCheckListSave(data);
+    // try {
+    //   console.log(data);
 
-    try {
-      console.log(data);
+    //   const response = await createCheckListForWorkOrder(
+    //     props.workorderId,
+    //     data,
+    //   );
+    //   console.log(response);
+    //   if (response) {
+    //     toast.success("CheckList Saved");
 
-      const response = await createCheckListForWorkOrder(
-        props.workorderId,
-        data,
-      );
-      console.log(response);
-      if (response) {
-        toast.success("CheckList Saved");
-
-        router.push(`/employee/dashboard/workorder/${props.workorderId}`);
-      } else throw "";
-    } catch (err: any) {
-      toast.error(err?.response?.data?.message || COMMON_ERROR);
-      console.log(err);
-    }
+    //     router.push(`/employee/dashboard/workorder/${props.workorderId}`);
+    //   } else throw "";
+    // } catch (err: any) {
+    //   toast.error(err?.response?.data?.message || COMMON_ERROR);
+    //   console.log(err);
+    // }
   };
 
   return (
@@ -93,7 +94,7 @@ const CheckListContainer: React.FC<Props> = (props) => {
                           <td className="">
                             {/* <div> */}
                             <Controller
-                              name={`checklist.${index}.categories.${_index}.tasks.${__index}.status`}
+                              name={`checklist.checklist.${index}.categories.${_index}.tasks.${__index}.status`}
                               control={control}
                               render={({ field }) => (
                                 <Radio.Group

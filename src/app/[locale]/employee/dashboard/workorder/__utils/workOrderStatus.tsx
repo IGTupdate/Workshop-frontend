@@ -28,6 +28,15 @@ export const getWorkOrderStatus = () => {
   });
 };
 
+export const isStatusCompleted = (stts1: string, currentStatus: string) => {
+  const stts1Index = workOrderStatus.indexOf(stts1 as TWorkOrderStatus);
+  const currentStatusIndex = workOrderStatus.indexOf(
+    currentStatus as TWorkOrderStatus,
+  );
+
+  return stts1Index < currentStatusIndex;
+};
+
 export const workOrderStatusText = {
   Pending: (
     <Tag className="w-[82px] text-center" color="red">

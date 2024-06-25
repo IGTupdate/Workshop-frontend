@@ -1,4 +1,4 @@
-import { IChecklist } from "@/app/types/checklist";
+import { IChecklist } from "@/app/types/vehicle-checklist";
 import React from "react";
 
 type Props = {
