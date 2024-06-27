@@ -19,7 +19,7 @@ const { Title } = Typography;
 
 type Props = {
   workOrderVehicle: TVehicle | null;
-  workOrderCheckList: IWorkorderChecklist | null;
+  workOrderCheckList: Record<string, string | IWorkorderChecklist>;
   workOrderStatus: TWorkOrderStatus;
   workorderId: string;
 };
@@ -35,23 +35,42 @@ const VehicleCheckList = (props: Props) => {
     <div className="bg-white p-4 rounded-xl shadow-xl">
       {props.workOrderStatus !== workOrderStatusEnum.Pending ? (
         <div>
-          {props.workOrderCheckList ? (
-            <WorkOrderCheckListView checklist={props.workOrderCheckList} />
+          {Object.keys(props.workOrderCheckList).map((key_list, index) => {
+            return (
+              <div key={index} className="mb-5 border-b">
+                <WorkOrderCheckListView
+                  checklist={
+                    props.workOrderCheckList &&
+                    props.workOrderCheckList[key_list] &&
+                    typeof props.workOrderCheckList[key_list] !== "string"
+                      ? (props.workOrderCheckList[
+                          key_list
+                        ] as IWorkorderChecklist)
+                      : null
+                  }
+                  type={key_list}
+                />
+              </div>
+            );
+          })}
+          {/* {props.workOrderCheckList ? (
+            <></>
+            // <WorkOrderCheckListView checklist={props.workOrderCheckList && props.workOrderCheckList[clist]} />
           ) : (
             <div className="mb-5">
               <Title level={4}>Checklist</Title>
               <p>Not Performed Checks till now</p>
             </div>
-          )}
-          {ability?.can(
+          )} */}
+          {/* {ability?.can(
             casl_action.update,
             casl_subject.workorder,
             "checklist",
           ) && (
-            <VehicleChecklistListContainer
-              workOrderVehicle={props.workOrderVehicle}
-            />
-          )}
+              <VehicleChecklistListContainer
+                workOrderVehicle={props.workOrderVehicle}
+              />
+            )} */}
         </div>
       ) : (
         <PrepareWorkOrderButtonContainer workOrderId={props.workorderId} />

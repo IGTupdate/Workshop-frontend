@@ -1,4 +1,5 @@
 import { workOrderStatusEnum } from "../[locale]/employee/dashboard/workorder/__utils/workOrderStatus";
+import { workOrderTaskStatusEnum } from "../[locale]/employee/dashboard/workorder/__utils/workOrderTaskStatus";
 import { TAppointment } from "./appointment";
 import { TCustomer } from "./customer";
 import { TEmployee } from "./employee";
@@ -10,19 +11,20 @@ export type TWorkOrderStatus =
   | "Pending"
   | "Prepared"
   | "InProgress"
+  | "FinalInspection"
   | "Washing"
   | "Billing"
   | "Completed";
 
 export type TTask = {
+  _id: string;
   title: string;
   description: string;
-  // after_image: string;
-  // before_image: string;
   critical: boolean;
   additional_work: boolean;
-  status: string;
+  status: workOrderTaskStatusEnum;
   approved: boolean;
+  remarks?: string;
 };
 
 export type TTaskRequest = {

@@ -165,6 +165,19 @@ export const WorkorderEstimateTimeAndCostsScema = Yup.object({
     .oneOf(Object.values(workOrderStatusEnum)),
 });
 
+export const WorkOrderTaskUpdateYupSchema = Yup.object({
+  status: Yup.string()
+    .oneOf(["Pending", "Completed"], "Invalid status")
+    .required("Status is required"),
+  remarks: Yup.string()
+    .max(500, "Remarks must be at most 500 characters")
+    .optional(),
+});
+
+export type TWorkOrderTaskUpdateYupSchema = Yup.InferType<
+  typeof WorkOrderTaskUpdateYupSchema
+>;
+
 export type TWorkorderEstimateTimeAndCostsScema = Yup.InferType<
   typeof WorkorderEstimateTimeAndCostsScema
 >;

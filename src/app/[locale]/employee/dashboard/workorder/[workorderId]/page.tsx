@@ -105,13 +105,7 @@ const Page = (props: Props) => {
     />,
     <VehicleCheckList
       key={"vehicle checklist"}
-      workOrderCheckList={
-        workOrder?.checklist && workOrder.checklist["technical"]
-          ? typeof workOrder.checklist["technical"] === "string"
-            ? null
-            : workOrder.checklist["technical"]
-          : null
-      }
+      workOrderCheckList={workOrder?.checklist || {}}
       workOrderVehicle={
         typeof workOrder?.appointmentId === "string"
           ? null

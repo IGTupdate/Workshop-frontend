@@ -8,6 +8,7 @@ import WorkOrderCheckListTaskDetailView from "./WorkOrderCheckListTaskDetailView
 const { Title } = Typography;
 
 type Props = {
+  type?: string;
   checklist: IWorkorderChecklist | null;
 };
 
@@ -15,12 +16,14 @@ const WorkOrderCheckListView = (props: Props) => {
   return (
     <div>
       <div>
-        <Title level={4}>CheckList Result</Title>
+        <Title level={4}>
+          CheckList - <span className="capitalize">{props.type}</span>
+        </Title>
       </div>
 
       {props.checklist && (
         <div>
-          {props.checklist.checklist.map((levelData, index) => {
+          {props.checklist?.checklist.map((levelData, index) => {
             return (
               <div key={index} className="mb-4">
                 <div>

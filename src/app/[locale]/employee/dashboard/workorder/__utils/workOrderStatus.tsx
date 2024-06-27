@@ -5,6 +5,7 @@ export const workOrderStatus: TWorkOrderStatus[] = [
   "Pending",
   "Prepared",
   "InProgress",
+  "FinalInspection",
   "Washing",
   "Billing",
   "Completed",
@@ -14,6 +15,7 @@ export enum workOrderStatusEnum {
   Pending = "Pending",
   Prepared = "Prepared",
   InProgress = "InProgress",
+  FinalInspection = "FinalInspection",
   Washing = "Washing",
   Billing = "Billing",
   Completed = "Completed",
@@ -51,6 +53,11 @@ export const workOrderStatusText = {
   InProgress: (
     <Tag className="w-[82px] text-center" color="orange">
       InProgress
+    </Tag>
+  ),
+  FinalInspection: (
+    <Tag className="w-[82px] text-center" color="orange">
+      FinalInspection
     </Tag>
   ),
   Washing: (

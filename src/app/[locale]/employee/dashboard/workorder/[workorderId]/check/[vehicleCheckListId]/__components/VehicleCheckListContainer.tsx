@@ -107,10 +107,6 @@ const VehicleCheckListContainer: React.FC<Props> = (props) => {
 
   return (
     <div>
-      {/* <CheckListContainer
-                mechanicCheckList={demodata}
-            /> */}
-
       {loading ? (
         <Loader />
       ) : (

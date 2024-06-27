@@ -1,12 +1,14 @@
 import { employeeRoleEnum } from "@/app/utils/constants/employee-roles";
 import { workOrderStatusEnum } from "../../__utils/workOrderStatus";
 
-export const workOrderSteps: {
+export type TWorkOrderSteps = {
   name: string;
-  statusForActive?: workOrderStatusEnum;
+  statusForActive?: workOrderStatusEnum | workOrderStatusEnum[];
   route: string;
   role?: employeeRoleEnum;
-}[] = [
+};
+
+export const workOrderSteps: TWorkOrderSteps[] = [
   {
     name: "Initial Check",
     route: "/prepare",
@@ -15,15 +17,21 @@ export const workOrderSteps: {
   },
   {
     name: "Mechanic Inspection",
-    route: "/check",
+    route: "/check?checklistType=technical",
     role: employeeRoleEnum.MECHANIC,
-    statusForActive: workOrderStatusEnum.Prepared,
+    statusForActive: [
+      workOrderStatusEnum.InProgress,
+      workOrderStatusEnum.Prepared,
+    ],
   },
   {
     name: "Service Execution",
     route: "service-execution",
     role: employeeRoleEnum.MECHANIC,
-    statusForActive: workOrderStatusEnum.InProgress,
+    statusForActive: [
+      workOrderStatusEnum.InProgress,
+      workOrderStatusEnum.Prepared,
+    ],
   },
   {
     name: "Final Inspection",

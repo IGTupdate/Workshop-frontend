@@ -1,13 +1,11 @@
 "use client";
 
-import VehicleCheckList from "@/app/components/WorkOrder/VehicleCheckList";
+import Loader from "@/app/components/Loader";
 import { getWorkOrderById } from "@/app/services/operations/workorder/workorder";
 import { TWorkOrder } from "@/app/types/work-order";
-import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { workOrderStatusEnum } from "../../__utils/workOrderStatus";
-import { TVehicle } from "@/app/types/vehicle";
-import Loader from "@/app/components/Loader";
+import { useParams, useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import VehicleChecklistListContainer from "../__components/vehicle_checklist/VehicleChecklistListContainer";
 
 type Props = {};
 
@@ -15,6 +13,10 @@ const Page = (props: Props) => {
   const params = useParams();
   const [workOrder, setWorkOrder] = useState<TWorkOrder | null>(null);
   const [inititalLoading, setInitialLoading] = useState(true);
+
+  const searchParams = useSearchParams();
+
+  const router = useRouter();
 
   useEffect(() => {
     loadWorkOrder();
@@ -24,7 +26,6 @@ const Page = (props: Props) => {
     setInitialLoading(true);
     try {
       const workOrderId = params.workorderId as string;
-
       const required_workorder = (await getWorkOrderById(
         workOrderId,
         true,
@@ -37,27 +38,44 @@ const Page = (props: Props) => {
       setInitialLoading(false);
     }
   };
+
+  useEffect(() => {
+    const checklistType = searchParams.get("checklistType");
+    if (
+      checklistType &&
+      workOrder &&
+      workOrder.checklist &&
+      workOrder.checklist[checklistType]
+    ) {
+      const requiredCheckist = workOrder.checklist[checklistType];
+      let redirectUrl = `/employee/dashboard/workorder/${workOrder._id}/check/`;
+      if (typeof requiredCheckist === "string") {
+        redirectUrl += requiredCheckist;
+      } else {
+        redirectUrl += requiredCheckist._id;
+      }
+
+      // router.push(redirectUrl);
+    }
+  }, [workOrder, searchParams]);
+
   return (
-    <div className="">
+    <div className="p-4 bg-white rounded-md">
       {inititalLoading ? (
         <Loader />
       ) : (
-        <VehicleCheckList
-          workOrderCheckList={
-            workOrder?.checklist
-              ? typeof workOrder.checklist["technical"] === "string"
-                ? null
-                : workOrder.checklist["technical"]
-              : null
-          }
-          workOrderVehicle={
-            typeof workOrder?.appointmentId === "string"
-              ? null
-              : (workOrder?.appointmentId.vehicle_id as TVehicle)
-          }
-          workOrderStatus={workOrder?.status || workOrderStatusEnum.Pending}
-          workorderId={workOrder?._id || ""}
-        />
+        <>
+          <VehicleChecklistListContainer
+            workOrderVehicle={
+              typeof workOrder?.appointmentId !== "string" &&
+              workOrder?.appointmentId.vehicle_id &&
+              typeof workOrder?.appointmentId.vehicle_id !== "string"
+                ? workOrder.appointmentId.vehicle_id
+                : null
+            }
+            checklistType={searchParams.get("checklistType") || ""}
+          />
+        </>
       )}
     </div>
   );

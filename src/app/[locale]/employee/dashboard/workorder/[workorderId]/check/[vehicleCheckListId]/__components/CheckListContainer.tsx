@@ -39,23 +39,6 @@ const CheckListContainer: React.FC<Props> = (props) => {
 
   const onSubmit = async (data: TworkOrderCheckListYupSchema) => {
     props.handleOnCheckListSave(data);
-    // try {
-    //   console.log(data);
-
-    //   const response = await createCheckListForWorkOrder(
-    //     props.workorderId,
-    //     data,
-    //   );
-    //   console.log(response);
-    //   if (response) {
-    //     toast.success("CheckList Saved");
-
-    //     router.push(`/employee/dashboard/workorder/${props.workorderId}`);
-    //   } else throw "";
-    // } catch (err: any) {
-    //   toast.error(err?.response?.data?.message || COMMON_ERROR);
-    //   console.log(err);
-    // }
   };
 
   return (

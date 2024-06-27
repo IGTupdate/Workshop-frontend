@@ -15,6 +15,7 @@ const { Title } = Typography;
 
 type Props = {
   workOrderVehicle: TVehicle | null;
+  checklistType?: string;
 };
 
 const VehicleChecklistListContainer = (props: Props) => {
@@ -33,7 +34,11 @@ const VehicleChecklistListContainer = (props: Props) => {
   const loadAllCheckList = async () => {
     setLoading(true);
     try {
-      const response = await getAllVehicleCheckList();
+      let checklistquery = "";
+      if (props.checklistType) {
+        checklistquery += "type=" + props.checklistType;
+      }
+      const response = await getAllVehicleCheckList(checklistquery);
       console.log(response);
       setVehicleCheckLists(response.data as IVehicleChecklist[]);
     } catch (err) {
