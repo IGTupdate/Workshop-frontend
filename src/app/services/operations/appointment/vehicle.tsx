@@ -9,7 +9,7 @@ import {
   setVehicleLoading,
 } from "@/app/store/slices/customerVehicleSlice";
 import toast from "react-hot-toast";
-import { TVehicleEntry } from "@/app/types/checklist";
+import { TVehicleEntry } from "@/app/types/vehicle-checklist";
 import {
   TVehicleExitSchema,
   TVehicleSchema,

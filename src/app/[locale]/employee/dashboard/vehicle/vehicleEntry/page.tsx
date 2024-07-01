@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import VehicleEntryTabelContainer from "./__components/VehicleEntryTabelContainer";
 import CreateEntryVehicle from "./__components/CreateEntryVehicle";
-import { TVehicleEntry } from "@/app/types/checklist";
+import { TVehicleEntry } from "@/app/types/vehicle-checklist";
 import {
   getVehicleEntry,
   VehicleEntry,

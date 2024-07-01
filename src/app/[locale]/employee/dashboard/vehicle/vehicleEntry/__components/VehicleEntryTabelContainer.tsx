@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import GetVehicleEntryTableColumn from "./GetVehicleEntryTableCoulmn";
 import { getVehicleEntry } from "@/app/services/operations/appointment/vehicle";
 import ShowvehicleEnryTableData from "./ShowvehicleEnryTableData";
-import { TVehicleEntry } from "@/app/types/checklist";
+import { TVehicleEntry } from "@/app/types/vehicle-checklist";
 
 type props = {
   vehicleEntry: TVehicleEntry[];

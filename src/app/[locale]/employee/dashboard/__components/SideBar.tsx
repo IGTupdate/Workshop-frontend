@@ -5,7 +5,6 @@ import React from "react";
 import { SIDEBAR_COLLAPSED_WIDTH, SIDEBAR_WIDTH } from "../utils/variables";
 import SiderContainer from "./__sidebar/SiderContainer";
 
-
 const { Sider } = Layout;
 
 type Props = {

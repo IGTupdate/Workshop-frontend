@@ -1,26 +1,11 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import {
-  Button,
-  Flex,
-  Popover,
-  QRCode,
-  Radio,
-  RadioChangeEvent,
-  Space,
-  TableProps,
-  Typography,
-} from "antd";
-import { TVehicleCheckListDataTable } from "@/app/types/checklist";
-import { FaEye } from "react-icons/fa";
-import { MdDeleteOutline } from "react-icons/md";
-import { FaRegEdit } from "react-icons/fa";
-import { useRouter } from "next/navigation";
-import { deleteVehicleCheckList } from "@/app/services/operations/workorder/vehicle-checklist";
-import { IoMdCloudDownload } from "react-icons/io";
-import html2canvas from "html2canvas";
+import { Button, Popover, QRCode, TableProps } from "antd";
 import dayjs from "dayjs";
+import html2canvas from "html2canvas";
+import { useRouter } from "next/navigation";
+import { useRef } from "react";
+import { IoMdCloudDownload } from "react-icons/io";
 
 type VehicleEntry = {
   entryTime: string;

@@ -2,7 +2,7 @@
 import { Modal, Table } from "antd";
 import React, { useState } from "react";
 import GetVehicleEntryTableColumn from "./GetVehicleEntryTableCoulmn";
-import { TVehicleEntry } from "@/app/types/checklist";
+import { TVehicleEntry } from "@/app/types/vehicle-checklist";
 import CreateExitVehicle from "./CreateExitVehicle";
 
 type props = {

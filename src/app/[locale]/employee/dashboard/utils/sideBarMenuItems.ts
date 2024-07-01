@@ -43,7 +43,7 @@ export const sideBarMenuItems: TsideBarMenuItems[] = [
       },
       {
         key: "4.2",
-        label:"vehicleEntry",
+        label: "vehicleEntry",
         resourcetype: "vehicle-entry",
         pathname: "/employee/dashboard/vehicle/vehicleEntry",
       },
