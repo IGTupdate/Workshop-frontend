@@ -64,6 +64,7 @@ const Page = () => {
                   height={100}
                   width={100}
                   className="rounded-full"
+                  style={{ width: "auto", height: "auto" }}
                 />
               </div>
             </div>

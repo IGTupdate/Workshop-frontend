@@ -19,6 +19,7 @@ const ProfileIcon: React.FC<Props> = ({ edit, setEdit }: Props) => {
           height={100}
           width={100}
           className="rounded-full"
+          style={{ width: "auto", height: "auto" }}
         />
       </div>
       <div className="flex justify-end items-center w-full">
