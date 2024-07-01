@@ -130,6 +130,12 @@ export const SideBarMenuItems = (
           resourcetype: "vehicle-checklist",
           pathname: "/employee/dashboard/vehicle/checklist",
         },
+        {
+          key: "4.2",
+          label: t("vehicleEntry"),
+          resourcetype: "vehicle-entry",
+          pathname: "/employee/dashboard/vehicle/vehicleEntry",
+        },
       ],
     },
     {
@@ -157,10 +163,42 @@ export const SideBarMenuItems = (
       ],
     },
     {
-      key: "9",
-      label: t("employee"),
-      pathname: "/employee/dashboard/employee",
-      resourcetype: "employee",
+      key: "7",
+      label: t("servicePlans"),
+      children: [
+        {
+          key: "7.1",
+          label: t("category"),
+          resourcetype: "category",
+          pathname: "/employee/dashboard/servicePlan/category",
+        },
+        {
+          key: "7.2",
+          label: t("tasks"),
+          resourcetype: "tasks",
+          pathname: "/employee/dashboard/servicePlan/category",
+        },
+      ],
+    },
+    {
+      key: "8",
+      label: t("employeeManagement"),
+      // pathname: "/employee/dashboard/employee",
+      // resourcetype: "employee",
+      children: [
+        {
+          key: "8.1",
+          label: t("employee"),
+          pathname: "/employee/dashboard/employee",
+          resourcetype: "employee",
+        },
+        {
+          key: "8.2",
+          label: t("role"),
+          pathname: "/employee/dashboard/employee/role",
+          resourcetype: "role",
+        },
+      ],
     },
     {
       key: "10",

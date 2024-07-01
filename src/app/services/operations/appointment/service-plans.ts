@@ -3,29 +3,27 @@ import {
   setServicePlansLoading,
 } from "@/app/store/slices/servicePlanSlice";
 import { RootState } from "@/app/store/store";
-import { TServicePlans } from "@/app/types/service";
+import { TServicePlans, TServicePlansCreate } from "@/app/types/service";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import { apiConnector } from "../../apiConnector";
 import { apiOpenConnector } from "../../apiOpenConnector";
 import { appointmentEndpoints } from "../../apis";
+import { TServicePlanValidatorSchema } from "@/app/validators/service-plans";
 
 const { CREATE_SERVICE_PLAN, UPDATE_SERVICE_PLAN, GET_SERVICE_PLAN } =
   appointmentEndpoints;
 
-export const createServicePlans = async (
-  data: TServicePlans,
-): Promise<void> => {
+export const createServicePlans = async (data: TServicePlanValidatorSchema) => {
   try {
     const response = await apiConnector({
       method: "POST",
       url: CREATE_SERVICE_PLAN,
-      bodyData: {
-        data,
-      },
+      bodyData: data,
     });
     if (response?.data?.success) {
       toast.success(response.data.message);
+      return response;
     }
   } catch (err: any) {
     toast.error(err?.response?.data?.message || "Something went wrong1");
@@ -33,8 +31,8 @@ export const createServicePlans = async (
 };
 
 export const updateServicePlans = async (
-  _id: string,
-  data: TServicePlans,
+  _id: string | string[],
+  data: TServicePlanValidatorSchema,
 ): Promise<void> => {
   try {
     const response = await apiConnector({
@@ -46,6 +44,7 @@ export const updateServicePlans = async (
     });
     if (response?.data?.success) {
       toast.success(response.data.message);
+      return response.data;
     }
   } catch (err: any) {
     toast.error(err?.response?.data?.message || "Something went wrong1");

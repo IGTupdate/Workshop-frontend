@@ -59,9 +59,9 @@ export async function sendOTP(
   try {
     // Sending OTP request
     const otpResult = await apiOpenConnector({
-      method: "POST",
-      url: SEND_OTP_API,
-      bodyData: { countryCode, contactNumber: number },
+      method: "GET",
+      url: SEND_OTP_API + "/" + number,
+      // bodyData: { countryCode, contactNumber: number },
     });
 
     if (otpResult?.data?.success) {
@@ -80,7 +80,6 @@ export async function sendOTP(
 }
 
 export async function verifyOTP(
-  countryCode: string,
   contactNumber: string,
   otp: string,
   dispatch: AppDispatch,
@@ -91,7 +90,7 @@ export async function verifyOTP(
     const otpVerificationResult = await apiOpenConnector({
       method: "POST",
       url: VERIFY_OTP_API,
-      bodyData: { countryCode, contactNumber, otp },
+      bodyData: { contactNumber, otp },
     });
 
     if (otpVerificationResult?.data?.success) {
@@ -206,3 +205,16 @@ export const logout =
       throw err;
     }
   };
+
+export async function getAccessByRoleId(query: string) {
+  try {
+    const accessData = await apiConnector({
+      method: "GET",
+      url: GET_ACCESS + query,
+    });
+
+    if (accessData.data.success) {
+      return accessData.data;
+    }
+  } catch (err) {}
+}

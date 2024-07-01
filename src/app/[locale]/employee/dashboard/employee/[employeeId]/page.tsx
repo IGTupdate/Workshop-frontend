@@ -28,7 +28,7 @@ const Page = (props: Props) => {
   const getEmployeeData = async (employeeId: string) => {
     try {
       setLoading(true);
-      const result = await getEmployeeByEmployeeId(employeeId, "full");
+      const result = await getEmployeeByEmployeeId(employeeId);
 
       if (result?.success === true) {
         setEmployee(() => {
@@ -57,9 +57,9 @@ const Page = (props: Props) => {
         <div className="p-4 bg-white shadow-xl rounded-xl overflow-hidden">
           <div className="mb-8 flex justify-between items-center">
             <h2 className="text-xl font-semibold">Employee Details</h2>
-            <Button onClick={() => router.push(`${employee._id}/update`)}>
+            {/* <Button onClick={() => router.push(`${employee._id}/update`)}>
               Update
-            </Button>
+            </Button> */}
           </div>
           <div>
             <EmployeeViewpageContainer employee={employee} />

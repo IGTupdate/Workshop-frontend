@@ -54,7 +54,7 @@ export async function employeeLogin(
 export const getAllEmployees = async (query: string = "") => {
   try {
     const response = await apiConnector({
-      method: "GET",
+      method: "POST",
       url: GET_ALL_EMPLOYEES + "?" + query,
     });
 

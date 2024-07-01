@@ -33,3 +33,10 @@ export type TVehicleCheckListDataTable = {
   remarks: string;
   levels: number;
 };
+
+export type TVehicleEntry = {
+  entryTime: string;
+  exitTime: string;
+  registrationNumber: string;
+  _id: string;
+};

@@ -1,4 +1,4 @@
-const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_BASE_URL || "";
+const AUTH_BASE_URL = process.env.NEXT_PUBLIC_AUTH_BASE_URL + "/api" || "";
 const APPOINTMENT_SERVICE_BASE_URL =
   process.env.NEXT_PUBLIC_APPOINTMENT_SERVICE_BASE_URL + "/api";
 const WORK_ORDER_SERVICE_BASE_URL =
@@ -44,20 +44,20 @@ const uploadFilesUrl = (...paths: string[]) =>
 
 // Define endpoint objects
 export const authEndpoints = {
-  SEND_OTP_API: authUrl(CUSTOMER, "/sendOtp"),
-  VERIFY_OTP_API: authUrl(CUSTOMER, "/verifyOtp"),
+  SEND_OTP_API: authUrl(CUSTOMER, "/send_otp"),
+  VERIFY_OTP_API: authUrl(CUSTOMER, "/verify_otp"),
   AUTH_API: authUrl(CUSTOMER, "/auth"),
-  GENERATE_ACCESS_TOKEN_API: authUrl(AUTH, "/generateAccessToken"),
+  GENERATE_ACCESS_TOKEN_API: authUrl("/generate_access_token"),
   EMPLOYEE_LOGIN_API: authUrl(EMPLOYEE, "/login"),
-  GET_CUSTOMER_DATA_API: authUrl(CUSTOMER),
+  GET_CUSTOMER_DATA_API: authUrl(CUSTOMER, "/get"),
   GET_EMPLOYEE_DATA_API: authUrl(EMPLOYEE, "/get"),
-  LOGOUT_API: authUrl(AUTH, "/logout"),
+  LOGOUT_API: authUrl("/logout"),
   CUSTOMER_UPDATE_API: authUrl(CUSTOMER, "/update"),
-  GET_ALL_EMPLOYEES: authUrl(EMPLOYEE, "/get-all"),
-  GET_ACCESS: authUrl(AUTH, "/getAccess"),
-  GET_CUSTOMER_AUTH_INIT: authUrl(AUTH, "/init"),
-  EMPLOYEE_REGISTER: authUrl(EMPLOYEE, "/register"),
-  GET_ALL_EMPLOYEE_ROLE: authUrl(EMPLOYEE, "/role/get-all"),
+  GET_ALL_EMPLOYEES: authUrl(EMPLOYEE, "/get_all"),
+  GET_ACCESS: authUrl("/access_control/get"),
+  GET_CUSTOMER_AUTH_INIT: authUrl("/init"),
+  EMPLOYEE_REGISTER: authUrl(EMPLOYEE, "/create"),
+  GET_ALL_EMPLOYEE_ROLE: authUrl("/role/get"),
   UPDATE_EMPLOYEE_DETAILS: authUrl(EMPLOYEE, "/update"),
 };
 
@@ -149,4 +149,10 @@ export const vehicleCheckListEndPoint = {
   UPDATE_VEHICLE_CHECKLIST: workOrderUrl("/vehicle-checklist/update"),
   DELETE_VEHICLE_CHECKLIST: workOrderUrl("/vehicle-checklist/delete"),
   GET_ALL_VEHICLE_CHECKLIST: workOrderUrl("/vehicle-checklist/get"),
+};
+
+export const vehicleEntryEndPoint = {
+  GET_VEHICLE_ENTRY: appointmentUrl(VEHICLE, "/get-entry"),
+  VEHICLE_ENTRY: appointmentUrl(VEHICLE, "/entry"),
+  VEHICLE_EXIT: appointmentUrl(VEHICLE, "/exit"),
 };

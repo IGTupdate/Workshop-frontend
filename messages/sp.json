@@ -312,7 +312,7 @@
     "end": "Fin",
     "remarks": "Observaciones",
     "description": "Agregar descripción",
-    "submitButton": "Entregar",
+    "addButton": "Agregar",
     "backButton": "Atrás",
     "bookButton": "Libro",
     "modalText": "Confirmar cita",
@@ -330,11 +330,17 @@
     "slotManagement": "Gestión de tragamonedas",
     "calender": "Calendario",
     "slotSchedule": "Horario de tragamonedas",
+    "employeeManagement": "Gestión de empleados",
     "employee": "Empleada",
+    "servicePlans": "Planes de servicio",
     "ramp": "Rampa",
     "settings": "Ajustes",
     "vehicleManagement": "Gestión de vehículos",
-    "vehicleManagementCheckList": "Lista de Verificación"
+    "vehicleManagementCheckList": "Lista de Verificación",
+    "vehicleEntry": "Entrada de vehículos",
+    "category": "Categoría",
+    "tasks": "Tareas",
+    "role": "Role"
   },
   "EmployeeDashboardAppointmentPage": {
     "manage_appointment": "Gestionar citas",

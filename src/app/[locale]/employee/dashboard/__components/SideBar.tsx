@@ -1,18 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Avatar, Drawer, Layout, Space, Typography } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Drawer, Layout, Typography } from "antd";
+import React from "react";
 import { SIDEBAR_COLLAPSED_WIDTH, SIDEBAR_WIDTH } from "../utils/variables";
-import SideBarMenus from "./SideBarMenus";
-import { useAppSelector } from "@/app/store/reduxHooks";
-import { IAuthData } from "@/app/store/slices/authSlice";
-import Logout from "@/app/components/Logout/Logout";
-import { useTranslations } from "next-intl";
-import Link from "next/link";
 import SiderContainer from "./__sidebar/SiderContainer";
 
-const { Text, Title } = Typography;
 
 const { Sider } = Layout;
 

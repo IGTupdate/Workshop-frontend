@@ -7,10 +7,11 @@ const { Text } = Typography;
 export type InputField = {
   name: string;
   label: string;
-  placeholder: string;
+  placeholder: string | undefined;
   type: string; //"text" | "number" | "email"; // Adjust as needed,
   error: string | undefined;
   control: any;
+  disabled?: boolean;
 };
 
 type Props = InputField & {
@@ -33,6 +34,7 @@ const InputField = (props: Props) => {
               {...field}
               placeholder={props.placeholder}
               className={`${props.upperCase ? "uppercase" : ""}`}
+              disabled={props.disabled}
             />
           );
         }}

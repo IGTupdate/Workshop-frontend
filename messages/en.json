@@ -306,7 +306,7 @@
     "end": "End",
     "remarks": "Remarks",
     "description": "Add Description",
-    "submitButton": "Submit",
+    "addButton": "Add",
     "backButton": "Back",
     "bookButton": "Book",
     "modalText": "Confirm Appointment",
@@ -324,11 +324,17 @@
     "slotManagement": "Slot Management",
     "calender": "Calender",
     "slotSchedule": "Slot Schedule",
+    "employeeManagement": "Employee Management",
     "employee": "Employee",
+    "servicePlans": "Service Plans",
     "ramp": "Ramp",
     "settings": "Settings",
     "vehicleManagement": "Vehicle Management",
-    "vehicleManagementCheckList": "CheckList"
+    "vehicleManagementCheckList": "CheckList",
+    "vehicleEntry": "Vehicle Entry",
+    "category": "Category",
+    "tasks": "Tasks",
+    "role": "Role"
   },
   "EmployeeDashboardAppointmentPage": {
     "manage_appointment": "Manage Appointments",

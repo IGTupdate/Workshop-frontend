@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { ApiConnectorParams, apiConnector } from "../../apiConnector";
 import { appointmentEndpoints } from "../../apis";
+import { TServiceTaskValidatorSchema } from "@/app/validators/service-plans";
 
 const {
   CREATE_SERVICE_TASK,
@@ -9,29 +10,29 @@ const {
   DELETE_SERVICE_TASK,
 } = appointmentEndpoints;
 
-export const createServiceTask = async (name: string): Promise<void> => {
+export const createServiceTask = async (
+  data: TServiceTaskValidatorSchema,
+): Promise<void> => {
   try {
     const response = await apiConnector({
       method: "POST",
       url: CREATE_SERVICE_TASK,
-      bodyData: {
-        name,
-      },
+      bodyData: data,
     });
     if (response?.data?.success) {
       toast.success(response.data.message);
     }
   } catch (err: any) {
-    toast.error(err?.response?.data?.message || "Something went wrong1");
+    toast.error(err?.response?.data?.message || "Something went wrong");
   }
 };
 
 export const updateServiceTask = async (
-  _id: string,
-  name: string,
+  _id: string | string[],
+  data: TServiceTaskValidatorSchema,
 ): Promise<void> => {
   try {
-    if (!name) {
+    if (!data) {
       toast.error("NO CHANGES FOUND");
       return;
     }
@@ -39,9 +40,7 @@ export const updateServiceTask = async (
     const response = await apiConnector({
       method: "POST",
       url: `${UPDATE_SERVICE_TASK}/${_id}`,
-      bodyData: {
-        name,
-      },
+      bodyData: data,
     });
     if (response?.data?.success) {
       toast.success(response.data.message);
@@ -70,7 +69,26 @@ export const getServiceTasks = async (serviceTaskIds?: string[]) => {
   }
 };
 
-export const deleteServiceTask = async (taskId: string[]) => {
+export const getServiceTasksByVehicle = async (vehicle_type?: string) => {
+  try {
+    const requestOptions: ApiConnectorParams = {
+      method: "POST",
+      url: GET_SERVICE_TASK,
+    };
+
+    if (vehicle_type) {
+      requestOptions.bodyData = { vehicle_type };
+    }
+
+    const response = await apiConnector(requestOptions);
+
+    return response.data.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const deleteServiceTask = async (taskId: string | string[]) => {
   try {
     await apiConnector({
       method: "POST",
@@ -80,5 +98,6 @@ export const deleteServiceTask = async (taskId: string[]) => {
     toast.success("Service Task Deleted Successfully");
   } catch (err) {
     console.error(err);
+    toast.error("Something went wrong");
   }
 };
