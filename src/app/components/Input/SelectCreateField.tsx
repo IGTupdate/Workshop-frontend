@@ -7,7 +7,7 @@ import { Controller } from "react-hook-form";
 let index = 0;
 
 type props = {
-  options: { value: string; label: string; }[];
+  options: { value: string; label: string }[];
   label: string;
   placeholder: string;
   name: string;

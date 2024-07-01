@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, DatePicker, Form, Input } from "antd";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-import moment from "moment";
 import InputField from "@/app/components/Input/InputField";
 import DateAndTimePicker from "@/app/components/Input/DateAndTimePicker";
 
