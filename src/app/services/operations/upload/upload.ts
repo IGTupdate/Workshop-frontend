@@ -61,22 +61,28 @@ export const uploadToTheServer = async (
   }
 };
 
-export const uploadImages = async (image: string) => {
+export const uploadImages = async (image: string, fileType: string = "png") => {
   try {
     const [prefix, base64Data] = image.split(",");
+    console.log(prefix);
     const contentType =
       prefix.match(/data:(.*);base64/)?.[1] || "application/octet-stream";
     // Decode the base64 string to get the image binary data
     const buffer = Buffer.from(base64Data, "base64") as any;
+
+    // generating presinged url
     const preSignedUrl = await uploadSingleObject({
       fileName: String(Date.now()),
-      fileType: "png",
+      fileType: fileType,
     });
+
+    // upload to the url
     const isUploaded = await uploadToTheServer(
       preSignedUrl,
       buffer,
       contentType,
     );
+
     if (isUploaded) return removeQueryParameters(preSignedUrl);
     else throw "";
   } catch (err) {

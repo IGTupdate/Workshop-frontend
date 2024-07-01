@@ -1,8 +1,8 @@
 "use client";
 import InventoryOrderContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/InventoryOrderContainer";
-import WorkOrderAdvisorDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderAdvisorDetails";
-import WorkOrderMechanicDetailContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderMechanicDetailContainer";
-import WorkOrderRampDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/WorkOrderRampDetails";
+import WorkOrderAdvisorDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/staffsAndRamps/WorkOrderAdvisorDetails";
+import WorkOrderMechanicDetailContainer from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/staffsAndRamps/WorkOrderMechanicDetailContainer";
+import WorkOrderRampDetails from "@/app/[locale]/employee/dashboard/workorder/[workorderId]/__components/staffsAndRamps/WorkOrderRampDetails";
 import { useAppSelector } from "@/app/store/reduxHooks";
 import { TWorkOrder } from "@/app/types/work-order";
 import { Button } from "antd";

@@ -14,6 +14,9 @@ import WorkOrderHistory from "../__components/WorkOrderHistory";
 import CusotmerVehicleDetails from "@/app/components/WorkOrder/CusotmerVehicleDetails";
 import StaffAndRamps from "@/app/components/WorkOrder/StaffAndRamps";
 import VehicleInspectionViewRecord from "@/app/components/WorkOrder/VehicleInspectionViewRecord";
+import VehicleCheckList from "@/app/components/WorkOrder/VehicleCheckList";
+import { useSearchParams } from "next/navigation";
+import { TVehicle } from "@/app/types/vehicle";
 
 const { Text } = Typography;
 
@@ -29,10 +32,11 @@ const Page = (props: Props) => {
 
   const ability = useAbility();
 
+  const searchParams = useSearchParams();
+
   // load work order
   useEffect(() => {
     // console.log("hello from work order", props.params.workorderId);
-
     if (ability && ability.can(casl_action.get, casl_subject.workorder)) {
       if (props.params.workorderId) {
         (async function () {
@@ -69,25 +73,37 @@ const Page = (props: Props) => {
     "Service Plans",
     "Vehicle Inspection Record",
     "Staff & Ramps",
+    "Vehicle CheckList",
     "History",
   ];
 
   const components = [
     <CusotmerVehicleDetails key="vehicle details" workOrderData={workOrder} />,
-
     <ServicePlans
       key={"Service Plan"}
       workOrderData={workOrder}
       showAdditionalWorks={true}
     />,
-    <VehicleInspectionViewRecord key={"Vehicle Inspection"} />,
+    <VehicleInspectionViewRecord
+      key={"Vehicle Inspection"}
+      observations={workOrder?.observations || []}
+      odometerReading={workOrder?.odometerReading || null}
+      fuelQuantity={workOrder?.fuelQuantity || null}
+    />,
     <StaffAndRamps
       key={"Staff & Ramps"}
       workOrderData={workOrder}
       handleUpdateWorkOrderData={handleUpdateWorkOrderData}
       params={props.params}
     />,
-
+    <VehicleCheckList
+      key={"vehicle checklist"}
+      workOrderVehicle={
+        typeof workOrder?.appointmentId === "string"
+          ? null
+          : (workOrder?.appointmentId.vehicle_id as TVehicle)
+      }
+    />,
     <WorkOrderHistory key={"History"} workOrderId={workOrder?._id || ""} />,
   ];
 
@@ -110,7 +126,7 @@ const Page = (props: Props) => {
           </div>
 
           <Tabs
-            defaultActiveKey="0"
+            defaultActiveKey={searchParams.get("tab") || "0"}
             tabPosition="top"
             size="large"
             centered

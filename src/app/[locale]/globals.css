@@ -182,3 +182,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .camera-modal > .ant-modal .ant-modal-content {
   box-shadow: none;
 }
+
+input[type="checkbox"] {
+  width: max-content;
+}

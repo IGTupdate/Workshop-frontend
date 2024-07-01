@@ -1,4 +1,9 @@
 import * as Yup from "yup";
+import {
+  workOrderStatus,
+  workOrderStatusEnum,
+  workOrderStatusText,
+} from "../[locale]/employee/dashboard/workorder/__utils/workOrderStatus";
 
 export const workOrderCreateYupSchema = Yup.object({
   appointmentId: Yup.string().required(),
@@ -85,11 +90,25 @@ export const workOrderOdometerAndFuelCreateSchema = Yup.object({
   odometerReading: Yup.object({
     images: Yup.array().required().default([]),
     value: Yup.number().optional(),
-  }),
+  }).test(
+    "images-or-value",
+    "Either images or value must be provided",
+    function (value) {
+      const { images, value: numValue } = value;
+      return images.length > 0 || (numValue !== undefined && numValue > 0);
+    },
+  ),
   fuelQuantity: Yup.object({
     images: Yup.array().required().default([]),
     value: Yup.number().optional(),
-  }),
+  }).test(
+    "images-or-value",
+    "Either images or value must be provided",
+    function (value) {
+      const { images, value: numValue } = value;
+      return images.length > 0 || (numValue !== undefined && numValue > 0);
+    },
+  ),
 });
 
 export const workOrderVehicleInspectionAddMoreCategory = Yup.object({
@@ -137,23 +156,13 @@ export const WorkorderEstimateTimeAndCostsScema = Yup.object({
       "Time must be greater than the current time",
       function (value) {
         if (!value) return false;
-        const currentTime = new Date();
-        const inputValue = new Date(value);
-        const newInputValue = new Date(
-          currentTime.getFullYear(),
-          currentTime.getMonth(),
-          currentTime.getDate(),
-          inputValue.getHours(),
-          inputValue.getMinutes(),
-          inputValue.getSeconds(),
-          inputValue.getMilliseconds(),
-        );
-
-        console.log(currentTime, newInputValue);
-        return newInputValue.getTime() > currentTime.getTime();
+        return new Date(value) > new Date();
       },
     )
     .required(),
+  status: Yup.string()
+    .default(workOrderStatusEnum.Prepared)
+    .oneOf(Object.values(workOrderStatusEnum)),
 });
 
 export type TWorkorderEstimateTimeAndCostsScema = Yup.InferType<

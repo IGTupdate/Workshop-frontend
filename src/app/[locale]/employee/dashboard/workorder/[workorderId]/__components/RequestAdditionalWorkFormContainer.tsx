@@ -3,25 +3,18 @@
 import InputField from "@/app/components/Input/InputField";
 import SelectField from "@/app/components/Input/SelectField";
 import TextAreaField from "@/app/components/Input/TextArea";
+import { TworkOrderAdditionalWorkCreateRequest } from "@/app/validators/workorder";
+import { Button, Divider } from "antd";
 import {
-  TworkOrderAdditionalWorkCreateRequest,
-  workOrderAdditionalWorkCreateRequest,
-} from "@/app/validators/workorder";
-import { Button, Divider, Input } from "antd";
-import React, { useEffect } from "react";
-import {
-  useFieldArray,
-  useForm,
   Control,
   FieldErrors,
-  UseFormSetValue,
+  useFieldArray,
   UseFormGetValues,
-  FieldArrayWithId,
+  UseFormSetValue,
 } from "react-hook-form";
-import { NEW_ADDITIONAL_WORK } from "../__utils/constant";
 import { MdOutlineCancel } from "react-icons/md";
+import { NEW_ADDITIONAL_WORK } from "../__utils/constant";
 
-import { TbPlus } from "react-icons/tb";
 import { AiFillPlusCircle } from "react-icons/ai";
 
 type Props = {
@@ -75,6 +68,7 @@ const RequestAdditionalWorkFormContainer = (props: Props) => {
                 />
 
                 <SelectField
+                  control={control}
                   name={`tasks.${index}.critical`}
                   error={
                     errors.tasks && errors.tasks[index]?.critical?.message
@@ -222,7 +216,7 @@ const PartsRequiredInTask = (props: TPropsPartsRequired) => {
                 label=""
                 error={""}
                 placeholder="price"
-                type="text"
+                type="number"
               />
               <button
                 onClick={() => {

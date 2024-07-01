@@ -6,36 +6,13 @@ import { Button, Image, Modal, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaCarAlt, FaCarBattery, FaCarCrash, FaCarSide } from "react-icons/fa";
-import CarPartImageModel from "../prepare/__components/CarPartImageModel";
-import AddMoreInspectionCategory from "../prepare/__components/AddMoreInspectionCategory";
-import { IoSettingsSharp } from "react-icons/io5";
+import CarPartImageModel from "./CarPartImageModel";
+import AddMoreInspectionCategory from "./AddMoreInspectionCategory";
 import CustomCamera from "@/app/components/Camera/Camera";
 import { FaCheck } from "react-icons/fa6";
+import ObservationCategoryDeleteModal from "./ObservationCategoryDeleteModal";
+import carParts, { getCategoryIcon } from "../../__utils/car_parts_icon";
 
-type CarPart = {
-  id: string;
-  icon: JSX.Element;
-  label: string;
-};
-
-type CapturedImages = {
-  [key: string]: string[];
-};
-
-const carParts: CarPart[] = [
-  { id: "Front", icon: <FaCarAlt size={50} />, label: "Front" },
-  { id: "Side", icon: <FaCarSide size={50} />, label: "Side" },
-  { id: "Back", icon: <FaCarCrash size={50} />, label: "Back" },
-  { id: "Engine", icon: <FaCarBattery size={50} />, label: "Engine" },
-];
-
-const getCategoryIcon = (category: string) => {
-  const result = carParts.find((el) => {
-    return el.id === category;
-  });
-  if (result) return result.icon;
-  return <IoSettingsSharp size={50} />;
-};
 type Props = {
   setSteps: React.Dispatch<React.SetStateAction<string>>;
   workOrder: Partial<TWorkOrder>;
@@ -49,23 +26,20 @@ const InspectVehicle = ({ setSteps, workOrder }: Props) => {
   const [showModal, setShowModal] = useState<string | null>(null);
   const [observations, setObservations] = useState<TWorkOrderObservation[]>([]);
 
+  // console.log(observations, "observations", carParts)
+
   useEffect(() => {
-    setObservations(() => {
-      return carParts.map((itm) => {
+    if (workOrder.observations) {
+      // filling
+      let newObservations = [...workOrder.observations];
+      const knownObservations = carParts.map((itm) => {
         return {
           category: itm.id,
           images: [],
           details: "",
         };
       });
-    });
-  }, []);
-
-  useEffect(() => {
-    if (workOrder.observations) {
-      // filling
-      let newObservations = [...workOrder.observations];
-      const filteredKnownObservationDoesNotSaved = observations.filter(
+      const filteredKnownObservationDoesNotSaved = knownObservations.filter(
         (obs) => {
           const isExist = newObservations.find((el) => {
             return obs.category === el.category;
@@ -74,7 +48,6 @@ const InspectVehicle = ({ setSteps, workOrder }: Props) => {
           return !isExist;
         },
       );
-
       newObservations = [
         ...newObservations,
         ...filteredKnownObservationDoesNotSaved,
@@ -92,11 +65,9 @@ const InspectVehicle = ({ setSteps, workOrder }: Props) => {
   };
 
   const getPreSavedCategoryData = (category: string) => {
-    console.log(category);
     const data = observations?.find((obs) => {
       return obs.category === category;
     });
-    console.log(data);
     return data || { category, images: [] as string[] };
   };
 
@@ -117,7 +88,6 @@ const InspectVehicle = ({ setSteps, workOrder }: Props) => {
   };
 
   const handleSaveObservation = (data: TWorkOrderObservation) => {
-    console.log(data);
     setObservations((prv) => {
       return prv.map((el) => {
         if (el.category === data.category) return data;
@@ -140,6 +110,14 @@ const InspectVehicle = ({ setSteps, workOrder }: Props) => {
     return true;
   };
 
+  const removeObservation = (toRemoveObs: TWorkOrderObservation) => {
+    setObservations((prv) => {
+      return prv.filter((obs) => {
+        return obs.category !== toRemoveObs.category;
+      });
+    });
+  };
+
   return (
     <>
       <div className="flex flex-col items-center justify-center py-6">
@@ -160,6 +138,14 @@ const InspectVehicle = ({ setSteps, workOrder }: Props) => {
                   )}
                   <div>{obs.category}</div>
                 </Button>
+
+                <div className="absolute top-0 right-0">
+                  <ObservationCategoryDeleteModal
+                    handleConfirmDelete={() => {
+                      removeObservation(obs);
+                    }}
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -181,6 +167,7 @@ const InspectVehicle = ({ setSteps, workOrder }: Props) => {
             openModal={showModal !== null}
             handleCloseModal={handleCloseModal}
             handleSaveObservation={handleSaveObservation}
+            // handleDeleteObservation={removeObservation}
             observation={
               showModal
                 ? getPreSavedCategoryData(showModal)
@@ -208,6 +195,8 @@ const InspectVehicle = ({ setSteps, workOrder }: Props) => {
           Back
         </Button>
         <Button
+          loading={loading}
+          disabled={loading}
           onClick={handleSaveAndContinue}
           htmlType="submit"
           type="primary"

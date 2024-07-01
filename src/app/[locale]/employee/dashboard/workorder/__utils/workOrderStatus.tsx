@@ -10,6 +10,15 @@ export const workOrderStatus: TWorkOrderStatus[] = [
   "Completed",
 ] as const;
 
+export enum workOrderStatusEnum {
+  Pending = "Pending",
+  Prepared = "Prepared",
+  InProgress = "InProgress",
+  Washing = "Washing",
+  Billing = "Billing",
+  Completed = "Completed",
+}
+
 export const getWorkOrderStatus = () => {
   return workOrderStatus.map((status) => {
     return {

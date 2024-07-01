@@ -70,6 +70,25 @@ export const getServiceTasks = async (serviceTaskIds?: string[]) => {
   }
 };
 
+export const getServiceTasksByVehicle = async (vehicle_type?: string) => {
+  try {
+    const requestOptions: ApiConnectorParams = {
+      method: "POST",
+      url: GET_SERVICE_TASK,
+    };
+
+    if (vehicle_type) {
+      requestOptions.bodyData = { vehicle_type };
+    }
+
+    const response = await apiConnector(requestOptions);
+
+    return response.data.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const deleteServiceTask = async (taskId: string[]) => {
   try {
     await apiConnector({

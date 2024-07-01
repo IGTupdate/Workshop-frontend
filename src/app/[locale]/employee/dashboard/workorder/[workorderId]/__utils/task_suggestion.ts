@@ -1,0 +1,17 @@
+export const suggestion_task = [
+  "Oil Change",
+  "Tire Rotation",
+  "Brake Inspection",
+  "Battery Check",
+  "Fluid Check",
+  "Air Filter Replacement",
+  "Wheel Alignment",
+  "Spark Plug Replacement",
+  "Transmission Service",
+  "Cooling System Service",
+  "Suspension Inspection",
+  "Headlight and Taillight Check",
+  "Exhaust System Check",
+  "AC System Check",
+  "Detailing Service",
+];

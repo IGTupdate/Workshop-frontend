@@ -112,7 +112,7 @@ const AppointmentpageContainer = (props: Props) => {
           <div className="mb-4 flex justify-between">
             {searchParams.get("startDate") && searchParams.get("endDate") ? (
               <RangePicker
-                placeholder={["puneet", "dwivedi"]}
+                placeholder={["startDate", "endDate"]}
                 onChange={handleRangeSelect}
                 defaultValue={[
                   dayjs(searchParams.get("startDate")),

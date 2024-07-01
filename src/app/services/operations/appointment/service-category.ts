@@ -73,3 +73,22 @@ export const getServiceCategory = async (serviceCategoryIds?: string[]) => {
     console.error(err);
   }
 };
+
+export const getServiceCategoryByVehicle = async (vehicle_type?: string) => {
+  try {
+    const requestOptions: ApiConnectorParams = {
+      method: "POST",
+      url: GET_SERVICE_CATEGORY,
+    };
+
+    if (vehicle_type) {
+      requestOptions.bodyData = { vehicle_type };
+    }
+
+    const response = await apiConnector(requestOptions);
+
+    return response.data.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
