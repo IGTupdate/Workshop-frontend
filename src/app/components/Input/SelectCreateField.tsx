@@ -7,13 +7,13 @@ import { Controller } from "react-hook-form";
 let index = 0;
 
 type props = {
-  options: { value: string; label: string }[];
+  options: { value: string; label: string; }[];
   label: string;
   placeholder: string;
   name: string;
   control?: any;
   mode: "single" | "multiple";
-  setValue: any;
+  setValue?: any;
 };
 
 const SelectCreateField = ({
@@ -74,7 +74,7 @@ const SelectCreateField = ({
                     onKeyDown={(e) => e.stopPropagation()}
                   />
                   <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
-                    Add item
+                    Add {name}
                   </Button>
                 </Space>
               </>

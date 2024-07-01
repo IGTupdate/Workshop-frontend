@@ -52,6 +52,7 @@ const SideBarMenus = (props: Props) => {
     [t("vehicleManagementCheckList")]: <GoChecklist size={20} />,
     [t("vehicleEntry")]: <PiCarProfileFill size={20} />,
     [t("role")]: <RiUserSettingsFill size={20} />,
+    [t("tool")]: <RiUserSettingsFill size={20} />,
   };
 
   const router = useRouter();

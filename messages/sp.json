@@ -340,7 +340,8 @@
     "vehicleEntry": "Entrada de vehículos",
     "category": "Categoría",
     "tasks": "Tareas",
-    "role": "Role"
+    "role": "Role",
+    "tool": "Herramienta"
   },
   "EmployeeDashboardAppointmentPage": {
     "manage_appointment": "Gestionar citas",

@@ -334,7 +334,8 @@
     "vehicleEntry": "Vehicle Entry",
     "category": "Category",
     "tasks": "Tasks",
-    "role": "Role"
+    "role": "Role",
+    "tool": "Tool"
   },
   "EmployeeDashboardAppointmentPage": {
     "manage_appointment": "Manage Appointments",

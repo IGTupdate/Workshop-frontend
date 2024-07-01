@@ -114,6 +114,12 @@ export const SideBarMenuItems: () => TsideBarMenuItems[] = () => {
       ],
     },
     {
+      key: "9",
+      label: t("tool"),
+      pathname: "/employee/dashboard/tool",
+      resourcetype: "tool",
+    },
+    {
       key: "10",
       label: t("settings"),
       pathname: "/employee/dashboard/settings",
