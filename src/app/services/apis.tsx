@@ -149,3 +149,9 @@ export const vehicleCheckListEndPoint = {
   DELETE_VEHICLE_CHECKLIST: workOrderUrl("/vehicle-checklist/delete"),
   GET_ALL_VEHICLE_CHECKLIST: workOrderUrl("/vehicle-checklist/get"),
 };
+
+export const vehicleEntryEndPoint = {
+  GET_VEHICLE_ENTRY: appointmentUrl(VEHICLE, "/get-entry"),
+  VEHICLE_ENTRY: appointmentUrl(VEHICLE, "/entry"),
+  VEHICLE_EXIT: appointmentUrl(VEHICLE, "/exit"),
+};

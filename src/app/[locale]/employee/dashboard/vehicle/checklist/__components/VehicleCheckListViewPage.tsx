@@ -25,9 +25,9 @@ const VehicleCheckListViewPage = (props: Props) => {
   }, []);
 
   const loadVehicleCheckLists = async () => {
+    setVehicleCheckListsLoading(true);
     try {
       const response = await getAllVehicleCheckList();
-      console.log(response);
 
       if (response.data) {
         const vehicleCheckListsData = response.data as IVehicleChecklist[];
@@ -45,6 +45,8 @@ const VehicleCheckListViewPage = (props: Props) => {
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setVehicleCheckListsLoading(false);
     }
   };
   return (

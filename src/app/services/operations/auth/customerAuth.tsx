@@ -210,7 +210,7 @@ export async function getAccessByRoleId(query: string) {
   try {
     const accessData = await apiConnector({
       method: "GET",
-      url: GET_ACCESS + "?" + query,
+      url: GET_ACCESS + query,
     });
 
     if (accessData.data.success) {

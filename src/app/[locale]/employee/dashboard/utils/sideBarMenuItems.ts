@@ -43,6 +43,12 @@ export const SideBarMenuItems: () => TsideBarMenuItems[] = () => {
           resourcetype: "vehicle-checklist",
           pathname: "/employee/dashboard/vehicle/checklist",
         },
+        {
+          key: "4.2",
+          label: t("vehicleEntry"),
+          resourcetype: "vehicle-entry",
+          pathname: "/employee/dashboard/vehicle/vehicleEntry",
+        },
       ],
     },
     {
@@ -89,15 +95,23 @@ export const SideBarMenuItems: () => TsideBarMenuItems[] = () => {
     },
     {
       key: "8",
-      label: t("employee"),
-      pathname: "/employee/dashboard/employee",
-      resourcetype: "employee",
-    },
-    {
-      key: "9",
-      label: "Role Management",
-      pathname: "/employee/dashboard/employee",
-      resourcetype: "roleManagement",
+      label: t("employeeManagement"),
+      // pathname: "/employee/dashboard/employee",
+      // resourcetype: "employee",
+      children: [
+        {
+          key: "8.1",
+          label: t("employee"),
+          pathname: "/employee/dashboard/employee",
+          resourcetype: "employee",
+        },
+        {
+          key: "8.2",
+          label: t("role"),
+          pathname: "/employee/dashboard/employee/role",
+          resourcetype: "role",
+        },
+      ],
     },
     {
       key: "10",

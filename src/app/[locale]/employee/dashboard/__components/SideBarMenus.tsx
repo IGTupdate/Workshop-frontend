@@ -25,6 +25,9 @@ import { FaCar } from "react-icons/fa";
 import { GoChecklist } from "react-icons/go";
 import { MdMiscellaneousServices } from "react-icons/md";
 import { TbCategoryFilled } from "react-icons/tb";
+import { FaUsersGear } from "react-icons/fa6";
+import { RiUserSettingsFill } from "react-icons/ri";
+import { PiCarProfileFill } from "react-icons/pi";
 
 type Props = {};
 
@@ -38,7 +41,8 @@ const SideBarMenus = (props: Props) => {
     [t("calender")]: <FaRegCalendarAlt />,
     [t("slotSchedule")]: <MdSchedule size={20} />,
     [t("workOrder")]: <FaHouseUser size={20} />,
-    [t("employee")]: <FaRegUser size={20} />,
+    [t("employeeManagement")]: <FaUsersGear size={20} />,
+    [t("employee")]: <FaRegUser size={16} />,
     [t("servicePlans")]: <MdMiscellaneousServices size={20} />,
     [t("category")]: <TbCategoryFilled size={20} />,
     [t("tasks")]: <TbCategoryFilled size={20} />,
@@ -46,7 +50,8 @@ const SideBarMenus = (props: Props) => {
     [t("settings")]: <IoSettingsOutline size={20} />,
     [t("vehicleManagement")]: <FaCar size={20} />,
     [t("vehicleManagementCheckList")]: <GoChecklist size={20} />,
-    roleManagement: <GoChecklist size={20} />,
+    [t("vehicleEntry")]: <PiCarProfileFill size={20} />,
+    [t("role")]: <RiUserSettingsFill size={20} />,
   };
 
   const router = useRouter();

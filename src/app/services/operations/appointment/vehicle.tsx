@@ -1,6 +1,6 @@
 import { TvehicleCreateSchema } from "@/app/validators/vehicle";
 import { apiOpenConnector } from "../../apiOpenConnector";
-import { appointmentEndpoints } from "../../apis";
+import { appointmentEndpoints, vehicleEntryEndPoint } from "../../apis";
 import { apiConnector } from "../../apiConnector";
 import { Action, ThunkAction } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "@/app/store/store";
@@ -9,6 +9,11 @@ import {
   setVehicleLoading,
 } from "@/app/store/slices/customerVehicleSlice";
 import toast from "react-hot-toast";
+import { TVehicleEntry } from "@/app/types/checklist";
+import {
+  TVehicleExitSchema,
+  TVehicleSchema,
+} from "@/app/validators/vehicle-entry";
 
 const {
   GET_VEHICLE,
@@ -18,6 +23,8 @@ const {
   DELETE_VEHICLE_BY_CUSTOMER_ID,
   ADD_VEHICLE_INTO_CUSTOMER,
 } = appointmentEndpoints;
+
+const { GET_VEHICLE_ENTRY, VEHICLE_ENTRY, VEHICLE_EXIT } = vehicleEntryEndPoint;
 
 export const getVehicles = async (query: string = "") => {
   try {
@@ -116,5 +123,52 @@ export const deleteVehicle = async (query: string, customerId?: string) => {
   } catch (err) {
     toast.success("Vehicle DELETION Failed");
     throw err;
+  }
+};
+
+export const getVehicleEntry = async (query?: string) => {
+  try {
+    const response = await apiConnector({
+      method: "GET",
+      url: GET_VEHICLE_ENTRY,
+    });
+    if (response.data.success === true) {
+      return response.data.data;
+    }
+  } catch (error) {
+    toast.error("Entry Not Found");
+  }
+};
+
+export const VehicleEntry = async (data: TVehicleSchema) => {
+  try {
+    const response = await apiConnector({
+      method: "POST",
+      url: VEHICLE_ENTRY,
+      bodyData: data,
+    });
+    console.log(response, "response");
+    if (response.data.success === true) {
+      toast.success(response.data.message);
+      return response.data;
+    }
+  } catch (error) {
+    toast.error("PLEASE Exit The Vehicle Before Re-Entering");
+  }
+};
+
+export const VehicleExit = async (data: TVehicleExitSchema) => {
+  try {
+    const response = await apiConnector({
+      method: "POST",
+      url: VEHICLE_EXIT,
+      bodyData: data,
+    });
+    if (response.data.success === true) {
+      toast.success(response.data.message);
+      return response.data;
+    }
+  } catch (error) {
+    toast.error("Date And Time Must Should Be Current Time And Date");
   }
 };

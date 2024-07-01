@@ -219,11 +219,9 @@ const VehicleCheckListCreateContainer = (props: Props) => {
   const router = useRouter();
 
   const onSubmit = async (data: TvehicleCheckListCreateYupSchema) => {
-    console.log(data);
     try {
       const response = await createVehicleCheckList(data);
       toast.success(response.message);
-      console.log(response);
       router.push(`/employee/dashboard/vehicle/checklist`);
     } catch (err: any) {
       toast.error(err?.response?.data?.message || COMMON_ERROR);

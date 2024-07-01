@@ -44,7 +44,7 @@ const Page = () => {
       ) : (
         <>
           <div className="flex justify-between items-center mb-8 bg-white p-4 rounded-xl">
-            <h2 className="text-xl font-semibold">Category's</h2>
+            <h2 className="text-xl font-semibold">Categorys</h2>
             <Link
               href={`/employee/dashboard/servicePlan/category/createCategory`}
             >
@@ -68,6 +68,7 @@ const Page = () => {
                     showBadge={true}
                     name={item.name}
                     vehicle_type={item.vehicle_type}
+                    id={item._id}
                   />
                 </div>
               ))
